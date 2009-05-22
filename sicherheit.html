@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript: Sicherheit</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
+</head>
+<body>
+
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>JavaScript: Sicherheit</h1>
+ <div class="section" id="einleitung">
+  <h2>Einleitung</h2>
+  <p>JavaScript wurde lange als gefährlich und unsicher angesehen, sodass viele Webautoren auf JavaScript verzichteten und viele Websurfer die Ausführung von JavaScripten deaktiviert haben. Dieser extreme Panikmache sollen hier neutrale Informationen gegenübergestellt werden, ohne zu behaupten, JavaScript sei per se sicher und harmlos.</p>
+  <p>Die besagten Ängste hatten verschiedene Gründe. JavaScript wird seit seinem Bestehen auch zur Gängelung und Irreführung unbedarfter Nutzer eingesetzt. Moderne Browser haben deshalb Gegenmaßnahmen ergriffen, die die Möglichkeiten von JavaScripten in verschiedenen Punkten beschneiden. Diese <strong>Einschränkungen</strong> werden wir auf dieser Seite kennenlernen.</p>
+  <p>Der ... (ECMAScript, Netscape JavaScript und das W3C DOM) ist relativ scharf umrissen. Ein JavaScript, das nur diese Techniken verwendet, hat begrenzte Möglichkeiten und damit ein vergleichsweise geringes Gefahrenpotenzial. Vorausgesetzt ist, dass die Browser <strong>grundlegenden Sicherheitskonzepte</strong> beachten - auch diese werde im Folgenden vorgestellt.</p>
+  <p>Wenn Sicherheitslücken in Browsern entdeckt werden, ist tatsächlich in den meisten Fällen JavaScript im Spiel. Ein Teil dieser Lücken ermöglicht ein Umgehen der grundlegenden Sicherheitsbeschränkungen, ein anderer betrifft <strong>JavaScript-Erweiterungen</strong>. Denn JavaScript ist mittlerweile ein Türöffner für vielfältige clientseitigen Programmierung, die weit über die besagte Kerntechniken hinausreicht.</p>
+  <p>Die Browserhersteller sind bemüht, die Fähigkeiten von JavaScript zu erweitern, indem sie Schnittstellen zu bestehenden Techniken einbauen. Zum Beispiel im Internet Explorer hat JavaScript (genauer gesagt <em>ActiveScripting</em>) Zugriff auf <em>ActiveX</em>-Objekte und den sogenannten <em>Windows Scripting Host</em>. Darüber sind - zumindest prinzipiell - sicherheitskritische Zugriffe auf den Client-Rechner möglich. Nun sind diese Schnittstellen nicht für jedes Script verfügbar, sondern durch weitere Sicherungsmechanismen geschützt. Weil diese jedoch in der Vergangenheit zu freizügig waren oder nicht hinreichend funktionierten, entstanden unzählige Sicherheitslücken.</p>
+  <p>Auch wenn der Internet Explorer solche Probleme mittlerweile im Griff hat: Das Beispiel soll ein allgemeines Problem verdeutlichen, das fast alle Browser betrifft, und das bisher zu allen Zeiten. JavaScript ist heutzutage nicht unproblematisch und es ist verständlich, wenn Anwender JavaScript deaktivieren oder dessen Möglichkeiten einschränken.</p>
+</div>
+ <div class="section" id="sicherheitskonzepte">
+  <h2>Sicherheitskonzepte von JavaScript</h2>
+  <div id="sandbox" class="section">
+	 <h3 id="sandbox" class="unit-std-heading">Sandbox-Prinzip</h3>
+	 <p>Ein JavaScript verfügt im Vergleich zu anderen Computerprogrammen nur über begrenzte Möglichkeiten. Es operiert im Rahmen eines Browserfenster und eines Dokumentes. Innerhalb dieses strengen Rahmens, in den das Script eingesperrt ist, darf es recht frei schalten und walten, denn es kann keinen Schaden anrichten. Diese grundlegende Beschränkung nennt sich <em>Sandbox</em>- oder <strong>Sandkastenprinzip</strong>.</p>
+	 <p>Insbesondere kann ein gewöhnliches JavaScript auf einer Webseite kann <strong>keine Dateien auf dem Client-Rechner auslesen</strong>, geschweige denn Änderungen daran vornehmen! Es kann auch keine Betriebssystem- oder Browsereinstellungen ändern oder Software auf dem Client-Rechner installieren.</p>
+	 <p>Es gibt nur einige wenige Ausnahmen, in denen ein JavaScript über Browserfenster und Dokument hinaus operieren kann. Zum Beispiel kann es - mit gewissen Einschränkungen - einfache Dialogfenster sowie weitere Browserfenster öffnen. Diese Ausnahmen, die meist über zusätzlich gesichert sind, werden wir noch kennenlernen ...</p>
+  </div>
+  <div id="same-origin-policy" class="section">
+	 <h3 id="same-origin-policy" class="unit-std-heading">Same-Origin-Policy</h3>
+	 <p>Die Same-Origin-Policy (zu deutsch etwa: <em>Grundsatz des selben Ursprungs</em>) besagt, dass ein JavaScript nur auf solche fremden Dokumente zugreifen darf, die dieselbe Herkunft haben. Mit <em>derselben Herkunft</em> ist, verkürzt gesagt, der Domainname in der URI des Dokuments gemeint.</p>
+	 <p>Ein JavaScript hat erst einmal nur Zugriff auf das Dokument, an das es gebunden ist und in dessen Kontext es ausgeführt wird. In einigen Fällen, vor allem bei Frames und Popups, kann ein Script jedoch über die Frame-Grenzen hinweg auf andere Dokumente zugreifen. Die Same-Origin-Policy schränkt diese Zugriff ein.</p>
+	 <p>Nehmen wir an, in einem Frame wird die URI <code>http://www.example.org/dokument1.html</code> geladen und in einem anderen Frame desselben Framesets die URI <code>http://www.example.org/dokument2.html</code>. Diese beiden Dokumente haben denselben Ursprungs-Webserver, nämlich <code>www.example.org</code>. Daher können Scripte beider Dokumente auf das jeweils andere zugreifen, um z.B. Formulardaten oder Cookies auszulesen, über das DOM Änderungen vorzunehmen oder Anwender-Ereignisse zu überwachen.</p>
+	 <p>Wenn die URI des zweiten Dokuments hingegen <code>http://www.example.</code><strong>net</strong><code>/dokument2.html</code> lautet, dann sperrt die Same-Origin-Policy den dokumentübergreifenden Zugriff. Denn der Ursprung ist unterschiedlich, einmal <code>www.example.org</code> und einmal <code>www.example.net</code>.</p>
+	 <p>Ziel der Same-Origin-Policy ist, dass eine Webseite die Daten einer anderen nicht so einfach abgreifen kann. Dies wäre natürlich kein Problem, wenn die andere Webseite sowieso öffentlich ist. Es wäre hingegen ein schwerwiegendes Sicherheitsrisiko bei all denjenigen Webseiten, die einer Anmeldung bedürfen und vertrauliche Daten anzeigen - zum Beispiel Webmail-Dienste, Communities und andere personalisierbare Webanwendungen.</p>
+	 <p>Die Same-Origin-Policy greift auch bei <code>XMLHttpRequest</code>, besser unter dem Namen  bekannt. Mit <code>XMLHttpRequest</code> kann ein Script HTTP-Anfragen auslösen und somit Daten vom Webserver empfangen oder an ihn übertragen. Die Same-Origin-Policy sorgt dafür, dass <code>XMLHttpRequest</code> nur Zugriff auf den ...</p>
+	 <p>An einem Punkt greift die Same-Origin-Policy nicht: Ein HTML-Dokument kann JavaScripte von fremden Domains einbinden. <code>http://www.example.org/dokument1.html</code> kann das Script mit der URI <code>http://www.example.net/script.js</code> einbinden. Dies ist einerseits ein nützliches Feature, kann aber andererseits auch zu Sicherheitslücken führen &ndash; wir werden später darauf zurückkommen.</p>
+  </div>
+  <div id="same-origin-policy-subdomains" class="section">
+	 <h3 id="same-origin-policy-subdomains" class="unit-std-heading">Same-Origin-Policy und Subdomains</h3>
+	 <p>Die Same-Origin-Policy blockt nicht nur den Zugriff, der sogenannte Top-Level-Domains übergreift (z.B. <code>example.org</code> will auf <code>example.net</code> zugreifen). Die Falle schnappt auch zu, wenn nur die Subdomains unterschiedlich ist. Das heißt, ein Script in einem Dokument unter <code>de.example.org</code> hat keinen Zugriff auf ein Dokument unter <code>en.selfhtml.org</code>, obwohl sich nur die Subdomain unterscheidet (<em>de</em> gegenüber <em>en</em>).</p>
+	 <p>Diese Regelung mag zunächst rigide und streng scheinen, ist aber eine wichtige Sicherheitsbarriere. Diese Sperre geht davon aus, dass unter einer Top-Level-Domain verschiede Websites liegen können, die ihre Daten nicht miteinander teilen wollen. Selbst wenn beide Domains zu einer Site gehören, lassen sich die verschiedenen Domains auf diese Weise kapseln und absichern.</p>
+	 <p>Es gibt zudem die Möglichkeit, für ein Dokument zu bestimmten, dass es für den Zugriff offen ist, der von Dokumenten derselben Top-Level-Domain kommt.</p>
+	 <p>In einem Dokument unter <code>de.example.org</code> wird folgende JavaScript-Anweisung notiert:</p>
+	 <pre class="content-example">document.domain = "example.org";</pre>
+	 <p>Damit ist das Dokument für Scripte zugänglich, die auf einer Domain liegen, die auf <code>de.example.org</code> endet. Also nicht nur für <code>de.example.org</code>, sondern auch für <code>en.example.org</code> oder <code>hildegard.de.example.org</code>.</p>
+	 <p>Dieses Schema gilt nicht nur für Top-Level-Domains, sondern für beliebige Subdomains. Ein Script unter <code>hildegard.de.example.org</code> kann folgende Anweisung notieren:</p>
+	 <pre class="content-example">document.domain = "de.example.org";</pre><p>Damit erlaubt es den Zugriff z.B. von <code>mechthild.de.example.org</code> und allen anderen Domains, die auf <code>de.example.org</code> enden.</p>
+  </div>
+  <div id="local-machine-lockdown" class="section">
+	 <h3 id="local-machine-lockdown" class="unit-std-heading">Local Machine Zone Lockdown (Internet Explorer)</h3>
+	 <p>Die Same-Origin-Policy lässt einen Punkt außer Acht: Ein Script darf im Kontext der Herkunftsdomain ohne Begrenzung schalten und walten sowie mittels <code>XMLHttpRequest</code> Daten empfangen und versenden. Das kann zu einem schwerwiegenden Problem werden, wenn das Script nicht im Web, sondern <em>lokal</em> ausgeführt wird. <em>Lokal</em> bedeutet, dass das Dokument, in welches das Script eingebunden ist, auf einer Festplatte des Client-Rechners liegt und von dort aus im Browser geöffnet wird. Die URI beginnt dann mit <code>file://localhost/</code>, in der Kurzschreibweise <code>file:///</code>.</p>
+	 <p>Die Konsequenz ist, dass ein solches Script prinzipiell <strong>alle</strong> Dateien auf den erreichbaren Datenträgern auslesen kann (aber nicht ändern - zumindest nicht über <code>XMLHttpRequest</code> alleine). Mit einigen Kniffen können diese abgegriffenen Daten ins Web gesendet werden .Somit ließen sich vertrauliche Daten ausspionieren. Es stellt daher ein grundlegendes Problem dar, wenn fremde Dokumente mit JavaScript auf den eigenen Rechner gelangen. Denn man kann nicht kontrollieren, ob diese Scripte auf lokale Dateien zugreifen und diese ins Netz versenden &ndash; es sei denn, man hat profunde JavaScript-Kenntnisse und prüft sie eigenhändig auf Herz und Nieren.</p>
+	 <p>Der Internet Explorer ab Windows XP mit dem Service Pack 2 stellt daher alle lokalen Dokumente mit Scripten unter Generalverdacht und verhindert ihre Ausführung. Dieser Sicherheitsmechanismus nennt sich <em>Local Machine Zone Lockdown</em>, zu deutsch <em>Sperrung der Zone des lokalen Computers</em>.</p>
+	 <p>Wie sich dieser Generalverdacht auswirkt und wie man den Internet Explorer trotzdem dazu bringen kann, Scripte in lokalen Dokumenten auszuführen, erörtert der Artikel <a href="http://aktuell.de.selfhtml.org/artikel/sonstiges/markoftheweb/" class="anchor-online-page">Umgehung der Sperrung der lokalen Zone</a>.</p>
+  </div>
+</div>
+ <div class="section" id="browser-schutzmechanismen">
+  <h2>Browser-Einschränkungen und Schutz vor schädlichen JavaScripten</h2>
+  <p>JavaScript hat zwar keine vollständige Kontrolle über den Client-Rechner und den Browser, besitzt aber einige Möglichkeiten des Missbrauchs, mit denen der Benutzers irregeführt, belästigt und gegängelt werden kann. Mittlerweile besitzen die Browser eingebaute Schutzmechanismen, die gewisse Freiheiten von JavaScripten beschränken. Sie sollten diese kennen, denn sie werden bei der JavaScript-Entwicklung früher oder später an diese Grenzen stoßen.</p>
+  <div class="section">
+	 <h3 class="unit-std-heading">window.open und Popup-Blocker</h3>
+	 <p>Ein problematisches Thema ist das Öffnen von neuen Fenster mit <code>window.open</code>. Diese Methode wird unter anderem dazu missbraucht, um sogenannte <strong>Popup-Fenster</strong> (kurz: <em>Popups</em>) mit Werbung zu öffnen, die automatisch und ohne ausdrücklichen Wunsch des Websurfers aufspringen. Das unkontrollierte Öffnen von Fenstern belästigt den Surfer nicht nur, sondern ist auch ein Sicherheitsproblem, denn es kann den Browser zum Abstürzen bringen, das Betriebssystem lahmlegen und Webserver mit unzähligen Anfragen bombardieren.</p>
+	 <p>Aus diesem Grund haben mittlerweile alle Browser einen sogenannten <strong>Popup-Blocker</strong> eingebaut. Ältere Browser lassen sich mit entsprechenden Zusätzen nachrüsten. Diese Blocker erlauben das Öffnen von Fenstern mittels JavaScript nur, wenn damit auf eine Benutzereingabe reagiert wird. Wenn sie also einfach <code>window.open</code> aufrufen, werden die meisten Popup-Blocker das Öffnen des Fensters unterbinden:</p>
+	 <pre class="content-example">&lt;script type="text/javascript"&gt;
+window.open("dokument.html", "fenstername");
+&lt;/script&gt;</pre>
+<p>Wenn Sie ein Fenster jedoch im Zuge der JavaScript-Behandlung (<em>Event-Handling</em>) einer Benutzereingabe öffnen, erlauben es die Popup-Blocker meistens. So können Sie beispielsweise ein <code>a</code>-Element mit einem <code>click</code>-Handler versehen. Ein einfaches Beispiel mit eingebetteten Event-Handler-Attributen sähe so aus:</p>
+	 <pre class="content-example">&lt;a href="dokument.html" onclick="window.open(this.href, 'popup')"&gt;Dokument XYZ im eigenen Fenster öffnen&lt;/a&gt;
+
+&lt;button type="button" onclick="window.open('dokument.html', 'popup')"&gt;Dokument XYZ im eigenen Fenster öffnen&lt;/button&gt;</pre>
+	<p>Sie können den <code>click</code>-Handler alternativ nach dem  registrieren:</p>
+	<pre class="content-example">function popupFenster (adresse) {
+window.open(this.href, 'popup');
+}
+window.onload = function () {
+document.getElementById("popupLink").onclick = popupFenster;
+};</pre>
+	<p>Vorausgesetzt bei diesem Beispiel ist, dass im HTML-Code ein Element mit der <code>id="popupLink"</code> existiert.</p>
+	 <p>Popup-Blocker versuchen zwischen <em>erwünschten</em> und <em>unerwünschten</em> Popup-Fenstern zu unterscheiden. Ein Browser kann nicht zuverlässig unterscheiden, ob ein Fenster vom Anwender erwünscht ist oder nicht. Das angesprochene Kriterium der <em>Benutzereingabe</em> (z.B. ein Mausklick auf ein Element) ist nur bedingt zur Unterscheidung tauglich. Manche Webseiten gaukeln dem Browser vor, sie würden ein »erwünschtes« Popup-Fenster als Reaktion auf ei</p>
+	 <p>Es gibt keine allgemeinen Regeln, nach denen Browser diese Unterscheidung vornehmen. Zudem können Popup-Blocker verschieden »scharf« eingestellt werden. Es ist daher schwierig, allgemeine Aussagen darüber zu treffen, welche Popup-Fenster geblockt werden und welche zugelassen werden. Sie müssen wohl oder übel damit rechnen, dass vermeintlich harmlose Fenster, die ihre Scripte öffnen wollen, bei manchen Anwendern geblockt werden.</p>
+	 <p>Trotzdem ein paar grobe <strong>Empfehlungen</strong>: Sie sollten darauf verzichten, Fenster als Reaktion auf die dokumentweite Ereignisse zu öffnen. Das betrifft <code>load</code> oder <code>unload</code>, aber auch Mausereignisse wie <code>click</code> oder Tastaturereignisse wie <code>keypress</code>. Solche Fenster werden höchstwahrscheinlich geblockt. Wenn Sie punktuell Popup-Fenster öffnen wollen, dann geben sie einem <code>a</code>- oder <code>button</code>-Element einen Event-Handler für das <code>click</code>-Ereignis. Das obige Beispiel illustriert dies.</p>
+	 <div id="fenstereigenschaften" class="section">
+		<h3 id="fenstereigenschaften" class="unit-std-heading">window.open und die Veränderung der Fenstereigenschaften</h3>
+		<p>Das Öffnen von neuen Fenstern bringt noch weiteres Missbrauchspotenzial und <strong>schwerwiegende Sicherheitsprobleme</strong> mit sich. Ursprünglich war es möglich, dass ein Script volle Kontrolle über das Aussehen und das Verhalten des neuen Fensters hatte - <code>window.open</code> hat für diese Fensteroptionen einen dritten Parameter. Problematische <code>window.open</code>-Aufrufe sehen zum Beispel so aus:</p>
+		<pre class="content-example">window.open("dokument.html", "popup1", "top=1000,left=1000,width=10,height=10")
+
+window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,status=no,toolbar=no")</pre>
+	<p><code>window.open</code> hatte direkten Einfluss auf die <strong>Größe des Fensters</strong>, dessen <strong>Position auf dem Bildschirm</strong>, aber auch auf die <strong>Anzeige der browsertypischen Bedienelemente</strong>. Auch war es möglich, Fenster ohne Einschränkungen nachträglich in ihrer <strong>Größe und Position</strong> zu verändern, sodass man sie beliebig über den Bildschirm verschieben konnte (mittels <code>window.resizeBy</code>, <code>window.resizeTo</code> sowie <code>window.innerHeight</code> und <code>window.innerWidth</code>). Gleichzeitig ließ sich unterbinden, dass der Anwender das Fenster in der Größe verändern konnte.</p>
+		<p>Sie können sich den Missbrauch vorstellen, der dadurch ermöglicht wurde: Indem eine winzige oder überdimensionierte Größe und etwa eine Position außerhalb des Bildschirmes angegeben wurde, wurde der Anwender daran gehindert, das Fenster überhaupt zu sehen, geschweige denn, es auf die gewohnte Art zu schließen. Oder das Fenster hüpfte immer weg, sobald es der Anwender schließen wollte. Das Verstecken der Menü-, Symbol-, Adress- und Statusleisten wurde auf breiter Front missbraucht, um Websurfer vorzugaukeln, er befinde sich auf der Login-Seite einer anderen, ihm bekannten und vertraulichen Webseite. Auf diese Weise werden im großen Stil persönliche Daten gestohlen - im Fachjargon nennt man diesen Datenklau <a href="http://de.wikipedia.org/wiki/Phishing" class="anchor-external">Phishing</a>.</p>
+		<p>Eine besonders perfide Gänglung des Benutzers erlaubten alte Versionen des Internet Explorers: Mit der Angabe der Fensteroption <code>fullscreen=yes</code> konnte ein Popup-Fenster im Vollbildmodus geöffnet werden. Über einen solchen <em>Kiosk</em>- oder <em>Präsentationsmodus</em> verfügen auch andere Browser, allerdings war es JavaScripten in anderen Browsern nicht erlaubt, diesen selbstständig zu aktivieren. Im Vollbildmodus war auf dem Bildschirm nichts als die Webseite zu sehen, alles andere wurde überlagert.</p>
+		<p>Neuere Browser schränken aus diesen Gründen die Einflussmöglichkeiten von nicht priviligierten JavaScripten auf die Darstellung von Browserfenstern stark ein. Gewisse Leisten können per JavaScript nicht mehr ausblendet werden oder sind zumindest immer in einer Kompaktdarstellung zu sehen. Insbesondere die <strong>Adressleiste</strong> wird immer angezeigt, sodass der Anwender immer weiß, auf welcher Webseite er sich befindet, und entscheiden kann, ob sie vertrauenswürdig ist. Viele Browser sorgen außerdem dafür, dass das Fenster eine <strong>Mindest- und Maximalgröße</strong> hat, auf dem Bildschirm tatsächlich zu sehen ist und der Anwender dessen <strong>Größe frei verändern</strong> kann.</p>
+		<p>Aus Gründen der Benutzerfreundlichkeit sei Ihnen ohnehin geraten, die Browser-Bedienelemente nicht zu verbergen. Je nachdem, was Sie im Popup-Fenster anzeigen möchten, ist der Benutzer dankbar, wenn er über die vertrauten Navigationsmöglichkeiten verfügt. Verzichten Sie möglichst darauf, die Browserleisten im dritten Parameter von <code>window.open</code> auszuschalten. Neuere Browser ignorieren viele dieser Angaben ohnehin und bestimmen die Anzeige von Menü und Leisten selbst. Das genaue Resultat können Sie nicht zuverlässig abschätzen, denn auch diese JavaScript-Einschränkungen unterscheiden sich von Browser zu Browser und sind individuell konfigurierbar.</p>
+		<p>Die beschriebenen Probleme mit Popup-Fenstern und die Gegenmaßnahmen seitens der Browser haben dazu geführt, dass der Einsatz von Popup-Fenstern nach und nach zurückgegangen ist. Es gibt noch weitere Gründe, warum Popup-Fenster aus der Mode sind. Einer davon ist, dass moderne Browser ihr Fensterkonzept komplett umgemodelt haben. Früher wurde in einem eigenständigen Browserfenster genau ein HTML-Dokument genau dargestellt. Heutzutage bieten die meisten grafischen Browser <strong>Tabbed Browsing</strong>. Das heißt, sie stellen mehrere Dokumente innerhalb eines Fensters dar und machen diese über Registerkarten zugänglich.</p>
+		<p>Die problematischen Fensterveränderungen, die wir betrachtet haben, verlieren beim <em>Tabbed Browsing</em> ihren Sinn. Da klassische Popup-Fenster das Konzept von Registerkarten durchbrechen, überlassen Browser zunehmend dem Anwender die Wahl, ob <code>window.open</code> ein eigenständiges Fenster oder eine Registerkarte öffnet. Auf deren Darstellung hat der Autor des JavaScriptes immer weniger Einfluss - zu Gunsten des Anwenders.</p>
+	 </div>
+  </div>
+  <div id="kontextmenue" class="section">
+	 <h3 id="kontextmenue" class="unit-std-heading">Kontextmenü</h3>
+	 <p>Als Kontextmenü wird das Aufklappmenü bezeichnet, das üblicherweise dann erscheint, wenn der Anwender ein Element des HTML-Dokuments mit der rechten Maustaste anklickt. Je nach Hardware, Betriebssystem und Browser gibt es noch weitere Möglichkeiten, das Kontextmenü aufzurufen.</p>
+	 <p>Dieses Kontextmenü ist für den Anwender enorm praktisch bei der Bedienung einer Webseite. Im Kontextmenü eines Links kann er zum Beispiel wählen, dass das Linkziel in einem neuen Fenster geöffnet wird oder die Zieladresse in die Zwischenablage kopiert wird.</p>
+	 <p>Dessen ungeachtet versuchen zahlreichen Webseiten, mittels JavaScript die Anzeige dieses Kontextmenüs im gesamten Dokument zu unterbinden. Diese Scripte reagieren dokumentweit auf die Ereignisse <code>contextmenu</code> und <code>onmousedown</code> und unterdrücken die Standardaktion des Browsers. Die Autoren wollen damit verhindern, dass Texte oder Bilder kopiert werden können oder der HTML-Quellcode gelesen werden kann. Meist wollen sie sich damit gegen eine urheberrechtswidrige Weiterverwendung der eigenen Werke schützen.</p>
+	 <p>Ganz davon abgesehen, ob dieses Vorhaben sinnvoll ist: Das Sperren des Kontextmenüs erfüllt diesen Zweck nicht zuverlässig und richtet mehr Schaden als Nutzen an. Wer Texte und Bilder kopieren möchte bzw. den Quelltext lesen will, schafft es ohne viel technisches Know-How auch trotz dieser »Rechtsklick-Sperre«.</p>
+	 <p>Neuere Browser haben erkannt, dass das Sperren des Kontextmenüs den Benutzer gängelt und in der gewohnten Bedienung von Webseiten einschränkt. Sie bieten daher in ihrer Konfiguration die Möglichkeit, diese Sperren zu ignorieren. »Rechtsklick-Sperren« werden damit schlichtweg wirkungslos.</p>
+	 <p>Es mag in besonderen Fällen, insbesondere speziellen Webanwendungen, seinen Sinn haben, ein eigenes, angepasstes Kontextmenü bereitzustellen. Aus diesem Grund ermöglichen verschiedene Browser die Behandlung des <code>contextmenu</code>-Ereignisses. Aber auch in dem Fall ist das Unterdrücken des browsereigenen Kontextmenüs nur möglich, wenn eine entsprechende Browsereinstellung es zulässt.</p>
+  </div>
+</div>
+ <div class="section" id="browser-konfiguration">
+  <h2>Browser-Einschränkungen konfigurieren</h2>
+  <div class="note-box note-box-todo">
+	 <p class="note-box-title">ToDo von: mschaefer</p>
+	 <div class="note-box-text">an welchen Stellen man das JavaScript-Verhalten der Browser einstellen kann</div>
+  </div>
+</div>
+ <div class="section" id="seitenspezifische-einstellungen">
+  <h2>Zonenmodelle, Positivlisten und seitenspezifische Einstellungen</h2>
+  <p>Ein wichtiges Sicherheitsfeature von Browsern sind Webseiten-spezifische Einstellungen. Je nachdem, welche Webseite angesurft wird, wird die Ausführung von JavaScripten uneingeschränkt zugelassen, nur eingeschränkt zugelassen oder der JavaScript-Interpreter wird deaktiviert und Scripte gar nicht ausgeführt. Dies trägt dem Umstand Rechnung, dass JavaScript als Haupteinfallstor für die Ausnutzung von Browser-Sicherheitslücken dient, zur Gängelung des Anwenders msisbraucht werden können oder unerwünschte Werbung einbinden.</p>
+  <p>Diese seitenspezifischen Einstellungen sind von Browser zu Browser unterschiedlich umgesetzt und betreffen nicht nur JavaScript, sondern auch andere sicherheits- und datenschutzkritische Techniken wie Plugins und Cookies.</p>
+  <div id="internet-explorer-seitenspezifisch" class="section">
+	 <h3 id="internet-explorer-seitenspezifisch" class="unit-std-heading">Internet Explorer</h3>
+	 <p>Der Internet Explorer verfügt über verschiedene <a href="http://support.microsoft.com/kb/174360/de" class="anchor-external">Sicherheitszonen</a>, die standardmäßig an gewisse Einstellungen gekoppelt sind. Eine normales HTML-Dokument im World Wide Web liegt in der <em>Internetzone</em>, ein Dokument auf dem lokalen Rechner oder im lokalen Netzwerk in der Zone <em>Lokales Intranet</em>.</p>
+	 <div class="note-box note-box-question">
+		<p class="note-box-title">Frage von: mschaefer</p>
+		<div class="note-box-text">Das kann so nicht stimmen, Local Machine Zone Lockdown nicht berücksichtigt?! Wie spielt die darein?</div>
+	 </div>
+	 <p>Daneben existieren zwei Zonen, zu denen der Anwender eigenständig Webadressen und Netzwerk-Pfade hinzufügen kann: <em>Vertrauenswürdige Sites</em> und <em>Eingeschränkte Sites</em>. Dies erlaubt dem Anwender beispielsweise, für die Internetzone eher restriktive Sicherheitseinstellungen zu wählen, die dann für bestimmte Seiten gelockert werden können.</p>
+	 <div class="note-box note-box-todo">
+		<p class="note-box-title">ToDo von: mschaefer</p>
+		<div class="note-box-text">Screenshots</div>
+	 </div>
+  </div>
+  <div id="firefox-seitenspezifisch" class="section">
+	 <h3 id="firefox-seitenspezifisch" class="unit-std-heading">Firefox</h3>
+	 <p>Mozilla Firefox verfügt intern über seitenspezifische Einstellungen, bietet standardmäßig aber keine Menü an, über das der Anwender die Einstellungen komfortabel regulieren könnte. Der Firefox-Zusatz <a href="http://noscript.net/" class="anchor-external">NoScript</a> erfreut sich jedoch einiger Verbreitung. Dieser erlaubt das seitenweise Erlauben oder Verbieten der Ausführung von JavaScripten und kann Scripten weitere Beschränkungen auferlegen.</p>
+	 <div class="note-box note-box-todo">
+		<p class="note-box-title">ToDo von: mschaefer</p>
+		<div class="note-box-text">Screenshot NoScript</div>
+	 </div>
+  </div>
+  <div id="opera-seitenspezifisch" class="section">
+	 <h3 id="opera-seitenspezifisch" class="unit-std-heading">Opera</h3>
+	 <p>Im Opera können Sie eine vielzal von Einstellung seitenspezifisch anpassen. Navigieren Sie zunächst zur Webseite, für die Sie besondere Einstellungen angeben wollen. Klicken Sie mit der rechten Maustaste auf eine freie Fläche des Dokuments und wählen Sie im Kontextmenü den Eintrag <em>Seitenspezifische Einstellungen...</em>. Unter der Registerkarte <em>Skripte</em> können Sie nicht nur JavaScript für die Seite aktivieren oder deaktivieren, sondern auch verschiedene JavaScript-Einstellungen festlegen:</p>
+	 <p><img src="opera-seitenspezifisch.png" width="459" height="398" alt="" /></p>
+  </div>
+  <div id="safari-seitenspezifisch" class="section">
+	 <h3 id="safari-seitenspezifisch" class="unit-std-heading">Safari</h3>
+	 <p>...</p>
+  </div>
+</div>
+ <div class="section" id="privilegien">
+  <h2>Privilegien und Signaturen (Gecko)</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="xss">
+  <h2>Cross-Site Scripting (XSS)</h2>
+  <p>...</p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="http://molily.de/js/">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
+
+</body>
+</html>

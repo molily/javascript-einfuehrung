@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_dom">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords></document-keywords>
+    <title>Arbeiten mit dem DOM</title>
+    <pageunit name="notizen">
+        <heading>Notizen</heading>
+        <p>...</p>
+    </pageunit>
+</page>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript: Entstehung und Standardisierung</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
+</head>
+<body>
+
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>JavaScript: Entstehung und Standardisierung</h1>
+ <div class="section" id="herkunft">
+  <h2>Wer legt fest, was JavaScript ist?</h2>
+  <p>Im Gegensatz zu HTML und CSS gibt es keine zentrale, geschlossene technische Spezifikation, die festlegt, was JavaScript ist und was nicht. JavaScript ist ein vielmehr Flickenteppich aus verschiedenen Spezifikationen und Industriestandards, die von verschiedenen Firmen und Gremien herausgegeben werden. Dies macht die Lage für Einsteiger ungemein schwierig und unübersichtlich.</p>
+</div>
+ <div class="section" id="netscape-microsoft">
+  <h2>Anfangszeit mit Netscape JavaScript und Microsoft JScript</h2>
+  <p>Der Name <strong>JavaScript</strong> ist erst einmal ein Markenname der Firma Netscape, die die Sprache einst aus der Taufe gehoben hat. Netscape gab in den 90er-Jahren verschiedene JavaScript-Spezifikationen heraus, die Versionsnummern trugen (1.0, 1.1, 1.2, 1.3 und 1.5). Es handelte sich hierbei um herstellereigene, sogenannte proprietäre Erfindungen. Die Spezifikationen dokumentierten die Techniken, die die hauseigene Browser, der <em>Netscape Navigator</em>, unterstützte.</p>
+  <p>Der Hintergrund der Entstehung von JavaScript war der sogenannte Browserkrieg: Eine Zeit des Wettlaufs, in der Netscape und Microsoft ihre Browsern mit proprietären Besonderheiten aufwerteten, um dem Konkurrenten Marktanteile zu rauben. Microsoft erkannte die Nützlichkeit von JavaScript an und setzte die JavaScript-Spezifikation auch in eigenen Browser, dem Internet Explorer um. Aus markenrechtlichen Gründen nannte Microsoft seine JavaScript-Variante <strong>JScript</strong>. Der eigene Name ging mit eigenen Zusätzen und Besonderheiten einher, wodurch sich Netscapes JavaScript und Microsofts JScript auseinander entwickelten.</p>
+</div>
+ <div class="section" id="ecmascript-dom">
+  <h2>Standardisierung durch ECMAScript und das W3C DOM</h2>
+  <p>Microsoft und Netscape sahen beide ein, dass es für Webentwickler ein Horror ist, sich in ein und derselben Sprache mit zwei unterschiedlichen Modellen herumplagen zu müssen. Sie strebten die Standardisierung der Sprache durch unabhängige Gremien an. Heraus kamen zwei Spezifikationen, die nach wie vor das meiste abdecken, was wir heute unter JavaScript verstehen.</p>
+  <p>Die Grundlagen von JavaScript wurden ganz allgemein in <strong>ECMAScript</strong> (ECMA-262) spezifiziert. ECMA steht dabei für den Namen der Standardisierungsorganisation, die die technische Spezifikation herausgibt. Maßgeblich ist derzeit die dritte Ausgabe aus dem Jahr 1999.</p>
+  <p>ECMAScript abstrahiert von den  und der für JavaScript charakteristische Rahmen der  wird ausgeklammert. Stattdessen definiert ECMAScript eine vielseitige Meta-Sprache, ein Grundgerüst für viele mögliche Programmiersprachen, und beschreibt deren Syntaxregeln, deren grundlegende Objekttypen sowie die Verarbeitung von Programmen. Dadurch dient ECMAScript heute nicht nur als »Herzstück« von JavaScript und damit als Grundlage für dynamische Webseiten, sondern wird an vielen verschiedenen Stellen eingesetzt &ndash; übrigens auch serverseitig.</p>
+  <p>Unglücklicherweise ist der ECMAScript-Standard für Normalsterbliche unverständlich, sodass er als praktische Referenz weitgehend ungeeignet ist. Sie können die offizielle Spezifikation dennoch <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" class="anchor-external">als PDF-Datei herunterladen</a>. Zur einfacheren Arbeit mit der Spezifikation wurde sie inoffiziell in <a href="http://bclary.com/log/2004/11/07/" class="anchor-external">eine große HTML-Datei</a> konvertiert. In dieser können Sie einfacher nachschlagen oder einzelne Abschnitte verlinken. Doch wie gesagt: Diese Dokumente sind leider für nur für diejenigen verständlich, die sich bereits intensiv mit JavaScript auseinandergesetzt haben.</p>
+  <p>Auf der anderen Seite war eine Standardisierung des Zugriffs auf das HTML-Dokument nötig. Sowohl Netscape als auch Microsoft erfanden eigene sogenannte <strong>DHTML-Modelle</strong>. (DHTML steht dabei für <em>dynamisches</em> HTML.) Beide Modelle waren jedoch beschränkt, undurchdacht und zu allem Überfluss natürlich zueinander nicht kompatibel.
+  </p>
+  <p>Ein weiteres Standardisierungsgremium, das World Wide Consortium (W3C) kam schließlich zur Hilfe. In Zusammenarbeit mit den Browserherstellern wurde das sogenannte <strong>Document Object Model (DOM)</strong> erarbeitet. Das DOM hat in der heutigen JavaScript-Anwendung eine zentrale Stellung und ist in vielerlei Hinsicht Referenzpunkt für JavaScript-Programmierer. Näheres erfahren Sie auf der <a href="http://www.w3.org/DOM/" class="anchor-external">DOM-Einstiegsseite des W3C</a>.</p>
+</div>
+ <div class="section" id="dom-standards">
+  <h2>Überblick über die DOM-Standards</h2>
+  <p>Bei dem DOM handelt es sich nicht um eine einzelne technische Spezifikation, sondern um eine ganze Familie von auf einander aufbauenden, sich ergänzenden Spezifikationen. Die meisten darin definierten Schnittstellen sind über JavaScript nutzbar, aber sie sind allesamt Programmiersprachen-unabhängig definiert.</p>
+  <p>Ebenso bezieht sich das DOM nicht ausschließlich auf HTML-Dokumente. Das sogenannte <strong>Kern-DOM</strong> beschreibt ein Objektmodell, das auf Dokumente aller Auszeichnungssprachen anwendbar ist, die auf SGML bzw. XML aufbauen. Das ist bei HTML 4.01 und XHTML 1.0 der Fall, trifft aber auch auf unzählige andere Sprachen zu.</p>
+  <p>Besonderheiten und Vereinfachungen beim Zugriff auf HTML-Dokumente werden im sogenannten <strong>HTML-DOM</strong> geregelt. Kern-DOM und HTML-DOM sind für JavaScript-Programmierer die wichtigsten Referenzpunkte - ein Großteil der Programmierung besteht aus der Nutzung dieser Techniken.</p>
+  <p>Darüber hinaus gibt es noch viele weitere DOM-Spezifikationen, von denen für die JavaScript-Programmierung im Web vor allem zwei interessant sind:</p>
+  <ul class="content-list circle">
+  <li><strong>DOM Style</strong> zusammen mit <strong>DOM CSS</strong> ermöglichen den Zugriff auf die Darstellung des Dokuments. Darüber können CSS-Eigenschaften ausgelesen und geändert werden sowie zentrale Stylesheet-Regeln verändert und erweitert werden. (Siehe <a href="css.html">Darstellung von Dokumenten steuern</a>.)</li>
+	 <li><strong>DOM Events</strong> beschreibt die Verarbeitung von Ereignissen (z.B. Benutzereingaben) im Dokument sowie die Art und Weise, wie JavaScripte Ereignisse behandeln und kontrollieren können. (Siehe <a href="einbindung.html">Ereignisverarbeitung</a>.)</li>
+  </ul>
+  <p>Die tatsächlichen Spezifikationen finden Sie unter <a href="http://www.w3.org/DOM/DOMTR" class="anchor-external">Document Object Model (DOM) Technical Reports</a> aufgelistet.
+  </p>
+</div>
+ <div class="section" id="erweiterungen">
+  <h2>Hersteller-eigene Techniken</h2>
+  <p>Bisher haben wir drei Quellen kennengelernt, aus denen sich JavaScript heutzutage zusammensetzt:</p>
+  <ol>
+	 <li>Netscape JavaScript</li>
+	 <li>ECMAScript</li>
+	 <li>W3C DOM</li>
+  </ol>
+  <p>Lediglich ECMAScript und DOM sind anerkannte herstellerübergreifende Industriestandards, auf denen wir heute vergleichsweise zuverlässig aufbauen können. Leider decken sie längst nicht das gesamte JavaScript ab, mit dem wir es heute zu tun haben. Dadurch sind wir dazu gezwungen, auch heute noch auf proprietäre Spezifikationen zurückzugreifen. Außerdem haben die Browser immer noch einige Lücken und Fehler bei der Umsetzung dieser Standards.</p>
+  <p>Heutige JavaScripte machen auf breiter Front Gebrauch von <strong>nicht-standardisierten Objekten</strong>. Viele davon wurden ursprünglich von einem Browserhersteller erfunden und dann von anderen Herstellern übernommen. Manche Techniken können dadurch ohne Bedenken verwendet werden.</p>
+  <p>Viele proprietäre Techniken erwiesen sich als nützlich und verbreiteten sich daher, sodass wir es mit De-Facto-Standards zu tun haben. Sie sind jedoch teilweise konzeptionell unausgereift, sodass sie dem Anwender unkomfortabel erscheinen. Oder sie sind schlecht spezifiziert, sodass andere Browserhersteller das Verhalten nicht hundertprozentig nachbauen konnten. Die JavaScript-Programmierung besteht daher zu einem großen Teil aus verschiedenen zusammenhanglosen, <strong>nicht miteinander abgestimmten Teiltechniken</strong>, was die Entwicklung von Scripten erschwert.</p>
+  <p>Die Entwicklung von JavaScript ist nicht am Ende angelangt, denn es werden fortlaufend neue Erweiterungen erfunden und Schnittstellen entwickelt, die die Fähigkeiten von JavaScript vervielfachen. Ebenso läuft der Standardisierungsprozess langsam weiter.</p>
+  <p>Zusammengefasst: JavaScript aus heutiger Sicht ist ein offener Begriff, der jegliches browserseitiges Scripting auf Basis von ECMAScript zusammenfasst. Da wir es mit einem wilden Patchwork aus Spezifikationen zu tun haben, verwenden JavaScripte ein Mischmasch aus Techniken.</p>
+</div>
+ <div class="section" id="html5">
+  <h2>WHATWG und HTML 5</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="ecmascript-ed-5">
+  <h2>Zukunft von JavaScript: ECMAScript 3.1 / ECMAScript Edition 5</h2>
+  <p>...</p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="http://molily.de/js/">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
+
+</body>
+</html>

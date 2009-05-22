@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_fenster">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords>Fenster, Dokument, window, document, Frames, Iframes</document-keywords>
+    <title>Fenster und Dokumente</title>
+    <pageunit name="notizen">
+        <heading>Notizen</heading>
+        <p>* window</p>
+        <p>* Mehrere Fensterobjekte und Cross-Window-Zugriff (iframes, frames, popups)</p>
+        <p>* document aus DOM Core und DOM HTML</p>
+        <p>* <hyperlink href="http://molily.de/temp/javascript-doku.html#Kurse:_Aufbauwissen:_Fenster_und_Frames_.28.E2.80.9EBrowser_Object_Model.E2.80.9C.29" link-type="external">BOM</hyperlink></p>
+        <p>* <hyperlink href="http://molily.de/temp/javascript-doku.html#Kurse:_Aufbauwissen:_Zugriff_auf_.28X.29HTML-_und_XML-Dokumente_.28Document_Object_Model.29" link-type="external">DOM</hyperlink></p>
+    </pageunit>
+    <pageunit name="grundlagen-fenster">
+        <heading>Grundlegendes zu Fenstern</heading>
+        <p>...</p>
+    </pageunit>
+    <pageunit name="grundlagen-dokumente">
+        <heading>Grundlegendes zu Dokumenten</heading>
+        <p>...</p>
+    </pageunit>
+</page>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sub-chapter PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<sub-chapter idref="basis_javascript_hintergruende">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords></document-keywords>
+    <title>Hintergrundwissen</title>
+    <preface>Dieses Kapitel enthält Hintergrundinformationen zu JavaScript. wenn Sie sich schnell in JavaScript einarbeiten möchten, können Sie diesen Teil erst einmal überspringen. Früher oder später sollten Sie sich in einer ruhigen Minute mit der Frage beschäftigen, woher JavaScript stammt, wie die Sprache spezifiziert wird und wie JavaScript überhaupt einzusetzen ist. Dieses eher theoretisch angehauchte Kapitel soll Ihnen dabei helfen, Ihr Verständnis und ihre Gründe für den
+    JavaScript-Einsatz kritisch zu hinterfragen.</preface>
+    <xi:include href="standards.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="einsatz.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+</sub-chapter>

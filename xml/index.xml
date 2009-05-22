@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<chapter idref="basis_javascript">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description>Java</document-description>
+    <document-keywords>JavaScript, Einführung, Dokumentation, Tutorial, Lernen</document-keywords>
+    <title>JavaScript</title>
+    <preface>....</preface>
+    <xi:include href="aufgaben.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="voraussetzungen.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="konzepte.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="sprachelemente/index.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="browser.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="einbindung.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="fenster.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="css.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="bibliotheken.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="sicherheit.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="ajax.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="werkzeuge.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="dom.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="beispiele/index.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+    <xi:include href="hintergruende/index.xml">
+        <xi:fallback></xi:fallback>
+    </xi:include>
+</chapter>

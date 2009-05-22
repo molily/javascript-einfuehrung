@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_einbindung">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords>script, Ereignis, Event, Überwachung, Handling, Event-Handler, Fluss, Ablauf, Eventobjekt, onload, Laden</document-keywords>
+    <title>Einbindung in HTML und Ereignisverarbeitung</title>
+    <pageunit name="notizen">
+        <heading>Notizen</heading>
+        <p>Diese Seite muss aufgeteilt werden!</p>
+    </pageunit>
+    <pageunit name="ueber">
+        <heading>Vorbemerkung</heading>
+        <p>Von den vielen Möglichkeiten, JavaScript in HTML-Dokumente einzubetten, werden hier nur wenige gängige und - aus Sicht der Autoren - empfehlenswerte vorgestellt. Dieses Kapitel geht davon aus, dass HTML und JavaScript möglichst getrennt werden und sich JavaScripte eigenständig hinzuschalten. Die Hintergründe zu diesem Ansatz finden Sie im Kapitel <interlink link-type="page" reference="basis_javascript_hintergruende_einsatz">Sinnvoller JavaScript-Einsatz</interlink>.</p>
+    </pageunit>
+    <pageunit name="script-element">
+        <heading>Das script-Element</heading>
+        <p>Zur Einbindung von JavaScript-Code in HTML-Dokument existiert in das HTML-Element <code>script</code>. Dieses darf sowohl im Kopf (<code>head</code>-Element) als auch im Körper (<code>body</code>-Element) eines HTML-Dokuments auftauchen. Es kann entweder direkt JavaScript-Code beinhalten, wie in diesem Beispiel:</p>
+        <example>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Dokument mit integriertem JavaScript&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+window.alert("Hallo Welt!");
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Dokument mit integriertem JavaScript&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>Oder es kann leer sein und auf eine externe Datei mit JavaScript-Code verweisen. Diese Nutzungsweise sollten Sie vorziehen und Ihre JavaScripte möglichst in separate Dateien auslagern.</p>
+        <p>Schreiben sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie im Dokumentkopf ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Webadresse (URI), unter der das Script abrufbar ist. Vergessen Sie auch nicht das Attribut <code>type</code> mit dem festen Wert <code>text/javascript</code>. Dieses teilt dem Browser
+        unmissverständlich mit, dass sie es sich bei ihrem Code um JavaScript handelt.</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Dokument mit externem JavaScript&lt;/title&gt;
+&lt;script type="text/javascript" src="script.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Dokument mit externem JavaScript&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>In der Datei <var>script.js</var> können Sie nun JavaScript-Anweisungen, Funktionen, Objekte und so weiter notieren. Selbstverständlich können sie auf dieselbe Weise mehrere Scripte einbinden: Verwenden Sie dazu einfach mehrere <code>script</code>-Elemente in dieser Weise.</p>
+        <p>Ihre Scriptdateien können Sie - genauso wie Stylesheets, Grafiken usw. - auch in Unterverzeichnissen und sogar auf anderen Webservern unterbringen. Solange die angegebene URI korrekt ist, wird ein JavaScript-fähiger Browser sie beim Anzeigen des Dokuments herunterladen und ausführen.</p>
+    </pageunit>
+    <pageunit name="ausfuehrung-ablauf">
+        <heading>Ausführung von script-Elementen</heading>
+        <p>Wie gesagt können Sie mit dem <code>script</code>-Element sowohl Scripte im Dokumentkopf als auch im Dokumentkörper einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab:</p>
+        <note editor="mschaefer" type="todo">Verweis zur Erklärung von HTML-Parsing</note>
+        <p>Die <code>script</code>-Elemente werden standardmäßig schon beim <em>Parsen</em> des HTML-Dokuments ausgeführt. Das bedeutet folgendes: Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das DOM zu überführen. Sobald der Parser auf ein script-Element trifft, wird das Parsing gestoppt und der JavaScript-Code wird ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der Parser
+        stoppt, lädt die externe JavaScript-Datei vom Webserver, führt diese aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
+        <p>Dadurch werden die <code>script</code>-Elemente in der Reihenfolge ausgeführt, in der sie im HTML-Quelltext notiert sind. Wenn Sie verschiedene Scripte haben, die aufeinander aufbauen, so müssen sie nacheinander einbinden. Ein Beispiel:</p>
+        <example>&lt;script type="text/javascript" src="grundlagenscript.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="aufbauscript.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+// Anwendung der Scripte
+helferfunktion();
+&lt;/script&gt;</example>
+        <p>Das Beispiel bindet drei Scripte ein, die beiden ersten als externe Ressourcen, das letzte direkt im HTML-Code. Da der Browser die Scripte in der Reihenfolge ihrer Einbindung ausführt, können spätere Scripte die Objekte, Funktionen usw. nutzen, die die vorher eingebundenen Scripte definiert haben. Im Beispiel wird zuerst die Quelle <var>grundlagenscript.js</var> eingebunden und ausgeführt. Das darauffolgende Script aus der Datei <var>aufbauscript.js</var> kann die darin notierten
+        Funktionen nutzen. Schließlich kann das dritte Script eine Funktion nutzen, die in <var>aufbauscript.js</var> definiert wurde.</p>
+        <p>Dass der Webbrowser die eingebundenen Scripte schon <em>während</em> und nicht erst <em>nach</em> dem Einlesen des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt. Das ermöglicht ihnen, einige Weichen zu stellen und das Dokuments schon während dem Laden direkt zu beeinflussen, nämlich mit der Methode <code>document.write</code>. Andererseits wird der Seitenaufbau verlangsamt, wenn erst große externe Scriptdateien vom Webserver
+        heruntergeladen und ausgeführt werden.</p>
+        <p>Weil ein Script mitten im Parsing-Prozess ausgeführt wird, hat es zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen</p>
+        <p>...</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+window.alert( document.title );
+window.alert( document.getElementById("überschrift") );
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 id="überschrift"&gt;Beispielüberschrift&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>Die erste Anweisung greift auf den Titel des Dokuments zu. Dieser steht dem Script bereits zur Verfügung, weil das entsprechende <code>title</code>-Element vor dem Script liegt und schon geparst wurde. Die zweite Anweisung greift auf eine eine Überschrift mittels deren ID zu. Dieser Zugriff funktioniert nicht, da das entsprechende <code>h1</code>-Element auf das Script folgt und noch nicht geparst wurde.</p>
+        <p>Eine mögliche Umgehung dieser Nachteile wäre, einfach alle <code>script</code>-Elemente in der notwendigen Reihenfolge ans Dokument-Ende zu setzen. Es hat sich jedoch eine andere Methode durchgesetzt, bei der die Hauptarbeit der Scripte erst gestartet wird, wenn das Dokument vollständig geladen wurde. Diese wird im folgenden beschrieben.</p>
+    </pageunit>
+    <pageunit name="noscript">
+        <heading>Noscript</heading>
+        <p>und warum es uns nicht interessieren braucht.</p>
+        <p>...</p>
+    </pageunit>
+    <pageunit name="ereignisbasierung">
+        <heading>Ereignisbasierte Scripte</heading>
+        <p>Der vorige Abschnitt hat Ihnen gezeigt, dass der Browser Scripte üblicherweise in dem Moment ausführt, in dem er den Code eines HTML-Dokuments herunterlädt, analysiert und auf ein <code>script</code>-Element trifft.</p>
+        <p>Der Clou von JavaScript ist aber nicht, bloß in diesem kurzen Moment des Ladens des HTML-Dokuments ausgeführt zu werden und dann für immer zur Ruhe zu kommen. Die meisten JavaScripte sollen Interaktivität bieten. Der Schlüssel dazu ist, das haben wir bereits in den <interlink link-type="page" reference="basis_javascript_konzepte">Grundkonzepten</interlink> besprochen, die <strong>Überwachung und Behandlung von Ereignissen</strong>. Moderne Scripte durchlaufen deshalb verschiedene
+        Phasen:</p>
+        <ol>
+            <li><strong>Das Dokument wird geladen:</strong> Dabei wird das JavaScript ausgeführt. Variablen und Funktionen werden notiert, sodass sie für die spätere Nutzung zur Verfügung stehen. (Die notierten Funktionen werden dabei eingelesen, aber nicht notwendigerweise aufgerufen.) Wie gesagt hat das Script zu diesem Zeitpunkt noch keinen vollständigen Zugriff auf das Dokument.</li>
+            <li><strong>Das Dokument ist fertig geladen.</strong> Der vollständige Zugriff auf das Dokument über das DOM ist erst jetzt möglich. Nun wird ein Teil des Scripts aktiv, um dem bisher statischen Dokument JavaScript-Interaktivität hinzuzufügen. Das bedeutet unter anderem: Das Script spricht vorhandene Elementknoten an und fügt ihnen sogenannte Event-Handler hinzu. Das Script kann dem Dokument aber auch eigene Elemente hinzufügen oder den Inhalt von bestehenden verändern.</li>
+            <li><strong>Der Anwender bedient das Dokument.</strong> Wenn die überwachten Ereignisse an den entsprechenden Elementen im Dokument passieren, so werden gewisse andere Teiles des Scripts aktiv, denn die Handler-Funktionen werden ausgeführt.</li>
+        </ol>
+        <p>Dieser chronologische Ablauf gibt die Struktur der meisten Scripte vor: Im Code werden vor allem mehrere Funktionen definiert, die später als <em>Handler</em> Ereignisse verarbeiten werden. Dann gibt es eine Hauptfunktion, die ausgeführt wird, wenn der Browser das Dokument fertig geladen hat, sodass Scripte darauf zugreifen können.</p>
+        <p>Das erste und enorm wichtige Ereignis, mit dem wir uns beschäftigen müssen, ist daher das <code>load</code>-Ereignis. Es passiert aus JavaScript-Sicht im [Fenster] beim zugehörigen <code>window</code>-Objekt. Wenn dieses Ereignis eintritt, wird die zweite Phase aktiv und dem Dokument können</p>
+    </pageunit>
+    <pageunit name="traditionelles-event-handling">
+        <heading>Traditionelles Event-Handling</heading>
+        <p>Die Anweisung, die die Überwachung eines bestimmten Ereignisses an einem bestimmten Element startet, nennt man das <em>Registrieren</em> von Event-Handlern. Die drei nötigen Bestandteile (Elementobjekt, Ereignistyp und Handler-Funktion) finden wir in dem Aufbau der JavaScript-Anweisung wieder. Das Schema lautet allgemein:</p>
+        <example>element.onevent = handlerfunktion;</example>
+        <ul>
+            <li><code>element</code> steht für eine JavaScript-Objekt, nämlich einen Elementknoten,</li>
+            <li><code>onevent</code> ist eine Objekteigenschaft, die mit der Vorsilbe <code>on</code> beginnt, auf die der Ereignistyp folgt. (<em>on</em> ist die englische Präposition für <em>bei</em>. Zum Beispiel <em>onclick</em> bedeutet soviel wie <em>beim Klicken</em>.)</li>
+            <li><code>handlerfunktion</code> ist der Name einer Funktion. (Genauer gesagt: ein Ausdruck, der ein Funktionsobjekt ergibt.)</li>
+        </ul>
+        <p>Insgesamt hat die Anweisung die Form »<em>Bei diesem Element: Beim Eintreten dieses Ereignisses führe diese Funktion aus.</em>«</p>
+        <p>Der obige Pseudocode soll nur das allgemeine Schema illustrieren. Es gibt natürlich kein Ereignis namens <code>event</code> und <code>onevent</code> ist lediglich ein Platzhalter für alle möglichen Eigenschaften, darunter <code>onclick</code>, <code>onmouseover</code>, <code>onkeypress</code> und so weiter.</p>
+        <p>Betrachten wir ein konkretes Beispiel. Wir wollen nach dem erfolgreichen Laden des Dokuments eine JavaScript-Funktion ausführen. Dazu haben wir bereits das <code>load</code>-Ereignis kennengelernt, dass beim <code>window</code>-Objekt passiert. Angenommen, wir haben eine Funktion namens <code>start</code> definiert:</p>
+        <example>function start () {
+   window.alert("Dokument erfolgreich geladen! Wir können nun über das DOM darauf zugreifen.");
+}</example>
+        <p>Gemäß dem obigen Schema starten wir folgendermaßen das Event-Handling:</p>
+        <example>window.onload = start;</example>
+        <p>Und schon wird die gezeigte Funktion beim Laden des Dokuments ausgeführt.</p>
+        <p>Sie werden sich sicher fragen, wie Ereignis-Verarbeitung auf JavaScript-Ebene funktioniert. Dazu schauen wir uns den Aufbau der besagten Anweisungen an: Wir haben dort eine einfache Wertzuweisung (erkennbar durch das <code>=</code>), die einer Objekteigenschaft (<code>window.onload</code> auf der linken Seite) einen Wert (<code>starte</code> auf der rechten Seite) zuweist. Nach dieser Zuweisung ist also die Funktion in der Objekteigenschaft gespeichert. Dies funktioniert, weil
+        Funktionen in JavaScripte auch bloß Objekte sind.</p>
+        <p>Passiert nun ein Ereignis am Objekt <code>window</code>, sucht der JavaScript-Interpreter nach einer Objekteigenschaft, die den Namen <code>on</code> gefolgt vom Ereignistyp trägt (z.B. <code>onload</code>). Wenn diese Eigenschaft gesetzt ist und eine Funktion beinhaltet, führt er diese Funktion aus. Das ist erst einmal alles - aber enorm wichtig zum Verständnis des Event-Handlings.</p>
+        <p>Die oben vorgestellte Methode ist im Grunde überholt, wie Sie später erfahren werden. Dieses <em>traditionelle</em> Event-Handling ist aber immer noch der Ausgangspunkt jeder JavaScript-Programmierung. Sie sollten sich dieses Schema und dessen Funktionsweise genau einprägen.</p>
+    </pageunit>
+    <pageunit name="traditionelles-schema">
+        <heading>Beispiel für traditionelles Event-Handling</heading>
+        <p>Mit dem Wissen über Ereignis-Überwachung und das <code>load</code>-Ereignis können wir ein Dokument mitsamt eines Scriptes schreiben, das die beschriebenen Phasen illustriert.</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Dokument mit JavaScript&lt;/title&gt;
+&lt;script type="text/javascript"&gt; ... &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>Dem <code>p</code>-Element mit der ID <code>interaktiv</code> soll nun per JavaScript ein Event-Handler zugewiesen werden. Ziel ist, dass eine bestimmte JavaScript-Funktion aufgerufen wird, immer wenn der Anwender auf die Fläche des Element klickt. Das Ereignis, das bei einem Mausklick ausgelöst wird, heißt sinnigerweise <code>click</code>.</p>
+        <p>Unser Script braucht drei Teile:</p>
+        <ol>
+            <li>Reagiere auf das <code>load</code>-Ereignis und führe eine Startfunktion aus, sobald das Ereignis passiert.</li>
+            <li>Die besagte Startfunktion, die den Textabsatz anspricht und einen Event-Handler für das <code>click</code>-Ereignis registriert.</li>
+            <li>Die Handler-Funktion, die beim Klick auf den Textabsatz ausgeführt wird.</li>
+        </ol>
+        <p>Punkt 1 ist mit der Anweisung erledigt, die wir bereits oben kennengelernt haben:</p>
+        <example>window.onload = start;</example>
+        <p>Natürlich können wir der Startfunktion auch einen anderen Namen als <code>start</code> geben. Üblich ist z.B. <code>init</code>.</p>
+        <p>Die Startfunktion könnte so aussehen:</p>
+        <example>function start () {
+   document.getElementById("interaktiv").onclick = klickverarbeitung;
+}</example>
+        <p>Was zunächst kompliziert aussieht, ist nichts anderes als das bekannte Schema <code>element.onevent = handlerfunktion;</code>.</p>
+        <p>Mit der DOM-Methode <code>document.getElementById</code> (zu deutsch: <em>gib mir das Element anhand der folgenden ID</em>) können wir gezielt ein Element aus dem Dokument herauspicken, dessen ID uns bekannt ist. Der Aufruf <code>document.getElementById("interaktiv")</code> gibt uns also das Objekt zurück, das den <code>p</code>-Elementknoten repräsentiert.</p>
+        <p>Wir arbeiten direkt mit diesem Rückgabewert weiter und weisen dem Elementobjekt nun einen Event-Handler zu. Die Objekteigenschaft lautet logischerweise <code>onclick</code>, denn es geht um das Klick-Ereignis. Die auszuführende Funktion ist hier <code>klickverarbeitung</code>, dieser Name ist freilich willkürlich gewählt.</p>
+        <p>Das ist schon alles und damit kommen wir zur Definition der besagten Funktion <code>klickverarbeitung</code>:</p>
+        <example>function klickverarbeitung () {
+   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+}</example>
+        <p>Was darin passiert, müssen Sie an dieser Stelle noch nicht bis ins Detail verstehen. Wie Sie sehen können, wird darin ebenfalls das <code>p</code>-Element angesprochen. Diesmal wird ebenfalls eine Eigenschaft gesetzt, nämlich <code>innerHTML</code>. An den bestehenden Inhalt wird mit dem Operator <code>+=</code> etwas angehängt, nämlich ein String. Wenn Sie das Beispiel im Browser ausführen und auf das Element klicken, ändert sich der Text des Elements.</p>
+        <p>Zusammengefasst sieht das Beispiel mit eingebettetem JavaScript so aus:</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Beispiel für traditionelles Event-Handling&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.onload = start;
+
+function start () {
+   document.getElementById("interaktiv").onclick = klickverarbeitung;
+}
+
+function klickverarbeitung () {
+   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>Den JavaScript-Code können wir später natürlich in eine externe Datei auslagern.</p>
+        <p>So einfach und nutzlos dieses kleine Beispiel aussieht: Wenn Sie das mehrschrittige Schema verstanden haben, beherrschen Sie einen Großteil der JavaScript-Programmierung und wissen, wie Scripte üblicherweise strukturiert werden und schließlich ausgeführt werden.</p>
+    </pageunit>
+    <pageunit name="handler-loeschen">
+        <heading>Event-Überwachung beenden</heading>
+        <p>...</p>
+    </pageunit>
+    <pageunit name="fehler-handler-aufrufen">
+        <heading>Häufiger Fehler: Handler-Funktion direkt aufrufen</heading>
+        <p>Ein häufiger Fehler beim Registrierens eines Event-Handlers sieht folgendermaßen aus:</p>
+        <example>element.onevent = handlerfunktion();   // Fehler!</example>
+        <p>Oft steckt hinter dieser Schreibweise der Wunsch, der Handler-Funktion noch Parameter mitzugeben, damit darin gewissen Daten zur Verfügung stehen:</p>
+        <example>element.onevent = handlerfunktion(parameter);   // Fehler!</example>
+        <p>Sie müssen sich die Funktionsweise des traditionellen Event-Handlings noch einmal durch den Kopf gehen lassen, um zu verstehen, warum diese Anweisungen nicht den gewünschten Zweck erfüllen. Beim korrekten Schema <code>element.onevent = handlerfunktion;</code> wird eine Funktion, genauer gesagt ein Funktionsobjekt, in einer Eigenschaft des Elementobjektes gespeichert.</p>
+        <p>Das ist beim obigen Code nicht der Fall. Stattdessen wird die Handler-Funktion wegen den Klammern <code>()</code> hinter dem Funktionsnamen sofort ausgeführt. Deren <em>Rückgabewert</em> wird schließlich in der <code>onevent</code>-Eigenschaft gespeichert. Meistens hat die Handler-Funktion keinen Rückgabewert - daher wird schlicht <code>undefined</code> in die Eigenschaft geschrieben. Wir wollen die Funktion aber nicht direkt aufrufen, sondern bloß das Funktionsobjekt ansprechen.
+        Daher dürfen keine Klammern zum Funktionsaufruf hinter dem Namen notiert werden.</p>
+        <p>Der Wunsch, der Handler-Funktion gewisse Daten als Parameter zu übergeben, ist verständlich. Die obige fehlerhafte Schreibweise vermag dies aber nicht zu leisten. Das Schema muss eingehalten und der Funktionsaufruf, der die Parameter übergibt, in einer weiteren Funktion gekapselt werden. Schematisch:</p>
+        <example>function helferfunktion (parameter) {
+   /* Arbeite mit dem Parameter */
+}
+function handlerfunktion () {
+   helferfunktion("Parameter");
+}
+element.onevent = handlerfunktion;</example>
+        <p>Das konkrete Beispiel aus dem vorigen Abschnitt können wir so anpassen, dass in der Handler-Funktion bloß eine andere Funktion mit Parametern ausgeführt wird:</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Übergabe von Parametern an die Handler-Funktion&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.onload = start;
+
+function start () {
+   document.getElementById("interaktiv").onclick = klickverarbeitung;
+}
+
+function klickverarbeitung () {
+   textHinzufügen(document.getElementById("interaktiv"), "Huhu, das ist von Javascript eingefügter Text.");
+}
+
+function textHinzufügen (element, neuerText) {
+   element.innerHTML += neuerText;
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</example>
+        <p>In der Handler-Funktion <code>klickverarbeitung</code> wird die neue Funktion <code>textHinzufügen</code> mit Parametern aufgerufen. Diese wurde verallgemeinert und ist wiederverwendbar: Sie nimmt zwei Parameter an, einmal ein Elementobjekt und einmal einen String. Die Funktion hängt sie den angegebenen Text in das angegebene Element ein.</p>
+    </pageunit>
+    <pageunit name="inline-handler">
+        <heading>Eingebettete Event-Handler-Attribute</heading>
+        <note editor="mschaefer" type="todo">Abschnitt auslagern</note>
+        <p>Wir haben kennengelernt, wie wir mit JavaScript auf »traditionelle« Weise Event-Handler registrieren können. Wann immer es möglich ist, sollten Sie diese Vorgehensweise wählen. Es soll aber nicht verschwiegen werden, dass es auch möglich ist, JavaScript direkt im HTML-Code unterzubringen und damit auf Ereignisse zu reagieren.</p>
+        <p>Zu diesem Zweck besitzen fast alle HTML-Elemente entsprechende Attribute, in die Sie den auszuführenden JavaScript-Code direkt hineinschreiben können. In diesem Code können Sie natürlich auch eigene Funktionen aufrufen, die sie in einem <code>script</code>-Element oder einer externen JavaScript-Datei definiert haben. Die Attribute sind genauso benannt wie die entsprechenden JavaScript-Eigenschaften: Die Vorsible <code>on</code> gefolgt vom Ereignis-Typ (z.B. <code>click</code>). Das
+        Schema lautet dementsprechend:</p>
+        <example>&lt;element onevent="JavaScript-Anweisungen"&gt;</example>
+        <p>Ein konkretes Beispiel:</p>
+        <example>&lt;p onclick="window.alert('Absatz wurde geklickt!');"&gt;Klicken Sie diesen Textabsatz an!&lt;/p&gt;</example>
+        <p>Hier enthält das Attribut die JavaScript-Anweisung <code>window.alert('Absatz wurde geklickt!');</code>, einen Funktionsaufruf. Sie können mehrere Anweisungen in einer Zeile notieren, indem Sie sie wie üblich mit einem Semikolon trennen. Zum Beispiel Funktionsaufrufe:</p>
+        <example>&lt;p onclick="funktion1(); funktion2();"&gt;Klicken Sie diesen Textabsatz an!&lt;/p&gt;</example>
+        <p>Wie sie sehen, wird es hier schon unübersichtlich. Sie müssen Ihren Code in eine Zeile quetschen, damit die Browser das Attribut korrekt verarbeiten.</p>
+        <p>Es gibt viele gute Gründe, HTML und JavaScript möglichst zu trennen und auf solches <em>Inline-JavaScript</em> zu verzichten. Natürlich hat jede Regel ihre berechtigten Ausnahmen. Als Anfänger sollten sie sich jedoch mit der Trennung sowie dem Registrieren von Event-Handlern mittels JavaScript vertraut machen, wie es in den vorigen Abschnitten erläutert wurde. Wenn Ihre Scripte komplexer werden, werden Sie vielleicht vereinzelt auf Event-Handler-Attribute zurückgreifen müssen, aber
+        der Großteil kann und sollte ohne sie funktionieren.</p>
+        <note editor="mschaefer" type="todo">Eigenheiten und Nachteile beschreiben: Zugriff auf this u.d. Event-Objekt, Mehrere Anweisungen und Whitespace, Stringbegrenzung/Anführungszeichen, geänderte Scope-Chain</note>
+    </pageunit>
+    <pageunit name="fehler-code-als-string">
+        <heading>Häufiger Fehler: Auszuführenden Code als String zuweisen</heading>
+        <p>Nachdem wir Inline-JavaScript angeschnitten haben, sei auf einen weiteren häufigen Fehler beim traditionellen Event-Handling hingewiesen. Manche JavaScript-Programmierer übertragen ihr Wissen über Event-Handler-Attribute intuitiv auf das das dynamische Setzen von Event-Handlern. Sie versuchen z.B. folgendes:</p>
+        <example>element.onclick = "window.alert('Element wurde geklickt!');"</example>
+        <p>Oder gleichwertig mit <code>setAttribute</code>:</p>
+        <example>element.setAttribute("onclick", "window.alert('Element wurde geklickt!');");</example>
+        <p>Sprich, sie behandeln die Eigenschaft <code>onclick</code> und dergleichen wie Attribute unter vielen. Für viele andere Attribute gilt das auch. Ein Beispiel:</p>
+        <example>&lt;p&gt;&lt;a id="link" href="http://de.selfhtml.org/" title="Deutschsprachige Anleitung zum Erstellen von Webseiten"&gt;SELFHTML&lt;/a&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;
+var element = document.getElementById("link");
+element.title = "Die freie Enzyklopädie";
+element.href = "http://de.wikipedia.org/";
+element.firstChild.nodeValue = "Wikipedia";
+&lt;/script&gt;</example>
+        <p>Das Beispielscript spricht ein Link-Element an und ändert dessen Attribute <code>title</code> und <code>href</code> sowie schließlich dessen Textinhalt. Man sieht hier, dass sich die Zuweisungen der Attributwerte im HTML und im JavaScript stark ähneln. Die neuen Attributwerte werden im JavaScript einfach als Strings notiert.</p>
+        <p>Diese Vorgehensweise ist beim Setzen von Event-Handler-Attributen über JavaScript <em>prinzipiell auch möglich</em>. Das heißt, im Grunde ist auch folgendes Schreibweisen möglich (schematisch - <code>onevent</code> steht hier wie gesagt für alle Ereignisse):</p>
+        <example>element.onevent = "JavaScript-Anweisungen, die beim Eintreten des Ereignisses ausgeführt werden."
+element.setAttribute("onevent", "JavaScript-Anweisungen");</example>
+        <p>Der Theorie nach haben folgende Schreibweisen daher denselben Effekt:</p>
+        <example>// Methode 1: Traditionelles Event-Handling
+function handlerfunktion () {
+   window.alert("Hallo Welt!");
+}
+element.onevent = handlerfunktion;
+
+// Methode 2: Auszuführenden Code als als String zuweisen
+element.setAttribute("onevent", "window.alert('Hallo Welt!');");</example>
+        <p>Ihnen mag die die zweite Schreibweise in vielen Fällen einfacher und kürzer erscheinen. Doch zum einen hat sie das Problem, dass sie in der Praxis längst nicht so etabliert ist wie die traditionelle: Der Internet Explorer in den neusten Versionen 7 und 8 unterstützt diese Schreibweise noch nicht.</p>
+        <p>Davon abgesehen hat es Nachteile, JavaScript-Code nicht in Funktionen zu ordnen, sondern in Strings zu verpacken. Ihr Code wird unübersichtlicher und Fehler sind schwieriger zu finden. Sie sollten daher möglichst das traditionelle Schema vorziehen.</p>
+        <note editor="mschaefer" type="todo">Browserlage testen, Verweis auf new Function</note>
+    </pageunit>
+    <pageunit name="event-objekt">
+        <heading>Zugriff auf das Event-Objekt</heading>
+        <p>Durch das Registrieren von Event-Handlern wird die angegebene Funktion immer dann ausgeführt, wenn das jeweilige Ereignis beim jeweiligen Element eintritt. In dieser Handler-Funktion ist es meistens nötig, auf die näheren Umstände des Ereignisses zu reagieren. Beispielsweise sind bei einem Mausklick die Koordinaten des Mauszeigers interessant oder bei einem Tastendruck die gedrückte Taste.</p>
+        <p>All diese Informationen sind in JavaScript beim <strong>Event-Objekt</strong> gespeichert. Dieses Objekt repräsentiert das individuelle Ereignis, das der Handler gerade verarbeitet. Es bietet zahlreiche Eigenschaften mit Daten zum Ereignis und einige Methoden, um das Verhalten des Ereignisses zu steuern - dazu später noch mehr. Wenn Sie bei der Ereignisverarbeitung diese Daten benötigen, ist der Zugriff auf das Event-Objekt die erste Aufgabe in der Handler-Funktion.</p>
+        <p>In den meisten Browser gestaltet sich dieser Zugriff einfach: Das Event-Objekt wird der Handlerfunktion als erster Parameter übergeben. Sie muss dieses nur noch entgegen nehmen, der Parametername ist dabei frei wählbar. Üblicherweise wird ein Kurzname wie <code>e</code> oder <code>ev</code> verwendet. Für das folgende Beispiel wählen wir den sprechenden Namen <code>eventObjekt</code>:</p>
+        <example>function handlerfunktion (eventObjekt) {
+   window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
+   // Fehler im Internet Explorer!
+}</example>
+        <p>Diesen Zugriff auf das Event-Objekt unterstützen alle relevanten Browser außer dem Internet Explorer. Für diesen ist eine Sonderlösung notwendig. Er übergibt das Event-Objekt nicht als Parameter an die Handlerfunktion, sondern stellt es unter dem globalen Objekt <code>window.event</code> zur Verfügung. Auch wenn es den Anschein hat: Dort ist ein Event-Objekt nicht dauerhaft gespeichert, sondern diese Schreibweise ist lediglich auf das jeweilige Event-Objekt des Ereignisses, das gerade
+        mittels Handler verarbeitet wird.</p>
+        <p>Um browserübergreifend auf das Event-Objekt zuzugreifen, ist also eine Vereinheitlichung notwendig. Diese ist recht einfach: Wir prüfen, ob der Funktion ein Parameter und somit die lokale Variable <code>eventObjekt</code> einen Wert hat. Falls dies zutrifft, nehmen wir diesen Parameter als Event-Objekt. Andernfalls speichern wir in der leeren Variable eine Referenz auf <code>window.event</code>.</p>
+        <example>function handlerfunktion (eventObjekt) {
+   // Vereinheitlichung:
+   if (!eventObjekt) {
+      // Korrektur für den Internet Explorer
+      eventObjekt = window.event;
+   }
+
+   // Browserübergreifender Zugriff:
+   window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
+}</example>
+        <p>Nach der Vereinheitlichung steht das Event-Objekt browserübergreifend in einer Variable zu Verfügung.</p>
+        <p>Mit <code>if (!eventObjekt)</code> wird genauer gesagt geprüft, ob der Wert der Variablen bei einer Umwandlung in den Typ Boolean den Wert <code>false</code> ergibt. Eine solche Abfrage ist hier möglich, weil <code>eventObjekt</code> entweder ein Objekt enthält oder, falls der Handlerfunktion das Event-Objekt nicht übergeben wird, mit dem Wert <code>undefined</code> initialisiert wird. Dieser ergibt in Boolean umgewandelt <code>false</code>.</p>
+        <p>Eine gleichwertige alternative Schreibweise nutzt den <code>||</code>-Operator. Sie funktioniert gleich: Es wird geprüft, ob ein Funktionsparameter übergeben wurde. Falls nicht, wird versucht, das Event-Objekt über <code>window.event</code> anzusprechen. Das Ziel ist ebenfalls vereinheitlichter Zugriff auf das Event-Objekt über die Variable <code>eventObjekt</code>.</p>
+        <example>function handlerfunktion (eventObjekt) {
+   eventObjekt = eventObjekt || window.event;
+   window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
+}</example>
+        <p>Der Oder-Operator <code>||</code> überprüft, ob der Wert links <code>true</code> ergibt, also der Parameter <code>eventObjekt</code> gesetzt wurde. Wenn dies der Fall ist, ergibt der Ausdruck den Wert von <code>eventObjekt</code> und es wird quasi <code>eventObjekt = eventObjekt</code> ausgeführt. Dabei passiert selbstverständlich nichts, die Variable wird mit sich selbst überschrieben. Interessant ist der andere Fall, wenn <code>eventObjekt</code> den Wert <code>undefined</code> hat
+        (siehe oben). Dann ergibt der Ausdruck den Wert rechts vom <code>||</code>-Operator und es wird <code>eventObjekt = window.event</code> ausgeführt. Durch diese Oder-Verzweigung ist das Event-Objekt in jedem Fall in der Variable <code>eventObjekt</code> gespeichert.</p>
+        <p>Welche der funktional identischen Schreibweise Sie verwenden, bleibt ihnen überlassen. Die erste ist klarer und leicht verständlich, die zweite ist kürzer.</p>
+        <p>In den obigen Beispielen wird das Event-Objekt in der Variable mit dem sprechenden Namen <code>eventObjekt</code> gespeichert. Die Namenswahl bleibt selbstverständlich Ihnen überlassen. Es hat sich eingebürgert, diese Variable der Kürze halber <code>e</code> zu nennen, um Tipparbeit zu sparen. Wenn in einer Handler-Funktion eine Variable <code>e</code> auftaucht, dann ist darin in der Regel das Event-Objekt gespeichert. Sie könnten gleichermaßen schreiben:</p>
+        <example>function handlerfunktion (e) {
+   e = e || window.event;
+   window.alert("Es ist ein Ereignis vom Typ " + e.type + " passiert.");
+}</example>
+    </pageunit>
+    <pageunit name="standardaktion">
+        <heading>Unterdrücken der Standardaktion des Ereignisses</heading>
+        <p>Viele Ereignisse im Dokument haben eigentümliche Auswirkungen. Zwei Beispiele: Wenn der Anwender auf einen Link klickt, so tritt ein <code>click</code>-Ereignis ein. Das bringt den Browser dazu, zum Linkziel zu navigieren. Das Aktivieren eines Absende-Buttons löst ein <code>submit</code>-Ereignis aus, das zur Übertragung des Formulars führt. Der Browser behandelt also standardmäßig gewisse Ereignisse und führt die sogenannte Standardaktion (englisch <em>default action</em>) aus, ohne
+        dass der Seitenautor eine entsprechende JavaScript-Logik definiert hat.</p>
+        <p>Beim <interlink link-type="page" reference="basis_javascript_hintergruende_einsatz">Unobtrusive JavaScript</interlink> versieht man z.B. bestehende Hyperlinks mit einer JavaScript-Logik. Die ursprüngliche Funktionalität des Links will man dann unterbinden: Beim Klick auf den Link soll nur das Script ausgeführt werden, nicht mehr das Linkziel angesprungen werden.</p>
+        <p>Angenommen, wir haben folgenden Link:</p>
+        <example>&lt;a href="bilder/bild.jpg" id="vollbildlink"&gt;Bild in Originalgröße ansehen&lt;/a&gt;</example>
+        <p>Mit JavaScript soll diesem Link nun ein <code>click</code>-Handler hinzugefügt werden, der das Bild in aktuelle Dokument einblendet anstatt das Dokument durch das Bild auszuwechseln. Wie dieses Einblenden umgesetzt wird, interessiert uns an dieser Stelle nicht, sondern nur das Unterdrücken der Standardaktion.</p>
+        <p>Im traditionellen Event-Handling wird die Standardaktion unterdrückt, indem die Handler-Funktion <code>false</code> als Ergebnis zurückgibt. Am Ende der Funktion wird daher die Anweisung <code>return false;</code> notiert.</p>
+        <example>// Registriere Event-Handler
+document.getElementById("vollbildlink").onclick = zeigeVollbild;
+
+function zeigeVollbild () {
+   // Blende das Bild ein, auf das der Link zeigt.
+   // ... (an dieser Stelle uninteressant) ...
+
+   // Unterdrücke schließlich die Standardaktion:
+   return false;
+};</example>
+        <p>Beachten Sie, dass mit der <code>return</code>-Anweisung die Funktion beendet wird. Code, der auf diese Anweisung folgt, wird nicht ausgeführt. Es sei denn, die <code>return</code>-Anweisung ist z.B. durch eine <code>if</code>-Anweisung gekapselt und wird nicht in jedem Fall ausgeführt.</p>
+        <p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen - sie können die Standardaktion lediglich verhindern.</p>
+        <p>Neben <code>return false</code> gibt es modernere Techniken, um die Standardaktion zu verhindern. Der DOM-Events-Standard bietet eine Methode namens <code>preventDefault</code> beim Event-Objekt, mit der sich die Standardaktion unterdrücken lässt. Das obige Beispiel könnte auch folgendermaßen aussehen:</p>
+        <example>function zeigeVollbild (eventObjekt) {
+   // Browserübergreifender Zugriff auf das Event-Objekt
+   if (!eventObjekt) eventObjekt = window.event;
+
+   // Unterdrücke die Standardaktion durch Aufruf von preventDefault:
+   e.preventDefault();
+   // Fehler im Internet Explorer!
+
+   // Blende das Bild ein, auf das der Link zeigt.
+   // ... (an dieser Stelle uninteressant) ...
+};</example>
+        <p>Der Vorteil von <code>preventDefault</code> ist, dass es im Gegensatz zu <code>return false</code> auch mittendrin in der Handler-Funktion aufgerufen werden kann. Das Beispiel demonstriert dies. Mit dem <code>preventDefault</code>-Aufruf wird die Funktion nicht beendet.</p>
+        <p>Der Nachteil ist, dass der Internet Explorer diese standardisierte Methode noch nicht kennt. Er hat jedoch eine Boolean-Eigenschaft des Event-Objekts namens <code>returnValue</code>. Weist man dieser den Wert <code>false</code> zu, so wird die Standardaktion unterbunden. Um alle Browser zu unterstützen, kann die Existenz der <code>preventDefault</code>-Methode abgefragt werden. Existiert diese nicht, wird alternativ die Eigenschaft <code>returnValue</code> gesetzt:</p>
+        <example>function zeigeVollbild (eventObjekt) {
+   if (!eventObjekt) eventObjekt = window.event;
+
+   // Existiert die Methode preventDefault? Dann rufe sie auf.
+   if (eventObjekt.preventDefault) {
+      eventObjekt.preventDefault();
+   } else {
+     // Andernfalls setze returnValue für den Internet Explorer
+     eventObjekt.returnValue = false;
+   }
+
+   // Blende das Bild ein, auf das der Link zeigt.
+   // ... (an dieser Stelle uninteressant) ...
+};</example>
+        <p>Diese Vorgehensweise ist hier der Vollständigkeit halber erwähnt. Wenn sie Ihnen unnötig kompliziert erscheint, so können Sie sich mit dem herkömmlichen <code>return false</code> zufrieden geben, das die Aufgabe hinreichend erfüllt. Sie müssen allerdings beachten, dass mit <code>return false</code> die Handler-Funktion beendet wird.</p>
+        <note editor="molily" type="question">An einigen Stellen bin ich im IE mit return false nicht weitergekommen und musste returnValue = false setzen. Muss untersucht werden, ob return false wirklich preventDefault und returnValue ersetzen kann</note>
+    </pageunit>
+    <pageunit name="bubbling">
+        <heading>Der Event-Fluss: Bubbling</heading>
+        <p>Bisher haben wir erfahren, dass Ereignisse bei bestimmten Elementen passieren. Dort können wir sie überwachen, indem wir Handler registrieren. Tritt das Ereignis bei diesem Element ein, wird die Handler-Funktion ausgelöst.</p>
+        <p>Die Wirklichkeit ist etwas komplizierter. Die Verarbeitung eines Ereignisses verläuft, um es genau zu sagen, in drei verschiedenen Phasen, die nacheinander durchlaufen werden. Davon kennen wir bereits eine und werden nun eine zweite kennenlernen. (Die dritte ist weniger wichtig und braucht Sie beim Einstieg in das Event-Handling erst einmal nicht interessieren.)</p>
+        <p>Ein Ereignis passiert bei einem Element, dem sogenannten <strong>Zielelement</strong> (englisch <em>target</em>), und löst dort alle Handler aus, die für das entsprechende Ereignis registriert wurden - soweit waren wir bereits. Diese Phase nennt sich entsprechend <em>Ziel-Phase</em>.</p>
+        <p>Mit dieser Phase ist die Ereignis-Verarbeitung aber nicht zuende , denn anschließend steigt das Ereignis im DOM-Elementenbaum auf. Dieser Vorgang nennt sich <strong>Bubbling</strong> (englisch für Aufsteigen, wie z.B. Luftblasen im Wasser). Dieses Aufsteigen bedeutet, dass die entsprechenden Handler beim Eltern-Element des Zielelements ausgeführt werden, dann bei dessen Eltern-Element und so weiter, bis das Ereignis schließlich den obersten <code>document</code>-Knoten erreicht hat.
+        Das Ereignis bewegt sich also nach oben im Elementbaum, durchläuft alle Eltern-Elemente des Zielelements und löst auf diesem Weg alle entsprechenden Handler aus. Dieser Vorgang wird entsprechend <em>Bubbling-Phase</em> genannt.</p>
+        <p>Das mag für den Anfang unverständlich klingen, der Sinn und die Funktionsweise des Bubblings sind aber schnell erfasst. Nehmen wir folgenden HTML-Code:</p>
+        <example>&lt;p id="absatz"&gt;
+   Dies ist ein Beispiel-Element mit einem
+   &lt;strong id="wichtig"&gt;
+      wichtigen Text
+   &lt;/strong&gt;.
+&lt;/p&gt;</example>
+        <p>Nehmen wir ferner an, dass das <code>p</code>-Element einen <code>click</code>-Handler bekommt:</p>
+        <example>function klickverarbeitung () {
+   window.alert("Der Absatz wurde geklickt!");
+}
+document.getElementById("absatz").onclick = klickverarbeitung;</example>
+        <p>Das <code>p</code>-Element wird vom Browser als rechteckige Box dargestellt. Bei einem Klick irgendwo in diese Box soll die Handler-Funktion ausgeführt werden.</p>
+        <p>Wenn der Anwender auf das Wort »Beispiel-Element« klickt, ist das <code>p</code>-Element das Zielelement des Ereignisses. Wenn man hingegen auf »wichtigen Text« klickt, so ist das <code>strong</code>-Element das Zielelement des Ereignisses, nicht das p-Element! Denn dieser Text liegt in erster Linie ein in Kindknoten des <code>strong</code>-Elements und liegt nur indirekt im <code>p</code>-Element.</p>
+        <p>Nichtsdestoweniger erwartet man, dass ein Klick auf die Box des <code>strong</code>-Elements ebenfalls den <code>click</code>-Handler beim <code>p</code>-Element auslöst. Und dies ist auch der Fall - dafür sorgt das Bubbling! Das Ereignis, das ursprünglich beim strong-Element passiert ist, steigt nämlich auf, sodass der Handler des <code>p</code>-Elements ausgeführt wird.</p>
+        <p>Das Bubbling ist also meist erwünscht, damit bei einem Element Ereignisse überwacht werden können, selbst wenn sie ursprünglich bei Kindelementen passieren. Wenn Sie aber nicht damit rechnen, dass Ereignisse aufsteigen, so kann das Bubbling zu einiger Verwirrung führen und Sie werden sich wundern, woher plötzlich gewisse Ereignisse stammen.</p>
+        <p>Nicht alle Ereignisse steigen auf, denn für manche Ereignisse ergibt es keinen Sinn, dass sie irgendwo zentral überwacht werden.</p>
+        <note editor="molily" type="todo">Siehe Referenz</note>
+    </pageunit>
+    <pageunit name="currenttarget-target">
+        <heading>Verarbeitendes Element und Zielelement</heading>
+        <p>Durch das beschriebene Bubbling ist es möglich, das sich das Element, bei dem ein Ereignis ursprünglich passiert ist, von dem unterscheiden kann, dessen Handler gerade aufgerufen wird. Es ist möglich, dass das Element, das das Ereignis verarbeitet, in im Elementenbaum oberhalb vom Zielelement liegt. Das Ereignis steigt in dem Fall vom Zielelement auf und löst bei einem anderen Element die Handler-Funktion aus.</p>
+        <p>In vielen Fällen will man in der Handler-Funktion auf beide beteiligten Elemente zugreifen, sofern sie sich unterscheiden.</p>
+        <p>Beginnen wir mit dem wichtigen Zugriff auf das <strong>Element, bei dem die Handler-Funktion registriert wurde</strong>: Das Element kann in der Handler-Funktion über das Schlüsselwort <code>this</code> angesprochen werden, denn die Handler-Funktion wird im Kontext dieses Elementobjektes ausgeführt.</p>
+        <p>Das obige Beispiel wird wieder aufgegriffen:</p>
+        <example>&lt;p id="absatz"&gt;
+   Dies ist ein Beispiel-Element mit einem
+   &lt;strong id="wichtig"&gt;
+      wichtigen Text
+   &lt;/strong&gt;.
+&lt;/p&gt;</example>
+        <p>Dem Absatz wird wieder ein <code>click</code>-Handler verpasst:</p>
+        <example>function klickverarbeitung () {
+   window.alert("Element vom Typ " + this.nodeName + " wurde geklickt!");
+}
+document.getElementById("absatz").onclick = klickverarbeitung;</example>
+        <p>Innerhalb der Handler-Funktion können wir über <code>this</code> auf das <code>p</code>-Element zugreifen.</p>
+        <p>Der DOM-Events-Standard sieht eine andere Zugriffsweise auf das Element vor, dessen Handler gerade ausgeführt wird: Die Eigenschaft <code>currentTarget</code> beim Event-Objekt enthält ebenfalls das fragliche Element. Der Internet Explorer kennt diese Eigenschaft noch nicht und das besagte <code>this</code> ist im IE die einzige Möglichkeit, auf das fragliche Element zuzugreifen. Der Einfachheit halber können Sie daher browserübergreifend <code>this</code> verwenden.</p>
+        <note editor="molily" type="todo">interaktives Beispiel, das den Unterschied der beiden Elemente illustriert</note>
+        <p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Alleinig der Internet Explorer unterstützt diese Eigenschaft nicht, kennt aber eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist - wir kennen dieses
+        Prozedere bereits.</p>
+        <example>function klickverarbeitung (eventObjekt) {
+   if (!eventObjekt) eventObjekt = window.event;
+
+   if (eventObjekt.target) {
+      var target = eventObjekt.target;
+   } else {
+      var target = eventObject.srcElement;
+   }
+
+   window.alert("Das Ereignis passierte ursprünglich beim Element " + target.nodeName);
+}</example>
+        <p>Falls die Eigenschaft <code>target</code> des Event-Objektes gefüllt ist, legen wir in der lokalen Variable <code>target</code> eine Referenz darauf an. Andernfalls, im Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
+        <p>Wie beim Zugriff auf das Event-Objekt erlaubt der <code>||</code>-Operator eine Kurzschreibweise. Das Event-Objekt wird zudem unter dem Kurznamen <code>e</code> gespeichert. So kommen wir zu einem Schema, dem dem viele Handler-Funktionen entsprechen:</p>
+        <example>function klickverarbeitung (e) {
+   // Vereinheitlichung von Event-Objekt und Zielelement
+   e = e || window.event;
+   var target = e.target || e.srcElement;
+
+  // Nutzlast
+   window.alert("Das Ereignis passierte ursprünglich beim Element " + target.nodeName);
+}</example>
+    </pageunit>
+    <pageunit name="bubbling-verhindern">
+        <heading>Kontrolle über den Event-Fluss: Bubbling verhindern</heading>
+        <p>Es gibt Fälle, in denen das Bubbling nicht gewünscht ist. Beispielsweise wenn zwei verschachtelte Elemente dasselbe Ereignis überwachen, aber nur der Handler des inneren Elements aktiv werden soll, wenn dieses das Ziel des Ereignisses ist. In einer Handler-Funktion können Sie deshalb das weitere Aufsteigen des Ereignisses im Elementenbaum verhindern.</p>
+        <p>Folgendes bekannte Beispiel mit verschachtelten Elementen soll dies illustrieren:</p>
+        <example>&lt;p id="absatz"&gt;
+   Dies ist ein Beispiel-Element mit einem
+   &lt;strong id="wichtig"&gt;
+      wichtigen Text
+   &lt;/strong&gt;.
+&lt;/p&gt;</example>
+        <p>Das <code>strong</code>-Element steckt hier im <code>p</code>-Element. Bei beiden Elementen wird ein <code>click</code>-Handler registriert:</p>
+        <example>function absatzKlick () {
+   window.alert("Klick auf das p-Element");
+}
+document.getElementById("absatz").onclick = absatzKlick;
+
+function wichtigKlick () {
+   window.alert("Klick auf das strong-Element");
+}
+document.getElementById("wichtig").onclick = wichtigKlick;</example>
+        <p>Bei einem Klick auf die Fläche des <code>strong</code>-Elements (»wichtigen Text«) werden beide Handler-Funktionen ausgeführt, denn das Ereignis steigt vom <code>strong</code>-Element zum <code>p</code>-Element auf.</p>
+        <p>Dieses Aufsteigen können Sie in der Handler-Funktion des <code>strong</code>-Elementes (<code>wichtigKlick</code>) verhindern. Der DOM-Standard definiert dafür die Methode <code>stopPropagation</code> (englisch: stoppe die Ausbreitung bzw. Weitergabe des Ereignisses) beim Event-Objekt. Ein Aufruf dieser Methode bricht das Aufsteigen ab bzw. verhindert das weitere Aufsteigen.</p>
+        <p>Der Internet Explorer kennt diese Methode nicht, verfügt jedoch über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch: breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
+        <p>Wieder einmal nutzen wir eine Fähigkeitenerkennung, die die Verfügbarkeit der standardisierten Methode <code>stopPropagation</code> prüft und im Fehlerfalle auf die Internet-Explorer-Alternative <code>cancelBubble</code> zurückfällt.</p>
+        <p>Die Handler-Funktion <code>wichtigKlick</code> wird wie folgt modifiziert:</p>
+        <example>function wichtigKlick (eventObekt) {
+   if (!eventObjekt) eventObjekt = window.event;
+
+   if (eventObjekt.stopPropagation) {
+      eventObjekt.stopPropagation();
+   } else {
+      eventObjekt.cancelBubble = true;
+   }
+
+   window.alert("Klick auf das strong-Element. Das Aufsteigen des Ereignisses wird unterbunden!");
+}</example>
+        <p>Damit können verschachtelte Elemente denselben Ereignistyp überwachen, im Beispiel <code>click</code>. Obwohl das eine Element in dem anderen enthalten ist und üblicherweise in dessen Grenzen dargestellt wird, übernimmt es die Ereignis-Verarbeitung selbstständig. Der Handler des äußeren Elements wird nur bei Klicks ausgeführt, die auf seine Fläche zielen, ausgenommen die Fläche des inneren Elements.</p>
+    </pageunit>
+    <pageunit name="delegation" style="">
+        <heading>Effizientes Event-Handling: Event-Delegation</heading>
+        <p>...</p>
+        <p>Bubbling-Effekt nutzen</p>
+        <p>Unterschied zwischen Zielelement und verarbeitendem Element nutzen</p>
+    </pageunit>
+    <pageunit name="traditionell-nachteile">
+        <heading>Nachteile des traditionellen Event-Handlings und Alternativen</heading>
+        <note editor="mschaefer" type="todo">Eigene Seite</note>
+        <p>Das traditionelle Event-Handling basiert darauf, dass ein Funktionsobjekt in einer Eigenschaft des Elementobjektes gespeichert wird. Wir erinnern uns an das Schema <code>element.onevent = handlerfunktion</code>.</p>
+        <p>Der Vorteil dieses Schema ist seine Einfachheit und Verständlichkeit. Will man ein Ereignis überwachen, schreibt man bloß die Handler-Funktion in eine entsprechende Element-Eigenschaft. Der größte Nachteile ist jedoch folgender: Es kann nur <em>eine</em> Handler-Funktion zugleich registriert werden. Denn in der Eigenschaft kann nur eine Funktion gespeichert werden, und weist man eine andere Funktion zu, überschreibt man die erste.</p>
+        <p>In manchen Fällen mag es ausreichen, dass man pro Element nur eine Handlerfunktion definieren kann. Diese kann schließlich weitere Funktionen aufrufen, sodass nicht der gesamte auszuführende Code direkt in dieser einen Funktion stehen muss. Doch insbesondere wenn verschiedene Scripte zusammenarbeiten, besteht die Gefahr, dass sie beim traditionellen Event-Handling einander in die Quere kommen.</p>
+        <p>Nun ist es durchaus möglich, mehrere Handler-Funktionen zu notieren, ohne letztlich vom traditionellen Schema abzuweichen. Dazu sind allerdings Helferscripte nötig, deren Funktionsweise schwer zu verstehen ist. Sie erzeugen immer neue Funktionen, die die bestehende Handler-Funktion und die neue, zusätzliche Handler-Funktion einschließen. Man spricht von sogenannten <em>Wrapper-Funktionen</em> (englisch: Hülle, Umschlag).</p>
+        <p>Doch darauf soll hier nicht näher eingegangen werden. Stattdessen wenden wir uns den fortgeschrittenen Modelle für Event-Handling zu.</p>
+    </pageunit>
+    <pageunit name="dom-events">
+        <heading>Event-Handling gemäß den W3C-Standards</heading>
+        <p>Das bisher beschriebene traditionelle Schema stammt aus den Anfangstagen von JavaScript, als es noch keine unabhängigen JavaScript-Spezifikationen gab. Der Browserhersteller Netscape erfand das Schema einst und andere Browser übernahmen es im Zuge ihrer JavaScript-Unterstützung.</p>
+        <p>Die Entwicklung ging jedoch weiter: Bei der Standardisierung des Event-Handlings verwarf das WWW-Konsortium das traditionelle Event-Handling. Der entsprechende DOM-Standard sieht ein anderes Modell vor: Alle Elementobjekte und weitere zentrale Objekte besitzen die Methode <code>addEventListener</code> (englisch: Ereignis-Empfänger hinzufügen). Will man dem Element einen Event-Handler zuweisen, so ruft man diese Methode auf.</p>
+        <unit name="addEventListener">
+            <heading>Event-Handler registrieren: addEventListener</heading>
+            <p>Das standardisierte Schema enthält ebenfalls die drei Bestandteile Elementobjekt, Ereignistyp und Handler-Funktion. Es lautet folgendermaßen:</p>
+            <example>element.addEventListener("event", handlerfunktion, capturing);</example>
+            <p>Die Methode erwartet also drei Parameter:</p>
+            <ol>
+                <li>Der erste Parameter ist ein String und enthält den <strong>Ereignistyp</strong>. Beispiele für den ersten Parameter sind <code>"click"</code>, <code>"mouseover"</code>, <code>"load"</code>, <code>"submit"</code> und so weiter.</li>
+                <li>Der zweite Parameter ist der Name der <strong>Handler-Funktion</strong> (genauer gesagt: ein Ausdruck, der ein Funktionsobjekt ergibt).</li>
+                <li>Der dritte Parameter bestimmt, für welche <strong>Event-Phase</strong> der Handler registriert werden soll. Es handelt sich um einen Boolean-Parameter, d.h. sie können <code>true</code> oder <code>false</code> notieren. <code>false</code> steht für die bereits bekannte Bubbling-Phase, <code>true</code> für die noch nicht behandelte und weniger wichtige <em>Capturing-Phase</em> (siehe <interlink link-type="anchor-down">Capturing</interlink>). Die genaue Bedeutung des dritten
+                Parameters wird erst später erklärt werden. Standardmäßig sollten Sie hier <code>false</code> notieren.</li>
+            </ol>
+            <p>Das folgende Beispiel kennen wir bereits vom traditionellen Event-Handling. Beim fertigen Laden des HTML-Dokuments wird automatisch ein <code>click</code>-Handler bei einem Textabsatz registriert. Dieses Mal nutzen wir die standardisierte Methode <code>addEventListener</code>:</p>
+            <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Beispiel für Event-Handling gemäß dem W3C DOM&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.addEventListener("load", start, false);
+
+function start () {
+   var pElement = document.getElementById("interaktiv");
+   pElement.addEventListener("click", klickverarbeitung, false);
+}
+
+function klickverarbeitung () {
+   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</example>
+            <p>Folgende Anweisungen haben sich geändert:</p>
+            <p>Aus der Zuweisung <code>window.onload = start;</code> ist der Aufruf <code>window.addEventListener("load", start, false);</code> geworden. Auch wenn <code>window</code> im strengen Sinne kein Elementobjekt ist, bietet es auch die Methode <code>addEventListener</code> an.</p>
+            <p>Aus der Zuweisung <code>document.getElementById("interaktiv").onclick = klickverarbeitung;</code> sind zwei geworden. In der ersten Anweisung speichern wir das Elementobjekt des Absatzes in einer Variable zwischen:</p>
+            <example>var pElement = document.getElementById("interaktiv");</example>
+            <p>In der zweiten Anweisung wird schließlich die Handler-Funktion registriert:</p>
+            <example>pElement.addEventListener("click", klickverarbeitung, false);</example>
+            <p>Sie können die Methoden-Aufrufe natürlich auch verketten, anstatt eine Hilfsvariable zu verwenden. Das sähe schematisch so aus: <code>document.getElementById(...).addEventListener(...)</code>. Schließlich gibt <code>getElementById</code> im Regelfall ein Elementobjekt zurück, dessen Methoden Sie direkt ansprechen können. Aus Gründen der Lesbarkeit und Verständlichkeit wurde diese Kette im Beispiel in zwei Anweisungen gesplittet.</p>
+            <p>Das obige Beispiel funktioniert in allen modernen Browsern - außer dem Internet Explorer. Dieser unterstützt, wie wir schon von diversen Eigenschaften und Methoden des Event-Objektes wissen, den W3C-DOM-Standard noch nicht. Die Methode <code>addEventListener</code> ist ihm schlicht unbekannt. Im Gegensatz zum traditionellen Event-Handling wird <code>addEventListener</code> daher nicht browserübergreifend unterstützt. Der Internet Explorer unterstützt stattdessen ein <interlink
+            link-type="anchor-down" reference="basis_javascript_einbindung" target-anchor="microsoft">eigenes, proprietäres Modell</interlink>, das im folgenden Abschnitt vorgestellt wird.</p>
+            <p>Der Hauptvorteil von <code>addEventListener</code> ist, dass Sie für ein Element <strong>mehrere Handler-Funktionen</strong> für denselben Ereignis-Typ registrieren können. Beim obigen Beispiel können wir die <code>start</code>-Funktion so anpassen, dass beim <code>p</code>-Element zwei andler statt bloß einer registriert werden:</p>
+            <example>function start () {
+   var pElement = document.getElementById("interaktiv");
+   pElement.addEventListener("click", meldung1, false);
+   pElement.addEventListener("click", meldung2, false);
+}
+
+function meldung1 () {
+   window.alert("Erste Handler-Funktion ausgeführt!");
+}
+function meldung2 () {
+   window.alert("Zweite Handler-Funktion ausgeführt!");
+}</example>
+            <p>Es werden zwei Handler-Funktionen namens <code>meldung1</code> und <code>meldung2</code> definiert. Mithilfe von <code>addEventListener</code> werden sie beide als <code>click</code>-Handler registriert. Wenn Sie auf den Textabsatz klicken, dann sollten nacheinander zwei JavaScript-Meldefenster erscheinen - und zwar in der Reihenfolge, in der die Handler mittels <code>addEventListener</code> registriert wurden.</p>
+        </unit>
+        <unit name="removeEventListener">
+            <heading>Event-Handler entfernen: removeEventListener</heading>
+            <p>Um die mit <code>addEventListener</code> registrierten Handler wieder zu <strong>entfernen</strong>, gibt es die Schwestermethode <code>removeEventListener</code> (englisch: Ereignis-Empfänger entfernen). Die Methode erwartet dieselben Parameter, die <code>addEventListener</code> beim Registrieren bekommen hat: Einen String mit dem Ereignis-Typ, die zu löschende Handler-Funktion und schließlich einen Boolean-Wert für die Event-Phase.</p>
+            <p>Um beide im Beispiel definierten Handler für das <code>p</code>-Element (nämlich <code>meldung1</code> und <code>meldung2</code>) wieder zu entfernen, notieren wir:</p>
+            <example>function beenden () {
+   pElement.removeEventListener("click", meldung1, false);
+   pElement.removeEventListener("click", meldung2, false);
+}</example>
+            <p>...</p>
+            <note editor="mschaefer" type="todo">Beispiel</note>
+        </unit>
+    </pageunit>
+    <pageunit name="microsoft">
+        <heading>Event-Handling gemäß Microsoft</heading>
+        <p>Microsoft hat schon früh für seinen Internet Explorer eine Alternative zum unzureichenden traditionellen Event-Handling eingeführt, welches vom damaligen Konkurrenten Netscape erfunden wurde. Das W3C-DOM wurde erst später standardisiert und wird bis heute nicht vom Internet Explorer unterstützt. Das Microsoft-Modell wiederum wird nur vom Internet Explorer verstanden. Es handelt sich hier also um eine Sonderlösung, die nur interessant ist, weil der Internet Explorer den DOM-Standard
+        noch nicht umsetzt.</p>
+        <p>Microsofts Modell ist als Vorläufer von <code>addEventListener</code> und <code>removeEventListener</code> zu sehen, funktioniert im Detail jedoch etwas anders und bringt einige Vor- und Nachteile mit sich.</p>
+        <unit name="attachEvent">
+            <heading>Event-Handler registrieren: attachEvent</heading>
+            <p>Im Microsoft-Modell besitzt jedes Elementobjekt die Methode <code>attachEvent</code> zum Registrieren von Event-Handlern. (Zentrale Objekte wie <code>window</code> und <code>document</code> besitzen die Methode ebenfalls.) Das Schema lautet folgendermaßen:</p>
+            <example>element.attachEvent("onevent", handlerfunktion);</example>
+            <p>Die Methode erwartet zwei Parameter:</p>
+            <ol>
+                <li>Der erste Parameter ist ein String und enthält den <strong>Ereignistyp</strong> mit der Vorsilbe <code>on</code>. Beispiele für den ersten Parameter sind <code>"onclick"</code>, <code>"onmouseover"</code>, <code>"onload"</code>, <code>"onsubmit"</code> und so weiter.</li>
+                <li>Der zweite Parameter ist der Name der <strong>Handler-Funktion</strong> (ein Ausdruck, der ein Funktionsobjekt ergibt).</li>
+            </ol>
+            <p>Wir greifen das bekannte Beispiel auf, das wir bereits nach dem traditionellem Modell und nach dem W3C-Modell umgesetzt haben, und setzen es mit dem Microsoft-Modell um:</p>
+            <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Beispiel für Event-Handling gemäß dem W3C DOM&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.attachEvent("onload", start);
+
+function start () {
+   var pElement = document.getElementById("interaktiv");
+   pElement.attachEvent("onclick", klickverarbeitung);
+}
+
+function klickverarbeitung () {
+   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</example>
+            <p>Das Beispiel hat sich gegenüber dem W3C-Modell nur geringfügig geändert. Anstelle von <code>window.addEventListener(...)</code> wurde <code>window.attachEvent(...)</code> notiert, dasselbe bei <code>pElement</code>.</p>
+            <p>Der Ereignistyp im ersten Parameter enthält nun den Präfix <code>on</code> vorangestellt: Aus <code>"load"</code> wird <code>"onload"</code>, aus <code>"click"</code> wird <code>"onclick"</code>. Der dritte Parameter, der die Event-Phase spezifiert, fällt weg - denn Microsofts Modell unterstützt sowieso nur das Registrieren in der Bubbling-Phase.</p>
+            <p>Auch mit attachEvent können Sie verschiedene Handler für denselben Ereignis-Typ definieren. Das obige Beispiel wird entsprechend angepasst:</p>
+            <example>function start () {
+   var pElement = document.getElementById("interaktiv");
+   pElement.attachEvent("onclick", meldung1);
+   pElement.attachEvent("onclick", meldung2);
+}
+
+function meldung1 () {
+   window.alert("Erste Handler-Funktion ausgeführt!");
+}
+function meldung2 () {
+   window.alert("Zweite Handler-Funktion ausgeführt!");
+}</example>
+            <p>Das Beispiel enthält nichts neues, die Aufrufe von <code>addEventListener</code> wurden auf die besagte Weise durch <code>attachEvent</code> ausgetauscht.</p>
+        </unit>
+        <unit name="detachEvent">
+            <heading>Event-Handler entfernen: detachEvent</heading>
+            <p>...</p>
+        </unit>
+        <unit>
+            <heading>Eigenheiten des Microsoft-Modell</heading>
+            <p>Das Microsoft-Modell bringt ein paar Besonderheiten mit sich, die Sie beachten sollten:</p>
+            <ul>
+                <li>Bei der Verwendung von <code>attachEvent</code> gestaltet sich der <interlink link-type="anchor-up" reference="basis_javascript_einbindung" target-anchor="event-objekt">Zugriff auf das Event-Objekt</interlink> einfacher, als wir es vom traditionellen Event-Handling gewöhnt sind. Dort war der Zugriff über window.event nötig. Im Falle von attachEvent wird das Event-Objekt der Handler-Funktion als Parameter übergeben, wie wir es aus anderen Browsern gewohnt sind.</li>
+                <li>this zeigt auf window</li>
+                <li></li>
+            </ul>
+            <p>Eigenheiten Die angedeuteten <strong>Unterschiede</strong> zu den bisher beschriebenen Modellen sollten Sie sorgfältig .....</p>
+            <p>....</p>
+        </unit>
+    </pageunit>
+    <pageunit name="addevent-helfer">
+        <heading>Browserübergreifendes Event-Handling</heading>
+        <p>Verwrirrung - drei Modelle?!</p>
+        <p>addEvent-Funktionen und Bibliotheken</p>
+    </pageunit>
+    <pageunit name="onload">
+        <heading>Onload-Techniken und DOMContentLoaded</heading>
+        <p>...</p>
+    </pageunit>
+    <pageunit name="capturing">
+        <heading>Capturing</heading>
+        <p>...</p>
+    </pageunit>
+</page>

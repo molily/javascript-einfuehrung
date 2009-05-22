@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_sprachelemente_kernobjekte">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords></document-keywords>
+    <title>Funktionen</title>
+    <pageunit name="function">
+        <heading>Einführung</heading>
+        <p>Mit Funktionen können Sie flexible Teilprogramme notieren.</p>
+        <p>... Das haben Sie sicher schon im Grundlagenkurs Programmierung gelernt, oder kennen Sie kennen es schon von anderen Programmiersprachen. ...</p>
+        <p>Die vorgegebene JavaScript-Objekte bieten in erster Linie Funktionen, die sie in Ihren Scripten aufrufen können.</p>
+        <p>In JavaScript spielen Funktionen einen höheren Stellenwert als in anderen Programmiersprachen und haben einige Besonderheiten - deshalb spricht man davon, dass JavaScript Aspekte einer <em>funktionalen Programmiersprache</em> besitzt. In JavaScript sind Funktionen nicht einfach feste, einmal definierte Script-Bestandteile, sondern selbst Objekte, mit denen man im Script nahezu ungehindert arbeiten kann. Sie können sogar problemlos neue Funktionen zur Laufzeit erzeugen und einmal
+        definierte wieder löschen.</p>
+        <p>Wenn Sie <strong>eigene Funktionen definieren</strong>, so können Sie sie an bestimmte andere Objekte hängen. Das bedeutet, sie als Unterobjekte eines Objektes zu speichern. In diesem Fall spricht man in der Terminologie der objektorientierten Programmierung von einer <strong>Methode</strong>. In anderen Fällen ist es sinnvoller, die Funktion als lokale Variable in einer anderen Funktion anzulegen. Und schließlich brauchen Sie die Funktion gar nicht zu speichern - sie können Sie auch
+        anonym (namenlos) anlegen, nur um sie z.B. als Parameter an eine andere Funktion weiterzugeben. Diese drei Möglichkeiten werden Ihnen später noch klarer werden, wenn wir betrachten, auf welche Weise sie Funktionen erzeugen können.</p>
+    </pageunit>
+    <pageunit name="deklarationen">
+        <heading>Funktionsdeklarationen</heading>
+        <p>Es gibt drei Arten, wie Sie Funktionen notieren und damit Funktionsobjekte erzeugen können. Die einfachste und wichtigste Art ist die sogenannte Funktions-Deklaration (auf englisch <em>function declaration</em>). Deren Syntax ist folgendermaßen aufgebaut:</p>
+        <example>function Funktionsname (Parameterliste) {
+   Anweisungen
+}</example>
+        <p>Der <strong>Funktionsname</strong> muss den üblichen Anforderungen an JavaScript-Bezeichnern [TODO Link] genügen: Sie dürfen Buchstaben, Zahlen und einige Sonderzeichen (das Dollar-Zeichen, den Unterstrich ... TODO) verwenden. Der Funktionsname darf in diesem Fall aber keine Leerzeichen enthalten.</p>
+        <p>Die <strong>Parameterliste</strong> zwischen den beiden runden Klammern ist eine durch Kommas getrennte Liste von Namen. Für diese gelten die besagten Namenskonventionen. Unter den in dieser Auflistung vergebenen Namen können Sie innerhalb der Funktion auf die übergebenen Parameter zugreifen.</p>
+        <p>Zwischen den beiden geschweiften Klammern wird der sogenannte Funktionskörper notiert: Darin werden die Anweisungen [TODO Link] untergebracht, die ausgeführt werden sollen, immer wenn die Funktion ausgeführt werden soll.</p>
+        <p>Folgendes Beispiel soll das Schema verdeutlichen:</p>
+        <example>function statusMeldung (meldungsTyp, meldungsText) {
+   var ausgabeElement = document.getElementById("meldungsausgabe");
+   ausgabeElement.className = meldungsTyp;
+   ausgabeElement.innerHTML = meldungsText;
+}
+statusMeldung("fehler", "Beim Absenden Ihrer Nachricht ist ein Fehler aufgetreten. " +
+   "Bitte versuchen Sie es erneut."); </example>
+        <p>Das Beispiel definiert eine Funktion mit dem Namen <code>statusMeldung</code>. Die Funktion erwartet zwei Parameter mit dem Namen <code>meldungsTyp</code> bzw. <code>meldungsText</code>.</p>
+        <p>Die Funktion wird nach dem Schema Funktionsname(Parameterliste) aufgerufen. Die beiden runden Klammern nach dem Funktionsnamen sind der eigentliche</p>
+        <p>...</p>
+        <p>Was passiert: wenn Sie direkt in einem script-Element notieren, wird eine globale Funktion angelegt. Das ist eine Methode des window-Objektes ... Globale Variablen sind wiederum nichts anderes als Eigenschaften des Objektes <code>window</code>.</p>
+        <p>bla() = window.bla()! window["bla"]!</p>
+    </pageunit>
+    <pageunit name="parameter">
+        <heading>Funktionsparameter</heading>
+        <p>Bei der Deklaration weisen Sie den Funktionsparametern </p>
+        <example>function Summe (zahl1, zahl2, zahl3) {
+   
+}
+
+Summe(5, 10, 15);</example>
+        <p></p>
+    </pageunit>
+    <pageunit name="arguments">
+        <heading>Variable Parameterzahl: Der arguments-Array</heading>
+        <p></p>
+    </pageunit>
+    <pageunit name="ergebnis">
+        <heading>Rückgabewert (Ergebnis)</heading>
+        <p>return</p>
+    </pageunit>
+    <pageunit name="lokale-variablen">
+        <heading>Lokale Variablen (Funktionsvariablen)</heading>
+        <p>Gültigkeitsbereich (Scope)</p>
+    </pageunit>
+    <pageunit name="ausdruecke">
+        <heading>Funktionsausdrücke</heading>
+        <p>Wie gesagt gibt es insgesamt drei Schreibweisen, mit denen Sie Funktionen erzeugen können. Je nach Verwendungszweck sind die folgenden weniger bekannten Schreibweisen passender.</p>
+        <p>Die zweite Art, wie Sie Funktionen notieren können, ist der sogenannte <strong>Funktions-Ausdruck</strong> (englisch <em>function expression</em>). Diese Schreibweise hat viele Vorteile, Sie werden sie schätzen lernen und vielfältig anwenden können.</p>
+        <p>Um den Unterschied zwischen Funktionsdeklaration und Funktionsausdruck zu verstehen, müssen Sie den Unterschied zwischen <em>Anweisungen</em> (Statements) und <em>Ausdrücken</em> (Expressions) kennen [TODO Link Syntax]. Die vorgestellte Funktionsdeklaration ist nämlich eine Anweisung, der Funktionsausdruck hingegen ein Ausdruck. Damit haben beide unterschiedliche Anwendungsmöglichkeiten. Sie können Funktionsausdrücke an viel mehr Stellen notieren als eine Funktionsdeklaration.</p>
+        <p>Das Schema eines Funktionsausdruckes sieht folgendermaßen aus:</p>
+        <example>function (Parameterliste) { Anweisungen }</example>
+        <p>Ein solcher Funktionsausdruck selbst ergibt lediglich eine Funktion, speichert Sie aber nicht unter einem Namen. Man spricht daher auch von <strong>anonymen (namenlosen)</strong> Funktionen.</p>
+        <p>Das Ergebnis des Ausdruckes, ein Funktionsobjekt, können Sie jedoch weiterverwenden. Beispielsweise können Sie das erzeugte Funktionsobjekt in einer Variable speichern:</p>
+        <example>var Funktionsname = function (Parameterliste) { Anweisungen };
+</example>
+        <p>Dieses Variablenzuweisung mit Funktionsausdruck hat denselben Effekt wie die klassische Funktionsdeklaration <code>function Funktionsname (...) {...}</code>. Das bedeutet, sie sind unter allen Umständen austauschbar.</p>
+        <p>Darüber lässt sich auch genauer verstehen, was eine Funktionsdeklaration macht. Wenn die gleichwertigen Anweisungen innerhalb einer Funktion notiert werden, wird eine <em>lokale Variable</em> erzeugt, in der die neue Funktion gespeichert wird. Stehen sie außerhalb einer Funktion ausgeführt, dann wird eine <em>globale Variable</em> erzeugt, das heißt die neue Funktion wird als Methode von Objektes <code>window</code> angelegt.</p>
+        <p>Was sind nun die <strong>Vorteile</strong> eines Funktionsausdruckes?</p>
+        <p>Mit Funktionsdeklarationen erzeugt man üblicherweise globale Funktionen (<code>window</code>-Methoden). Wenn Sie eine Funktion mittels Funktionsausdruck erzeugen, müssen Sie diese nicht zwangsläufig global als <code>window</code>-Methode abspeichern, sondern können sie auch an einem anderen Objekt speichern. Auf diese Weise können Sie Ordnung in Ihre Scripte bringen und zusammenhörige Variablen z.B. unter einem Objekt gruppieren. Ein Beispiel:</p>
+        <example>var bildergalerie = new Object();
+bildergalerie.abspielen = function () {
+   /* ... */
+};
+bildergalerie.abspielen();</example>
+        <p>Im obigen Beispiel wird eine allgemeines Object erzeugt [TODO Link], das als globale Variable mit dem Namen <code>bildergalerie</code> gespeichert wird. In der zweiten Zeile wird dem zunächst leeren Objekt eine Methode hinzugefügt. Die entsprechende Funktion wird mithilfe eines Funktionsausdrucks notiert. Das entstehende Funktionsobjekt wird in der Eigenschaft <code>abspielen</code> gespeichert. In der dritten Zeile schließlich wird diese Funktion aufgerufen.</p>
+        <p>Die Gruppierung unter dem Objekt <code>bildergalerie</code> hat den Vorteil, dass der globale Gültigkeitsbereich, das <code>window</code>-Objekt, nicht übermäßig mit eigenen Objekten beschrieben wird. Der Verzicht auf globale Variablen hat den Vorteil, dass mehrere Scripte problemlos zusammenarbeiten können. [TODO: Diese Programmiertechnik der Kapselung zentral beschreiben.]</p>
+        <p>Im Beispiel wird lediglich das Objekt <code>bildergalerie</code> global gespeichert, das heißt als Eigenschaft von <code>window</code>. Folglich darf an keiner anderen Stelle eine gleichnamige globale Variable erzeugt werden, sonst würde das Objekt überschrieben werden. Die Funktion <code>abspielen</code> hängt hingegen als Methode am <code>bildergalerie</code>-Objekt. Sie kann anderen, gleichnamigen Funktionen nicht in die Quere kommen.</p>
+        <p>...</p>
+        <p>Eine weitere häufige Anwendung von Funktionsausdrücken findet sich im <strong>Event-Handling</strong>. Um eine Handler-Funktionen zu notieren, können Sie herkömmliche Funktionsdeklarationen nutzen:</p>
+        <example>// Handler-Funktion mit Funktionsdeklaration notieren
+function init () {
+   window.alert("Dokument ist fertig geladen!");
+}
+// Event-Handler registrieren
+window.onload = init;</example>
+        <p>Im Beispiel wird eine globale Funktion namens <code>init</code> angelegt und daraufhin als Event-Handler für das <code>load</code>-Ereignis beim <code>window</code>-Objekt registriert (siehe <interlink link-type="page" reference="basis_javascript_einbindung" target-anchor="traditionelles-event-handling">traditionelles Event-Handling</interlink>).</p>
+        <p>Diese Schreibweise ergibt Sinn, wenn Sie die Funktion <code>init</code> später noch einmal benötigen. Üblicherweise ist das nicht der Fall: Man braucht solche Funktionen nur an der Stelle, wo man sie als Handler registriert; es ist nicht nötig, sie irgendwo unter einem Namen zu speichern.</p>
+        <p>In diesem Fall kann ein Funktionsausdruck den Code vereinfachen. Notieren Sie die Handler-Funktion mit einem Ausdruck und speichern Sie sie direkt in der <code>onload</code>-Eigenschaft:</p>
+        <example>window.onload = function () {
+   window.alert("Dokument ist fertig geladen!");
+};</example>
+        <p>Dasselbe Prinzip können Sie überall beim Event-Handling anwenden. Wenn Sie beispielsweise einem Element einen <code>click</code>-Handler zuweisen wollen, so könnten Sie die fragliche Funktion mit einer Deklaration notieren:</p>
+        <example>function klickHandler () {
+   window.alert("Element wurde geklickt!");
+}
+document.getElementById("bla").onclick = handlerFunktion;</example>
+        <p>Üblicherweise besteht keine Notwendigkeit, die Handler-Funktion global unter dem Namen klickHandler zu speichern. Stattdessen können Sie einen Funktionsausdruck verwenden und die erzeugte Funktion direkt als <code>click</code>-Handler abspeichern:</p>
+        <example>document.getElementById("bla").onclick = function () {
+   window.alert("Element wurde geklickt!");
+};</example>
+        <p>Es gibt noch viele weitere Fälle, in denen das Zwischenspeichern einer Funktion, wie es eine Funktionsdeklaration zwangsläufig tut, unnötig ist - und damit gibt es es zahlreiche weitere Anwendungsmöglichkeiten für Funktionsausdrücke. Im Abschnitt über Closures werden wir darauf zurückkommen.</p>
+    </pageunit>
+    <pageunit name="function-konstruktor">
+        <heading>Function-Konstruktor</heading>
+        <p>Wenden wir uns der dritten und letzten Möglichkeit zur Erzeugung von Funktionen zu. Dieser brauchen Sie keine große Aufmerksamkeit schenken, denn ihr Anwendungsbereich ist klein und ihr Gebrauch entsprechend selten.</p>
+        <p>Alle Funktionen, egal wie sie erzeugt wurden, sind Instanzen des <code>Function</code>-Konstruktors. Sie können daher auch direkt diesen Konstruktor aufrufen, um eine weitere Instanz zu erzeugen. Die Schreibweise lautet folgendermaßen:</p>
+        <example>new Function("Anweisungen", "Parametername1", "Parametername2", ...)</example>
+        <p>Sie rufen Function mit dem Schlüsselwort <code>new</code> auf. Der Konstruktor erwartet die Anweisungen, d.h. den Funktionskörper, im ersten Parameter. Dabei muss es sich um einen <strong>String</strong> handeln! Der zweite, dritte und alle folgenden Parameter enthalten die Parameternamen der neuen Funktion - ebenfalls als Strings. Wenn die zu erzeugende Funktion drei Parameter namens ...</p>
+        <p>Der Aufruf von new Function erzeugt lediglich eine Funktion, speichert sie selbst aber noch nicht. Sie kennen das bereits vom Funktionsausdruck. Möchten Sie die erzeugte Funktion in einer lokalen Variable speichern, können Sie notieren:</p>
+        <example>var quadrat = new Function(
+   // Funktionskörper mit Anweisungen
+   "window.alert('Das Quadrat der Zahl ' + zahl + 'lautet: ' + (zahl * zahl);",
+   // Name des ersten Parameters
+   "zahl"
+);
+// Aufruf der erzeugten Funktion
+quadrat(5);</example>
+        <p></p>
+        <p>var Funktionsname</p>
+        <p>Welchen Sinn hat das? Hat nur dann Sinn, wenn Sie JavaScript-Code als String im JavaScript-Programm haben und eine Funktion daraus machen wollen. &gt; äußerst selten</p>
+        <p>Verwenden Sie nach Möglichkeit die beschriebenen Funktionsdeklarationen und -ausdrücke.</p>
+    </pageunit>
+    <pageunit name="closures">
+        <heading>Verschachtelte Funktionen (Closures)</heading>
+        <p>Fortgesch</p>
+        <p>siehe Artikel</p>
+        <p></p>
+        <example>
+
+function meineFunktion () {
+   document.getElementBy
+}
+window.setTimeout(meineFunktion, 5000);
+
+function irgendeineFunktion () {
+   var bla = "string"; // diese Variable ist nur in dieser Funktion verfügbar
+   var status = 50;
+   setTimeout(
+      function () {
+         // Verschachtelte Funktion
+         // Closure!
+         alert(status);
+      },
+      5000
+   );
+}</example>
+    </pageunit>
+    <pageunit name="funktional">
+        <heading>Funktionale Programmierg: Funktionen als Objekte verwenden</heading>
+        <p>Funktionen sind ganz normale Objekte mit Eigenschaften und Methoden</p>
+        <p>Event-Handler und Callback-Funktionen</p>
+        <p>Funktionale Programmierung</p>
+    </pageunit>
+    <pageunit name="this">
+        <heading>Kontext einer Funktion: Das Schlüsselwort this</heading>
+        <p>Kontext mit call und apply beeinflussen</p>
+    </pageunit>
+    <pageunit name="...">
+        <heading>...</heading>
+        <p>...</p>
+    </pageunit>
+</page>

@@ -1,0 +1,11 @@
+Our good addEvent/RemoveEvent helpers should
+have a minimal of these features/options:
+
+1) fix the "this" keyword (everybody does this)
+2) fix the "event" source (not always the current window)
+3) provide missing w3c "target" and other properties (some do this)
+4) provide missing w3c "preventDefault" and "stopPropagation" methods
+5) event must be removed (most helpers seems to do it but do not...)
+6) options to fix or change the order of the events (most don't do)
+7) options to use w3c or inline registration (most don't do)
+8) returnValue must be preserved correctly (very few helpers do)

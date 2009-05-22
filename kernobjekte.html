@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript: Kernobjekte und Datentypen</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
+</head>
+<body>
+
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>Kernobjekte und Datentypen</h1>
+
+ <div class="section" id="allgemeines">
+  <h2>Einführung</h2>
+  <p>Die Kernobjekte repräsentieren in erster Linie die grundlegenden <strong>Datentypen</strong> in JavaScript, z.B. Zahlen oder Zeichenketten (sogenannte <em>Strings</em>). Datentypen sind in JavaScript objektorientiert gelöst: Jedes Objekt ist eine <em>Instanz</em> (ein Exemplar, ein Abkömmling) einer bestimmten Konstruktorfunktion. Von dessen Prototypen erbt die Instanz Eigenschaften und Methoden.</p>
+  <p>[TODO: Wo werden Konstruktoren, Instanzen, Prototypen usw. erklärt?]</p>
+  <p>Was das konkret bedeutet, müssen Sie an dieser Stelle noch nicht verstehen - wichtig ist, dass einzelnen Objekte durch diese Kernobjekte erzeugt werden und ihnen nachgebildet sind. Wie sich das äußert, werden wir im Folgenden kennenlernen.</p>
+</div>
+ <div class="section" id="erzeugen">
+  <h2>Objekte erzeugen: Literale und Instantiierung</h2>
+  <p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder eine ausdrückliche <strong>Instantiierung</strong>. Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen.</p>
+  <p>Ein Literal (englisch für <em>wörtlich</em>, <em>buchstäblich</em>) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> ist ein <code>Boolean</code>-Literal und so weiter. Normalerweise notieren Sie solche Werte immer in der Literalschreibweise.</p>
+  <p>Wie gesagt sind Objekte Instanzen der Kernobjekte. Deren Konstruktoren haften in JavaScript am globalen Objekt - das ist im
+	 Web-Kontext das jeweilige Fensterobjekt <code>window</code>. Wenn wir also ein Objekt vom Typ <code>String</code> erzeugen wollen, können wir alternativ <code>new String()</code> schreiben.</p>
+  <p>Nun ist es bei <code>String</code>-Objekten in der Regel nicht sinnvoll, ein einfaches <code>"Hallo"</code> durch <code>new String("Hallo")</code> zu ersetzen, schließlich enthält die langen Schreibweise ebenfalls ein <code>String</code>-Literal. Andere Objekte werden hingegen standardmäßig über <code>new Objekttyp</code> erzeugt, z.B. <code>new Date()</code>.</p>
+</div>
+ <div class="section" id="object">
+  <h2>Die Mutter aller Objekte: Object</h2>
+  <p>Alle Objekte stammen von einem obersten und allgemeinsten Kernobjekt ab: <code>Object</code>. Jedes Objekt ist demnach zumindet vom allgemeinen Typ <code>Object</code>, darüber hinaus meistens zusätzlich von einem spezifischeren Typ (z.B. <code>Boolean</code>).</p>
+  <p>Ein solches nicht weiter bestimmtes Objekt ist bloß ein Container, nämlich eine ungeordnete Zuordnungsliste bestehend aus Namen und Werten. In anderen Programmiersprachen wird diese Struktur <em>Hash</em> oder <em>assoziativer Array</em> genannt. In JavaScript bildet diese Struktur das Grundgerüst aller verfügbaren Objekte.</p>
+  <p>Als grundlegender Typ hinter allen anderen Typen interessiert uns <code>Object</code> nur wenig. Es gibt aber auch Objekte, die nur von <code>Object</code> abstammen. Diese sind immer dann nützlich, wenn man in JavaScript eine Zuordnungsliste benötigt oder eigene Objekte in einer hierarchischen Ordnung speichern will. Eine einfache Anwendung von <code>Object</code> könnte so aussehen:</p>
+  <pre class="content-example">var adresse = new Object();
+adresse.name = "Max Mustermann";
+adresse.straße = "Königsallee 56";
+adresse.stadt = "Frankfurt";</pre><p>Solche Objekte sind für die Strukturierung von Daten oder sogar JavaScript-Programmen selbst äußerst nützlich. Denn in solchen Objekten lassen sich nicht nur Zeichenketten oder Zahlen unter bestimmten Namen abspeichern, sondern auch beispielsweise Funktionsobjekte. Und sie lassen sich beliebig verschachteln.</p>
+  <p>Das obige Beispiel verwendet die Langschreibweise <code>new Object</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
+  <pre class="content-example">{
+name1 : wert3,
+name2 : wert2,
+name3 : wert3
+}</pre><p>Die Anzahl der notierten Eigenschaften ist nicht begrenzt. Zu beachten ist, dass hinter der letzten Zuweisung kein Komma notiert wird.</p>
+  <p>Das erste Beispiel sieht in der Literalschreibweise so aus:</p><pre class="content-example">var adresse = {
+name : "Max Mustermann",
+straße : "Königsallee 56",
+stadt : "Frankfurt"
+};</pre>
+  <p>Dies erzeugt haargenau das gleiche Objekt wie die Langschreibweise.</p>
+  <p>...</p>
+</div>
+ <div class="section" id="string-number-boolean">
+  <h2>String, Number, Boolean</h2>
+  <p>String, Number, Boolean sind die wichtigsten einfachen Datentypen. Sie haben einen direkt und eindeutig darstellbaren Wert.</p>
+  <ul class="content-list circle">
+	 <li>Ein String-Wert ist eine Zeichenkette. Darin können Sie Text speichern.</li>
+	 <li>Ein Number-Wert ist eine Zahl. Es kann eine Ganzzahl oder eine Kommazahl sein, positiv oder negativ.</li>
+	 <li>Ein Boolean-Wert drückt einen Wahrheitswert aus. Dieser kann zwei Zustände annehmen: <code>true</code> (wahr) oder <code>false</code> (falsch). Darin können ...
+	 </li>
+  </ul>
+  <pre class="content-example">var zahl = 1.23;
+var zeichenkette = "Hallo Welt!";
+var boolean = true;</pre>
+<p>Diese Anweisungen definieren eine <code>String</code>-, eine <code>Number</code> und eine <code>Boolean</code>-Variable mithilfe der jeweiligen Literalschreibweise.</p>
+  <p>...</p>
+</div>
+ <div class="section" id="objects-primitives">
+  <h2>Objekte und primitive Typen - Referenzen und Kopien</h2>
+  <p>Zwar verhalten sich alle Werte in JavaScript in gewissen Situationen wie Objekte, aber strenggenommen gibt es eine Unterscheidung zwischen »richtigen«, vollwertigen Objekten und sogenannten einfachen Werten, im der englischen Fachsprache <strong>Primitive Values</strong>, kurz <strong>Primitives</strong> genannt.</p>
+  <p>Diese Doppelung betrifft die eben behandelten <code>Boolean</code>-, <code>Number</code>- und <code>String-Werte</code>. Diese nämlich können entweder als Primitive oder als vollwertiges Objekt notiert werden. Üblicherweise arbeitet man mit
+	 Primitives: Die Literalschreibweise <code>var string = "Hallo Welt"</code> erzeugt ein <em>String-Primitive</em>, während <code>var string = new String("Hallo Welt");</code> ein <em>String-Objekt</em> erzeugt.</p>
+  <p>[TODO: Das sollte irgendwo zentraler stehen.]</p>
+  <p>Dieser Unterschied macht sich an zwei Stellen bemerkbar:</p>
+  <ol>
+	 <li>Primitives werden <em>als Kopie</em> an Funktionen übergeben, während Objekte <em>als Referenz</em> auf dieselbe Speicherstelle (in anderen Programmiersprachen »Zeiger« oder »Pointer« genannt) übergeben werden. Das bedeutet: Sie notieren ein Objekt als Variable. Wenn Sie dieses Objekt einer Funktion übergeben und daran Änderungen vornehmen, z.B. eine Eigenschaft hinzufügen, haben Sie nach dem ist Funktionsaufruf auf das das geänderte Objekt Zugriff. Denn an beiden Stellen haben Sie Zugriff auf ein und dasselbe Objekt. Wenn sie hingegen einen Primitive übergeben, dann haben Änderungen daran keine Auswirkung auf die Variable im ursprünglichen Kontext &ndash; es sei denn, die Funktion gibt den geänderten Primitive zurück und Sie speichern den Rückgabewert in einer Variablen.</li>
+	 <li>Der Vergleichsoperator <code>==</code> ergibt beim Vergleich zweier Objects nur dann <code>true</code>, wenn es sich um ein und dasselbe Object handelt. Er verhält sich in dem Fall wie der Identitätsoperator <code>===</code>. Zwei Objekte können also niemals gleich sein, es sei denn, sie sind identisch, also ein und dasselbe Objekt. Der Vergleich <code>new String("Hallo Welt") == new String("Hallo Welt")</code> ergibt <code>false</code>, denn die beiden String-Objekte sind nicht identisch. Bei Primitives hingegen gibt es eine Gleichheit unabhängig von der Identität: <code>"Hallo Welt" == "Hallo Welt"</code> ergibt erwartungsgemäß <code>true</code>, denn es werden zwei Primitives verglichen.</li>
+  </ol>
+  <p>...</p>
+</div>
+ <div class="section" id="function">
+  <h2>Function (Funktionsobjekte)</h2>
+  <p>Funktionen sind JavaScript-Objekte, die vom Konstruktor <code>Function</code> abstammen. Funktionen sind der zentrale Bestandteile eines JavaScript-Programmes: Ein Script ist üblicherweise in verschiedene Funktionen unterteilt, die einander aufrufen. Eine Funktion gruppiert zusammengehörige Anweisungen und löst eine gewisse Teilaufgabe. Anstatt denselben oder sehr ähnlichen Code immer wieder zu notieren, notiert man stattdessen eine Funktion, die mehrfach aufgerufen werden kann. Durch sogenannte Parameter können ihr variable Informationen bei jedem Aufruf mitgeteilt werden.</p>
+  <p>Näheres zu Funktionen finden Sie im eigenen Abschnitt .</p>
+</div>
+ <div class="section" id="array">
+  <h2>Array</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="regexp">
+  <h2>RegExp</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="date">
+  <h2>Date</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="math">
+  <h2>Math</h2>
+  <p>...</p>
+</div>
+ <div class="section" id="andere-typen">
+  <h2>Objekttypen außerhalb des Kerns</h2>
+  <p>...</p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="http://molily.de/js/">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
+
+</body>
+</html>

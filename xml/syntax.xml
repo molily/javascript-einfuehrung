@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_sprachelemente_syntax">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords></document-keywords>
+    <title>Syntax-Grundlagen</title>
+    <pageunit name="...">
+        <heading>Notizen</heading>
+        <p>siehe <hyperlink href="http://aktuell.de.selfhtml.org/weblog/javascript-syntax" link-type="online-page">Weblog-Artikel</hyperlink></p>
+    </pageunit>
+    <pageunit name="aufbau">
+        <heading>Aufbau eines JavaScript-Programmes</heading>
+        <p>[Syntax]</p>
+        <p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Grammatik-Regeln können Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Grammatik einhalten, damit Sie verstanden werden.</p>
+        <p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenige Möglichkeiten. Zum anderen müssen Sie sich an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
+        <p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er dessen Syntax verstehen. Dieses Aufsplitten in die syntaktischen Bestandteile nennt sich <strong>Parsing</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
+        <p>Die folgende Beschreibung der Syntax wird theoretisch und ungewohnt ... formale Beschreibung von Sprachen.</p>
+        <p>Welche Bestandteile an welchen Stellen vorkommen dürfen</p>
+    </pageunit>
+    <pageunit name="anweisungen">
+        <heading>Anweisungen (Statements)</heading>
+        <p></p>
+        <unit name="kontrollstrukturen">
+            <heading>Kontrollstrukturen: Schleifen und Verzweigungen</heading>
+            <p></p>
+        </unit>
+        <unit name="variablen-deklaration">
+            <heading>Variablen-Deklaration</heading>
+            <p></p>
+        </unit>
+        <unit name="expression-statement">
+            <heading>Ausdruck-Anweisung (Expression-Statement)</heading>
+            <p></p>
+        </unit>
+    </pageunit>
+    <pageunit name="funktionen">
+        <heading>Funktionsdeklarationen</heading>
+        <p>siehe Funktionen</p>
+    </pageunit>
+    <pageunit name="ausdruecke">
+        <heading>Ausdrücke (Expressions)</heading>
+        <p></p>
+    </pageunit>
+    <pageunit name="operatoren">
+        <heading>Operatoren</heading>
+        <p></p>
+    </pageunit>
+    <pageunit name="literale">
+        <heading>Literale</heading>
+        <p>siehe Kernobjekte</p>
+    </pageunit>
+</page>

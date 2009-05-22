@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript: Grundlegende Konzepte</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
+</head>
+<body>
+
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>JavaScript: Grundlegende Konzepte</h1>
+ <div class="section" id="scriptsprache">
+  <h2>Clientseitige Scriptsprache</h2>
+  <p>Bei JavaScript handelt es sich um eine Programmiersprache, die auf dem Client-Rechner ausgeführt wird. Um dies zu verstehen, müssen wir uns das Client-Server-Modell in Erinnerung rufen. Daten im Web werden mit HTTP (englisch <em>Hypertext Transfer Protocol</em> = Hypertext-Übertragungsprotokoll) übertragen: Der Rechner des Anwenders, genannt <em>Client</em> (englisch <em>Kunde</em>) stellt eine Verbindung zum <em>Server</em> (englisch <em>Diener</em>) her und schickt eine HTTP-Anfrage. Dies kann z.B. die Anweisung sein, ihm eine bestimmte Adresse zu liefern. Der Webserver antwortet darauf in der Regel mit einer Bestätigung und sendet z.B. ein HTML-Dokument zurück.</p>
+  <p>JavaScript steht außerhalb dieses Datenaustausches zwischen Anwender-Rechner und Webserver. JavaScripte werden in ein HTML-Dokument eingebettet oder mit ihm verknüpft. Sie werden erst aktiv, wenn die Datenübertragung abgeschlossen ist, nämlich wenn das HTML-Dokument beim Client-Rechner angekommen ist und es der Web-Browser samt Scripten verarbeitet.</p>
+  <p>Ein häufiges Missverständnis ist, dass JavaScript mit serverseitigen Programmiersprachen gemischt werden kann. Die Ausführung von serverseitigen Scripten wie z.B. PHP und die Ausführung von JavaScripten findet jedoch <em>nacheinander</em> statt: Serverseitige Scripte werden aktiv, wenn eine HTTP-Anfrage den Server erreicht. Diese Scripte generieren dann üblicherweise ein HTML-Dokument. Dieses kann selbstverständlich JavaScript enthalten und der JavaScript-Code kann auch dynamisch zusammengesetzt werden. Das serverseitige Script läuft meistens nicht mehr als ein paar Sekunden und beendet sich dann. Das generierte Dokument wird anschließend zum Client übertragen, wo es der Browser verarbeitet. Erst dann wird das damit verknüpfte JavaScript ausführt.</p>
+  <p>Dies soll zeigen, wie server- und clientseitige Programme zusammenarbeiten, aber doch getrennt sind - denn sie laufen auf verschiedenen Rechnern, operieren in einer unterschiedlichen Umgebung und erfüllen andere Aufgaben.</p>
+  <div class="note-box note-box-todo">
+	 <p class="note-box-title">ToDo von: mschaefer</p>
+	 <div class="note-box-text">Diagramm</div>
+  </div>
+</div>
+<div id="objektmodelle" class="section">
+  <h2>Objektmodelle, Elementobjekte und Knoten</h2>
+  <p>Nachdem wir die Übertragung von HTML-Dokumenten vom Webserver zum Browser betrachtet haben, müssen wir uns vor Augen führen, wie der Browser das Dokument verarbeitet. Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Der Browser benutzt für dessen Verarbeitung einen sogenannten <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Dieser Parser überführt den HTML-Code in eine Objektstruktur, die sich dann im Arbeitsspeicher befindet. – Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. – Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten, Attributknoten und Textknoten, die wie in einer Baumstruktur angeordnet sind.</p>
+  <p>Es ist essentiell zu wissen, dass der Browser alle weiteren Operationen an dieser Objektstruktur vornimmt, nicht am HTML-Code, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, wie ihn der Autor geschrieben hat, sondern auf den entsprechenden Elementenbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <em>Document Object Model</em> geregelt.</p>
+  <div class="note-box note-box-todo">
+	<p class="note-box-title">ToDo von: molily</p>
+	 <div class="note-box-text">vgl. http://molily.de/dokumentmodelle</div>
+  </div>
+</div>
+<div id="interpreter" class="section">
+  <h2>JavaScript-Interpreter</h2>
+  <p>Wie kommen nun JavaScripte ins Spiel? JavaScript-Code wird direkt oder indirekt in HTML-Dokumente eingebunden. Der Browser ruft den JavaScript-Code ebenfalls vom Web-Server ab und führt ihn aus, noch während das Dokument nach und nach analysiert und dargestellt wird. Dazu verfügen die heutigen Web-Browser über einen eingebauten JavaScript-Interpreter.</p>
+  <p>Doch nicht alle Browser verfügen über einen solchen, schon gar nicht alle Programme, die in irgendeiner Weise Webseiten verarbeiten. Zudem verfügen die jeweiligen Interpreter über sehr unterschiedliche Fähigkeiten. Nicht zuletzt gibt es viele Gründe, warum ein JavaScript trotz vorhandenem Interpreter nicht ausgeführt wird: Der Anwender kann den Interpreter für alle Websites oder für eine bestimmte abschalten. Die Ausführung von JavaScripten kann aus Sicherheitsgründen gesperrt oder beschränkt sein. Oder ein sogenannter Proxy, ein vermittelnder Rechner zwischen Client und Server, kann den Code auf dem Weg herausfiltern.</p>
+</div>
+<div id="objekte" class="section">
+  <h2>Objektbasierung</h2>
+  <p>JavaScript basiert auf sogenannten Objekten, die die Umgebung repräsentieren, in der ein Script arbeitet. Der Zugriff auf das Browserfenster sowie das Dokument erfolgt über Objekte, die nach ganz bestimmten Regeln (Objekt-Typen) aufgebaut sind.</p>
+  <p>JavaScript-Objekte sind allgemein gesprochen Container für weitere Informationen. Ein Objekt funktioniert wie eine Zuordnungsliste, die unter einem Namen einen bestimmten Wert speichert. Diese Einträge werden <em>Eigenschaften</em>, im Englischen <em>Properties</em> oder <em>Member</em> genannt. Objekte können auf diese Weise beliebig verschachtelt werden, sodass ein Objekt Unterobjekte als Eigenschaften enthält.</p>
+  <p>Wie gesagt besteht das HTML-Dokument aus Sicht des DOM aus Knoten: Diese Knoten werden im JavaScript ebenfalls als Objekte angesprochen. Wir haben es also mit Knotenobjekten zu tun, die häufigsten sind Elementobjekte.</p>
+  <p>Eines sei vorweggenommen: Wenn wir eine Eigenschaft bzw. ein Unterobjekt eines Objektes ansprechen wollen, so notieren wir im JavaScript-Code den Namen des einen Objektes, dann einen Punkt und schließlich den Namen der Eigenschaft. Beispielsweise: <code>objekt.eigenschaft</code>.</p>
+</div>
+<div id="fenster-dokumente" class="section">
+  <h2>Fenster und Dokumente</h2>
+  <p>JavaScripte werden immer im Kontext eines HTML-Dokuments ausgeführt, das als Objektes namens <code>document</code> vorliegt. Zu jedem Dokumentobjekt gehört immer ein Fensterobjekt. Es trägt den Namen <strong><code>window</code></strong> und wird <strong>globales Objekt</strong> genannt, weil es in der Objekthierarchie von JavaScript das oberste und wichtigste ist. Daran hängt das Dokumentobjekt <code>document</code> als Unterobjekt.</p>
+  <p>Mit <em>Fenster</em> ist in der Regel ein gewöhnliches Browserfenster gemeint – lediglich im Falle von Frames, Inner Frames und Popup-Fenstern werden in einem Browserfenster mehrere Dokumente mit mehreren Fensterobjekten dargestellt. Dass Sie mit JavaScript Zugriff auf das Fensterobjekt haben, bedeutet nicht, dass Sie den gesamten Browser unter Ihrer Kontrolle haben. Das Fensterobjekt ist bloß eine Repräsentation und dient als ordnendes Objekt, um darin gewisse Funktionen und Eigenschaften unterzubringen.</p>
+  <p>Ein JavaScript wird immer im Kontext genau eines Dokuments und genau eines Fensterobjekts ausgeführt. Wenn mehrere zusammenhängende Dokumente parallel im Browser angezeigt werden, wie etwa bei Frames, kann ein JavaScript jedoch auch auf andere Fensterobjekte und Dokumente zugreifen – zumindest prinzipiell, denn es gibt bestimmte Sicherheitshürden.</p>
+  <p>Dies sind nur die Grundlagen der beiden zentralen JavaScript-Konzepte. Genaueres erfahren Sie im Kapitel über  sowie im Kapital über .</p>
+</div>
+<div id="events" class="section">
+  <h2>Ereignisse (Events)</h2>
+  <p>JavaScripte arbeiten nicht im leeren Raum, sondern wie gesagt im Rahmen eines Browserfensters, in dem ein HTML-Dokument dargestellt wird. Wie erfolgt nun die Verbindung von HTML und JavaScript? Wann wird ein Script aktiv?</p>
+  <p>In dem Moment, in dem der Browser den HTML-Code einliest, in die besagte Objektstruktur überführt und die Darstellung berechnet, werden auch alle mit dem Dokument verknüpften Scripte ausgeführt.</p>
+  <p>Ihre Hauptarbeit leisten Scripte aber nicht in diesem Moment des Ladens der Seite. Sie werden zwar kurz aktiv, legen sich dann üblicherweise wieder »schlafen«. Sie werden erst wieder aktiv, wenn etwas im Dokument passiert. Denn JavaScript arbeitet nach dem Prinzip der <strong>Überwachung und Behandlung von Ereignissen</strong> (im Englischen <em>event handling</em>). Ein »<em>Ereignis</em>« kann vieles sein. Es geht dabei vor allem um Benutzereingaben. Beispielsweise:</p>
+  <ul class="content-list circle">
+	 <li>Auf der Tastatur wird eine Taste gedrückt (Ereignis-Typ: <code>keypress</code>)</li>
+	<li>Ein Element im Dokument wird mit der Maus angeklickt (<code>click</code>)</li>
+  </ul>
+  <p>Neben diesen Ereignissen, die direkt auf Benutzereingaben wie Tastendrücke und Mausklicks zurückgeben, gibt es unter anderem
+	 solche, die sich auf die Interaktion mit Formularen beziehen:</p>
+  <ul class="content-list circle">
+	 <li>Ein Formularfeld wird fokussiert (<code>focus</code>)</li>
+	 <li>Der Text in einem Formularfeld wird geändert (<code>change</code>)</li>
+	 <li>Ein Formular wird abgesendet (<code>submit</code>)</li>
+  </ul>
+  <p>Schließlich können auch Ereignisse überwacht werden, die sich auf das ganze Dokument oder das zugehörige Fenster beziehen:</p>
+  <ul class="content-list circle">
+	 <li>Das Dokument wurde vollständig mitsamt aller Grafiken und Stylesheets geladen, seine Objektstruktur steht vollständig zur
+		Verfügung (<code>load</code>)</li>
+	 <li>Die Größe des Browserfensters wird verändert (<code>resize</code>)</li>
+  </ul>
+  <p>Ein solches Ereignis lässt sich nun mit der Ausführung einer JavaScript-Funktion verbinden (Teilprogramme werden in JavaScript in sogenannten <em>Funktionen</em> gruppiert - dazu später mehr im entsprechenden Kapitel). Immer wenn das Ereignis eintritt, wird dann die angegebene Funktion ausgeführt. Auf diese Weise kann auf eine Aktion des Anwenders eine JavaScript-Reaktion folgen.</p>
+  <p>Um ein Ereignis zu überwachen, sind drei Bestandteile nötig:</p>
+  <ol>
+	 <li>Der <strong>Typ</strong> des Ereignisses. Zum Beispiel <code>click</code>, das bedeutet alle Mausklicks.</li>
+	 <li>Die Stelle, <strong>wo</strong> das Ereignis überwacht werden soll: Fensterweit, dokumentweit oder nur an einem bestimmten Element im Dokument.</li>
+	 <li>Die JavaScript-<strong>Funktion</strong>, die beim Ereignis ausgeführt werden soll. Diese Funktion wird auch <strong>Handler</strong> oder <strong>Handler-Funktion</strong> genannt (englisch <code>handle</code> = verarbeiten, abwickeln).</li>
+  </ol>
+  <p>Mit JavaScript können wir nun solche Regeln formulieren: <em>Überwache das Ereignis <code>click</code> beim Element mit der ID <code>button</code> und führe die Handler-Funktion <code>begrüßung</code> aus, wenn das Ereignis eintritt.</em> Klickt der Benutzer auf das besagte Element, wird die Funktion <code>begrüßung</code> ausgeführt und darin kann auf die Benutzereingabe reagiert werden.</p>
+  <p>Mit Fug und Recht kann behauptet werden, dass das <em>event handling</em> das folgenreichste Konzept von JavaScript ist: Die heutige Programmierung von JavaScripten besteht zum allergrößten Teil aus dem Entwerfen Ereignis-gesteuerter Abläufe. Gleichzeitig bringt dieser Bereich große Herausforderungen mit sich, die die Praxis ungemein erschweren.</p>
+  <p>Genaueres zum Thema können Sie im Kapitel  erfahren.</p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="http://molily.de/js/">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
+
+</body>
+</html>

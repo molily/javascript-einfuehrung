@@ -1,0 +1,113 @@
+body {
+	font-family: Calibri,Geneva,Trebuchet MS,Lucida Sans,Tahoma,Arial,'Trebuchet MS',Verdana,Helvetica,sans-serif;
+	max-width: 45em;
+	margin: auto;
+	line-height: 1.6;
+}
+
+h1 {
+	font-size: 1.5em;
+}
+
+h2, h3 {
+	border-bottom: thin solid #eee;
+	padding-bottom: 2px;
+}
+
+h2 {
+	margin-top: 1.4em;
+	font-size: 1.2em;
+}
+
+h3 {
+	font-size: 1.1em;
+	margin-top: 1.4em;
+}
+
+p, ol, ul, dl {
+	margin: 1.5em 1em 1.5em 1.5em;
+}
+
+p {
+	text-indent: 2.5em;
+}
+
+ol {
+	padding-left: 0;
+}
+
+ol li {
+	margin-bottom: 1em;
+	padding-left: 0;
+}
+
+dt {
+	margin-bottom: 0.5em;
+	font-weight: bold;
+}
+
+dl {
+}
+
+dd {
+	margin-bottom: 1em;
+}
+
+pre, code {
+	font-family: consolas,"courier new","bitstream vera sans monspace","lucida console",courier,"liberation mono",monospace;
+	font-size: inherit;
+	color: #00b;
+}
+
+pre {
+	border: thin solid #ddd;
+	padding: 1em;
+	background-color: rgb(255, 250, 235);
+	
+	display: inline-block;
+	min-width: 100%;
+}
+
+dfn {
+	font-weight: bold;
+	font-style: normal;
+}
+
+#nav, #footer {
+	margin-top: 1em;
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+	font-size: 90%;
+}
+
+#nav p, #footer p {
+	margin: 0;
+	text-indent: 0;
+}
+
+#nav strong {
+	font-size: 110%;
+}
+
+#nav strong, #nav a {
+	white-space: nowrap;
+}
+
+#nav .contents-link {
+	text-align: right;
+	font-weight: bold;
+}
+
+#toc {
+	margin-left: 3em;
+}
+
+#toc li {
+	margin-bottom: 0;
+}
+
+#footer {
+	margin-top: 4em;
+	padding: 3em 4em;
+	border-style: solid none none;
+}

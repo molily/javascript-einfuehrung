@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="basis_javascript_werkzeuge">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords>Werkzeuge, Tools, Helfer, Software, Programme, Konsole, Fehlerkonsole, Fehlermeldung, Scriptfehler, DOM-Inspektor, Firebug, Debugger, Editor, Fehler, Suche</document-keywords>
+    <title>Arbeitstechniken und Entwicklerwerkzeuge</title>
+    <pageunit name="notizen">
+        <heading>Notizen</heading>
+        <p>vgl. Heilmann S. 451</p>
+        <p>vgl. Resig S. 59</p>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Einleitung</heading>
+        <p>Wenn Sie in die JavaScript-Entwicklung einsteigen, sollte Sie sich mit einigen <strong>Werkzeugen</strong> vertraut machen, die Ihnen das Schreiben eines Scriptes vereinfachen. Um zu einem funktionsfähigen Script kommen, um Fehler zu finden und um Script-Abläufe zu verstehen, gibt es einige bewährte <strong>Arbeitsmethoden</strong> und Fertigkeiten.</p>
+    </pageunit>
+    <pageunit name="erste-schritte">
+        <heading>Erste Schritte: Firefox, Firebug und ein Texteditor</heading>
+        <p>JavaScripte können Sie mit ganz unterschiedlichen Programmen und Hilfsmitteln entwickeln und jeder Webautor hat unterschiedliche Bedürfnisse und Gewohnheiten. Sobald Sie einige Erfahrung gesammelt haben, sollten Sie sich umschauen, welche Arbeitsweise Ihnen am besten zusagt. Für den Anfang sei hier aber eine einseitige und parteiische Empfehlung ausgesprochen.</p>
+        <p>Wenn Sie browserübergreifende JavaScripte für das öffentliche Web programmieren, so sollten Sie Ihre Scripte zunächst mit dem Browser <strong>Mozilla Firefox</strong> testen und sie mit dessen Hilfe fortentwickeln. Dieser Browser ist weit verbreitet, läuft auf allen relevanten Plattformen und ist einer der Ziel-Browser, auf dem Ihre Scripte auf jeden Fall funktionieren sollten. Firefox verfügt über ausgezeichnete JavaScript-Fähigkeiten und gibt präzise und hilfreiche
+        JavaScript-Fehlermeldungen. Sie können Firefox unter <hyperlink href="http://getfirefox.com/" link-type="external">getfirefox.com</hyperlink> herunterladen.</p>
+        <p>Eine weitere entscheidende Hilfe stellt das Firefox-Zusatzprogramm <strong>Firebug</strong> dar. Firebug ist nicht nur ein mächtiges JavaScript-Werkzeug, sondern hilft auch enorm bei der HTML- und CSS-Entwicklung - insbesondere durch den sogenannten <em>DOM-Inspektor</em>, mit dem Sie den Elementbaum des HTML-Dokuments sowie die zugehörigen JavaScript- und CSS-Eigenschaften ansehen können. Nachdem Sie Firefox installiert haben, können Sie das Firebug-Addon über <hyperlink
+        href="http://getfirefox.com" link-type="external">getfirebug.com</hyperlink> oder die <hyperlink href="https://addons.mozilla.org/de/firefox/addon/1843" link-type="external">Firefox-Addon-Datenbank</hyperlink> installieren.</p>
+        <p>Firebug gibt Lernenden einen wertvollen Einblick in das DOM, veranschaulicht den Aufbau von JavaScript-Objekten und macht die Zusammenarbeit zwischen HTML, CSS und JavaScript verständlich. Seien Sie neugierig und spielen Sie mit Firebug herum - es kann ihr Verständnis der Webtechniken und insbesondere dem <em>DOM Scripting</em> nur verbessern.</p>
+        <p>Eine weitere Voraussetzung für die JavaScript-Programmierung ist natürlich ein <strong>Texteditor</strong>, mit dem Sie die JavaScripte schreiben. Auch in puncto Editoren haben Sie zwischen tausenden eine Auswahl. Für den Anfang brauchen Sie keinen Editor mit besonderen Fähigkeiten. Er sollte jedoch Syntax-Highlighting für JavaScript-Code sowie die Anzeige von Zeilen- und Spaltennummern beherrschen. Denn diese Features erweisen sich direkt als hilfreich. Ein möglicher einfacher Editor
+        für Windows ist <hyperlink href="http://notepad-plus.sourceforge.net/" link-type="external">Notepad++</hyperlink>, weitere finden Sie im <hyperlink href="http://aktuell.de.selfhtml.org/links/html-editoren.htm" link-type="online-page">Linkverzeichnis</hyperlink>.</p>
+        <p>Mit diesem Dreiergespann bestehend aus einem komfortablen Texteditor, einem hochentwickelten Browser und einem Analyse-Werkzeug für JavaScripte können sie gut gewappnet in die Programmierung einsteigen.</p>
+    </pageunit>
+    <pageunit name="fehlerkonsole">
+        <heading>Fehlermeldungen und Fehlerkonsolen</heading>
+        <p>Der erste Referenzpunkt beim Testen von Scripten in einem Browser ist die <strong>JavaScript-Konsole</strong> des Browsers. Darin werden Fehler aufgeführt, die bei der JavaScript-Ausführung auftraten. Eine solche Fehlermeldung besteht üblicherweise aus einer Fehlerbeschreibung, der Script-Adresse sowie der Zeilennummer.</p>
+        <p>In der JavaScript-Konsole finden sich in erster Linie <strong>Ausnahmefehler</strong> (englisch <em>exception</em>s). Wenn diese auftreten, wird die Ausführung des Scriptes abgebrochen. Ein Ausnahmefehler tritt beispielsweise auf, wenn Sie auf eine nicht existente Variable zugreifen, eine nicht existente Methode aufrufen oder eine Objekteigenschaft ansprechen, obwohl es sich beim jeweiligen Wert nicht um ein Objekt handelt.</p>
+        <p>Die Browser unterscheiden sich darin, wie sie diese Fehlermeldungen darstellen und wie informativ diese sind. Die verständlichsten und präzisesten Fehlermeldungen liefert üblicherweise der Firefox-Browser.</p>
+        <unit name="fehlerkonsole-firefox">
+            <heading>Firefox-Fehlerkonsole und Firebug</heading>
+            <p>Im Firefox können Sie die Meldungen über das Menü <em>Extras → Fehlerkonsole</em> erreichen:</p>
+            <p><image description="Firefox-Fehlerkonsole mit Fehlermeldung" height="274" source="firefox-fehlerkonsole.png" style="" width="509" /></p>
+            <p>Der obige Screenshot zeigt eine beispielhafte Fehlermeldung, die auftritt, wenn auf eine nicht definierte Variable zugegriffen wird. Der Code, der diesen Fehler absichtlich ausgelöst hat, lautet <code>window.alert(nichtDefinierteVariable);</code>. Wie der Fehlerkonsole zu entnehmen ist, steht dieser Code in der Zeile 3 des HTML-Dokuments mit der Adresse <var>file:///C:/Users/molily/beispiel.html</var>.</p>
+            <p>In der Fehlerkonsole von Firefox werden nicht nur JavaScript-Exceptions angezeit, sondern auch andere Meldungen und Warnungen, die Firefox beim Verarbeiten von HTML- und CSS-Code ausgibt. Als Webentwickler sollten Sie daher immer ein Auge auf diese Fehlerkonsole haben.</p>
+            <p>Mithilfe des empfohlenen Firefox-Zusatz <strong>Firebug</strong> ist der Zugriff auf die Fehlerkonsole einfacher. Wenn bei der Ausführung eines Scriptes ein Ausnahmefehler auftritt, dann erscheint rechts unten in der Statusleiste ein rotes Fehlersymbol mit der Anzahl der Fehler. Wenn Sie darauf klicken, klappt Firebug am unteren Fensterrand auf und zeigt die Konsole samt Fehlermeldungen:</p>
+            <p><image description="Firebug-Konsole" height="419" source="firebug-konsole.png" width="621" /></p>
+            <p>Firebug zeigt nicht nur die aus der herkömmlichen Firefox-Konsole bekannten Informationen an, sondern zeigt sogar die JavaScript-Anweisung, die den Fehler ausgelöst hat. Außerdem führt ein Klick auf den grünen Code oder den blauen Zeilenverweis in den »Script«-Tab von Firebug. Darin wird der gesamte JavaScript-Code dargestellt und direkt zu der Zeile gesprungen, die den Fehler ausgelöst hat:</p>
+            <p><image description="Firebug: Anzeige der Codezeile, die den Fehler ausgelöst hat" height="419" source="firebug-script-tab.png" width="621" /></p>
+            <p>Nach Möglichkeiten sollten Sie mit den JavaScript-Konsolen von Firefox bzw. dem Firebug-Zusatz arbeiten. Dennoch soll nicht verschwiegen werden, wie Sie in den anderen relevanten Browsern an die Fehlermeldungen kommen.</p>
+        </unit>
+        <unit name="fehlerkonsole-internet-explorer">
+            <heading>Fehlermeldungen im Internet Explorer</heading>
+            <p>Der <strong>Internet Explorer</strong> (Stand: Version 7) kennt keine vergleichbare Konsole, in der alle Fehlermeldungen mitgeloggt werden und die ein Webautor komfortabel abrufen kann. Stattdessen erzeugen Ausnahmefehler Meldungsfenster direkt im Browser. Beim obigen Beispiel sieht das etwa so aus:</p>
+            <p><image description="Meldungsfenster im Internet Explorer 7" height="451" source="internet-explorer-fehlermeldung.png" width="610" /></p>
+            <p>Allerdings springt dieses Fenster nicht immer auf, wenn auf irgendeiner Website ein JavaScript-Fehler passiert. Das würde beim normalen Web-Browsing dazu führen, dass fast auf jeder Seite die ein oder andere Fehlermeldung angezeigt wird. Auf Dauer würden diese Fenster den Websurfer nerven, deshalb ist ihre Anzeige standardmäßig deaktiviert.</p>
+            <p>Um bei der JavaScript-Entwicklung im Internet Explorer die Fehlermeldungen zu Gesicht zu bekommen, ist eine entsprechende Einstellung nötig. Klicken Sie auf die Schaltfläche <em>Extras</em> und wählen <em>Internetoptionen</em>. Unter der Registerkarte <em>Erweitert</em> finden Sie eine lange Liste von Einstellungen. Unterhalb von <em>Browsen</em> finden Sie die Einstellung <strong>Skriptfehler anzeigen</strong>. Diese Checkbox sollte wie auf dem folgenden Screenshot aktiviert sein
+            (Häkchen setzen):</p>
+            <p><image description="Einstellung im Internet Explorer zur Anzaige von JavaScript-Fehlern" height="530" source="internet-explorer-skriptfehler-anzeigen.png" width="413" /></p>
+            <p>Sie können diese Einstellung jederzeit wieder rückgängig machen, indem Sie in einem Meldungsfenster Checkbox »Diese Meldung immer anzeigen, wenn eine Seite Fehler enthält.« deaktivieren.</p>
+            <p>Die Fehlermeldungen des Internet Explorers, insbesonderen in älteren Versionen, sind weniger präzise und oft unverständlich und verwirrend. In manchen Fällen wird die Zeilennummer nicht korrekt angegeben und bei ausgelagerten JavaScript-Dateien die tatsächliche Script-Adresse nicht angegeben, nur die Adresse des einbindenden HTML-Dokuments. Ein komfortables Debugging von Scripten im Internet Explorer 7 ist daher ohne Zusätze schwer möglich. Dennoch können Sie auch mit den
+            unzureichenden Fehlermeldungen mit der Zeit ein Gefühl dafür bekommen, wie Sie die Fehlerquelle in Ihrem Script lokalisieren und die Fehlerursache beheben. Erst der Internet Explorer 8 wird eine komfortable Fehlerkonsole enthalten, die Firebug nachempfunden ist.</p>
+        </unit>
+        <unit name="fehlerkonsole-opera">
+            <heading>Opera-Fehlerkonsole und Dragonfly</heading>
+            <p>Im Opera-Browser erreichen Sie die Fehlerkonsole über den Menüeintrag <em>Extras → Weiteres → Fehlerkonsole</em>. Die Fehlerbeschreibungen sind im Allgemeinen weniger verständlich als im Firefox, aber zeigen zumindest genau die Stelle im Code an, die den Fehler ausgelöst hat:</p>
+            <p><image description="Fehlerkonsole im Opera" height="403" source="opera-fehlerkonsole.png" width="729" /></p>
+            <p>Ähnlich wie beim Firefox handelt es sich um eine Mehrzweck-Konsole, in der sich u.a. auch HTML- und CSS-Warnungen finden. Eine Filterung nach JavaScript-Fehlern ist jedoch möglich.</p>
+            <p>Mittlerweile verfügt Opera über einen Firebug-ähnlichen Zusatz namens <em>Dragonfly</em>, der über das Menü <em>Extras → Weiteres → Entwicklerwerkzeuge</em> aktiviert werden kann. Dessen Fehlerkonsole bietet derzeit aber keinen Mehrwert gegenüber der herkömmlichen, die Meldungen sind identisch - allerdings kann sie nicht nur in einem gesonderten Fenster, sondern am unteren Fensterrand angezeigt werden:</p>
+            <p><image description="Fehlerkonsole im Opera Dragonfly" height="531" source="opera-dragonfly-fehlerkonsole.png" width="613" /></p>
+        </unit>
+        <unit name="fehlerkonsole-safari">
+            <heading>Safari-Fehlerkonsole [Windows]</heading>
+            <p>Um im Safari an die Fehlermeldungen zu kommen, müssen Sie zunächst das sogenannte Developer-Menü aktivieren, denn darüber lässt sich die JavaScript-Fehlerkonsole öffnen. Dazu wählen Sie im Menü <em>Bearbeiten</em> den Eintrag <em>Einstellungen</em>. Unter der Registerkarte <em>Erweitert</em> aktivieren Sie die Checkbox »Menü "Developer" in der Menüleiste einblenden«:</p>
+            <p><image description="Safari-Einstellungen mit Checkbox zum Aktivieren des Developer-Menüs" height="308" source="safari-developer-menue.png" width="609" /></p>
+            <p>Daraufhin erscheint im Safari-Hauptfenster das Menü <em>Developer</em>, in dem Sie den Eintrag <em>Fehlerkonsole einblenden</em> finden werden. Der Beispielcode erzeugt darin folgende Fehlermeldung:</p>
+            <p><image description="Safari-Fehlerkonsole" height="400" source="safari-fehlerkonsole.png" width="587" /></p>
+            <p>Mit einem Klick auf den Pfeil können Sie in die Quelltext-Ansicht springen, um zur Code-Zeile zu gelangen, die den Fehler ausgelöst hat.</p>
+        </unit>
+    </pageunit>
+    <pageunit name="fehlersuche">
+        <heading>Fehlersuche mit Kontrollausgaben</heading>
+        <p><em>Hilfe, mein JavaScript funktioniert nicht!</em> - Keine Panik. Wenn Sie bei der JavaScript-Programmierung ein paar Faustregeln befolgen, kommen Sie schnell voran und finden die Ursache.</p>
+        <p>Bei der JavaScript-Entwicklung sollten Sie sich eine methodische Herangehensweise angewöhnen: Werden Sie sich klar darüber, <strong>was</strong> sie genau vorhaben und <strong>wie</strong>, das heißt mit welchen Einzelschritten Sie das erreichen wollen. Wenn Sie sich diesen Programmablauf überlegt haben, recherchieren Sie die dazu nötigen JavaScript-Techniken. Suchen Sie in einer Objektreferenz die Objekte heraus, mit denen Sie arbeiten wollen. Lesen Sie die Beschreibungen aufmerksam
+        durch, sodass sie die Objekte korrekt verwenden können. Beachten Sie unter anderem den Typ von Eigenschaften und die Parameter, die Methoden entgegennehmen.</p>
+        <p>Wenn ein Script nicht wie erwartet funktioniert, sollten Sie zunächst in der <em>Fehlerkonsole</em> des Browsers schauen, ob in ihrem Script Fehler auftraten und der Browser die Ausführung deshalb gestoppt hat. Die Fehlerkonsole liefert in der Regel die Nummer der Codezeile in Ihrem Script, in der der Fehler aufgetreten ist. Die letztliche Ursache des Fehlers <em>kann</em>, muss aber <em>nicht</em> genau in dieser Zeile liegen! Die Ursache kann genauso eine Anweisung in einer anderen
+        Zeile im Script sein, die vorher ausgeführt wurde, sodass die Voraussetzungen für die spätere Anweisung nicht gegeben sind.</p>
+        <unit>
+            <heading>Kontrollausgaben über die alert-Methode</heading>
+            <p>Um Fehlern auf die Spur zu kommen, gehen Sie ihr JavaScript-Programm Schritt für Schritt durch und notieren nach jeder relevanten Anweisung eine <strong>Kontrollausgabe</strong>. Dies geht am einfachsten mit der browserübergreifenden Methode <code>window.alert</code>, die ein Meldungsfenster erzeugt. Ein Beispiel:</p>
+            <example>var element = document.getElementById("navigation");
+window.alert("Navigationselement: " + element);
+
+var textknoten = document.createTextNode("Hallo!");
+window.alert("Neuer Textknoten: " + textknoten);
+
+element.appendChild(textknoten);
+window.alert("Textknoten wurde angehängt.");</example>
+            <p>Wenn ein Fehler in Ihrem Script auftritt, dann bricht der Browser die Script-Ausführung ab, sodass die darauffolgende Kontrollausgabe nicht mehr ausgeführt wird. Somit können Sie einerseits den Fehler lokalisieren und andererseits gibt Ihnen die letzte Kontrollausgabe vor dem Abbruch eventuell Hinweise auf die Fehlerursache.</p>
+            <p>Um Fehler auf diese Weise eingrenzen zu können, sollten Sie die Anweisungen zwischen den Kontrollausgaben möglichst einfach halten - zumindest solange ihr Script noch in der Entwicklungsphase ist. Die folgende Anweisung ist zusammengesetzt und kann an gleich mehreren Stellen zu einem Programmabbruch führen:</p>
+            <example>document.getElementsByTagName("h1")[0].style.color = "red";</example>
+            <p>Wenn in dieser Zeile ein JavaScript-Fehler auftritt, dann sollten Sie die Anweisung in ihre Teile aufspalten und Kontrollausgaben einfügen:</p>
+            <example>window.alert("Suche alle Überschriften im Dokument...");
+var überschriftenListe = document.getElementsByTagName("h1");
+window.alert("Anzahl der gefundenen h1-Überschriften: " + überschriftenListe.length);
+
+var ersteÜberschrift = überschriftenListe[0];
+window.alert("Erste h1-Überschrift: " + ersteÜberschrift);
+
+window.alert("Setze Farbe der Überschrift...");
+ersteÜberschrift.style.color = "red";
+window.alert("Farbe gesetzt.");</example>
+            <p>Dieses Beispiel ist übertrieben, soll aber die Möglichkeiten von Kontrollausgaben veranschaulichen. Der Vorteil von <code>window.alert</code> ist, dass der Browser die Ausführung des Scriptes solange anhält, wie das Meldungsfenster geöffnet ist. Auf die Weise können Sie einem Script, das sonst ganz schnell ausgeführt wird, bei der Arbeit zuschauen und Fehler erkennen.</p>
+            <p>Der Nachteil von Kontrollausgaben mit <code>window.alert</code> ist, dass es JavaScript-Objekte in Strings umwandeln muss, um sie auszugeben. (Intern wird die Objektmethode <code>toString</code> aufgerufen.) Der String, der dabei herauskommt, gibt Ihnen nicht immer Aufschluss darüber, ob es sich um das erwartete Objekt handelt. Nur in einigen Browsern ist nachvollziehbar, um was für ein Objekt es sich handelt. Bei bei komplexen Objekten wie Arrays oder DOM-Knoten ist dies aber
+            gewöhnungsbedürftig - mit der Zeit lernen Sie, wie sie solche Knoten am besten in Kontrollausgaben ansprechen.</p>
+        </unit>
+        <unit>
+            <heading>Ablaufprotokolle mit Firebugs console-Objekt</heading>
+            <p>Vielseitiger als Ausgaben mittels <code>window.alert</code> ist die Nutzung der <hyperlink href="http://getfirebug.com/console.html" link-type="external">JavaScript-Konsole von Firebug</hyperlink>. Über das globale Objekt <code>window.console</code> bietet Firebug verschiedene Methoden an, mit denen Sie Statusmeldungen in die Firebug-eigene Konsole schreiben können. In der Konsole haben Sie dann ein Log aller Meldungen Ihres Scriptes.</p>
+            <p>Das obige Beispiel könnte für Firebug mithilfe der Methode <code>console.debug</code> folgendermaßen umgesetzt werden:</p>
+            <example>var überschriftenListe = document.getElementsByTagName("h1");
+console.debug("Gefundene h1-Überschriften:", überschriftenListe);
+
+var ersteÜberschrift = überschriftenListe[0];
+console.debug("Erste h1-Überschrift:", ersteÜberschrift);
+
+console.debug("Setze nun die Farbe der Überschrift...");
+ersteÜberschrift.style.color = "red";
+console.debug("Farbe gesetzt. Zur Kontrolle:", ersteÜberschrift.style.color);</example>
+            <p>Firebug stellt auch komplexe Objekte sinnfällig da. Die Ausgaben in der Konsole sind interaktiv, d.h. sie können ein dort ausgegebenes Objekt anklicken und sich dessen Eigenschaften auflisten lassen.</p>
+            <p>Das Objekt <code>console</code> bietet viele weitere Methoden, um Meldungen in die Konsole zu schreiben. Diese können Sie der besagten Dokumentation entnehmen. Für den Anfang sollten Ihnen aber die Methoden <code>console.debug</code> und <code>console.log</code> ausreichen.</p>
+            <note editor="mschaefer" type="todo">Beispieldokument / Screenshots</note>
+            <p>Auf diese Weise können Sie akribische <strong>Ablaufprotokolle</strong> Ihrer Scripte anlegen und haben die Objekte, mit denen Sie arbeiten, direkt im Blick. Dies macht Firebug zu einem unverzichtbaren Werkzeug. Mittlerweile bieten auch Entwicklerwerkzeuge für andere Browser ein <code>console</code>-Objekt mit den besagten Methoden an. Damit entsteht ein Quasi-Standard, mit dem hoffentlich irgendwann eine browserübergreifende JavaScript-Fehlersuche ermöglicht.</p>
+            <p>Beachten Sie jedoch, dass Sie diese Methodenaufrufe nur während der Entwicklung ihrer Scripte nutzen können und am Ende wieder entfernen sollten - denn bei Ihren Webseiten-Besuchern wird das <code>console</code>-Objekt üblicherweise nicht zur Verfügung stehen. Ein Aufruf würde daher einen Fehler erzeugen und das Script abbrechen.</p>
+        </unit>
+    </pageunit>
+    <pageunit name="dom-inspektor">
+        <heading>DOM-Inspektoren</heading>
+        <p>Beim Einlesen eines HTML-Dokuments erzeugt der Browser aus dem HTML-Code eine Baumstruktur aus Elementen - diese Vorgang nennt sich Parsing. Die auf HTML aufbauenden Webtechniken CSS und JavaScript operieren auf dieser Grundlage. Den JavaScript-Zugriff auf diese interne Baumstruktur regelt das <interlink link-type="page" reference="basis_javascript_dom">DOM (Dokument-Objektmodell)</interlink>.</p>
+        <p>Zum Auslesen und Verändern des Dokuments bewegt sich ein Script im DOM-Baum. Um den Elementenbaum des aktuellen Dokuments zu veranschaulichen, bieten verschiedene Browser sogenannte DOM-Inspektoren an. Diese bilden die Knotenstruktur ab, die sie aus dem Dokument generiert haben, und erlauben eine Navigation darin. Sie können in der Baumdarstellung einen Elementknoten anklicken, um dessen JavaScript-Eigenschaften und -Methoden sowie die geltenden CSS-Formatierungen zu sehen.</p>
+        <p>Eine weitere Möglichkeit, Informationen zu einem Element abzurufen, nennt sich <em>Element untersuchen</em> oder ähnlich. Dabei können Sie einen beliebigen Bereich im Dokument anklicken und im DOM-Inspektor wird automatisch das zugehörige Element fokussiert und dessen Informationen angezeigt.</p>
+        <p>Nehmen wir folgendes Beispieldokument und schauen uns an, wie die verschiedenen DOM-Inspektoren den Elementenbaum wiedergeben:</p>
+        <example>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta htttp-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+  &lt;title&gt;Document Object Model&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Document Object Model&lt;/h1&gt;
+  &lt;p&gt;(aus: &lt;a href="http://de.wikipedia.org/wiki/Document_Object_Model"&gt;Wikipedia,
+der freien Enzyklopädie&lt;/a&gt;.)&lt;/p&gt;
+  &lt;blockquote cite="http://de.wikipedia.org/wiki/Document_Object_Model"&gt;
+    &lt;p&gt;Das Document Object Model (DOM) ist eine Programmierschnittstelle (API) für den Zugriff
+auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/body&gt;
+&lt;/html&gt;  </example>
+        <unit name="dom-inspektor-firefox">
+            <heading>Firefox mit Firebug</heading>
+            <p>Ältere Firefox-Versionen besitzen einen eingebauten, aber wenig komfortablen DOM-Inspektor. Ab Version 3 ist der DOM-Inspektor nicht mehr enthalten. Er kann zwar nachinstalliert werden, aber Sie sollten direkt auf das Firebug-Addon umsteigen, der dieselbe Funktionalität bietet.</p>
+            <p>Zum DOM-Inspektor von Firebug gelangen Sie, indem Sie die Firebug-Leiste am unteren Fensterrand durch einen Klick auf das Käfer-Symbol aufklappen. Anschließend wählen Sie den Tab <em>HTML</em>. Auf der linken Seite findet sich der interaktive Elementbaum. Sie können die Verschachtelungen über die Plus-Symbole aufklappen, um die Kindelement eines Elements zu sehen. Um nähere Informationen zu einem Element zu bekommen, klicken Sie auf die blauen Elementnamen. In folgenden Screenshot
+            wurde das <em>h1</em>-Element im Beispieldokument angeklickt:</p>
+            <p><image description="DOM-Inspektor von Firebug" height="???" source="firebug-dom-inspector.png" width="???" /></p>
+            <p>In der rechten Spalte finden Sie die drei Tabs <em>Styles</em>, <em>Layout</em> und <em>DOM</em>. Die ersten beiden sind in erster Linie bei der CSS-Entwicklung interessant, der dritte Tab insbesondere beim Schreiben von JavaScript. Darin sind alle Eigenschaften und Methoden des ausgewählten Elementobjekten aufgelistet. Viele dieser Eigenschaftswerte (z.B. <code>parentNode</code>) sind anklickbar und führen zur Ansicht des entsprechenden Knoten bzw. JavaScript-Objekts.</p>
+            <p>Um ein Element schnell zu finden, können Sie oben links in der Firebug-Leiste auf <em>Untersuchen</em> klicken. Nun können Sie im Dokument ein Element auswählen. Wenn Sie mit dem Mauszeiger durch das Dokument gehen, wird das Element, auf deren Fläche sich der Mauszeiger befindet, mit einem blauen Rahmen hervorgehoben. Außerdem wird das Element automatisch im DOM-Inspektor fokussiert. Klicken Sie ein Element an, um den Auswahl-Modus zu verlassen. Alternativ zu dieser Vorgehensweise
+            über die Schaltfläche <em>Untersuchen</em> können Sie ein Element mit der rechten Maustaste anklicken und im Kontextmenü <em>Element untersuchen</em> wählen. Dies hat denselben Effekt.</p>
+        </unit>
+        <unit name="dom-inspektor-internet-explorer">
+            <heading>Internet Explorer 7 mit der Developer Toolbar</heading>
+            <p>Der Internet Explorer verfügt über keinen eingebauten DOM-Inspektor, es existiert allerdings ein offizieller Zusatz, den Sie installieren sollten: Die <hyperlink href="http://www.microsoft.com/downloads/details.aspx?familyid=e59c3964-672d-4511-bb3e-2d5e1db91038&amp;displaylang=en" link-type="external">Internet Explorer Developer Toolbar</hyperlink>. Diese wurde der besagten Ansicht von Firebug nachempfunden.</p>
+            <p>Nachdem Sie den Zusatz installiert haben, können Sie die Toolbar aktivieren, indem Sie im Menü <em>Ansicht → Explorer-Leiste → IE Developer Toolbar</em> aktivieren. Gegebenenfalls ist das Menü im Internet Explorer 7 standardmäßig ausgeblendet - Sie können es kurzzeitig einblenden, indem Sie die Alt-Taste drücken. Die Toolbar erscheint am unteren Fensterrand und Sie können deren Höhe variieren.</p>
+            <p>Das Beispieldokument wird in der IE Developer Toolbar folgendermaßen veranschaulicht:</p>
+            <p><image description="Internet Explorer Developer Toolbar" height="???" source="internet-explorer-developer-toolbar.png" width="???" /></p>
+            <p>Die mittlere Spalte zeigt die Eigenschaften des ausgewählten Elementobjektes an (hier wieder die <code>h1</code>-Überschrift).</p>
+        </unit>
+        <unit>
+            <heading>Opera Dragonfly</heading>
+            <p>...</p>
+        </unit>
+        <unit>
+            <heading>Safari Web Inspector</heading>
+            <p>...</p>
+        </unit>
+    </pageunit>
+    <pageunit name="debugger">
+        <heading>Debugger</heading>
+        <p>Mithilfe von Kontrollausgaben können Sie den Ablauf eines Scriptes nachvollziehen und Variablen ausgeben, um deren Werte zu prüfen. Eine vielseitigeres und mächtigeres Werkzeug sind Debugger. Damit können Sie komfortabler die Funktionsweise eines Scriptes untersuchen, denn Sie müssen nicht nach jeder Anweisung eine Kontrollausgabe einfügen. Ein JavaScript-Debugger bietet im Allgemeinen folgende Möglichkeiten:</p>
+        <p>Sie können im Code sogenannte <strong>Haltepunkte</strong> (englisch <em>Breakpoints</em>) setzen. Die Ausführung des JavaScripts wird an dieser Stelle unterbrochen und der Browser öffnet den Debugger. Ausgehend von dieser Code-Zeile können Sie die folgenden Anweisungen nun Schritt für Schritt ausführen, Anweisungen überspringen und aus aufgerufenen Funktionen herausspringen. Bei dieser <strong>schrittweisen Ausführung</strong> können Sie überprüfen, welche Werte bestimmte Objekte und
+        Variablen an dieser Stelle im Script haben. Eine Weiterentwicklung dieser <strong>Überwachung von Variablenwerten</strong> stellen sogenannte <strong>Watch-Expressions</strong> (englisch für Überwachungs-Ausdrücke) dar.</p>
+        <p>...</p>
+        <p>Wenn Sie viele Funktionen definieren, die sich gegenseitig aufrufen, hilft Ihnen ein Debugger, die Übersicht über das Aufrufen und Abarbeiten von Funktionen zu behalten. In der Einzelschritt-Ausführung haben Sie den sogenannten <strong>Call Stack</strong> (englisch für Aufruf-Stapel) im Blick. Das ist die Verschachtelung der Funktionen, die gerade abgearbeitet werden. Wenn beispeilsweise die Funktion <code>a</code> die Funktion <code>b</code> aufruft und diese wiederum die Funktion
+        <code>c</code>, so ist der Stapel <code>a</code> &gt; <code>b</code> &gt; <code>c</code>. Die Funktion <code>c</code>, die gerade ausgeführt wird, liegt sozusagen oben auf dem Stapel. Nach dessen Ausführung wird <code>c</code> vom Stapel genommen und in die Funktion <code>b</code> zurückgekehrt - und so weiter.</p>
+        <p>...</p>
+        <p>Firebug, Opera Dragonfly, Microsoft Visual Web Developer Express, IE 8</p>
+    </pageunit>
+    <pageunit name="editoren">
+        <heading>Editoren und Entwicklungsumgebungen</heading>
+        <p>Aptana Studio</p>
+    </pageunit>
+    <pageunit name="packer">
+        <heading>Code-Komprimierer und -Formatierer</heading>
+        <p>...</p>
+        <p></p>
+    </pageunit>
+</page>
