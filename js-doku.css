@@ -3,6 +3,7 @@ body {
 	max-width: 45em;
 	margin: auto;
 	line-height: 1.6;
+	counter-reset: counterH2;
 }
 
 h1 {
@@ -14,14 +15,30 @@ h2, h3 {
 	padding-bottom: 2px;
 }
 
+body {
+}
+
 h2 {
 	margin-top: 1.4em;
 	font-size: 1.2em;
+	counter-reset: counterH3;
+}
+
+h2:before {
+	content: counter(counterH2) ". ";
+	counter-increment: counterH2;
+	padding-right: 0.5em;
 }
 
 h3 {
 	font-size: 1.1em;
 	margin-top: 1.4em;
+}
+
+h3:before {
+	content: counter(counterH2) "." counter(counterH3);
+	counter-increment: counterH3;
+	padding-right: 0.5em;
 }
 
 p, ol, ul, dl {

@@ -15,14 +15,6 @@
 
 <h1>JavaScript: Zusammenarbeit mit CSS, Darstellung von Dokumenten steuern</h1>
 
- <div class="section" id="notizen">
-	<h2>Notizen</h2>
-	<p>* style-Objekte</p>
-	<p>* Dafür sorgen, dass Selektoren wirken</p>
-	<p>* Klassen und IDs setzen</p>
-	<p>* Direkter Zugriff auf die eingelesenen Stylesheets im Speicher</p>
-	<p>* <a href="http://molily.de/temp/javascript-doku.html#Kurse:_Aufbauwissen:_Darstellung_von_Dokumenten_beeinflussen_.28DOM_Style.29" class="anchor-external">DOM Style</a></p>
-</div>
 <div class="section" id="einleitung">
 	<h2>Einleitung</h2>
 	<p>Mit JavaScript können Sie die Darstellung des Dokuments dynamisch ändern, während es im Browser angezeigt wird. Dies ist ein wesentlicher Bestandteil der Interaktivität, die Sie einem Dokument mittels Javascript hinzufügen können. Die Möglichkeiten sind vielfältig: Beispielsweise können Sie als Reaktion auf eine Benutzereingabe gewisse Elemente ein- und ausblenden. Es sind aber auch &ndash; mit entsprechendem Aufwand &ndash; visuelle Effekte und komplexe Animationen möglich.</p>
@@ -168,13 +160,13 @@ if (hasClass(element, "beispielklasse")) {
 </div>
 <div id="style-objekt" class="section">
 	<h2>Direktformatierung über das <code>style</code>-Objekt</h2>
-	<div class="subsection">
+	<div id="html-inline-styles" class="subsection">
 		<h3>Inline-Styles in HTML</h3>
 		<p>Um direkt einzelne HTML-Elemente mit CSS zu formatieren, existiert das <code>style</code>-Attribut, welches eine Liste von Eigenschafts-Wert-Zuweisungen enthält. Ein HTML-Beispiel:</p>
 		<pre>&lt;p style="color: red; background-color: yellow; font-weight: bold;"&gt;Fehler!&lt;/p&gt;</pre>
 		<p>Gegenüber dem Einsatz von zentralen Formaten in Stylesheets sind diese sogenannten <em>Inline-Styles</em> (eingebettete Formatierungen) ineffektiv und führen zu zu einer Vermischung von HTML und CSS, die die Wartbarkeit des Dokuments verschlechtert. Sie sollten Sie daher nur in Ausnahmefällen einsetzen, auf die wir später noch zu sprechen kommen.</p>
 	</div>
-	<div class="subsection">
+	<div id="style-objekt" class="subsection">
 		<h3>Das <code>style</code>-Objekt als Schnittstelle zu Inline-Styles</h3>
 	<p>JavaScript bietet eine Schnittstelle zu diesem <code>style</code>-Attribut: Das <code>style</code>-Objekt bei jedem Elementobjekt. Das <code>style</code>-Objekt hat für jede mögliche CSS-Eigenschaft eine entsprechende les- und schreibbare Objekteigenschaft. Zu der CSS-Eigenschaft <code>color</code> existiert also eine Objekteigenschaft <code>element.style.color</code> vom Type String.</p>
 		<p>CSS-Eigenschaftsnamen mit Bindestrichen, wie z.B. <code>background-color</code>, können nicht unverändert als JavaScript-Eigenschaftsnamen übernommen werden. Deshalb werden sie im sogenannten <em>Camel-Case</em> (Groß- und Kleinschreibung im Kamel-Stil) notiert: Der Bindestrich fällt weg, dafür wird der darauf folgende Buchstabe zu einem Großbuchstaben. Aus <code>background-color</code> wird also <code>backgroundColor</code>, aus <code>border-left-width</code> wird <code>borderLeftWidth</code> und so weiter. Die Großbuchstaben in der Wortmitte werden mit Höcker eines Kamels verglichen.</p>
@@ -184,31 +176,36 @@ if (hasClass(element, "beispielklasse")) {
 		<pre>element.style.marginTop = 15; // Falsch!
 	element.style.marginTop = "15px"; // Richtig</pre>
 	</div>
-	<div class="subsection">
-		<h3>Sonderfälle bei der Umsetzung von CSS-Eigenschaftsnamen in JavaScript-Eigenschaftsnamen</h3>
+	<div id="style-eigenschaftsnamen" class="subsection">
+		<h3>Sonderfälle bei der Umsetzung von CSS- in JavaScript-Eigenschaftsnamen</h3>
 		<p>Abweichungen vom besagten Schema</p>
+		<p><code>cssFloat</code> vs. <code>styleFloat</code></p>
 	</div>
-	<div class="subsection">
-		<h3>Sinnvoller Einsatz</h3>
+	<div id="style-objekt-sinnvoll" class="subsection">
+		<h3>Sinnvoller Einsatz des <code>style</code>-Objektes</h3>
 		<p>Das Setzen von CSS-Formatierungen direkt über das <code>style</code>-Objekt ist zwar einfach. Doch Sie diese Präsentationsregeln wie gesagt  nicht im JavaScript, sondern sie z.B. in einer Klasse im Stylesheet unterbringen. Nur in manchen Fällen ist die Verwendung von Inline-Styles notwendig: Wenn der Eigenschaftswert nicht fest steht, sondern erst im JavaScript berechnet wird. Das ist der Fall z.B. bei Animationen oder bei einer Positionierung abhängig von der Mauszeiger-Position wie beim Drag and Drop.</p>
 	</div>
-	<div class="subsection">
+	<div id="style-nachteile" class="subsection">
 		<h3><code>style</code> ist nicht zum Auslesen der gegenwärtigen Eigenschaftswerte geeignet</h3>
 		<p>Das <code>style</code>-Objekt wird immer wieder missverstanden: <strong>Sie können über das <code>style</code>-Objekt <strong>nicht</strong> den aktuellen, berechneten Wert einer CSS-Eigenschaft auslesen.</strong> Sie können damit lediglich Inline-Styles setzen und die bereits gesetzten auslesen.</p>
 		<p>Die besagten Objekteigenschaften (<code>.style.<var>cssEigenschaft</var></code>) sind allesamt <strong>leer</strong>, wenn sie nicht im betreffenden HTML-Element über ein <code>style</code>-Attribut oder wie beschrieben mit JavaScript gesetzt wurden. Folgendes Beispiel verdeutlicht dies:</p>
 		<pre>&lt;p id="ohne-inline-styles"&gt;Element ohne Inline-Styles&lt;/p&gt;
 &lt;p id="mit-inline-styles" style="color: red"&gt;Element mit Inline-Styles&lt;/p&gt;</pre>
 		<pre>// Gibt einen leeren String aus:
-window.alert(document.getElementById("ohne-inline-styles").style.backgroundColor);
+window.alert(
+	document.getElementById("ohne-inline-styles").style.backgroundColor
+);
 // Gibt »red« aus, weil Inline-Style gesetzt wurde:
-window.alert(document.getElementById("mit-inline-styles").style.backgroundColor);</pre>
+window.alert(
+	document.getElementById("mit-inline-styles").style.backgroundColor
+);</pre>
 	</div>
 </div>
 <div id="werte-auslesen" class="section">
 	<h2>CSS-Eigenschaften auslesen</h2>
 	<p>Über das <code>style</code>-Objekt besteht wie gesagt kein Zugriff auf den aktuellen CSS-Eigenschaftswert eines Elements, sofern kein entsprechender Inline-Style gesetzt wurde. Dies ist meistens der Fall, denn die Formatierungen rühren üblicherweise zentralen Formatierungen in ausgelagerten Stylesheets und den Standardformatierungen des jeweiligen Browsers her.</p>
 	<p>Das Auslesen des gegenwärtigen Werts von CSS-Eigenschaften eines Elements gestaltet sich schwierig. Wenn man in Erfahrung bringen will, welche tatsächliche Textfarbe oder welche Pixel-Breite ein Element hat, dann ist nach den sogenannten <em>berechneten Werten</em> (englisch <em>computed values</em>) gefragt, wie sie in der CSS-Fachsprache genannt werden.</p>
-	<div class="subsection">
+	<div id="getcomputedstyle" class="subsection">
 		<h3><code>getComputedStyle</code> aus W3C DOM CSS</h3>
 		<p>Der W3C-Standard, der die Schnittstelle zwischen JavaScript und CSS und damit der Darstellung eines Dokuments festlegt, kennt zu diesem Zweck die Methode <code>window.getComputedStyle()</code>. Sie erwartet ein Elementobjekt als ersten Parameter und einen String mit einem CSS-Pseudo-Element als zweiten Parameter (<code>"after"</code>, <code>"before"</code>, <code>"first-line"</code> oder <code>"first-letter"</code>). Da man üblicherweise nicht die Formatierung des Pseudo-Elements abfragen will, übergibt man standardmäßig <code>null</code> für kein Pseudo-Element.</p>
 		<p><code>getComputedStyle</code> gibt ein Objekt zurück, das genauso aufgebaut ist wie das bereits besprochene <code>element.style</code>-Objekt. Es enthält für jede CSS-Eigenschaft eine entsprechende Objekteigenschaft mit dem aktuellen berechneten Wert.</p>
@@ -218,7 +215,7 @@ window.alert("Textfarbe: " + computedStyle.color);
 window.alert("Elementbreite: " + computedStyle.width);</pre>
 		<p>Die berechneten Werte (<em>computed values</em>), die <code>getComputedStyle</code> zurückgibt, sind nicht in jedem Fall identisch mit den Werten, die Sie im Stylesheet notiert haben. Der Längenwert in <code>margin-top: 2em;</code> und der Prozentwert in <code>font-size: 120%;</code> werden von den verbreiteten grafischen Browsern letztlich in Pixelwerte umgerechnet, sodass <code>getComputedStyle</code> Werte mit der Einheit <code>px</code> zurückgibt.</p>
 	</div>
-	<div class="subsection">
+	<div id="currentstyle" class="subsection">
 		<h3>Microsofts <code>currentStyle</code></h3>
 		<p><code>getComputedStyle</code> wird von allen großen Browser außer dem Internet Explorer unterstützt. Browserübergreifende Scripte müssen daher eine Sonderlösung für den IE einbauen.</p>
 		<p>Microsoft bietet eine Alternative, die ähnliches leistet: Jedes Elementobjekt kennt neben dem angesprochenen <code>style</code>-Objekt ein gleich aufgebautes Objekt namens <code>currentStyle</code> mit Objekteigenschaften für jede unterstützte CSS-Eigenschaft. Im Gegensatz zum <code>style</code>-Objekt erlaubt <code>currentStyle</code> das Auslesen des aktuellen berechneten CSS-Eigenschaftswertes:</p>
@@ -229,7 +226,7 @@ window.alert("Elementbreite: " + currentStyle.width);</pre>
 		<p><code>currentStyle</code> liefert meist ein ähnliches Ergebnis wie das standardisierte <code>getComputedStyle</code>. In manchen Fällen gibt es jedoch Abweichungen, etwa im obigen Beispiel beim Auslesen des <code>width</code>-Wertes. Der Internet Explorer gibt <code>auto</code> zurück, wenn dem Element keine explizite Breite zugewiesen wurde. Für das browserübergreifende Auslesen der Box-Größe eignen sich stattdessen die Eigenschaoffset client</p>
 		
 	</div>
-	<div class="subsection">
+	<div id="crossbrowser-style-auslesen" class="subsection">
 		<h3>Browserübergreifendes Auslesen von CSS-Eigenschaften</h3>
 		<p>Durch Kombination von <code>getComputedStyle</code> für standardkonforme Browser und <code>currentStyle</code> für den Internet Explorer können wir eine lose Helferfunktion schreiben, die uns den aktuellen CSS-Eigenschaftswert liefert. Die Funktion fragt ab, welches Objekt zur Verfügung steht, und bringt den Wert damit in Erfahrung:</p>
 		<pre>function getStyleValue (element, cssProperty) {
@@ -241,30 +238,43 @@ window.alert("Elementbreite: " + currentStyle.width);</pre>
 	}
 	return value;
 }</pre>
-	<p>Bei der Anwendung wird der Funktion das Elementobjekt und ein String übergeben, der den Eigenschaftsnamen in der JavaScript-typischen Schreibweise enthält:</p>
-	<pre>var currentFontSize = getStyleValue(document.getElementById("beispielID"), "fontSize");
+		<p>Bei der Anwendung wird der Funktion das Elementobjekt und ein String übergeben, der den Eigenschaftsnamen in der JavaScript-typischen Schreibweise enthält:</p>
+		<pre>var currentFontSize = getStyleValue(document.getElementById("beispielID"), "fontSize");
 window.alert(currentFontSize);</pre>
+		<p>Dies funktioniert zwar browserübergreifend, allerdings ist das Ergebnis unterschiedlich: Der Internet Explorer gibt bei der Abfrage des Wertes für die <code>font-size</code>-Eigenschaft einen <code>pt</code>-Wert zurück, andere Browser einen <code>px</code>-Wert. Mit diesen Browserunterschieden müssen Sie rechnen, sie lassen sich nicht ohne viel Aufwand vereinheitlichen.</p>
+	</div>
 	
 	</div>
-	<div class="subsection">
-		<h3></h3>
-		
+	<div id="elementgroessen" class="subsection">
+		<h3>Elementbox-Größen auslesen über Microsoft-Eigenschaften</h3>
+		<p>Über die vorgestellten Techniken ist es nicht browserübergreifend möglich, die aktuelle Höhe und Breite einer Element-Box auszulesen. Stattdessen sollten Sie folgende Eigenschaften der Elementobjekte verwenden. Sie wurden ursprünglich von Microsoft erfunden, erfreuen sich aber breiter Browser-Unterstützung. Im Gegensatz zu <code>getComputedStyle</code> und <code>currentStyle</code> geben sie keine String-Werte samt Einheiten zurück, sondern direkt JavaScript-Zahlen (Number-Wert).</p>
+		<dl>
+			<dt><code>offsetWidth</code> und <code>offsetHeight</code></dt>
+			<dd>liefern die Breite bzw. Höhe der <em>border box</em> (Rahmen-Box) des Elements. Das bedeutet, dass <code>padding</code> (Innenabstand) und <code>border</code> (Rahmen) inbegriffen sind, <code>margin</code> (Außenrahmen) hingegen nicht.</dd>
+			<dt><code>clientWidth</code> und <code>clientHeight</code></dt>
+			<dd>liefern Breite bzw. Höhe der <em>padding box</em> (Innenabstand-Box) des Elements. Das bedeutet, dass <code>padding</code> inbegriffen ist, während <code>border</code> und <code>margin</code> nicht eingerechnet werden. Ebenso wird eine möglicherweise angezeigte Bildlaufleiste (Scrollbar) nicht einberechnet.</dd>
+			<dt><code>clientWidth</code> und <code>clientHeight</code></dt>
+			<dd>liefern die innere Breite bzw. Höhe des Elements. <code>margin</code>, <code>border</code>, <code>padding</code> sowie die Größe der Bildlaufleiste werden nicht einberechnet.</dd>
+			<dt><code>scrollWidth</code> und <code>scrollHeight</code></dt>
+			<dd>geben die tatsächliche Höhe des Inhalts wieder, wenn das Element kleiner ist, als der Inhalt es erfordert, und das Element Bildlaufleisten besitzt, um diesen Inhalt zugänglich zu machen. Die vorher genannten Eigenschaften geben in diesem Fall lediglich die Größe des »Guckfensters«, also des aktuell sichtbaren Ausschnittes wieder.</dd>
+		</dl>
+		<p>In den meisten Fällen werden Sie die äußere Größe eines Elements benötigen, also <code>offsetWidth</code> und <code>offsetHeight</code>. Das folgende Beispiel gibt die Größe eines Elements aus:</p>
+		<pre>var element = document.getElementById('beispielID');
+window.alert("Breite: " + element.offsetWidth + "\nHöhe: " + element.offsetHeight);</pre>
+		<p>TODO: Das ist die Theorie, Browser-Unstimmigkeiten sind bei Quirksmode dokumentiert</p>
 	</div>
-		
-	Browserproblem!
-	currentStyle
-	ist aber nicht dasselbe!
-	Sonderfälle!
-	offsetWidth, scrollHeight, clientWidth usw.
 </div>
 <div id="stylesheets-aendern" class="section">
-	<h2>Stylesheet-Regeln dynamisch erzeugen und ändern</h2>
-	<p>...</p>
-	<p>Zugriff auf die eingelesenen Stylesheets im Speicher</p>
-</div>
-<div id="weiteres" class="section">
-	<h2>Weiteres (TODO)</h2>
-	<p>ppk schreibt über Elementgrößen und Positionen</p>
+	<h2>Zugriff auf die eingebundenen Stylesheets</h2>
+	<div class="subsection">
+		<h3>Stylesheets mit JavaScript deaktivieren und einfügen</h3>
+	</div>
+	<div class="subsection">
+		<h3>Stylesheet-Regeln dynamisch erzeugen und ändern</h3>
+	</div>
+	<div class="subsection">
+		<h3>Stylesheet-Regeln dynamisch erzeugen und ändern</h3>
+	</div>
 </div>
 
 <div id="footer">
