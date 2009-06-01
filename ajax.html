@@ -18,19 +18,19 @@
 <div class="section" id="webanwendungen">
 	<h2>Entstehung von Ajax: Neue dynamische Webanwendungen</h2>
 	<p>In der Anfangszeit bestand das World Wide Web aus einer Sammlung von weltweit abrufbaren wissenschaftlichen Daten und Dokumenten. Das heutige Web hingegen bietet nicht bloß statische Informationsangebote, sondern maßgeblich interaktive Dienste. Spätestens unter dem Schlagwort <em>Web 2.0</em> sind unzählige sogenannte <em>Webanwendungen</em> aus dem Boden gesprossen, die vorher ungeahnte Dienste ins Web brachten. Man denke nur an Kontaktnetzwerke, die selbst keine Inhalte bereitstellen, sondern ihren Nutzern Kommunikation und das Einstellen eigener Inhalte ermöglichen. Das Web als Verbund von mehreren Rechnern, nicht mehr der einzelne Rechner ist die Plattform für Software dieser Art.</p>
-	<p>Viele dieser neuen Webanwendungen setzen stark auf JavaScript, um die Funktionalität klassischer Desktop-Anwendungen bereitzustellen &ndash; mit den Besonderheiten, die sich daraus ergeben, dass die Anwendung nun im Netz beheimatet ist. Heraus kommen zum Beispiel E-Mail-Programme, News-Leseprogramme, Textverarbeitung, Tabellenkalkulation, Präsentationen, Chat-Programme, Foto-Verwaltung und Bildbearbeitung, Terminkalender und Adressbücher, Karten-Anwendungen und vieles mehr. Mittlerweile genießen diese eine ungeheure Popularität und vereinfachen die Arbeit am Computer und im Netz.</p>
-	<p>JavaScript spielt dabei eine zentrale und neue Rolle. Es handelt sich nicht um klassische HTML-Dokumente, denen mit JavaScript ein wenig Interaktivität hinzugefügt wird. Stattdessen funktionieren viele dieser neuartigen Webanwendungen ohne JavaScript nicht. Durch komplexes Event-Handling und viele Tricks bringt JavaScript einfache HTML-Elemente dazu, sich wie Bedienelemente von Desktop-Programmen zu verhalten - z.B. wie Schaltflächen, Menüs oder Dialogfenster.</p>
+	<p>Viele dieser neuen Webanwendungen setzen stark auf JavaScript, um die Funktionalität klassischer Desktop-Anwendungen bereitzustellen. Heraus kommen zum Beispiel E-Mail-Programme, News-Leseprogramme, Textverarbeitung, Tabellenkalkulation, Präsentationen, Chat-Programme, Foto-Verwaltung und Bildbearbeitung, Terminkalender und Adressbücher, Karten-Anwendungen und vieles mehr. Dadurch, dass die Anwendung nun im Netz beheimatet ist, ergeben sich besondere Mehrwerte: Man spricht von »sozialer« und »kollaborativer« Software, deren Fokus auf Kommunikation, gemeinsame Nutzung von Daten und Zusammenarbeit liegt. Mittlerweile genießen diese Anwendungen eine ungeheure Popularität und vereinfachen die Arbeit am Computer und im Netz.</p>
+	<p>JavaScript spielt dabei eine zentrale und neue Rolle. Es handelt sich nicht um klassische HTML-Dokumente, denen mit JavaScript ein wenig Interaktivität hinzugefügt wird. Stattdessen funktionieren viele dieser Webanwendungen nicht ohne JavaScript. Durch komplexes Event-Handling und viele Tricks bringt JavaScript einfache HTML-Elemente dazu, sich wie Bedienelemente von Desktop-Programmen zu verhalten - z.B. wie Schaltflächen, Menüs oder Dialogfenster.</p>
 </div>
 
 <div id="ajax-definition" class="section">
 	<h2>Was ist anders an Ajax?</h2>
-	<p>Gemeinsam ist den besagten Webanwendungen eine Schlüsseltechnik namens <strong>Ajax</strong>. Das bedeutet: <strong>JavaScript tauscht im Hintergrund Daten mit dem Webserver aus</strong> über selbst erzeugte HTTP-Anfragen, deren Server-Antwort dem Script zur Verfügung steht.</p>
+	<p>Gemeinsam ist den besagten Webanwendungen eine Schlüsseltechnik namens <strong>Ajax</strong>. Das bedeutet: <strong>JavaScript tauscht im Hintergrund Daten mit dem Webserver aus</strong>. Da funktioniert über selbst erzeugte HTTP-Anfragen, deren Server-Antwort dem Script zur Verfügung steht.</p>
 	<p>Was ist daran nun neu? Dazu muss man zuerst verstehen, wie Interaktion im Web <em>ohne Ajax</em> funktioniert: Herkömmliche Webseiten nutzen Links und Formulare, um mit dem Webserver zu interagieren. Der Anwender aktiviert einen Link oder sendet ein Formular ab, woraufhin der Browser eine entsprechende HTTP-Anfrage an den Webserver stellt. Der Webserver antwortet, indem er üblicherweise ein HTML-Dokument zurückliefert, das der Browser verarbeitet und anzeigt. Ohne Ajax muss also immer ein neues, vollständiges HTML-Dokument vom Server geladen werden. Diese HTML-Dokumente werden oft von serverseitigen Programmen generiert.</p>
 	<p>Ajax durchbricht dieses Prinzip und kann damit die Bedienung von Webseiten und den Aufbau von Webanwendungen grundlegend ändern. Es werden nicht immer neue HTML-Dokumente heruntergeladen und ausgewechselt, sondern nur kleine Datenportionen mit dem Webserver ausgetauscht. Gerade benötigte Daten werden nachgeladen und ausgewählte Änderungen dem Server mitgeteilt. Im Extremfall kommt eine sogenannte <em>Single Page Application</em> heraus, bei der es nur ein ursprüngliches HTML-Dokument gibt und der restliche Datenaustausch mit dem Webserver per JavaScript im Hintergrund abläuft. Über die DOM-Schnittstelle wird das Dokument nach Belieben umgestaltet. Es reagiert auf Benutzereingaben, übersendet diese gegebenenfalls an den Server, lädt im Hintergrund Inhalte vom Server nach und montiert diese ins bestehende Dokument ein.</p>
 </div>
 
 <div id="begriff" class="section">
-	<h2>Der Begriff »Ajax«</h2>
+	<h2>Der Begriff »Ajax« und seine Schwächen</h2>
 	<p>Der Begriff <em>Ajax</em> wurde ursprünglich im Jahr 2005 von dem richtungsweisenden Artikel <a href="http://www.adaptivepath.com/ideas/essays/archives/000385.php"
 	class="anchor-external">A New Approach to Web Applications</a> von Jesse James Garrett geprägt. Ajax steht darin als Abkürzung für <em>Asynchronous JavaScript and XML</em>.</p>
 	<p>Diese Abkürzung stift leider mehr Verwirrung, als sie zum Verständnis beiträgt. Weder sind Ajax-Anwendungen »asynchron« in dem Sinne, dass die Kommunikation mit dem Server völlig losgelöst von Benutzereingaben stattfindet. Noch ist XML notwendigerweise das geeignete Übertragungsformat für Daten zwischen Client und Server. Garretts Konzept taugt wenig zum Verständnis der gegenwärtigen Praxis, die unter dem Schlagwort Ajax zusammengefasst wird.</p>
@@ -43,33 +43,67 @@
 	<p>Der Browser zeigt also beim klassischen Modell eine Reihe von eigenständigen HTML-Dokumenten (Ressourcen) an, die alle eine eindeutige Adresse (URI) besitzen. Dafür stellt der Browser Navigationsmechanismen wie den Verlauf (History) zur Verfügung. Diese Dokumente sind unabhängig von JavaScript lesbar, verlinkbar, durch Suchmaschinen indizierbar, abspeicherbar und so weiter.</p>
 	<p>Mit <strong>Ajax</strong> hingegen werden die Serveranfragen im Hintergrund gestartet, ohne dass das Dokument ausgewechselt wird. Damit fällt das Warten auf die Serverantwort entweder ganz weg, weil nicht auf sie gewartet werden muss, oder der Server muss nur eine kleine Datenportion zurückschicken. Der Vorteil von Ajax-Webanwendungen ist daher, dass sie schneller auf Benutzereingaben reagieren und dem vertrauten Verhalten von Desktop-Anwendungen näherkommen.</p>
 	<p>Ajax bricht absichtlich mit grundlegenden Funktionsweisen und Regeln des Webs. Daraus zieht es seine Vorteile, aber auch schwerwiegende Nachteile: Es gibt keine vollständigen, adressierbaren Dokumente mehr, die einen bestimmten Punkt und Status der Webanwendung markieren. Wenn der Anwender zu dem Inhalt kommen möchte, den er zuvor gesehen hat, betätigt er die Zurück-Funktion. Das funktioniert bei der Verwendung von Ajax nicht mehr wie gewohnt: Denn im Browser-Verlauf wird die Änderung der Inhalte via JavaScript nicht registriert, denn das Dokument ist nicht ausgewechselt worden und die Adresse hat sich nicht geändert. Eine Navigation, wie sie der Anwender von statischen Webseiten gewohnt ist, ist auf Seiten mit solcher JavaScript-Interaktivität nicht ohne weiteres möglich.</p>
-	<p>Ajax-Anwendungen verlagern einen großen Teil der Datenverarbeitung vom Server-Rechner auf den Client-Rechner, genauer gesagt in den Browser. Damit steigen die Ansprüche, die an die Zugangssoftware gestellt werden. ...</p>
+	<p>Ajax-Anwendungen verlagern einen großen Teil der Datenverarbeitung vom Server-Rechner auf den Client-Rechner, genauer gesagt in den Browser. Damit steigen die Ansprüche, die an die Zugangssoftware gestellt werden - auch wenn mittlerweile alle neueren JavaScript-fähigen Browser pber leistungsfähige Ajax-Umsetzungen verfügen.</p>
+	<p>Es ist eine besondere Herausforderung, eine Site mit Ajax zugänglich für Nutzer ohne JavaScript, mit alternativen oder assistiven Zugangstechniken wie Screenreadern oder Mobilbrowsern zu gestalten. Funktionen wie der Verlauf, den bisher der Browser automatisch zur Verfügung stellte, müssen in Ajax-Anwendungen nachgebaut werden, z.B. indem jeder Status eine Adresse bekommt, damit die Zurück-Navigation funktioniert und der Status verlinkt werden kann. Es ist also mit einigem Aufwand verbunden, eine Ajax-Anwendung so komfortabel und robust zu bekommen, wie es klassische Lösungen von Haus aus sind.</p>
 </div>
 
-<div id="anwendung" class="section">
-	<h2>Typische Anwendungsfälle</h2>
-	<p>...</p>
-	<ul>
-		<li>Laden von kleinen Inhaltsfragmenten auf Benutzereingabe (z.B. Liste mit Ajax-Vollansichten)</li>
-		<li>Auto-Vervollständigung (Autocomplete)</li>
-		<li>Bewertungen und andere Server-Aktionen, die nicht das Laden eines neues Dokuments erfordern</li>
-		<li>Pagination (Blättern/Seitennavigation)</li>
-		<li>Edit-in-place-Formulare</li>
-	</ul>
+<div id="anwendungsbeispiele" class="section">
+	<h2>Typische Anwendungsfälle von Ajax</h2>
+	<p>Neben vollständigen Webanwendungen, die das Verhalten einer Desktop-Anwendung komplett in JavaScript zu emulieren versuchen, gibt es viele kleine Fälle, in denen Hintergrund-Serverkommunikation auf klassischen Webseiten sinnvoll ist und die Bedienung vereinfacht. In diesen Fällen kann Ajax zumeist als Zusatz verwendet werden. Das heißt, wenn JavaScript nicht aktiv ist oder Ajax nicht verfügbar ist, dann kann die Website trotzdem ohne funktionale Einschränkungen benutzt werden (vgl. <a href="einsatz.html">Unobtrusive JavaScript</a>).</p>
+	
+	<div class="subsection" id="">
+		<h3>Laden von kleinen Inhaltsfragmenten</h3>
+		<p>Oftmals werden Inhalte in kurzer, übersichtlicher Listenform dargestellt. Um den vollen Eintrag zu sehen, muss ohne Ajax eine vollständiges neues Dokument geladen werden. Mit Ajax können Listenansicht und Vorschau- bzw. Vollansicht kombiniert werden, ohne dass alle nötigen Informationen von Anfang an im Dokument liegen. Auf Benutzerwunsch (z.B. beim Klicken oder beim Überfahren mit der Maus) können die Informationen zu einem Eintrag via Ajax nachgeladen werden und erscheinen dann direkt beim entsprechenden Listeneintrag.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Automatische Vervollständigung (Autocomplete)</h3>
+		<p>Ohne Ajax sind Suchmasken mitunter langsam und zäh bedienbar: Man gibt einen Suchbegriff ein, sendet das Formular ab und wartet auf die Trefferliste. In vielen Fällen erkennt man dann, dass man die Suche verfeinern muss oder den Suchbegriff korrigieren muss, weil man ihn offensichtlich nicht korrekt geschrieben hat. Schneller zum Ziel kommt man, wenn schon beim Tippen die Eingabe im Hintergrund an den Server gesendet wird und unter dem Eingabefeld blitzschnell Suchvorschläge angezeigt werden, die zu der bisherigen Eingabe passen.</p>
+		<p>Stellen Sie sich etwa eine Fahrplanauskunft vor: Wenn Sie »Paris« in das Zielfeld eingeben, werden sofort alle Pariser Bahnhöfe aufgelistet, sodass sie einen davon wählen können. Oder Sie geben in einem Produktkatalog einen Herstellernamen, eine Produktkennziffer oder ein Merkmal ein, so werden kann Ajax mithilfe einer intelligente serverseitigen Suchfunktion die passenden Produkte sofort anzeigen, noch während sie tippen.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Bewertungen, Bestätigung und weitere Server-Aktionen</h3>
+		<p>Nicht jede Benutzeraktion auf einer Site startet das Abrufen von neuen Informationen vom Server. Es gibt viele Aktionen, die dem Server bloß eine Statusänderung mitteilen, ohne dass dazu das aktuelle Dokument ausgetauscht und ein neues aufgebaut werden muss. All diese sind Kandidaten für sinnvollen Ajax-Gebrauch. Dazu gehören einfache Formulare, die per Ajax automatisch abgesendet werden, z.B. Bewertungen und Abstimmungen. Ferner Funktionen wie Markieren, Ausblenden, Löschen usw.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Blättern und Seitennavigation</h3>
+		<p>Beim Navigieren durch Listen z.B. mit Suchresultaten, Artikeln oder Produkten gibt es üblicherweise eine Seitennavigation. Seite 1 zeigt etwa die Resultate 1 bis 10, Seite 2 zeigt 11 bis 20 und so weiter. Ajax kann das Durchstöbern dieser Listen vereinfachen, indem beim Blättern nicht notwendig ein neues Dokument vom Server geladen werden muss. Stattdessen kann Ajax die folgende Seite schrittweise hinzuladen und in die Liste einfügen. Das kann sogar soweit gehen, dass die folgenden Einträge automatisch nachgeladen werden, sobald der Anwender an das Ende der gerade angezeigten Einträge scrollt.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Eingebettete Formulare</h3>
+		<p>Vom Benutzer veränderbare Daten (z.B. ein Kundenprofil oder Einstellungen) werden üblicherweise in zwei Ansichten angezeigt: 
+		Die Nur-Lesen-Ansicht einerseits und die Editieren-Ansicht andererseits. Beispielsweise gibt es eine tabellarische Auflistung sowie ein zusätzliches Formular, in dem dieselben Daten verändert werden können.</p>
+		<p>Mit Ajax können beide Ansichten zu einer zusammengefasst werden (sogenannte <em>Edit-in-place-Formulare</em> bzw. <em>Inline Edit</em>). Will der Benutzer ein Datenfeld editieren, so kann JavaScript die Lese-Ansicht auf Knpofdruck dynamisch in eine Formular-Ansicht wechseln. Hat der Benutzer das Editieren beendet, so werden die Änderungen per Ajax an den Server gesendet. Verlässt der Benutzer die Seite, so bleiben die Änderungen gespeichert und es besteht keine Gefahr, dass der Benutzer vergisst, das Formular abzusenden.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Regelmäßiges Aktualisieren vom Server (Liveticker, Chats, E-Mail)</h3>
+		<p>Anwendungen wie Liveticker oder webbasierte E-Mail-Leseprogramme basieren darauf, dass eine Webseite häufig Aktualisierungen erfährt. Anstatt immer das gesamte Dokument neu zu laden, um eventuelle neue Inhalte anzuzeigen, kann Ajax regelmäßig im Hintergrund beim Server nachfragen, ob seit der letzten Aktualisierung neue Inhalte hinzugekommen sind. Falls ja, sendet der Server diese neuen bzw. geänderten Einträge in der Antwort gleich mit und JavaScript stellt sie im aktuellen Dokument dar.</p>
+		<p>Mit Ajax ist bisher keine echte Echtzeit-Aktualisierung möglich, wie sie für web-basierte Chats und Instant Messaging benötigt wird. Das liegt hauptsächlich daran, dass das Protokoll HTTP nach dem Anfrage-Antwort-Schema funktioniert anstatt auf einer dauerhaften Verbindung zwischen Client und Server. Unter dem Schlagwort <em>Comet</em> werden allerdings Techniken entwickelt, die diese Beschränkungen von HTTP zu umgehen versuchen. Auch wenn es bereits beeindruckende Praxisanwendungen gibt, so kommen diese nicht ohne aufwändige Tricks aus und haben mit grundlegenden Problemen zu kämpfen.</p>
+	</div>
 </div>
 
 <div id="xmlhttprequest" class="section">
-	<h2>XMLHttpRequest und andere Techniken zur Serverkommunikation</h2>
-	<p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <code>XMLHttpRequest</code>-Objekt. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Mithilfe von ActiveX ist es im Internet Explorer möglich, ein <code>XMLHttpRequest</code>-Objekt zu erzeugen. Darüber werden HTTP-Anfragen gestartet und die Serverantwort ausgelesen.</p>
+	<h2>XMLHttpRequest</h2>
+	<p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code></strong>-Objekt. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objektes werden HTTP-Anfragen gestartet und die Serverantwort ausgelesen.</p>
 	<p>Andere Browserhersteller erkannten die Möglichkeiten von <code>XMLHttpRequest</code> und übernahmen diese Technik - allerdings ohne ActiveX. Mittlerweile kennen alle großen JavaScript-fähigen Browser das Objekt <code>window.XMLHttpRequest</code>. Ab Version 7 des Internet Explorers ist dieses globale Objekt ebenfalls verfügbar, bei älteren Versionen muss der Umweg über ActiveX genommen werden.</p>
-	<p>Der Clou an <code>XMLHttpRequest</code> ist, dass es eine Server-Anfrage standardmäßig <em>asynchron</em> absendet und die Server-Antwort durch Ereignis-Behandlung verarbeitet wird. Das bedeutet, dass ein Script die Anfrage auslöst und eine angegebene Handler-Funktion aufgerufen wird, sobald sich der Status der Anfrage ändert und schließlich die Antwort eintrifft. Das hat folgenden Sinn: Der Browser friert an der Stelle, wo die Anfrage abgesendet wird, nicht ein und stoppt das JavaScript, bis die Antwort eingetroffen ist, sondern kommt zur Ruhe, kann andere Scriptteile ausführen und sogar weitere Serveranfragen starten. Erst dadurch ist die schnelle und unterbrechungsfreie Reaktion auf Benutzereingaben möglich, die für Ajax-Anwendungen typisch ist.</p>
+	<p>Der Clou an <code>XMLHttpRequest</code> ist, dass es eine Server-Anfrage standardmäßig <em>asynchron</em> absendet und die Server-Antwort durch Ereignis-Behandlung verarbeitet wird. Das bedeutet, dass ein Script die Anfrage auslöst und eine angegebene Handler-Funktion aufgerufen wird, sobald sich der Status der Anfrage ändert und schließlich die Antwort eintrifft. Das hat folgenden Sinn: Der Browser friert an der Stelle, wo die Anfrage abgesendet wird, nicht ein und stoppt die Ausführung von JavaScript, bis die Antwort eingetroffen ist. Sondern der Browser kommt zur Ruhe, kann andere Scriptteile ausführen und sogar weitere Serveranfragen starten. Erst dadurch ist die schnelle und unterbrechungsfreie Reaktion auf Benutzereingaben möglich, die für Ajax-Anwendungen typisch ist.</p>
+</div>
+
+<div id="alternativtechniken" class="section">
+	<h2> Weitere Techniken zur Serverkommunikation</h2>
 	<p>Neben <code>XMLHttpRequest</code> gibt es weitere JavaScript-Techniken, um im Hintergrund Daten mit dem Webserver auszutauschen. Strenggenommen wurde Ajax schon lange praktiziert, bevor sich <code>XMLHttpRequest</code> breiter Browserunterstützung erfreute. Aber erst mit <code>XMLHttpRequest</code> gelang Ajax der Durchbruch, weshalb beide Begriffe oft synonym verwendet werden. Dies allerdings zu Unrecht: Zwar ist <code>XMLHttpRequest</code> die vielseitigste, aber beileibe nicht immer die einfachste und geeignetste Methode, um Informationen mit dem Webserver auszutauschen. Alternativen sind unter anderem:</p>
-	<ul class="content-list circle">
-	<li>Versteckte eingebettete Frames (<em>Inner Frames</em>, <em>IFrames</em>), in denen Daten geladen werden oder die als Ziel-Frame für Formulare dienen. Ein Script kann auf diesen Frame und seine Inhalte zugreifen.</li>
-	<li>Per JavaScript erzeugte Bildobjekte (<code>Image</code>-Objekte), mit denen sich Serveranfragen starten lassen - unabhängig davon, ob der Server eine Bilddatei zurücksendet.</li>
-	<li>Per JavaScript erzeugte <code>script</code>-Elemente, die Scripte selbst von fremden Servern einbinden können, die Daten in mit JavaScript direkt zugänglichen Formaten bereitstellen.</li>
-	</ul>
-	<p>...</p>
+	<div class="subsection" id="">
+		<h3>Inner Frames (Iframes)</h3>
+		<p>Versteckte eingebettete Frames, in denen Daten geladen werden oder die als Ziel-Frame für Formulare dienen. Ein Script kann auf diesen Frame und seine Inhalte zugreifen (unter den Bedingungen der Same-Origin-Policy).</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Bildobjekte</h3>
+		<p>Per JavaScript erzeugte Bildobjekte (<code>Image</code>-Objekte), mit denen sich Serveranfragen starten lassen - unabhängig davon, ob der Server eine Bilddatei zurücksendet.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3><code>script</code>-Elemente</h3>
+		<p>Per JavaScript erzeugte <code>script</code>-Elemente, die Scripte selbst von fremden Servern einbinden können, die Daten in mit JavaScript direkt zugänglichen Formaten bereitstellen.
+		Cross-Site JSON und JSONP</p>
+	</div>
 </div>
 <div id="beispiel" class="section">
 	<h2>Beispiel für XMLHttpRequest</h2>
@@ -79,75 +113,75 @@
 <div id="formate-xml-json" class="section">
 <h2>Übertragungsformate</h2>
 	<div class="subsection">
-		<h3>XML</h3>
-		<p><code>XMLHttpRequest</code> hat seinen Namen daher, dass es ursprünglich dazu gedacht war, XML-Dokumente vom Server herunterzuladen. JavaScript kann anschließend mit verschiedenen Schnittstellen mit dem Dokument arbeiten. Das funktioniert zwar vorzüglich, allerdings ist das Extrahieren von Daten aus einem XML-Dokument über die DOM-Schnittstelle umständlich.</p>
-		<p>Wenn Sie strukturierte Daten per XML übertragen wollen, müssen Sie ein eigenes XML-Derivat, d.h. eine Auszeichnungssprache nach den Regeln von XML entwerfen. Sie definieren gewisse Elemente und Attribute und die grammatischen Regeln, wie diese zusammengesetzt werden können. So entstehen Datenstrukturen, die die zu übertragenden Informationen in der notwendigen Ordnung beinhalten. Das zugehörige JavaScript kann diese Elemente ansprechen und die Werte der enthaltenen Textknoten bzw. Attribute auslesen.</p>
-		<p>Auch wenn Sie die Grammatik-Regeln der XML-Sprache nicht unbedingt in einer formalen Dokumentyp-Definition (DTD) niederschreiben müssen, ist das Entwerfen eines neuen XML-Derivates bloß für Ajax vergleichsweise aufwändig. Das Auslesen der Informationen im JavaScript erfordert nicht nur Kenntnisse des XML-DOM, sondern ist mit ziemlicher Schreibarbeit verbunden.</p>
-		<p>Wenn die serverseitigen Programme, die Ihre Website betreiben, bereits ein XML-Format als Speicher- oder Austauschformat verwendet und die damit ausgezeichneten Daten zum Client weitergeschickt werden sollen, bietet es sich auch für Ajax an. Andernfalls ist XML oftmals kompliziert und überdimensioniert.</p>
+		<h3>HTML / Nur-Text</h3>
 		<p>...</p>
-		<pre class="content-example">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;us-präsidenten&gt;
-&lt;präsident&gt;
-&lt;name&gt;Harry S. Truman&lt;/name&gt;
-&lt;partei&gt;Demokraten&lt;/partei&gt;
-&lt;beginn&gt;1945&lt;/beginn&gt;
-&lt;ende&gt;1953&lt;/ende&gt;
-&lt;/präsident&gt;
-&lt;präsident&gt;
-&lt;name&gt;Dwight D. Eisenhower&lt;/name&gt;
-&lt;partei&gt;Republikaner&lt;/partei&gt;
-&lt;beginn&gt;1953&lt;/beginn&gt;
-&lt;ende&gt;1961&lt;/ende&gt;
-&lt;/präsident&gt;
-&lt;präsident&gt;
-&lt;name&gt;John F. Kennedy&lt;/name&gt;
-&lt;partei&gt;Demokraten&lt;/partei&gt;
-&lt;beginn&gt;1961&lt;/beginn&gt;
-&lt;ende&gt;1963&lt;/ende&gt;
-&lt;/präsident&gt;
-&lt;/us-präsidenten&gt;</pre>
-	
+	</div>
 
-	<div class="subsection">
+<div class="subsection">
 		<h3>JSON</h3>
 		<p>...</p>
 		<pre class="content-example">[
-{
-"name" : "Harry S. Truman",
-"partei" : "Demokraten",
-"beginn" : 1945,
-"ende" : 1953
-},
-{
-"name" : "Dwight D. Eisenhower"
-"partei" : "Republikaner",
-"beginn" : 1953,
-"ende" : 1961
-},
-{
-"name" : "John F. Kennedy"
-"partei" : "Demokraten",
-"beginn" : 1961,
-"ende" : 1963
-}
+   {
+      "name" : "Harry S. Truman",
+      "partei" : "Demokraten",
+      "beginn" : 1945,
+      "ende" : 1953
+   },
+   {
+      "name" : "Dwight D. Eisenhower"
+      "partei" : "Republikaner",
+      "beginn" : 1953,
+      "ende" : 1961
+   },
+   {
+      "name" : "John F. Kennedy"
+      "partei" : "Demokraten",
+      "beginn" : 1961,
+      "ende" : 1963
+   }
 ]</pre>
 		<p>...</p>
 	</div>
 	
 	<div class="subsection">
-		<h3>HTML</h3>
+		<h3>XML</h3>
+		<p><code>XMLHttpRequest</code> hat seinen Namen daher, dass es ursprünglich dazu gedacht war, XML-Dokumente vom Server herunterzuladen. JavaScript kann anschließend mit verschiedenen Schnittstellen mit dem Dokument arbeiten. Das funktioniert zwar vorzüglich, allerdings ist das Extrahieren von Daten aus einem XML-Dokument über die DOM-Schnittstelle umständlich. In den meisten Fällen sollen die Daten nämlich im bestehenden HTML-Dokument angezeigt werden, sodass die XML-Daten in eine HTML-Struktur umgewandelt werden müssen.</p>
+		<p>Wenn Sie strukturierte Daten per XML übertragen wollen, müssen Sie ein eigenes Auszeichnungssprache nach den Regeln von XML entwerfen. Sie denken sich gewisse Elemente und Attribute und die grammatischen Regeln aus, wie diese zusammengesetzt werden können. Mithilfe dieser Datenstrukturen werden die zu übertragenden Informationen geordnet. Das zugehörige JavaScript kann diese Elemente ansprechen und die Werte der enthaltenen Textknoten bzw. Attribute auslesen.</p>
+		<p>Auch wenn Sie diese XML-Sprache nicht unbedingt in einer formalen Dokumentyp-Definition (DTD) niederschreiben müssen, ist das Entwerfen eines passenden XML-Derivates für für Ajax vergleichsweise aufwändig. Das Auslesen der Informationen im JavaScript erfordert nicht nur Kenntnisse des XML-DOM, sondern ist mit ziemlicher Schreibarbeit verbunden.</p>
+		<p>Wenn die serverseitigen Programme, die Ihre Website betreiben, bereits ein XML-Format als Speicher- oder Austauschformat verwendet und die damit ausgezeichneten Daten zum Client weitergeschickt werden sollen, bietet es sich auch für Ajax an. Andernfalls ist XML oftmals kompliziert und überdimensioniert.</p>
 		<p>...</p>
-	</div>
+		<pre class="content-example">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;us-präsidenten&gt;
+   &lt;präsident&gt;
+      &lt;name&gt;Harry S. Truman&lt;/name&gt;
+      &lt;partei&gt;Demokraten&lt;/partei&gt;
+      &lt;beginn&gt;1945&lt;/beginn&gt;
+      &lt;ende&gt;1953&lt;/ende&gt;
+   &lt;/präsident&gt;
+   &lt;präsident&gt;
+      &lt;name&gt;Dwight D. Eisenhower&lt;/name&gt;
+      &lt;partei&gt;Republikaner&lt;/partei&gt;
+      &lt;beginn&gt;1953&lt;/beginn&gt;
+      &lt;ende&gt;1961&lt;/ende&gt;
+   &lt;/präsident&gt;
+   &lt;präsident&gt;
+      &lt;name&gt;John F. Kennedy&lt;/name&gt;
+      &lt;partei&gt;Demokraten&lt;/partei&gt;
+      &lt;beginn&gt;1961&lt;/beginn&gt;
+      &lt;ende&gt;1963&lt;/ende&gt;
+   &lt;/präsident&gt;
+&lt;/us-präsidenten&gt;</pre>
+	
 
-	<div class="section">
-		<h3>Nur-Text</h3>
-		<p>...</p>
-	</div>
+	
+	
+
 </div>
 
 <div id="sicherheit" class="section">
 	<h2>Ajax und Sicherheit</h2>
 	<p>...</p>
+	<p>Same-Origin-Policy, Cross-Domain-XMLHttpRequest, Bildobjekte, Scripte, JSONP</p>
 </div>
 
 <div id="footer">
