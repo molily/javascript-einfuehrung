@@ -128,3 +128,7 @@ dfn {
 	padding: 3em 4em;
 	border-style: solid none none;
 }
+
+body#contents #footer p {
+	margin-bottom: 1em;
+}
