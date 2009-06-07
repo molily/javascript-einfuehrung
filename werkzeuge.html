@@ -22,8 +22,8 @@
 </div>
 
 <div class="section" id="einleitung">
-<h2>Einleitung</h2>
-<p>Wenn Sie in die JavaScript-Entwicklung einsteigen, sollte Sie sich mit einigen <strong>Werkzeugen</strong> vertraut machen, die Ihnen das Schreiben eines Scriptes vereinfachen. Um zu einem funktionsfähigen Script kommen, um Fehler zu finden und um Script-Abläufe zu verstehen, gibt es einige bewährte <strong>Arbeitsmethoden</strong> und Fertigkeiten.</p>
+	<h2>Einleitung</h2>
+	<p>Wenn Sie in die JavaScript-Entwicklung einsteigen, sollte Sie sich mit einigen <strong>Werkzeugen</strong> vertraut machen, die Ihnen das Schreiben eines Scriptes vereinfachen. Um zu einem funktionsfähigen Script kommen, um Fehler zu finden und um Script-Abläufe zu verstehen, gibt es einige bewährte <strong>Arbeitsmethoden</strong> und Fertigkeiten.</p>
 </div>
 
 <div class="section" id="erste-schritte">
@@ -231,7 +231,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 		<p>...</p>
 	</div>
 
-	<div class="subsection">
+	<div class="subsection" id="dom-inspektor-safari">
 		<h3>Safari Web Inspector</h3>
 		<p>...</p>
 	</div>
@@ -245,7 +245,21 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 	<p>...</p>
 	<p>Wenn Sie viele Funktionen definieren, die sich gegenseitig aufrufen, hilft Ihnen ein Debugger, die Übersicht über das Aufrufen und Abarbeiten von Funktionen zu behalten. In der Einzelschritt-Ausführung haben Sie den sogenannten <strong>Call Stack</strong> (englisch für Aufruf-Stapel) im Blick. Das ist die Verschachtelung der Funktionen, die gerade abgearbeitet werden. Wenn beispeilsweise die Funktion <code>a</code> die Funktion <code>b</code> aufruft und diese wiederum die Funktion <code>c</code>, so ist der Stapel <code>a</code> &gt; <code>b</code> &gt; <code>c</code>. Die Funktion <code>c</code>, die gerade ausgeführt wird, liegt sozusagen oben auf dem Stapel. Nach dessen Ausführung wird <code>c</code> vom Stapel genommen und in die Funktion <code>b</code> zurückgekehrt - und so weiter.</p>
 	<p>...</p>
-	<p>Firebug, Opera Dragonfly, Microsoft Visual Web Developer Express, IE 8</p>
+	<div class="subsection">
+		<h3>Debugging mit Firebug</h3>
+	</div>
+	<div class="subsection">
+		<h3>Debugging mit den Internet Explorer 8 Entwicklertools</h3>
+	</div>
+	<div class="subsection">
+		<h3>Debugging mit Microsoft Visual Web Developer Express</h3>
+	</div>
+	<div class="subsection">
+		<h3>Debugging von Opera Dragonfly</h3>
+	</div>
+	<div class="subsection">
+		<h3>Debugging mit Safari Web Inspektor</h3>
+	</div>
 </div>
 
 <div class="section" id="editoren">
@@ -255,8 +269,8 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
 <div class="section" id="packer">
 	<h2>Code-Komprimierer und -Formatierer</h2>
-	<p>...</p>
-	<p></p>
+	<p>Bei der JavaScript-Programmierung sollten Sie gewisse Konventionen zur Code-Formatierung einhalten. Das dient nicht nur der Lesbarkeit, Übersichtlichkeit und Klarheit des Quellcodes, sondern macht erst effektive Fehlersuche und Debugging möglich. Das beinhaltet grob gesagt eine Anweisung pro Zeile sowie eine Einrückung innerhalb von Blöcken (Funktionen, Kontrollstrukturen usw.). Wie das im Detail aussieht, ist Ihrem Geschmack überlassen.</p>
+	<p>Wenn das JavaScript jedoch im Browser ausgeführt wird, ...</p>
 </div>
 
 <div id="footer">
