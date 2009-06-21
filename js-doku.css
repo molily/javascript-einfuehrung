@@ -15,11 +15,8 @@ h2, h3 {
 	padding-bottom: 2px;
 }
 
-body {
-}
-
 h2 {
-	margin-top: 1.4em;
+	margin-top: 2em;
 	font-size: 1.2em;
 	counter-reset: counterH3;
 }
@@ -31,8 +28,8 @@ h2:before {
 }
 
 h3 {
+	margin-top: 1.5em;
 	font-size: 1.1em;
-	margin-top: 1.4em;
 }
 
 h3:before {
@@ -71,7 +68,7 @@ dd {
 }
 
 pre, code {
-	font-family: consolas,"courier new","bitstream vera sans monspace","lucida console",courier,"liberation mono",monospace;
+	font-family: consolas,"courier new","bitstream vera sans monspace","lucida console","liberation mono",courier,monospace;
 	font-size: inherit;
 	color: #00b;
 }
@@ -81,13 +78,25 @@ pre {
 	padding: 1em;
 	background-color: rgb(255, 250, 235);
 	
+	/*
 	display: inline-block;
 	min-width: 100%;
+	*/
 }
 
 dfn {
 	font-weight: bold;
 	font-style: normal;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: thin solid #ccc;
+	padding: 0.2em 0.5em;
 }
 
 #nav, #footer {
@@ -120,8 +129,15 @@ dfn {
 }
 
 #toc li {
+	margin-bottom: .5em;
+}
+
+#toc ol {
+	font-size: .9em;
+	margin-top: 0;
 	margin-bottom: 0;
 }
+
 
 #footer {
 	margin-top: 4em;

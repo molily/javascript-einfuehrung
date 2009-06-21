@@ -24,103 +24,357 @@
 
 <div id="ajax-definition" class="section">
 	<h2>Was ist anders an Ajax?</h2>
-	<p>Gemeinsam ist den besagten Webanwendungen eine Schlüsseltechnik namens <strong>Ajax</strong>. Das bedeutet: <strong>JavaScript tauscht im Hintergrund Daten mit dem Webserver aus</strong>. Da funktioniert über selbst erzeugte HTTP-Anfragen, deren Server-Antwort dem Script zur Verfügung steht.</p>
-	<p>Was ist daran nun neu? Dazu muss man zuerst verstehen, wie Interaktion im Web <em>ohne Ajax</em> funktioniert: Herkömmliche Webseiten nutzen Links und Formulare, um mit dem Webserver zu interagieren. Der Anwender aktiviert einen Link oder sendet ein Formular ab, woraufhin der Browser eine entsprechende HTTP-Anfrage an den Webserver stellt. Der Webserver antwortet, indem er üblicherweise ein HTML-Dokument zurückliefert, das der Browser verarbeitet und anzeigt. Ohne Ajax muss also immer ein neues, vollständiges HTML-Dokument vom Server geladen werden. Diese HTML-Dokumente werden oft von serverseitigen Programmen generiert.</p>
-	<p>Ajax durchbricht dieses Prinzip und kann damit die Bedienung von Webseiten und den Aufbau von Webanwendungen grundlegend ändern. Es werden nicht immer neue HTML-Dokumente heruntergeladen und ausgewechselt, sondern nur kleine Datenportionen mit dem Webserver ausgetauscht. Gerade benötigte Daten werden nachgeladen und ausgewählte Änderungen dem Server mitgeteilt. Im Extremfall kommt eine sogenannte <em>Single Page Application</em> heraus, bei der es nur ein ursprüngliches HTML-Dokument gibt und der restliche Datenaustausch mit dem Webserver per JavaScript im Hintergrund abläuft. Über die DOM-Schnittstelle wird das Dokument nach Belieben umgestaltet. Es reagiert auf Benutzereingaben, übersendet diese gegebenenfalls an den Server, lädt im Hintergrund Inhalte vom Server nach und montiert diese ins bestehende Dokument ein.</p>
+	<p>Gemeinsam ist den vielen der besagten Webanwendungen eine Schlüsseltechnik namens <strong>Ajax</strong>. Das bedeutet: <strong>JavaScript tauscht im Hintergrund Daten mit dem Webserver aus</strong>. Das funktioniert über selbst erzeugte HTTP-Anfragen, deren Server-Antwort dem Script zur Verfügung steht.</p>
+	<p>Was ist daran nun neu? Dazu muss man zuerst verstehen, wie Interaktion im Web <em>ohne Ajax</em> funktioniert: Herkömmliche Websites nutzen Links und Formulare, um mit dem Webserver zu interagieren. Der Anwender aktiviert einen Link oder sendet ein Formular ab, woraufhin der Browser eine entsprechende HTTP-Anfrage an den Webserver sendet. Der Webserver antwortet, indem er üblicherweise ein HTML-Dokument zurückliefert, das der Browser verarbeitet und anstelle des alten anzeigt. Ohne Ajax muss also immer ein neues, vollständiges HTML-Dokument vom Server geladen werden. Diese HTML-Dokumente werden oft in Webanwendungen oftmals von serverseitigen Programmen generiert.</p>
+	<p>Ajax durchbricht dieses Prinzip und kann damit die Bedienung von Webseiten und den Aufbau von Webanwendungen grundlegend ändern. Es werden nicht immer neue HTML-Dokumente heruntergeladen und ausgewechselt, sondern nur kleine Datenportionen mit dem Webserver ausgetauscht. Gerade benötigte Daten werden nachgeladen und ausgewählte Änderungen dem Server mitgeteilt.</p>
+	<p>Im Extremfall kommt eine sogenannte <em>Single Page Application</em> heraus, bei der es nur <em>ein</em> ursprüngliches HTML-Dokument gibt und der restliche Datenaustausch mit dem Webserver per JavaScript im Hintergrund abläuft. Über die DOM-Schnittstelle wird das Dokument nach Belieben umgestaltet. Es reagiert auf Benutzereingaben, übersendet diese gegebenenfalls an den Server, lädt im Hintergrund Inhalte vom Server nach und montiert diese ins bestehende Dokument ein.</p>
 </div>
 
 <div id="begriff" class="section">
 	<h2>Der Begriff »Ajax« und seine Schwächen</h2>
-	<p>Der Begriff <em>Ajax</em> wurde ursprünglich im Jahr 2005 von dem richtungsweisenden Artikel <a href="http://www.adaptivepath.com/ideas/essays/archives/000385.php"
-	class="anchor-external">A New Approach to Web Applications</a> von Jesse James Garrett geprägt. Ajax steht darin als Abkürzung für <em>Asynchronous JavaScript and XML</em>.</p>
-	<p>Diese Abkürzung stift leider mehr Verwirrung, als sie zum Verständnis beiträgt. Weder sind Ajax-Anwendungen »asynchron« in dem Sinne, dass die Kommunikation mit dem Server völlig losgelöst von Benutzereingaben stattfindet. Noch ist XML notwendigerweise das geeignete Übertragungsformat für Daten zwischen Client und Server. Garretts Konzept taugt wenig zum Verständnis der gegenwärtigen Praxis, die unter dem Schlagwort Ajax zusammengefasst wird.</p>
-	<p>In den meisten Fällen bezeichnet »Ajax« lediglich den JavaScript-gestützte Datenaustausch mit dem Webserver. XML in dabei nur ein mögliches, aber nicht das zentrale Übertragungsformat. Und »Asynchronität« bedeutet lediglich, dass die JavaScript-Ausführung beim Warten auf die Serverantwort nicht den Browser blockiert, sondern dass JavaScript-Ereignisse gefeuert werden, wenn die Serverantwort eingetroffen ist.</p>
+	<p>Der Begriff <em>Ajax</em> wurde ursprünglich im Jahr 2005 von dem richtungsweisenden Artikel <a href="http://www.adaptivepath.com/ideas/essays/archives/000385.php">A New Approach to Web Applications</a> von Jesse James Garrett geprägt. Ajax steht darin als Abkürzung für <em>Asynchronous JavaScript and XML</em> (auf Deutsch: asynchrones JavaScript und XML).</p>
+	<p>Diese Abkürzung stift leider mehr Verwirrung, als sie zum Verständnis beiträgt. Weder sind Ajax-Anwendungen asynchron in dem Sinne, dass die Kommunikation mit dem Server völlig losgelöst von Benutzereingaben stattfindet. Noch ist XML zwangsläufig das Übertragungsformat für Daten zwischen Client und Server. Garretts Konzept taugt wenig zum Verständnis der gegenwärtigen Praxis, die unter dem Schlagwort Ajax zusammengefasst wird.</p>
+	<p>In den meisten Fällen bezeichnet »Ajax« lediglich den JavaScript-gestützten Datenaustausch mit dem Webserver. XML in dabei nur ein mögliches, aber nicht das zentrale Übertragungsformat. Und asynchron bedeutet lediglich, dass die JavaScript-Ausführung beim Warten auf die Server-Antwort nicht den Browser blockiert, sondern dass JavaScript-Ereignisse gefeuert werden, wenn die Server-Antwort eingetroffen ist.</p>
 </div>
 
 <div id="vorteile-nachteile" class="section">
 	<h2>Vor- und Nachteile von Ajax</h2>
-	<p>Im <strong>herkömmlichen Modell</strong> klickt der Anwender auf einen Link oder den Absende-Button eines Formulars und muss erst einmal warten: Der Browser übermittelt eine Anfrage an den Webserver. Dieser speichert gegebenenfalls Änderungen ab und generiert ein neues vollständiges Dokument. Erst wenn dieses zum Client-Rechner übertragen wurde und der Browser es vollständig dargestellt hat, kann der Anwender in der Webanwendung weiterarbeiten.</p>
-	<p>Der Browser zeigt also beim klassischen Modell eine Reihe von eigenständigen HTML-Dokumenten (Ressourcen) an, die alle eine eindeutige Adresse (URI) besitzen. Dafür stellt der Browser Navigationsmechanismen wie den Verlauf (History) zur Verfügung. Diese Dokumente sind unabhängig von JavaScript lesbar, verlinkbar, durch Suchmaschinen indizierbar, abspeicherbar und so weiter.</p>
-	<p>Mit <strong>Ajax</strong> hingegen werden die Serveranfragen im Hintergrund gestartet, ohne dass das Dokument ausgewechselt wird. Damit fällt das Warten auf die Serverantwort entweder ganz weg, weil nicht auf sie gewartet werden muss, oder der Server muss nur eine kleine Datenportion zurückschicken. Der Vorteil von Ajax-Webanwendungen ist daher, dass sie schneller auf Benutzereingaben reagieren und dem vertrauten Verhalten von Desktop-Anwendungen näherkommen.</p>
-	<p>Ajax bricht absichtlich mit grundlegenden Funktionsweisen und Regeln des Webs. Daraus zieht es seine Vorteile, aber auch schwerwiegende Nachteile: Es gibt keine vollständigen, adressierbaren Dokumente mehr, die einen bestimmten Punkt und Status der Webanwendung markieren. Wenn der Anwender zu dem Inhalt kommen möchte, den er zuvor gesehen hat, betätigt er die Zurück-Funktion. Das funktioniert bei der Verwendung von Ajax nicht mehr wie gewohnt: Denn im Browser-Verlauf wird die Änderung der Inhalte via JavaScript nicht registriert, denn das Dokument ist nicht ausgewechselt worden und die Adresse hat sich nicht geändert. Eine Navigation, wie sie der Anwender von statischen Webseiten gewohnt ist, ist auf Seiten mit solcher JavaScript-Interaktivität nicht ohne weiteres möglich.</p>
-	<p>Ajax-Anwendungen verlagern einen großen Teil der Datenverarbeitung vom Server-Rechner auf den Client-Rechner, genauer gesagt in den Browser. Damit steigen die Ansprüche, die an die Zugangssoftware gestellt werden - auch wenn mittlerweile alle neueren JavaScript-fähigen Browser pber leistungsfähige Ajax-Umsetzungen verfügen.</p>
-	<p>Es ist eine besondere Herausforderung, eine Site mit Ajax zugänglich für Nutzer ohne JavaScript, mit alternativen oder assistiven Zugangstechniken wie Screenreadern oder Mobilbrowsern zu gestalten. Funktionen wie der Verlauf, den bisher der Browser automatisch zur Verfügung stellte, müssen in Ajax-Anwendungen nachgebaut werden, z.B. indem jeder Status eine Adresse bekommt, damit die Zurück-Navigation funktioniert und der Status verlinkt werden kann. Es ist also mit einigem Aufwand verbunden, eine Ajax-Anwendung so komfortabel und robust zu bekommen, wie es klassische Lösungen von Haus aus sind.</p>
+	<div class="subsection">
+		<h3>Klassisches Modell mit eigenständigen, adressierbaren Dokumenten</h3>
+		<p>Das <strong>herkömmliche Modell</strong> funktioniert nach dem Grundsatz »Stop and Go«: Der Anwender klickt Anwender auf einen Link oder den Absende-Button eines Formulars und muss erst einmal warten. Der Browser übermittelt derweil eine Anfrage an den Webserver. Dieser speichert gegebenenfalls Änderungen ab und generiert ein neues, vollständiges Dokument. Erst wenn dieses zum Client-Rechner übertragen wurde und der Browser es vollständig dargestellt hat, kann der Anwender in der Webanwendung weiterarbeiten.</p>
+		<p>Der Browser zeigt also beim klassischen Modell eine Reihe von <em>eigenständigen HTML-Dokumenten</em> (Ressourcen) an, die alle eine <em>eindeutige, gleichbleibende Adresse</em> (URI) besitzen. Dafür stellt der Browser Navigationsmechanismen wie den Verlauf (auch History genannt) zur Verfügung. Der bestechende Vorteil dieses Modells: Diese Dokumente sind unabhängig von JavaScript lesbar, verlinkbar, durch Suchmaschinen indizierbar, problemlos abspeicherbar und so weiter.</p>
+	</div>
+	<div class="subsection">
+		<h3>Besonderheiten bei Ajax</h3>
+		<p>Mit <strong>Ajax</strong> hingegen werden die Server-Anfragen im Hintergrund gestartet, ohne dass das Dokument ausgewechselt wird. Damit fällt das Warten auf die Server-Antwort entweder ganz weg, weil nicht auf sie gewartet werden muss, oder der Server muss nur eine kleine Datenportion zurückschicken. Der Vorteil von Ajax-Webanwendungen ist daher, dass sie schneller auf Benutzereingaben reagieren und dem vertrauten Verhalten von Desktop-Anwendungen näherkommen.</p>
+		<p><strong>Ajax bricht absichtlich mit grundlegenden Funktionsweisen und Regeln des Webs</strong>. Daraus zieht es seine Vorteile, aber auch schwerwiegende Nachteile: Es gibt keine vollständigen, adressierbaren Dokumente mehr, die in Webanwendungen einen bestimmten Punkt und Status markieren. Wenn der Anwender zu dem Inhalt kommen möchte, den er zuvor gesehen hat, betätigt er aus Gewohnheit die Zurück-Funktion. Das funktioniert bei der Verwendung von Ajax nicht mehr wie gewohnt: Denn im Browser-Verlauf wird die Änderung der Inhalte via JavaScript nicht registriert, denn das Dokument ist nicht ausgewechselt worden und die Adresse hat sich nicht geändert. Eine Navigation, wie sie der Anwender von statischen Webseiten gewohnt ist, ist auf Seiten mit solcher JavaScript-Interaktivität nicht ohne weiteres möglich.</p>
+	</div>
+	<div class="subsection">
+		<h3>Zugänglichkeit von Ajax-Anwendungen</h3>
+		<p>Ajax-Anwendungen verlagern einen großen Teil der Datenverarbeitung vom Server-Rechner auf den Client-Rechner, genauer gesagt in den Browser. Damit steigen die Ansprüche, die an die Zugangssoftware gestellt werden - auch wenn mittlerweile alle neueren JavaScript-fähigen Browser über leistungsfähige Ajax-Umsetzungen verfügen.</p>
+		<p>Es ist eine besondere Herausforderung, eine Site mit Ajax zugänglich für Nutzer ohne JavaScript, mit alternativen oder assistiven Zugangstechniken wie Screenreadern oder Mobilbrowsern zu gestalten. Funktionen wie der Verlauf, den bisher der Browser automatisch zur Verfügung stellte, müssen in Ajax-Anwendungen nachgebaut werden, z.B. indem jeder Status eine Adresse bekommt, damit die Zurück-Navigation funktioniert und der Status verlinkt werden kann. Es ist also mit einigem Aufwand verbunden, eine Ajax-Anwendung so komfortabel und robust zu bekommen, wie es klassische Lösungen von Haus aus sind.</p>
+		<p>...</p>
+	</div>
 </div>
 
 <div id="anwendungsbeispiele" class="section">
-	<h2>Typische Anwendungsfälle von Ajax</h2>
-	<p>Neben vollständigen Webanwendungen, die das Verhalten einer Desktop-Anwendung komplett in JavaScript zu emulieren versuchen, gibt es viele kleine Fälle, in denen Hintergrund-Serverkommunikation auf klassischen Webseiten sinnvoll ist und die Bedienung vereinfacht. In diesen Fällen kann Ajax zumeist als Zusatz verwendet werden. Das heißt, wenn JavaScript nicht aktiv ist oder Ajax nicht verfügbar ist, dann kann die Website trotzdem ohne funktionale Einschränkungen benutzt werden (vgl. <a href="einsatz.html">Unobtrusive JavaScript</a>).</p>
+	<h2>Typische abwärtskompatible Anwendungsfälle von Ajax</h2>
+	<p>Neben vollständigen Webanwendungen, die das Verhalten einer Desktop-Anwendung komplett in JavaScript zu emulieren versuchen, gibt es viele kleine Fälle, in denen Hintergrund-Serverkommunikation auf klassischen Webseiten sinnvoll ist und die Bedienung vereinfacht. In diesen Fällen kann Ajax zumeist als Zusatz verwendet werden. Das heißt: Falls JavaScript verfügbar ist, genießt der Anwender einen gewissen Extra-Komfort in der Bedienung. Falls JavaScript nicht aktiv oder Ajax nicht verfügbar ist, dann kann die Website trotzdem ohne funktionale Einschränkungen benutzt werden. Dieser abwärtskompatible Einsatz entspricht dem Konzept des <a href="einsatz.html">Unobtrusive JavaScript</a>.</p>
 	
-	<div class="subsection" id="">
+	<div class="subsection" id="anwendung-fragmente">
 		<h3>Laden von kleinen Inhaltsfragmenten</h3>
-		<p>Oftmals werden Inhalte in kurzer, übersichtlicher Listenform dargestellt. Um den vollen Eintrag zu sehen, muss ohne Ajax eine vollständiges neues Dokument geladen werden. Mit Ajax können Listenansicht und Vorschau- bzw. Vollansicht kombiniert werden, ohne dass alle nötigen Informationen von Anfang an im Dokument liegen. Auf Benutzerwunsch (z.B. beim Klicken oder beim Überfahren mit der Maus) können die Informationen zu einem Eintrag via Ajax nachgeladen werden und erscheinen dann direkt beim entsprechenden Listeneintrag.</p>
+		<p>Oftmals werden Inhalte in kurzer, übersichtlicher Listenform dargestellt. Um den vollen Eintrag zu sehen, muss ohne Ajax ein neues Dokument geladen werden. Mit Ajax können Listenansicht und Vorschau- bzw. Vollansicht kombiniert werden, ohne dass alle Detail-Informationen von Anfang an versteckt im Dokument liegen. Auf Benutzerwunsch (z.B. beim Klicken oder beim Überfahren mit der Maus) können die Informationen zu einem Eintrag via Ajax nachgeladen werden und erscheinen dann direkt beim entsprechenden Listeneintrag.</p>
 	</div>
-	<div class="subsection" id="">
-		<h3>Automatische Vervollständigung (Autocomplete)</h3>
-		<p>Ohne Ajax sind Suchmasken mitunter langsam und zäh bedienbar: Man gibt einen Suchbegriff ein, sendet das Formular ab und wartet auf die Trefferliste. In vielen Fällen erkennt man dann, dass man die Suche verfeinern muss oder den Suchbegriff korrigieren muss, weil man ihn offensichtlich nicht korrekt geschrieben hat. Schneller zum Ziel kommt man, wenn schon beim Tippen die Eingabe im Hintergrund an den Server gesendet wird und unter dem Eingabefeld blitzschnell Suchvorschläge angezeigt werden, die zu der bisherigen Eingabe passen.</p>
-		<p>Stellen Sie sich etwa eine Fahrplanauskunft vor: Wenn Sie »Paris« in das Zielfeld eingeben, werden sofort alle Pariser Bahnhöfe aufgelistet, sodass sie einen davon wählen können. Oder Sie geben in einem Produktkatalog einen Herstellernamen, eine Produktkennziffer oder ein Merkmal ein, so werden kann Ajax mithilfe einer intelligente serverseitigen Suchfunktion die passenden Produkte sofort anzeigen, noch während sie tippen.</p>
+	<div class="subsection" id="anwendung-autocomplete">
+		<h3>Automatische Vervollständigung (Autocomplete und Suche bei der Eingabe)</h3>
+		<p>Ohne Ajax sind Suchmasken mitunter langsam und zäh bedienbar: Man gibt einen Suchbegriff ein, sendet das Formular ab und wartet auf die Trefferliste. In vielen Fällen muss man die Suche verfeinern oder den Suchbegriff korrigieren, z.B. weil man ihn offensichtlich nicht korrekt geschrieben hat. Schneller zum Ziel kommt man, wenn schon beim Tippen die Eingabe im Hintergrund an den Server gesendet wird und unter dem Eingabefeld blitzschnell Suchvorschläge angezeigt werden, die zu der bisherigen Eingabe passen.</p>
+		<p>Stellen Sie sich etwa eine Fahrplanauskunft vor: Wenn Sie »Paris« in das Zielfeld eingeben, werden sofort alle Pariser Bahnhöfe aufgelistet, sodass sie einen davon wählen können. Oder Sie geben in einem Produktkatalog einen Herstellernamen, eine Produktkennziffer oder ein Merkmal ein, so kann Ajax mithilfe einer intelligenten serverseitigen Suchfunktion die passenden Produkte sofort anzeigen, noch während sie tippen.</p>
 	</div>
-	<div class="subsection" id="">
-		<h3>Bewertungen, Bestätigung und weitere Server-Aktionen</h3>
-		<p>Nicht jede Benutzeraktion auf einer Site startet das Abrufen von neuen Informationen vom Server. Es gibt viele Aktionen, die dem Server bloß eine Statusänderung mitteilen, ohne dass dazu das aktuelle Dokument ausgetauscht und ein neues aufgebaut werden muss. All diese sind Kandidaten für sinnvollen Ajax-Gebrauch. Dazu gehören einfache Formulare, die per Ajax automatisch abgesendet werden, z.B. Bewertungen und Abstimmungen. Ferner Funktionen wie Markieren, Ausblenden, Löschen usw.</p>
+	<div class="subsection" id="anwendung-serveraktionen">
+		<h3>Server-Aktionen ohne Antwort-Daten</h3>
+		<p>Nicht jede Benutzeraktion auf einer Site startet das Abrufen von neuen Informationen vom Server. Es gibt viele Aktionen, die dem Server bloß eine Statusänderung mitteilen, ohne dass dazu das aktuelle Dokument ausgetauscht und ein neues aufgebaut werden muss. All diese sind Kandidaten für sinnvollen Ajax-Gebrauch:</p>
+		<ul>
+			<li>Einfache Formulare, die per Ajax automatisch abgesendet werden, z.B. bei einer Kommentarfunktion</li>
+			<li>Bewertungen mit einer einfachen Skala (z.B. 1-5 Sterne)</li>
+			<li>Abstimmungen</li>
+			<li>Listen-Funktionen wie Markieren, Ausblenden, Löschen usw.</li>
+		</ul>
+		<p>Beim erfolgreichen Übermitteln der Aktion an den Server gibt dieser üblicherweise nur eine Bestätigung zurück, das dem Benutzer nicht einmal präsentiert werden muss. Daher kann man dem Benutzer standardmäßig eine Erfolgsmeldung zeigen, ohne dass auf die Server-Antwort gewartet werden muss. Nur wenn diese negativ ausfällt, wird eine Fehlermeldung angezeigt. Dadurch wirkt ein Ajax-Interface besonders schnell bedienbar und reagiert ohne Verzögerung auf Benutzereingaben &ndash; vorausgesetzt, dass die HTTP-Anfrage korrekt übermittelt wurde und das serverseitige Programm sie verarbeiten konnte.</p>
 	</div>
-	<div class="subsection" id="">
+	<div class="subsection" id="anwendung-seitennavigation">
 		<h3>Blättern und Seitennavigation</h3>
-		<p>Beim Navigieren durch Listen z.B. mit Suchresultaten, Artikeln oder Produkten gibt es üblicherweise eine Seitennavigation. Seite 1 zeigt etwa die Resultate 1 bis 10, Seite 2 zeigt 11 bis 20 und so weiter. Ajax kann das Durchstöbern dieser Listen vereinfachen, indem beim Blättern nicht notwendig ein neues Dokument vom Server geladen werden muss. Stattdessen kann Ajax die folgende Seite schrittweise hinzuladen und in die Liste einfügen. Das kann sogar soweit gehen, dass die folgenden Einträge automatisch nachgeladen werden, sobald der Anwender an das Ende der gerade angezeigten Einträge scrollt.</p>
+		<p>Beim Navigieren durch Listen z.B. mit Suchresultaten, Artikeln oder Produkten gibt es üblicherweise eine Seitennavigation. Seite 1 zeigt etwa die Resultate 1 bis 10, Seite 2 zeigt 11 bis 20 und so weiter. Ajax kann das Durchstöbern dieser Listen vereinfachen, indem beim Blättern nicht notwendig ein neues Dokument vom Server geladen werden muss. Stattdessen kann Ajax die Einträge der folgenden Seite schrittweise hinzuladen und z.B. ans Ende der bestehenden Liste einfügen. Das kann sogar soweit gehen, dass die folgenden Einträge automatisch nachgeladen werden, sobald der Anwender an das Ende der gerade angezeigten Einträge scrollt.</p>
 	</div>
-	<div class="subsection" id="">
+	<div class="subsection" id="anwendung-edit-in-place">
 		<h3>Eingebettete Formulare</h3>
 		<p>Vom Benutzer veränderbare Daten (z.B. ein Kundenprofil oder Einstellungen) werden üblicherweise in zwei Ansichten angezeigt: 
 		Die Nur-Lesen-Ansicht einerseits und die Editieren-Ansicht andererseits. Beispielsweise gibt es eine tabellarische Auflistung sowie ein zusätzliches Formular, in dem dieselben Daten verändert werden können.</p>
 		<p>Mit Ajax können beide Ansichten zu einer zusammengefasst werden (sogenannte <em>Edit-in-place-Formulare</em> bzw. <em>Inline Edit</em>). Will der Benutzer ein Datenfeld editieren, so kann JavaScript die Lese-Ansicht auf Knpofdruck dynamisch in eine Formular-Ansicht wechseln. Hat der Benutzer das Editieren beendet, so werden die Änderungen per Ajax an den Server gesendet. Verlässt der Benutzer die Seite, so bleiben die Änderungen gespeichert und es besteht keine Gefahr, dass der Benutzer vergisst, das Formular abzusenden.</p>
 	</div>
-	<div class="subsection" id="">
-		<h3>Regelmäßiges Aktualisieren vom Server (Liveticker, Chats, E-Mail)</h3>
-		<p>Anwendungen wie Liveticker oder webbasierte E-Mail-Leseprogramme basieren darauf, dass eine Webseite häufig Aktualisierungen erfährt. Anstatt immer das gesamte Dokument neu zu laden, um eventuelle neue Inhalte anzuzeigen, kann Ajax regelmäßig im Hintergrund beim Server nachfragen, ob seit der letzten Aktualisierung neue Inhalte hinzugekommen sind. Falls ja, sendet der Server diese neuen bzw. geänderten Einträge in der Antwort gleich mit und JavaScript stellt sie im aktuellen Dokument dar.</p>
-		<p>Mit Ajax ist bisher keine echte Echtzeit-Aktualisierung möglich, wie sie für web-basierte Chats und Instant Messaging benötigt wird. Das liegt hauptsächlich daran, dass das Protokoll HTTP nach dem Anfrage-Antwort-Schema funktioniert anstatt auf einer dauerhaften Verbindung zwischen Client und Server. Unter dem Schlagwort <em>Comet</em> werden allerdings Techniken entwickelt, die diese Beschränkungen von HTTP zu umgehen versuchen. Auch wenn es bereits beeindruckende Praxisanwendungen gibt, so kommen diese nicht ohne aufwändige Tricks aus und haben mit grundlegenden Problemen zu kämpfen.</p>
+	<div class="subsection" id="anwendung-ticker">
+		<h3>Regelmäßiges Aktualisieren vom Server (Liveticker, E-Mail, Chats)</h3>
+		<p>Anwendungen wie Liveticker oder webbasierte E-Mail-Leseprogramme basieren darauf, dass eine Webseite häufig Aktualisierungen erfährt. Anstatt immer das gesamte Dokument neu zu laden, um eventuelle neue Inhalte anzuzeigen, kann Ajax regelmäßig im Hintergrund beim Server nachfragen, ob seit der letzten Aktualisierung neue Inhalte hinzugekommen sind. Falls ja, sendet der Server diese neuen oder geänderten Einträge in der Antwort gleich mit und JavaScript stellt sie im aktuellen Dokument dar. Ohne dass der Benutzer etwas tun muss, aktualisiert sich die Webseite von selbst und zeigt neue Nachrichten schnellstmöglich an.</p>
+		<p>Mit Ajax ist bisher keine echte Echtzeit-Aktualisierung möglich, wie sie für Web-basierte Chats und Instant Messaging benötigt wird. Das liegt hauptsächlich daran, dass das Protokoll HTTP auf einem Anfrage-Antwort-Schema anstatt auf einer dauerhaften Verbindung zwischen Client und Server basiert. Man kann zwar alle paar Sekunden einen sogenannten Server-Poll einleiten, d.h. beim Webserver nachfragen, ob neue Chat-Beiträge bzw. Direktnachrichten vorhanden sind. Allerdings lässt sich damit nicht die Geschwindigkeit und Zuverlässigkeit erreichen, wie man sie von echten Chat-Programmen gewohnt ist.</p>
+		<p>Unter dem Schlagwort <em>Comet</em> werden allerdings Techniken wie <em>Web Sockets</em> und <em>Server-sent Events</em> entwickelt, die diese Beschränkungen von HTTP zu umgehen versuchen. Auch wenn es bereits beeindruckende Praxisanwendungen gibt, so kommen diese nicht ohne aufwändige Tricks aus und haben mit grundlegenden Problemen zu kämpfen.</p>
 	</div>
 </div>
 
-<div id="xmlhttprequest" class="section">
-	<h2>XMLHttpRequest</h2>
-	<p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code></strong>-Objekt. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objektes werden HTTP-Anfragen gestartet und die Serverantwort ausgelesen.</p>
+<div id="xhr" class="section">
+	<h2>XMLHttpRequest &ndash; die JavaScript-Technik hinter Ajax</h2>
+	
+	<p>Nachdem wir einige Anwendungsfälle betrachtet haben, soll es nun zur Sache gehen: Wie wird Ajax in JavaScript konkret angewendet?</p>
+	<p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code>-Objekt</strong>. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objektes werden HTTP-Anfragen gestartet und die Server-Antwort ausgelesen.</p>
 	<p>Andere Browserhersteller erkannten die Möglichkeiten von <code>XMLHttpRequest</code> und übernahmen diese Technik - allerdings ohne ActiveX. Mittlerweile kennen alle großen JavaScript-fähigen Browser das Objekt <code>window.XMLHttpRequest</code>. Ab Version 7 des Internet Explorers ist dieses globale Objekt ebenfalls verfügbar, bei älteren Versionen muss der Umweg über ActiveX genommen werden.</p>
-	<p>Der Clou an <code>XMLHttpRequest</code> ist, dass es eine Server-Anfrage standardmäßig <em>asynchron</em> absendet und die Server-Antwort durch Ereignis-Behandlung verarbeitet wird. Das bedeutet, dass ein Script die Anfrage auslöst und eine angegebene Handler-Funktion aufgerufen wird, sobald sich der Status der Anfrage ändert und schließlich die Antwort eintrifft. Das hat folgenden Sinn: Der Browser friert an der Stelle, wo die Anfrage abgesendet wird, nicht ein und stoppt die Ausführung von JavaScript, bis die Antwort eingetroffen ist. Sondern der Browser kommt zur Ruhe, kann andere Scriptteile ausführen und sogar weitere Serveranfragen starten. Erst dadurch ist die schnelle und unterbrechungsfreie Reaktion auf Benutzereingaben möglich, die für Ajax-Anwendungen typisch ist.</p>
+	</div>
+	
+<div id="xhr-asynchron" class="section">
+	<h2>Asynchronität und Event-Basierung bei XMLHttpRequest</h2>
+	<p>Der Clou an <code>XMLHttpRequest</code> ist, dass es eine Server-Anfrage standardmäßig <em>asynchron</em>, d.h. im Hintergrund absendet. Die Server-Antwort wird dann durch Ereignis-Behandlung verarbeitet. Das bedeutet, dass ein Script die Anfrage auslöst und eine angegebene Event-Handler-Funktion aufgerufen wird, sobald sich der Status der Anfrage ändert und schließlich die Antwort eintrifft.</p>
+	<p>Diese Ereignis-basierte Verarbeitung hat folgenden Sinn: Der Browser friert an der Stelle, wo die Anfrage abgesendet wird, nicht ein und stoppt die Ausführung von JavaScript, bis die Antwort eingetroffen ist. Sondern der Browser kommt zur Ruhe, kann andere Scriptteile ausführen und sogar weitere Server-Anfragen starten. Erst dadurch ist die schnelle und unterbrechungsfreie Reaktion auf Benutzereingaben möglich, die für Ajax-Anwendungen typisch ist.</p>
+	<p>Wenn Sie noch nicht mit Event-Handling in JavaScript vertraut sind, dann wird Sie dieses Modell erst einmal verwirren. Denn die JavaScript-Funktion, die das XMLHttpRequest erzeugt und die HTTP-Anfrage absendet, kann nicht gleichzeitig die Server-Antwort verarbeiten. Diese Aufgabe muss eine weitere Funktion übernehmen. Wie das konkret aussieht, werden wir später sehen.</p>
+	<p>In den meisten Fällen sollten Sie asynchrones XMLHttpRequest wählen. Es soll allerdings nicht verschwiegen werden, dass auch synchrones XMLHttpRequest möglich ist. Dies arbeitet nicht Event-basiert, sondern hält die JavaScript-Ausführung vom Zeitpunkt des Absendens der Anfrage bis zum Zeitpunkt des vollständigen Empfangs der Antwort an. Das bedeutet, dass die JavaScript-Anweisung, die auf <code>xhr.send()</code> folgt (siehe unten) direkt Zugriff auf die Server-Antwort hat.</p>
+</div>
+	
+<div class="section" id="xhr-anfrage">
+	<h2>Server-Anfrage mit XMLHttpRequest absenden</h2>
+	<p>Die Absenden einer Anfrage mittels XMLHttpRequest umfasst vier grundlegende Schritte:</p>
+	
+	<div class="subsection" id="xhr-erzeugen">
+		<h3>Das Erzeugen eines XMLHttpRequest-Objektes</h3>
+		<pre>var xhr = new XMLHttpRequest();</pre>
+		<p>Eine neue Instanz wird erzeugt, indem der Konstruktor <code>XMLHttpRequest</code> mit dem Schlüsselwort <code>new</code> aufgerufen wird. Das zurückgelieferte Anfrage-Objekt wird hier in einer Variable namens <code>xhr</code> gespeichert.</p>
+		<p>Für ältere Internet Explorer ist wie gesagt eine andere Schreibweise nötig, welche ein ActiveX-Objekt erstellt. ...
+		<p>Um browserübergreifend zu arbeiten, benötigen wir eine Fähigkeitenweiche mit einer Objekt-Erkennung. Wenn window.XMLHttpRequest zur Verfügung steht, wird diese Objekt benutzt, andernfalls wird versucht, ein ActiveX-Objekt zu erzeugen. ...</p>
+	</div>
+	
+	<div class="subsection" id="xhr-readystatehandler-registrieren">
+		<h3>Registrieren einer Handler-Funktion für das <code>readystate</code>-Ereignis (bei asynchronen Anfragen)</h3>
+		<pre>xhr.onreadystatechange = xhrReadyStateHandler;</pre>
+		<p>Sie müssen eine Funktion angeben, die immer dann aufgerufen wird, wenn sich das Status der Server-Anfrage ändert. Das bewerkstelligt die Zuweisung einer Funktion an die Eigenschaft <code>onreadystatechange</code>. Dieses Schema gleich dem <a href="einbindung.html#traditionelles-evnet-handling">traditionellen Event-Handling</a>. Der Aufbau der <code>readyState</code>-Handler-Funktion wird weiter unten beschrieben.</p>
+		<p>Diese Anweisung ist nur bei asynchronen Anfragen nötig.</p>
+	</div>
+	
+	<div class="subsection" id="xhr-open">
+		<h3>Festlegen der Anfrage-Methode, der Anfrage-Adresse sowie des Arbeitsmodus</h3>
+		<pre>xhr.open("GET", "beispiel.html", false);</pre>
+		<p>Mit dem Aufruf der <code>open</code>-Methode des Anfrage-Objektes geben Sie drei zentrale Daten an.</p>
+		<ol>
+			<li>Im ersten Parameter die HTTP-Anfragemethode als String. Üblich sind <code>"GET"</code>, <code>"POST"</code> und <code>"HEAD"</code>.</li>
+			<li>Im zweiten Parameter die Adresse (URI) als String, an die die Anfrage gesendet werden soll. Im Beispiel wird davon ausgegangen, dass unter demselben Pfad wie das HTML-Dokument, das die Server-Anfrage startet, eine Datei namens <var>beispiel.html</var> existiert.</li>
+			<li>Der dritte Parameter legt schließlich fest, ob die Anfrage synchron oder asynchron abgesendet werden soll. Übergeben Sie <code>false</code> für eine asynchrone Abfrage oder <code>true</code> für eine synchrone Anfrage.</li>
+		</ol>
+		<p>Im obigen Beispielcode wird eine asynchrone GET-Anfrage an die Adresse <var>beispiel.html</var> abgesendet.</p>
+	</div>
+	
+	<div class="subsection" id="xhr-send">
+		<h3>Anfrage starten und gegebenenfalls POST-Daten angeben</h3>
+		<pre>xhr.send(null);</pre>
+		<p>Um die Anfrage zu starten, rufen Sie die <code>send</code>-Methode auf. Im Fall einer GET-Anfrage brauchen Sie keine Parameter angeben - oder nur <code>null</code> wie im Beispiel. Im Falle einer POST-Anfrage übergeben Sie den sogenannten Anfragekörper (engl. <em>POST body</em>). Dieser String wird dann an den Server übermittelt. Die Übertragung von Daten werden wir weiter unten genauer besprechen.</p>
+	</div>
 </div>
 
-<div id="alternativtechniken" class="section">
-	<h2> Weitere Techniken zur Serverkommunikation</h2>
-	<p>Neben <code>XMLHttpRequest</code> gibt es weitere JavaScript-Techniken, um im Hintergrund Daten mit dem Webserver auszutauschen. Strenggenommen wurde Ajax schon lange praktiziert, bevor sich <code>XMLHttpRequest</code> breiter Browserunterstützung erfreute. Aber erst mit <code>XMLHttpRequest</code> gelang Ajax der Durchbruch, weshalb beide Begriffe oft synonym verwendet werden. Dies allerdings zu Unrecht: Zwar ist <code>XMLHttpRequest</code> die vielseitigste, aber beileibe nicht immer die einfachste und geeignetste Methode, um Informationen mit dem Webserver auszutauschen. Alternativen sind unter anderem:</p>
-	<div class="subsection" id="">
-		<h3>Inner Frames (Iframes)</h3>
-		<p>Versteckte eingebettete Frames, in denen Daten geladen werden oder die als Ziel-Frame für Formulare dienen. Ein Script kann auf diesen Frame und seine Inhalte zugreifen (unter den Bedingungen der Same-Origin-Policy).</p>
+<div class="section" id="xhr-antwort">
+	<h2>Server-Antwort beim XMLHttpRequest verarbeiten</h2>
+	
+	<p>Vor dem Absenden eines asynchronen XMLHttpRequest haben wir eine Handler-Funktion namens <code>xhrReadyStateHandler</code> registriert. Diese wird beispielhaft wie folgt notiert:
+	<pre>function xhrReadyStateHandler () {
+   &hellip;
+}</pre>
+
+	<div class="subsection" id="xhr-readystate">
+		<h3>Anfrage-Status: <code>readyState</code></h3>
+		<p>Die Funktion wird immer dann ausgeführt, wenn sich der Status der Anfrage ändert (der sogenannte <em>ready state</em>, auf deutsch in etwa Fortschrittsstatus). Jede Anfrage durchläuft eine Reihe von fünf Phasen, die jeweils durch eine Nummer von 0 bis 4 identifiziert werden.</p>
+		<p>Der gegenwärtigen Status lässt sich über die Eigenschaft <code>readyState</code> des XMLHttpRequest-Objektes abfragen. Diese Eigenschaft enthält eine Nummer gemäß der folgenden Tabelle.</p>
+
+		<table>
+		<thead>
+		<tr><th>Status-Nummer</th><th>Anfrage-Zustand</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>0</td><td>XMLHttp-Request wurde erzeugt, aber die <code>open</code>-Methode noch nicht aufgerufen</td></tr>
+		<tr><td>1</td><td><code>open</code> wurde aufgerufen, aber noch nicht <code>send</code></td></tr>
+		<tr><td>2</td><td><code>send</code> wurde aufgerufen und von der Server-Antwort ist bereits der Statuscode und die Antwort-Kopfzeilen (Header) eingetroffen</td></tr>
+		<tr><td>3</td><td>Die Antwortdaten werden übertragen und sind schon teilweise verfügbar</td></tr>
+		<tr><td>4</td><td>Die Antwortdaten wurden komplett übertragen</td></tr>
+		</tbody>
+		</table>
+
+		<p>In den meisten Fällen ist nur der Status 4 interessant, denn dann können Sie auf die vollständige Server-Antwort zugreifen. Da der <code>readyState</code>-Handler für jeden Status aufgerufen wird, fragen wir darin ab, ob die <code>readyState</code>-Eigenschaft den Wert 4 erreicht hat. Wenn das nicht der Fall ist, brechen wir die Funktion vorzeitig mit <code>return</code> ab. Der restliche JavaScript-Code der Funktion wird dann nur ausgeführt, wenn der Zugriff auf die Server-Antwort möglich ist.</p>
+		<pre>function xhrReadyStateHandler () {
+   if (xhr.readyState != 4) {
+      return;
+   }
+   // Server-Antwort ist eingetroffen!
+}</pre>
 	</div>
-	<div class="subsection" id="">
-		<h3>Bildobjekte</h3>
-		<p>Per JavaScript erzeugte Bildobjekte (<code>Image</code>-Objekte), mit denen sich Serveranfragen starten lassen - unabhängig davon, ob der Server eine Bilddatei zurücksendet.</p>
+	
+	<div class="subsection" id="xhr-http-status">
+		<h3>HTTP-Statuscode: <code>responseCode</code></h3>
+		<p>Alleine das Eintreffen der Server-Antwort bedeutet nun nicht, dass der Server die Anfrage fehlerfrei verarbeiten konnte. Ausschlaggebend dafür ist der <em>HTTP-Statuscode</em> der Server-Antwort. Dies ist eine vierstellige Zahl. Im Erfolgsfalle lautet der Code <code>200</code>, im Fehlerfalle z.B. <code>404</code> für »Nicht gefunden« oder <code>500</code> für »Server-interner Fehler«. Nur im Erfolgsfalle können Sie damit rechnen, dass der Server die gegebenenfalls übersandten Daten entgegen genommen hat und die Server-Antwort die gewünschten Daten enthält.</p>
+		<p>Der HTTP-Statuscode der Antwort lässt sich über die Eigenschaft <code>responseCode</code> des jeweiligen XMLHttpRequest-Objektes auslesen. Der <code>readyState</code>-Handler wird daher um eine <code>if</code>-Anweisung ergänzt, die den <code>responseCode</code> mit <code>200</code> vergleicht. <code>200</code> bedeutet wie gesagt »Alles in Ordnung«.</p>
+		<pre>function xhrReadyStateHandler () {
+   if (xhr.readyState != 4) {
+      return;
+   }
+   // Server-Antwort ist eingetroffen!
+   if (<strong>xhr.responseCode</strong> == 200) {
+      // Server-Antwort in Ordnung
+   }
+}</pre>
+		<p>Im Fehlerfall passiert beim obigen Beispiel nichts &ndash; das ist natürlich nicht optimal. Denn selbst wenn der Server nicht mit den gewünschten Daten antwortet, so antwortet er zumeist mit einer Fehlermeldung. Das folgende Beispiel enthält in einem <code>else</code>-Zweig eine sehr einfache Fehlerbehandlung:</p>
+		<pre>function xhrReadyStateHandler () {
+   if (xhr.readyState != 4) {
+      return;
+   }
+   if (xhr.responseCode == 200) {
+      // Server-Antwort in Ordnung
+   } else {
+      alert("Es ist ein Fehler beim Laden aufgetreten:\n" + xhr.responseCode);
+   }
+}</pre>
+		<p>Diese kann Ihnen als Seitenbetreiber helfen, den Fehler zu beheben &ndash; für Ihre Seitenbesucher ist sie allerdings oftmals wenig hilfreich.</p>
 	</div>
-	<div class="subsection" id="">
-		<h3><code>script</code>-Elemente</h3>
-		<p>Per JavaScript erzeugte <code>script</code>-Elemente, die Scripte selbst von fremden Servern einbinden können, die Daten in mit JavaScript direkt zugänglichen Formaten bereitstellen.
-		Cross-Site JSON und JSONP</p>
+	
+	<div class="subsection" id="xhr-responsetext-responsexml">
+		<h3>Zugriff auf die Antwortdaten: <code>responseText</code> und <code>responseXML</code></h3>
+		<p>Nachdem der Anfrage-Status sowie der HTTP-Antwortcode abgefragt wurde, kann endlich auf die tatsächlichen Antwortdaten zugegriffen werden. Dazu stehen zwei Eigenschaften des XMLHttpRequest-Objekts zur Verfügung: <code>responseText</code> und <code>responseXML</code>.</p>
+		
+		<h4><code>responseText</code></h4>
+		<p><code>responseText</code> enthält die Server-Antwort als String. Das Auslesen dieser Eigenschaft ist der Standardweg und die folgenden Beispiele werden diese Eigenschaft verwenden.</dd>
+		
+		<h4><code>responseXML</code></h4>
+		<p>Wenn es sich bei der Server-Antwort um ein XML-Dokument handelt, erlaubt die Eigenschaft <code>responseXML</code> Zugriff auf das DOM des XML-Dokumentes. Vorausgesetzt ist, dass der Server das Dokument mit einem entsprechenden Inhaltstyp (MIME-Typ) sendet. Dieser lautet ist üblicherweise <code>application/xml</code>. Nur dann verarbeitet der Browser die Server-Antwort automatisch mit seinem XML-Parser und stellt den DOM-Zugriff bereit.</p>
+		<p><code>responseXML</code> liefert den <code>Document</code>-Knoten des DOM-Knotenbaums. Von dort aus stehen Ihnen alle Möglichkeiten des W3C-Core-DOM zur Verfügung. Auf das Wurzelelement können Sie beispielsweise über <code>xhr.responseXML.documentElement</code> zugreifen, eine Liste aller Elemente eines Typs bekommen Sie mit den Methoden <code>xhr.responseXMLgetElementsByTagName()</code> bzw. <code>xhr.responseXMLgetElementsByTagNameNS()</code> abfragen.</p>
+		
+		<h4>Server-Antwort aus <code>responseText</code> ins Dokument schreiben</h4>
+		<p>Eine häufige Aufgabe ist es, die Server-Antwort ins aktuelle Dokument einzufügen. Das bekannte Beispiel erweitern wir um eine Zuweisung, die die Antwortdaten in ein Element hineinlädt.</p>
+		<pre>function xhrReadyStateHandler () {
+   if (xhr.readyState != 4) {
+      return;
+   }
+   if (xhr.responseCode == 200) {
+      document.getElementById("zielelement").innerHTML = <strong>xhr.responseText</strong>;
+   }
+}</pre>
+		<p>Mittels <code>getElementById</code> sprechen wir ein vorhandenes Element im Dokument an. Der String mit den Antwortdaten wird dessen Eigenschaft <code>innerHTML</code> zugewiesen. Die Antwortdaten werden damit als HTML-Codeschnipsel interpretiert und werden als neuer Inhalt des angesprochenen Elements eingebunden.</p>
+		<p>Übrigens ist es auch möglich, <code>responseText</code> zu nutzen, wenn der Server nicht mit dem HTTP-Statuscode <code>200</code> geantwortet hat &ndash; in diesem Fall können Sie <code>responseText</code> auslesen, um eine eventuelle Fehlermeldung des Servers auszugeben.</p>
 	</div>
 </div>
-<div id="beispiel" class="section">
-	<h2>Beispiel für XMLHttpRequest</h2>
+
+<div class="section" id="xhr-beispiel">
+	<h3>Vollständiges XMLHttpRequest-Beispiel</h3>
+	<p></p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+&lt;html>&lt;head>
+&lt;title>XMLHttpRequest-Beispiel&lt;/title>
+&lt;script type="text/javascript">
+function sendXhr () {
+   var xhr;
+   if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+   } else if (window.ActiveXObject) {
+      xhr = new ActiveXObject('MSXML2.XMLHTTP');
+   } else {
+      return false;
+   }
+   xhr.onreadystatechange = xhrReadyStateHandler;
+   xhr.open("GET", "beispiel.html", false);
+   xhr.send(null);
+}
+function xhrReadyStateHandler () {
+   if (xhr.readyState != 4) {
+      return;
+   }
+   if (xhr.responseCode == 200) {
+      document.getElementById("zielelement").innerHTML = xhr.responseText;
+   }
+}
+&lt;/script>
+&lt;/head>&lt;body>
+&lt;p>&lt;a href="javascript:sendXhr()">XMLHttpRequest starten&lt;/a>&lt;/p>
+&lt;p id="zielelement">Hier erscheint die Server-Antwort.&lt;/p>
+&lt;/body>&lt;/html>
+</pre>
 	<p>...</p>
 </div>
 
+<div class="section" id="xhr-datenuebertragung">
+	<h3>Datenübertragung mit XMLHttpRequest</h3>
+	<p>Die Vielseitigkeit von XMLHttpRequest rührt daher, das Sie nicht nur Daten vom Server nachladen können, sondern auch Daten aus JavaScript heraus an den Server übermitteln können. Beispielweise lässt sich mit JavaScript der Wert eines Formularelements im Dokument auslesen und per XMLHttpRequest an den Server übertragen. Dieser interpretiert den Wert beispielsweise als Suchbegriff und liefert entsprechende Suchergebnisse zurück.</p>
+	<p>Wie die Datenübertragung genau abläuft, hängt von der Anfragemethode ab. Wir werden die zwei wichtigsten betrachten: <code>GET</code> und <code>POST</code>.</p>
+	<h4><code>GET</code> und der Query String</h4>
+	<p>Bei GET werden die zu übertragenden Daten in die Adresse (URI) einmontiert, und zwar in den Teil der URI, der <em>Query String</em> (Abfrage-Zeichenkette) genannt wird. Dieser ist von der eigentlichen URI mit einem Fragezeichen (<code>?</code>) getrennt. Eine relative Adresse mit Query String sieht von Aufbau her so aus:</p>
+<pre>beispiel.php?<var>querystring</var></pre>
+	<p>Üblicherweise setzt sich der Query String aus Name-Wert-Paaren zusammen. Name und Wert werden durch ein Gleichheitszeichen (<code>=</code>) getrennt, die Paare durch ein kaufmännisches Und-Zeichen (<code>&amp;</code>). Schematisch ist der Query String folglich so aufgebaut: <code>name1=wert1&amp;name2=wert2&amp;name3=wert3</code> usw. (Je nach verwendeter Server-Software ist auch ein anderer Aufbau des Query Strings denkbar. Dies ist jedoch der am weitesten verbreitete.)</p>
+	<p>Wenn wir beispielsweise die drei Informationen Vorname: Alexandra, Nachname: Schmidt und Wohnort: Hamburg übertragen wollen, so könnte der Query String lauten:</p>
+	<pre>vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg</pre>
+	<p>Um diese Daten per <code>GET</code> zu übertragen, werden sie in die relative Adresse einmontiert:</p>
+	<pre>beispiel.php?vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg</pre>
+	<p>Diese Adresse könnten wir bereits beim Starten eines XMLHttpRequest nutzen, d.h. sie als Parameter an die <code>open</code>-Methode übergeben:</p>
+	<pre>xhr.open("GET", "beispiel.php?vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg", false);</pre>
+	<p>Spannend wird es aber erst, wenn es gilt, diese Adresse samt Query String dynamisch mit variablen Daten zusammenzusetzen, die z.B. der Benutzer eingegeben hat.</p>
+	<p>Nehmen wir an, es gibt im Dokument folgendes Formular mit den drei Feldern für Vorname, Nachname und Wohnort:</p>
+<pre>&lt;form id="formular" action="beispiel.php">
+&lt;p>&lt;label>Vorname: &lt;input type="text" name="vorname">&lt;/label>&lt;/p>
+&lt;p>&lt;label>Nachname: &lt;input type="text" name="nachname">&lt;/label>&lt;/p>
+&lt;p>&lt;label>Wohnort: &lt;input type="text" name="wohnort">&lt;/label>&lt;/p>
+&lt;p>&lt;input type="submit" value="Absenden">&lt;/p>
+&lt;/form></pre>
+	<p>Wenn JavaScript aktiviert ist, soll das Formular im Hintergrund per XMLHttpRequest abgesendet werden. Andernfalls erfolgt ein normales Absenden samt Auswechseln des gegenwärtig angezeigten Dokuments</p>
+	<p>Mittels <a href="einbindung.html#traditionelles-event-handling">traditionellem Event-Handling</a> verknüpfen wir JavaScript-Logik mit dem Absenden des Formulares. Dazu nutzen wir das übliche mehrschrittige Schema:</p>
+	<pre>window.onload = initFormularXHR;
+
+function initFormularXHR () {
+   document.getElementById("formular").onsubmit = formularSubmit;
+}
+
+function formularSubmit () {
+   // Formular mit XMLHttpRequest absenden
+}</pre>
+	<p>Die Handler-Funktion <code>formularSubmit</code> muss nun folgendes leisten:</p>
+	<ol>
+		<li>Das Formular über das DOM ansprechen</li>
+		<li>Den Query String mit den Formulareingaben zusammensetzen (man spricht von einer <dfn>Serialisierung</dfn> des Formulars)</li>
+		<li>Einen XMLHttpRequest starten mit dem erzeugten Query String</li>
+		<li>Das normale Absenden des Formulars unterbrechen, indem die <a href="einbindung.html#standardaktion">Standardaktion abgebrochen</a> wird</li>
+	</ol>
+	<p>Am kompliziertesten ist der zweite Schritt, deshalb betrachten wir erst einmal das Gerüst mit den restlichen Aufgaben.</p>
+	<pre>function formularSubmit () {
+}</pre>
+	<p>...</p>
+	<p>Helferfunktion für den zweiten Schritt, die Serialisierung des Formulars</p>
+	
+	<ol>
+		<li>Um den Query String zusammenzusetzen, werden die Felder des Formulars durchlaufen</li>
+		<li>Für jedes Feld dessen Namen und Wert auslesen und ein entsprechendes Paar erzeugen (<code>name=wert</code>)</li>
+		<li>Dieses Paar an einen String anhängen, in dem der Query String zusammengesetzt wird</li>
+	</ol>
+
+	<h4>POST und der POST-Anfragekörper</h4>
+	
+</div>
+
+<div class="subsection" id="xhr-helferfunktion">
+	<h2>Helferfunktion für XMLHttpRequest</h2>
+	<p></p>
+</div>
+
+</div>
+
+<div id="alternativtechniken" class="section">
+	<h2>Alternativtechniken zur Serverkommunikation</h2>
+	<p>Neben <code>XMLHttpRequest</code> gibt es weitere JavaScript-Techniken, um im Hintergrund Daten mit dem Webserver auszutauschen. Strenggenommen wurde Ajax schon lange praktiziert, bevor sich <code>XMLHttpRequest</code> breiter Browserunterstützung erfreute. Aber erst mit <code>XMLHttpRequest</code> gelang Ajax der Durchbruch, weshalb beide Begriffe oft synonym verwendet werden. Dies allerdings zu Unrecht: Zwar ist <code>XMLHttpRequest</code> die vielseitigste, aber beileibe nicht immer die einfachste und geeignetste Methode, um Informationen mit dem Webserver auszutauschen. Alternativen sind unter anderem:</p>
+	<div class="subsection" id="">
+		<h3>Iframes</h3>
+		<p>In eingebettete Frames (Iframes) können Daten im Hintergrund geladen werden oder sie dienen als Ziel-Frame für Formulare. Ein Script im einbettenden Elterndokument kann auf diesen Frame und seine Inhalte zugreifen. Da der Website-Besucher nichts von diesen Vorgängen im Hintergrund mitbekommen muss, kann der Iframe kurzerhand mit CSS versteckt werden.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3>Bildobjekte</h3>
+		<p>Schon seit den Anfängen von JavaScript existiert die Möglichkeit, per JavaScript Bildobjekte (<code>Image</code>-Objekte) zu erzeugen, um Grafiken in den Browsercache zu laden:</p>
+		<pre>var bild = new Image();
+bild.src = "beispiel.png";</pre>
+		<p>Diese <code>Image</code>-Objekte lassen sich jedoch zweckentfremden, um eine Server-Anfrage (<code>GET</code>-Anfrage) zu starten. Es ist dabei nicht wichtig, ob der Server auch tatsächlich eine Bilddatei (oder überhaupt etwas) zurücksendet. Diese im Vergleich zu <code>XMLHttpRequest</code> sehr einfache Methode eignet sich für die Server-Aktionen, in denen man dem Server per <code>GET</code>-Anfrage etwas mitteilt, aber keine Antwort oder Bestätigung erwartet.</p>
+	</div>
+	<div class="subsection" id="">
+		<h3><code>script</code>-Elemente</h3>
+		<p>Per JavaScript erzeugte <code>script</code>-Elemente, die Scripte selbst von fremden Servern einbinden können, die Daten in mit JavaScript direkt zugänglichen Formaten bereitstellen.</p>
+		<p>Besonderheiten: Cross-Site JSON und JSONP</p>
+	</div>
+</div>
+
 <div id="formate-xml-json" class="section">
-<h2>Übertragungsformate</h2>
+	<h2>Übertragungsformate</h2>
+	
 	<div class="subsection">
 		<h3>HTML / Nur-Text</h3>
 		<p>...</p>
 	</div>
-
-<div class="subsection">
+	
+	<div class="subsection">
 		<h3>JSON</h3>
 		<p>...</p>
-		<pre class="content-example">[
+		<pre>[
    {
       "name" : "Harry S. Truman",
       "partei" : "Demokraten",
@@ -150,7 +404,7 @@
 		<p>Auch wenn Sie diese XML-Sprache nicht unbedingt in einer formalen Dokumentyp-Definition (DTD) niederschreiben müssen, ist das Entwerfen eines passenden XML-Derivates für für Ajax vergleichsweise aufwändig. Das Auslesen der Informationen im JavaScript erfordert nicht nur Kenntnisse des XML-DOM, sondern ist mit ziemlicher Schreibarbeit verbunden.</p>
 		<p>Wenn die serverseitigen Programme, die Ihre Website betreiben, bereits ein XML-Format als Speicher- oder Austauschformat verwendet und die damit ausgezeichneten Daten zum Client weitergeschickt werden sollen, bietet es sich auch für Ajax an. Andernfalls ist XML oftmals kompliziert und überdimensioniert.</p>
 		<p>...</p>
-		<pre class="content-example">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+		<pre>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;us-präsidenten&gt;
    &lt;präsident&gt;
       &lt;name&gt;Harry S. Truman&lt;/name&gt;
@@ -177,8 +431,40 @@
 
 <div id="sicherheit" class="section">
 	<h2>Ajax und Sicherheit</h2>
-	<p>...</p>
-	<p>Same-Origin-Policy, Cross-Domain-XMLHttpRequest, Bildobjekte, Scripte, JSONP</p>
+	
+	<div class="subsection">
+		<h3>Same-Origin-Policy bei XMLHttpRequest</h3>
+		<p>XMLHttpRequest unterliegt dem grundlegenden Sicherheitskonzept der <a href="sicherheit.html#same-origin-policy">Same-Origin-Policy</a>. Das bedeutet, sie können mit XMLHttpRequest nur HTTP-Anfragen an den Webserver absenden, auf dem das Dokument liegt, in dessen Kontext das JavaScript ausgeführt wird.</p>
+		<p>Wenn Sie von einem Dokument auf <var>example.org</var> aus eine Anfrage an eine fremden Domain, z.B. <var>example.net</var> senden, dann wird der Browser das JavaScript mit einem Ausnahmefehler abbrechen.
+	</p>
+	
+		<pre>// Script auf example.org
+xhr.open("GET", "http://example.net/", false); // Fehler!</pre>
+		<p>Sie können also nicht ohne weiteres HTTP-Anfragen an beliebige Adressen senden bzw. beliebige Adressen im Web auslesen &ndash; das verhindert die Same-Origin-Policy. Es gibt jedoch zahlreiche Möglichkeiten, mit JavaScript auf externe Dienste und Datenquellen im Web zuzugreifen und sogenannte <em>Mashups</em> zu erstellen. Diese verwenden nicht klassisches XMLHttpRequest, sondern nutzen alternative Techniken, bei denen andere Sicherheitsmodelle als Same-Origin-Policy greifen.</p>
+	</div>
+	
+	<div class="subsection">
+		<h3>Cross-Site Ajax mit HTTP Access Control</h3>
+		<p><em>Cross-Site</em>, <em>Cross-Origin</em> oder auch <em>Cross-Domain Ajax</em> bezeichnet die Möglichkeit, eine HTTP-Anfrage an eine fremde Domain abzusenden und auf die Server-Antwort zuzugreifen. Derzeit etwickelt das Standardisierungsgremium W3C einen Ansatz, der Schnittstellen wie XMLHttpRequest einen  domainübergreifenden Zugriff ermöglichen soll. Der Entwurf für die technische Spezifikation firmiert derzeit unter dem Namen <a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin Resource Sharing</a> (engl. für Herkunft-übergreifender Zugriff auf Ressourcen), ist aber bekannter unter dem Namen <dfn>HTTP Access Control</dfn> (engl. für HTTP-Zugriffskontrolle).</p>
+		<p>Mit diesem Modell lassen sich Ausnahmen von der Same-Origin-Policy festlegen, und zwar nach einem <strong>Einverständnis-Modell</strong>: Eine Website erlaubt einer bestimmten anderen Website, auf sie zuzugreifen. Gemäß dem obigen Beispiel kann die Zieldomain <code>example.net</code> einwilligen, dass Anfragen von Ursprungsdomain <code>example.org</code> erlaubt sind.</p>
+		<p>Diese Erlaubnis wird in einer bestimmten HTTP-Kopfzeile (Header) erteilt, die der Webserver unter <code>example.net</code> bei der Beantwortung einer Anfrage mitliefert. Um beispielsweise den domainübergreifenden Zugriff ausschließlich von Dokumenten auf <code>http://example.org</code> zu erlauben, sendet der Webserver die Kopfzeile:</p>
+		<pre>Access-Control-Allow-Origin: http://example.org</pre>
+		<p>Die Überprüfung der Erlaubnis nimmt der Browser vor: Wenn ein JavaScript von <code>example.org</code> eine Anfrage an <code>example.net</code> sendet, so prüft der Browser, ob die Antwort von <code>example.net</code> die besagten HTTP-Kopfzeile enthält. Falls ja, so kann das JavaScript die Serverantwort wie gewohnt verarbeiten, andernfalls wird das Script mit einem Ausnahmefehler abgebrochen. (???)</p>
+		<p>Dies ist nur ein vereinfachtes Beispiel, um einfache Anfragen zu erlauben. Die besagte Spezifikation sieht viel feinere Zugriffskontrolle vor. An dieser soll lediglich das Grundprinzip ersichtlich werden.</p>
+		<p>In der Praxis gibt es derzeit zwei Umsetzungen der W3C-Spezifikation: Mozilla Firefox erlaubt ab Version 3.5 den domainübergreifenden Zugriff mithilfe eines normalen <code>XMLHttpRequest</code>-Objekts. Der Internet Explorer ab Version 8 hat hingegen ein eigenes Objekt nur solche Zugriffe erfunden: <a href="http://msdn.microsoft.com/en-us/library/cc288060(VS.85).aspx">XDomainRequest</a>. Dessen Bedienung ähnelt der von XMLHttpRequest stark, es gibt im Detail allerdings einige Unterschiede, Eigenheiten und Verbesserungen.</p>
+		<p>Da beide Techniken noch recht neu und noch nicht breit unterstützt sind, sei hier nur am Rande darauf hingewiesen. ...</p>
+		<p>Wie gesagt setzen diese Techniken die Same-Origin-Policy nicht vollständig außer Kraft, sondern ergänzen das Verbot des domainübergreifenden Zugriffs durch eine Ausnahme: Der Webserver auf der Zieldomain muss so konfiguriert sein, dass er sein Einverständnis zu dieser fremden Anfrage gibt.</p>
+	</div>
+	
+	<div class="subsection">
+		<h3>Cross-Site Ajax mit Server-Proxy</h3>
+		<p></p>
+	</div>
+	
+	<div class="subsection">
+		<h3>Scripte einbinden und JSONP</h3>
+		<p></p>
+	</div>
 </div>
 
 <div id="footer">

@@ -25,20 +25,56 @@ function ContentLoaded(c,j){var b=c.document,h='DOMContentLoaded',d=c.navigator.
 /* ------------------------------------------------------ */
 
 var TOC = {
-	init : function () {
-		var ol = document.createElement("ol"),
-			h2s = document.getElementsByTagName("h2");
-		ol.id = "toc";
-		for (var i = 0, li, a; h2 = h2s[i]; i++) {
+	buildList : function (headings, callback) {
+		var ol, i, heading, a, section, li;
+		
+		if (headings.length == 0) {
+			return false;
+		}
+		
+		ol = document.createElement("ol")
+		
+		for (i = 0; heading = headings[i]; i++) {
+			
 			a = document.createElement("a");
-			a.innerHTML = h2.innerHTML;
-			a.href = "#" + h2.parentNode.id;
+			a.innerHTML = heading.innerHTML;
+			section = heading.parentNode;
+			if (section.id) {
+				a.href = "#" + section.id;
+			}
+			
 			li = document.createElement("li");
 			li.appendChild(a);
 			ol.appendChild(li);
+			
+			if (typeof callback == "function") {
+				callback(section, li);
+			}
 		}
+		
+		return ol;
+	},
+	
+	init : function () {
+		
+		var mainToc = TOC.buildList(
+			document.getElementsByTagName("h2"),
+			buildSubToc
+		);
+		mainToc.id = "toc";
+		
 		var h1 = document.getElementsByTagName("h1")[0];
-		document.body.insertBefore(ol, h1.nextSibling);
+		document.body.insertBefore(mainToc, h1.nextSibling);
+		
+		function buildSubToc (section, mainTocItem) {
+			var subToc = TOC.buildList(
+				section.getElementsByTagName("h3")
+			);
+			if (subToc) {
+				mainTocItem.appendChild(subToc);
+			}
+		}
+		
 	}
 };
 ContentLoaded(window, TOC.init);
