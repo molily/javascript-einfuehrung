@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page PUBLIC "-//SELFHTML//DTD SDML 1.0 Full//DE"
+"http://src.selfhtml.org/grammar/dtd/sdml1-full.dtd">
+<page idref="referenz_javascript_window">
+    <idindex>
+        &idindex;
+    </idindex>
+    <document-description></document-description>
+    <document-keywords></document-keywords>
+    <title>window</title>
+    <pageunit name="...">
+        <heading>Notizen</heading>
+        <p><hyperlink href="https://redaktion.selfhtml.org/wiki/SELF9/JavaScript/Objektreferenz/document" link-type="online-page">https://redaktion.selfhtml.org/wiki/SELF9/JavaScript/Objektreferenz/window</hyperlink></p>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Core-Konstruktoren</heading>
+        <example>Array
+Boolean
+Date
+Function
+Math
+Number
+Object
+RegExp
+String
+
+Error
+EvalError
+RangeError
+ReferenceError
+SyntaxError
+MemoryError
+TypeError
+URIError</example>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Konstanten</heading>
+        <example>NaN
+undefined
+null
+Infinity</example>
+    </pageunit>
+    <pageunit name="...">
+        <heading>DOM-Konstruktoren</heading>
+        <example>Attr
+Comment
+CDATASection
+CSSRule
+CSSStyleDeclaration
+Document
+DocumentFragment
+DocumentType
+DOMException
+Element
+Entity
+EntityReference
+Event
+HTMLAnchorElement
+HTMLAppletElement
+HTMLAreaElement
+HTMLBaseElement
+HTMLBaseFontElement
+HTMLBlockQuoteElement
+HTMLBodyElement
+HTMLBRElement
+HTMLButtonElement
+HTMLCollection
+HTMLDirectoryElement
+HTMLDivElement
+HTMLDListElement
+HTMLDocument
+HTMLElement
+HTMLFieldSetElement
+HTMLFontElement
+HTMLFormElement
+HTMLFrameElement
+HTMLFrameSetElement
+HTMLHeadElement
+HTMLHeadingElement
+HTMLHRElement
+HTMLHtmlElement
+HTMLIFrameElement
+HTMLImageElement
+HTMLInputElement
+HTMLIsIndexElement
+HTMLLabelElement
+HTMLLayerElement
+HTMLLegendElement
+HTMLLIElement
+HTMLLinkElement
+HTMLMapElement
+HTMLMenuElement
+HTMLMetaElement
+HTMLModElement
+HTMLObjectElement
+HTMLOListElement
+HTMLOptGroupElement
+HTMLOptionElement
+HTMLOptionsCollection
+HTMLParagraphElement
+HTMLParamElement
+HTMLPreElement
+HTMLQuoteElement
+HTMLScriptElement
+HTMLSelectElement
+HTMLStyleElement
+HTMLTableCaptionElement
+HTMLTableCellElement
+HTMLTableColElement
+HTMLTableElement
+HTMLTableRowElement
+HTMLTableSectionElement
+HTMLTextAreaElement
+HTMLTitleElement
+HTMLUListElement
+HTMLUnknownElement
+KeyboardEvent
+MutationEvent
+NamedNodeMap
+Node
+NodeFilter
+NodeList
+ProcessingInstruction
+Text</example>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Eigenschaften</heading>
+        <example>document
+event
+frames
+history
+location
+navigator
+screen
+
+window
+
+Components
+XPCNativeWrapper
+XMLDocument
+XXX4
+
+EventException
+
+globalStorage
+localStorage
+sessionStorage
+
+sun
+netscape
+java
+JavaArray
+JavaClass
+JavaObject
+JavaPackage
+Packages
+
+directories
+
+debug
+undoManager
+
+
+_content
+applicationCache
+clientInformation
+clipboardData
+closed
+content
+crypto
+debug
+defaultStatus
+dialogArguments
+dialogHeight
+dialogLeft
+dialogTop
+dialogWidth
+external
+frameElement
+fullScreen
+innerHeight
+innerWidth
+konqueror
+length
+locationbar
+maxConnectionsPer1_0Server
+maxConnectionsPerServer
+menubar
+name
+offscreenBuffering
+opener
+opera
+outerHeight
+outerWidth
+pageXOffset
+pageYOffset
+parent
+personalbar
+pkcs11
+returnValue
+screenLeft
+screenTop
+screenX
+screenY
+scrollMaxX
+scrollMaxY
+scrollX
+scrollY
+scrollbars
+self
+sidebar
+status
+statusbar
+toolbar
+top
+
+controllers
+directories</example>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Methoden</heading>
+        <example>addEventListener
+addEventStream
+alert
+atob
+attachEvent
+back
+blur
+btoa
+captureEvents
+captureEvents Obsolete
+clearInterval
+clearTimeout
+close
+decodeURI
+decodeURIComponent
+encodeURI
+encodeURIComponent
+eval
+isFinite
+isNaN
+moveBy
+moveTo
+open
+parseFloat
+parseInt
+resizeBy
+resizeTo
+scroll
+scrollBy
+scrollTo
+valueOf
+scrollByLines
+scrollByPages
+confirm
+createPopup
+detachEvent
+escape
+execScript
+find
+focus
+navigate
+setActive
+setDocument
+setHotKeys
+setInterval
+setResizable
+setTimeout
+setZOptions
+sizeToContent
+showHelp
+showModalDialog
+showModelessDialog
+stop
+toString
+disableExternalCapture
+dispatchEvent
+enableExternalCapture
+getAttention
+getComputedStyle
+getSelection
+openDatabase
+openDialog
+postMessage
+unescape
+updateCommands
+removeEventListener
+removeEventStream
+handleEvent
+print
+prompt
+releaseEvents
+sizeToContent
+dump
+forward
+home
+
+SVGUnitTypes
+SVGZoomAndPan
+
+DOMParser
+XMLSerializer
+
+XSLTProcessor
+XPathEvaluator
+
+XMLHttpRequest
+XDomainRequest
+
+Image
+Option
+ImageData
+Audio
+Notation
+Range</example>
+    </pageunit>
+    <pageunit name="...">
+        <heading>Event-Handler</heading>
+        <example>onabort
+onactivate
+onafterprint
+onbeforedeactivate
+onbeforeprint
+onbeforeunload
+onblur
+onchange
+onclick
+onclose
+oncontextmenu
+oncontrolselect
+ondblclick
+ondeactivate
+ondrag
+ondragdrop
+ondragend
+ondragenter
+ondragleave
+ondragover
+ondragstart
+ondrop
+onerror
+onfocus
+onhashchange
+onhelp
+onkeydown
+onkeypress
+onkeyup
+onload
+onmessage
+onmousedown
+onmousemove
+onmouseout
+onmouseover
+onmouseup
+onmousewheel
+onmove
+onpaint
+onreset
+onresize
+onresizeend
+onscroll
+onselect
+onstorage
+onsubmit
+onunload</example>
+    </pageunit>
+</page>

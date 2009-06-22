@@ -1,0 +1,16 @@
+title
+referrer
+domain
+URL
+body
+images
+applets
+links
+forms
+anchors
+cookie
+open
+close
+write
+writeln
+getElementsByName

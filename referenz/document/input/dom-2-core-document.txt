@@ -1,0 +1,17 @@
+doctype
+implementation
+documentElement
+createElement
+createDocumentFragment
+createTextNode
+createComment
+createCDATASection
+createProcessingInstruction
+createAttribute
+createEntityReference
+getElementsByTagName
+importNode
+createElementNS
+createAttributeNS
+getElementsByTagNameNS
+getElementById

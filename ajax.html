@@ -136,12 +136,12 @@
 	
 	<div class="subsection" id="xhr-open">
 		<h3>Festlegen der Anfrage-Methode, der Anfrage-Adresse sowie des Arbeitsmodus</h3>
-		<pre>xhr.open("GET", "beispiel.html", false);</pre>
+		<pre>xhr.open("GET", "beispiel.html", true);</pre>
 		<p>Mit dem Aufruf der <code>open</code>-Methode des Anfrage-Objektes geben Sie drei zentrale Daten an.</p>
 		<ol>
 			<li>Im ersten Parameter die HTTP-Anfragemethode als String. Üblich sind <code>"GET"</code>, <code>"POST"</code> und <code>"HEAD"</code>.</li>
 			<li>Im zweiten Parameter die Adresse (URI) als String, an die die Anfrage gesendet werden soll. Im Beispiel wird davon ausgegangen, dass unter demselben Pfad wie das HTML-Dokument, das die Server-Anfrage startet, eine Datei namens <var>beispiel.html</var> existiert.</li>
-			<li>Der dritte Parameter legt schließlich fest, ob die Anfrage synchron oder asynchron abgesendet werden soll. Übergeben Sie <code>false</code> für eine asynchrone Abfrage oder <code>true</code> für eine synchrone Anfrage.</li>
+			<li>Der dritte Parameter legt schließlich fest, ob die Anfrage synchron oder asynchron abgesendet werden soll. Übergeben Sie <code>true</code> für eine asynchrone Abfrage oder <code>false</code> für eine synchrone Anfrage.</li>
 		</ol>
 		<p>Im obigen Beispielcode wird eine asynchrone GET-Anfrage an die Adresse <var>beispiel.html</var> abgesendet.</p>
 	</div>
@@ -259,7 +259,7 @@ function sendXhr () {
       return false;
    }
    xhr.onreadystatechange = xhrReadyStateHandler;
-   xhr.open("GET", "beispiel.html", false);
+   xhr.open("GET", "beispiel.html", true);
    xhr.send(null);
 }
 function xhrReadyStateHandler () {
@@ -292,7 +292,7 @@ function xhrReadyStateHandler () {
 	<p>Um diese Daten per <code>GET</code> zu übertragen, werden sie in die relative Adresse einmontiert:</p>
 	<pre>beispiel.php?vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg</pre>
 	<p>Diese Adresse könnten wir bereits beim Starten eines XMLHttpRequest nutzen, d.h. sie als Parameter an die <code>open</code>-Methode übergeben:</p>
-	<pre>xhr.open("GET", "beispiel.php?vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg", false);</pre>
+	<pre>xhr.open("GET", "beispiel.php?vorname=Alexandra&amp;nachname=Schmidt&amp;wohnort=Hamburg", true);</pre>
 	<p>Spannend wird es aber erst, wenn es gilt, diese Adresse samt Query String dynamisch mit variablen Daten zusammenzusetzen, die z.B. der Benutzer eingegeben hat.</p>
 	<p>Nehmen wir an, es gibt im Dokument folgendes Formular mit den drei Feldern für Vorname, Nachname und Wohnort:</p>
 <pre>&lt;form id="formular" action="beispiel.php">
@@ -439,7 +439,7 @@ bild.src = "beispiel.png";</pre>
 	</p>
 	
 		<pre>// Script auf example.org
-xhr.open("GET", "http://example.net/", false); // Fehler!</pre>
+xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
 		<p>Sie können also nicht ohne weiteres HTTP-Anfragen an beliebige Adressen senden bzw. beliebige Adressen im Web auslesen &ndash; das verhindert die Same-Origin-Policy. Es gibt jedoch zahlreiche Möglichkeiten, mit JavaScript auf externe Dienste und Datenquellen im Web zuzugreifen und sogenannte <em>Mashups</em> zu erstellen. Diese verwenden nicht klassisches XMLHttpRequest, sondern nutzen alternative Techniken, bei denen andere Sicherheitsmodelle als Same-Origin-Policy greifen.</p>
 	</div>
 	
