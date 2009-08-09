@@ -46,11 +46,18 @@ p {
 	text-indent: 2.5em;
 }
 
-ol {
+ul p, ol p {
+	margin-left: 0;
+	text-indent: 0;
+}
+
+ol, ul {
 	padding-left: 0;
 }
 
-ol li {
+ol li,
+ul li {
+	margin-left: 2.5em;
 	margin-bottom: 1em;
 	padding-left: 0;
 }

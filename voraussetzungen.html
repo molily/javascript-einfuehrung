@@ -15,40 +15,32 @@
 
 <h1>JavaScript: Vorkenntnisse und Voraussetzungen</h1>
 
- <div class="section" id="notizen">
-  <h2>Notizen</h2>
-  <ul>
-  <li>Kenntnis von HTML zur Strukturierung von Texten/Dokumenten und CSS zur</li>
-  <li>Trennung von Struktur und Layout</li>
-  <li>HTML-Dokumente als Elementenbaum/Objektbaum verstehen</li>
-  <li>Ausgelagertes, effizientes CSS, sinnvoll mit IDs, Klassen und komplexen Selektoren arbeiten</li>
-  <li>Idealerweise Kenntnis einer Sprache für serverseitige Dynamik (PHP usw.), denn im Zusammenhang mit Server-Anwendungen wird JavaScript insbesondere eingesetzt</li>
-  </ul>
-</div>
 <div id="herangehensweise" class="section">
-  <h2>Herangehensweise dieser Einführung</h2>
-  <p>Diese Dokumentation wählt eine gewisse Herangehensweise an JavaScript und empfiehlt einen bestimmten JavaScript-Einsatz. Sie gibt Ihnen bewusst eine bestimmte Arbeitsweise vor und geht von einigen Grundannahmen aus, die nicht verschwiegen werden sollen. Sie müssen mit diesen nicht einverstanden sein, sie sollten sie jedoch zur Kenntnis nehmen, wenn Sie mit dieser Einführung JavaScript lernen möchten.</p>
-  <ul class="content-list circle">
-	 <li>Die Geschichte von JavaScript verlief äußerst wechselhaft. Viele der im Laufe dieser Geschichte entstandenen JavaScript-Tutorials sind veraltet oder empfehlen eine fragwürdige Praxis. Diese Anleitung will die Fehler vergangener Jahre möglichst vermeiden. Sie beschränkt sich auf die aktuelle Situation und erklärt ausgewählte Grundlagen des gegenwärtigen JavaScript-Gebrauchs.</li>
-	 <li>Diese Anleitung ist nicht für Webautoren gedacht, die bloß fremde Fertigscripte in ihre Sites einbauen wollen. Diese Einführung soll dazu befähigen, den Themenkomplex zu verstehen, um vom Einstieg an auf hohem Niveau zu programmieren. JavaScript wird nicht als schnell zu erlernende Technik dargestellt, sondern als eine vielseitige Programmiersprache mit Besonderheiten und Tücken.</li>
-	 <li>Diese Einführung wirkt auf den ersten Blick trocken, weil sie zunächst aus viel erklärendem Text und wenig konkretem JavaScript-Code oder Anwendungsbeispielen besteht. Das ist Absicht, denn sie möchte erst einmal die Grundkonzepte und später ständig benötigte Fertigkeiten vermitteln. Wenn Sie diese Grundlagen nachvollzogen haben, werden Sie merken, dass Sie den Aufbau von Scripten unter Rückgriff auf das erworbene Wissen verstehen können und Ihnen das Entwerfen eigener Scripte viel einfacher fällt.</li>
-  </ul>
+	<h2>Herangehensweise dieser Einführung</h2>
+	<p>Diese Dokumentation wählt eine <em>bestimmte</em> Herangehensweise an JavaScript und empfiehlt einen <em>bestimmten</em> JavaScript-Einsatz. Sie gibt Ihnen bewusst eine Arbeitsweise vor und geht von einigen Grundannahmen aus, die im Folgenden offen gelegt werden. Sie müssen mit diesen selbstverständlich nicht einverstanden sein und können Ihren eigenen Weg wählen.</p>
+	<ul>
+		<li>Diese Anleitung ist nicht für Webautoren gedacht, die bloß fremde Fertigscripte in ihre Sites einbauen wollen. Diese Einführung soll dazu befähigen, den Themenkomplex zu verstehen, um vom Einstieg an auf hohem Niveau zu programmieren. JavaScript wird nicht als schnell zu erlernende Technik dargestellt, sondern als eine vielseitige Programmiersprache mit erfreulichen Besonderheiten und nervenraubenden Tücken.</li>
+		<li>Die Geschichte von JavaScript verlief äußerst wechselhaft. Viele der im Laufe der Geschichte entstandenen JavaScript-Tutorials sind veraltet oder empfehlen eine fragwürdige Praxis. Diese Anleitung beschränkt sich auf die aktuelle Situation und erklärt ausgewählte Grundlagen des gegenwärtigen JavaScript-Gebrauchs.</li>
+		<li>Diese Einführung wirkt auf den ersten Blick trocken, weil sie derzeit aus viel erklärendem Text und wenig konkretem JavaScript-Code oder Anwendungsbeispielen besteht. Sie möchte zunächst die Grundkonzepte und später ständig benötigte Fertigkeiten vermitteln. Wenn Sie diese Grundlagen nachvollzogen haben, werden Sie den Aufbau von Scripten verstehen können und das Entwerfen eigener Scripte fällt Ihnen viel einfacher.</li>
+	</ul>
 </div>
 <div id="trennung-html-css" class="section">
-  <h2>Trennung von Struktur und Layout</h2>
-  <p>Bevor Sie sich mit JavaScript beschäftigen, sollten Sie sich bereits intensiv mit HTML und CSS auseinandergesetzt haben. Idealerweise haben Sie bereits eine kleine Website mit diesen Web-Sprachen geschrieben. JavaScript tritt nämlich als <em>dritte, zusätzliche Technik</em> hinzu, die auf HTML und CSS aufbaut.</p>
-  <p>Für einen Einstieg in JavaScript ist es hilfreich, die <em>genauen Aufgaben</em> von HTML und CSS sowie vor allem deren Rolle im modernen Webdesign zu kennen. Sie sollten wissen, dass HTML der Auszeichnung von Texten dient. Damit entsteht ein strukturiertes Dokument – bestehend aus Überschriften, Abschnitten, Absätzen, Listen, Hyperlinks usw.</p>
-  <p>Dieses Dokument wird anschließend mit CSS formatiert. Das Stylesheet hat dabei unter anderem die Aufgabe, die Struktur für den Leser ersichtlich zu machen, Übersichtlichkeit zu schaffen und nicht zuletzt eine prägnante, ansprechende und mitunter kunstvolle Erscheinung zu bieten.
-  </p>
-  <p>Zentral beim zeitgemäßen Einsatz von HTML und CSS ist die <strong>Trennung von Inhalt und Präsentation</strong>. Das bedeutet, jegliche Informationen, die die Darstellung im Browser regeln, möglichst aus dem HTML-Code herauzuhalten und stattdessen ins Stylesheet auszulagern. Gleichzeitig werden inhaltliche und strukturelle Informationen (wie z.B. »dieser Text ist wichtig«) durch entsprechende Auszeichnungen im HTML-Code untergebracht, anstatt den Text bloß im Stylesheet z.B. fett zu formatieren.</p>
-  <p>Der Zweck dieser Trennung ist, dass der HTML-Code möglichst schlank ist und möglichst viel Bedeutung trägt. Man spricht daher auch von <strong>semantischem Markup</strong> (Semantik ist die Lehre von der Bedeutung). Dadurch lassen sich effiziente Stylesheets schreiben, die HTML-Elemente über gezielte Selektoren ansprechen. Im HTML-Code bedarf es dann nur wenige zusätzliche Angriffspunkte für das Stylesheet wie etwa <code>div</code>-Abschnitte sowie <code>id</code>- und <code>class</code>-Attribute. Wenn ein zentrales Stylesheet das Layout zahlreicher Dokumente steuert, ist die Präsentation mit geringem Aufwand anpassbar, ohne dass alle betroffenen HTML-Dokumente geändert werden müssen.</p>
-  <p>Warum ist das für JavaScript wichtig? Je klarer und präziser HTML und CSS angewendet werden, desto einfacher ist es später, JavaScripte zu schreiben – denn mit JavaScript operieren Sie später auf Grundlage ihrer HTML-Dokumente und Ihre Scripte werden Hand in Hand mit dem Stylesheet zusammenarbeiten. Bevor Sie also die erste JavaScript-Codezeile schreiben, sollten Sie mit HTML und CSS beste Voraussetzungen dafür schaffen. Am Anfang mag das noch sehr theoretisch klingen, aber später werden Sie ein Gefühl dafür bekommen, wie HTML und CSS oganisiert sein müssen, um mit JavaScript effizient zusammenzuarbeiten.</p>
+	<h2>HTML und CSS: Trennung von Struktur und Layout</h2>
+	<p>Bevor Sie sich mit JavaScript beschäftigen, sollten Sie sich bereits intensiv mit HTML und CSS auseinandergesetzt haben. Idealerweise haben Sie bereits eine kleine Website mit diesen Web-Sprachen geschrieben. JavaScript tritt nämlich als <em>dritte, zusätzliche Technik</em> hinzu, die auf HTML und CSS aufbaut.</p>
+	<p>Für einen Einstieg in JavaScript ist es hilfreich, die <em>genauen Aufgaben</em> von HTML und CSS sowie vor allem deren Rolle im modernen Webdesign zu kennen:</p>
+	<ul>
+		<li>Sie sollten wissen, dass <strong>HTML</strong> der Auszeichnung von Texten dient. Damit entsteht ein strukturiertes Dokument &ndash; bestehend aus Überschriften, Abschnitten, Absätzen, Listen, Hyperlinks usw.</li>
+		<li>Dieses Dokument wird anschließend mit <strong>CSS</strong> formatiert. Das Stylesheet hat dabei unter anderem die Aufgabe, die Struktur für den Leser ersichtlich zu machen, Übersichtlichkeit zu schaffen und nicht zuletzt eine prägnante, ansprechende und mitunter kunstvolle Erscheinung zu bieten.</li>
+	</ul>
+	<p>Zentral beim zeitgemäßen Einsatz von HTML und CSS ist die <strong>Trennung von Inhalt und Präsentation</strong>. Das bedeutet, jegliche Informationen, die die Darstellung im Browser regeln, möglichst aus dem HTML-Code herauzuhalten und stattdessen ins Stylesheet auszulagern. Gleichzeitig werden inhaltliche und strukturelle Informationen (wie z.B. »dieser Text ist wichtig«) durch entsprechende Auszeichnungen im HTML-Code untergebracht, anstatt den Text bloß im Stylesheet z.B. fett zu formatieren.</p>
+	<p>Der Zweck dieser Trennung ist, dass der HTML-Code möglichst schlank ist und möglichst viel Bedeutung trägt. Man spricht daher auch von <strong>semantischem Markup</strong> (Semantik ist die Lehre von der Bedeutung). Dadurch lassen sich effiziente Stylesheets schreiben, die HTML-Elemente über gezielte Selektoren ansprechen. Im HTML-Code bedarf es dann nur wenige zusätzliche Angriffspunkte für das Stylesheet wie etwa <code>div</code>-Abschnitte sowie <code>id</code>- und <code>class</code>-Attribute. Wenn ein zentrales Stylesheet das Layout zahlreicher Dokumente steuert, ist die Präsentation mit geringem Aufwand anpassbar, ohne dass alle betroffenen HTML-Dokumente geändert werden müssen.</p>
+	<p>Warum ist das für JavaScript wichtig? Je klarer und präziser HTML und CSS angewendet werden, desto einfacher ist es später, JavaScripte zu schreiben – denn mit JavaScript operieren Sie später auf Grundlage ihrer HTML-Dokumente und Ihre Scripte werden Hand in Hand mit dem Stylesheet zusammenarbeiten. Bevor Sie also die erste JavaScript-Codezeile schreiben, sollten Sie mit HTML und CSS beste Voraussetzungen dafür schaffen. Am Anfang mag das noch sehr theoretisch klingen, aber später werden Sie ein Gefühl dafür bekommen, wie HTML und CSS oganisiert sein müssen, um mit JavaScript effizient zusammenzuarbeiten.</p>
 </div>
 <div id="serverprogrammierung" class="section">
-  <h2>Serverseitige Programmierung</h2>
-  <p>Der Einsatz von JavaScript lohnt sich ... Webanwendungen</p>
-  <p>Auf den meisten Websites ... Sie durchsuchen Produktdatenbanken, vergleichen Preise, bestellen Artikel, schauen sich Fotogalerien an, füllen Formulare aus, tippen Texte ein, navigieren durch komplexe Informationsangebote ...</p>
-  <p>...</p>
+	<h2>Serverseitige Programmierung</h2>
+	<p>Mit HTML und CSS alleine lassen sich nur statische Informationsangebote mit Texten, Bildern und Hyperlinks erstellen. Die meisten Websites bieten jedoch keine fertigen HTML-Dokumente, sondern interaktive Dienste. Websurfer durchsuchen Produktdatenbanken, vergleichen Preise, bestellen Artikel, schauen sich Foto-Diashows an, füllen Formulare aus und geben Texte ein, laden Dateien hoch dergleichen. Diese Funktionen basieren auf Programmen, die auf dem Webserver laufen. Die Programme fragen zumeist Datenbanken ab, verarbeiten die Browser-Anfrage und generieren HTML-Dokumente.</p>
+	<p>Der Einsatz von JavaScript lohnt sich insbesondere bei solchen interaktiven und personalisierten Webanwendungen, denn JavaScript hat die Möglichkeit, deren Bedienkomfort enorm zu verbessern. Das fängt bei einem Webforum an und geht bis zu solchen Anwendungen, die zum großen Teil aus JavaScript bestehen und sich dadurch wie gewöhnliche Desktop-Programme verhalten können.</p>
+	<p>Die vollen Fähigkeiten von JavaScript entfalten sich also im Zusammenhang mit Server-Anwendungen. Um JavaScript-Techniken wie Ajax einsetzen zu können, sollten Sie daher idealerweise Kenntnis einer serverseitigen Programmiersprache haben oder zumindest mit der Inbetriebnahme von serverseitigen Fertigscripten vertraut sein. Gängige Einsteigersprachen für serverseitige Dynamik sind PHP und Perl sowie Python und Ruby.</p>
 </div>
 
 <div id="footer">

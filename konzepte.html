@@ -14,30 +14,45 @@
 </div>
 
 <h1>JavaScript: Grundlegende Konzepte</h1>
+
  <div class="section" id="scriptsprache">
-  <h2>Clientseitige Scriptsprache</h2>
-  <p>Bei JavaScript handelt es sich um eine Programmiersprache, die auf dem Client-Rechner ausgeführt wird. Um dies zu verstehen, müssen wir uns das Client-Server-Modell in Erinnerung rufen. Daten im Web werden mit HTTP (englisch <em>Hypertext Transfer Protocol</em> = Hypertext-Übertragungsprotokoll) übertragen: Der Rechner des Anwenders, genannt <em>Client</em> (englisch <em>Kunde</em>) stellt eine Verbindung zum <em>Server</em> (englisch <em>Diener</em>) her und schickt eine HTTP-Anfrage. Dies kann z.B. die Anweisung sein, ihm eine bestimmte Adresse zu liefern. Der Webserver antwortet darauf in der Regel mit einer Bestätigung und sendet z.B. ein HTML-Dokument zurück.</p>
-  <p>JavaScript steht außerhalb dieses Datenaustausches zwischen Anwender-Rechner und Webserver. JavaScripte werden in ein HTML-Dokument eingebettet oder mit ihm verknüpft. Sie werden erst aktiv, wenn die Datenübertragung abgeschlossen ist, nämlich wenn das HTML-Dokument beim Client-Rechner angekommen ist und es der Web-Browser samt Scripten verarbeitet.</p>
-  <p>Ein häufiges Missverständnis ist, dass JavaScript mit serverseitigen Programmiersprachen gemischt werden kann. Die Ausführung von serverseitigen Scripten wie z.B. PHP und die Ausführung von JavaScripten findet jedoch <em>nacheinander</em> statt: Serverseitige Scripte werden aktiv, wenn eine HTTP-Anfrage den Server erreicht. Diese Scripte generieren dann üblicherweise ein HTML-Dokument. Dieses kann selbstverständlich JavaScript enthalten und der JavaScript-Code kann auch dynamisch zusammengesetzt werden. Das serverseitige Script läuft meistens nicht mehr als ein paar Sekunden und beendet sich dann. Das generierte Dokument wird anschließend zum Client übertragen, wo es der Browser verarbeitet. Erst dann wird das damit verknüpfte JavaScript ausführt.</p>
-  <p>Dies soll zeigen, wie server- und clientseitige Programme zusammenarbeiten, aber doch getrennt sind - denn sie laufen auf verschiedenen Rechnern, operieren in einer unterschiedlichen Umgebung und erfüllen andere Aufgaben.</p>
-  <div class="note-box note-box-todo">
-	 <p class="note-box-title">ToDo von: mschaefer</p>
-	 <div class="note-box-text">Diagramm</div>
-  </div>
+	<h2>Clientseitige Scriptsprache</h2>
+	<p>Bei JavaScript handelt es sich um eine Programmiersprache, die auf dem Client-Rechner direkt im Browser ausgeführt wird.</p>
+	<p>Um dies zu verstehen, müssen wir uns das Client-Server-Modell in Erinnerung rufen: Daten im Web werden mittels <strong>HTTP</strong> (englisch <em>Hypertext Transfer Protocol</em> = Hypertext-Übertragungsprotokoll) übertragen. Dieses Protokoll funktioniert nach einem Anfrage-Antwort-Schema. Der Rechner des Anwenders, genannt <em>Client</em> (englisch <em>Kunde</em>) stellt eine Verbindung zum <em>Server</em> (englisch <em>Diener</em>, <em>Anbieter</em>) her und schickt eine Anfrage. Dies kann z.B. die Anweisung sein, ihm eine bestimmte Adresse zu liefern. Der Webserver antwortet darauf in der Regel mit einer Bestätigung und sendet z.B. ein HTML-Dokument zurück.</p>
+	<p>JavaScript ist der Datenübertragung zwischen Anwender-Rechner und Webserver nachgeordnet. Scripte werden in ein HTML-Dokument eingebettet oder mit ihm verknüpft. Sie werden erst aktiv, wenn das HTML-Dokument beim Client-Rechner (zumindest teilweise) angekommen ist und der Web-Browser das Dokument samt Scripten verarbeitet.</p>
+	<h3>Zusammenarbeit zwischen server- und clientseitigen Programmen</h3>
+	<p>Ein häufiges Missverständnis ist, dass JavaScript mit serverseitigen Programmiersprachen gemischt werden kann. Die Ausführung von Serverprogrammen (wie z.B. PHP-Scripten) und die Ausführung von JavaScripten finden jedoch strikt <em>nacheinander und voneinander getrennt</em> statt. Serverseitiger PHP-Code kann nicht direkt clientseitigen JavaScript-Code ausführen und umgekehrt, wie folgender Ablauf zeigen soll.</p>
+	<ol>
+		<li>Der Client sendet eine HTTP-Anfrage an den Server, wenn der Anwender einen Hyperlink aktiviert oder ein Formular absendet.</li>
+		<li>
+			<p>Der Webserver nimmt die Anfrage entgegen. Das Serverprogramm wird gestartet und generiert üblicherweise ein HTML-Dokument, welches JavaScript enthalten kann. Dieser JavaScript-Code kann dynamisch durch das Serverprogramm zusammengesetzt werden.</p>
+			<p>Das Serverprogramm läuft meistens nicht mehr als ein paar Sekunden und beendet sich dann. Damit endet der Wirkungsbereich des Serverprogramms: Es startet, um eine Client-Anfrage zu verarbeiten, und endet, bevor das generierte HTML-Dokument zum Client übertragen wird.</p>
+		</li>
+		<li>Der Browser auf dem Client empfängt den HTML-Code und verarbeitet ihn. In diesem Moment werden mit dem Dokument verknüpfte JavaScripte ausführt.</li>
+	</ol>
+	<p>Dies soll zeigen, wie server- und clientseitige Programme zusammenarbeiten, aber doch getrennt sind &ndash; denn sie laufen nacheinander auf verschiedenen Rechnern, operieren in einer unterschiedlichen Umgebung und erfüllen andere Aufgaben.</p>
+	<p>Zu allem Überfluss ist JavaScript nach der Darstellung des HTML-Dokuments im Browser nicht auf dem Client eingeschlossen, sondern kann von sich aus mit Serverprogrammen interagieren. JavaScripte können allerdings nicht direkt Programmcode auf dem Server aufrufen. Die einzige Möglichkeit ist, eine HTTP-Anfrage im Hintergrund zu starten. Diese Technik werden wir später unter dem Begriff <strong>Ajax</strong> kennenlernen.</p>
+	<div class="note-box note-box-todo">
+		<p class="note-box-title">ToDo von: mschaefer</p>
+		<p class="note-box-text">Diagramm</p>
+	</div>
 </div>
+
 <div id="objektmodelle" class="section">
-  <h2>Objektmodelle, Elementobjekte und Knoten</h2>
-  <p>Nachdem wir die Übertragung von HTML-Dokumenten vom Webserver zum Browser betrachtet haben, müssen wir uns vor Augen führen, wie der Browser das Dokument verarbeitet. Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Der Browser benutzt für dessen Verarbeitung einen sogenannten <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Dieser Parser überführt den HTML-Code in eine Objektstruktur, die sich dann im Arbeitsspeicher befindet. – Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. – Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten, Attributknoten und Textknoten, die wie in einer Baumstruktur angeordnet sind.</p>
-  <p>Es ist essentiell zu wissen, dass der Browser alle weiteren Operationen an dieser Objektstruktur vornimmt, nicht am HTML-Code, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, wie ihn der Autor geschrieben hat, sondern auf den entsprechenden Elementenbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <em>Document Object Model</em> geregelt.</p>
-  <div class="note-box note-box-todo">
-	<p class="note-box-title">ToDo von: molily</p>
-	 <div class="note-box-text">vgl. http://molily.de/dokumentmodelle</div>
-  </div>
+	<h2>Dokument-Objektmodell (DOM), Elementobjekte und Knoten</h2>
+	<p>Nachdem wir die Übertragung von HTML-Dokumenten vom Webserver zum Browser betrachtet haben, müssen wir uns vor Augen führen, wie der Browser das Dokument verarbeitet.</p>
+	<p>Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Noch während der Browser den Code über das Netz empfängt, verarbeitet er ihn Stück für Stück. Diese Aufgabe übernimmt der sogenannte <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Der Parser überführt den HTML-Code in eine Objektstruktur im Arbeitsspeicher befindet. &ndash; Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. &ndash; Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten, Attributknoten und Textknoten, die in einer Baumstruktur angeordnet sind.</p>
+	<p>Der Browser nutzt für alle weiteren Operationen diese Objektstruktur, nicht den HTML-Quellcode, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, sondern auf den entsprechenden Elementenbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <strong>Document Object Model</strong> geregelt.</p>
+	<div class="note-box note-box-todo">
+		<p class="note-box-title">ToDo von: molily</p>
+		<p class="note-box-text">vgl. http://molily.de/dokumentmodelle</p>
+	</div>
 </div>
 <div id="interpreter" class="section">
-  <h2>JavaScript-Interpreter</h2>
-  <p>Wie kommen nun JavaScripte ins Spiel? JavaScript-Code wird direkt oder indirekt in HTML-Dokumente eingebunden. Der Browser ruft den JavaScript-Code ebenfalls vom Web-Server ab und führt ihn aus, noch während das Dokument nach und nach analysiert und dargestellt wird. Dazu verfügen die heutigen Web-Browser über einen eingebauten JavaScript-Interpreter.</p>
-  <p>Doch nicht alle Browser verfügen über einen solchen, schon gar nicht alle Programme, die in irgendeiner Weise Webseiten verarbeiten. Zudem verfügen die jeweiligen Interpreter über sehr unterschiedliche Fähigkeiten. Nicht zuletzt gibt es viele Gründe, warum ein JavaScript trotz vorhandenem Interpreter nicht ausgeführt wird: Der Anwender kann den Interpreter für alle Websites oder für eine bestimmte abschalten. Die Ausführung von JavaScripten kann aus Sicherheitsgründen gesperrt oder beschränkt sein. Oder ein sogenannter Proxy, ein vermittelnder Rechner zwischen Client und Server, kann den Code auf dem Weg herausfiltern.</p>
+	<h2>JavaScript-Interpreter</h2>
+	<p>Wie kommen nun JavaScripte ins Spiel? JavaScript-Code wird direkt in HTML-Dokumente eingebettet oder indirekt mit externen Dateien eingebunden. Der Browser ruft den JavaScript-Code ebenfalls vom Web-Server ab und führt ihn aus, noch während das Dokument Stück für Stück analysiert (geparst) und dargestellt wird. Dazu verfügen die heutigen Web-Browser über einen eingebauten <strong>JavaScript-Interpreter</strong>.</p>
+	<p>Doch nicht alle Browser verfügen über einen solchen, schon gar nicht alle Programme, die in irgendeiner Weise Webseiten verarbeiten. Zudem verfügen die jeweiligen Interpreter über sehr unterschiedliche Fähigkeiten. Nicht zuletzt gibt es viele Gründe, warum ein JavaScript trotz vorhandenem Interpreter nicht ausgeführt wird oder nicht alle JavaScript-Techniken nutzen kann: Der Anwender kann den Interpreter für alle Websites oder für eine bestimmte abschalten. Die Ausführung von JavaScripten kann aus Sicherheitsgründen gesperrt oder beschränkt sein. Oder ein sogenannter Proxy, ein vermittelnder Rechner zwischen Client und Server, kann den Code während der Übertragung herausfiltern.</p>
+	<p>
 </div>
 <div id="objekte" class="section">
   <h2>Objektbasierung</h2>
@@ -58,19 +73,19 @@
   <p>JavaScripte arbeiten nicht im leeren Raum, sondern wie gesagt im Rahmen eines Browserfensters, in dem ein HTML-Dokument dargestellt wird. Wie erfolgt nun die Verbindung von HTML und JavaScript? Wann wird ein Script aktiv?</p>
   <p>In dem Moment, in dem der Browser den HTML-Code einliest, in die besagte Objektstruktur überführt und die Darstellung berechnet, werden auch alle mit dem Dokument verknüpften Scripte ausgeführt.</p>
   <p>Ihre Hauptarbeit leisten Scripte aber nicht in diesem Moment des Ladens der Seite. Sie werden zwar kurz aktiv, legen sich dann üblicherweise wieder »schlafen«. Sie werden erst wieder aktiv, wenn etwas im Dokument passiert. Denn JavaScript arbeitet nach dem Prinzip der <strong>Überwachung und Behandlung von Ereignissen</strong> (im Englischen <em>event handling</em>). Ein »<em>Ereignis</em>« kann vieles sein. Es geht dabei vor allem um Benutzereingaben. Beispielsweise:</p>
-  <ul class="content-list circle">
+  <ul>
 	 <li>Auf der Tastatur wird eine Taste gedrückt (Ereignis-Typ: <code>keypress</code>)</li>
 	<li>Ein Element im Dokument wird mit der Maus angeklickt (<code>click</code>)</li>
   </ul>
   <p>Neben diesen Ereignissen, die direkt auf Benutzereingaben wie Tastendrücke und Mausklicks zurückgeben, gibt es unter anderem
 	 solche, die sich auf die Interaktion mit Formularen beziehen:</p>
-  <ul class="content-list circle">
+  <ul>
 	 <li>Ein Formularfeld wird fokussiert (<code>focus</code>)</li>
 	 <li>Der Text in einem Formularfeld wird geändert (<code>change</code>)</li>
 	 <li>Ein Formular wird abgesendet (<code>submit</code>)</li>
   </ul>
   <p>Schließlich können auch Ereignisse überwacht werden, die sich auf das ganze Dokument oder das zugehörige Fenster beziehen:</p>
-  <ul class="content-list circle">
+  <ul>
 	 <li>Das Dokument wurde vollständig mitsamt aller Grafiken und Stylesheets geladen, seine Objektstruktur steht vollständig zur
 		Verfügung (<code>load</code>)</li>
 	 <li>Die Größe des Browserfensters wird verändert (<code>resize</code>)</li>
