@@ -21,44 +21,90 @@
 </div>
 <div class="section" id="aufbau">
 	<h2>Aufbau eines JavaScript-Programmes</h2>
-	<p>[Syntax]</p>
-	<p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Grammatik-Regeln können Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Grammatik einhalten, damit Sie verstanden werden.</p>
-	<p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenige Möglichkeiten. Zum anderen müssen Sie sich an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
-	<p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er dessen Syntax verstehen. Dieses Aufsplitten in die syntaktischen Bestandteile nennt sich <strong>Parsing</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
-	<p>Die folgende Beschreibung der Syntax wird theoretisch und ungewohnt ... formale Beschreibung von Sprachen.</p>
-	<p>Welche Bestandteile an welchen Stellen vorkommen dürfen</p>
+	<p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Syntax-Regeln können Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Syntax und Grammatik einhalten, damit Sie verstanden werden.</p>
+	<p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenig Spielraum. Zum anderen müssen sich Programmierer an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
+	<p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er zunächst dessen Syntax verstehen. Dieses Aufsplitten in die Bestandteile nennt sich <strong>Parsing</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
+	<p>Die folgende Beschreibung der JavaScript-Syntax ist sehr theoretisch und formal. Es soll ihnen den groben Aufbau eines JavaScript-Programmes vermitteln, damit Sie wissen, welche Bestandteile an welchen Stellen vorkommen dürfen.</p>
 </div>
 <div class="section" id="anweisungen">
 	<h2>Anweisungen (Statements)</h2>
-	<p></p>
-	<div class="subsection" id="kontrollstrukturen">
-		<h3>Kontrollstrukturen: Schleifen und Verzweigungen</h3>
-		<p></p>
-	</div>
+	<p>Vereinfachend gesagt besteht ein JavaScript-Programm aus einer Abfolge von einer oder mehreren Anweisungen, sogenannten Statements. Bei der Ausführung des JavaScripts werden die Anweisungen nacheinander abgearbeitet.</p>
+	<p>(Der Einfachheit halber rechnen wir die Funktionsdeklaration zu den Anweisungen, was der ECMAScript-Standard nicht tut. Aber Sonderfall der Funktionsdeklarationen, sie werden nicht in der Reihenfolge der anderen Anweisungen ausgeführt. Dasselbe bei Variablen-Deklarationen. TODO)</p>
 	<div class="subsection" id="variablen-deklaration">
 		<h3>Variablen-Deklaration</h3>
-		<p></p>
+		<p>Mit einer Variablen-Deklaration wird eine Variable im aktuellen Gültigkeitsbereich erzeugt, d.h. als globale Variable oder lokale Funktionsvariable. Sie kann entweder ohne Wert instantiiert werden:
+		<pre>var alter;</pre>
+		<p>Oder der Anfangswert kann gleich angegeben werden:</p>
+		<pre>var alter = 32;</pre>
+		<p>Anstelle der <code>32</code> kann ein beliebiger Ausdruck stehen. Das Schema lautet also:</p>
+		<pre>var <var>Bezeichner</var> = <var>Ausdruck</var>;</pre>
+	</div>
+	<div class="subsection" id="kontrollstrukturen">
+		<h3>Kontrollstrukturen: Verzweigungen und Schleifen</h3>
+		<p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Dazu gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt.</p>
+		<pre>if (alter >= 18) {
+   alert("Volljährig!");
+} else {
+   alert("Noch nicht volljährig.");
+}</pre>
+		<p>Zwischen den runden Klammern steht ein beliebiger Ausdruck, zwischen den geschweiften Klammern eine oder mehrere Anweisungen. Das allgemeine Schema lautet:</p>
+		<pre>if (<var>Ausdruck</var>) {
+   <var>Anweisungen</var>
+} else {
+   <var>Anweisungen</var>
+}</pre>
+		<p>Mit der <code>switch</code>-Anweisung lassen sich Verzweigungen notieren, bei denen ein Wert mit vielen anderen Werten verglichen wird und eine entsprechende Anweisung ausgeführt wird.</p>
+		<pre>switch (alter) {
+   case 10 :
+      alert("zehn");
+   case 20 :
+      alert("zwanzig");
+}</pre>
 	</div>
 	<div class="subsection" id="expression-statement">
 		<h3>Ausdruck-Anweisung (Expression-Statement)</h3>
-		<p></p>
+		<p>Die meisten Anweisungen sind sogenannte Ausdruck-Anweisungen. Sie bestehen lediglich aus einem Ausdruck, und ein Ausdruck kann sehr unterschiedlich aussehen.</p>
+<pre>window.print();
+alter = 18;
+objekt.nummer = 5;
+objekt.nummer++;
+meldung = alter >= 18 ? "volljährig" : "noch nicht volljährig";
+1 + 1;
+</pre>
+	<p>Eine Ausdruck-Anweisung sollte immer mit einem Semikolon abgeschlossen werden.</p>
 	</div>
-</div>
-<div class="section" id="funktionen">
-	<h2>Funktionsdeklarationen</h2>
-	<p>siehe Funktionen</p>
+	<div class="subsection" id="weitere-statements">
+		<h3>Weitere Statements</h3>
+		<p>break, return, continue usw.</p>
+	</div>
 </div>
 <div class="section" id="ausdruecke">
 	<h2>Ausdrücke (Expressions)</h2>
-	<p></p>
+	<p>
+	Ein Ausdruck besteht aus Bezeichnern und Literalen, die mit Operatoren verknüpft werden
+	</p>
+<pre>
+alter = 18
+element.appendChild(element2)
+objekt.nummer++
+alert("Vorname: " + vorname)
+</pre>
 </div>
 <div class="section" id="operatoren">
 	<h2>Operatoren</h2>
-	<p></p>
+	<p>Ein, zwei oder drei Operanden. Die Operanden können selbst als Ausdrücke notiert sein.</p>
+</div>
+<div class="section" id="bezeichner">
+	<h2>Bezeichner (Identifier)</h2>
+	<p>siehe Kernobjekte</p>
 </div>
 <div class="section" id="literale">
 	<h2>Literale</h2>
 	<p>siehe Kernobjekte</p>
+</div>
+<div class="section" id="funktionen">
+	<h2>Funktionsdeklarationen</h2>
+	<p>siehe Funktionen</p>
 </div>
 
 <div id="footer">

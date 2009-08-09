@@ -16,49 +16,114 @@
 <h1>JavaScript: Objekte und Variablen</h1>
 
 <div class="section" id="einfuehrung">
-	<h2>Einführung</h2>
-	<p>[TODO: Was sind Objekte, Eigenschaften, Methoden? Konstruktoren, Instanzen? Wo erklären?]</p>
-	<p>In JavaScript haben wir es fast ausschließlich mit Objekten zu tun. Auf jeden »Wert« im Speicher haben wir Zugriff als ein Objekt. Diese Objekte haben meistens gewisse Eigenschaften und Methoden. Diese verhalten sich selbst wieder als Objekte - so entsteht eine Objekthierarchie, die prinzipiell unendlich fortgesetzt werden kann.</p>
-	<p>Der Browser stellt einem Script eine ungeheure Anzahl von <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert das Script <strong>eigene Objekte</strong>. Diese vom JavaScript-Programm selbst eingeführten Objekte werden <strong>Variablen</strong> genannt.</p>
+	<h2>Objekte, Eigenschaften und Methoden</h2>
+	<p>Ein Objekt ist ein grob gesagt ein Bündel von Informationen im Speicher. In JavaScript haben wir auf alle zugänglichen Informationen Zugriff als ein Objekt.</p>
+	<p>Ein Objekt funktioniert als eine Zuordnungsliste, die unter bestimmten Namen weitere <strong>Unterobjekte</strong>, auch <strong>Member</strong> genannt, speichert. Diese Unterobjekte teilt man in <strong>Eigenschaften</strong> und <strong>Methoden</strong>. Methoden sind ausführbare Funktionen, die dem Objekt zugehören, Eigenschaften sind alle nicht ausführbaren Unterobjekte.</p>
+	<p>Durch diese Verschachtelung von Objekten entsteht eine beliebig lange Kette von Objekten, die aufeinander verweisen.</p>
+	<p>Der Browser stellt einem Script eine große Menge von <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert das Script eigene Objekte. Diese vom JavaScript-Programm selbst eingeführten Objekte werden üblicherweise <strong>Variablen</strong> genannt.</p>
 </div>
-<div class="section" id="eigenschaften">
-	<h2>Objekte und Eigenschaften ansprechen</h2>
-	<p>...</p>
-	<p>objekt.unterobjekt</p>
-	<p>objekt["unterobjekt"]</p>
-	<p>Identifier Resolution</p>
+<div class="section" id="objektorientierung">
+	<h2>Konstruktoren, Prototypen und Instanzen</h2>
+	<p>Ein JavaScript-Objekt gehört einem gewissen Typ an. Diese Zugehörigkeit stellt sich in JavaScript so dar, dass ein Objekt von einer Funktion erzeugt wurde. Diese erzeugende Funktion wird <strong>Konstruktor</strong> genannt. Die meisten Konstruktorfunktionen sind JavaScript-intern und vordefiniert, Sie können allerdings auch selbst definierte Funktionen als Konstruktoren verwenden.</p>
+	<p>Die Objekte, die ein bestimmter Konstruktor erzeugt hat, werden <strong>Instanzen</strong> (Exemplare, Abkömmlinge) dieses Konstruktors genannt. Beispielsweise ist ein String-Objekt (eine Zeichenkette) eine Instanz der Konstruktorfunktion <code>String</code>.</p>
+	<p>Jedes Objekt hat eine Eigenschaft namens <code>constructor</code>, die auf die Konstruktorfunktion verweist, die es hergestellt hat. Beispielsweise liefert <code>"Dies ist ein String".constructor</code> die Konstruktorfunktion <code>String</code>.</p>
+	<p>Ein Konstruktor ist eine Art Fabrik, die Instanzen nach immer gleichem Muster produziert. Dieses Muster, der Bauplan für die Instanzen ist selbst ein Objekt: Das sogenannte prototypische Objekt, kurz <strong>Prototyp</strong>. Instanzen sind so gesehen Kopien des Prototypen und werden ihm nachgebildet.</p>
+	<p>Das prototypische Objekt hängt an der Konstruktorfunktion. Jede Funktion hat eine Eigenschaft namens <code>prototype</code>, die auf das zugehörige prototypische Objekt verweist. <code>String.prototype</code> liefert beispielsweise das Objekt, das den Bauplan für alle String-Instanzen definiert.</p>
+	<p>Jedes Objekt stammt also von einem Konstruktoren ab, dem ein Prototyp zugeordnet ist. Wenn wir ein Objekt erzeugen, dann wird hinter den Kulissen die entsprechende Konstruktorfunktion aufgerufen. Die Instanz erbt alle Eigenschaften und Methoden des Prototypen, indem sie an das frisch erzeugte, bisher leere Instanz-Objekt kopiert werden. Dieser Vorgang wird <strong>prototypische Vererbung</strong> genannt.</p>
+	<p>Prototypen können auch untereinander erben. Auf diese Weise sind die Objekttypen voneinander ableitbar. Ein String-Objekt ist gleichzeitig eine Instanz vom <code>String</code>-Konstruktor wie auch eine Instanz vom <code>Object</code>-Konstruktor.</p>
+	<p>Das prototypische Objekt ist ein ganz normales JavaScript-Objekt, dem Sie neue Eigenschaften und Methoden hinzufügen können. Auf diese Weise können alle Instanzen, die vom fraglichen Prototypen erben, auf einen Schlag mit neuen Fähigkeiten ausgestattet werden. Diese Methode nennt sich <strong>prototypische Erweiterung</strong>.</p>
+	<p>Aus Sicht der JavaScript-Programmierung passieren diese Vorgänge meist unbemerkt. Dass beim Erstellen eines Objektes ein Konstruktor aufgerufen wird und der Prototyp als Vorbild für das Objekt dient, wird nur ersichtlich, wenn wir in diese Vorgänge eingreifen wollen oder eigene Konstruktoren und Prototypen schreiben. Dennoch ist das Wissen um Konstruktoren und Instanzen grundlegend, um den Aufbau der Objektwelt und die Objekttypen in JavaScript zu verstehen.</p>
+</div>
+<div class="section" id="klassen">
+	<h2>Klassen &ndash; gibt es nicht in JavaScript</h2>
+	<p>Objekttypen und Vererbung werden in vielen anderen Programmiersprachen über Klassen gelöst. JavaScript hingegen kennt keine Klassen, sondern nur die besagten Konstruktorfunktionen und Prototypen. ...</p>
+</div>
+<div class="section" id="bezeichner">
+	<h2>Bezeichner: Objekte ansprechen</h2>
+	<p>Bezeichner (engl. Identifier) sind Namen für Objekte. Um ein vorhandenes Objekt in einem JavaScript anzusprechen oder einen Wert unter einem Namen abzuspeichern, notieren wir dessen Namen.</p>
+	<pre>alert(vorname);</pre>
+	<p>Hier werden gleich zwei Bezeichner notiert: Einmal <code>alert</code> und einmal <code>vorname</code>. <code>alert</code> bezeichnet die vordefinierte globale Funktion, mit der sich Meldungen ausgeben lassen. <code>vorname</code> steht beispielhaft für eine durch das Script selbst erzeugte Variable.</p>
+	<div class="subsection" id="bezeichner-konventionen">
+		<h3>Unterobjekte ansprechen</h3>
+		<p>Um ausgehend von einem Objekt ein Unterobjekt (Member) anzusprechen, notieren wir den einen Objektnamen, dann einen <code>.</code> und danach den Namen des Unterobjekts. Schematisch:</p>
+		<pre>objekt.unterobjekt</pre>
+		<p>	Der Punkt (<code>.</code>) ist der sogenannte <em>Property Accessor Operator</em> (engl. Operator zum Zugriff auf Eigenschaften).</p>
+		<p>Auf diese Weise können wir ganze Ketten an Objektnamen notieren, um das gewünschte Objekt zu fassen zu bekommen:</p>
+		<pre>window.location.href.substring(0, 4)</pre>
+		<p>Hier wird die <code>substring</code>-Methode angesprochen, um das Protokoll <code>http</code> aus der Adresse (URL) des gegenwärtigen HTML-Dokuments zu extrahieren.</p>
+		<p>Eine alternative Methode zum Ansprechen von Unterobjekten ist die Klammer-Schreibweise. Dabei wird der Name des Unterobjektes zwischen eckigen Klammern als String notiert:</p>
+		<pre>objekt["unterobjekt"]</pre>
+		<p>Dies hat denselben Effekt wie <code>objekt.unterobjekt</code>. Der Vorteil dieser Schreibweise kommt zum Tragen, wenn der Objektname variabel ist und erst zur Laufzeit des Scriptes feststeht. Zwischen den Klammern lässt sich ein beliebiger <a href="syntax.html#ausdruecke">Ausdruck</a> notieren, also beispielsweise ein Bezeichner, der auf eine String-Variable verweist:</p>
+		<pre>objekt[stringVariable]</pre>
+		<p>Der JavaScript-Interpreter nimmt den String als Objektnamen und sucht nach einem entsprechenden Unterobjekt.</p>
+		<p>...</p>
+	</div>
+	<div class="subsection" id="bezeichner-konventionen">
+		<h3>Konventionen für Bezeichner</h3>
+		<p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Objektnamen beachten müssen:</p>
+		<p>Ein Bezeichner darf nur aus Buchstaben und arabischen Ziffern (0-9) bestehen. Es gibt zwei Ausnahmen: An beliebiger Stelle darf der Unterstrich <code>_</code> sowie das Dollarzeichen <code>$</code> verwendet werden. Außerdem darf der Bezeichner nicht mit einer Ziffer beginnen.</p>
+		Insbesondere Leerzeichen und andere Sonderzeichen sind in einem Bezeichner nicht erlaubt.</p>
+		<p>Beispiele für <strong>erlaubte Bezeichner</strong>:</p>
+<pre>
+mitarbeiter_name
+mitarbeiterName
+_mitarbeitername
+$mitarbeitername
+lohnIn$
+mitarbeiter1
+twenty4seven
+</pre>
+		<p>Beispiele für <strong>nicht erlaubte</strong> Bezeichner:</p>
+<pre>
+mitarbeiter name
+mitarbeiter-name
+mitarbeiter.name
+lohnIn€
+lohnIn£
+2raumwohnung
+ein♥FürTiere
+arbeiter&angestellte
+</pre>
+		<p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
+		<p>Allerdings beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>firmengröße</code> ist also möglich, üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen.</p>
+		
+		
+		<p>Bracket Notation erlaubt beliebigen String</p>
+	</div>
+
 </div>
 <div class="section" id="funktionen">
 	<h2>Funktionen und Methoden aufrufen</h2>
 	<p>...</p>
+	<p>Call-Operator</p>
 	<p>funktion(parameter)</p>
 	<p>objekt.methode(parameter)</p>
 </div>
 <div class="section" id="globales-objekt">
-	<h2>Das globale Objekt window</h2>
+	<h2>Das globale Objekt <code>window</code></h2>
 	<p></p>
 </div>
 <div class="section" id="variablen">
 	<h2>Variablen</h2>
-	<p></p>
 	<p>Gültigkeitsbereich (Scope)</p>
-   <div class="subsection" id="globale-variablen">
+	<p>Identifier Resolution</p>
+	<div class="subsection" id="globale-variablen">
 		<h3>Globale Variablen</h3>
 		<p></p>
 	</div>
-   <div class="subsection" id="lokale-variablen">
+	<div class="subsection" id="lokale-variablen">
 		<h3>Lokale Variablen (Funktionsvariablen)</h3>
 		<p></p>
 	</div>
 </div>
-<div class="section" id="bezeichner">
-	<h2>Konventionen für Variablennamen (Bezeichner)</h2>
-	<p>...</p>
+<div class="section" id="erzeugen">
+	<h2>Objekte erzeugen: Literale und Instantiierung</h2>
+	<p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder eine ausdrückliche <strong>Instantiierung</strong>.</p>
+	<p>Ein Literal (englisch für <em>wörtlich</em>, <em>buchstäblich</em>) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> und <code>false</code> sind <code>Boolean</code>-Literale.</p>
+	<p>Die Langschreibweise erzeugt ausdrücklich eine Instanz eines Kernobjekts, indem es den Konstruktoren aufruft. Wenn wir z.B. ein Objekt vom Typ <code>Array</code> erzeugen wollen, können wir <code>new Array()</code> schreiben.</p>
+	<p>Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen und das Ergebnis ist auch nicht immer dasselbe (siehe <a href="#objects-primitives">Objekte und primitive Typen</a>). Wenn eine Literalschreibweise für den gewünschten Objekttyp existiert, dann sollten Sie diese nutzen. Für manche Objekttypen existiert keine Literalschreibweise, sodass Sie beispielsweise <code>new Date()</code> notieren müssen.</p>
 </div>
-<div class="section" id="objektorientierung">
-	<h2>Objektorientierung</h2>
-	<p>Konstruktoren, Instanzen, Prototypen hier?</p>
-</div>
+
 
 <div id="footer">
 <p><strong>JavaScript-Dokumentation</strong> &middot; <a href="http://molily.de/js/">Zum Inhaltsverzeichnis</a></p>
