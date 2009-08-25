@@ -17,7 +17,7 @@
 
  <div class="section" id="ueber">
 	<h2>Vorbemerkung</h2>
-	<p>Von den vielen Möglichkeiten, JavaScript in HTML-Dokumente einzubetten, werden hier nur wenige gängige vorgestellt und empfohlen. Dieses Kapitel geht davon aus, dass HTML und JavaScript möglichst getrennt werden und sich JavaScripte eigenständig hinzuschalten. Die Hintergründe zu diesem Ansatz finden Sie im Kapitel <a href="hintergruende/einsatz.html">Sinnvoller JavaScript-Einsatz</a>.</p>
+	<p>Von den vielen Möglichkeiten, JavaScript in HTML-Dokumente einzubetten, werden hier nur wenige gängige vorgestellt und empfohlen. Dieses Kapitel geht davon aus, dass HTML und JavaScript möglichst getrennt werden und sich JavaScripte eigenständig hinzuschalten. Die Hintergründe zu diesem Ansatz finden Sie im Kapitel <a href="einsatz.html">Sinnvoller JavaScript-Einsatz</a>.</p>
 </div>
 <div class="section" id="script-element">
 	<h2>Das script-Element</h2>
@@ -56,10 +56,9 @@ window.alert("Hallo Welt!");
 	<h2>Ausführung von script-Elementen</h2>
 	
 	<p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf als auch im Dokumentkörper einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im folgenden betrachten.</p>
-	<p>Die <code>script</code>-Elemente werden standardmäßig schon beim Einlesen des HTML-Dokuments ausgeführt. Das bedeutet: Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
-	<p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments gestoppt und der JavaScript-Code wird ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt diese aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
-	<p>Diese Vorgehensweise hat folgende Konsequenzen:</p>
-	
+	<p>Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
+	<p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb <code>script</code>-Element wird ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
+	<p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat folgende Konsequenzen:</p>
 	<div class="subsection" id="script-reihenfolge">
 		<h3>Scripte haben Zugriff auf die Objekte vorher eingebundener Scripte</h3>
 		<p>Die <code>script</code>-Elemente samt enthaltenem JavaScript-Code bzw. aus externen Dateien eingebundener JavaScript-Code werden in der Reihenfolge ausgeführt, in der sie im HTML-Quelltext notiert sind. Wenn Sie verschiedene Scripte haben, die aufeinander aufbauen, so müssen Sie sie nacheinander einbinden.</p>
@@ -74,7 +73,7 @@ helferfunktion();
 	
 	<div class="subsection" id="script-verzoegerung">
 		<h3>Externe Scripte verzögern den Aufbau des Dokuments</h3>
-		<p>Dass der Webbrowser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> dem Einlesen des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes Script im Dokument abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
+		<p>Dass der Webbrowser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> dem Einlesen des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
 		<p>Dieser Nachteil kann dadurch umgangen werden, alle <code>script</code>-Elemente in der notwendigen Reihenfolge am Dokument-Ende zu platzieren anstatt wie üblich in den Dokumentkopf. Aus Gründen der kürzeren Ladezeit und des schnelleren Aufbau des Dokumentes wird dies immer öfter empfohlen. Es setzt allerdings eine bestimmte Arbeitsweise voraus. Im Abschnitt <a href="#ereignisbasierung">Ereignisbasierte Scripte</a> werden wir eine Methode kennenlernen, bei die Scripte die Hauptarbeit erst verrichten, wenn das Dokument vollständig geladen wurde.</p>
 	</div>
 	
@@ -92,7 +91,8 @@ document.write("&lt;link rel='stylesheet' href='javascript.css'&gt;");
 &lt;/head&gt;
 &lt;body&gt;
 &lt;script type="text/javascript"&gt;
-document.write("&lt;p&gt;&lt;a href="javascript:location.reload()"&gt;Seite mittels JavaScript neu laden&lt;\/a&gt;&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;a href='javascript:location.reload()'&gt;" +
+	"Seite mittels JavaScript neu laden&lt;\/a&gt;&lt;\/p&gt;");
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -104,12 +104,12 @@ document.write("&lt;p&gt;&lt;a href="javascript:location.reload()"&gt;Seite mitt
 	
 	<div class="subsection" id="script-dom-zugriff">
 		<h3>Ein Script hat Zugriff auf die Elemente vor dem zugehörigen <code>script</code>-Element</h3>
-		<p>Wie Sie vielleicht wissen, ist die häufigste Aufgabe von JavaScripten der Zugriff auf das Dokument über die DOM-Schnittstelle, die die Elemente und deren Textinhalte als Knotenobjekte zugänglich macht. Doch weil ein Script mitten im Parsing-Prozess, also während des Einlesens des HTML-Dokuments ausgeführt wird, hat es zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, genauer gesagt auf die Elemente, die vor dem zugehörigen <code>script</code>-Element liegen und somit vom Parser bereits verarbeitet wurden.</p>
+		<p>Wie Sie vielleicht wissen, ist die häufigste Aufgabe von JavaScripten der Zugriff auf das Dokument über die DOM-Schnittstelle, die die Elemente und deren Textinhalte als Knotenobjekte zugänglich macht. Da ein Script mitten im Parsing-Prozess, also während des Einlesens des HTML-Dokuments ausgeführt wird, hat es zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit vom Parser bereits verarbeitet wurden.</p>
 		<pre>
 &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
 &lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
+&lt;<strong>head</strong>&gt;
+&lt;<strong>title</strong>&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
 &lt;script type="text/javascript"&gt;
 // Der Titel ist an dieser Stelle bereits verfügbar:
 window.alert( document.title );
@@ -119,7 +119,7 @@ window.alert( document.body );
 window.alert( document.getElementById("überschrift") );
 &lt;/script&gt;
 &lt;/head&gt;
-&lt;body&gt;
+&lt;<strong>body</strong>&gt;
 
 &lt;script type="text/javascript"&gt;
 window.alert( document.title ); // OK
@@ -129,7 +129,7 @@ window.alert( document.body );
 window.alert( document.getElementById("überschrift") );
 &lt;/script&gt;
 
-&lt;h1 id="überschrift"&gt;Beispielüberschrift&lt;/h1&gt;
+&lt;<strong>h1 id="überschrift"</strong>&gt;Beispielüberschrift&lt;/h1&gt;
 &lt;script type="text/javascript"&gt;
 window.alert( document.title ); // OK
 window.alert( document.body ); // OK
@@ -149,8 +149,9 @@ window.alert( document.getElementById("überschrift") );
 	<h2>Das <code>noscript</code>-Element</h2>
 	<p>Das <code>noscript</code> ist als Gegenstück zu <code>script</code> gedacht: Damit lassen sich Alternativinhalte für Programme ins Dokument einfügen, die keine Scripte unterstützen. Browser, in denen JavaScripte deaktiviert oder nicht verfügbar ist, zeigen den Alternativinhalt an. Der Inhalt richtet sich auch an Programme wie Suchmaschinen-Robots, die das Dokument automatisiert verarbeiten, ohne die Scripte dabei zu beachten.</p>
 	<pre>&lt;noscript&gt;
-   &lt;p&gt;Dieser Absatz ist gehört zum Inhalt des Dokuments, ist aber im Browser nur zu sehen,
-   wenn JavaScript deaktiviert oder nicht zur Verfügung steht.&lt;/p&gt;
+   &lt;p&gt;Dieser Absatz ist gehört zum Inhalt des Dokuments, ist aber
+   im Browser nur zu sehen, wenn JavaScript deaktiviert oder nicht
+   zur Verfügung steht.&lt;/p&gt;
 &lt;/noscript&gt;</pre>
 	<p>Der Sinn von <code>noscript</code> ist, die Informationen zugänglich zu machen, die sonst nur mithilfe des Scriptes zugänglich wären oder sogar durch das Script eingefügt werden. Diese Abwärtskompatibilität einer Website und die Zugänglichkeit aller Inhalte ohne JavaScript ist zwar erstrebenswert, allerdings zäumt »Unobtrusive JavaScript« das Pferd von vorne anstatt von hinten auf: Alle Informationen liegen bereits im Dokument und es ist auch ohne JavaScript gut bedienbar. Mittels JavaScript werden dann Zusatzfunktionen eingebaut, die die Bedienung und das Lesen der Inhalte vereinfachen und verbessern.</p>
 	<p>Im Unobtrusive JavaScript kommt dem <code>noscript</code>-Element daher keine Bedeutung zu. Von seiner Verwendung wird sogar abgeraten, da es dazu verleitet, JavaScript-Logik mit dem HTML-Code fest zu verschweißen, anstatt diese sauber zu trennen. Gestalten Sie Ihre Website so, dass ohne JavaScript möglichst alle Inhalte zugänglich sind und alle Funktionen zur Verfügung stehen. Ihre JavaScripte schalten sich dann hinzu und modifizieren das Dokument entsprechend. Anstatt also mittels <code>noscript</code> ein Element einzufügen, das nur ohne JavaScript relevant ist, sollten Sie dieses ganz normal ohne <code>noscript</code> im Dokument notieren. Falls es bei aktiviertem JavaScript nicht benötigt wird, dann können Sie es mittels JavaScript verändern oder ganz ausblenden.</p>
@@ -163,14 +164,14 @@ window.alert( document.getElementById("überschrift") );
 	<p>Der Schicksal von JavaScript ist aber nicht, bloß in diesem kurzen Moment des Ladens des HTML-Dokuments ausgeführt zu werden und dann für immer zur Ruhe zu kommen. Die meisten JavaScripte sollen Interaktivität bieten. Der Schlüssel dazu ist, das haben wir bereits in den <a href="http://redaktion.selfhtml.org/selfhtml-preview/javascript/konzepte.html#events">Grundkonzepten</a> kennengelernt, die <strong>Überwachung und Behandlung von Ereignissen</strong> (auch <strong>Event-Handling</strong> genannt).</p>
 	<p>Moderne Scripte durchlaufen deshalb verschiedene <strong>Phasen</strong>:</p>
 	<div class="subsection" id="phase-laden">
-		<h3>1. Phase: Das Dokument wird geladen</h3>
-		<p>Dabei wird das JavaScript ausgeführt. Variablen und Funktionen werden notiert, sodass sie für die spätere Nutzung zur Verfügung stehen. (Die notierten Funktionen werden dabei definiert, aber nicht notwendigerweise aufgerufen.) Wie gesagt hat das Script zu diesem Zeitpunkt noch keinen vollständigen Zugriff auf das Dokument.</p>
+		<h3>Phase Eins: Das Dokument wird empfangen und geparst</h3>
+		<p>Dabei wird das JavaScript erstmals ausgeführt. Variablen und Funktionen werden notiert, sodass sie für die spätere Nutzung zur Verfügung stehen. (Die notierten Funktionen werden dabei definiert, aber nicht notwendigerweise aufgerufen.) Wie gesagt hat das Script zu diesem Zeitpunkt noch keinen vollständigen Zugriff auf das Dokument.</p>
 	</div>
 	<div class="subsection" id="phase-onload">
-		<h3>2. Phase: Das Dokument ist fertig geladen</h3>
+		<h3>Phase Zwei: Das Dokument ist fertig geladen</h3>
 		<p>Der vollständige Zugriff auf das Dokument über das DOM ist erst jetzt möglich. Nun wird ein Teil des Scripts aktiv, um dem bisher statischen Dokument JavaScript-Interaktivität hinzuzufügen: Das Script spricht vorhandene Elementknoten an und fügt ihnen sogenannte Event-Handler hinzu. Das Script kann aber auch den Inhalt oder die Darstellung von bestehenden Elementen verändern und dem Dokument neue Elemente hinzufügen (auch <strong>DOM-Manipulation</strong> genannt).</p>
 	<div class="subsection" id="phase-event-handling">
-		<h3>3. Phase: Der Anwender bedient das Dokument und das Script reagiert darauf</h3>
+		<h3>Phase Drei: Der Anwender bedient das Dokument und das Script reagiert darauf</h3>
 		<p>Wenn die überwachten Ereignisse an den entsprechenden Elementen im Dokument passieren, so werden gewisse andere Teiles des Scripts aktiv, denn die Handler-Funktionen werden ausgeführt.</p>
 	</div>
 	<div class="subsection" id="script-struktur">
@@ -218,28 +219,28 @@ ihn interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Mau
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 	<p>Dem <code>p</code>-Element mit der ID <code>interaktiv</code> soll nun per JavaScript ein Event-Handler zugewiesen werden. Ziel ist, dass eine bestimmte JavaScript-Funktion aufgerufen wird, immer wenn der Anwender auf die Fläche des Element klickt. Das Ereignis, das bei einem Mausklick ausgelöst wird, heißt sinnigerweise <code>click</code>.</p>
-	<p>Unser Script braucht drei Teile:</p>
+	<p>Unser Script läuft in drei Schritten ab:</p>
 	<ol>
-		<li><strong>Warten, bis das Dokument vollständig geladen ist:</strong> Reagiere auf das <code>load</code>-Ereignis und führe eine Startfunktion aus, sobald das Ereignis passiert.</li>
+		<li><strong>Warten, bis das Dokument vollständig geladen ist:</strong> Starte die Überwachung des <code>load</code>-Ereignisses und führe eine Startfunktion aus, sobald das Ereignis passiert.</li>
 		<li><strong>Einrichtung der Event-Handler:</strong> Die besagte Startfunktion spricht den Textabsatz an und registriert einen Event-Handler für das <code>click</code>-Ereignis.</li>
 		<li><strong>Ereignis-Verarbeitung:</strong> Die Handler-Funktion, die beim Klick auf den Textabsatz ausgeführt wird.</li>
 	</ol>
-	<p>Teil 1 ist mit der Anweisung erledigt, die wir bereits oben kennengelernt haben:</p>
+	<p>Schritt 1 ist mit der Anweisung erledigt, die wir bereits oben kennengelernt haben:</p>
 	<pre>window.onload = start;</pre>
 	<p>Natürlich können wir der Startfunktion auch einen anderen Namen als <code>start</code> geben. Üblich ist z.B. <code>init</code>.</p>
-	<p>Die Startfunktion für Teil 2 könnte so aussehen:</p>
+	<p>Die Startfunktion für Schritt 2 könnte so aussehen:</p>
 <pre>function start () {
    document.getElementById("interaktiv").onclick = klickverarbeitung;
 }</pre>
 	<p>Was zunächst kompliziert aussieht, ist nichts anderes als die Anwendung des bekannten Schemas <code>element.onevent = handlerfunktion;</code>.</p>
 	<p>Zur Einrichtung des Event-Handler greifen wir über das DOM auf das Dokument zu. Damit der Zugriff auf das gewünschte Element so einfach möglich ist, haben wir einen »Angriffspunkt« für das Script geschaffen, indem wir dem <code>p</code>-Element eine ID zugewiesen haben. Eine solche Auszeichnung über IDs und Klassen (<code>class</code>-Attribute) spielen eine wichtige Rolle, um Angriffspunkte für Stylesheets und Scripte zu bieten.</p>
-	<p>Mit der DOM-Methode <code>document.getElementById</code> (zu deutsch: <em>gib mir das Element anhand der folgenden ID</em>) können wir das das Element mit der bekannten ID ansprechen. Der Aufruf <code>document.getElementById("interaktiv")</code> gibt uns das Objekt zurück, das das <code>p</code>-Element repräsentiert.</p>
+	<p>Mit der DOM-Methode <code>document.getElementById</code> (zu deutsch: <em>gib mir das Element anhand der folgenden ID</em>) können wir das Element mit der bekannten ID ansprechen. Der Aufruf <code>document.getElementById("interaktiv")</code> gibt uns das Objekt zurück, das das <code>p</code>-Element repräsentiert.</p>
 	<p>Wir arbeiten direkt mit diesem Rückgabewert weiter und weisen dem Elementobjekt nun einen Event-Handler zu. Die Objekteigenschaft lautet <code>onclick</code>, denn es geht um das <code>click</code>-Ereignis. Die auszuführende Handler-Funktion lautet <code>klickverarbeitung</code>, dieser Name ist freilich willkürlich gewählt.</p>
 	<p>Das ist schon alles und damit kommen wir zur Definition der besagten Funktion <code>klickverarbeitung</code>:</p>
 	<pre>function klickverarbeitung () {
    document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
 }</pre>
-	<p>Was darin passiert, müssen Sie noch nicht bis ins Detail verstehen. Wie Sie sehen können, wird darin ebenfalls mittels <code>document.getElementById</code> das angeklickte <code>p</code>-Element angesprochen. Erneut wird eine Eigenschaft gesetzt, nämlich <code>innerHTML</code>. An den bestehenden Wert wird mit dem Operator <code>+=</code> ein String angehängt. Wenn Sie das Beispiel im Browser ausführen und auf das Element klicken, ändert sich der Text des Elements.</p>
+	<p>Was darin passiert, müssen Sie noch nicht bis ins Detail verstehen. Wie Sie sehen können, wird darin ebenfalls mittels <code>document.getElementById</code> das angeklickte <code>p</code>-Element angesprochen. Erneut wird eine Eigenschaft gesetzt, diesmal <code>innerHTML</code>. An den bestehenden Wert wird mit dem Operator <code>+=</code> ein String angehängt. Wenn Sie das Beispiel im Browser ausführen und auf das Element klicken, ändert sich der Text des Elements.</p>
 	<p>Zusammengefasst sieht das Beispiel mit eingebettetem JavaScript so aus:</p>
 	<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
 &lt;html&gt;
@@ -267,7 +268,7 @@ interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 	<p>Den JavaScript-Code können wir später natürlich in eine externe Datei auslagern.</p>
-	<p>So einfach und nutzlos dieses kleine Beispiel aussieht: Wenn Sie dieses dreischrittige Schema verstanden haben, beherrschen Sie einen Großteil der JavaScript-Programmierung und wissen, wie Scripte üblicherweise strukturiert werden und schließlich ausgeführt werden.</p>
+	<p>So einfach und nutzlos dieses kleine Beispiel aussieht: Wenn Sie das dreischrittige Schema verstanden haben, beherrschen Sie einen Großteil der JavaScript-Programmierung und wissen, wie Scripte üblicherweise strukturiert werden und schließlich ausgeführt werden.</p>
 </div>
 <div class="section" id="handler-loeschen">
 	<h2>Event-Überwachung beenden</h2>
@@ -286,7 +287,7 @@ interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an
 	<p>Oft steckt hinter dieser Schreibweise der Wunsch, der Handler-Funktion noch Parameter mitzugeben, damit darin gewissen Daten zur Verfügung stehen:</p>
 	<pre>element.onevent = handlerfunktion(parameter);   // Fehler!</pre>
 	<p>Sie müssen sich die Funktionsweise des traditionellen Event-Handlings noch einmal durch den Kopf gehen lassen, um zu verstehen, warum diese Anweisungen nicht den gewünschten Zweck erfüllen. Beim korrekten Schema <code>element.onevent = handlerfunktion;</code> wird eine Funktion, genauer gesagt ein Funktionsobjekt, in einer Eigenschaft des Elementobjektes gespeichert.</p>
-	<p>Das ist beim obigen Code nicht der Fall. Stattdessen wird die Handler-Funktion wegen den Klammern <code>()</code> hinter dem Funktionsnamen <strong>sofort ausgeführt</strong>. Diese Klammern sind nämlich der sogenannte Aufruf-Operator.</p>
+	<p>Das ist beim obigen fehlerhaften Code nicht der Fall. Anstatt auf das Eintreten des Ereignisses zu warten, wird die Handler-Funktion <strong>sofort ausgeführt</strong>. Dafür verantwortlich sind die Klammern <code>()</code> hinter dem Funktionsnamen &ndash; diese Klammern sind nämlich der JavaScript-Operator zum Aufruf von Funktionen.</p>
 	<p>Das Erste, was der JavaScript-Interpreter beim Verarbeiten dieser Zeile macht, ist der Aufruf der Funktion. Deren <em>Rückgabewert</em> wird schließlich in der <code>onevent</code>-Eigenschaft gespeichert. In den meisten Fällen hat die Handler-Funktion keinen Rückgabewert, was dem Wert <code>undefined</code> entspricht, oder sie gibt <code>false</code> zurück, sodass schlicht diese Werte in die Eigenschaft geschrieben werden. Wir wollen die Funktion aber nicht direkt aufrufen, sondern bloß das Funktionsobjekt ansprechen, um es in die Eigenschaft zu kopieren. Daher dürfen an dieser Stelle keine Klammern hinter dem Namen notiert werden.</p>
 	<p>Der Wunsch, der Handler-Funktion gewisse Daten als Parameter zu übergeben, ist verständlich. Die obige fehlerhafte Schreibweise vermag dies aber nicht zu leisten. Leider ist diese Aufgabenstellung auch nicht so einfach lösbar: Das altbekannte Schema <code>element.onevent = handlerfunktion;</code> muss eingehalten werden. Der Funktionsaufruf, der die Parameter übergibt, wird in einer zusätzlichen Funktion untergebracht (gekapselt). Schematisch:</p>
 	<pre>function helferfunktion (parameter) {
@@ -743,8 +744,8 @@ function meldung2 () {
 		<p>Diese Bibliotheken bringen jedoch eine komplett neue und eigene Arbeitsweise sowie unzählige weitere Funktionen mit sich und erschlagen den Nutzer damit förmlich. Daher seien hier zwei isolierte Helferscripte vorgestellt.</p>
 	</div>
 
-	<div class="subsection">
-		<h3 id="einfaches-addevent">Einfaches, oftmals ausreichendes <code>addEvent</code></h3>
+	<div class="subsection" id="einfaches-addevent">
+		<h3>Einfaches, oftmals ausreichendes <code>addEvent</code></h3>
 		<p>Ein einfaches Beispiel ist <a href="http://www.ilfilosofo.com/blog/2008/04/14/addevent-preserving-this/">A Good Enough addEvent</a> von Austin Matzko. Ziel ist es, mehrere Event-Handler für einen Typ bei einem Element registrieren zu können. Die Funktion verwendet <code>addEventListener</code> (DOM-Standard) oder <code>attachEvent</code> (Microsoft-Modell) je nach Verfügbarkeit.</p>
 <pre>function addEvent (obj, type, fn) {
    if (obj.addEventListener) {
@@ -798,19 +799,19 @@ function meldung2 () {
 </div>
 
 <div class="section" id="onload">
-	<h2>Onload-Techniken &ndash; Scripte ausführen, sobald das Dokument verfügbar ist</h2>
+	<h2>Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</h2>
 	
 	<div class="subsection" id="onload-nachteile">
-		<h3>Das <code>load</code>-Ereignis und seine Nachteile</h3>
-		<p>Wir haben bereits die <a href="#ereignisbasierung">drei Phasen von ereignisbasierten Scripten</a> kennengelernt, die ohne ins HTML eingebettetes JavaScript auskommen (Unobtrusive JavaScript). Die zweite Phase tritt ein, wenn das Dokument fertig geladen ist und ein Script Zugriff auf den Elementenbaum des Dokuments hat. Dieser Zugriff ist nötig, um bei den gewünschten Elementen Event-Handler zu registrieren.</p>
-		<p>Wir haben das dokumentweite <code>load</code>-Ereignis (<code>window.onload</code>) kennengelernt, um eine Funktion zu diesem Zeitpunkt auszuführen. Das <code>load</code>-Ereignis tritt jedoch erst dann ein, wenn das gesamte Dokument samt aller Bilder, Plugins, Iframes und sonstigen externen Ressourcen geladen ist. Je nachdem, wieviele Bilder eingebunden werden, kann zu diesem Zeitpunkt das Dokument schon längst im Browser aufgebaut sein und der Anwender kann es schon größtenteils lesen und bedienen.</p>
-		<p>Für das Event-Handling interessiert uns nicht, ob auch alle Bilder fertig geladen, sondern lediglich der JavaScript-Zugriff auf den DOM-Baum, der weit vor dem Eintreten des <code>load</code>-Ereignisses möglich ist (dieser Zustand wird auch »DOM ready« genannt). Bestenfalls sollte das JavaScript die notwendigen Änderungen am Dokument schnellstmöglich vornehmen sowie ihm Interaktivität hinzufügen. Dadurch ist das Dokument eingeschlossen der JavaScript-Funktionalität bereits während des Ladens für den Anwender bedienbar.</p>
+		<h3>Nachteile des <code>load</code>-Ereignisses</h3>
+		<p>Wir haben bereits die <a href="#ereignisbasierung">drei Phasen von ereignisbasierten Scripten</a> kennengelernt, die sich automatisch hinzuschalten, ohne dass JavaScript-Code direkt ins HTML eingebettet ist (Unobtrusive JavaScript). Die zweite Phase tritt ein, wenn das Dokument fertig geladen ist und ein Script Zugriff auf den DOM-Elementenbaum des Dokuments hat. Sobald dieser Zugriff möglich ist, werden Event-Handler bei gewissen Elementen registrieren.</p>
+		<p>Wir haben das dokumentweite <code>load</code>-Ereignis (<code>window.onload</code>) kennengelernt, um eine Funktion nach dem erfolgreichen Laden des Dokuments auszuführen. Das <code>load</code>-Ereignis tritt jedoch erst dann ein, wenn das gesamte Dokument samt aller Bilder, Plugins, Iframes und anderen externen Ressourcen geladen ist. Je nachdem, wieviele Bilder eingebunden werden, kann zu diesem Zeitpunkt das Dokument schon längst im Browser aufgebaut sein und der Anwender kann es schon größtenteils lesen und bedienen.</p>
+		<p>Für das Event-Handling interessiert uns nicht, ob auch alle Bilder fertig geladen, sondern lediglich der JavaScript-Zugriff auf den DOM-Baum, der weit vor dem Eintreten des <code>load</code>-Ereignisses möglich ist. Dieser Zeitpunkt wird mit <em>DOM ready</em> beschrieben. Ein JavaScript sollte dem Dokument so zeitnah wie möglich Interaktivität hinzufügen und notwendige Änderungen vornehmen, damit das Dokument einschließlich der JavaScript-Funktionalität bereits während des Ladens für den Anwender bedienbar ist.</p>
 	</div>
 	
 	<div class="subsection" id="domcontentloaded">
 		<h3>DOMContentLoaded</h3>
-		<p>Lange Rede, kurzer Sinn: Der <code>load</code>-Event ist aus heutiger Sicht für Unobtrusive JavaScript nicht geeignet. Glücklicherweise gibt es ein Ereignis, das eintritt, sobald der Parser den HTML-Code eingelesen hat und der DOM-Baum für JavaScripte nutzbar ist: <code>DOMContentLoaded</code>.</p>
-		<p>Die Überwachung dieses Ereignises ist allerdings nur im Zusammenhang mit <code>addEventListener</code>, also dem W3C-Modell möglich. Alle großen Browser, die den DOM-Standard umsetzen, kennen mittlerweile auch <code>DOMContentLoaded</code>. Eine Ausnahme bildet der Internet Explorer einschließlich der neusten Version 8: Weder unterstützt er den DOM-Standard, noch kennt er das Ereignis <code>DOMContentLoaded</code>.</p>
+		<p>Der <code>load</code>-Event ist aus heutiger Sicht für Unobtrusive JavaScript nicht geeignet. Glücklicherweise gibt es ein Ereignis, das eintritt, sobald der Parser den gesamten HTML-Code eingelesen hat und der DOM-Baum für JavaScripte nutzbar ist: <code>DOMContentLoaded</code>.</p>
+		<p>Die Überwachung dieses Ereignises ist allerdings nur im Zusammenhang mit <a href="#addEventListener">addEventListener</a>, also dem W3C-Modell möglich. Alle großen Browser, die den DOM-Standard umsetzen, kennen mittlerweile auch <code>DOMContentLoaded</code>. Eine Ausnahme bildet der Internet Explorer einschließlich der neusten Version 8: Weder unterstützt er den DOM-Standard, noch kennt er das Ereignis <code>DOMContentLoaded</code>.</p>
 		<p>Das folgende Beispiel demonstriert die Überwachung der beiden Ereignisse <code>load</code> und <code>DOMContentLoaded</code>:</p>
 <pre>function dokumentGeladen (e) {
 	alert("Das Ereignis " + e.type + " ist passiert.")
