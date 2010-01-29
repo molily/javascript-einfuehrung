@@ -1,3 +1,5 @@
+(function (window) {
+
 /*
  *
  * ContentLoaded.js
@@ -21,6 +23,25 @@
 // @w	window reference
 // @f	function reference
 function ContentLoaded(c,j){var b=c.document,h='DOMContentLoaded',d=c.navigator.userAgent.toLowerCase(),f=parseFloat(d.match(/.+(?:rv|it|ml|ra|ie)[\/: ]([\d.]+)/)[1]);function g(a){if(!document.loaded){document.loaded=true;j((a.type&&a.type==h)?a:{type:h,target:b,eventPhase:0,currentTarget:b,timeStamp:+new Date,eventType:a.type||a})}}if(/webkit\//.test(d)&&f<525.13){(function(){if(/complete|loaded/.test(b.readyState)){g('khtml-poll')}else{setTimeout(arguments.callee,10)}})()}else if(/msie/.test(d)&&!c.opera){b.attachEvent('onreadystatechange',function(a){if(b.readyState=='complete'){b.detachEvent('on'+a.type,arguments.callee);g(a)}});if(c==top){(function(){try{b.documentElement.doScroll('left')}catch(e){setTimeout(arguments.callee,10);return}g('msie-poll')})()}}else if(b.addEventListener&&(/opera\//.test(d)&&f>9)||(/gecko\//.test(d)&&f>=1.8)||(/khtml\//.test(d)&&f>=4.0)||(/webkit\//.test(d)&&f>=525.13)){b.addEventListener(h,function(a){b.removeEventListener(h,arguments.callee,false);g(a)},false)}else{var i=c.onload;c.onload=function(a){g(a||c.event);if(typeof i=='function'){i(a||c.event)}}}}
+
+/* ------------------------------------------------------ */
+
+var CoolURIs = {
+	rules : {
+		'einbindung.html#fehler-code-als-string' : 'event-handling-grundlagen.html#fehler-code-als-string'
+	},
+	init : function () {
+		var currentURI = location.href, newURI;
+		for (var oldURI in CoolURIs.rules) {
+			if (currentURI.indexOf(oldURI) > -1) {
+				location.href = CoolURIs.rules[oldURI];
+				break;
+			}
+		}
+	}
+};
+
+CoolURIs.init();
 
 /* ------------------------------------------------------ */
 
@@ -55,26 +76,30 @@ var TOC = {
 		return ol;
 	},
 	
+	buildSubToc : function (section, mainTocItem) {
+		var subToc = TOC.buildList(
+			section.getElementsByTagName("h3")
+		);
+		if (subToc) {
+			mainTocItem.appendChild(subToc);
+		}
+	},
+	
 	init : function () {
 		
 		var mainToc = TOC.buildList(
 			document.getElementsByTagName("h2"),
-			buildSubToc
+			TOC.buildSubToc
 		);
+		if (!mainToc) {
+			return;
+		}
 		mainToc.id = "toc";
-		
 		var h1 = document.getElementsByTagName("h1")[0];
 		document.body.insertBefore(mainToc, h1.nextSibling);
-		
-		function buildSubToc (section, mainTocItem) {
-			var subToc = TOC.buildList(
-				section.getElementsByTagName("h3")
-			);
-			if (subToc) {
-				mainTocItem.appendChild(subToc);
-			}
-		}
-		
 	}
 };
+
 ContentLoaded(window, TOC.init);
+
+})(window);

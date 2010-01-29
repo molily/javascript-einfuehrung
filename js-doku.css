@@ -77,7 +77,7 @@ dd {
 pre, code {
 	font-family: consolas,"courier new","bitstream vera sans monspace","lucida console","liberation mono",courier,monospace;
 	font-size: inherit;
-	color: #00b;
+	color: #02a;
 }
 
 pre {
@@ -89,6 +89,11 @@ pre {
 	display: inline-block;
 	min-width: 100%;
 	*/
+}
+
+pre strong {
+	font-weight: normal;
+	color: green;
 }
 
 dfn {
