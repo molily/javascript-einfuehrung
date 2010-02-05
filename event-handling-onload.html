@@ -52,9 +52,10 @@ ContentLoaded(window, init);</pre>
 </div>
 
 <div class="section" id="domcontentloaded-nachteile">
-	<h2>Unklarheiten bei <code>DOMContentLoaded</code></h2>
-	<p>Das <code>DOMContentLoaded</code>-Ereignis ist eine Technik, die ein Browserhersteller [Mozilla?] erfunden hat und die die anderen Browserhersteller übernommen haben, weil sie sie nützlich fanden. Das heißt, das Ereignis wurde noch nicht formal spezfiziert und seine genaue Funktionsweise noch nicht standardisiert. Das führt dazu, dass sich die Browser im Detail unterschiedlich verhalten.</p>
-	<p>Todo: HTML5!</p>
+	<h2>Einschränkungen bei <code>DOMContentLoaded</code></h2>
+	<p>Das <code>DOMContentLoaded</code>-Ereignis ist eine Technik, die der Browserhersteller Mozilla erfunden hat und die die anderen Browserhersteller übernommen haben, weil sie sie nützlich fanden. Mittlerweile wird <code>DOMContentLoaded</code> in HTML5 standardisiert.
+	<p>TODO</p>
+	<p>die Browser verhalten sich im Detail unterschiedlich</p>
 	<p>Eine Unstimmigkeit ist die Frage, ob das Ereignis durch den Ladevorgang externer Stylesheets verzögert werden soll.</p>
 	<p>Beide Varianten ergeben Sinn: Es reicht zwar aus, dass der DOM-Baum komplett eingelesen ist, wenn man Event-Handler registrieren will. Allerdings gibt es auch Scripte, die in der Initialisierungsphase bereits auf die Darstellung gewisser Elemente reagieren sollen &ndash; und diese wird üblicherweise durch externe Stylesheets geregelt. Wenn das Script beispielsweise die Größe eines Elements in Erfahrung bringen will, muss der Browser bereits die Stylesheets verarbeitet und die Darstellung berechnet haben.</p>
 	<p>Seien Sie also vorsichtig, wenn Sie <code>DOMContentLoaded</code> nutzen und Ihre Scripte Informationen über die Darstellung der Elemente abfragen. Große JavaScript-Frameworks nehmen eine Vereinheitlichung vor: Sie verwenden nicht allein <code>DOMContentLoaded</code>, sondern prüfen zusätzlich, ob alle eingebundenen Stylesheets bereits geladen wurden. Wenn der Ladevorgang noch andauert, wird die Prüfung nach einer Zeit wiederholt und erst dann die angegebenen Handler-Funktionen ausgeführt. Somit ist garantiert, dass alle Style-Informationen auf das Dokument angewendet wurden, bevor sich die zweite Phase der Scripte anläuft.</p>
