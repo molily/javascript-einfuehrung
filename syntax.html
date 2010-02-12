@@ -21,10 +21,10 @@
 </div>
 <div class="section" id="aufbau">
 	<h2>Aufbau eines JavaScript-Programmes</h2>
-	<p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Syntax-Regeln können Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Syntax und Grammatik einhalten, damit Sie verstanden werden.</p>
-	<p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenig Spielraum. Zum anderen müssen sich Programmierer an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
+	<p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Syntax-Regeln kennen Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Syntax und Grammatik einhalten, damit Sie verstanden werden.</p>
+	<p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenig Spielraum. Zum anderen müssen sich Programmierer an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
 	<p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er zunächst dessen Syntax verstehen. Dieses Aufsplitten in die Bestandteile nennt sich <strong>Parsing</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
-	<p>Die folgende Beschreibung der JavaScript-Syntax ist sehr theoretisch und formal. Es soll ihnen den groben Aufbau eines JavaScript-Programmes vermitteln, damit Sie wissen, welche Bestandteile an welchen Stellen vorkommen dürfen.</p>
+	<p>Die folgende Beschreibung der JavaScript-Syntax ist sehr theoretisch und formal. Sie soll ihnen den groben Aufbau eines JavaScript-Programmes vermitteln, damit Sie wissen, welche Bestandteile an welchen Stellen vorkommen dürfen.</p>
 </div>
 <div class="section" id="anweisungen">
 	<h2>Anweisungen (Statements)</h2>
@@ -42,7 +42,7 @@
 	<div class="subsection" id="kontrollstrukturen">
 		<h3>Kontrollstrukturen: Verzweigungen und Schleifen</h3>
 		<p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Dazu gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt.</p>
-		<pre>if (alter >= 18) {
+		<pre>if (alter &gt;= 18) {
    alert("Volljährig!");
 } else {
    alert("Noch nicht volljährig.");
@@ -68,10 +68,10 @@
 alter = 18;
 objekt.nummer = 5;
 objekt.nummer++;
-meldung = alter >= 18 ? "volljährig" : "noch nicht volljährig";
+meldung = alter &gt;= 18 ? "volljährig" : "noch nicht volljährig";
 1 + 1;
 </pre>
-	<p>Eine Ausdruck-Anweisung sollte immer mit einem Semikolon abgeschlossen werden.</p>
+    <p>Eine Ausdruck-Anweisung sollte immer mit einem Semikolon abgeschlossen werden. <!-- TODO Hinweis auf das Laissez-faire des ECMAScript-Standards und daraus entstehender Probleme? --></p>
 	</div>
 	<div class="subsection" id="weitere-statements">
 		<h3>Weitere Statements</h3>
