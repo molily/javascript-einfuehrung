@@ -17,7 +17,7 @@
 
 <div class="section" id="einfuehrung">
 	<h2>Objekte, Eigenschaften und Methoden</h2>
-	<p>Ein Objekt ist ein grob gesagt ein Bündel von Informationen im Speicher. In JavaScript haben wir auf alle zugänglichen Informationen Zugriff als ein Objekt.</p>
+	<p>Ein Objekt ist grob gesagt ein Bündel von Informationen im Speicher. In JavaScript haben wir auf alle zugänglichen Informationen Zugriff als ein Objekt.</p>
 	<p>Ein Objekt funktioniert als eine Zuordnungsliste, die unter bestimmten Namen weitere <strong>Unterobjekte</strong>, auch <strong>Member</strong> genannt, speichert. Diese Unterobjekte teilt man in <strong>Eigenschaften</strong> und <strong>Methoden</strong>. Methoden sind ausführbare Funktionen, die dem Objekt zugehören, Eigenschaften sind alle nicht ausführbaren Unterobjekte.</p>
 	<p>Durch diese Verschachtelung von Objekten entsteht eine beliebig lange Kette von Objekten, die aufeinander verweisen.</p>
 	<p>Der Browser stellt einem Script eine große Menge von <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert das Script eigene Objekte. Diese vom JavaScript-Programm selbst eingeführten Objekte werden üblicherweise <strong>Variablen</strong> genannt.</p>
@@ -50,7 +50,7 @@
 		<p>	Der Punkt (<code>.</code>) ist der sogenannte <em>Property Accessor Operator</em> (engl. Operator zum Zugriff auf Eigenschaften).</p>
 		<p>Auf diese Weise können wir ganze Ketten an Objektnamen notieren, um das gewünschte Objekt zu fassen zu bekommen:</p>
 		<pre>window.location.href.substring(0, 4)</pre>
-		<p>Hier wird die <code>substring</code>-Methode angesprochen, um das Protokoll <code>http</code> aus der Adresse (URL) des gegenwärtigen HTML-Dokuments zu extrahieren.</p>
+    <p>Hier wird die <code>substring</code>-Methode des durch <code>window.location.href</code> referenzierten String-Objekts angesprochen, um das Protokoll <code>http</code> aus der Adresse (URL) des gegenwärtigen HTML-Dokuments zu extrahieren.</p>
 		<p>Eine alternative Methode zum Ansprechen von Unterobjekten ist die Klammer-Schreibweise. Dabei wird der Name des Unterobjektes zwischen eckigen Klammern als String notiert:</p>
 		<pre>objekt["unterobjekt"]</pre>
 		<p>Dies hat denselben Effekt wie <code>objekt.unterobjekt</code>. Der Vorteil dieser Schreibweise kommt zum Tragen, wenn der Objektname variabel ist und erst zur Laufzeit des Scriptes feststeht. Zwischen den Klammern lässt sich ein beliebiger <a href="syntax.html#ausdruecke">Ausdruck</a> notieren, also beispielsweise ein Bezeichner, der auf eine String-Variable verweist:</p>
@@ -61,8 +61,8 @@
 	<div class="subsection" id="bezeichner-konventionen">
 		<h3>Konventionen für Bezeichner</h3>
 		<p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Objektnamen beachten müssen:</p>
-		<p>Ein Bezeichner darf nur aus Buchstaben und arabischen Ziffern (0-9) bestehen. Es gibt zwei Ausnahmen: An beliebiger Stelle darf der Unterstrich <code>_</code> sowie das Dollarzeichen <code>$</code> verwendet werden. Außerdem darf der Bezeichner nicht mit einer Ziffer beginnen.</p>
-		Insbesondere Leerzeichen und andere Sonderzeichen sind in einem Bezeichner nicht erlaubt.</p>
+    <p>Ein Bezeichner darf nur aus Buchstaben, arabischen Ziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
+		Alle anderen Zeichen (etwa Leer- oder Sonderzeichen) sind in Bezeichnern nicht erlaubt.</p>
 		<p>Beispiele für <strong>erlaubte Bezeichner</strong>:</p>
 <pre>
 mitarbeiter_name
@@ -82,13 +82,13 @@ lohnIn€
 lohnIn£
 2raumwohnung
 ein♥FürTiere
-arbeiter&angestellte
+arbeiter&amp;angestellte
 </pre>
-		<p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
+    <p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« <!-- TODO »«, <em></em> oder Kombination? Wann <strong>? --> gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
 		<p>Allerdings beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>firmengröße</code> ist also möglich, üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen.</p>
 		
 		
-		<p>Bracket Notation erlaubt beliebigen String</p>
+    <p>Bracket Notation erlaubt beliebigen String</p> <!-- TODO Bracket Notation? -->
 	</div>
 
 </div>
