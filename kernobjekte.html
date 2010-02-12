@@ -35,7 +35,7 @@ adresse.stadt = "Frankfurt";</pre>
 	</div>
 	<div class="subsection" id="object-literale">
 		<h3>Object-Literale</h3>
-		<p>Das obige Beispiel verwendet die Langschreibweise <code>new Object</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
+		<p>Das obige Beispiel verwendet die Langschreibweise <code>new Object()</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
 	<pre class="content-example">{
    name1 : wert3,
    name2 : wert2,
@@ -54,14 +54,14 @@ adresse.stadt = "Frankfurt";</pre>
 	<h2>String, Number und Boolean</h2>
 	<p>String, Number und Boolean sind die wichtigsten einfachen Datentypen. Sie haben einen direkt und eindeutig darstellbaren Wert.</p>
 	<ul>
-		<li>Ein String-Wert ist eine Zeichenkette. Darin können Sie einzelne Zeichen bis hin zu ganzen Texte speichern.</li>
+		<li>Ein String-Wert ist eine Zeichenkette. Darin können Sie einzelne Zeichen bis hin zu ganzen Texten speichern.</li>
 		<li>Ein Number-Wert ist eine Zahl. Es kann eine Ganzzahl oder eine Kommazahl sein, positiv oder negativ.</li>
 		<li>Ein Boolean-Wert drückt einen Wahrheitswert aus. Dieser kann zwei Zustände annehmen: <code>true</code> (wahr) oder <code>false</code> (falsch).</li>
 	</ul>
 	<pre class="content-example">var zahl = 1.23;
 var zeichenkette = "Hallo Welt!";
 var boolean = true;</pre>
-	<p>Diese Anweisungen definieren eine <code>String</code>-, eine <code>Number</code> und eine <code>Boolean</code>-Variable mithilfe der jeweiligen Literalschreibweise.</p>
+	<p>Diese Anweisungen definieren eine <code>String</code>-, eine <code>Number</code>- und eine <code>Boolean</code>-Variable mithilfe der jeweiligen Literalschreibweise.</p>
 	<p>...</p>
 </div>
 <div class="section" id="objects-primitives">
@@ -76,7 +76,7 @@ var boolean = true;</pre>
 	<div class="subsection" id="referenzen-kopien">
 		<h3>Referenzen und Kopien</h3>
 		<p>Primitives werden <strong>als Kopie</strong> an Funktionen übergeben, während Objekte <strong>als Referenzen</strong> auf dieselbe Speicherstelle (in anderen Programmiersprachen »Zeiger« genannt) übergeben werden.</p>
-		<p>Gegeben ist folgender Fall: Sie notieren ein Objekt als Variable. Dieses Objekt übergeben Sie einer einer Funktion und in der Funktion nehmen Sie Änderungen am Objekt vor, fügen ihm z.B. eine Eigenschaft hinzu.</p>
+		<p>Gegeben ist folgender Fall: Sie notieren ein Objekt als Variable. Dieses Objekt übergeben Sie einer Funktion und in der Funktion nehmen Sie Änderungen am Objekt vor, fügen ihm z.B. eine Eigenschaft hinzu.</p>
 		<p>Wenn das Objekt als <em>Referenz</em> übergeben wird, dann haben Sie nach dem Funktionsaufruf auf das geänderte Objekt Zugriff. Denn an beiden Stellen, innerhalb und außerhalb der Funktion, haben Sie Zugriff auf ein und dasselbe Objekt.</p>
 		<p>Wenn das Objekt als <em>Primitive</em> übergeben wird, dann haben Änderungen daran keine Auswirkung auf die Variable im ursprünglichen Kontext &ndash; es sei denn, die Funktion gibt einen Primitive zurück und Sie arbeiten mit dem Rückgabewert der Funktion weiter.</p>
 	</div>
