@@ -124,7 +124,7 @@
 
 	<div class="subsection" id="alert-kontrollausgaben">
 		<h3>Kontrollausgaben über die <code>alert</code>-Methode</h3>
-		<p>Um Fehlern auf die Spur zu kommen, gehen Sie Ihr JavaScript-Programm Schritt für Schritt durch und notieren nach jeder relevanten Anweisung eine <strong>Kontrollausgabe</strong>. Dies geht am einfachsten mit der browserübergreifenden Methode <code>window.alert</code>, die ein Meldungsfenster erzeugt. Ein Beispiel:</p>
+		<p>Um Fehlern auf die Spur zu kommen, gehen Sie ihr JavaScript-Programm Schritt für Schritt durch und notieren nach jeder relevanten Anweisung eine <strong>Kontrollausgabe</strong>. Dies geht am einfachsten mit der browserübergreifenden Methode <code>window.alert</code>, die ein Meldungsfenster erzeugt. Ein Beispiel:</p>
 		<pre>var element = document.getElementById("navigation");
 window.alert("Navigationselement: " + element);
 
@@ -134,7 +134,7 @@ window.alert("Neuer Textknoten: " + textknoten);
 element.appendChild(textknoten);
 window.alert("Textknoten wurde angehängt.");</pre>
 		<p>Wenn ein Fehler in Ihrem Script auftritt, dann bricht der Browser die Script-Ausführung ab, sodass die darauffolgende Kontrollausgabe nicht mehr ausgeführt wird. Somit können Sie einerseits den Fehler lokalisieren und andererseits gibt Ihnen die letzte Kontrollausgabe vor dem Abbruch eventuell Hinweise auf die Fehlerursache.</p>
-		<p>Um Fehler auf diese Weise eingrenzen zu können, sollten Sie die Anweisungen zwischen den Kontrollausgaben möglichst einfach halten - zumindest solange Ihr Script noch in der Entwicklungsphase ist. Die folgende Anweisung ist zusammengesetzt und kann an gleich mehreren Stellen zu einem Programmabbruch führen:</p>
+		<p>Um Fehler auf diese Weise eingrenzen zu können, sollten Sie die Anweisungen zwischen den Kontrollausgaben möglichst einfach halten - zumindest solange ihr Script noch in der Entwicklungsphase ist. Die folgende Anweisung ist zusammengesetzt und kann an gleich mehreren Stellen zu einem Programmabbruch führen:</p>
 		<pre>document.getElementsByTagName("h1")[0].style.color = "red";</pre>
 		<p>Wenn in dieser Zeile ein JavaScript-Fehler auftritt, dann sollten Sie die Anweisung in ihre Teile aufspalten und Kontrollausgaben einfügen:</p>
 		<pre>window.alert("Suche alle Überschriften im Dokument...");
@@ -148,7 +148,7 @@ window.alert("Setze Farbe der Überschrift...");
 ersteÜberschrift.style.color = "red";
 window.alert("Farbe gesetzt.");</pre>
 		<p>Dieses Beispiel ist übertrieben, soll aber die Möglichkeiten von Kontrollausgaben veranschaulichen. Der Vorteil von <code>window.alert</code> ist, dass der Browser die Ausführung des Scriptes solange anhält, wie das Meldungsfenster geöffnet ist. Auf die Weise können Sie einem Script, das sonst ganz schnell ausgeführt wird, bei der Arbeit zuschauen und Fehler erkennen.</p>
-		<p>Der Nachteil von Kontrollausgaben mit <code>window.alert</code> ist, dass es JavaScript-Objekte in Strings umwandeln muss, um sie auszugeben. (Intern wird die Objektmethode <code>toString</code> aufgerufen.) Der String, der dabei herauskommt, gibt Ihnen nicht immer Aufschluss darüber, ob es sich um das erwartete Objekt handelt. Nur in einigen Browsern ist nachvollziehbar, um was für ein Objekt es sich handelt. Bei komplexen Objekten wie Arrays oder DOM-Knoten ist dies aber gewöhnungsbedürftig - mit der Zeit lernen Sie, wie sie solche Knoten am besten in Kontrollausgaben ansprechen.</p>
+		<p>Der Nachteil von Kontrollausgaben mit <code>window.alert</code> ist, dass es JavaScript-Objekte in Strings umwandeln muss, um sie auszugeben. (Intern wird die Objektmethode <code>toString</code> aufgerufen.) Der String, der dabei herauskommt, gibt Ihnen nicht immer Aufschluss darüber, ob es sich um das erwartete Objekt handelt. Nur in einigen Browsern ist nachvollziehbar, um was für ein Objekt es sich handelt. Bei bei komplexen Objekten wie Arrays oder DOM-Knoten ist dies aber gewöhnungsbedürftig - mit der Zeit lernen Sie, wie sie solche Knoten am besten in Kontrollausgaben ansprechen.</p>
 	</div>
 
 	<div class="subsection" id="console-objekt">
@@ -169,7 +169,7 @@ console.debug("Farbe gesetzt. Zur Kontrolle:", ersteÜberschrift.style.color);</
 		<p><img src="firebug-konsole-log.png" alt=""></p>
 		<p>Das Objekt <code>console</code> bietet viele weitere Methoden, um Meldungen in die Konsole zu schreiben. Diese können Sie der besagten Dokumentation entnehmen.
 	Für den Anfang sollten Ihnen aber die Methoden <code>console.debug</code> und <code>console.log</code> ausreichen.</p>
-		<p>Auf diese Weise können Sie akribische <strong>Ablaufprotokolle</strong> Ihrer Scripte anlegen und haben die Objekte, mit denen Sie arbeiten, direkt im Blick. Dies macht Firebug zu einem unverzichtbaren Werkzeug. Mittlerweile bieten auch Entwicklerwerkzeuge für andere Browser ein <code>console</code>-Objekt mit den besagten Methoden an. Damit entsteht ein Quasi-Standard, mit dem hoffentlich irgendwann eine browserübergreifende JavaScript-Fehlersuche möglich sein wird.</p>
+		<p>Auf diese Weise können Sie akribische <strong>Ablaufprotokolle</strong> Ihrer Scripte anlegen und haben die Objekte, mit denen Sie arbeiten, direkt im Blick. Dies macht Firebug zu einem unverzichtbaren Werkzeug. Mittlerweile bieten auch Entwicklerwerkzeuge für andere Browser ein <code>console</code>-Objekt mit den besagten Methoden an. Damit entsteht ein Quasi-Standard, mit dem hoffentlich irgendwann eine browserübergreifende JavaScript-Fehlersuche ermöglicht.</p>
 		<p>Beachten Sie jedoch, dass Sie diese Methodenaufrufe nur während der Entwicklung ihrer Scripte nutzen können und am Ende wieder entfernen sollten - denn bei Ihren Webseiten-Besuchern wird das <code>console</code>-Objekt möglicherweise nicht zur Verfügung stehen. Ein Aufruf würde daher einen Fehler erzeugen und das Script abbrechen.</p>
 	</div>
 
@@ -201,7 +201,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
 	<div id="dom-inspektor-firefox" class="subsection">
 		<h3>DOM-Inspektor von Firebug</h3>
-		<p>Zum DOM-Inspektor von Firebug gelangen Sie, indem Sie die Firebug-Leiste am unteren Fensterrand durch einen Klick auf das Käfer-Symbol aufklappen. Anschließend wählen Sie den Tab <em>HTML</em>. Auf der linken Seite findet sich der interaktive Elementbaum. Sie können die Verschachtelungen über die Plus-Symbole aufklappen, um die Kindelement eines Elements zu sehen. Um nähere Informationen zu einem Element zu bekommen, klicken Sie auf die blauen Elementnamen. In folgendem Screenshot wurde das <em>h1</em>-Element im Beispieldokument angeklickt:</p>
+		<p>Zum DOM-Inspektor von Firebug gelangen Sie, indem Sie die Firebug-Leiste am unteren Fensterrand durch einen Klick auf das Käfer-Symbol aufklappen. Anschließend wählen Sie den Tab <em>HTML</em>. Auf der linken Seite findet sich der interaktive Elementbaum. Sie können die Verschachtelungen über die Plus-Symbole aufklappen, um die Kindelement eines Elements zu sehen. Um nähere Informationen zu einem Element zu bekommen, klicken Sie auf die blauen Elementnamen. In folgenden Screenshot wurde das <em>h1</em>-Element im Beispieldokument angeklickt:</p>
 		<p><img src="firebug-dom-inspector.png" alt=""></p>
 		<p>In der rechten Spalte finden Sie die drei Tabs <em>Styles</em>, <em>Layout</em> und <em>DOM</em>. Die ersten beiden sind in erster Linie bei der CSS-Entwicklung interessant, der dritte Tab insbesondere beim Schreiben von JavaScript. Darin sind alle Eigenschaften und Methoden des ausgewählten Elementobjekten aufgelistet. Viele dieser Eigenschaftswerte (z.B. <code>parentNode</code>) sind anklickbar und führen zur Ansicht des entsprechenden Knoten bzw. JavaScript-Objekts.</p>
 		<p>Um ein Element schnell zu finden, können Sie oben links in der Firebug-Leiste auf <em>Untersuchen</em> klicken. Nun können Sie im Dokument ein Element auswählen. Wenn Sie mit dem Mauszeiger durch das Dokument gehen, wird das Element, auf deren Fläche sich der Mauszeiger befindet, mit einem blauen Rahmen hervorgehoben. Außerdem wird das Element automatisch im DOM-Inspektor fokussiert. Klicken Sie ein Element an, um den Auswahl-Modus zu verlassen.</p>
@@ -226,7 +226,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
 	<div class="subsection" id="dom-inspektor-dragonfly">
 		<h3>DOM-Inspektor von Opera Dragonfly</h3>
-		<p>Den DOM-Inspektor von Opera Dragonfly erreichen Sie über das Menü <em>Extras → Weiteres → Entwicklerwerkzeuge</em>. Den DOM-Baum finden Sie im Tab <em>DOM</em>. Mittels Schaltflächen können Sie zwischen verschiedene Darstellungen wechseln und manche Knotentypen ausblenden. Im rechten Bereich können Sie über drei Tabs <em>Styles</em>, <em>Properties</em> und <em>Layout</em> auf die Elementeigenschaften zugreifen. Diese entsprechen funktional den Tabs <em>Styles</em>, <em>DOM</em> und <em>Layout</em> in Firebug.</p>
+		<p>Ein DOM-Inspektor von Opera Dragonfly erreichen Sie über das Menü <em>Extras → Weiteres → Entwicklerwerkzeuge</em>. Den DOM-Baum finden Sie im Tab <em>DOM</em>. Mittels Schaltflächen können Sie zwischen verschiedene Darstellungen wechseln und manche Knotentypen ausblenden. Im rechten Bereich können Sie über drei Tabs <em>Styles</em>, <em>Properties</em> und <em>Layout</em> auf die Elementeigenschaften zugreifen. Diese entsprechen funktional den Tabs <em>Styles</em>, <em>DOM</em> und <em>Layout</em> in Firebug.</p>
 		<p>Wie auch die anderen vorgestellten DOM-Inspektoren bietet Opera an, ein Element durch Klicken im Dokument auszuwählen. Auf der entsprechenden Schalftläche ist ein Cursor abgebildet.</p>
 		<p>...</p>
 	</div>
@@ -240,7 +240,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
 <div class="section" id="debugger">
 	<h2>Debugger</h2>
-	<p>Mithilfe von Kontrollausgaben können Sie den Ablauf eines Scriptes nachvollziehen und Variablen ausgeben, um deren Werte zu prüfen. Ein vielseitigeres und mächtigeres Werkzeug sind Debugger. Damit können Sie komfortabler die Funktionsweise eines Scriptes untersuchen, denn Sie müssen nicht nach jeder Anweisung eine Kontrollausgabe einfügen. Ein JavaScript-Debugger bietet im Allgemeinen folgende Möglichkeiten:</p>
+	<p>Mithilfe von Kontrollausgaben können Sie den Ablauf eines Scriptes nachvollziehen und Variablen ausgeben, um deren Werte zu prüfen. Eine vielseitigeres und mächtigeres Werkzeug sind Debugger. Damit können Sie komfortabler die Funktionsweise eines Scriptes untersuchen, denn Sie müssen nicht nach jeder Anweisung eine Kontrollausgabe einfügen. Ein JavaScript-Debugger bietet im Allgemeinen folgende Möglichkeiten:</p>
 	<p>Sie können im Code sogenannte <strong>Haltepunkte</strong> (englisch <em>Breakpoints</em>) setzen. Die Ausführung des JavaScripts wird an dieser Stelle unterbrochen und der Browser öffnet den Debugger. Ausgehend von dieser Code-Zeile können Sie die folgenden Anweisungen nun Schritt für Schritt ausführen, Anweisungen überspringen und aus aufgerufenen Funktionen herausspringen. Bei dieser <strong>schrittweisen Ausführung</strong> können Sie überprüfen, welche Werte bestimmte Objekte und Variablen an dieser Stelle im Script haben. Eine Weiterentwicklung dieser <strong>Überwachung von Variablenwerten</strong> stellen sogenannte <strong>Watch-Expressions</strong> (englisch für Überwachungs-Ausdrücke) dar.</p>
 	<p>...</p>
 	<p>Wenn Sie viele Funktionen definieren, die sich gegenseitig aufrufen, hilft Ihnen ein Debugger, die Übersicht über das Aufrufen und Abarbeiten von Funktionen zu behalten. In der Einzelschritt-Ausführung haben Sie den sogenannten <strong>Call Stack</strong> (englisch für Aufruf-Stapel) im Blick. Das ist die Verschachtelung der Funktionen, die gerade abgearbeitet werden. Wenn beispeilsweise die Funktion <code>a</code> die Funktion <code>b</code> aufruft und diese wiederum die Funktion <code>c</code>, so ist der Stapel <code>a</code> &gt; <code>b</code> &gt; <code>c</code>. Die Funktion <code>c</code>, die gerade ausgeführt wird, liegt sozusagen oben auf dem Stapel. Nach dessen Ausführung wird <code>c</code> vom Stapel genommen und in die Funktion <code>b</code> zurückgekehrt - und so weiter.</p>
