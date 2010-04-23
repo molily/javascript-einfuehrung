@@ -168,12 +168,22 @@ th, td {
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+.sequence-navigation {
+	border-top: 1px solid #ddd;
+	margin-top: 4em;
+	padding-top: 4em;
+}
+
+.sequence-navigation p {
+	margin: 0;
+}
+
 .sequence-navigation .prev:before {
-	content: "<< ";
+	content: " → Nächste Seite: ";
 }
 
 .sequence-navigation .next:before {
-	content: ">> ";
+	content: "← Vorherige Seite: ";
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
