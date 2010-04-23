@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js-organisation4</title>
+<link rel="stylesheet" href="file://C:/Users/molily/projekte/molily/molily.de/css/content.css">
+<link rel="stylesheet" href="js-organisation.css">
+</head>
+<body>
+
+<h1>Organisation von JavaScripten 3: Objektverfügbarkeit und <code>this</code>-Kontext</h1>
+
+<h2 id="this">Bedeutung von this</h2>
+
+<p>Bei allen drei vorgestellten Techniken &ndash; <code>Object</code>-Literalen, Revealing Module Pattern und Konstruktoren/Prototypen &ndash; haben wir mit <code>this</code> gearbeitet, um auf das Modul bzw. die Instanz zuzugreifen. Nun wollen wir uns näher der Funktionsweise von <code>this</code> zuwenden.</p>
+
+<p><code>this</code> ist ein Schlüsselwort, das zu einem Wert aufgelöst wird und in der Regel auf ein Objekt zeigt. Worauf es zeigt, hängt ganz vom Kontext ab.</p>
+
+<p>Notieren wir <code>this</code> im globalen Scope, so zeigt es bloß auf <code>window</code>, das globale Objekt:</p>
+
+<pre>
+alert(this); // Ergibt [object Window] oder ähnliches
+</pre>
+
+<p>Dasselbe gilt, wenn <code>this</code> in einer Funktion verwendet wird, die ganz normal über <code>funktion()</code> aufgerufen wird:</p>
+
+<pre>
+function zeigeThis () {
+    alert(this); // ergibt ebenfalls [object Window]
+}
+zeigeThis();
+</pre>
+
+<p>In diesen beiden Fällen bietet <code>this</code> wenig Nutzen, denn wir könnten genauso <code>window</code> schreiben.</p>
+
+<div class="sidebox">
+<p><code>this</code> zeigt standardmäßig auf das globale Objekt <code>window</code>. Innerhalb einer Methode, die über <code>objekt.funktion()</code> aufgerufen wird, zeigt es jedoch auf <code>objekt</code>.</p>
+</div>
+
+<p><code>this</code> wird in folgendem Fall interessant: Eine Funktion hängt an einem Objekt, ist also eine Methode dessen. Wenn wir die Funktion nun über das Schema <code>objekt.funktion()</code> aufrufen, dann zeigt <code>this</code> innerhalb der Funktion auf <code>objekt</code>.</p>
+
+<p>Ein einfaches Modul mit einem <code>Object</code>-Literal:
+
+<pre>
+var Modul = {
+    eigenschaft : "wert",
+    methode : function () {
+        alert("methode wurde aufgerufen\n" +
+              "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    }
+};
+Modul.methode();
+</pre>
+
+<p><code>this</code> zeigt innerhalb der Methode auf das Objekt <code>Modul</code>. Wir könnten alternativ <code>Modul.eigenschaft</code> schreiben, was auf dasselbe herauskäme. <code>this</code> hat jedoch den Vorteil, dass es unabhängig vom aktuellen Modulnamen ist. Wenn dieser später geändert wird und die Funktion verschoben wir, so müssen nicht alle Verweise angepasst werden.</p>
+
+<p>Bei Konstruktoren und Prototypen ist <code>this</code> unersetzlich:</p>
+
+<pre>
+function Katze (name) {
+    <strong>this.name</strong> = name;
+}
+Katze.prototype = {
+    pfoten : 4,
+    zeigePfoten : function () {
+        alert("Die Katze zeigt ihre " + <strong>this.pfoten</strong> + " Pfoten.");
+    }
+};
+var maunzi = new Katze('Maunzi');
+maunzi.zeigePfoten();
+var schnucki = new Katze('Schnucki');
+schnucki.zeigePfoten();
+</pre>
+
+<p><code>this</code> zeigt innerhalb des Konstruktors und der <code>zeigePfoten</code>-Methode auf die Instanz. Dies ist einmal <code>maunzi</code> und einmal <code>schnucki</code>, deshalb müssen wir hier <code>this</code> verwenden.</p>
+
+<h2 id="andere-kontexte">Methoden in anderen Kontexten ausführen</h2>
+
+<div class="sidebox">
+<p><code>this</cide> ist in der OOP äußerst praktisch. Allerdings verweist <code>this</code> nur bei der Aufrufweise <code>objekt.funktion()</code> auf das gewünschte Objekt. Der Verweis geht bei anderen Aufrufweisen, die in der funktionalen Natur von JavaScript liegen, verloren.</p>
+</div>
+
+
+<p>Der Zugriff auf das Modul bzw. auf die Instanz über <code>this</code> ist zum Teil unerlässlich. Damit <code>this</code> auf das gewünschte Objekt zeigt, müssen beide Kriterien erfüllt sein: Die Funktion hängt an dem Objekt als Unterobjekt <strong>und</strong> sie wird über das Schema <code>objekt.funktion()</code> aufgerufen. Alleine durch diese Aufrufweise wird die <code>this</code>-Verbindung hergestellt.</p>
+
+<p>Dieser Bezug kann jedoch verloren gehen, wenn die Funktion außerhalb dieses Objektkontextes ausgeführt wird. Dies passiert vor allem in folgenden Fällen:</p>
+
+<ol>
+<li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="http://molily.de/js/event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird &ndash; siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
+<li>Beim Aufrufen der Funktion mit <code>setTimeout</code> oder <code>setInterval</code>. Die verzögert bzw. wiederholt ausgeführte Funktion verliert den Bezug zum Ursprungsobjekt, denn <code>this</code> verweist darin auf das globale Objekt <code>window</code>. In vielen Fällen ist der Zugriff auf das Modul bzw. die Instanz notwendig.</li>
+<li>Bei der Übergabe einer Funktion als Parameter (z.B. als Callback-Funktion), beim Speichern in einer Variablen und dergleichen. In diesen Fällen zeigt gibt es oftmals keinen spezifischen Kontext, sodass <code>this</code> als Fallback auf <code>window</code> zeigt.</li>
+</ol>
+
+<h3 id="this-problem-modul"><code>this</code>-Problem bei einfachen Modulen</h3>
+
+<p>Das folgende Beispiel demonstriert das Problem im Falle eines einfachen Moduls mit dem <code>Object</code>-Literal:</p>
+
+<pre>
+var Modul = {
+    eigenschaft : "Eigenschaftswert",
+    start : function () {
+        // Funktioniert:
+        alert("start wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+        <strong>setTimeout(this.verzögert, 100);</strong>
+        <strong>document.getElementById("button").onclick = this.handler;</strong>
+    },
+    verzögert : function () {
+        // <strong>Fehler</strong>: this verweist auf window
+        alert("verzögert wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    },
+    handler : function (e) {
+        // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
+        alert("handler wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    },
+};
+Modul.start();
+</pre>
+
+<p>Das zugehörige HTML:</p>
+
+<pre>
+&lt;button id="button"&gt;Button, der auf Klick reagiert&lt;/button&gt;
+</pre>
+
+<h3 id="this-problem-instanz"><code>this</code>-Problem bei Prototypen und Instanzmethoden</h3>
+
+<p>Dasselbe mit einem Konstruktor, einem Prototyp und einer Instanz:</p>
+
+<pre>
+function Konstruktor () {}
+Konstruktor.prototype = {
+    eigenschaft : "Eigenschaftswert",
+    start : function () {
+        // Funktioniert:
+        alert("start wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+        <strong>setTimeout(this.verzögert, 100);</strong>
+        <strong>document.getElementById("button").onclick = this.handler;</strong>
+    },
+    verzögert : function () {
+        // <strong>Fehler</strong>: this verweist auf window
+        alert("verzögert wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    },
+    handler : function (e) {
+        // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
+        alert("handler wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    };
+};
+var instanz = new Konstruktor();
+instanz.start();
+</pre>
+
+<p>In beiden Fällen werden Objektmethoden als Event-Handler verwendet (<code>handler</code>) sowie mit <code>setTimeout</code> aufgerufen (<code>verzögert</code>). In den <code>start</code>-Methoden gelingt der Zugriff über <code>this</code> noch. In der <code>verzögert</code>-Methode zeigt <code>this</code> jedoch nicht mehr auf das richtige Objekt, sondern auf <code>window</code>. In der <code>handler</code>-Methode, welche beim Klicken auf den Button ausgeführt wird, enthält <code>this</code> zwar eine wertvolle Information, aber auch hier geht der Bezug zum Modul bzw. zur Instanz verloren.</p>
+
+<p>Die Lösung dieses Problems ist kompliziert und führt uns auf eine zentral wichtige, aber auch schwer zu meisternde Eigenheit der JavaScript-Programmierung, die im Folgenden vorgestellt werden soll.</p>
+
+<h2 id="closures">Einführung in Closures</h2>
+
+<div class="sidebox">
+<p>Verschachtelte Funktionen haben Zugriff auf die lokalen Variablen der äußere Funktion &ndash; und zwar auch nach der Abarbeitung der äußeren Funktion. Sie konservieren die Variablen.</p>
+</div>
+
+<p>Eine <dfn>Closure</dfn> ist allgemein gesagt eine Funktion, die in einer anderen Funktion notiert wird. Diese verschachtelte, innere Funktion hat Zugriff auf die Variablen des Geltungsbereiches (Scopes) der äußeren Funktion &ndash; und zwar über die Ausführung der äußeren Funktion hinaus.</p>
+
+<p>Durch dieses <strong>Einschließen</strong> der Variablen kann man bestimmte Objekte in Funktionen verfügbar machen, die darin sonst nicht oder nur über Umwege verfügbar wären. Closures werden damit zu einem Allround-Werkzeug in der fortgeschrittenen JavaScript-Programmierung. Wir haben Closures bereits verwendet, um private Objekte zu erreichen.</p>
+
+<p>Dieses Beispiel demonstriert die Variablen-Verfügbarkeit bei verschachtelten Funktionen:</p>
+
+<pre>
+function äußereFunktion  () {
+    // Definiere eine lokale Variable
+    var <strong>variable</strong> = "wert";
+    // Lege eine verschachtelte Funktion an
+    function innereFunktion () {
+        // Obwohl diese Funktion einen eigenen Scope mit sich bringt,
+        // ist die Variable aus dem umgebenden Scope hier verfügbar:
+        alert("Wert der Variablen aus der äußeren Funktion: " + <strong>variable</strong>);
+    }
+    // Führe die eben definierte Funktion aus
+    innerfunktion();
+}
+äußereFunktion();
+</pre>
+
+<p>Das Beispiel zeigt, dass die innere Funktion Zugriff auf die Variablen der äußeren Funktion hat. Der entscheidende Punkt bei einer Closure ist jedoch ein anderer:</p>
+
+<p>Normalerweise werden alle lokalen Variablen einer Funktion aus dem Speicher gelöscht, nachdem die Funktion beendet wurde. Eine Closure aber führt dazu, dass die Variablen der äußeren Funktion nach deren Ausführung nicht gelöscht werden, sondern im Speicher erhalten bleiben. Die Variablen stehen der inneren Funktion weiterhin über deren ursprüngliche Namen zur Verfügung. Die Variablen werden also <em>eingeschlossen</em> und konserviert &ndash; daher der Name »Closure«.</p>
+
+<p>Auch lange nach dem Ablauf der äußeren Funktion hat die Closure immer noch Zugriff auf deren Variablen. Vorausgesetzt ist, dass die Closure woanders gespeichert wird und dadurch zu einem späteren Zeitpunkt ausgeführt werden kann. Im obigen Beispiel ist die innere Funktion nur eine lokale Variable, die zwar Zugriff auf die Variablen der äußeren Funktion hat, aber bei deren Beendigung selbst verfällt.</p>
+
+<p>Eine Möglichkeit, die innere Funktion zu speichern, ist das Registrieren als Event-Handler. Dabei wird das Funktionsobjekt in einer Eigenschaft (hier <code>onclick</code>) eines Elementobjektes gespeichert und bleibt damit über die Ausführung der äußeren Funktion hinweg erhalten:</p>
+
+<pre>
+function äußereFunktion  () {
+    var variable = "wert";
+    // Lege eine verschachtelte Funktion an
+    function closure {
+        alert("Wert der Variablen aus der äußeren Funktion: " + variable);
+    };
+    // Speichere die Closure-Funktion als Event-Handler
+    <strong>document.getElementById("button").onclick = closure;</strong>
+}
+äußereFunktion();
+</pre>
+
+<p>Der zugehörige Button im HTML:</p>
+
+<pre>
+&lt;button id="button"&gt;Button, der auf Klick reagiert&lt;/button&gt;
+</pre>
+
+<p>Bei einem Klick auf den Button wird die Closure als Event-Handler ausgeführt. <code>äußereFunktion </code> wird schon längst nicht mehr ausgeführt, aber <code>variable</code> wurde in die Closure eingeschlossen.</p>
+
+<p>Zusammengefasst haben wir folgendes Schema zur Erzeugung einer Closure:</p>
+
+<ol>
+<li>Beginn der Ausführung der äußeren Funktion</li>
+<li>Lokale Variablen werden definiert</li>
+<li>Innere Funktion wird definiert</li>
+<li>Innere Funktion wird außerhalb gespeichert, sodass sie erhalten bleibt</li>
+<li>Ende der Ausführung der äußeren Funktion</li>
+<li>Unbestimmte Zeit später: Innere Funktion (Closure-Funktion) wird ausgeführt</li>
+</ol>
+
+<h2 id="closures-anwendung">Anwendung von Closures: Zugriff auf das Modul bzw. die Instanz ermöglichen</h2>
+
+<p>Wie helfen uns Closures nun beim <code>this</code>-Problem weiter?</p>
+
+<h3 id="closures-modul">Module: Verzicht auf <code>this</code> zugunsten des Revealing Module Patterns</h3>
+
+<div class="sidebox">
+<p>Beim Revealing Module Pattern ist <code>this</code> unnötig, denn alle Funktionen sind Closures und schließen die benötigten Variablen ein.</p>
+</div>
+
+<p>Gegenüber dem einfachen <code>Object</code>-Literal bietet das Revealing Module Pattern bereits die nötige Infrastruktur, um das Problem zu lösen. Um private Objekte zu erreichen, benutzt das Revealing Module Pattern eine Kapselfunktion, in der weitere Funktionen notiert sind. Die inneren Funktionen sind bereits Closures. Daher liegt eine mögliche Lösung darin, vom einfachen <code>Object</code>-Literal auf das Revealing Module Pattern umzusteigen.</p>
+
+<p>Das Revealing Module Pattern trennt zwischen privaten Objekten und der öffentliche Schnittstelle (API). Letztere ist ein <code>Object</code>-Literal, der aus der Kapselfunktion zurückgegeben wird. Dieses <code>Object</code> enthält verschachtelte Methoden, die als Closures die privaten Objekte einschließen. Zur Wiederholung:</p>
+
+<pre>
+var Modul = (function () {
+    // Private Objekte
+    var privateVariable = "privat";
+    // Öffentliche API
+    return {
+        öffentlicheMethode : function () {
+            alert(privateVariable);
+        }
+    };
+})();
+Modul.öffentlicheMethode();
+</pre>
+
+<p>Die Funktionen haben in jedem Fall Zugriff auf die privaten Objekte, auch wenn sie z.B. durch Event-Handling oder <code>setTimeout</code> aus dem Kontext gerissen werden. Eine kleine Änderung ist jedoch nötig, damit öffentliche Methoden sich gegenseitig sowie private Funktionen öffentliche Methoden aufrufen können. Anstatt die öffentliche API-Objekt direkt hinter <code>return</code> zu notieren, speichern wir es zuvor in einer Variable. Diese wird von allen verschachtelten Funktionen eingeschlossen.</p>
+
+<pre>
+var Modul = (function () {
+    // Private Objekte
+    var privateVariable = "privat";
+    function privateFunktion () {
+        alert("privateFunktion wurde verzögert aufgerufen\n"+
+            "privateVariable: " + privateVariable);
+        // Rufe öffentliche Methode auf:
+        <strong>api</strong>.end();
+    }
+    // Öffentliche API, gespeichert in einer Variable
+    <strong>var api</strong> = {
+        start : function () {
+            alert("Test startet");
+            // Hier würde this noch funktionieren, wir nutzen trotzdem api
+            setTimeout(<strong>api</strong>.öffentlicheMethode, 100);
+        }
+        öffentlicheMethode : function () {
+            alert("öffentlicheMethode wurde verzögert aufgerufen");
+            setTimeout(privateFunktion, 100);
+        }
+        ende : function () {
+            alert("Öffentliche ende-Methode wurde aufgerufen. Test beendet");
+        }
+    };
+    return <strong>api</strong>;
+})();
+Modul.start();
+</pre>
+
+<p>Der Code gibt folgende Nachrichten aus:</p>
+
+<pre>
+Test startet
+öffentlicheMethode wurde verzögert aufgerufen
+privateFunktion wurde verzögert aufgerufen
+privateVariable: privat
+Öffentliche ende-Methode wurde aufgerufen. Test beendet
+</pre>
+
+<p>Dieses Beispiel zeigt, wie öffentliche und private Methoden einander aufrufen können. Auf <code>this</code> kann verzichtet werden, denn alle benötigten Variablen werden durch Closures eingeschlossen. Infolgedessen stellt die Nutzung von <code>setTimeout</code> kein Problem dar.</p>
+
+<p>Die privaten Objekte sind direkt über ihre Variablennamen verfügbar, die Eigenschaften der öffentlichen API indirekt über die Variable <code>api</code>.</p>
+
+<h3 id="closures-instanzen">Konstruktoren/Instanzen: Methoden im Konstruktor verschachteln</h3>
+
+<div class="sidebox">
+<p>Die Methoden werden im Konstuktor verschachtelt. Sie schließen eine Variable ein, die auf die Instanz verweist und die wir als Ersatz zu <code>this</code> verwenden..</p>
+</div>
+
+<p>Wir haben zwei Möglichkeit kennengelernt, dem Instanzobjekt Eigenschaften zuzuweisen. [^] Zum einen, indem wir sie im Konstruktor über <code>this</code> anlegen. Zum anderen, indem wir einen Prototypen definieren und die Instanz davon erbt. Der Weg über den Prototyp hat Performance-Vorteile, der Weg über den Konstruktor erlaubt private Objekte.</p>
+
+<p>Private Objekte funktionieren letztlich über Closures und bieten die Möglichkeit, das <code>this</code>-Problem zu umgehen: Im Konstruktor wird eine lokale Variable als Referenz auf das Instanzobjekt <code>this</code> angelegt. Diese heißt üblicherweise <code>thisObject</code>, <code>that</code> oder <code>instance</code>. Alle Methoden, die der Instanz im Konstruktor hinzugefügt werden, schließen diese Variable ein. Sie ist darin auch dann verfügbar, wenn sie als Event-Handler oder mit Verzögerung in einem anderen Kontext ausgeführt werden. Folgendes Beispiel demonstriert beide Fälle:</p>
+
+<pre>
+function Konstruktor () {
+    // Referenz auf das Instanzobjekt anlegen
+    <strong>var thisObject = this;</strong>
+    // Weitere private Objekte
+    var privateVariable = "privat";
+
+    // Öffentliche Eigenschaften
+    this.eigenschaft = "wert";
+
+    this.start = function () {
+        alert("start() wurde aufgerufen\n" +
+            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+        setTimeout(<strong>thisObject</strong>.verzögert, 500);
+    };
+
+    this.verzögert = function () {
+        alert("verzögert() wurde aufgerufen\n" +
+            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+    };
+
+    this.handler = function () {
+        alert("handler wurde aufgerufen\n" +
+            "Element, das den Event behandelt: " + <strong>this</strong> + "\n" +
+            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+    };
+
+    // Hier im Konstruktor kann this noch verwendet werden
+    document.getElementById("button").onclick = this.handler;
+}
+
+var instanz = new Konstruktor();
+instanz.start();
+</pre>
+
+<p>Der zugehörige Button-Code lautet wieder:</p>
+
+<pre>
+&lt;button id="button"&gt;Button, der auf Klick reagiert&lt;/button&gt;
+</pre>
+
+<p>Wichtig ist hier die Unterscheidung zwischen <code>this</code> und <code>thisObject</code>. <code>this</code> zeigt in den drei Methoden <code>start</code>, <code>verzögert</code> und <code>handler</code> auf drei unterschiedliche Objekte. In <code>start</code> zeigt es auf das Instanzobjekt <code>instanz</code>, in <code>verzögert</code> auf <code>window</code> und in <code>handler</code> auf das Button-Element. <code>thisObject</code> hingegen ist die eingeschlossene Variable, die auf das Instanzobjekt zeigt &ndash; und zwar in allen drei Methoden.</p>
+
+<p>Dank Closures können wir zum Zugriff auf die Instanz auf das uneindeutige <code>this</code> verzichten. Stattdessen nutzen wir die eigene Variable <code>thisObject</code>.</p>
+
+
+<h2 id="binding">Function Binding: Closures automatisiert erzeugen</h2>
+
+<div class="sidebox">
+<p>Mit Function Binding lassen sich bei Bedarf Closures erzeugen, die den <code>this</code>-Kontext einer Funktion festlegen. Heraus kommt eine Wrapper-Funktion, die die ursprüngliche Funktion im gewünschten Kontext aufruft.</p>
+</div>
+
+<p>Die gezeigte Verschachtelung ist eine effektiver, aber folgenschwerer Trick, um die Verfügbarkeit von Objekten zu gewährleisten. Sie liegt nahe, wenn sowieso mit privaten Objekten gearbeitet wird und deshalb alle Modul- bzw. Instanzmethoden verschachtelt werden. Sie funktioniert nicht bei einfachen <code>Object</code>-Literalen und bei der Nutzung von Prototypen. Glücklicherweise erlaubt die funktionale Natur von JavaScript, Funktionen und damit Closures zur Laufzeit anzulegen und den <code>this</code>-Kontext einer Funktion bei ihrem Aufruf festzulegen.</p>
+
+<h3 id="call-apply"><code>this</code>-Kontext erzwingen mit <code>call</code> und <code>apply</code></h3>
+
+<div class="sidebox">
+<p>Die Methoden <code>call</code> und <code>apply</code> von Funktionsobjekten erlauben das Erzwingen des Kontextes beim Funktionsaufruf.</p>
+</div>
+
+<p>Da Funktionen in JavaScript Objekte erster Klasse sind, können sie selbst Methoden besitzen. Zwei der vordefinierten Methoden von Funktionsobjekten sind <a href="https://developer.mozilla.org/Core_JavaScript_1.5_Reference:Global_Objects:Function:call/en">call</a> und <a href="https://developer.mozilla.org/Core_JavaScript_1.5_Reference:Global_Objects:Function:apply/en">apply</a>. Diese rufen die zugehörige Funktion auf und erlauben es zusätzlich, den Kontext beim Aufruf einer Funktion explizit anzugeben. Das Objekt, auf das <code>this</code> innerhalb der Funktion zeigt, wird nicht mehr nach den üblichen Regeln bestimmt. Stattdessen zeigt <code>this</code> auf das Objekt, das <code>call</code> bzw. <code>apply</code> übergeben wird.</p>
+
+<p>Auf diese Weise können wir jede beliebige Funktion im Kontext eines beliebigen Objektes ausführen, auch ohne dass die Funktion am angegebenen Objekt hängt:</p>
+
+<pre>
+var objekt = {
+    eigenschaft : "Objekteigenschaft"
+};
+
+function beispielFunktion () {
+    // this zeigt nun auf objekt
+    alert(this.eigenschaft);
+}
+
+ // Erzwinge Kontext mit apply, setze objekt als Kontext
+beispielFunktion.call(objekt);
+</pre>
+
+<p>Der Unterschied zwischen <code>call</code> bzw. <code>apply</code> ist der dritte Parameter. Über diesen können der aufgerufenen Funktion Parameter durchgereicht werden. Während <code>call</code> die Parameter für den Aufruf einzeln erwartet, also als zweiter, dritter, vierter und so weiter, erwartet <code>apply</code> alle Parameter in einem Array.</p>
+
+<pre>
+var objekt = {
+    eigenschaft : 0
+};
+
+function summe (a, b, c) {
+    this.eigenschaft = a + b + c;
+    alert("Ergebnis: " + this.eigenschaft);
+}
+
+// call: Übergebe drei einzelne Parameter
+summe.call(objekt, 1, 2, 3);
+// apply: Übergebe drei Parameter in einem Array
+summe.apply(objekt, [1, 2, 3]);
+</pre>
+
+<p>Im Beispiel werden <code>call</code> und <code>apply</code> genutzt, um die Funktion <code>summe</code> im Kontext von <code>objekt</code> auszuführen. Die Funktion nimmt drei Parameter entgegen, summiert diese und speichert sie in einer Objekteigenschaft. Der Effekt der beiden <code>call</code>- und <code>apply</code>-Aufrufe ist derselbe, <code>summe</code> bekommt drei Parameter.</p>
+
+<p><code>call</code> und <code>apply</code> alleine helfen uns zur Lösung der Kontextproblematik noch nicht weiter. Sie stellen allerdings das Kernstück der Technik dar, die im Folgenden beschrieben wird.</p>
+
+<h3 id="bind-bindaseventlistener"><code>bind</code> und <code>bindAsEventListener</code></h3>
+
+<div class="sidebox">
+<p><code>bind</code>/<code>bindAsEventListener</code> vereinen funktionale Programmierung, Closures und <code>call</code>/<code>apply</code>, um eine gewünschte Funktion im angegebenen Kontext aufzurufen.</p>
+</div>
+
+<p><code>bind</code> und <code>bindAsEventListener</code> sind zwei verbreitete Helferfunktionen, die durch das JavaScript-Framework <a href="http://www.prototypejs.org/">Prototype</a> bekannt wurden. Sie werden dem Prototyp von Funktionsobjekten (<code>Function.prototype</code>) hinzugefügt. Daraufhin besitzt eine beliebige Funktion die Methoden <code>funktion.bind(&hellip;)</code> und <code>funktion.bindAsEventListener(&hellip;)</code>.</p>
+
+<p><code>bind</code> und <code>bindAsEventListener</code> erzeugen dynamisch eine neue Funktion, die die ursprüngliche Funktion umhüllt und an dessen Stelle verwendet wird. Man spricht von <dfn>Wrapper-Funktionen</dfn>.</p>
+
+<p>Der Sinn dieser Kapselung ist in erster Linie die Korrektur des <code>this</code>-Kontextes. Dazu werden die besagten <code>call</code> und <code>apply</code> verwendet. <code>bind</code> und <code>bindAsEventListener</code> nehmen &ndash; genauso wie <code>call</code>/<code>apply</code> &ndash; als ersten Parameter das Objekt an, das als Kontext verwendet wird.</p>
+
+<p><code>bind</code> ermöglicht es zudem, der ursprünglichen Funktion Parameter zu übergeben, sodass darin nicht nur ein Objekt über <code>this</code>, sondern viele weitere Objekte verfügbar sind. Das Erzeugen einer neuen Wrapper-Funktion, die eine andere mit vordefinierten Parametern aufruft, nennt sich <dfn>Currying</dfn>.</p>
+
+<h3 id="bind-code">Kommentierter Code</h3>
+
+<p>Die Funktionen <code>bind</code> und <code>bindAsEventListener</code> sehen kommentiert so aus:</p>
+ 
+<table class="commented-code">
+<tr>
+<td><pre>Function.prototype.bind = function () {</pre></td>
+<td>Erweitere alle Funktionsobjekte um die Methode <code>bind</code> über den Prototyp aller Funktionsobjekte.</td>
+</tr>
+<tr>
+<td><pre>    var originalFunction = this;</pre></td>
+<td>Speichere die gegenwärtige Funktion in einer Variablen, damit in der Closure ein Zugriff darauf möglich ist.</td>
+</tr>
+<tr>
+<td><pre>    var args = Array.prototype.slice.call(arguments);</pre></td>
+<td><code>bind</code> nimmt eine beliebige Anzahl von Parametern entgegen. Sie sind nicht in der Parameterliste aufgeführt, denn es wird <code>arguments</code> zum Zugriff darauf verwendet. Diese Liste wird zunächst in einen echten Array umgewandelt, indem eine Array-Methode darauf angewendet wird.</td>
+</tr>
+<tr>
+<td><pre>    var contextObject = args.shift();</pre></td>
+<td>Entnehme dem Array den ersten Parameter. Das ist das Objekt, in dessen Kontext die Funktion ausgeführt werden soll. <code>args</code> enthält nun die restlichen Parameter.</td>
+</tr>
+<tr>
+<td><pre>    var wrapperFunction = function () {</pre></td>
+<td>Erzeuge eine verschachtelte Funktion, die als Closure wirkt. Die Closure schließt <code>originalFunction</code>, <code>args</code> und <code>contextObject</code> ein.</td>
+</tr>
+<tr>
+<td><pre>        return originalFunction.apply(contextObject, args);</pre></td>
+<td>Innerhalb der erzeugten Funktion: Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei die restlichen Parameter durch und gib den Rückgabewert der Funktion zurück.</td>
+</tr>
+<tr>
+<td><pre>    };</pre></td>
+<td></td>
+</tr>
+<tr>
+<td><pre>    return wrapperFunction;</pre></td>
+<td>Gib die soeben erzeugte Wrapper-Funktion zurück.</td>
+</tr>
+<tr>
+<td><pre>};</pre></td>
+<td></td>
+</tr>
+</table>
+
+<table class="commented-code">
+<tr>
+<td><pre>Function.prototype.bindAsEventListener = function (contextObject) {</pre></td>
+<td>Erweitere alle Funktionsobjekte um die Methode <code>bindAsEventListener</code> über den Prototyp aller Funktionsobjekte. Die Funktion nimmt nur einen Parameter entgegen: Das Objekt, in dessen Kontext die Funktion ausgeführt werden soll.</td>
+</tr>
+<tr>
+<td><pre>    var originalFunction = this;</pre></td>
+<td>Speichere die gegenwärtige Funktion in einer Variablen, damit in der Closure ein Zugriff darauf möglich ist.</td>
+</tr>
+<tr>
+<td><pre>    var wrapperFunction = function (event) {</pre></td>
+<td>Erzeuge eine verschachtelte Funktion, die als Closure wirkt. Die Closure schließt <code>contextObject</code> und <code>originalFunction</code> ein.</td>
+</tr>
+<tr>
+<td><pre>        var eventObject = event || window.event;</pre></td>
+<td>Vereinheitliche den Zugriff auf das Event-Objekt. Dieses wird der Handler-Funktion entweder als Parameter übergeben (hier <code>event</code>) oder steht im Internet Explorer unter <code>window.event</code> zur Verfügung.</td>
+</tr>
+<tr>
+<td><pre>        return originalFunction.call(contextObject, eventObject);</pre></td>
+<td>Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei das Event-Objekt durch und gib den Rückgabewert der Funktion zurück.</td>
+</tr>
+<tr>
+<td><pre>    };</pre></td>
+<td></td>
+</tr>
+<tr>
+<td><pre>    return wrapperFunction;</pre></td>
+<td>Gib die soeben erzeugte Wrapper-Funktion zurück.</td>
+</tr>
+<tr>
+<td><pre>};</pre></td>
+<td></td>
+</tr>
+</table>
+
+<h3 id="bind-kompakt">Kurzschreibweise</h3>
+
+<p>Ohne Kommentare und Variablen, die bloß der Lesbarkeit dienen, sehen die beiden Funktionen wie folgt aus:</p>
+
+<pre>Function.prototype.bind = function () {
+    var method = this, args = Array.prototype.slice.call(arguments), object = args.shift();
+    return function () {
+        return method.apply(object, args);
+    };
+};
+
+Function.prototype.bindAsEventListener = function (object) {
+    var method = this;
+    return function (event) {
+        return method.call(object, event || window.event);
+    }
+};</pre>
+
+<h3 id="bind-modul">Anwendung bei einfachen Modulen</h3>
+
+<p><code>bind</code> ist die allgemeinere Funktion, die z.B. bei Timeouts, Intervallen und Callbacks Verwendung findet. <code>bindAsEventListener</code> ist die Nutzung einer Funktion als Event-Handler zugeschnitten.</p>
+
+<p>Der folgenden Code zeigt, wie sich die obigen Beispiele [^] mithilfe von <code>bind</code> und <code>bindAsEventListener</code> lösen lassen, sodass <code>this</code> immer auf das richtige Objekt zeigt.</p>
+
+<pre>
+var Modul = {
+    eigenschaft : "Eigenschaftswert",
+    start : function () {
+        alert("start wurde aufgerufen\n" +
+            "this.eigenschaft: " + this.eigenschaft);
+        setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
+        document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
+    },
+    verzögert : function () {
+        alert("verzögert wurde aufgerufen\n" +
+            "this.eigenschaft: " + this.eigenschaft);
+    },
+    handler : function (e) {
+        alert("handler wurde aufgerufen\n" +
+            "Event-Objekt: " + e + "\n",
+            "this.eigenschaft: " + this.eigenschaft);
+    },
+};
+Modul.start();
+</pre>
+
+<h3 id="bind-instanz">Anwendung bei Prototypen und Instanzmethoden</h3>
+
+<pre>
+function Konstruktor () {}
+Konstruktor.prototype = {
+    eigenschaft : "Eigenschaftswert",
+    start : function () {
+        alert("start wurde aufgerufen\n" +
+            "this.eigenschaft: " + this.eigenschaft);
+        setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
+        document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
+    },
+    verzögert : function () {
+        alert("verzögert wurde aufgerufen\n" +
+            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    },
+    handler : function (e) {
+        alert("handler wurde aufgerufen\n" +
+            "Event-Objekt: " + e + "\n",
+            "this.eigenschaft: " + this.eigenschaft);
+    };
+};
+var instanz = new Konstruktor();
+instanz.start();
+</pre>
+
+<p>Hier mag zunächst die Schreibweise <code>this.verzögert.bind(this)</code> und <code>this.handler.bindAsEventHandler(this)</code> irritieren. Diese Aufrufe hüllen <code>verzögert</code> und <code>handler</code> in Closures, welche die beiden Methoden im Kontext der Instanz ausführen.</p>
+
+<p>Function Binding und Currying mit solchen Helferfunktionen erlaubt das präzise Anlegen von Closures und ist ein wichtiges Werkzeug, um Verfügbarkeitsprobleme zu lösen. Im Gegensatz zu einer großen Kapselfunktion, in der alle weiteren Funktionen als Closures angelegt werden, ist Binding punktgenauer und vielseitiger &ndash; es funktioniert auch bei einfachen <code>Object</code>-Literalen und Methoden, die über den Prototyp hinzugefügt werden.</p>
+
+<h3 id="besseres-binding">Es gibt viele, bessere Binding-Funktionen</h3>
+
+<div class="sidebox">
+<p>Nutzen Sie die ausgereiften Binding- und Currying-Funktionen aus bekannten JavaScript-Bibliotheken.</p>
+</div>
+
+<p>Die hier vorgestellten <code>bind</code> und <code>bindAsEventListener</code> sind zwei <em>sehr einfache</em> Umsetzungen. Es gibt viele weitere, die mehr Komfort bieten und auf Performance optimiert sind. Die tatsächlichen Funktionen im Prototype-Framework ermöglichen es beispielsweise, dass Parameter der Wrapper-Funktion an die ursprüngliche Funktion weitergegeben werden. Die oben beschriebene <code>bind</code>-Funktion gibt lediglich die Parameter weiter, die beim <code>bind</code>-Aufruf angegeben wurden. <code>bindAsEventListener</code> aus Prototype erlaubt ebenfalls beides, während die obige Funktion nur das Event-Objekt weitergeben kann.</p>
+
+<p>Neben Prototype bieten auch andere Frameworks und funktionale Bibliotheken Function Binding und Currying. Das Konzept ist dasselbe, die Umsetzungen und Benennungen unterscheiden sich im Detail. Das Framework <a href="http://mootools.net/">Mootools</a> bietet etwa <a href="http://mootools.net/docs/core/Native/Function#Function:bind">bind</a> und <a href="http://mootools.net/docs/core/Native/Function#Function:bindWithEvent">bindWithEvent</a>.</p>
+
+<hr>
+
+<pre>
+Verknüpfen von Daten mit Elementen im DOM (jQuerys data(), Prototypes store(), Mootools store() usw.)
+    - benötigt ein DOM, auch evtl. Performance-Schwierigkeiten
+weitere Methoden zur Übergabe (z.B. jQuerys e.data)
+</pre>
+
+</body>
+</html>

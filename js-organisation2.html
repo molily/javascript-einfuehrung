@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js-organisation2</title>
+<link rel="stylesheet" href="file://C:/Users/molily/projekte/molily/molily.de/css/content.css">
+<link rel="stylesheet" href="js-organisation.css">
+</head>
+<body>
+
+<h1>Organisation von JavaScripten 2: Module</h1>
+
+<h2 id="unstrukturiert">Unstrukturierte Scripte</h2>
+
+<p>Zahlreiche Scripte, die JavaScript-Programmierer im Netz anbieten, liegen in einer gesonderten Datei vor und sind darüber hinaus unstrukturiert. Es handelt sich um eine lose Sammlung von dutzenden globalen Variablen und Funktionen:</p>
+
+<pre>
+var variable1 = "wert";
+var variable2 = "wert";
+var variable3 = "wert";
+
+function funktion1 () {
+    /* ... */
+}
+function funktion2 () {
+    /* ... */
+}
+function funktion3 () {
+    /* ... */
+}
+</pre>
+
+<p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Gültigkeitsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>indow.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
+
+<h2 id="kapselung-verfuegbarkeit">Das Yin und Yang von JavaScript: Kapselung vs. Verfügbarkeit</h2>
+
+<div class="sidebox">
+<p>Unstrukturierte Scripte sind schlecht zu warten und kollidieren mit anderen Scripten. Vermeiden Sie globale Variablen, soweit möglich.</p>
+</div>
+
+<p>Clientseitige JavaScripte arbeiten unter besonderen Bedingungen: Ein Script operiert auf einem HTML-Dokument, auf das es über das DOM zugreift. Ferner operiert es im Kontext des sogenannten globalen Objektes. Das ist in JavaScript das <code>window</code>-Objektes, welches den obersten Namensraum bereitstellt. Sowohl das globale Objekt als auch das DOM teilt es sich mit anderen Scripten. Diese »öffentlichen Güter« darf kein Script für sich alleine beanspruchen.</p>
+
+<p>Wenn Scripte unterschiedlicher Herkunft zusammenkommen, kann das schnell zu Konflikten führen. Die Vermeidung von Konflikten setzt bereits beim <a href="#unobtrusivejs">Unobtrusive JavaScript</a> an: Indem wir JavaScript-Code nicht direkt ins HTML-Dokument einbetten, sondern fortgeschrittenes Event-Handling verwenden, reduzieren wir Überschneidungen im DOM.</p>
+
+<p>Konfliktfeld Nummer Eins bleibt das <code>window</code>-Objekt. Darüber können über das zwei Scripte zusammenarbeiten, aber auch in Konflikt geraten, wenn sie gleichnamige Variablen definieren. In JavaScript gilt es daher, ein <strong>Gleichgewicht zwischen Kapselung und Verfügbarkeit</strong> herzustellen.</p>
+
+<p>Datenkapselung bedeutet, dass das Erweitern des globalen Objekts sowie der DOM-Objekte auf ein Minimum reduziert wird. Ein Script sollte den globalen Scope nicht für seine Arbeitsdaten verwenden und globale Variablen möglichst vermeiden. Es sollte nur die Objekte am <code>window</code>-Objekt speichern, die für den Zugriff von außen unbedingt vonnöten sind.</p>
+
+<div class="sidebox">
+<p>Die öffentliche API ihres Scriptes benötigt nur ein globales Objekt, über welches die restlichen Funktionen zugänglich sind.</p>
+</div>
+
+<p>Bei manchen Aufgaben ist es möglich, ein Script konsequent zu kapseln, sodass es das globale <code>window</code>-Objekt nicht antastet. In anderen Fällen ist es nötig, zumindest einige Objekte global verfügbar zu machen. Gründe dafür können sein:
+
+<ul>
+<li>Eine öffentliche Programmierschnittstelle (API) besonders bei Bibliotheken</li>
+<li>Konfigurierbarkeit des Scripts z.B. durch verschiedene Nutzer</li>
+<li>Erweiterbarkeit (Modularisierung)</li>
+</ul>
+
+<p>Es kommt daher auf das richtige Gleichgewicht an. Zwei Beispiele: Das riesige jQuery-Framework definiert standardmäßig nur zwei globale Variablen: <code>window.jQuery()</code> und als Alias <code>window.$()</code>. Das YUI-Framework definiert lediglich <code>window.YUI()</code>. <code>window.jQuery()</code> und <code>window.YUI()</code> sind beides Funktionen, denen man beim Aufruf letztlich Funktionen übergibt - dazu später mehr. Beide Frameworks schaffen es, nicht mehr als ein globales Objekt anzulegen, ohne auf die obigen Features wie Erweiterbarkeit zu verzichten.</p>
+
+<h2 id="object-literal">Einfache Module mit dem Objekt-Literal</h2>
+
+<div class="sidebox">
+<p><code>Object</code>-Objekte sind besonders vielseitig. Sie sind das Grundwerkzeug zur Gruppierung von Objekten und damit zur Strukturierung von Programmen. Sie sind als Hashes allgegenwärtig.</p>
+</div>
+
+<p>Eine einfache Möglichkeit, um den globalen Scope zu schonen, ist die Gruppierung aller Variablen und Funktionen eines Scripts in einer JavaScript-Objektstruktur. Im globalen Geltungsbereich taucht dann nur noch diese eine Objektstruktur auf, andere globale Variablen oder Funktionen werden nicht belegt. Das Script ist in der Objektstruktur in sich abgeschlossen. Damit sind Wechselwirkungen mit anderen Scripten ausgeschlossen, solange der Bezeichner der Objektstruktur eindeutig ist.
+
+<p>Ein JavaScript-Objekt ist erst einmal nichts anderes als ein Container für weitere Daten. Ein Objekt ist eine Liste, in der unter einem Bezeichner gewisse Unterobjekte gespeichert sind. Aus anderen Programmiersprachen ist diese solche Datenstruktur als <em>Hash</em> oder <em>assoziativer Array</em> bekannt. In JavaScript sind alle vorgegebenen Objekte und Methoden in solchen verschachtelten Objektstrukturen organisiert, z.B. <code>window.document.body</code>.</p>
+
+<p>In JavaScript gibt es den allgemeinen Objekttyp <code>Object</code>, von dessen Prototypen alle anderen JavaScript-Objekte abstammen. Das heißt, jedes JavaScript-Objekt ist immer auch ein <code>Object</code>-Objekt. <code>Object</code> ist die Grundlage, auf der die restlichen spezifischeren Objekttypen aufbauen.</p>
+ 
+<p>Für die Organisation von eigenen Scripten bieten sich solche unspezifischen <code>Object</code>-Objekte an. Über <code>new Object()</code> lässt sich ein <code>Object</code>-Objekt erzeugen:</p>
+
+<pre>
+var Modul = <strong>new Object</strong>();
+Modul.eigenschaft = "wert";
+Modul.methode = function () {
+    alert("Modul-Eigenschaft: " + Modul.eigenschaft);
+};
+Modul.methode();
+</pre>
+
+<p>Über die gewohnte Schreibweise zum Ansprechen von Unterobjekten (<code>objekt.unterobjekt</code>) werden dem <code>Object</code> weitere Objekte angehängt. Im Beispiel werden zwei Objekte angehängt, ein String und eine Funktion.
+
+<p>Der Name <code>Modul</code> ist selbstverständlich nur als Platzhalter gemeint. Sie sollten das <code>Object</code>-Objekt (im Folgenden kurz <code>Object</code> genannt) eindeutig und wiedererkennbar nach der Aufgabe bzw. dem Zweck ihres Scriptes benennen.</p>
+
+<div class="sidebox">
+<p>Der <code>Object</code>-Literal erlaubt das kompakte Erzeugen von <code>Object</code>-Objekten und eignet sich hervorragend für die Definition von Modulen.</p>
+</div>
+
+<p>JavaScript bietet für das Definieren von <code>Object</code>-Objekten eine Kurzschreibweise an, den sogenannten <strong>Object-Literal</strong>. Ein <code>Object</code>-Literal beginnt mit einer öffnenden geschweiften Klammer <code>{</code> und endet mit einer schließenden geschweiften Klammer <code>}</code>. Dazwischen befinden sich, durch Kommas getrennt, die Zuweisungen von Namen zu Objekten. Zwischen Name und Objekt wird ein Doppelpunkt notiert. Das Schema ist also: <code>{ name1 : objekt1, name2 : objekt2, &hellip; nameN : objektN }</code></p>
+
+<p>Das obige Beispiel-<code>Object</code> lässt sich in der Literalschreibweise so umsetzen:</p>
+
+<pre> 
+var Modul = {
+    eigenschaft : "wert",
+    methode : function () {
+        alert("Modul-Eigenschaft (über window.Modul): " + Modul.eigenschaft);
+        // Alternativ:
+        alert("Modul-Eigenschaft (über this): " + this.eigenschaft);
+    }
+};
+Modul.methode();
+</pre>
+
+<p>Eine Illustration der entstehenden Verschachtelung:</p>
+
+<ul class="kompakt"> 
+    <li>
+        window (globales Objekt)
+        <ul>
+            <li><code>Modul</code> (Object)
+                <ul> 
+                    <li><code>eigenschaft</code> (String)</li> 
+                    <li><code>methode</code> (Function)</li> 
+                </ul> 
+            </li> 
+        </ul> 
+    </li>
+</ul>
+
+<p>Der Zugriff auf die Unterobjekte des <code>Object</code>-Containers ist von außen über den globale Namen nach dem Schema <code>Modul.eigenschaft</code> möglich. Im Beispiel wird über <code>Modul.methode()</code> die zuvor angehängte Funktion aufgerufen.</p>
+
+
+<h2 id="scope">Kapselung mit privatem Funktions-Scope</h2>
+
+<div class="sidebox">
+<p>Wirksame Kapselung erreichen Sie mit einer Funktion, die Ihre Variablen einschließt und nur wenige Objekte nach außen verfügbar macht.</p>
+</div>
+
+<p>Beim Objekt-Literal wird ein globales Objekt als Namensraum benutzt, um darin eigene Objekte unterzubringen. All diese Objekte sind über das Containerobjekt für andere Scripte zugänglich. Es gibt also keine Trennung zwischen öffentlichen und privaten Daten. Während es sinnvoll ist, dass z.B. eine Methode <code>Modul.methode()</code> von außen aufrufbar ist, ist es unnötig und potenziell problematisch, dass jede Objekteigenschaft gelesen und manipuliert werden kann.</p>
+
+<p>
+Der nächste Schritt ist daher, eine wirksame Kapselung zu implementieren. Das Mittel dazu ist ein eigener, privater Scope (Variablen-Gültigkeitsbereich). Darin können beliebig viele lokale Variablen und Methoden definiert werden. Die einzige Möglichkeit, in JavaScript einen Scope zu erzeugen, ist eine Funktion. Wir definieren also eine Funktion, um darin das gesamte Script zu kapseln. Solange durchgehend lokale Variablen und Funktionen verwendet werden, wird der globale Scope nicht angetastet.<p>
+
+<div class="sidebox">
+<p>Schließen Sie Ihren Code in einen Funktionsausdruck ein, der sofort ausgeführt wird. Darin können Sie mit Objekten quasen, ohne den globalen Scope zu verpesten.</p>
+</div>
+
+<p>Ein mittlerweile stark verbreitetes Muster ist daher folgender Codeschnipsel:</p>
+
+<pre>
+(function () {
+    /* ... */
+})();
+</pre>
+
+<p>Dies erscheint zunächst sehr kryptisch, daher eine schrittweise Zerlegung der Syntax:</p>
+
+<ol>
+<li>Erzeuge eine namenlose Funktion per Funktionsausdruck: <code>function () { ... }</code></li>
+<li>Umschließe diesen Funktionsausdruck mit runden Klammern: <code><strong>(</strong>function () {}<strong>)</strong></code></li>
+<li>Führe die Funktion sofort aus mit dem Call-Operator, das sind die beiden runden Klammern: <code>(function () { ... })<strong>()</strong></code>. Die Parameterliste bleibt in diesem Beispiel leer.</li>
+<li>Schließe die Anweisung mit einem <code>;</code> ab.</li>
+</ol>
+
+<p>Diese anonyme Funktion wird nur notiert, um einen Scope zu erzeugen, und sie wird sofort ausgeführt, ohne dass sie irgendwo gespeichert wird. Innerhalb der Funktion wird nun der gewünschte Code untergebracht:</p>
+
+<pre>
+(function () {
+    
+    /* Lokale Variable */
+    var variable = 123;
+    
+    /* Lokale Funktion */
+    function funktion () {
+        /* ... */
+    }
+    
+    /* Rufe lokale Funktion auf: */
+    funktion();
+    
+    /* Zugriff auf globale Objekte ist ebenfalls möglich: */
+    alert(document.title);
+    
+})();
+</pre>
+
+<p>Im Beispiel finden sich eine Variablendeklarationen und eine Funktionsdeklaration. Beide sind lokal, sind also nur innerhalb der Kapselfunktion zugänglich. Wir können auf die Variablen und Funktionen direkt zugreifen.</p>
+
+<div class="sidebox">
+<p>Vergessen Sie nicht, Variablen mit <code>var</code> als lokal zu deklarieren. Andernfalls werden sie automatisch global, also Eigenschaften von <code>window</code>.</p>
+</div>
+
+<p>Das Beispiel macht noch nichts sinnvolles. Die Nützlichkeit von Funktionen zur Kapselung ergibt sich z.B. bei einem Anwendungsbeispiel mit Event-Handling.</p>
+
+<pre>
+(function () {
+    
+    var clickNumber = 0;
+    var outputEl;
+    
+    function buttonClicked () {
+        clickNumber++;
+        outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
+    }
+    
+    function init () {
+        outputEl = jQuery('#output);
+        jQuery('#button').click(buttonClicked);
+    }
+    
+    jQuery(document).ready(init);
+    
+})();
+</pre>
+
+<p>Das zugehörige HTML:</p>
+
+<pre>
+&lt;button id="button">Klick mich&lt;/button>
+&lt;p id="output">Button wurde noch nicht angeklickt&lt;/p>
+&lt;script type="text/javascript" src="beispiel.js">&lt;/script>
+</pre>
+
+<p>Der Code nutzt die jQuery-Bibliothek, um eine Initialisierungsfunktion bei <a href="#domready">DOM ready</a> auszuführen. Diese registriert bei einem Button einen Event-Handler. Wird der Button geklickt, wird eine Zahl erhöht. Zudem wird die bisherige Anzahl der Klicks im Dokument ausgegeben.</p>
+
+<p>Das Besondere an diesem Script sind die vier lokalen Variablen bzw. Funktionen. Sie werden direkt im Funktions-Scope notiert, anstatt sie an einen <code>Object</code>-Container zu hängen. Innerhalb der verschachtelten Funktionen sind die Variablen des äußeren Funktions-Scope verfügbar (siehe <a href="#closures">Closures</a>). <code>init()</code> füllt die Variable <code>outputEl</code> und greift auf die Funktion <code>buttonClicked()</code> zu. <code>buttonClicked()</code> greift auf die Variablen <code>clickNumber</code> und <code>outputEl</code> zu. Das Script funktioniert, ohne dass Objekte am globalen <code>window</code>-Objekt angelegt werden.</p>
+
+<h3 id="dom-ready-scope">DOM-ready-Handler als privater Scope</h3>
+
+<div class="sidebox">
+<p>DOM-Ready-Handlerfunktionen in verschiedenen Bibliotheken bieten berets einen privaten Scope, den Sie nutzen sollten.</p>
+</div>
+
+<p>Bei der Verwendung mit jQuery ist das Anlegen solcher Funktions-Scope gang und gäbe. Wenn die Initialisierung eines Scriptes auf DOM ready warten soll, dann übergibt man einen Funktionausdruck an <code>jQuery(document).ready()</code>. Diese Funktion wird als Handler beim Eintreten des DOM-ready-Ereignisses ausgeführt. Man nutzt sie gleichzeitig als privaten Scope für weitere Objekte. Das obige Beispiel können wir also folgendermaßen anpassen:</p>
+
+<pre>
+jQuery(function ($) {
+    
+    var clickNumber = 0;
+    var outputEl;
+    
+    function buttonClicked () {
+        clickNumber++;
+        outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
+    }
+    
+    function init () {
+        outputEl = $('#output);
+        $('#button').click(buttonClicked);
+    }
+    
+    init();
+    
+});
+</pre>
+
+<p>Die übergebene DOM-ready-Funktion bekommt das globale jQuery-Objekt als ersten Parameter. Wir nennen den Parameter hier <code>$</code>. Funktionsparameter sind automatisch lokale Variablen, das heißt, wir können mit <code>$</code> genauso umgehen wie mit <code>clickNumber</code> oder <code>buttonClicked</code>.</p>
+
+<h3 id="import-globals">Globale Objekte importieren</h3>
+
+<div class="sidebox">
+<p>Das Übergeben von Objekten in die Kapselfunktion verkürzt die Scope-Kette und beschleunigt den Zugriff auf diese Objekte etwas.</p>
+</div>
+
+<p>jQuery stellt standardmäßig <code>window.$</code> als Abkürzung für <code>window.jQuery</code> zur Verfügung, wenn nicht der <a href="http://docs.jquery.com/Using_jQuery_with_Other_Libraries">noConflict-Modus</a> aktiviert wird. Es ergibt jedoch Sinn, das jQuery-Objekt als lokale Variable zu definieren, denn das beschleunigt den Zugriff darauf (Stichwort Scope-Chain).</p>
+
+<p>Aus demselben Grund hat es sich eingebürgert, das <code>window</code>-Objekt sowie weitere häufig benutzte Objekte wie <code>document</code> mittels Parametern in den Funktions-Scope zu übergeben:</p>
+
+<pre>
+(function (window, document, undefined) {
+
+    /* ... */
+    
+})(window, document);
+</pre>
+
+<p>Gleichzeitig wird hier sichergestellt, dass innerhalb der Funktion der Bezeichner <code>undefined</code> immer den Typ <code>Undefined</code> besitzt. Wir definieren einen solchen Parameter, aber übergeben keinen Wert dafür &ndash; sodass eine lokale Variable namens <code>undefined</code> mit einem leeren Wert angelegt wird. Das ist andernfalls nicht garantiert, denn <code>window.undefined</code> ist durch Scripte überschreibbar.</p>
+
+<p>Innerhalb der Funktion können die Objekte genauso heißen wie außerhalb. Dennoch handelt es z.B. bei <code>document</code> innerhalb der Funktion um eine lokale Variable, auch wenn sie natürlich auf <code>window.document</code> verweist.</p>
+
+<h2 id="revealing-module">Kapselung plus öffentliche Schnittstelle: Das Revealing Module Pattern</h2>
+
+<p>Wir haben nun beide Extreme kennengelernt: Bei <code>Object</code>-Containern sind alle Unterobjekte öffentlich. Bei einer Kapselfunktion ist kein Objekt nach außen hin zugänglich. Wenn wir ein wiederverwendbares Script schreiben wollen, wollen wir meist eine öffentliche Schnittstelle (API) anbieten. Dazu müssen einige ausgewählte Objekte, in der Regel Methoden, sowohl nach außen sichtbar sein als auch Zugriff auf die internen, privaten Objekte haben. Man spricht in diesem Fall von <dfn>privilegierten Methoden</dfn>.</p>
+
+<div class="sidebox">
+<p>Das Revealing Module Pattern erlaubt öffentliche und private Objekte und eignet sich ideal, um API und interne Implementierung sauber zu trennen.</p>
+</div>
+
+<p>Diesen Kompromiss erreichen wir durch eine Kombination aus <code>Object</code>-Literalen und einer Kapselfunktion. Dieses Entwurfsmuster nennt sich <strong><dfn>Revealing Module Pattern</dfn></strong>. Kurz gesagt gibt die Kapselfunktion ein Objekt nach draußen, bevor sie sich beendet. Über dieses Objekt können gewisse privilegierte Methoden aufgerufen werden.</p>
+
+<p>Wir beginnen mit dem bereits beschriebenen Funktionsausdruck, der sofort ausgeführt wird:</p>
+
+<pre>
+(function () {
+    /* ... private Objekte ... */
+})();
+</pre>
+
+<p>Das Neue ist, dass diese Funktion einen Wert zurückgibt, der in einer Variable gespeichert wird:</p>
+
+<pre>
+var Modul = (function () {
+    /* ... private Objekte ... */
+})();
+</pre>
+
+<p>Dieser Wert ist ein Objekt, welches wir in der Funktion mit einem Objekt-Literal notieren und mittels <code>return</code> nach draußen geben. An dem Objekt hängen die öffentlichen Eigenschaften und Methoden:</p>
+
+<pre>
+var Modul = (function () {
+    
+    /* ... private Objekte ... */
+    
+    /* Gebe öffentliche API zurück: */
+    return {
+        öffentlicheMethode : function () { ... }
+    };
+    
+})();
+</pre>
+
+<p>Innerhalb der anonymen Funktion notieren wir wie üblich unsere privaten Objekte. Das folgende Beispiel definiert eine öffentliche, privilegierte Methode. Sie hat Zugriff auf sämtliche internen, privaten Objekte, welche direkt von außen nicht zugänglich sind.</p>
+
+<pre>
+var Modul = (function () {
+
+    // Private Objekte
+    var privateVariable = "privat";
+    function privateFunktion () {
+        alert("privateFunktion wurde aufgerufen\nPrivate Variable: " + privateVariable);
+    }
+    
+    // Gebe öffentliches Schnittstellen-Objekt zurück
+    return {
+        öffentlicheMethode : function () {
+            alert("öffentlicheMethode wurde aufgerufen\nPrivate Variable: " + privateVariable);
+            privateFunktion();
+        }
+    };
+    
+})();
+
+// Rufe öffentliche Methode auf
+Modul.öffentlicheMethode();
+
+// Ergibt undefined, weil von außen nicht sichtbar:
+window.alert("Modul.privateFunktion von außerhalb: " + Modul.privateFunktion);
+</pre>
+
+<p>Da die privilegierten Methoden innerhalb des Funktions-Scope notiert werden, haben sie darauf Zugriff. Das liegt daran, dass sie <a href="#closures">Closures</a> sind.</p>
+
+<div class="sidebox">
+<p>Module können Sie mit einem <code>Object</code> in einem Namensraum gruppieren.</p>
+</div>
+
+<p>Es ist natürlich möglich, solche Module nicht direkt als globale Variablen zu speichern, sondern verschiedene in einem <code>Object</code>-Literal zu speichern. Dieser dient dann als Namensraum für zusammengehörige Module. So ist letztlich mehrere Module unter nur einer globalen Variable gespeichert.</p>
+
+<pre>
+var Namensraum = {};
+Namensraum.Modul1 = (function () { ... })();
+Namensraum.Modul2 = (function () { ... })();
+</pre>
+
+<h2 id="module-erweitern">Erweiterbare Module</h2>
+
+<div class="sidebox">
+<p>Module nachträglich zu erweitern ist möglich, allerdings haben die einzelnen Teile keinen Zugriff auf die privaten Objekte der anderen Teilmodule.</p>
+</div>
+
+<p>Ben Cherry schlägt eine <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">Erweiterbarkeit von Modulen</a> auf Basis des Revealing Module Patterns vor. Er unterscheidet zwischen fester und lockerer Kopplung der Teile. Das heißt, entweder setzt ein Aufbaumodul ein Basismodul zwingend voraus. Oder beide Module ergänzen sich gegenseitig, sind aber auch separat funktionsfähig.</p>
+
+<h3>Feste Kopplung</h3>
+
+<pre>
+/* Grundmodul */
+var Modul = (function (Modul) {
+    /* ... private Objekte ... */
+    return {
+        methode1 : function () { ... }
+    };
+})();
+
+/* Erweiterung des Grundmoduls */
+(function (modul) {
+    /* ... private Objekte ... */
+    /* Erweitere Modul um neue Methoden: */
+    modul.methode2 = function () { ... };
+})(Modul);
+</pre>
+
+<p>Die Definition des Grundmoduls erfolgt wie beim Revealing Module Pattern besprochen. Zur Erweiterung des Moduls wird eine weitere anonyme Funktion angelegt und ausgeführt. Diese Funktion bekommt das Modulobjekt als Parameter übergeben und fügt diesem neue Methoden hinzu oder überschreibt vorhandene. Innerhalb der Funktion können wie üblich private Objekte und Methoden angelegt werden.</p>
+
+<p>Nach der Ausführung des obigen Codes besitzt das Modul zwei öffentliche Methoden:</p>
+
+<pre>
+Modul.methode1();
+Modul.methode2();
+</pre>
+
+<p>Zu beachten ist, dass die Methoden der Erweiterung keinen Zugriff auf die privaten Objekte des Grundmoduls haben &ndash; denn sie befinden sich in einem anderen Funktions-Scope. Zur Lösung dieses Problems schlägt Ben Cherry eine Methode vor, die die privaten Objekte kurzzeitig öffentlich macht, sodass ein übergreifender Zugriff möglich ist. Das erscheint mir jedoch besonders umständlich &ndash; in diesem Fall würde ich privaten Objekte zu dauerhaft öffentlichen Eigenschaften machen und auf die vollständige Kapselung verzichten.</p>
+
+<h3>Lose Kopplung</h3>
+
+<p>Bei der losen Kopplung können die Teilmodule alleine oder zusammen stehen. Ferner ist die Reihenfolge, in der die Teilmodule notiert werden, unwichtig. Dafür können sie nicht stillschweigend auf die gegenseitigen öffentlichen Methoden zugreifen, sondern müssen gegebenenfalls prüfen, ob diese definiert sind.</p>
+
+<pre>
+var Modul = (function (modul) {
+    /* ... private Objekte ... */
+    
+    /* Lege Methode am Modulobjekt an: */
+    modul.methode1 = function () { ... };
+    
+    return modul; 
+}(Modul || {}));
+
+var Modul = (function (modul) {
+    /* ... private Objekte ... */
+    
+    /* Lege Methode am Modulobjekt an: */
+    modul.methode2 = function () { ... };
+    
+    return modul; 
+}(Modul || {}));
+</pre>
+
+<p>Die Moduldeklarationen sind gleich aufgebaut: Es gibt eine anonyme Funktion, um einen privaten Scope zu erzeugen. Diese Funktion bekommt das bestehende Modul übergeben. Der Ausdruck <code>Modul || {}</code> prüft, ob das Modul bereits definiert wurde. Falls ja, wird dieses der Funktion übergeben. Andernfalls wird mit dem <code>Object</code>-Literal ein leeres Objekt erzeugt und übergeben. Somit ist gesichert, dass die Funktion ein Objekt als Parameter entgegennimmt. Innerhalb der Funktion können wir private Objekte notieren und das Modulobjekt um neue Eigenschaften erweitern. Am Ende wird das Modul zurückgegeben und der Rückgabewert in einer Variable gespeichert.</p>
+
+<p>Das Resultat ist ebenfalls, dass das Modul zwei öffentliche Methoden besitzt:</p>
+
+<pre>
+Modul.methode1();
+Modul.methode2();
+</pre>
+
+</body>
+</html>
