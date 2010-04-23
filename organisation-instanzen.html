@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="utf-8">
-<title>js-organisation3</title>
-<link rel="stylesheet" href="file://C:/Users/molily/projekte/molily/molily.de/css/content.css">
-<link rel="stylesheet" href="js-organisation.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
 </head>
 <body>
 
-<h1>Organisation von JavaScripten 3: Konstruktoren, Prototypen und Instanzen</h1>
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</h1>
 
 <h2 id="instanzen">Objektinstanzen mit Konstruktoren und Prototypen</h2>
 
 <p>Mit <code>Object</code>-Literalen und dem Revealing Module Pattern haben wir das gebaut, was in anderen Programmiersprachen <em>Singleton</em> oder <em>Klasse</em> mit statischen Methoden genannt wird. Ein solches Modul kommt nur einmal vor und kann nur einen internen Status haben. In vielen Fällen ist es jedoch sinnvoll, mehrere Instanzen (Exemplare) eines Objektes zu erzeugen. In vielen anderen Programmiersprachen würde man dazu eine eigene Klasse definieren und davon Instanzen erzeugen.</p>
 
 <p>In JavaScript gibt es wie eingangs erwähnt keine Klassen. Es gibt jedoch <strong>Konstruktor-Funktionen</strong> (kurz: <dfn>Konstruktoren</dfn>) und <strong>prototypische Objekte</strong> (kurz: Prototypen).</p>
-
 
 <h3 id="konstruktoren">Konstruktor-Funktionen (Konstruktoren)</h3>
 
@@ -353,6 +357,17 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 <h2>Mehrfachvererbung über die Prototyp-Kette</h2>
 
 <p>Tausende Möglichkeiten...</p>
+
+<div class="sequence-navigation">
+	<p class="prev"><a href="organisation-module.html" rel="prev">Organisation von JavaScripten: Module</a></p>
+	<p class="next"><a href="organisation-verfuegbarkeit.html" rel="next">Organisation von JavaScripten: Objektverfügbarkeit und this-Kontext</a></p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="./">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
 
 </body>
 </html>

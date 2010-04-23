@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="utf-8">
-<title>js-organisation1</title>
-<link rel="stylesheet" href="file://C:/Users/molily/projekte/molily/molily.de/css/content.css">
-<link rel="stylesheet" href="js-organisation.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Organisation von JavaScripten: Voraussetzungen und Überblick</title>
+<link rel="stylesheet" href="js-doku.css">
+<script type="text/javascript" src="js-doku.js"></script>
 </head>
 <body>
 
-<h1>Organisation von JavaScripten 1: Voraussetzungen und Überblick</h1>
+<div id="nav">
+<p>Hier entsteht eine <strong>JavaScript-Dokumentation</strong> von <a href="http://molily.de/">molily</a>. Derzeit ist sie noch lückenhaft, wächst aber nach und nach. Kommentare und Feedback werden gerne per <a href="mailto:zapperlott@gmail.com">E-Mail</a> entgegen genommen.</p>
+<p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
+</div>
+
+<h1>Organisation von JavaScripten: Voraussetzungen und Überblick</h1>
 
 <h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
 
@@ -47,11 +52,11 @@
 <p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
 </div>
 
-<h3>1. JavaScript auslagern und extern am Dokumentende einbinden</h3>
+<h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
 <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script type="text/javascript" src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
-<h3 id="domready">2. Scripte bei DOM Ready initialisieren</h3>
+<h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
 
 <p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="http://molily.de/js/event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
 
@@ -77,7 +82,7 @@ $(function () {
 $(funktion);
 </pre>
 
-<h3>3. DOM-Zugriffe über Selektor-Engines</h3>
+<h3>DOM-Zugriffe über Selektor-Engines</h3>
 
 <p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Element auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
 
@@ -89,11 +94,11 @@ $(document).ready(function () {
 });
 </pre>
 
-<h3>4. Zeitgemäßes Event-Handling</h3>
+<h3>Zeitgemäßes Event-Handling</h3>
 
 <p>Nach den Ansprechen der Elemente können Sie Event-Handler registrieren. Dazu benötigen Sie eine leistungsfähige Event-Handling-Komponente, die sicherstellt, dass mehreren Handler für einen Typ registriert werden können und die Ihnen die Event-Verarbeitung durch Nivellierung von Browserunterschieden vereinfacht. Eine solche ist in den üblichen Frameworks eingebaut, alternativ können Sie eine lose <a href="http://molily.de/js/event-handling-fortgeschritten.html#flexibles-addevent">addEvent-Helferfunktionen</a> nutzen.
 
-<p>Beispiel jQuery:
+<p>Beispiel jQuery:</p>
 
 <pre>
 $(document).ready(function () {
@@ -104,8 +109,6 @@ $(document).ready(function () {
 </pre>
 
 <p>Zum effizienten Event-Handling gehört <a href="http://molily.de/js/event-handling-effizient.html">Event Delegation</a> hinzu. Die Grundidee ist, dass Ereignisse bei einer ganzen Schar von Elementen durch ein darüberliegendes Element verarbeitet werden. Dazu macht man sich das Event Bubbling und Event Capturing zunutze. Beispielsweise jQuery bietet dafür die Methoden <a href="http://api.jquery.com/delegate/">delegate()</a> und <a href="http://api.jquery.com/live/">live()</a>.</p>
-
-<hr>
 
 <h2 id="oop">Objektorientierte Programmierung in JavaScript</h2>
 
@@ -214,7 +217,6 @@ $instanz2->zusatzmethode();
 <p><img src="crockford-functions.jpg" alt="" style="float:right; margin-left: 2em">
 
 Functions are the very best part of JavaScript. It's where most of the power is, it's where the beauty is. &hellip; Function is the key idea in JavaScript. It's what makes it so good and so powerful. In other languages you've got lots of things: you've got methods, classes, constructors, modules, and more. In JavaScript there's just function, and function does all of those things and more. That's not a deficiency, that's actually a wonderful thing — having one thing that can do a lot, and can do it brilliantly, at scale, that's what functions do in this language.</p>
-<p><cite></cite></p>
 </blockquote>
 
 <p>Crockford weist hier darauf hin, wie vielseitig Funktionen in JavaScript sind und dass sie Aufgaben übernehmen, für die es in anderen Sprachen unterschiedliche Konzepte gibt.</p>
@@ -234,7 +236,7 @@ Functions are the very best part of JavaScript. It's where most of the power is,
 
 </div><!-- /.base -->
 
-<div class="pillar">
+<div class="pillar first">
 
 <h3>Funktionen</h3>
 
@@ -251,7 +253,7 @@ Functions are the very best part of JavaScript. It's where most of the power is,
 </ul>
 
 </div><!-- /.pillar -->
-<div class="pillar">
+<div class="pillar second">
 
 <h3>Scope</h3>
 
@@ -265,7 +267,7 @@ Functions are the very best part of JavaScript. It's where most of the power is,
 </ul>
 
 </div><!-- /.pillar -->
-<div class="pillar">
+<div class="pillar third">
 
 <h3>Prototypen</h3>
 
@@ -283,6 +285,16 @@ Functions are the very best part of JavaScript. It's where most of the power is,
 </div><!-- /.pillars -->
 
 <p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu wäre eine systematische Einführung in JavaScript nötig.</p>
+
+<div class="sequence-navigation">
+	<p class="next"><a href="organisation-module.html" rel="next">Organisation von JavaScripten: Module</a></p>
+</div>
+
+<div id="footer">
+<p><strong>JavaScript-Dokumentation</strong> &middot; <a href="./">Zum Inhaltsverzeichnis</a></p>
+<p>Autor: <a href="http://molily.de/">molily</a> &middot; Kontakt: <a href="mailto:zapperlott@gmail.com">zapperlott@gmail.com</a></p>
+<p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
+</div>
 
 </body>
 </html>
