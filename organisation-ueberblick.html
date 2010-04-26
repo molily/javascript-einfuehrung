@@ -15,118 +15,150 @@
 
 <h1>Organisation von JavaScripten: Voraussetzungen und Überblick</h1>
 
-<h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
+ <div class="section" id="einleitung">
+ 
+	 <h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
 
-<div class="sidebox">
-<p>Wie sehen wohlgestrukturierte, umfangreiche JavaScript aus?</p>
+	<div class="sidebox">
+	<p>Wie sehen wohlgestrukturierte, umfangreiche JavaScript aus?</p>
+	</div>
+
+	<p>Dieser Artikel richtet sich an Web- und Anwendungsentwickler, die umfangreiche und komplexe JavaScripte schreiben. Mittlerweile ermöglichen Frameworks wie jQuery einen schnellen Einstieg in das DOM-Scripting. Wie gut der Code in diesen kleinen Anwendungsfällen strukturiert ist, spielt keine entscheidende Rolle. Das Framework gibt bereits eine Grundstruktur vor, die für diese Zwecke ausreicht.</p>
+
+	<p>Wenn Scripte jedoch über ein simples DOM-Scripting hinausgehen und ganze Webanwendungen entstehen, stellen sich verschiedene Fragen: Wie lässt sich die komplexe Funktionalität geordnet in JavaScript implementieren? Welche Möglichkeiten der objektorientierten Programmierung in JavaScript gibt es? Wie lassen sich Datenmodelle in JavaScript angemessen umsetzen?</p>
+
+	<p>Eine sinnvolle Struktur wird zur Anforderung ebenso wie die Optimierung der Performance. Wird der JavaScript-Code mehrere tausend Zeilen lang, so soll er wartbar, übersichtlich und testbar bleiben. Er soll modular sein sowie wenig Redundanzen besitzen. Verschiedene Programmierer sollen gleichzeitig daran arbeiten können. Wenn das Script veröffentlicht werden soll, sodass es Fremde auf Ihren Sites verwenden, muss es in verschiedenen, unberechenbaren Umgebungen robust arbeiten.</p>
+
+	<p>Dieser Artikel soll Strategien vorstellen, um diesen Herausforderungen zu begegnen. Bevor wir uns konkreten JavaScript-Fragen widmen, soll zunächst erörtert werden, wann und wie JavaScript sinnvoll eingesetzt wird. Dies hat direkte Konsequenzen auf die Struktur und Arbeitsweise der JavaScripte. Deshalb ist es bereits auf dieser Ebene wichtig, die richtigen Weichen zu stellen. Alle weiteren Tipps gehen davon aus, dass Sie gemäß diesen Prinzipen arbeiten.</p>
+
 </div>
 
-<p>Dieser Artikel richtet sich an Web- und Anwendungsentwickler, die umfangreiche und komplexe JavaScripte schreiben. Mittlerweile ermöglichen Frameworks wie jQuery einen schnellen Einstieg in das DOM-Scripting. Wie gut der Code in diesen kleinen Anwendungsfällen strukturiert ist, spielt keine entscheidende Rolle. Das Framework gibt bereits eine Grundstruktur vor, die für diese Zwecke ausreicht.</p>
+<div class="section"  id="schichtenmodell">
 
-<p>Wenn Scripte jedoch über ein simples DOM-Scripting hinausgehen und ganze Webanwendungen entstehen, stellen sich verschiedene Fragen: Wie lässt sich die komplexe Funktionalität geordnet in JavaScript implementieren? Welche Möglichkeiten der objektorientierten Programmierung in JavaScript gibt es? Wie lassen sich Datenmodelle in JavaScript angemessen umsetzen?</p>
+	<h2>Das Schichtenmodell: Trennung von Inhalt, Präsentation und Verhalten</h2>
 
-<p>Eine sinnvolle Struktur wird zur Anforderung ebenso wie die Optimierung der Performance. Wird der JavaScript-Code mehrere tausend Zeilen lang, so soll er wartbar, übersichtlich und testbar bleiben. Er soll modular sein sowie wenig Redundanzen besitzen. Verschiedene Programmierer sollen gleichzeitig daran arbeiten können. Wenn das Script veröffentlicht werden soll, sodass es Fremde auf Ihren Sites verwenden, muss es in verschiedenen, unberechenbaren Umgebungen robust arbeiten.</p>
+	<div class="sidebox">
+	<p>Inhalte werden sinnvoll ausgezeichnet. Für die Struktur ist HTML zuständig, die Präsentation wird in Stylesheets ausgelagert.</p>
+	</div>
 
-<p>Dieser Artikel soll Strategien vorstellen, um diesen Herausforderungen zu begegnen. Bevor wir uns konkreten JavaScript-Fragen widmen, soll zunächst erörtert werden, wann und wie JavaScript sinnvoll eingesetzt wird. Dies hat direkte Konsequenzen auf die Struktur und Arbeitsweise der JavaScripte. Deshalb ist es bereits auf dieser Ebene wichtig, die richtigen Weichen zu stellen. Alle weiteren Tipps gehen davon aus, dass Sie gemäß diesen Prinzipen arbeiten.</p>
+	<p>Im modernen Webdesign kommt den Webtechniken HTML, CSS und JavaScript jeweils eine bestimmte Rolle zu. HTML soll die Texte bedeutungsvoll strukturieren, indem z.B. Überschriften, Listen, Absätze, Datentabellen, Abschnitte, Hervorhebungen, Zitate usw. als solche ausgezeichnet werden. CSS definiert die Regeln für die Darstellung dieser Inhalte, sei es auf einem Desktop-Bildschirm, auf einem mobilen Gerät oder beim Ausdrucken.</p>
 
-<h2 id="schichtenmodell">Das Schichtenmodell: Trennung von Inhalt, Präsentation und Verhalten</h2>
-
-<div class="sidebox">
-<p>Inhalte werden sinnvoll ausgezeichnet. Für die Struktur ist HTML zuständig, die Präsentation wird in Stylesheets ausgelagert.</p>
+	<p>Um eine Website effizient zu entwickeln sowie sie nachträglich mit geringem Aufwand pflegen zu können, sollen diese beiden Aufgaben strikt voneinander getrennt werden: Im HTML-Code werden keine Angaben zur Präsentation gemacht. Im Stylesheet befinden sich demnach alle Angaben zur Präsentation in möglichst kompakter Weise. Dadurch müssen im HTML-Code nur genau soviele Angriffspunkte für CSS-Selektoren gesetzt werden, wie gerade nötig sind (z.B. zusätzliche <code>div</code>- oder <code>span</code>-Elemente sowie <code>id</code>- und <code>class</code>-Attribute). Ein und dasselbe Dokument kann auf diese Weise durch den Wechsel des Stylesheets ein völlig anderes Layout bekommen. Aber auch ganz ohne Stylesheet sind die Inhalte noch sinnvoll strukturiert und die Inhalte zugänglich.
+	
 </div>
 
-<p>Im modernen Webdesign kommt den Webtechniken HTML, CSS und JavaScript jeweils eine bestimmte Rolle zu. HTML soll die Texte bedeutungsvoll strukturieren, indem z.B. Überschriften, Listen, Absätze, Datentabellen, Abschnitte, Hervorhebungen, Zitate usw. als solche ausgezeichnet werden. CSS definiert die Regeln für die Darstellung dieser Inhalte, sei es auf einem Desktop-Bildschirm, auf einem mobilen Gerät oder beim Ausdrucken.</p>
+<div class="section" id="unobtrusivejs">
 
-<p>Um eine Website effizient zu entwickeln sowie sie nachträglich mit geringem Aufwand pflegen zu können, sollen diese beiden Aufgaben strikt voneinander getrennt werden: Im HTML-Code werden keine Angaben zur Präsentation gemacht. Im Stylesheet befinden sich demnach alle Angaben zur Präsentation in möglichst kompakter Weise. Dadurch müssen im HTML-Code nur genau soviele Angriffspunkte für CSS-Selektoren gesetzt werden, wie gerade nötig sind (z.B. zusätzliche <code>div</code>- oder <code>span</code>-Elemente sowie <code>id</code>- und <code>class</code>-Attribute). Ein und dasselbe Dokument kann auf diese Weise durch den Wechsel des Stylesheets ein völlig anderes Layout bekommen. Aber auch ganz ohne Stylesheet sind die Inhalte noch sinnvoll strukturiert und die Inhalte zugänglich.
+	<h2>Erste Schritte zum Unobtrusive JavaScript</h2>
 
-<h2 id="unobtrusivejs">Unobtrusive JavaScript</h2>
+	<div class="sidebox">
+	<p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
+	</div>
+		
+	<p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (engl. Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
 
-<p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (engl. Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
+	<p>Die Grundlage für eine sinnvolle JavaScript-Programmierung ist die <strong>Auslagerung des JavaScript-Codes</strong>: Im HTML-Code sollte sich kein JavaScript in Form von Event-Handler-Attributen befinden (<code>onload</code>, <code>onclick</code>, <code>onmouseover</code> usw.). Stattdessen werden Elemente, denen ein bestimmtes Verhalten hinzugefügt werden soll, falls nötig mit einer Klasse oder ID markiert, um die Elemente eindeutung adressieren zu können. Die nötige Interaktivität wird dem Dokument automatisch hinzugefügt. Beim Ladens des Dokuments wird das Script aktiv, initialisiert sich und startet die Ereignisüberwachung an den betreffenden Elementen. Diese Anwendung von JavaScript nennt sich <a href="http://ichwill.net/">Unobtrusive JavaScript</a>, »unaufdringliches« JavaScript.</p>
 
-<p>Die Grundlage für eine sinnvolle JavaScript-Programmierung ist die <strong>Auslagerung des JavaScript-Codes</strong>: Im HTML-Code sollte sich kein JavaScript in Form von Event-Handler-Attributen befinden (<code>onload</code>, <code>onclick</code>, <code>onmouseover</code> usw.). Stattdessen werden Elemente, denen ein bestimmtes Verhalten hinzugefügt werden soll, falls nötig mit einer Klasse oder ID markiert, um die Elemente eindeutung adressieren zu können. Die nötige Interaktivität wird dem Dokument automatisch hinzugefügt. Beim Ladens des Dokuments wird das Script aktiv, initialisiert sich und startet die Ereignisüberwachung an den betreffenden Elementen. Diese Anwendung von JavaScript nennt sich <a href="http://ichwill.net/">Unobtrusive JavaScript</a>, »unaufdringliches« JavaScript.
+	</div>
+	
+	<div class="subsection">
 
+		<h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
-<h2 id="unobtrusivejs-schritte">Erste Schritte für Unobtrusive JavaScript</h2>
+		<p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script type="text/javascript" src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
-<div class="sidebox">
-<p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
-</div>
+	
+	</div>
+	
+	<div class="subsection">
+	
+		<h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
 
-<h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
+		<p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="http://molily.de/js/event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
 
-<p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script type="text/javascript" src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
-
-<h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
-
-<p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="http://molily.de/js/event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
-
-<p>Beispiel jQuery:</p>
+		<p>Beispiel jQuery:</p>
 
 <pre>
 $(document).ready(function () {
-    // Diese Funktion wird beim DOM ready ausgeführt
+	// Diese Funktion wird beim DOM ready ausgeführt
 });
 </pre>
 
-<p>Kurzschreibweise mit</p>
+		<p>Kurzschreibweise mit</p>
 
 <pre>
 $(function () {
-    // ...
+	// ...
 });
 </pre>
 
-<p>Übergabe einer Funktion über ihren Namen:</p>
+		<p>Übergabe einer Funktion über ihren Namen:</p>
 
 <pre>
 $(funktion);
 </pre>
 
-<h3>DOM-Zugriffe über Selektor-Engines</h3>
+	</div>
+	
+	<div class="subsection">
+	
+		<h3>DOM-Zugriffe über Selektor-Engines</h3>
 
-<p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Element auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
+		<p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Element auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
 
-<p>Beispiel jQuery:</p>
-
-<pre>
-$(document).ready(function () {
-    // Liefert alle li-Elemente im Element mit der ID produktliste
-    $('#produktliste li')
-});
-</pre>
-
-<h3>Zeitgemäßes Event-Handling</h3>
-
-<p>Nach den Ansprechen der Elemente können Sie Event-Handler registrieren. Dazu benötigen Sie eine leistungsfähige Event-Handling-Komponente, die sicherstellt, dass mehreren Handler für einen Typ registriert werden können und die Ihnen die Event-Verarbeitung durch Nivellierung von Browserunterschieden vereinfacht. Eine solche ist in den üblichen Frameworks eingebaut, alternativ können Sie eine lose <a href="http://molily.de/js/event-handling-fortgeschritten.html#flexibles-addevent">addEvent-Helferfunktionen</a> nutzen.
-
-<p>Beispiel jQuery:</p>
+		<p>Beispiel jQuery:</p>
 
 <pre>
 $(document).ready(function () {
-    $('#produktliste li').click(function (e) {
-        // ... Verarbeite Ereignis ...
-    });
+	// Liefert alle li-Elemente im Element mit der ID produktliste
+	$('#produktliste li')
 });
 </pre>
 
-<p>Zum effizienten Event-Handling gehört <a href="http://molily.de/js/event-handling-effizient.html">Event Delegation</a> hinzu. Die Grundidee ist, dass Ereignisse bei einer ganzen Schar von Elementen durch ein darüberliegendes Element verarbeitet werden. Dazu macht man sich das Event Bubbling und Event Capturing zunutze. Beispielsweise jQuery bietet dafür die Methoden <a href="http://api.jquery.com/delegate/">delegate()</a> und <a href="http://api.jquery.com/live/">live()</a>.</p>
+	</div>
+	
+	<div class="subsection">
+	
+		<h3>Zeitgemäßes Event-Handling</h3>
 
-<h2 id="oop">Objektorientierte Programmierung in JavaScript</h2>
+		<p>Nach den Ansprechen der Elemente können Sie Event-Handler registrieren. Dazu benötigen Sie eine leistungsfähige Event-Handling-Komponente, die sicherstellt, dass mehreren Handler für einen Typ registriert werden können und die Ihnen die Event-Verarbeitung durch Nivellierung von Browserunterschieden vereinfacht. Eine solche ist in den üblichen Frameworks eingebaut, alternativ können Sie eine lose <a href="http://molily.de/js/event-handling-fortgeschritten.html#flexibles-addevent">addEvent-Helferfunktionen</a> nutzen.
 
-<p>JavaScript zieht viele Programmieranfänger an und ist für viele Webautoren die erste Programmiersprache, mit der sie aktiv in Kontakt kommen.
-Für sie bleibt die genaue Funktionsweise von JavaScript zunächst unzugänglich. Sie treffen auf Fallstricke und schaffen es nicht, JavaScript zu bändigen. Aber auch professionelle Software-Entwickler mit fundierten Kenntnissen anderer Programmiersprachen geraten an JavaScript. Sie sind nicht weniger verwirrt und verzweifeln, weil sie in JavaScript nicht Strukturen wiederfinden, die ihnen in anderen Sprachen Orientierung bieten.</p>
+		<p>Beispiel jQuery:</p>
 
-<h3 id="klassen">Klassenbasierte Objektorientierung in anderen Programmiersprachen</h3>
+<pre>
+$(document).ready(function () {
+	$('#produktliste li').click(function (e) {
+		// ... Verarbeite Ereignis ...
+	});
+});
+</pre>
 
-<div class="sidebox">
-<p>OOP in vielen anderen Programmiersprachen läuft über Klassen, die Kapselung und vieles mehr erlauben. Zusammenhängende Klassen werden in Namensräumen bzw. Modulen gruppiert.</p>
+		<p>Zum effizienten Event-Handling gehört <a href="http://molily.de/js/event-handling-effizient.html">Event Delegation</a> hinzu. Die Grundidee ist, dass Ereignisse bei einer ganzen Schar von Elementen durch ein darüberliegendes Element verarbeitet werden. Dazu macht man sich das Event Bubbling und Event Capturing zunutze. Beispielsweise jQuery bietet dafür die Methoden <a href="http://api.jquery.com/delegate/">delegate()</a> und <a href="http://api.jquery.com/live/">live()</a>.</p>
+		
+	</div>
+	
 </div>
 
-<p>Viele verbreitete Programmiersprachen arbeiten zumindest teilweise objektorientiert und besitzen ausgereifte, sehr konventionelle Konzepte zur Strukturierung von Programmen. Das sind vor allem <dfn>Klassen</dfn> und ferner <dfn>Module</dfn>, <dfn>Pakete</dfn> bzw. <dfn>Namensräume</dfn>.</p>
+<div class="section" id="oop">
 
-<p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen &ndash; oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klassen bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
+	<h2>Objektorientierte Programmierung in JavaScript</h2>
+	
+	<p>JavaScript zieht viele Programmieranfänger an und ist für viele Webautoren die erste Programmiersprache, mit der sie aktiv in Kontakt kommen.
+	Für sie bleibt die genaue Funktionsweise von JavaScript zunächst unzugänglich. Sie treffen auf Fallstricke und schaffen es nicht, JavaScript zu bändigen. Aber auch professionelle Software-Entwickler mit fundierten Kenntnissen anderer Programmiersprachen geraten an JavaScript. Sie sind nicht weniger verwirrt und verzweifeln, weil sie in JavaScript nicht Strukturen wiederfinden, die ihnen in anderen Sprachen Orientierung bieten.</p>
+	
+	<div class="subsection" id="klassen">
 
-<p>Diese konventionelle klassenbasierte OOP sieht beispielsweise in PHP 5.3 folgendermaßen aus:</p>
+		<h3>Klassenbasierte Objektorientierung in anderen Programmiersprachen</h3>
+		
+		<div class="sidebox">
+		<p>OOP in vielen anderen Programmiersprachen läuft über Klassen, die Kapselung und vieles mehr erlauben. Zusammenhängende Klassen werden in Namensräumen bzw. Modulen gruppiert.</p>
+		</div>
+
+		<p>Viele verbreitete Programmiersprachen arbeiten zumindest teilweise objektorientiert und besitzen ausgereifte, sehr konventionelle Konzepte zur Strukturierung von Programmen. Das sind vor allem <dfn>Klassen</dfn> und ferner <dfn>Module</dfn>, <dfn>Pakete</dfn> bzw. <dfn>Namensräume</dfn>.</p>
+
+		<p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen &ndash; oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klassen bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
+
+		<p>Diese konventionelle klassenbasierte OOP sieht beispielsweise in PHP 5.3 folgendermaßen aus:</p>
 
 <pre>
 namespace Beispielnamensraum;
@@ -186,106 +218,118 @@ $instanz2 = new AbgeleiteteKlasse();
 $instanz2->zusatzmethode();
 </pre>
 
-<p>Dieses Beispiel soll hier nicht näher beschrieben werden, sondern nur den Hintergrund illustrieren für diejenigen, die solche oder ähnliche klassenbasierte OOP bereits kennen.</p>
+		<p>Dieses Beispiel soll hier nicht näher beschrieben werden, sondern nur den Hintergrund illustrieren für diejenigen, die solche oder ähnliche klassenbasierte OOP bereits kennen.</p>
 
-<p>Die besagten Konzepte bilden in eine Richtschnur: Hält sich ein Programmierer an diese Konventionen, so ist mehr oder weniger garantiert, dass das Programm von anderen grob verstanden und wiederverwendet werden kann und nicht mit anderen Programmen in die Quere kommt. Selbst Sprachen, die nicht konsequent objektorientiert arbeiten, bekommen eine einheitliche Struktur dadurch, dass die Programmierer ihren Code in Namensräumen und Klassen organisieren.</p>
+		<p>Die besagten Konzepte bilden in eine Richtschnur: Hält sich ein Programmierer an diese Konventionen, so ist mehr oder weniger garantiert, dass das Programm von anderen grob verstanden und wiederverwendet werden kann und nicht mit anderen Programmen in die Quere kommt. Selbst Sprachen, die nicht konsequent objektorientiert arbeiten, bekommen eine einheitliche Struktur dadurch, dass die Programmierer ihren Code in Namensräumen und Klassen organisieren.</p>
+		
+	</div>
+	
+	<div class="subsection" id="oop-js">
 
-<h2 id="oop-js">JavaScript hat keine Klassen &ndash; doch das ist nicht schlimm</h2>
+		<h3>JavaScript hat keine Klassen &ndash; doch das ist nicht schlimm</h3>
 
-<div class="sidebox">
-<p>JavaScript bietet keine Patentlösung wie Klassen, sondern erlaubt verschiedene Programmier&shy;paradigmen. Man muss selbst geeignete Techniken zur Strukturierung wählen.</p>
+		<div class="sidebox">
+		<p>JavaScript bietet keine Patentlösung wie Klassen, sondern erlaubt verschiedene Programmier&shy;paradigmen. Man muss selbst geeignete Techniken zur Strukturierung wählen.</p>
+		</div>
+
+		<p>ECMAScript 3, der JavaScript zugrunde liegende Webstandard, besitzt all diese Features nicht. Und der Nachfolger ECMAScript 5 verbessert lediglich die eigentümlichen Fähigkeiten, bietet etwa Methoden zur Datenkapselung, fügt jedoch absichtlich keine Klassen in JavaScript ein.</p> 
+
+		<p>JavaScript bringt von Haus aus keine »einzig wahre« Programmiertechnik wie Namensräume und Klassen mit. Das kann man als Nachteil auffassen, aber auch als Vorteil. Weil JavaScript ein vorgegebenes Gerüst zu fehlen scheint, fehlt Einsteigern die Orientierung. Es gibt nicht den einen vordefinierten Weg, ein Programme in JavaScript zu strukturieren. Stattdessen muss man sich selbst über die sinnvolle Organisation von JavaScripten Gedanken machen.</p>
+
+		<p>Glücklicherweise ist JavaScript so leistungsfähig, dass sich die besagten Strukturen durchaus mit JavaScript umsetzen lassen. Es ist mit Zusatzbibliotheken möglich, JavaScript klassenbasiert zu entwickeln. Dies vereinfacht den Einstieg für diejenigen, die bereits andere, klassenbasierte Programmiersprachen beherrschen.</p>
+
+		<p>Dabei sollten allerdings nicht die Eigenarten und besonderen Fähigkeiten von JavaScript vergessen werden. Im Gegensatz zu manch anderen klassenbasierten Sprachen ist JavaScript äußerst dynamisch und besitzt funktionale Aspekte. JavaScript-Kenner empfehlen, die Fähigkeiten von JavaScript zu nutzen, anstatt bloß klassenbasierte OOP überzustülpen. Mit diesen Möglichkeiten ist JavaScript nicht unbedingt schlechter und defizitär im Vergleich zu klassenbasierter Objektorientierung &ndash; es ist lediglich ein anderer, nicht minder interessanter und brauchbarer Ansatz.</p>
+		
+	</div>
+
 </div>
 
-<p>ECMAScript 3, der JavaScript zugrunde liegende Webstandard, besitzt all diese Features nicht. Und der Nachfolger ECMAScript 5 verbessert lediglich die eigentümlichen Fähigkeiten, bietet etwa Methoden zur Datenkapselung, fügt jedoch absichtlich keine Klassen in JavaScript ein.</p> 
+<div class="section" id="grundpfeiler">
 
-<p>JavaScript bringt von Haus aus keine »einzig wahre« Programmiertechnik wie Namensräume und Klassen mit. Das kann man als Nachteil auffassen, aber auch als Vorteil. Weil JavaScript ein vorgegebenes Gerüst zu fehlen scheint, fehlt Einsteigern die Orientierung. Es gibt nicht den einen vordefinierten Weg, ein Programme in JavaScript zu strukturieren. Stattdessen muss man sich selbst über die sinnvolle Organisation von JavaScripten Gedanken machen.</p>
+	<h2>Grundpfeiler der fortgeschrittenen JavaScript-Programmierung</h2>
 
-<p>Glücklicherweise ist JavaScript so leistungsfähig, dass sich die besagten Strukturen durchaus mit JavaScript umsetzen lassen. Es ist mit Zusatzbibliotheken möglich, JavaScript klassenbasiert zu entwickeln. Dies vereinfacht den Einstieg für diejenigen, die bereits andere, klassenbasierte Programmiersprachen beherrschen.</p>
+	<div class="sidebox">
+	<p>JavaScript ist eine objektorientierte, dynamische Sprache. Funktionen und Prototypen machen sie enorm leistungsfähig.</p>
+	</div>
 
-<p>Dabei sollten allerdings nicht die Eigenarten und besonderen Fähigkeiten von JavaScript vergessen werden. Im Gegensatz zu manch anderen klassenbasierten Sprachen ist JavaScript äußerst dynamisch und besitzt funktionale Aspekte. JavaScript-Kenner empfehlen, die Fähigkeiten von JavaScript zu nutzen, anstatt bloß klassenbasierte OOP überzustülpen. Mit diesen Möglichkeiten ist JavaScript nicht unbedingt schlechter und defizitär im Vergleich zu klassenbasierter Objektorientierung &ndash; es ist lediglich ein anderer, nicht minder interessanter und brauchbarer Ansatz.</p>
+	<p>Die Grundlage von ECMAScript 3 sind Objekte, die zur Laufzeit beliebig um Eigenschaften und Methoden ergänzt werden können. Ein JavaScript-Objekt ist eine ungeordnete Liste, in der String-Schlüsseln beliebige Werte zugeordnet werden. Diese dynamischen, erweiterbaren Objekte ermöglicht eine Strukturierung von Programmen. Sie dienen, wie wir später sehen werden, als vielseitiges Mittel zur Gruppierung und sind insofern mit Hashes, Namensräumen, Singletons bzw. Klassen mit statischen Methoden in anderen Sprachen vergleichbar.</p>
 
-<h2 id="grundpfeiler">Grundpfeiler der fortgeschrittenen JavaScript-Programmierung</h2>
+	<p>Die wirklichen Stärken von JavaScript liegen jedoch woanders: <strong>Funktionen</strong>. Dazu Douglas Crockford in dem Vortrag <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3">Crockford on JavaScript &ndash; Act III: Function the Ultimate</a>:
 
-<div class="sidebox">
-<p>JavaScript ist eine objektorientierte, dynamische Sprache. Funktionen und Prototypen machen sie enorm leistungsfähig.</p>
+	<blockquote>
+	<p><img src="crockford-functions.jpg" alt="" style="float:right; margin-left: 2em">
+
+	Functions are the very best part of JavaScript. It's where most of the power is, it's where the beauty is. &hellip; Function is the key idea in JavaScript. It's what makes it so good and so powerful. In other languages you've got lots of things: you've got methods, classes, constructors, modules, and more. In JavaScript there's just function, and function does all of those things and more. That's not a deficiency, that's actually a wonderful thing — having one thing that can do a lot, and can do it brilliantly, at scale, that's what functions do in this language.</p>
+	</blockquote>
+
+	<p>Crockford weist hier darauf hin, wie vielseitig Funktionen in JavaScript sind und dass sie Aufgaben übernehmen, für die es in anderen Sprachen unterschiedliche Konzepte gibt.</p>
+
+	<p>Das folgende Diagramm soll die Säulen der fortgeschrittenen JavaScript-Programmierung illustrieren. Das Fundament bilden dynamische Objekte und <code>Object</code>-Literale, darauf bauen Funktionen auf, welche Scopes erzeugen und als Konstruktoren prototypische Vererbung ermöglichen.</p>
+
+	<div class="pillars" id="grundpfeiler-diagramm">
+
+	<div class="section base" id="objects">
+	<h3>Objekte / <code>Object</code>-Objekte</h3>
+	<ul>
+	<li>Alles ist ein Objekt &ndash; bis auf Primitives, die sich allerdings wie Objekte verhalten</li>
+	<li>Objekte sind i.d.R. erweiterbar (ECMAScript 3)</li>
+	<li>Object-Objekte sind Allround-Container und Hashes</li>
+	<li>Object-Literale <code>{ key : value, ... }</code></li>
+	</ul>
+
+	</div><!-- /.base -->
+
+	<div class="section pillar first" id="funktionen">
+
+	<h3>Funktionen</h3>
+
+	<ul>
+	<li>Dienen der Codestrukturierung</li>
+	<li>Objekte erster Klasse: Zur Laufzeit erzeugen, übergeben, zurückgeben, in Variablen speichern</li>
+	<li>Funktionale Programmierung (z.B. Listenoperationen, Currying, Event-Handler)</li>
+	<li>Können an Objekte als Methoden gehängt werden</li>
+	<li>Methoden haben <code>this</code>-Kontext, über <code>call</code> und <code>apply</code> veränderbar (Binding)</li>
+	<li>Erzeugen Scopes</li>
+	<li>Können verschachtelt werden (Scope-Chain)</li>
+	<li>Dienen als Konstruktoren</li>
+	<li>Besitzen Prototypen für damit erzeugte Objekte (<code>funktion.prototype</code>)</li>
+	</ul>
+
+	</div><!-- /.pillar -->
+	<div class="section pillar second" id="scope">
+
+	<h3>Scope</h3>
+
+	<ul>
+	<li>Gültigkeitsbereich für Variablen</li>
+	<li>Allzweckwerkzeug für Datenverfügbarkeit und Kapselung/Privatheit</li>
+	<li>Nur Funktionen erzeugen einen Scope, keine anderen Blöcke</li>
+	<li>Identifier Resolution über die Scope-Chain (<code>bezeichner</code> wird über Scope-Chain aufgelöst)</li>
+	<li>Scope-Chain speichert die internen Variablenobjekte von Funktionsaufrufen</li>
+	<li>Scope-Chain ermöglicht Closures und darüber Currying</li>
+	</ul>
+
+	</div><!-- /.pillar -->
+	<div class="section pillar third" id="prototypen">
+
+	<h3>Prototypen</h3>
+
+	<ul>
+	<li>Prototypenbasierte Vererbung</li>
+	<li><code>objekt.eigenschaft</code> wird über die Prototype-Chain aufgelöst</li>
+	<li>Ganz normale Objekte, die im Programm und nicht per Deklaration erzeugt werden</li>
+	<li>Ein Objekt stellt Funktionalität für ein anderes bereit (Delegation)</li>
+	<li>Erzeugen von Objekten gleicher Funktionalität unter Schonung des Speichers</li>
+	<li>Ableiten und Redefinieren von Funktionalität</li>
+	<li>Keine Trennung zwischen Deklaration und Instanz &ndash; alle Objekte können Prototypen sein</li>
+	</ul>
+
+	</div><!-- /.pillar -->
+	</div><!-- /.pillars -->
+
+	<p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu wäre eine systematische Einführung in JavaScript nötig.</p>
+	
 </div>
-
-<p>Die Grundlage von ECMAScript 3 sind Objekte, die zur Laufzeit beliebig um Eigenschaften und Methoden ergänzt werden können. Ein JavaScript-Objekt ist eine ungeordnete Liste, in der String-Schlüsseln beliebige Werte zugeordnet werden. Diese dynamischen, erweiterbaren Objekte ermöglicht eine Strukturierung von Programmen. Sie dienen, wie wir später sehen werden, als vielseitiges Mittel zur Gruppierung und sind insofern mit Hashes, Namensräumen, Singletons bzw. Klassen mit statischen Methoden in anderen Sprachen vergleichbar.</p>
-
-<p>Die wirklichen Stärken von JavaScript liegen jedoch woanders: <strong>Funktionen</strong>. Dazu Douglas Crockford in dem Vortrag <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3">Crockford on JavaScript &ndash; Act III: Function the Ultimate</a>:
-
-<blockquote>
-<p><img src="crockford-functions.jpg" alt="" style="float:right; margin-left: 2em">
-
-Functions are the very best part of JavaScript. It's where most of the power is, it's where the beauty is. &hellip; Function is the key idea in JavaScript. It's what makes it so good and so powerful. In other languages you've got lots of things: you've got methods, classes, constructors, modules, and more. In JavaScript there's just function, and function does all of those things and more. That's not a deficiency, that's actually a wonderful thing — having one thing that can do a lot, and can do it brilliantly, at scale, that's what functions do in this language.</p>
-</blockquote>
-
-<p>Crockford weist hier darauf hin, wie vielseitig Funktionen in JavaScript sind und dass sie Aufgaben übernehmen, für die es in anderen Sprachen unterschiedliche Konzepte gibt.</p>
-
-<p>Das folgende Diagramm soll die Säulen der fortgeschrittenen JavaScript-Programmierung illustrieren. Das Fundament bilden dynamische Objekte und <code>Object</code>-Literale, darauf bauen Funktionen auf, welche Scopes erzeugen und als Konstruktoren prototypische Vererbung ermöglichen.</p>
-
-<div class="pillars" id="grundpfeiler-diagramm">
-
-<div class="base">
-<h3>Objekte / <code>Object</code>-Objekte</h3>
-<ul>
-<li>Alles ist ein Objekt &ndash; bis auf Primitives, die sich allerdings wie Objekte verhalten</li>
-<li>Objekte sind i.d.R. erweiterbar (ECMAScript 3)</li>
-<li>Object-Objekte sind Allround-Container und Hashes</li>
-<li>Object-Literale <code>{ key : value, ... }</code></li>
-</ul>
-
-</div><!-- /.base -->
-
-<div class="pillar first">
-
-<h3>Funktionen</h3>
-
-<ul>
-<li>Dienen der Codestrukturierung</li>
-<li>Objekte erster Klasse: Zur Laufzeit erzeugen, übergeben, zurückgeben, in Variablen speichern</li>
-<li>Funktionale Programmierung (z.B. Listenoperationen, Currying, Event-Handler)</li>
-<li>Können an Objekte als Methoden gehängt werden</li>
-<li>Methoden haben <code>this</code>-Kontext, über <code>call</code> und <code>apply</code> veränderbar (Binding)</li>
-<li>Erzeugen Scopes</li>
-<li>Können verschachtelt werden (Scope-Chain)</li>
-<li>Dienen als Konstruktoren</li>
-<li>Besitzen Prototypen für damit erzeugte Objekte (<code>funktion.prototype</code>)</li>
-</ul>
-
-</div><!-- /.pillar -->
-<div class="pillar second">
-
-<h3>Scope</h3>
-
-<ul>
-<li>Gültigkeitsbereich für Variablen</li>
-<li>Allzweckwerkzeug für Datenverfügbarkeit und Kapselung/Privatheit</li>
-<li>Nur Funktionen erzeugen einen Scope, keine anderen Blöcke</li>
-<li>Identifier Resolution über die Scope-Chain (<code>bezeichner</code> wird über Scope-Chain aufgelöst)</li>
-<li>Scope-Chain speichert die internen Variablenobjekte von Funktionsaufrufen</li>
-<li>Scope-Chain ermöglicht Closures und darüber Currying</li>
-</ul>
-
-</div><!-- /.pillar -->
-<div class="pillar third">
-
-<h3>Prototypen</h3>
-
-<ul>
-<li>Prototypenbasierte Vererbung</li>
-<li><code>objekt.eigenschaft</code> wird über die Prototype-Chain aufgelöst</li>
-<li>Ganz normale Objekte, die im Programm und nicht per Deklaration erzeugt werden</li>
-<li>Ein Objekt stellt Funktionalität für ein anderes bereit (Delegation)</li>
-<li>Erzeugen von Objekten gleicher Funktionalität unter Schonung des Speichers</li>
-<li>Ableiten und Redefinieren von Funktionalität</li>
-<li>Keine Trennung zwischen Deklaration und Instanz &ndash; alle Objekte können Prototypen sein</li>
-</ul>
-
-</div><!-- /.pillar -->
-</div><!-- /.pillars -->
-
-<p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu wäre eine systematische Einführung in JavaScript nötig.</p>
 
 <div class="sequence-navigation">
 	<p class="next"><a href="organisation-module.html" rel="next">Organisation von JavaScripten: Module</a></p>

@@ -1,5 +1,5 @@
 body {
-	font-family: Calibri,Geneva,Trebuchet MS,Lucida Sans,Tahoma,Arial,'Trebuchet MS',Verdana,Helvetica,sans-serif;
+	font-family: Calibri,Geneva,'Trebuchet MS',Lucida Sans,Tahoma,Arial,Verdana,Helvetica,sans-serif;
 	max-width: 45em;
 	margin: auto;
 	line-height: 1.6;
@@ -75,7 +75,7 @@ dd {
 }
 
 pre, code {
-	font-family: consolas,"courier new","bitstream vera sans monspace","lucida console","liberation mono",courier,monospace;
+	font-family: consolas,"bitstream vera sans monspace","lucida console","liberation mono",monaco,"courier new",courier,monospace;
 	font-size: inherit;
 	color: #02a;
 }
@@ -84,11 +84,7 @@ pre {
 	border: thin solid #ddd;
 	padding: 1em;
 	background-color: rgb(255, 250, 235);
-	
-	/*
-	display: inline-block;
-	min-width: 100%;
-	*/
+	font-size: 87.5%;
 }
 
 pre strong {
@@ -179,11 +175,11 @@ th, td {
 }
 
 .sequence-navigation .prev:before {
-	content: " → Nächste Seite: ";
+	content: "← Vorherige Seite: ";
 }
 
 .sequence-navigation .next:before {
-	content: "← Vorherige Seite: ";
+	content: " → Nächste Seite: ";
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -367,6 +363,11 @@ body#contents #footer p {
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+.commented-code {
+	margin: 2em -6em;
+	font-size: 87.5%;
+}
+
 .commented-code td,
 .commented-code pre {
 	border-style: none;
@@ -376,12 +377,11 @@ body#contents #footer p {
 }
 
 .commented-code td {
-	padding: .2em .5em;
+	padding: 0.2em .5em;
 	border-style: solid none;
 	border-color: #ddd;
 }
 
 .commented-code td:first-child {
-	background-color:#F8FAFF;
-	padding-right: 1em;
+	background-color:#FFFAEB;
 }
