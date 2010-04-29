@@ -57,7 +57,7 @@
 	
 	<p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf als auch im Dokumentkörper einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im folgenden betrachten.</p>
 	<p>Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
-	<p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb <code>script</code>-Element wird ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
+	<p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
 	<p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat folgende Konsequenzen:</p>
 	<div class="subsection" id="script-reihenfolge">
 		<h3>Scripte haben Zugriff auf die Objekte vorher eingebundener Scripte</h3>
@@ -99,7 +99,7 @@ helferfunktion();
 </pre>
 		<p>Das Beispiel enthält zwei Scripte mit <code>document.write</code>-Aufrufen. Diese schreiben HTML-Elemente ins Dokument, einmal ein Verweis auf ein Stylesheet und einmal ein Textabsatz mit einem JavaScript-Link.</p>
 		<p><code>document.write</code> ist beim »Unobtrusive JavaScript« nur sehr selten sinnvoll. Inhalte, die nur bei aktiviertem JavaScript sichtbar sein sollen, da sie auf JavaScript-Funktionalität beruhen, sollten Sie ohne <code>document.write</code> dynamisch ins Dokument einfügen. Die dazu nötigen Techniken werden wir noch kennenlernen.</p>
-		<p>Der Anwendungsbereich von <code>document.write</code> wird oftmals missverstanden. Wir haben hier den einen von zwei möglichen Anwendungsfällen kennenlernt: Das Ergänzen eines Dokuments noch während der Browser den HTML-Code einliest. Wenn <code>document.write</code> jedoch nach dem vollständigen Einlesen de HTML-Codes aufgerufen wird, die Methode einen ganz anderen Effekt und eignet sich nicht dazu, das vorhandene Dokument via JavaScript zu ändern.</p>
+		<p>Der Anwendungsbereich von <code>document.write</code> wird oftmals missverstanden. Wir haben hier den einen von zwei möglichen Anwendungsfällen kennenlernt: Das Ergänzen eines Dokuments noch während der Browser den HTML-Code einliest. Wenn <code>document.write</code> jedoch nach dem vollständigen Einlesen de HTML-Codes aufgerufen wird, hat die Methode einen ganz anderen Effekt und eignet sich nicht dazu, das vorhandene Dokument via JavaScript zu ändern.</p>
 	</div>
 	
 	<div class="subsection" id="script-dom-zugriff">
