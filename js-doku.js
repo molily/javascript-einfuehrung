@@ -83,57 +83,86 @@ CoolURIs.init();
 /* ------------------------------------------------------ */
 
 var TOC = {
-	buildList : function (headings, callback) {
-		var ol, i, heading, a, section, li;
-		
-		if (headings.length == 0) {
-			return false;
+	
+	sortElements : document.documentElement.compareDocumentPosition ? function (a, b) {
+		if (!a.compareDocumentPosition || !b.compareDocumentPosition) return 0;
+		return a.compareDocumentPosition(b) & 4 ? -1 : a === b ? 0 : 1;
+	} : ('sourceIndex' in document.documentElement) ? function (a, b) {
+		if (!a.sourceIndex || !b.sourceIndex) return 0;
+		return a.sourceIndex - b.sourceIndex;
+	} : null,
+	hasClass : function(element, className) {
+		var elementClassName = element.className;
+		return (elementClassName.length > 0 && (elementClassName == className || new RegExp("(^|\\s)" + className + "(\\s|$)").test(elementClassName)));
+	},
+	
+	toArray : function (list) {
+		var arr = [];
+		for (var i = 0, l = list.length; i < l; i++) {
+			arr.push(list[i]);
 		}
-		
-		ol = document.createElement("ol")
+		return arr;
+	},
+	
+	getHeadings : function () {
+		var h2s = document.getElementsByTagName("h2"),
+			h3s = document.getElementsByTagName("h3"),
+			list = TOC.toArray(h2s).concat(TOC.toArray(h3s));
+		list.sort(TOC.sortElements);
+		return list;
+	},
+	
+	createElement : function (tagName, attributes, innerHTML) {
+		var el = document.createElement(tagName);
+		for (var prop in attributes) {
+			if (attributes.hasOwnProperty(prop)) {
+				el.setAttribute(prop, attributes[prop]);
+			}
+		}
+		if (innerHTML) {
+			el.innerHTML = innerHTML
+		}
+		return el;
+	},
+	
+	buildList : function () {
+		var headings = TOC.getHeadings(),
+			h2list = TOC.createElement("ol"),
+			lastH2Item = null,
+			h3list = null,
+			i, heading, section, a, li;
 		
 		for (i = 0; heading = headings[i]; i++) {
 			
-			a = document.createElement("a");
-			a.innerHTML = heading.innerHTML;
 			section = heading.parentNode;
-			if (section.id) {
-				a.href = "#" + section.id;
+			if (!section.id) {
+				continue;
 			}
-			
-			li = document.createElement("li");
+			a = TOC.createElement("a", { href : "#" + section.id }, heading.innerHTML);
+			li = TOC.createElement("li");
 			li.appendChild(a);
-			ol.appendChild(li);
 			
-			if (typeof callback == "function") {
-				callback(section, li);
+			if (heading.tagName == "H3") {
+				if (!h3list) {
+					h3list = TOC.createElement("ol");
+					lastH2Item.appendChild(h3list);
+				}
+				h3list.appendChild(li);
+			} else {
+				h2list.appendChild(li);
+				h3list = null;
+				lastH2Item = li;
 			}
 		}
 		
-		return ol;
-	},
-	
-	buildSubToc : function (section, mainTocItem) {
-		var subToc = TOC.buildList(
-			section.getElementsByTagName("h3")
-		);
-		if (subToc) {
-			mainTocItem.appendChild(subToc);
-		}
+		return h2list;
 	},
 	
 	init : function () {
-		
-		var mainToc = TOC.buildList(
-			document.getElementsByTagName("h2"),
-			TOC.buildSubToc
-		);
-		if (!mainToc) {
-			return;
-		}
+		var mainToc = TOC.buildList();
 		mainToc.id = "toc";
 		var h1 = document.getElementsByTagName("h1")[0];
-		document.body.insertBefore(mainToc, h1.nextSibling);
+		h1.parentNode.insertBefore(mainToc, h1.nextSibling);
 	}
 };
 

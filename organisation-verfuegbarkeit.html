@@ -46,7 +46,7 @@ zeigeThis();
 
 	<p><code>this</code> wird in folgendem Fall interessant: Eine Funktion hängt an einem Objekt, ist also eine Methode dessen. Wenn wir die Funktion nun über das Schema <code>objekt.funktion()</code> aufrufen, dann zeigt <code>this</code> innerhalb der Funktion auf <code>objekt</code>.</p>
 
-	<p>Ein einfaches Modul mit einem <code>Object</code>-Literal:
+	<p>Ein einfaches Modul mit einem <code>Object</code>-Literal:</p>
 
 <pre>
 var Modul = {
@@ -339,7 +339,7 @@ privateVariable: privat
 		<p>Die Methoden werden im Konstuktor verschachtelt. Sie schließen eine Variable ein, die auf die Instanz verweist und die wir als Ersatz zu <code>this</code> verwenden..</p>
 		</div>
 
-		<p>Wir haben zwei Möglichkeit kennengelernt, dem Instanzobjekt Eigenschaften zuzuweisen. [^] Zum einen, indem wir sie im Konstruktor über <code>this</code> anlegen. Zum anderen, indem wir einen Prototypen definieren und die Instanz davon erbt. Der Weg über den Prototyp hat Performance-Vorteile, der Weg über den Konstruktor erlaubt private Objekte.</p>
+		<p>Wir haben zwei Möglichkeit kennengelernt, dem Instanzobjekt Eigenschaften zuzuweisen. Zum einen, indem wir sie <a href="organisation-instanzen.html#konstruktoren">im Konstruktor über <code>this</code></a> anlegen. Zum anderen, indem wir <a href="organisation-instanzen.html#prototypen">einen Prototypen definieren</a> und die Instanz davon erbt. Der Weg über den Prototyp hat Performance-Vorteile, der Weg über den Konstruktor erlaubt private Objekte.</p>
 
 		<p>Private Objekte funktionieren letztlich über Closures und bieten die Möglichkeit, das <code>this</code>-Problem zu umgehen: Im Konstruktor wird eine lokale Variable als Referenz auf das Instanzobjekt <code>this</code> angelegt. Diese heißt üblicherweise <code>thisObject</code>, <code>that</code> oder <code>instance</code>. Alle Methoden, die der Instanz im Konstruktor hinzugefügt werden, schließen diese Variable ein. Sie ist darin auch dann verfügbar, wenn sie als Event-Handler oder mit Verzögerung in einem anderen Kontext ausgeführt werden. Folgendes Beispiel demonstriert beide Fälle:</p>
 
@@ -402,7 +402,7 @@ instanz.start();
 
 	<p>Die gezeigte Verschachtelung ist eine effektiver, aber folgenschwerer Trick, um die Verfügbarkeit von Objekten zu gewährleisten. Sie liegt nahe, wenn sowieso mit privaten Objekten gearbeitet wird und deshalb alle Modul- bzw. Instanzmethoden verschachtelt werden. Sie funktioniert nicht bei einfachen <code>Object</code>-Literalen und bei der Nutzung von Prototypen. Glücklicherweise erlaubt die funktionale Natur von JavaScript, Funktionen und damit Closures zur Laufzeit anzulegen und den <code>this</code>-Kontext einer Funktion bei ihrem Aufruf festzulegen.</p>
 	
-	<div clss="section" id="call-apply">
+	<div class="subsection" id="call-apply">
 
 		<h3><code>this</code>-Kontext erzwingen mit <code>call</code> und <code>apply</code></h3>
 
@@ -450,11 +450,9 @@ summe.apply(objekt, [1, 2, 3]);
 
 		<p><code>call</code> und <code>apply</code> alleine helfen uns zur Lösung der Kontextproblematik noch nicht weiter. Sie stellen allerdings das Kernstück der Technik dar, die im Folgenden beschrieben wird.</p>
 
-		</div>
+	</div>
 		
-</div>
-
-<div class="section" id="bind-bindaseventlistener">
+	<div class="subsection" id="bind-bindaseventlistener">
 
 		<h3><code>bind</code> und <code>bindAsEventListener</code></h3>
 
@@ -582,7 +580,7 @@ Function.prototype.bindAsEventListener = function (object) {
 
 		<p><code>bind</code> ist die allgemeinere Funktion, die z.B. bei Timeouts, Intervallen und Callbacks Verwendung findet. <code>bindAsEventListener</code> ist die Nutzung einer Funktion als Event-Handler zugeschnitten.</p>
 
-		<p>Der folgenden Code zeigt, wie sich die obigen Beispiele [^] mithilfe von <code>bind</code> und <code>bindAsEventListener</code> lösen lassen, sodass <code>this</code> immer auf das richtige Objekt zeigt.</p>
+		<p>Der folgenden Code zeigt, wie sich <a href="#this-problem-modul">die obigen Beispiele</a> mithilfe von <code>bind</code> und <code>bindAsEventListener</code> lösen lassen, sodass <code>this</code> immer auf das richtige Objekt zeigt.</p>
 
 <pre>
 var Modul = {
@@ -642,7 +640,7 @@ instanz.start();
 	
 	</div>
 	
-	<div class="section" id="besseres-binding">
+	<div class="subsection" id="besseres-binding">
 
 		<h3>Es gibt viele, bessere Binding-Funktionen</h3>
 
@@ -671,8 +669,8 @@ weitere Methoden zur Übergabe (z.B. jQuerys e.data)
 -->
 
 <div class="sequence-navigation">
-	<p class="prev"><a href="organisation-instanzen.html" rel="prev">Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</a></p>
 	<p class="next"><a href="organisation-frameworks.html" rel="next">Organisation von JavaScripten: Framework-Architekturen</a></p>
+	<p class="prev"><a href="organisation-instanzen.html" rel="prev">Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</a></p>
 </div>
 
 <div id="footer">
