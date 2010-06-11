@@ -237,7 +237,7 @@ Modul.methode();
 
 	<p>Der Code nutzt die jQuery-Bibliothek, um eine Initialisierungsfunktion bei <a href="#domready">DOM ready</a> auszuführen. Diese registriert bei einem Button einen Event-Handler. Wird der Button geklickt, wird eine Zahl erhöht. Zudem wird die bisherige Anzahl der Klicks im Dokument ausgegeben.</p>
 
-	<p>Das Besondere an diesem Script sind die vier lokalen Variablen bzw. Funktionen. Sie werden direkt im Funktions-Scope notiert, anstatt sie an einen <code>Object</code>-Container zu hängen. Innerhalb der verschachtelten Funktionen sind die Variablen des äußeren Funktions-Scope verfügbar (siehe <a href="#closures">Closures</a>). <code>init()</code> füllt die Variable <code>outputEl</code> und greift auf die Funktion <code>buttonClicked()</code> zu. <code>buttonClicked()</code> greift auf die Variablen <code>clickNumber</code> und <code>outputEl</code> zu. Das Script funktioniert, ohne dass Objekte am globalen <code>window</code>-Objekt angelegt werden.</p>
+	<p>Das Besondere an diesem Script sind die vier lokalen Variablen bzw. Funktionen. Sie werden direkt im Funktions-Scope notiert, anstatt sie an einen <code>Object</code>-Container zu hängen. Innerhalb der verschachtelten Funktionen sind die Variablen des äußeren Funktions-Scope verfügbar (siehe <a href="organisation-verfuegbarkeit.html#closures">Closures</a>). <code>init()</code> füllt die Variable <code>outputEl</code> und greift auf die Funktion <code>buttonClicked()</code> zu. <code>buttonClicked()</code> greift auf die Variablen <code>clickNumber</code> und <code>outputEl</code> zu. Das Script funktioniert, ohne dass Objekte am globalen <code>window</code>-Objekt angelegt werden.</p>
 	
 	<div class="subsection" id="dom-ready-scope">
 
