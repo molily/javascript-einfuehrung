@@ -250,7 +250,7 @@ body#contents #footer p {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .pillars {
-	margin: 0 -6em;
+	xmargin: 0 -6em;
 	font-size: 87.5%;
 }
 
@@ -262,21 +262,22 @@ body#contents #footer p {
 
 .pillars .base {
 	margin: 0 0 1em;
-	max-width: 68em;
+	xmax-width: 68em;
 }
 
 .pillars .pillar {
 	float: left;
-	max-width: 19.5em;
-	margin: 0 0 1em 1.5em;
+	xmax-width: 19.5em;
+	width: 32%;
+	margin: 0 0 1em 2%;
 }
 
 .pillars .pillar.first {
 	margin-left: 0;
 }
 
-.pillars .base,
-.pillars .pillar {
+.pillars .base div,
+.pillars .pillar div {
 	border: 1px solid #999;
 	
 	-moz-border-radius: 10px;
@@ -302,7 +303,7 @@ body#contents #footer p {
 }
 
 .pillars ul {
-	padding-left: 1em;
+	list-style-position: inside;
 }
 
 .pillars li {

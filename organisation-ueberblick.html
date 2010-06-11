@@ -104,7 +104,7 @@ $(funktion);
 	
 		<h3>DOM-Zugriffe über Selektor-Engines</h3>
 
-		<p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Element auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
+		<p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Elemente auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
 
 		<p>Beispiel jQuery:</p>
 
@@ -256,9 +256,8 @@ $instanz2->zusatzmethode();
 
 	<p>Die wirklichen Stärken von JavaScript liegen jedoch woanders: <strong>Funktionen</strong>. Dazu Douglas Crockford in dem Vortrag <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3">Crockford on JavaScript &ndash; Act III: Function the Ultimate</a>:
 
-	<blockquote>
+	<blockquote lang="en">
 	<p><img src="crockford-functions.jpg" alt="" style="float:right; margin-left: 2em">
-
 	Functions are the very best part of JavaScript. It's where most of the power is, it's where the beauty is. &hellip; Function is the key idea in JavaScript. It's what makes it so good and so powerful. In other languages you've got lots of things: you've got methods, classes, constructors, modules, and more. In JavaScript there's just function, and function does all of those things and more. That's not a deficiency, that's actually a wonderful thing — having one thing that can do a lot, and can do it brilliantly, at scale, that's what functions do in this language.</p>
 	</blockquote>
 
@@ -269,6 +268,8 @@ $instanz2->zusatzmethode();
 	<div class="pillars" id="grundpfeiler-diagramm">
 
 	<div class="section base" id="objects">
+	<div>
+	
 	<h3>Objekte / <code>Object</code>-Objekte</h3>
 	<ul>
 	<li>Alles ist ein Objekt &ndash; bis auf Primitives, die sich allerdings wie Objekte verhalten</li>
@@ -277,10 +278,12 @@ $instanz2->zusatzmethode();
 	<li>Object-Literale <code>{ key : value, ... }</code></li>
 	</ul>
 
+	</div>
 	</div><!-- /.base -->
 
 	<div class="section pillar first" id="funktionen">
-
+	<div>
+	
 	<h3>Funktionen</h3>
 
 	<ul>
@@ -295,8 +298,11 @@ $instanz2->zusatzmethode();
 	<li>Besitzen Prototypen für damit erzeugte Objekte (<code>funktion.prototype</code>)</li>
 	</ul>
 
+	</div>
 	</div><!-- /.pillar -->
+	
 	<div class="section pillar second" id="scope">
+	<div>
 
 	<h3>Scope</h3>
 
@@ -309,8 +315,11 @@ $instanz2->zusatzmethode();
 	<li>Scope-Chain ermöglicht Closures und darüber Currying</li>
 	</ul>
 
+	</div>
 	</div><!-- /.pillar -->
+	
 	<div class="section pillar third" id="prototypen">
+	<div>
 
 	<h3>Prototypen</h3>
 
@@ -324,10 +333,11 @@ $instanz2->zusatzmethode();
 	<li>Keine Trennung zwischen Deklaration und Instanz &ndash; alle Objekte können Prototypen sein</li>
 	</ul>
 
+	</div>
 	</div><!-- /.pillar -->
 	</div><!-- /.pillars -->
 
-	<p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu wäre eine systematische Einführung in JavaScript nötig.</p>
+	<p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu ist eine systematische Einführung in JavaScript nötig.</p>
 	
 </div>
 
