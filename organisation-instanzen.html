@@ -96,7 +96,9 @@ alert(maunzi.name + ' ist neuerdings eine ' + maunzi.rasse);
 
 		<p>In den obigen Beispielen haben wir dem neuen Objekt direkt im Konstruktor Eigenschaften und Methoden hinzugefügt. Das bedeutet, dass diese Objekte mit jeder Instanz neu angelegt werden. Das ist <em>eine</em> Möglichkeit, wie dem Objekt Funktionalität hinzugefügt werden kann. Sie ist unter anderem dann notwendig, wenn Konstruktor-Parameter an das Instanzobjekt kopiert werden, wie es im Beispiel mit <code>this.name = name;</code> getan wird.</p>
 
-		<p>Mit einer Funktion ist immer ein <strong>prototypisches Objekt (Prototyp)</strong> verknüpft. Dieser Prototyp ist bei eigenen Funktionen anfangs leer. Es ist eine Eigenschaft des Funktionsobjektes mit dem Namen <code>prototype</code>. Dieses Objekt können wir entweder erweitern oder mit einem eigenen Objekt ersetzen. Im folgenden Beispiel wird der Prototyp erweitert, indem eine Methode hinzugefügt wird:</p>
+		<p>Mit einer Funktion ist immer ein <strong>prototypisches Objekt (Prototyp)</strong> verknüpft. Es handelt sich um ein gewöhnliches allgemeines JavaScript-Objekt, wie wir es auch mit <code>new Object()</code> oder dem <code>Object</code>-Literal <code>{}</code> anlegen können. Dieser Prototyp ist bei eigenen Funktionen anfangs leer.</p>
+		
+		<p>Über die Eigenschaft <code>prototype</code> können wir ausgehend vom Funktionsobjekt auf den Prototypen zugreifen. Dieses Objekt können wir entweder erweitern oder mit einem eigenen Objekt ersetzen. Im folgenden Beispiel wird der Prototyp erweitert, indem eine Methode hinzugefügt wird:</p>
 
 <pre>
 function Katze () {}
@@ -109,9 +111,9 @@ var maunzi = new Katze();
 mauzi.miau();
 </pre>
 
-		<p>Hier wird Funktionausdruck notiert und die Funktion in <code>Katze.prototype.miau</code> gespeichert. Beim Prototypen wird also eine Eigenschaft namens <code>miau</code> angelegt. Darin steckt nun die neu angelegte Funktion. Wenn wir nun eine <code>Katze</code>-Instanz erzeugen, dann steht daran die <code>miau</code>-Methode zu Verfügung.</p>
+		<p>Hier wird Funktionausdruck notiert und die Funktion in <code>Katze.prototype.miau</code> gespeichert. Beim Prototypen wird also eine Eigenschaft namens <code>miau</code> angelegt. Darin steckt nun die neu angelegte Funktion. Wenn wir eine <code>Katze</code>-Instanz erzeugen, so besitzt sie eine <code>miau</code>-Methode.</p>
 
-		<p>Eine gleichwertige Alternativschreibweise ersetzt das Prototyp-Objekt mit einem eigenen Objekt. Dieses kann z.B. mit einem <code>Object</code>-Literal notiert werden. Wenn dem Prototypen viele Eigenschaften angehängt werden, ist diese Schreibweise letztlich kürzer.</p>
+		<p>Eine gleichwertige Alternativschreibweise ersetzt das Prototyp-Objekt mit einem eigenen Objekt. Dieses kann z.B. mit einem <code>Object</code>-Literal notiert werden. Wenn dem Prototypen viele Eigenschaften angehängt werden, ist diese Schreibweise letztlich kürzer, als mehrfach <code>Katze.prototype.eigenschaft = ...<code> zu schreiben.</p>
 
 <pre>
 function Katze () {}
@@ -126,7 +128,7 @@ var maunzi = new Katze();
 mauzi.miau();
 </pre>
 
-		<p>Das Objekt, das mit dem <code>Object</code>-Literal angelegt wird, wird zum Prototyp für alle <code>Katze</code>-Instanzen.</p>
+		<p>Mit dem <code>Object</code>-Literal wird ein Objekt angelegt, welches eine <code>miau</code>-Methode besitzt. Durch die Zuweisung an <code>Katze.prototype</code> wird dieses Objekt wird zum Prototypen für alle <code>Katze</code>-Instanzen.</p>
 		
 	</div>
 	
@@ -155,43 +157,43 @@ mauzi.miau();
 <div class="js-objects">
 
 <div class="object">
-    <h3>maunzi</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
-    </table>
+	<h3>maunzi</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
+	</table>
 </div>
 
 <div class="object">
-    <h3>Katze.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
-    <tr class="own"><th>miau</th><td>function () { alert("Miau!"); }</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
-    </table>
+	<h3>Katze.prototype</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
+	<tr class="own"><th>miau</th><td>function () { alert("Miau!"); }</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	</table>
 </div>
 
 <div class="object">
-    <h3>Object.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>null</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
-    <tr class="dontenum"><th>toString</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>toLocaleString</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>valueOf</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>hasOwnProperty</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>isPrototypeOf</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>propertyIsEnumerable</th><td>[native Funktion]</td></tr>
-    </table>
+	<h3>Object.prototype</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>null</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	<tr class="dontenum"><th>toString</th><td>[native Funktion]</td></tr>
+	<tr class="dontenum"><th>toLocaleString</th><td>[native Funktion]</td></tr>
+	<tr class="dontenum"><th>valueOf</th><td>[native Funktion]</td></tr>
+	<tr class="dontenum"><th>hasOwnProperty</th><td>[native Funktion]</td></tr>
+	<tr class="dontenum"><th>isPrototypeOf</th><td>[native Funktion]</td></tr>
+	<tr class="dontenum"><th>propertyIsEnumerable</th><td>[native Funktion]</td></tr>
+	</table>
 </div>
 
 </div><!-- /.js-objects -->
 
 	<p>Wenn wir <code>maunzi.miau</code> notieren, dann wird nacheinander an diesen drei Objekten nach einer Eigenschaft mit diesem Namen gesucht.</p>
 
-	<p>Das Objekt <code>maunzi</code> besitzt selbst keine Eigenschaften bis auf <code>constructor</code>, welches auf die Funktion zeigt, mit dem es erzeugt wurde &ndash; das ist bekanntlich <code>Katze</code>. Intern hat es aber einen Verweis auf seinen Prototyp, das ist <code>Katze.prototype</code>. (Dieser Verweis wird intern in der unsichtbaren Eigenschaft <code>[[Prototype]]</code> gespeichert &ndash; lediglich in eigenen JavaScript-Engines ist er über die Eigenschaft <code>__proto__</code> les- und schreibbar.)</p>
+	<p>Das Objekt <code>maunzi</code> besitzt selbst keine Eigenschaften bis auf <code>constructor</code>, welches auf die Funktion zeigt, mit dem es erzeugt wurde &ndash; das ist bekanntlich <code>Katze</code>. Intern besitzt <code>maunzi</code> einen Verweis auf seinen Prototyp, das ist <code>Katze.prototype</code>. Dieser Verweis wird in der unsichtbaren Eigenschaft <code>[[Prototype]]</code> gespeichert &ndash; lediglich in einigen JavaScript-Engines ist er über die Eigenschaft <code>__proto__</code> les- und schreibbar.</p>
 
-	<p>Über diesen Verweis schreitet der JavaScript-Interpreter zum Prototypen von <code>maunzi</code>, <code>Katze.prototype</code>. Dort wird er fündig, denn dort, existiert eine Eigenschaft namens <code>miau</code>. Dies ist eine Funktion und sie kann mit <code>()</code> ausgeführt werden.</p>
+	<p>Über diesen Verweis schreitet der JavaScript-Interpreter zum Prototypen von <code>maunzi</code>, <code>Katze.prototype</code>. Dort wird er fündig, denn dort existiert eine Eigenschaft namens <code>miau</code>. Dies ist eine Funktion und sie kann mit dem Aufruf-Operator <code>(&hellip;)</code> ausgeführt werden.</p>
 
 	<div class="sidebox">
 	<p>Prototypische Vererbung ist das Delegieren von Funktionalität von einem Objekt zum anderen. Das ist prinzipiell nicht an Konstruktoren und Instanzen gebunden, über diese wird bloß der Prototyp-Verweis angelegt.</p>
@@ -236,7 +238,7 @@ mauzi.miau();
 <pre>
 function Katze () {}
 Katze.prototype = {
-	rasse : "Europäisch Kurzhaar"
+    rasse : "Europäisch Kurzhaar"
 };
 var maunzi = new Katze();
 alert(maunzi.rasse);
@@ -247,20 +249,20 @@ alert(maunzi.rasse);
 <div class="js-objects">
 
 <div class="object">
-    <h3>maunzi</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
-    </table>
+	<h3>maunzi</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
+	</table>
 </div>
 
 <div class="object">
-    <h3>Katze.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
-    <tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
-    </table>
+	<h3>Katze.prototype</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
+	<tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	</table>
 </div>
 
 </div><!-- /.js-objects -->
@@ -279,21 +281,21 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 	<div class="js-objects">
 
 <div class="object">
-    <h3>maunzi</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-    <tr class="own"><th>rasse</th><td>"Perser"</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
-    </table>
+	<h3>maunzi</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
+	<tr class="own"><th>rasse</th><td>"Perser"</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
+	</table>
 </div>
 
 <div class="object">
-    <h3>Katze.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
-    <tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
-    </table>
+	<h3>Katze.prototype</h3>
+	<table>
+	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
+	<tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	</table>
 </div>
 
 </div><!-- /.js-objects -->
