@@ -41,7 +41,10 @@
 	</div>
 	<div class="subsection" id="kontrollstrukturen">
 		<h3>Kontrollstrukturen: Verzweigungen und Schleifen</h3>
-		<p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Dazu gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt.</p>
+    <p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Dadurch ist es möglich, die Ausführung der in den Blöcken enthaltenen Anweisungen entsprechend bestimmter Regeln zu kontrollieren.</p>
+    <p>Man unterscheidet grundsätzlich zwei Arten von Kontrollstrukturen: Verzweigungen und Schleifen. Mittels Verzweigungen ist es möglich, die Ausführung einer oder mehrer Anweisungs-Blöcke von Bedingungen abhängig zu machen. Schleifen ermöglichen, einen Anweisungs-Block wiederholt ausführen zu lassen.</p>
+    <h4>Verzweigungen</h4>
+    <p>Zu den Verzweigungen gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt.</p>
 		<pre>if (alter &gt;= 18) {
    alert("Volljährig!");
 } else {
@@ -60,6 +63,13 @@
    case 20 :
       alert("zwanzig");
 }</pre>
+    <h4>Schleifen</h4>
+    <p>Ist zur Laufzeit die Anzahl der Wiederholungen bereits beim Eintritt in die Schleife bekannt, verwendet man häufig die <code>for</code>-Anweisung.</p>
+    <pre>for (var i = 0; i &lt; 5; i++) {
+    alert("Sie müssen noch " + (5 - i) + " mal klicken.");
+}</pre>
+    <p>Beim Schleifeneintritt wird zunächst die Variable <code>i</code> deklariert und mit dem Wert <code>0</code> initialisiert. Anschließend wird der Anweisungs-Block so oft ausgeführt, bis der Wert von <code>i</code> die Zahl 4 übersteigt. Da <code>i</code> nach jedem Schleifendurchlauf um eins erhöht wird, wird die Schleife nach fünf Durchläufen verlassen.</p>
+    <p>Allgemein wird die Ausführung einer <code>for</code>-Anweisung wird von drei Teilen bestimmt. Einmal der <strong>Initialisierung</strong>, in obigem Beispiel <code>var i = 0</code>. Hier wird im normalen Gebrauch eine so genannte <strong>Schleifenvariable</strong> mit einem Startwert initialisiert. Im zweiten Teil, der <strong>Bedingung</strong>, wird eine Eigenschaft der Schleifenvariable geprüft. Als drittes wird in der <strong>Fortsetzung</strong> angegeben, was nach jedem Durchlauf mit der Schleifenvariable getan werden soll.</p>
 	</div>
 	<div class="subsection" id="expression-statement">
 		<h3>Ausdruck-Anweisung (Expression-Statement)</h3>
