@@ -34,7 +34,7 @@
 }
 document.addEventListener("load", dokumentGeladen, false);
 document.addEventListener("DOMContentLoaded", dokumentGeladen, false);</pre>
-	<p>Aus den besagten Gründen kann der Internet Explorer dieses Beispiel ausführen, er kennt die Methode <code>addEventListener</code> nicht.</p>
+	<p>Aus den besagten Gründen kann der Internet Explorer dieses Beispiel nicht ausführen, er kennt die Methode <code>addEventListener</code> nicht.</p>
 	<p>Das Beispiel zeigt, dass der <code>DOMContentLoaded</code>-Event vor dem <code>load</code>-Event passiert. Wenn große und zahlreiche externen Ressourcen in das Dokument eingebunden sind, dann kann zwischen beiden Ereignissen viel Zeit vergehen &ndash; wertvolle Zeit, die ein Script nicht untätig verstreichen lassen sollte.</p>
 </div>
 
