@@ -75,7 +75,7 @@ dd {
 }
 
 pre, code {
-	font-family: consolas,"bitstream vera sans monspace","lucida console","liberation mono",monaco,"courier new",courier,monospace;
+	font-family: consolas,"bitstream vera sans monospace","lucida console","liberation mono",monaco,"courier new",courier,monospace;
 	font-size: 100%;
 	color: #02a;
 }
