@@ -46,6 +46,10 @@ p {
 	text-indent: 2.5em;
 }
 
+p.image {
+	text-indent: 0;
+}
+
 ul p, ol p {
 	margin-left: 0;
 	text-indent: 0;

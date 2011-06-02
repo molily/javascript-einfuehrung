@@ -29,12 +29,12 @@
 	<p>Während der HTML- und CSS-Gebrauch zu dieser Zeit revolutioniert wurde, blieb JavaScript lange Zeit ausgeklammert. Erst ab dem Jahre 2004 machten sich einige aus der Webstandards-Bewegung daran, auch JavaScript einen neuen Sinn zu verleihen und den »richtigen« JavaScript-Gebrauch zu erforschen. Heraus kam das sogenannte <strong>Schichtenmodell</strong>, das den drei Webtechniken HTML, CSS und JavaScript gewisse Funktionen zuweist und sie aufeinander aufbauen lässt.</p>
 	<p>Wir haben bereits in der <a href="voraussetzungen.html#trennung-html-css">Einleitung</a> besprochen, dass modernes Webdesign den <strong>strukturierten Inhalt</strong> (Text mit HTML-Auszeichnungen) von der <strong>Präsentationslogik</strong> trennt: Die Informationen zur Präsentation werden aus dem Markup in ein zentrales CSS-Stylesheet ausgelagert. Das Stylesheet baut auf dem Markup auf und ergänzt es – das HTML-Dokument soll aber auch ohne das Stylesheet möglichst zugänglich sein.</p>
 	<p>So ensteht das Schichtenmodell: HTML bietet die grundlegende Schicht, darüber liegt die CSS-Schicht. Im Code sind beide Schichten voneinander getrennt, um optimale Wartbarkeit, Ausbaubarkeit und Flexibilität zu gewährleisten. Dieses Modell lässt sich zunächst in einem einfachen Diagramm veranschaulichen:</p>
-	<p><img src="schichtenmodell.png" alt=""></p>
+	<p><img src="images/schichtenmodell.png" alt=""></p>
 	<p>Der Clou ist nun, JavaScript ebenfalls als eine solche Schicht zu begreifen, genannt <a href="http://www.digital-web.com/articles/the_behavior_layer/" class="anchor-external">Behaviour Layer</a>, zu deutsch <strong>Verhaltens-Schicht</strong>.</p>
 	<p>Mit »Verhalten« ist Interaktivität gemeint: <em>Wenn der Anwender etwas tut, bringt JavaScript die Webseite dazu, sich in einer bestimmten Weise zu verhalten.</em> Wie CSS fügt JavaScript dem Dokument einen eigentümlichen Mehrwert hinzu. CSS und JavaScript sollen mit dem Ziel eingesetzt werden, die Benutzbarkeit zu verbessern.</p>
 	<p>Die drei Schichten HTML, CSS und JavaScript arbeiten Hand in Hand, aber außer der HTML-Schicht ist keine für das grundlegende Funktionieren notwendig. Insbesondere funktioniert die Präsentation auch dann, wenn JavaScript nicht zur Verfügung steht. Das »Verhalten« funktioniert seinerseits soweit wie möglich, wenn das Stylesheet nicht angewendet wird. Damit hat man z.B. sehbehinderte Anwender mit Screenreadern im Kopf.</p>
 	<p>Wenn HTML die Basis bildet und die Zusätze CSS und JavaScript wegfallen können, gibt es vier verschiedene Kombinationsmöglichkeiten. Das folgende Schaubild schildert die die vier Fälle, die berücksichtigt werden sollten:</p>
-	<p><img src="layer.jpg" /></p>
+	<p><img src="images/layer.jpg" /></p>
 	<p>(Die Grafik wurde übernommen aus dem <a href="http://www.hessendscher.de/workshop/" class="anchor-external">Webstandards-Workshop</a> von Russ Weakley.)</p>
 	<p>TODO: Übersetzung</p>
 </div>
