@@ -17,7 +17,7 @@
 
 <div class="section" id="delegation">
 	<h2>Event-Delegation</h2>
-	<p>Wenn zahlreiche Elemente im Dokument überwacht werden sollen, ist es sehr aufwändig umzusetzen und langsam in der Ausführung, diese herauszusuchen, zu durchlaufen und bei jedem denselben Event-Handler zu registrieren. Bei solchen Aufgabenstellungen lässt vom <a href="event-handling-objekt.html#bubbling">Bubbling-Effekt</a> profitieren, das ist das Aufsteigen der Ereignisse im DOM-Baum. Man macht sich die Verschachtelung der Elemente im DOM-Baum zunutze und überwacht die Ereignisse von verschiedenen Elementen bei einem gemeinsamen, höherliegenden Element, zu dem die Ereignisse aufsteigen. Diese Technik nennt sich <dfn>Event-Delegation</dfn> (englisch <em>delegation</em> für Übertragung von Aufgaben). Dabei wird einem zentralen Element die Aufgabe übertragen, die Ereignisse zu verarbeiten, die bei seinen Kindelementen passieren. </p>
+	<p>Wenn zahlreiche Elemente im Dokument überwacht werden sollen, ist es sehr aufwändig umzusetzen und langsam in der Ausführung, diese herauszusuchen, zu durchlaufen und bei jedem denselben Event-Handler zu registrieren. Bei solchen Aufgabenstellungen können Sie vom <a href="event-handling-objekt.html#bubbling">Bubbling-Effekt</a> profitieren, das ist das Aufsteigen der Ereignisse im DOM-Baum. Man macht sich die Verschachtelung der Elemente im DOM-Baum zunutze und überwacht die Ereignisse von verschiedenen Elementen bei einem gemeinsamen, höherliegenden Element, zu dem die Ereignisse aufsteigen. Diese Technik nennt sich <dfn>Event-Delegation</dfn> (englisch <em>delegation</em> für Übertragung von Aufgaben). Dabei wird einem zentralen Element die Aufgabe übertragen, die Ereignisse zu verarbeiten, die bei seinen Nachfahrenelementen passieren.</p>
 	<p>Event-Delegation eignet sich insbesondere dann, wenn viele gleichförmige Elemente in Menüs, Link-Listen, Formularen oder Tabellen JavaScript-Interaktivität benötigen. Ohne Event-Delegation müsste man jedes Element einzeln ansprechen, um dort immer denselben Event-Handler zu registrieren.</p>
 	<p>Nehmen wir beispielsweise eine Liste mit Links zu Bildern. Wenn JavaScript aktiv ist, soll das Vollbild dokumentintern eingeblendet werden. Ein ähnliches Beispiel hatten wir bereits beim Unterdrücken der Standardaktion &ndash; die Umsetzung der Einblendung bleibt weiterhin ausgeklammert.</p>
 	<p>Wir gehen von folgendem HTML-Gerüst aus:</p>
@@ -36,7 +36,7 @@
 	<pre>document.getElementById("bilderliste").onclick = bilderlistenKlick;</pre>
 	<p>In der angegebenen Handler-Funktion <code>bilderlistenKlick</code> findet nun die Überprüfung des Zielelementes statt.</p>
 	<pre>funktion bilderlistenKlick (e) {
-   // Vereinheitlichung von Event-Objekt und Zielelement
+   // Vereinheitlichung von <a href="event-handling-objekt.html">Event-Objekt</a> und <a href="event-handling-objekt.html#currenttarget-target">Zielelement</a>
    var e = e || window.event;
    var target = e.target || e.srcElement;
    
@@ -72,11 +72,11 @@
    var bildAdresse = aElement.href;
    
    // Blende das Bild ein, auf das der Link zeigt.
-   // ... (an dieser Stelle uninteressant) ...
+   // (Die genaue Umsetzung ist an dieser Stelle ausgeklammert.)
 }</pre>
 	<p>Dieses Beispiel soll Ihnen die grundlegende Funktionsweise von Event-Delegation veranschaulichen:</p>
 	<ol>
-		<li>Es gibt eine Handler-Funktion, die alle aufsteigenden Ereignisse eines Types bei seinen Kindelementen überwacht.</li>
+		<li>Es gibt eine Handler-Funktion, die alle Ereignisse eines Types überwacht, welche von seinen Nachfahrenelementen aufsteigen.</li>
 		<li>Darin wird das Ereignis untersucht und insbesondere das Zielelement überprüft.</li>
 		<li>Wenn das Zielelement gewissen Kriterien entspricht (z.B. einem bestimmten Elementyp oder einer Klasse angehört), wird auf das Ereignis reagiert. Das kann in dieser Funktion erfolgen oder der Übersicht halber in einer anderen.</li>
 	</ol>
@@ -96,21 +96,21 @@
 		<li><strong>Bubbling-Phase</strong> (Aufsteigen vom Zielelement): Das Ereignis steigt ausgehend vom Zielelement wieder in der Element-Hierarchie auf. Es durchläuft alle Vorfahrenelemente und löst dort die relevanten Handler aus.</li>
 	</ol>
 	<p>Alle bisher beschriebenen Modelle, ausgehend vom <a href="event-handling-grundlagen.html#traditionelles-event-handling">traditionellen</a> über <a href="event-handling-fortgeschritten.html#dom-events">W3C DOM Events</a> und dem <a href="event-handling-fortgeschritten.html#microsoft">Microsoft-Modell</a>, haben Handler für die Bubbling-Phase registriert. Wie wir uns das Bubbling zunutze machen, haben wir bereits bei der <a href="#delegation">Event-Delegation</a> kennengelernt.</p>
-	<p>Das Capturings ist ein weiterer Ansatz, um Ereignisse effizienter zu überwachen: Wir können ein Event-Handler bei einem höherliegenden Element registrieren, um die Ereignisse zu überwachen, die bei vielen Nachfahrenelemente passieren.</p>
-	<p>Der Unterschied zwischen Bubbling und Capturing folgender: Nicht alle Ereignisse haben eine Bubbling-Phase, das heißt nicht alle Ereignisse steigen auf und lösen die entsprechenden Handler bei ihren Vorfahrenelementen aus. Das hat zwar durchaus seinen Sinn, macht aber die beschriebene Event-Delegation unmöglich. Gäbe es das Event-Capturing nicht, wären Sie gezwungen, alle nicht aufsteigenden Ereignisse direkt bei ihren Zielelementen zu überwachen. Mithilfe des Event-Capturings können Sie auch solche Ereignisse zentral überwachen &ndash; denn jedes Ereignis hat eine Capturing-Phase.</p>
-	<p>Event-Capturing ist nur unter Verwendung der standardisierten Methode <code>addEventListener</code> möglich. Das traditionelle Event-Handling mit seinem Schema <code>element.onevent = handlerfunktion</code> registriert den Handler immer für die Bubbling-Phase. Dasselbe gilt für das Microsoft-Modell mit <code>attachEvent</code>. Da <code>addEventListener</code> noch nicht vom Internet Explorer unterstützt wird, ist eine Nutzung in browserübergreifenden Scripten nur möglich, wenn für den Internet Explorer eine Alternative ohne Event-Capturing bereitgestellt wird.</p>
+	<p>Capturing ist ein weiterer Ansatz, um Ereignisse effizienter zu überwachen: Wir können ein Event-Handler bei einem höherliegenden Element registrieren, um die Ereignisse zu überwachen, die bei vielen Nachfahrenelemente passieren.</p>
+	<p>Der Unterschied zwischen Bubbling und Capturing folgender: Nicht alle Ereignisse haben eine Bubbling-Phase, das heißt nicht alle Ereignisse steigen auf und lösen die entsprechenden Handler bei ihren Vorfahrenelementen aus. Das hat durchaus seinen Sinn, macht aber die beschriebene Event-Delegation unmöglich. Gäbe es das Event-Capturing nicht, wären Sie gezwungen, alle nicht aufsteigenden Ereignisse direkt bei ihren Zielelementen zu überwachen. Mithilfe des Event-Capturings können Sie auch solche Ereignisse zentral überwachen &ndash; denn <em>jedes</em> Ereignis hat eine Capturing-Phase.</p>
+	<p>Event-Capturing ist nur unter Verwendung der standardisierten Methode <code>addEventListener</code> möglich. Das traditionelle Event-Handling mit seinem Schema <code>element.onevent = handlerfunktion</code> registriert den Handler immer für die Bubbling-Phase. Dasselbe gilt für das Microsoft-Modell mit <code>attachEvent</code>. Für Internet Explorer vor Version 9, welche <code>addEventListener</code> nicht unterstützen, müssen Sie daher gegebenenfalls eine Alternative ohne Event-Capturing bereitstellen.</p>
 	<p>Um Event-Handler für die Capturing-Phase zu registrieren, nutzen Sie wie gewohnt <code>addEventListener</code>, setzen jedoch den dritten Boolean-Parameter auf <code>true</code>:</p>
 	<pre>document.addEventListener("focus", captureHandler, true);</pre>
 	
 	<p>Die Vorteile des Capturings liegen also darin, insbesondere nicht aufsteigende Ereignisse bei einem höherliegenden Element zu verarbeiten.
-	<p>Folgende Ereignisse steigen beispielsweise nicht auf:</p>
+	<p>Folgende Ereignisse beispielsweise steigen nicht auf:</p>
 	<ul>
 		<li><code>load</code>, z.B. bei Bildern, Objekten und Iframes</li>
-		<li>focus und blur (vgl. focusin und focusout)</li>
-		<li>mouseenter und mouseleave (vgl. mouseover und mouseout)</li>
-		<li>submit</li>
+		<li><code>focus</code> und <code>blur</code>. (Als alternative aufsteigende Ereignisse gibt es allerdings <code>focusin</code> und <code>focusout</code>.)</li>
+		<li><code>mouseenter</code> und <code>mouseleave</code>. (Die Ereignisse <code>mouseover</code> und <code>mouseout</code> hingegen steigen auf.)</li>
+		<li><code>submit</code></li>
 	</ul>
-	<p>	Und man kann den Event-Fluss abbrechen, indem man das Ereignis schon in der Capturing-Phase »abfängt«. Target- und Bubbling-Phase fallen dann aus. Das Ereignis erreicht das Zielelement nie. Wie? Mit stopPropagation.</p>
+	<p>Da die Capturing-Phase die erst im Event-Fluss ist, ist es möglich, ein Ereignis schon in dieser Phase abzufangen. Ruft man in der Capturing-Phase die <a href="event-handling-objekt.html#bubbling-verhindern"><code>stopPropation</code>-Methode des Event-Objektes</a> auf, so wird der Fluss abgebrochen und die Ziel- und Bubbling-Phase fallen aus. Das Ereignis erreicht somit das Zielelement nicht.</p>
 </div>
 
 <div class="sequence-navigation">

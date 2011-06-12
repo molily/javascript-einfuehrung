@@ -26,7 +26,7 @@
 <div class="section" id="dom-events">
 	<h2>Event-Handling gemäß dem W3C-Standard DOM Events</h2>
 	<p>Das bisher beschriebene traditionelle Schema stammt aus den Anfangstagen von JavaScript. Der Browserhersteller und JavaScript-Erfinder Netscape erfand das Schema einst und andere Browser übernahmen es im Zuge ihrer JavaScript-Unterstützung.</p>
-	<p>Die Entwicklung ging jedoch weiter: Bei der Standardisierung des Event-Handlings verwarf das WWW-Konsortium das traditionelle Event-Handling. Der entsprechende DOM-Standard sieht ein anderes Modell vor: Alle Elementobjekte und weitere zentrale Objekte besitzen die Methode <code>addEventListener</code> (englisch: Ereignis-Empfänger hinzufügen). Will man dem Element einen Event-Handler zuweisen, so ruft man diese Methode auf.</p>
+	<p>Die Entwicklung ging jedoch weiter: Bei der Standardisierung des Event-Handlings verwarf das WWW-Konsortium das traditionelle Event-Handling. Der entsprechende DOM-Standard sieht ein anderes Modell vor: Alle Elementobjekte und weitere zentrale Objekte besitzen die Methode <code>addEventListener</code> (englisch: Ereignis-Überwacher hinzufügen). Will man dem Element einen Event-Handler zuweisen, so ruft man diese Methode auf.</p>
 	<div class="subsection" id="addEventListener">
 		<h3>Event-Handler registrieren: <code>addEventListener</code></h3>
 		<p>Das standardisierte Schema enthält ebenfalls die drei Bestandteile Elementobjekt, Ereignistyp und Handler-Funktion. Es lautet folgendermaßen:</p>
@@ -53,27 +53,30 @@ function start () {
 }
 
 function klickverarbeitung () {
-   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+   document.getElementById("interaktiv").innerHTML +=
+      " Huhu, das ist von Javascript eingefügter Text.";
 }
 
 &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
-interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+&lt;p id="interaktiv"&gt;
+   Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!
+&lt;/p&gt;
 
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 		<p>Folgende Anweisungen haben sich geändert:</p>
-		<p>Aus der Zuweisung <code>window.onload = start;</code> ist der Aufruf <code>window.addEventListener("load", start, false);</code> geworden. Auch wenn <code>window</code> kein Elementobjekt ist, bietet es auch die Methode <code>addEventListener</code> an.</p>
+		<p>Aus der Zuweisung <code>window.onload = start;</code> ist der Aufruf <code>window.addEventListener("load", start, false);</code> geworden. Wenngleich <code>window</code> kein Elementobjekt ist, bietet es dennoch die Methode <code>addEventListener</code> an.</p>
 		<p>Aus der Zuweisung <code>document.getElementById("interaktiv").onclick = klickverarbeitung;</code> sind zwei geworden. In der ersten Anweisung speichern wir das Elementobjekt des Absatzes in einer Variable zwischen:</p>
 		<pre>var pElement = document.getElementById("interaktiv");</pre>
 		<p>In der zweiten Anweisung wird schließlich die Handler-Funktion registriert:</p>
 		<pre>pElement.addEventListener("click", klickverarbeitung, false);</pre>
 		<p>Sie können die Methoden-Aufrufe natürlich auch verketten, anstatt eine Hilfsvariable zu verwenden. Das sähe schematisch so aus: <code>document.getElementById(&hellip;).addEventListener(&hellip;)</code>. Schließlich gibt <code>getElementById</code> im Regelfall ein Elementobjekt zurück, dessen Methoden Sie direkt ansprechen können. Aus Gründen der Lesbarkeit und Verständlichkeit wurde diese Kette im Beispiel in zwei Anweisungen gesplittet.</p>
-		<p>Das obige Beispiel funktioniert in allen modernen Browsern &ndash; außer dem Internet Explorer. Dieser unterstützt den W3C-DOM-Standard noch nicht, wie wir schon von diversen Eigenschaften und Methoden des Event-Objektes wissen. Die Methode <code>addEventListener</code> ist ihm schlicht unbekannt.</p>
-		<p>Im Gegensatz zum traditionellen Event-Handling wird <code>addEventListener</code> daher nicht browserübergreifend unterstützt. Der Internet Explorer unterstützt stattdessen ein <a href="#microsoft">eigenes, proprietäres Modell</a>, das im folgenden Abschnitt vorgestellt wird.</p>
+		<p>Das obige Beispiel funktioniert in allen modernen Browsern &ndash; jedoch nicht im Internet Explorer vor der Version 9. Die älteren Internet-Explorer-Versionen unterstützen den W3C-DOM-Standard noch nicht. Die Methode <code>addEventListener</code> ist diesen Browsern schlicht unbekannt.</p>
+		<p>Der Internet Explorer unterstützt den Events-Standard erst ab Version 9. Ältere Versionen unterstützen stattdessen ein <a href="#microsoft">eigenes, proprietäres Modell</a>, das im folgenden Abschnitt vorgestellt wird.</p>
 		<p>Der Hauptvorteil von <code>addEventListener</code> ist, dass Sie für ein Element <strong>mehrere Handler-Funktionen</strong> für denselben Ereignistyp registrieren können. Beim obigen Beispiel können wir die <code>start</code>-Funktion so anpassen, dass beim <code>p</code>-Element zwei Handler statt bloß einer registriert werden:</p>
 		<pre>function start () {
    var pElement = document.getElementById("interaktiv");
@@ -102,9 +105,8 @@ function meldung2 () {
 </div>
 
 <div class="section" id="microsoft">
-	<h2>Event-Handling gemäß Microsoft</h2>
-	<p>Microsoft hat schon früh für seinen Internet Explorer eine Alternative zum unzureichenden traditionellen Event-Handling eingeführt, welches vom damaligen Konkurrenten Netscape erfunden wurde. Das W3C-DOM wurde erst später standardisiert und wird bis heute nicht vom Internet Explorer unterstützt. Das Microsoft-Modell wiederum wird nur vom Internet Explorer verstanden. Es handelt sich hier also um eine Sonderlösung, die nur interessant ist, weil der Internet Explorer den DOM-Standard
-	noch nicht umsetzt.</p>
+	<h2>Event-Handling gemäß Microsoft für ältere Internet Explorer</h2>
+	<p>Microsoft hat schon früh für seinen Internet Explorer eine Alternative zum unzureichenden traditionellen Event-Handling eingeführt, welches seinerseits vom damaligen Konkurrenten Netscape erfunden wurde. Das W3C-DOM wurde erst später standardisiert und wurde erst Jahre später im Internet Explorer 9 eingebaut. Das Microsoft-Modell wiederum wird nur vom Internet Explorer verstanden. Es handelt sich hier also um eine Sonderlösung, die nur noch für ältere Internet-Explorer-Versionen interessant ist, welche den DOM-Standard nicht umsetzen.</p>
 	<p>Microsofts Modell teilt einige Fähigkeiten mit <code>addEventListener</code> und <code>removeEventListener</code>, funktioniert im Detail jedoch anders und bringt einige Eigenheiten und Schwierigkeiten mit sich.</p>
 	<div class="subsection" id="attachEvent">
 		<h3>Event-Handler registrieren: attachEvent</h3>
@@ -130,15 +132,18 @@ function start () {
 }
 
 function klickverarbeitung () {
-   document.getElementById("interaktiv").innerHTML += " Huhu, das ist von Javascript eingefügter Text.";
+   document.getElementById("interaktiv").innerHTML +=
+      " Huhu, das ist von Javascript eingefügter Text.";
 }
 
 &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;p id="interaktiv"&gt;Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
-interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!&lt;/p&gt;
+&lt;p id="interaktiv"&gt;
+   Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!
+&lt;/p&gt;
 
 &lt;/body&gt;
 &lt;/html&gt;</pre>
@@ -171,7 +176,7 @@ function meldung2 () {
 	</div>
 	<div class="subsection" id="microsoft-eigenheiten">
 		<h2>Eigenheiten des Microsoft-Modell</h2>
-		<p>Das Microsoft-Modell bringt ein eine erfreuliche und eine unerfreuliche Besonderheit mit sich:</p>
+		<p>Das Microsoft-Modell bringt eine erfreuliche und eine unerfreuliche Besonderheit mit sich:</p>
 		<ul>
 			<li>Bei der Verwendung von <code>attachEvent</code> gestaltet sich der <a href="event-handling-objekt.html#event-objekt">Zugriff auf das Event-Objekt</a> einfacher, als wir es vom traditionellen Event-Handling gewöhnt sind. Dort war der Zugriff über <code>window.event</code> nötig. Bei der Benutzung von <code>attachEvent</code> wird das Event-Objekt der Handler-Funktion als Parameter übergeben, wie wir es aus anderen Browsern gewohnt sind und wie es auch beim im DOM-Standard vorgeschrieben ist.</li>
 			<li>Der <a href="event-handling-objekt.html#currenttarget-target">Zugriff auf das verarbeitende Element</a> ist nicht möglich. Beim traditionellen Event-Handling hatten wir <code>this</code> kennengelernt, um das Element anzusprechen, bei dem die gerade ausgeführte Handler-Funktion registriert wurde. Das ist im Zusammenhang mit <code>attachEvent</code> nicht möglich, denn <code>this</code> zeigt nicht auf das gewünschte Objekt, sondern stets auf das globale Objekt <code>window</code> &ndash; und ist damit unbrauchbar.</li>
@@ -188,8 +193,8 @@ function meldung2 () {
 		<p>Wir haben drei Modelle und deren Detailunterschiede kennengelernt. Das mag Sie verwirrt haben und Sie werden sich sicher fragen, welches Sie nun in der Praxis ohne Bedenken anwenden können. Das Fazit lautet leider: Keines.</p>
 		<ul>
 			<li>Das traditionelle Event-Handling reicht in einfachen Fällen aus, Sie werden aber sehr schnell an dessen Grenzen stoßen.</li>
-			<li>DOM Events ist zweifelsohne das leistungsfähigste und vielseitigste, der gravierende Nachteil ist jedoch, dass der weit verbreitete Internet Explorer den W3C-Standard noch nicht umsetzt.</li>
-			<li>Das Microsoft-Modell kann zwar als Ausweichlösung für den Internet Explorer verwendet werden. Es bringt jedoch starke Einschränkungen mit sich, die einer Korrektur bedürfen, und manche unüberbrückbaren Unterschiede führen dazu, dass es nicht gleichwertig zum W3C-Modell eingesetzt werden kann.</li>
+			<li>DOM Events ist zweifelsohne das leistungsfähigste und vielseitigste, der gravierende Nachteil ist jedoch, dass  Internet-Explorer-Versionen den W3C-Standard nicht umsetzen. Die Versionen vor 9 sind derzeit noch weit verbreitet.</li>
+			<li>Das Microsoft-Modell taugt zwar als Ausweichlösung für ältere Internet Explorer. Es bringt jedoch Einschränkungen mit sich, die einer Korrektur bedürfen. Und manche unüberbrückbaren Unterschiede führen dazu, dass es nicht gleichwertig zum W3C-Modell eingesetzt werden kann.</li>
 		</ul>
 	</div>
 	
@@ -220,23 +225,24 @@ function absatzKlick () {
 }
 addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
 &lt;/script&gt;</pre>
-		<p>Da die beiden Modelle im Detail zueinander inkompatibel sind, sind im <code>attachEvent</code>-Zweig einige Anpassungen vonnöten. Die übergebene Handler-Funktion wird in einer weiteren gekapselt und eingeschlossen, die an deren Stelle als Handlerfunktion verwendet wird.</p>
+		<p>Da die beiden Modelle im Detail zueinander inkompatibel sind, sind im <code>attachEvent</code>-Zweig einige Anpassungen vonnöten. Diese müssen Sie im Detail nicht verstehen, sie seien hier dennoch erklärt:</p>
 		<ol>
-			<li>Der Kontext wird der Handler-Funktion korrigiert. Dadurch ist in der Handler-Funktion mittels <code>this</code> der Zugriff auf das verarbeitende Element möglich. (Siehe <a href="event-handling-objekt.html#currenttarget-target">verarbeitendes Element</a>.)</li>
+			<li>Die übergebene Handler-Funktion wird in einer weiteren gekapselt und eingeschlossen, die an deren Stelle als Handlerfunktion verwendet wird. Der Kontext der Handler-Funktion wird korrigiert. Dadurch ist in der Handler-Funktion mittels <code>this</code> der Zugriff auf das verarbeitende Element möglich. (Siehe <a href="event-handling-objekt.html#currenttarget-target">verarbeitendes Element</a>.)</li>
 			<li>Der Handler-Funktion wird das Event-Objekt als Parameter übergeben. Dadurch fällt in der Handler-Funktion die Vereinheitlichung bem Zugriff darauf weg. (Siehe <a href="event-handling-objekt.html#event-objekt">Zugriff auf das Event-Objekt</a>.)</li>
 		</ol>
-		<p>Diese Funktion ist wie gesagt sehr einfach gehalten, was unter anderem folgende Nachteile mit sich bringt:</p>
+		<p>Kurz gesagt sorgen diese Anpassungen dafür, dass Sie browserübergreifend mglichst gleich arbeiten können und die Browserunterschiede ausgeglichen werden.</p>
+		<p>Diese <code>addEvent</code>-Funktion ist wie gesagt sehr einfach gehalten, was unter anderem folgende Nachteile mit sich bringt:</p>
 		<ul>
 			<li>Es gibt keine äquivalente Funktion zum Entfernen eines Event-Handlers (<code>removeEvent</code>).</li>
-			<li>Wenn Sie dieselbe Handler-Funktion für einen Ereignistyp beim selben Element mehrfach registrieren, verhält sich der Internet Explorer anders als die restlichen Browser, die den DOM-Standard unterstützen: Die Handler-Funktion wird nur einmal ausgeführt anstatt so oft, wie Sie den Handler registriert haben. Diese Fall ist allerdings vermeidbar, in der Regel besteht keine Notwendigkeit, einen Handler mehrfach zu registrieren.</li>
+			<li>Wenn Sie dieselbe Handler-Funktion für einen Ereignistyp beim selben Element mehrfach registrieren, verhalten sich ältere Internet Explorer anders als moderne Browser, die den DOM-Standard unterstützen: Die Handler-Funktion wird nur einmal ausgeführt anstatt so oft, wie Sie den Handler registriert haben. Diese Fall ist allerdings vermeidbar, in der Regel besteht keine Notwendigkeit, einen Handler mehrfach zu registrieren.</li>
 			<li>Es werden nur die allerwichtigsten Browserunterschiede vereinheitlicht, auf viele weitere müssen Sie in der Handler-Funktion selbst reagieren.</li>
 		</ul>
 	</div>
 	
 	<div class="subsection" id="flexibles-addevent">
 		<h3>Flexibles und leistungsfähiges <code>addEvent</code>/<code>removeEvent</code></h3>
-		<p>Eine robustere, aber umso kompliziertere Lösung, die diee Funktionen <code>addEvent</code> und <code>removeEvent</code> bietet, stammt von Dean Edwards und wurde von Tino Zijdel weiterentwickelt: <a href="http://therealcrisp.xs4all.nl/upload/addEvent_dean.html">addEvent() new style</a></p>
-		<p>Dieses Helferscript verwendet die standardisierte Methoden <code>addEventListener</code> und <code>removeEventListener</code> in den Browsern, in denen sie zur Verfügung stehen. Als Alternative für den Internet Explorer wird allerdings nicht das Microsoft-eigene Modell verwendet &ndash; zu groß sind die Unterschiede zwischen den beiden Modellen. Stattdessen wird das Registrieren von mehreren Event-Handlern selbst übernommen: Es wird bei jedem Element eine eigene Liste mit Handler-Funktionen für ein Ereignistyp geführt. Beim Eintreten des Ereignisses wird eine Helferfunktion aufgerufen, die diese interne Liste abarbeitet und jede dort verzeichnete Handler-Funktion aufruft.</p>
+		<p>Eine robustere, aber umso kompliziertere Umsetzung der Funktionen <code>addEvent</code> und <code>removeEvent</code> stammt von Dean Edwards und wurde von Tino Zijdel weiterentwickelt: <a href="http://therealcrisp.xs4all.nl/upload/addEvent_dean.html">addEvent() new style</a>.</p>
+		<p>Dieses Helferscript verwendet die standardisierte Methoden <code>addEventListener</code> und <code>removeEventListener</code> in den Browsern, in denen sie zur Verfügung stehen. Als Alternative für ältere Internet Explorer wird allerdings nicht das Microsoft-eigene Modell verwendet &ndash; zu groß sind die Unterschiede zwischen den beiden Modellen. Stattdessen wird das Registrieren von mehreren Event-Handlern selbst übernommen: Es wird bei jedem Element eine eigene Liste mit Handler-Funktionen für ein Ereignistyp geführt. Beim Eintreten des Ereignisses wird eine Helferfunktion aufgerufen, die diese interne Liste abarbeitet und jede dort verzeichnete Handler-Funktion aufruft.</p>
 		<p>Neben <code>addEvent</code> umfasst das Script auch eine <code>removeEvent</code>-Methode. Im Vergleich zum einfachen <code>addEvent</code> werden im Internet Explorer zwei weitere Vereinheitlichungen vorgenommen, sodass folgende Techniken browserübergreifend nutzbar sind:</p>
 		<ol>
 			<li>In der Handler-Funktion ist mittels <code>this</code> der Zugriff auf das verarbeitende Element möglich. (Siehe <a href="event-handling-objekt.html#currenttarget-target">verarbeitendes Element</a>.)</li>
@@ -244,7 +250,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
 			<li>Zum Unterdrücken der Standardaktion kann browserübergreifend die standardisierte Methode <code>preventDefault</code> des Event-Objektes verwendet werden. Eine entsprechende Fähigkeiten-Weiche in der Handler-Funktion ist nicht nötig. (Siehe <a href="event-handling-objekt.html#standardaktion">Unterdrücken der Standardaktion</a>.)</li>
 			<li>Um das Aufsteigen des Ereignisses zu verhindern, kann die standardisierte Methode <code>stopPropagation</code> des Event-Objektes browserübergreifend genutzt werden. (Siehe <a href="event-handling-objekt.html#bubbling-verhindern">Bubbling verhindern</a>.)</li>
 		</ol>
-		<p>...</p>
+		<p>Falls Sie keine umfangreichere JavaScript-Bibliothek verwenden, welche ausgereiftes Event-Handling ermöglicht, so sind Sie mit diesen beiden Helferfunktionen <code>addEvent</code> und <code>removeEvent</code> gut bedient &ndash; Sie sollten sie in ihren Werkzeugkasten aufnehmen.</p>
 	</div>
 	
 	<div class="subsection" id="addevent-frameworks">
