@@ -111,25 +111,8 @@ var maunzi = new Katze();
 mauzi.miau();
 </pre>
 
-		<p>Hier wird Funktionausdruck notiert und die Funktion in <code>Katze.prototype.miau</code> gespeichert. Beim Prototypen wird also eine Eigenschaft namens <code>miau</code> angelegt. Darin steckt nun die neu angelegte Funktion. Wenn wir eine <code>Katze</code>-Instanz erzeugen, so besitzt sie eine <code>miau</code>-Methode.</p>
+		<p>Hier wird ein Funktionausdruck notiert und das Funktionsobjekt in <code>Katze.prototype.miau</code> gespeichert. Beim Prototypen wird also eine Eigenschaft namens <code>miau</code> angelegt. Darin steckt nun die neu angelegte Funktion. Wenn wir eine <code>Katze</code>-Instanz erzeugen, so besitzt sie eine <code>miau</code>-Methode.</p>
 
-		<p>Eine gleichwertige Alternativschreibweise ersetzt das Prototyp-Objekt mit einem eigenen Objekt. Dieses kann z.B. mit einem <code>Object</code>-Literal notiert werden. Wenn dem Prototypen viele Eigenschaften angehängt werden, ist diese Schreibweise letztlich kürzer, als mehrfach <code>Katze.prototype.eigenschaft = ...</code> zu schreiben.</p>
-
-<pre>
-function Katze () {}
-
-<strong>Katze.prototype</strong> = {
-    miau : function () {
-        alert("Miau!");
-    }
-};
-
-var maunzi = new Katze();
-mauzi.miau();
-</pre>
-
-		<p>Mit dem <code>Object</code>-Literal wird ein Objekt angelegt, welches eine <code>miau</code>-Methode besitzt. Durch die Zuweisung an <code>Katze.prototype</code> wird dieses Objekt wird zum Prototypen für alle <code>Katze</code>-Instanzen.</p>
-		
 	</div>
 	
 </div>
@@ -233,13 +216,12 @@ mauzi.miau();
 	
 	<p>Diese Art der Vererbung nennt man <dfn>Differential Inheritance</dfn>. Im Gegensatz zur klassenbasierten Vererbung werden beim abgeleiteten Objekt (der Instanz) keine Eigenschaften erzeugt. Die Instanz ist keine Kopie des Prototypen, die Instanz kann sogar leer sein, wie es Katzen-Beispiel der Fall ist. Erst wenn sich die Instanz vom Prototypen unterscheidet, wird bei der Instanz eine Eigenschaft angelegt, die einen anderen Wert als die des Prototypen besitzt. In der Glasplatten-Metapher bedeutet dies: An den Stellen, in denen die Instanz dem Prototyp gleicht, ist die Platte durchsichtig &ndash; sie delegiert . Wo sie sich unterscheidet, besitzt sie einen eigenen, andersfarbigen Zettel.</p>
 	
-	<p>Nehmen wir an, dass hiesige Katzen meistens von der Rasse »Europäisch Kurzhaar« sind. Anstatt dies jedes Mal beim Erzeugen anzugeben, notieren wir die Eigenschaft im Prototypen:</p>
+	<p>Nehmen wir an, dass hiesige Katzen meistens von der Rasse »Europäisch Kurzhaar« sind. Anstatt dies jedes Mal beim Erzeugen anzugeben, legen wir die Eigenschaft beim Prototypen an:</p>
 	
 <pre>
 function Katze () {}
-Katze.prototype = {
-    rasse : "Europäisch Kurzhaar"
-};
+Katze.prototype.rasse = "Europäisch Kurzhaar";
+
 var maunzi = new Katze();
 alert(maunzi.rasse);
 </pre>
@@ -272,6 +254,7 @@ alert(maunzi.rasse);
 <pre>
 var maunzi = new Katze();
 alert(maunzi.rasse); // Derzeit noch »Europäisch Kurzhaar« - vererbt vom Prototypen
+
 maunzi.rasse = "Perser";
 alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 </pre>
@@ -313,11 +296,9 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 <pre>
 function Katze () {}
 
-Katze.prototype = {
-    pfoten : 4,
-    miau : function () {
-        alert("Miau!");
-    }
+Katze.prototype.pfoten = 4;
+Katze.prototype.miau = function () {
+   alert("Miau!");
 };
 
 var maunzi = new Katze();
@@ -330,7 +311,7 @@ alert('Maunzi hat nun ' + maunzi.pfoten + ' Pfoten.');
 
 // Überschreibe Methode des Prototyps:
 Katze.prototype.miau = function () {
-    alert("Wau, wau!");
+   alert("Wau, wau!");
 };
 schnucki.miau();
 </pre>
@@ -496,17 +477,17 @@ Module.öffentlicheMethode();
 	
 	<pre>
 function Konstruktor () {}
-Konstruktor.prototype = {
-    // Öffentliche Eigenschaften
-    öffentlicheMethode : function () {
-        alert(this._privateMethode());
-    },
-    // Pseudo-private Eigenschaften
-    <strong>_privateEigenschaft</strong> : 1;
-    <strong>_privateMethode</strong> : function () {
-        this._privateEigenschaft++;
-        return this._privateEigenschaft;
-    }
+
+// Öffentliche Eigenschaften
+Konstruktor.prototype.öffentlicheMethode = function () {
+   alert(this._privateMethode());
+};
+
+// Pseudo-private Eigenschaften
+Konstruktor.prototype.<strong>_privateEigenschaft</strong> = 1;
+Konstruktor.prototype.<strong>_privateMethode</strong> = function () {
+   this._privateEigenschaft++;
+   return this._privateEigenschaft;
 };
 
 var instanz = new Konstruktor();

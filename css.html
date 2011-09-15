@@ -43,9 +43,9 @@
 	<p>Betrachten wir als Beispiel ein JavaScript, dass die Eingaben eines Formulars überprüft. Beim Absenden des Formulars wird eine Handler-Funktion für das Ereignis <code>submit</code> aktiv. Diese Funktion soll fehlerhafte Formularfelder rot markieren.</p>
 	<p>Nehmen wir an, die <code>input</code>-Eingabefelder sind standardmäßig im Stylesheet so formatiert:</p>
 	<pre class="content-example">input {
-   padding: 4px 6px;
-   border: 1px solid #555;
-   background-color: #fafafa;
+    padding: 4px 6px;
+    border: 1px solid #555;
+    background-color: #fafafa;
 }</pre>
 	<p>Im Stylesheet wird nun eine Regel definiert mit den Eigenschaften für fehlerhafte Felder. Wir nutzen dazu einen Selektor mit dem Elementnamen <code>input</code> kombiniert mit der Klasse <code>fehlerhaft</code>:</p>
 	<pre class="content-example">input.fehlerhaft {
@@ -58,43 +58,43 @@
 	<pre>element.className = 'klassenname';</pre>
 	<p>In der beispielhaften Formularüberprüfung kann das Setzen der Klasse folgendermaßen aussehen: Wir definieren eine Funktion <code>formularÜberprüfung</code>, die als Handler für das Ereignis <code>submit</code> registriert wird (siehe <a href="einbindung.html">Ereignisverarbeitung</a>). In dieser Funktion wird das zu überprüfende Formularfeld über das DOM mittels <code>document.getElementById</code> herausgesucht. Ist der Wert des Feldes leer, wird eine Meldung ausgegeben und das Feld bekommt die Klasse <code>fehlerhaft</code>.</p>
 <pre>function formularÜberprüfung () {
-   // Spreche das Formularfeld über das DOM an und
-   // speichere es in eine Variable zwischen:
-   var element = document.getElementById("kontaktformular-name");
-   // Prüfe den Feldwert:
-   if (element.value == "") {
-      // Zeige im Fehlerfall ein Hinweisfenster:
-      window.alert("Bitte geben Sie Ihren Namen an.");
-      // Weise dem Element die Klasse »fehlerhaft« zu:
-      <strong>element.className = 'fehlerhaft';</strong>
-      // Setze den Fokus auf das Feld:
-      element.focus();
-      // Verhindere das Absenden des Formulars
-      // (unterdrücke die Standardaktion des Ereignisses):
-      return false;
-   }
+    // Spreche das Formularfeld über das DOM an und
+    // speichere es in eine Variable zwischen:
+    var element = document.getElementById("kontaktformular-name");
+    // Prüfe den Feldwert:
+    if (element.value == "") {
+        // Zeige im Fehlerfall ein Hinweisfenster:
+        window.alert("Bitte geben Sie Ihren Namen an.");
+        // Weise dem Element die Klasse »fehlerhaft« zu:
+        <strong>element.className = 'fehlerhaft';</strong>
+        // Setze den Fokus auf das Feld:
+        element.focus();
+        // Verhindere das Absenden des Formulars
+        // (unterdrücke die Standardaktion des Ereignisses):
+        return false;
+    }
 }
 
 function init () {
-	// Starte die Ereignis-Überwachung mittels
-	// traditionellem Event-Handling
-	document.getElementById("kontaktformular").onsubmit = formularÜberprüfung;
+    // Starte die Ereignis-Überwachung mittels
+    // traditionellem Event-Handling
+    document.getElementById("kontaktformular").onsubmit = formularÜberprüfung;
 }
 
 window.onload = init;</pre>
 	<p>Der zugehörige HTML mit den nötigen IDs könnte so aussehen:</p>
 <pre>&lt;form action="&hellip;" method="post" id="kontaktformular"&gt;
-   &lt;p&gt;&lt;label&gt;
-      Ihr Name:
-      &lt;input type="text" name="name" id="kontaktformular-name"&gt;
-   &lt;/label>&lt;/p&gt;
-   <em>&hellip; weitere Felder &hellip;</em>
-   &lt;p>&lt;input type="submit" value="Absenden">&lt;/p>
+    &lt;p&gt;&lt;label&gt;
+        Ihr Name:
+        &lt;input type="text" name="name" id="kontaktformular-name"&gt;
+    &lt;/label>&lt;/p&gt;
+    <em>&hellip; weitere Felder &hellip;</em>
+    &lt;p>&lt;input type="submit" value="Absenden">&lt;/p>
 &lt;/form&gt;
 </pre>
 	<p>Der Clou dieser Vorgehensweise ist, dass Sie mit dem Setzen der Klasse an einem Element nur eine minimale JavaScript-Änderung vornehmen. Diese Änderung führt dazu, dass eine Regel aus dem Stylesheet plötzlich auf bestimmte Elemente greift &ndash; der Browser wendet daraufhin automatisch die definierten Formatierungen an.</p>
 	<p>Über dieses Modell können Sie auch komplexere Aufgabenstellungen lösen, denn Ihnen stehen alle Möglichkeiten von CSS-Selektoren zu Verfügung. Beispielsweise können Sie mittels Nachfahrenselektoren Elemente formatieren, die unterhalb des mit der Klasse markierten Elements liegen. So können Sie durch die Änderung der Klasse gleich mehrere enthaltene, im DOM-Baum unterhalb liegende Elemente formatieren, ohne diese einzeln anzusprechen.</p>
-	<p>TODO: Beispiel dazu</p>
+	<p>TODO: Beispiel dazu. Mit Nachfahrenselektoren größere Umformatierungen vornehmen, ohne alle Elemente einzeln anzusprechen</p>
 	<div id="addclass" class="subsection">
 		<h3>Komfortables Hinzufügen, Löschen und Abfragen von Klassen</h3>
 		<p>Die oben vorgestellte Methode zum Setzen der Klasse ist stark vereinfacht und hat verschiedene Nachteile. Ein HTML-Element kann nämlich mehreren Klassen angehören. Die JavaScript-Eigenschaft <code>className</code> enthält dann eine Liste von Klassen, die durch Leerzeichen getrennt werden.</p>
@@ -108,37 +108,37 @@ window.onload = init;</pre>
 		</ul>
 		<p>Falls Sie keine Fertigbibliothek nutzen, können Sie diese Helferfunktionen dennoch in ihre Scripte aufnehmen. Eine mögliche Umsetzung als lose globale Funktionen sieht folgendermaßen aus:</p>
 <pre>function addClass (element, className) {
-	if (!hasClass(element, className)) {
-		if (element.className) {
-			element.className += " " + className;
-		} else {
-			element.className = className;
-		}
-	}
+    if (!hasClass(element, className)) {
+        if (element.className) {
+            element.className += " " + className;
+        } else {
+            element.className = className;
+        }
+    }
 }
 
 function removeClass (element, className) {
-	var regexp = addClass[className];
-	if (!regexp) {
-		regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
-	}
-	element.className = element.className.replace(regexp, "$2");
+var regexp = addClass[className];
+    if (!regexp) {
+        regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
+    }
+    element.className = element.className.replace(regexp, "$2");
 }
 
 function hasClass (element, className) {
-	var regexp = addClass[className];
-	if (!regexp) {
-		regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
-	}
-	return regexp.test(element.className);
+    var regexp = addClass[className];
+    if (!regexp) {
+        regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
+    }
+    return regexp.test(element.className);
 }
 
 function toggleClass (element, className) {
-	if (element.hasClass(className)) {
-		element.removeClass(className);
-	} else {
-		element.addClass(className);
-	}
+    if (element.hasClass(className)) {
+        element.removeClass(className);
+    } else {
+        element.addClass(className);
+    }
 }</pre>
 	<p>Alle Funktionen erwarten jeweils zwei Parameter, nämlich das Elementobjekt und den gewünschten Klassennamen als String. Folgende Beispiele sollen die Anwendung illustrieren:</p>
 <pre>// Element ansprechen und Elementobjekt in einer Variable zwischenspeichern:
@@ -151,9 +151,9 @@ removeClass(element, "beispielklasse");
 toggleClass(element, "beispielklasse");
 // Vorhandensein einer Klasse prüfen:
 if (hasClass(element, "beispielklasse")) {
-	window.alert("Klasse gefunden.");
+    window.alert("Klasse gefunden.");
 } else {
-	window.alert("Klasse nicht gefunden.");
+    window.alert("Klasse nicht gefunden.");
 }</pre>
 		<p>Mit diesen Funktionen in Ihrem JavaScript-Werkzeugkasten können Sie das Zusammenspiel von JavaScript-Interaktivität und Stylesheet-Formatierungen komfortabel und übersichtlich meistern.</p>
 	</div>
@@ -174,7 +174,7 @@ if (hasClass(element, "beispielklasse")) {
 		<pre>document.getElementById("beispielID").style.backgroundColor = "red";</pre>
 		<p>Als Werte müssen Sie stets Strings angeben genau in der Form, wie sie in CSS spezifiziert sind. Das gilt auch für Zahlenwerte, die eine Einheit erfordern:</p>
 		<pre>element.style.marginTop = 15; // Falsch!
-	element.style.marginTop = "15px"; // Richtig</pre>
+element.style.marginTop = "15px"; // Richtig</pre>
 	</div>
 	<div id="style-eigenschaftsnamen" class="subsection">
 		<h3>Sonderfälle bei der Umsetzung von CSS- in JavaScript-Eigenschaftsnamen</h3>
@@ -193,11 +193,11 @@ if (hasClass(element, "beispielklasse")) {
 &lt;p id="mit-inline-styles" style="color: red"&gt;Element mit Inline-Styles&lt;/p&gt;</pre>
 		<pre>// Gibt einen leeren String aus:
 window.alert(
-	document.getElementById("ohne-inline-styles").style.backgroundColor
+    document.getElementById("ohne-inline-styles").style.backgroundColor
 );
 // Gibt »red« aus, weil Inline-Style gesetzt wurde:
 window.alert(
-	document.getElementById("mit-inline-styles").style.backgroundColor
+    document.getElementById("mit-inline-styles").style.backgroundColor
 );</pre>
 	</div>
 </div>
@@ -223,20 +223,20 @@ window.alert("Elementbreite: " + computedStyle.width);</pre>
 var currentStyle = element.currentStyle;
 window.alert("Textfarbe: " + currentStyle.color);
 window.alert("Elementbreite: " + currentStyle.width);</pre>
-		<p><code>currentStyle</code> liefert meist ein ähnliches Ergebnis wie das standardisierte <code>getComputedStyle</code>. In manchen Fällen gibt es jedoch Abweichungen, etwa im obigen Beispiel beim Auslesen des <code>width</code>-Wertes. Der Internet Explorer gibt <code>auto</code> zurück, wenn dem Element keine explizite Breite zugewiesen wurde. Für das browserübergreifende Auslesen der Box-Größe eignen sich stattdessen die Eigenschaoffset client</p>
+		<p><code>currentStyle</code> liefert meist ein ähnliches Ergebnis wie das standardisierte <code>getComputedStyle</code>. In manchen Fällen gibt es jedoch Abweichungen, etwa im obigen Beispiel beim Auslesen des <code>width</code>-Wertes. Der Internet Explorer gibt <code>auto</code> zurück, wenn dem Element keine explizite Breite zugewiesen wurde. Für das browserübergreifende Auslesen der Box-Größe eignen sich stattdessen die Eigenschaft <a href="#elementgroessen"><code>offsetWidth/offsetHeight</code> sowie <code>clientWidth/clientHeight</code></a>.</p>
 		
 	</div>
 	<div id="crossbrowser-style-auslesen" class="subsection">
 		<h3>Browserübergreifendes Auslesen von CSS-Eigenschaften</h3>
 		<p>Durch Kombination von <code>getComputedStyle</code> für standardkonforme Browser und <code>currentStyle</code> für den Internet Explorer können wir eine lose Helferfunktion schreiben, die uns den aktuellen CSS-Eigenschaftswert liefert. Die Funktion fragt ab, welches Objekt zur Verfügung steht, und bringt den Wert damit in Erfahrung:</p>
 		<pre>function getStyleValue (element, cssProperty) {
-	var value = "";
-	if (window.getComputedStyle) {
-		value = window.getComputedStyle(element, null)[cssProperty];
-	} else if (element.currentStyle) {
-		value = element.currentStyle[cssProperty];
-	}
-	return value;
+    var value = "";
+    if (window.getComputedStyle) {
+        value = window.getComputedStyle(element, null)[cssProperty];
+    } else if (element.currentStyle) {
+        value = element.currentStyle[cssProperty];
+    }
+    return value;
 }</pre>
 		<p>Bei der Anwendung wird der Funktion das Elementobjekt und ein String übergeben, der den Eigenschaftsnamen in der JavaScript-typischen Schreibweise enthält:</p>
 		<pre>var currentFontSize = getStyleValue(document.getElementById("beispielID"), "fontSize");
@@ -247,21 +247,19 @@ window.alert(currentFontSize);</pre>
 	</div>
 	<div id="elementgroessen" class="subsection">
 		<h3>Elementbox-Größen auslesen über Microsoft-Eigenschaften</h3>
-		<p>Über die vorgestellten Techniken ist es nicht browserübergreifend möglich, die aktuelle Höhe und Breite einer Element-Box auszulesen. Stattdessen sollten Sie folgende Eigenschaften der Elementobjekte verwenden. Sie wurden ursprünglich von Microsoft erfunden, erfreuen sich aber breiter Browser-Unterstützung. Im Gegensatz zu <code>getComputedStyle</code> und <code>currentStyle</code> geben sie keine String-Werte samt Einheiten zurück, sondern direkt JavaScript-Zahlen (Number-Wert).</p>
+		<p>Über die vorgestellten Techniken ist es nicht browserübergreifend möglich, die aktuelle Höhe und Breite einer Element-Box in der Einheit Pixel auszulesen. Stattdessen sollten Sie folgende Eigenschaften der Elementobjekte verwenden. Sie wurden ursprünglich von Microsoft erfunden, erfreuen sich aber breiter Browser-Unterstützung. Im Gegensatz zu <code>getComputedStyle</code> und <code>currentStyle</code> geben sie keine String-Werte samt Einheiten zurück, sondern direkt JavaScript-Zahlen (Number-Werte) in der Einheit Pixel.</p>
 		<dl>
 			<dt><code>offsetWidth</code> und <code>offsetHeight</code></dt>
-			<dd>liefern die Breite bzw. Höhe der <em>border box</em> (Rahmen-Box) des Elements. Das bedeutet, dass <code>padding</code> (Innenabstand) und <code>border</code> (Rahmen) inbegriffen sind, <code>margin</code> (Außenrahmen) hingegen nicht.</dd>
+			<dd>liefern die Breite bzw. Höhe der Rahmen-Box des Elements. Das bedeutet, dass der Innenabstand (<code>padding</code>) und der Rahmen (<code>border</code>) inbegriffen sind, der Außenrahmen hingegen (<code>margin</code>) nicht.</dd>
 			<dt><code>clientWidth</code> und <code>clientHeight</code></dt>
-			<dd>liefern Breite bzw. Höhe der <em>padding box</em> (Innenabstand-Box) des Elements. Das bedeutet, dass <code>padding</code> inbegriffen ist, während <code>border</code> und <code>margin</code> nicht eingerechnet werden. Ebenso wird eine möglicherweise angezeigte Bildlaufleiste (Scrollbar) nicht einberechnet.</dd>
-			<dt><code>clientWidth</code> und <code>clientHeight</code></dt>
-			<dd>liefern die innere Breite bzw. Höhe des Elements. <code>margin</code>, <code>border</code>, <code>padding</code> sowie die Größe der Bildlaufleiste werden nicht einberechnet.</dd>
+			<dd>liefern Breite bzw. Höhe der Innenabstand-Box des Elements. Das bedeutet, dass <code>padding</code> inbegriffen ist, während <code>border</code> und <code>margin</code> nicht eingerechnet werden. Ebenso wird die Größe einer möglicherweise angezeigte Bildlaufleiste (Scrollbar) nicht einberechnet.</dd>
 			<dt><code>scrollWidth</code> und <code>scrollHeight</code></dt>
-			<dd>geben die tatsächliche Höhe des Inhalts wieder, wenn das Element kleiner ist, als der Inhalt es erfordert, und das Element Bildlaufleisten besitzt, um diesen Inhalt zugänglich zu machen. Die vorher genannten Eigenschaften geben in diesem Fall lediglich die Größe des »Guckfensters«, also des aktuell sichtbaren Ausschnittes wieder.</dd>
+			<dd>geben die tatsächlich angezeigte Breite bzw. Höhe des Inhalts wieder. Wenn das Element kleiner ist, als der Inhalt es erfordert, also Bildlaufleisten angezeigt werden, so  geben diese Eigenschaften die Größe des des aktuell sichtbaren Ausschnittes wieder.</dd>
 		</dl>
 		<p>In den meisten Fällen werden Sie die äußere Größe eines Elements benötigen, also <code>offsetWidth</code> und <code>offsetHeight</code>. Das folgende Beispiel gibt die Größe eines Elements aus:</p>
 		<pre>var element = document.getElementById('beispielID');
 window.alert("Breite: " + element.offsetWidth + "\nHöhe: " + element.offsetHeight);</pre>
-		<p>TODO: Das ist die Theorie, Browser-Unstimmigkeiten sind bei Quirksmode dokumentiert</p>
+    <p>Falls sie die innere Größe benötigen, so können Sie zunächst die aktuellen Werte der jeweiligen <code>padding</code>-Eigenschaften <a href="#crossbrowser-style-auslesen">auslesen</a>. Das sind <code>padding-left</code> und <code>padding-right</code> für die Breite bzw. <code>padding-top</code> und <code>padding-bottom</code> für die Höhe. Diese substrahieren sie von <code>offsetWidth</code> bzw. <code>offsetHeight</code>, um die tatsächliche Innengröße zu erhalten.</p>
 	</div>
 </div>
 <div id="stylesheets-aendern" class="section">
