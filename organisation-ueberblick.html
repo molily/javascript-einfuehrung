@@ -16,7 +16,7 @@
 <h1>Organisation von JavaScripten: Voraussetzungen und Überblick</h1>
 
  <div class="section" id="einleitung">
- 
+
 	 <h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
 
 	<div class="sidebox">
@@ -44,7 +44,7 @@
 	<p>Im modernen Webdesign kommt den Webtechniken HTML, CSS und JavaScript jeweils eine bestimmte Rolle zu. HTML soll die Texte bedeutungsvoll strukturieren, indem z.B. Überschriften, Listen, Absätze, Datentabellen, Abschnitte, Hervorhebungen, Zitate usw. als solche ausgezeichnet werden. CSS definiert die Regeln für die Darstellung dieser Inhalte, sei es auf einem Desktop-Bildschirm, auf einem mobilen Gerät oder beim Ausdrucken.</p>
 
 	<p>Um eine Website effizient zu entwickeln sowie sie nachträglich mit geringem Aufwand pflegen zu können, sollen diese beiden Aufgaben strikt voneinander getrennt werden: Im HTML-Code werden keine Angaben zur Präsentation gemacht. Im Stylesheet befinden sich demnach alle Angaben zur Präsentation in möglichst kompakter Weise. Dadurch müssen im HTML-Code nur genau soviele Angriffspunkte für CSS-Selektoren gesetzt werden, wie gerade nötig sind (z.B. zusätzliche <code>div</code>- oder <code>span</code>-Elemente sowie <code>id</code>- und <code>class</code>-Attribute). Ein und dasselbe Dokument kann auf diese Weise durch den Wechsel des Stylesheets ein völlig anderes Layout bekommen. Aber auch ganz ohne Stylesheet sind die Inhalte noch sinnvoll strukturiert und die Inhalte zugänglich.
-	
+
 </div>
 
 <div class="section" id="unobtrusivejs">
@@ -54,24 +54,24 @@
 	<div class="sidebox">
 	<p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
 	</div>
-		
+
 	<p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (engl. Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
 
 	<p>Die Grundlage für eine sinnvolle JavaScript-Programmierung ist die <strong>Auslagerung des JavaScript-Codes</strong>: Im HTML-Code sollte sich kein JavaScript in Form von Event-Handler-Attributen befinden (<code>onload</code>, <code>onclick</code>, <code>onmouseover</code> usw.). Stattdessen werden Elemente, denen ein bestimmtes Verhalten hinzugefügt werden soll, falls nötig mit einer Klasse oder ID markiert, um die Elemente eindeutung adressieren zu können. Die nötige Interaktivität wird dem Dokument automatisch hinzugefügt. Beim Ladens des Dokuments wird das Script aktiv, initialisiert sich und startet die Ereignisüberwachung an den betreffenden Elementen. Diese Anwendung von JavaScript nennt sich <a href="http://ichwill.net/">Unobtrusive JavaScript</a>, »unaufdringliches« JavaScript.</p>
 
 	</div>
-	
+
 	<div class="subsection">
 
 		<h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
 		<p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script type="text/javascript" src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
-	
+
 	</div>
-	
+
 	<div class="subsection">
-	
+
 		<h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
 
 		<p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="http://molily.de/js/event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
@@ -99,9 +99,9 @@ $(funktion);
 </pre>
 
 	</div>
-	
+
 	<div class="subsection">
-	
+
 		<h3>DOM-Zugriffe über Selektor-Engines</h3>
 
 		<p>Nutzen Sie JavaScript-Selektor-Engines, um auf das Dokument über CSS-artige Selektoren zuzugreifen und Elemente auszuwählen. Alle verbreiteten Frameworks bringen solche mit, sie sind aber auch separat erhältlich (z.B. <a href="http://sizzlejs.com/">Sizzle</a>).</p>
@@ -116,9 +116,9 @@ $(document).ready(function () {
 </pre>
 
 	</div>
-	
+
 	<div class="subsection">
-	
+
 		<h3>Zeitgemäßes Event-Handling</h3>
 
 		<p>Nach den Ansprechen der Elemente können Sie Event-Handler registrieren. Dazu benötigen Sie eine leistungsfähige Event-Handling-Komponente, die sicherstellt, dass mehreren Handler für einen Typ registriert werden können und die Ihnen die Event-Verarbeitung durch Nivellierung von Browserunterschieden vereinfacht. Eine solche ist in den üblichen Frameworks eingebaut, alternativ können Sie eine lose <a href="http://molily.de/js/event-handling-fortgeschritten.html#flexibles-addevent">addEvent-Helferfunktionen</a> nutzen.
@@ -134,29 +134,29 @@ $(document).ready(function () {
 </pre>
 
 		<p>Zum effizienten Event-Handling gehört <a href="http://molily.de/js/event-handling-effizient.html">Event Delegation</a> hinzu. Die Grundidee ist, dass Ereignisse bei einer ganzen Schar von Elementen durch ein darüberliegendes Element verarbeitet werden. Dazu macht man sich das Event Bubbling und Event Capturing zunutze. Beispielsweise jQuery bietet dafür die Methoden <a href="http://api.jquery.com/delegate/">delegate()</a> und <a href="http://api.jquery.com/live/">live()</a>.</p>
-		
+
 	</div>
-	
+
 </div>
 
 <div class="section" id="oop">
 
 	<h2>Objektorientierte Programmierung in JavaScript</h2>
-	
+
 	<p>JavaScript zieht viele Programmieranfänger an und ist für viele Webautoren die erste Programmiersprache, mit der sie aktiv in Kontakt kommen.
 	Für sie bleibt die genaue Funktionsweise von JavaScript zunächst unzugänglich. Sie treffen auf Fallstricke und schaffen es nicht, JavaScript zu bändigen. Aber auch professionelle Software-Entwickler mit fundierten Kenntnissen anderer Programmiersprachen geraten an JavaScript. Sie sind nicht weniger verwirrt und verzweifeln, weil sie in JavaScript nicht Strukturen wiederfinden, die ihnen in anderen Sprachen Orientierung bieten.</p>
-	
+
 	<div class="subsection" id="klassen">
 
 		<h3>Klassenbasierte Objektorientierung in anderen Programmiersprachen</h3>
-		
+
 		<div class="sidebox">
 		<p>OOP in vielen anderen Programmiersprachen läuft über Klassen, die Kapselung und vieles mehr erlauben. Zusammenhängende Klassen werden in Namensräumen bzw. Modulen gruppiert.</p>
 		</div>
 
 		<p>Viele verbreitete Programmiersprachen arbeiten zumindest teilweise objektorientiert und besitzen ausgereifte, sehr konventionelle Konzepte zur Strukturierung von Programmen. Das sind vor allem <dfn>Klassen</dfn> und ferner <dfn>Module</dfn>, <dfn>Pakete</dfn> bzw. <dfn>Namensräume</dfn>.</p>
 
-		<p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen &ndash; oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klassen bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
+		<p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen &ndash; oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klasse bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
 
 		<p>Diese konventionelle klassenbasierte OOP sieht beispielsweise in PHP 5.3 folgendermaßen aus:</p>
 
@@ -173,10 +173,10 @@ class Beispielklasse implements IBeispielInterface
     function __construct() {
         echo "Konstruktor\n";
     }
-    
+
     public $oeffentlich = 'Öffentliche Eigenschaft';
     private $privat = 'Private Eigenschaft';
-    
+
     public function oeffentlicheMethode() {
         echo "Öffentliche Methode\n";
         $this->privateMethode();
@@ -185,7 +185,7 @@ class Beispielklasse implements IBeispielInterface
         echo "Private Methode\n";
         echo $this->privat . "\n";
     }
-    
+
     const konstante = 'Klassenkonstante';
     public static $statisch = 'Statische Eigenschaft (Klasseneigenschaft)';
     public static function statischeMethode() {
@@ -201,7 +201,7 @@ class AbgeleiteteKlasse extends Beispielklasse
         parent::__construct();
         print "Konstruktor von AbgeleiteteKlasse\n";
     }
-    
+
     public function zusatzmethode() {
         echo "Zusatzmethode von AbgeleiteteKlasse\n";
         parent::oeffentlicheMethode();
@@ -221,9 +221,9 @@ $instanz2->zusatzmethode();
 		<p>Dieses Beispiel soll hier nicht näher beschrieben werden, sondern nur den Hintergrund illustrieren für diejenigen, die solche oder ähnliche klassenbasierte OOP bereits kennen.</p>
 
 		<p>Die besagten Konzepte bilden in eine Richtschnur: Hält sich ein Programmierer an diese Konventionen, so ist mehr oder weniger garantiert, dass das Programm von anderen grob verstanden und wiederverwendet werden kann und nicht mit anderen Programmen in die Quere kommt. Selbst Sprachen, die nicht konsequent objektorientiert arbeiten, bekommen eine einheitliche Struktur dadurch, dass die Programmierer ihren Code in Namensräumen und Klassen organisieren.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection" id="oop-js">
 
 		<h3>JavaScript hat keine Klassen &ndash; doch das ist nicht schlimm</h3>
@@ -232,14 +232,14 @@ $instanz2->zusatzmethode();
 		<p>JavaScript bietet keine Patentlösung wie Klassen, sondern erlaubt verschiedene Programmier&shy;paradigmen. Man muss selbst geeignete Techniken zur Strukturierung wählen.</p>
 		</div>
 
-		<p>ECMAScript 3, der JavaScript zugrunde liegende Webstandard, besitzt all diese Features nicht. Und der Nachfolger ECMAScript 5 verbessert lediglich die eigentümlichen Fähigkeiten, bietet etwa Methoden zur Datenkapselung, fügt jedoch absichtlich keine Klassen in JavaScript ein.</p> 
+		<p>ECMAScript 3, der JavaScript zugrunde liegende Webstandard, besitzt all diese Features nicht. Und der Nachfolger ECMAScript 5 verbessert lediglich die eigentümlichen Fähigkeiten, bietet etwa Methoden zur Datenkapselung, fügt jedoch absichtlich keine Klassen in JavaScript ein.</p>
 
 		<p>JavaScript bringt von Haus aus keine »einzig wahre« Programmiertechnik wie Namensräume und Klassen mit. Das kann man als Nachteil auffassen, aber auch als Vorteil. Weil JavaScript ein vorgegebenes Gerüst zu fehlen scheint, fehlt Einsteigern die Orientierung. Es gibt nicht den einen vordefinierten Weg, ein Programme in JavaScript zu strukturieren. Stattdessen muss man sich selbst über die sinnvolle Organisation von JavaScripten Gedanken machen.</p>
 
 		<p>Glücklicherweise ist JavaScript so leistungsfähig, dass sich die besagten Strukturen durchaus mit JavaScript umsetzen lassen. Es ist mit Zusatzbibliotheken möglich, JavaScript klassenbasiert zu entwickeln. Dies vereinfacht den Einstieg für diejenigen, die bereits andere, klassenbasierte Programmiersprachen beherrschen.</p>
 
 		<p>Dabei sollten allerdings nicht die Eigenarten und besonderen Fähigkeiten von JavaScript vergessen werden. Im Gegensatz zu manch anderen klassenbasierten Sprachen ist JavaScript äußerst dynamisch und besitzt funktionale Aspekte. JavaScript-Kenner empfehlen, die Fähigkeiten von JavaScript zu nutzen, anstatt bloß klassenbasierte OOP überzustülpen. Mit diesen Möglichkeiten ist JavaScript nicht unbedingt schlechter und defizitär im Vergleich zu klassenbasierter Objektorientierung &ndash; es ist lediglich ein anderer, nicht minder interessanter und brauchbarer Ansatz.</p>
-		
+
 	</div>
 
 </div>
@@ -269,7 +269,7 @@ $instanz2->zusatzmethode();
 
 	<div class="section base" id="objects">
 	<div>
-	
+
 	<h3>Objekte / <code>Object</code>-Objekte</h3>
 	<ul>
 	<li>Alles ist ein Objekt &ndash; bis auf Primitives, die sich allerdings wie Objekte verhalten</li>
@@ -283,7 +283,7 @@ $instanz2->zusatzmethode();
 
 	<div class="section pillar first" id="funktionen">
 	<div>
-	
+
 	<h3>Funktionen</h3>
 
 	<ul>
@@ -300,7 +300,7 @@ $instanz2->zusatzmethode();
 
 	</div>
 	</div><!-- /.pillar -->
-	
+
 	<div class="section pillar second" id="scope">
 	<div>
 
@@ -317,7 +317,7 @@ $instanz2->zusatzmethode();
 
 	</div>
 	</div><!-- /.pillar -->
-	
+
 	<div class="section pillar third" id="prototypen">
 	<div>
 
@@ -338,7 +338,7 @@ $instanz2->zusatzmethode();
 	</div><!-- /.pillars -->
 
 	<p>Dieses Diagramm soll Ihnen einen kompakten Überblick geben. Viele der Begriffe soll dieser Artikel im weiteren erläutern, auf andere kann er nicht eingehen, denn dazu ist eine systematische Einführung in JavaScript nötig.</p>
-	
+
 </div>
 
 <div class="sequence-navigation">
