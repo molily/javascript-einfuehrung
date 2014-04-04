@@ -108,12 +108,12 @@ Andernfalls:
   <p>Alternativ zur Abfrage des Browsernamens wurden <strong>zentrale Objekte</strong> zur Browsererkennung verwendet:</p>
   <pre class="content-example">Wenn das Objekt document.all existiert,
 Dann:
-  Nehme an, es ist ein Internet Explorer und löse die Aufgabe
+  Nimm an, es ist ein Internet Explorer und löse die Aufgabe
   auf die die IE-typische Weise
 Andernfalls:
   Wenn das Objekt document.layers existiert,
   Dann:
-    Nehme an, es ist ein Netscape Navigator und löse die Aufgabe
+    Nimm an, es ist ein Netscape Navigator und löse die Aufgabe
     auf die Netscape-typische Weise</pre>
   <p>Solche Objektabfragen sind nicht völlig abwegig, denn die abgefragten Objekte <code>document.all</code> und <code>document.layers</code> wurden bei der Umsetzung meistens auch verwendet. Wenn jedoch von der Existenz <em>eines</em> Objektes wird stillschweigend auf die Existenz vieler anderer Browserfähigkeiten geschlossen wird, handelt es sich um eine versteckte Browserabfrage.</p>
   <p>Eine Browserweiche geht davon aus, dass der Browser eine Reihe von Techniken unterstützt, nur weil er einen bestimmten Namen trägt oder ein zentrales Objekt existiert. Zum einen können damit immer nur die derzeit bekannten Browser in ihren aktuellen Versionen berücksichtigt werden.</p>
@@ -158,7 +158,7 @@ Falls nein:
       Falls ja:
         Benutze diese Methode.
       Falls nein:
-        Breche ab.</pre>
+        Brich ab.</pre>
 <p>Wie Sie sehen, kommt dieses Beispiel ganz ohne Browserabfragen aus und ist doch für verschiedene Browser ausgelegt.</p>
   </div>
   <div class="section">
