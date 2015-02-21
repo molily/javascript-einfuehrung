@@ -35,7 +35,7 @@
 		<ol>
 			<li>Der erste Parameter ist ein String und enthält den <strong>Ereignistyp</strong>. Beispiele für den ersten Parameter sind <code>"click"</code>, <code>"mouseover"</code>, <code>"load"</code>, <code>"submit"</code> und so weiter.</li>
 			<li>Der zweite Parameter ist der Name der <strong>Handler-Funktion</strong>, genauer gesagt ein Ausdruck, der ein Funktionsobjekt ergibt.</li>
-			<li>Der dritte Parameter bestimmt, für welche <strong>Event-Phase</strong> der Handler registriert werden soll. Es handelt sich um einen Boolean-Parameter, d.h. sie können <code>true</code> oder <code>false</code> notieren. <code>false</code> steht für die bereits bekannte Bubbling-Phase, <code>true</code> für die noch nicht behandelte und weniger wichtige <em>Capturing-Phase</em> (siehe <a href="capturing">Capturing</a>). Die genaue Bedeutung des dritten
+			<li>Der dritte Parameter bestimmt, für welche <strong>Event-Phase</strong> der Handler registriert werden soll. Es handelt sich um einen Boolean-Parameter, d.h. sie können <code>true</code> oder <code>false</code> notieren. <code>false</code> steht für die bereits bekannte Bubbling-Phase, <code>true</code> für die noch nicht behandelte und weniger wichtige <em>Capturing-Phase</em> (siehe <a href="capturing.html">Capturing</a>). Die genaue Bedeutung des dritten
 			Parameters wird erst später erklärt werden. Standardmäßig sollten Sie hier <code>false</code> notieren.</li>
 		</ol>
 		<p>Das folgende Beispiel kennen wir bereits vom traditionellen Event-Handling. Beim fertigen Laden des HTML-Dokuments wird automatisch ein <code>click</code>-Handler bei einem Textabsatz registriert. Dieses Mal nutzen wir die standardisierte Methode <code>addEventListener</code>, die denselben Zweck erfüllt:</p>
@@ -187,7 +187,7 @@ function meldung2 () {
 
 <div class="section" id="addevent">
 	<h2>Browserübergreifendes Event-Handling</h2>
-	
+
 	<div class="subsection" id="addevent-lage">
 		<h3>Ausgangslage</h3>
 		<p>Wir haben drei Modelle und deren Detailunterschiede kennengelernt. Das mag Sie verwirrt haben und Sie werden sich sicher fragen, welches Sie nun in der Praxis ohne Bedenken anwenden können. Das Fazit lautet leider: Keines.</p>
@@ -197,7 +197,7 @@ function meldung2 () {
 			<li>Das Microsoft-Modell taugt zwar als Ausweichlösung für ältere Internet Explorer. Es bringt jedoch Einschränkungen mit sich, die einer Korrektur bedürfen. Und manche unüberbrückbaren Unterschiede führen dazu, dass es nicht gleichwertig zum W3C-Modell eingesetzt werden kann.</li>
 		</ul>
 	</div>
-	
+
 	<div class="subsection" id="addevent-helfer">
 		<h3><code>addEvent</code>-Helferfunktionen</h3>
 		<p>Um relativ komfortabel browserübergreifend Ereignisse verarbeiten zu können, benötigen wir eine Helferfunktion, die eine Vereinheitlichung vornimmt und gewisse Browserunterschiede nivelliert. Eine solche alleinstehende Funktion zum Registrieren von Event-Handlern wird in der Regel <code>addEvent</code> genannt</p>
@@ -238,7 +238,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
 			<li>Es werden nur die allerwichtigsten Browserunterschiede vereinheitlicht, auf viele weitere müssen Sie in der Handler-Funktion selbst reagieren.</li>
 		</ul>
 	</div>
-	
+
 	<div class="subsection" id="flexibles-addevent">
 		<h3>Flexibles und leistungsfähiges <code>addEvent</code>/<code>removeEvent</code></h3>
 		<p>Eine robustere, aber umso kompliziertere Umsetzung der Funktionen <code>addEvent</code> und <code>removeEvent</code> stammt von Dean Edwards und wurde von Tino Zijdel weiterentwickelt: <a href="http://therealcrisp.xs4all.nl/upload/addEvent_dean.html">addEvent() new style</a>.</p>
@@ -252,7 +252,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
 		</ol>
 		<p>Falls Sie keine umfangreichere JavaScript-Bibliothek verwenden, welche ausgereiftes Event-Handling ermöglicht, so sind Sie mit diesen beiden Helferfunktionen <code>addEvent</code> und <code>removeEvent</code> gut bedient &ndash; Sie sollten sie in ihren Werkzeugkasten aufnehmen.</p>
 	</div>
-	
+
 	<div class="subsection" id="addevent-frameworks">
 		<h3>Browserübergreifendes Event-Handling mit Frameworks</h3>
 		<p> Die besagte Browser-Vereinheitlichung berührt nur die Spitze des Eisberges: Besonders bei der Verarbeitung von Tastatur- und Maus-Ereignissen erwarten den JavaScript-Programmierer noch viel größere Browserunterschiede. Um beispielsweise browserübergreifend die Mausposition relativ zum Dokument auszulesen, ist eine komplexe Fähigkeiten-Weiche nötig. Dasselbe gilt für das Auslesen der gedrückten Taste(n). Für den JavaScript-Einsteiger ist es schwierig und unkomfortabel, für all diese Detailunterschiede Korrekturen einzubauen. Das eigentliche Verarbeiten der Ereignisse rückt durch dieses Browser-Durcheinander (im Englischen »quirks« genannt), in den Hintergrund.</p>

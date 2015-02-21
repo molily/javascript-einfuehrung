@@ -80,7 +80,7 @@ schnucki.zeigePfoten();
 </pre>
 
 	<p><code>this</code> zeigt innerhalb des Konstruktors und der <code>zeigePfoten</code>-Methode auf die Instanz. Dies ist einmal <code>maunzi</code> und einmal <code>schnucki</code>, deshalb müssen wir hier <code>this</code> verwenden.</p>
-	
+
 </div>
 
 <div class="section" id="andere-kontexte">
@@ -96,13 +96,13 @@ schnucki.zeigePfoten();
 	<p>Dieser Bezug kann jedoch verloren gehen, wenn die Funktion außerhalb dieses Objektkontextes ausgeführt wird. Dies passiert vor allem in folgenden Fällen:</p>
 
 	<ol>
-	<li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="http://molily.de/js/event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird &ndash; siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
+	<li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird &ndash; siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
 	<li>Beim Aufrufen der Funktion mit <code>setTimeout</code> oder <code>setInterval</code>. Die verzögert bzw. wiederholt ausgeführte Funktion verliert den Bezug zum Ursprungsobjekt, denn <code>this</code> verweist darin auf das globale Objekt <code>window</code>. In vielen Fällen ist der Zugriff auf das Modul bzw. die Instanz notwendig.</li>
 	<li>Bei der Übergabe einer Funktion als Parameter (z.B. als Callback-Funktion), beim Speichern in einer Variablen und dergleichen. In diesen Fällen zeigt gibt es oftmals keinen spezifischen Kontext, sodass <code>this</code> als Fallback auf <code>window</code> zeigt.</li>
 	</ol>
 
 	<div class="section" id="this-problem-modul">
-	
+
 		<h3><code>this</code>-Problem bei einfachen Modulen</h3>
 
 		<p>Das folgende Beispiel demonstriert das Problem im Falle eines einfachen Moduls mit dem <code>Object</code>-Literal:</p>
@@ -138,7 +138,7 @@ Modul.start();
 </pre>
 
 	</div>
-	
+
 	<div class="subsection" id="this-problem-instanz">
 
 		<h3><code>this</code>-Problem bei Prototypen und Instanzmethoden</h3>
@@ -174,9 +174,9 @@ instanz.start();
 		<p>In beiden Fällen werden Objektmethoden als Event-Handler verwendet (<code>handler</code>) sowie mit <code>setTimeout</code> aufgerufen (<code>verzögert</code>). In den <code>start</code>-Methoden gelingt der Zugriff über <code>this</code> noch. In der <code>verzögert</code>-Methode zeigt <code>this</code> jedoch nicht mehr auf das richtige Objekt, sondern auf <code>window</code>. In der <code>handler</code>-Methode, welche beim Klicken auf den Button ausgeführt wird, enthält <code>this</code> zwar eine wertvolle Information, aber auch hier geht der Bezug zum Modul bzw. zur Instanz verloren.</p>
 
 		<p>Die Lösung dieses Problems ist kompliziert und führt uns auf eine zentral wichtige, aber auch schwer zu meisternde Eigenheit der JavaScript-Programmierung, die im Folgenden vorgestellt werden soll.</p>
-		
+
 	</div>
-	
+
 </div>
 
 <div class="section" id="closures">
@@ -248,7 +248,7 @@ function äußereFunktion  () {
 	<li>Ende der Ausführung der äußeren Funktion</li>
 	<li>Unbestimmte Zeit später: Innere Funktion (Closure-Funktion) wird ausgeführt</li>
 	</ol>
-	
+
 </div>
 
 <div class="section" id="closures-anwendung">
@@ -258,9 +258,9 @@ function äußereFunktion  () {
 	<p>Wie helfen uns Closures nun beim <code>this</code>-Problem weiter?</p>
 
 	<div class="subsection" id="closures-modul">
-	
+
 		<h3>Module: Verzicht auf <code>this</code> zugunsten des Revealing Module Patterns</h3>
-		
+
 		<div class="sidebox">
 		<p>Beim Revealing Module Pattern ist <code>this</code> unnötig, denn alle Funktionen sind Closures und schließen die benötigten Variablen ein.</p>
 		</div>
@@ -328,9 +328,9 @@ privateVariable: privat
 		<p>Dieses Beispiel zeigt, wie öffentliche und private Methoden einander aufrufen können. Auf <code>this</code> kann verzichtet werden, denn alle benötigten Variablen werden durch Closures eingeschlossen. Infolgedessen stellt die Nutzung von <code>setTimeout</code> kein Problem dar.</p>
 
 		<p>Die privaten Objekte sind direkt über ihre Variablennamen verfügbar, die Eigenschaften der öffentlichen API indirekt über die Variable <code>api</code>.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection" id="closures-instanzen">
 
 		<h3>Konstruktoren/Instanzen: Methoden im Konstruktor verschachteln</h3>
@@ -387,9 +387,9 @@ instanz.start();
 		<p>Wichtig ist hier die Unterscheidung zwischen <code>this</code> und <code>thisObject</code>. <code>this</code> zeigt in den drei Methoden <code>start</code>, <code>verzögert</code> und <code>handler</code> auf drei unterschiedliche Objekte. In <code>start</code> zeigt es auf das Instanzobjekt <code>instanz</code>, in <code>verzögert</code> auf <code>window</code> und in <code>handler</code> auf das Button-Element. <code>thisObject</code> hingegen ist die eingeschlossene Variable, die auf das Instanzobjekt zeigt &ndash; und zwar in allen drei Methoden.</p>
 
 		<p>Dank Closures können wir zum Zugriff auf die Instanz auf das uneindeutige <code>this</code> verzichten. Stattdessen nutzen wir die eigene Variable <code>thisObject</code>.</p>
-		
+
 	</div>
-	
+
 </div>
 
 <div class="section" id="binding">
@@ -401,7 +401,7 @@ instanz.start();
 	</div>
 
 	<p>Die gezeigte Verschachtelung ist eine effektiver, aber folgenschwerer Trick, um die Verfügbarkeit von Objekten zu gewährleisten. Sie liegt nahe, wenn sowieso mit privaten Objekten gearbeitet wird und deshalb alle Modul- bzw. Instanzmethoden verschachtelt werden. Sie funktioniert nicht bei einfachen <code>Object</code>-Literalen und bei der Nutzung von Prototypen. Glücklicherweise erlaubt die funktionale Natur von JavaScript, Funktionen und damit Closures zur Laufzeit anzulegen und den <code>this</code>-Kontext einer Funktion bei ihrem Aufruf festzulegen.</p>
-	
+
 	<div class="subsection" id="call-apply">
 
 		<h3><code>this</code>-Kontext erzwingen mit <code>call</code> und <code>apply</code></h3>
@@ -451,7 +451,7 @@ summe.apply(objekt, [1, 2, 3]);
 		<p><code>call</code> und <code>apply</code> alleine helfen uns zur Lösung der Kontextproblematik noch nicht weiter. Sie stellen allerdings das Kernstück der Technik dar, die im Folgenden beschrieben wird.</p>
 
 	</div>
-		
+
 	<div class="subsection" id="bind-bindaseventlistener">
 
 		<h3><code>bind</code> und <code>bindAsEventListener</code></h3>
@@ -467,15 +467,15 @@ summe.apply(objekt, [1, 2, 3]);
 		<p>Der Sinn dieser Kapselung ist in erster Linie die Korrektur des <code>this</code>-Kontextes. Dazu werden die besagten <code>call</code> und <code>apply</code> verwendet. <code>bind</code> und <code>bindAsEventListener</code> nehmen &ndash; genauso wie <code>call</code>/<code>apply</code> &ndash; als ersten Parameter das Objekt an, das als Kontext verwendet wird.</p>
 
 		<p><code>bind</code> ermöglicht es zudem, der ursprünglichen Funktion Parameter zu übergeben, sodass darin nicht nur ein Objekt über <code>this</code>, sondern viele weitere Objekte verfügbar sind. Das Erzeugen einer neuen Wrapper-Funktion, die eine andere mit vordefinierten Parametern aufruft, nennt sich <dfn>Currying</dfn>.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection" id="bind-code">
 
 		<h3>Kommentierter Code</h3>
 
 		<p>Die Funktionen <code>bind</code> und <code>bindAsEventListener</code> sehen kommentiert so aus:</p>
- 
+
 <table class="commented-code">
 <tr>
 <td><pre>Function.prototype.bind = function () {</pre></td>
@@ -551,7 +551,7 @@ summe.apply(objekt, [1, 2, 3]);
 </table>
 
 	</div>
-	
+
 	<div class="subsection" id="bind-kompakt">
 
 		<h3>Kurzschreibweise</h3>
@@ -573,7 +573,7 @@ Function.prototype.bindAsEventListener = function (object) {
 };</pre>
 
 	</div>
-	
+
 	<div class="subsection" id="bind-modul">
 
 		<h3>Anwendung bei einfachen Modulen</h3>
@@ -605,7 +605,7 @@ Modul.start();
 </pre>
 
 	</div>
-	
+
 	<div class="subsection" id="bind-instanz">
 
 		<h3>Anwendung bei Prototypen und Instanzmethoden</h3>
@@ -637,9 +637,9 @@ instanz.start();
 		<p>Hier mag zunächst die Schreibweise <code>this.verzögert.bind(this)</code> und <code>this.handler.bindAsEventHandler(this)</code> irritieren. Diese Aufrufe hüllen <code>verzögert</code> und <code>handler</code> in Closures, welche die beiden Methoden im Kontext der Instanz ausführen.</p>
 
 		<p>Function Binding und Currying mit solchen Helferfunktionen erlaubt das präzise Anlegen von Closures und ist ein wichtiges Werkzeug, um Verfügbarkeitsprobleme zu lösen. Im Gegensatz zu einer großen Kapselfunktion, in der alle weiteren Funktionen als Closures angelegt werden, ist Binding punktgenauer und vielseitiger &ndash; es funktioniert auch bei einfachen <code>Object</code>-Literalen und Methoden, die über den Prototyp hinzugefügt werden.</p>
-	
+
 	</div>
-	
+
 	<div class="subsection" id="besseres-binding">
 
 		<h3>Es gibt viele, bessere Binding-Funktionen</h3>
@@ -651,9 +651,9 @@ instanz.start();
 		<p>Die hier vorgestellten <code>bind</code> und <code>bindAsEventListener</code> sind zwei <em>sehr einfache</em> Umsetzungen. Es gibt viele weitere, die mehr Komfort bieten und auf Performance optimiert sind. Die tatsächlichen Funktionen im Prototype-Framework ermöglichen es beispielsweise, dass Parameter der Wrapper-Funktion an die ursprüngliche Funktion weitergegeben werden. Die oben beschriebene <code>bind</code>-Funktion gibt lediglich die Parameter weiter, die beim <code>bind</code>-Aufruf angegeben wurden. <code>bindAsEventListener</code> aus Prototype erlaubt ebenfalls beides, während die obige Funktion nur das Event-Objekt weitergeben kann.</p>
 
 		<p>Neben Prototype bieten auch andere Frameworks und funktionale Bibliotheken Function Binding und Currying. Das Konzept ist dasselbe, die Umsetzungen und Benennungen unterscheiden sich im Detail. Das Framework <a href="http://mootools.net/">Mootools</a> bietet etwa <a href="http://mootools.net/docs/core/Native/Function#Function:bind">bind</a> und <a href="http://mootools.net/docs/core/Native/Function#Function:bindWithEvent">bindWithEvent</a>.</p>
-		
+
 	</div>
-	
+
 </div>
 
 <!--
