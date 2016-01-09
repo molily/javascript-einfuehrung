@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
 	<p>In JavaScript gibt es wie eingangs erwähnt keine Klassen. Es gibt jedoch <strong>Konstruktor-Funktionen</strong> (kurz: <dfn>Konstruktoren</dfn>) und <strong>prototypische Objekte</strong> (kurz: Prototypen).</p>
 
 	<div class="subsection" id="konstruktoren">
-	
+
 		<h3>Konstruktor-Funktionen (Konstruktoren)</h3>
 
 		<div class="sidebox">
@@ -32,9 +33,9 @@
 		</div>
 
 		<p>Der Name Konstruktor stammt vom englischen <em>construct</em> = erzeugen, konstruieren, bauen. Eine Konstruktor-Funktion ist demnach ein Erzeuger neuer Objekte. Sie werden sich sicher fragen, wie die Syntax zum Notieren von Konstruktoren lautet. Ein Konstruktur ist jedoch keine besondere Sprachstruktur, sondern erst einmal eine ganz normale Funktion. Zu einem Konstruktor wird sie lediglich dadurch, dass sie mit dem Schlüsselwort <code>new</code> aufgerufen wird.</p>
-		 
+
 		<p>Wenn eine Funktion mit <code>new</code> aufgerufen wird, wird intern ein neues, leeres <code>Object</code>-Objekt angelegt und die Funktion <a href="organisation-verfuegbarkeit.html">im Kontext dieses Objektes ausgeführt</a>. Das bedeutet, im Konstruktor kann das neue Objekt über <code>this</code> angesprochen werden. Darüber können ihm z.B. Eigenschaften und Methoden hinzugefügt werden.</p>
-		 
+
 		<p>Intern wird also ein <code>Object</code>-Objekt angelegt, genauso wie wir es zur Strukturierung getan haben. Der Unterschied beim Konstruktor ist, dass auf diese Weise unzählige gleich ausgestattete Objekte, sogenannte <dfn>Instanzen</dfn> erzeugt werden können.</p>
 
 <pre>
@@ -56,10 +57,10 @@ instanz1.methode();
 var instanz2 = <strong>new Konstruktor()</strong>;
 instanz2.methode();
 // usw.
-</pre> 
+</pre>
 
 		<p>Dieses Beispiel enthält eine Konstruktorfunktion, mithilfe derer zwei Instanzen erzeugt werden. Innerhalb des Konstruktors werden dem leeren Instanzobjekt zwei Eigenschaften hinzugefügt, ein String und eine Funktion.</p>
-		 
+
 		<p>Als Funktion kann ein Konstruktor Parameter entgegennehmen. Somit können Instanzen mit unterschiedlichen Eigenschaften erzeugt werden:</p>
 
 <pre>
@@ -83,9 +84,9 @@ alert(maunzi.name + ' ist neuerdings eine ' + maunzi.rasse);
 </pre>
 
 		<p>Da diese Eigenschaften von außen zugänglich und schreibbar sind, handelt es sich um <dfn>öffentliche Eigenschaften</dfn>.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection" id="prototypen">
 
 		<h3>Prototypische Objekte (Prototypen)</h3>
@@ -97,7 +98,7 @@ alert(maunzi.name + ' ist neuerdings eine ' + maunzi.rasse);
 		<p>In den obigen Beispielen haben wir dem neuen Objekt direkt im Konstruktor Eigenschaften und Methoden hinzugefügt. Das bedeutet, dass diese Objekte mit jeder Instanz neu angelegt werden. Das ist <em>eine</em> Möglichkeit, wie dem Objekt Funktionalität hinzugefügt werden kann. Sie ist unter anderem dann notwendig, wenn Konstruktor-Parameter an das Instanzobjekt kopiert werden, wie es im Beispiel mit <code>this.name = name;</code> getan wird.</p>
 
 		<p>Mit einer Funktion ist immer ein <strong>prototypisches Objekt (Prototyp)</strong> verknüpft. Es handelt sich um ein gewöhnliches allgemeines JavaScript-Objekt, wie wir es auch mit <code>new Object()</code> oder dem <code>Object</code>-Literal <code>{}</code> anlegen können. Dieser Prototyp ist bei eigenen Funktionen anfangs leer.</p>
-		
+
 		<p>Über die Eigenschaft <code>prototype</code> können wir ausgehend vom Funktionsobjekt auf den Prototypen zugreifen. Dieses Objekt können wir entweder erweitern oder mit einem eigenen Objekt ersetzen. Im folgenden Beispiel wird der Prototyp erweitert, indem eine Methode hinzugefügt wird:</p>
 
 <pre>
@@ -114,7 +115,7 @@ mauzi.miau();
 		<p>Hier wird ein Funktionausdruck notiert und das Funktionsobjekt in <code>Katze.prototype.miau</code> gespeichert. Beim Prototypen wird also eine Eigenschaft namens <code>miau</code> angelegt. Darin steckt nun die neu angelegte Funktion. Wenn wir eine <code>Katze</code>-Instanz erzeugen, so besitzt sie eine <code>miau</code>-Methode.</p>
 
 	</div>
-	
+
 </div>
 
 <div class="section" id="prototyp-vererbung">
@@ -187,7 +188,7 @@ mauzi.miau();
 	<p>Prototypische Vererbung funktioniert grundlegend anders als klassenbasierte Vererbung, denn JavaScript ist eine äußerst dynamische Sprache. Es gibt keine Klassen, die einmal deklariert werden und nach der Kompilierung unveränderlich sind. Über die Prototyp-Kette erben gewöhnliche Objekte von gewöhnlichen Objekten. Jedes Objekt kann der Prototyp eines anderen Objektes werden und »einspringen«, wenn es die angeforderte Eigenschaft nicht selbst bereitstellen kann.</p>
 
 	<p>Alle beteiligten Objekte einschließlich der Prototypen können zur Laufzeit beliebig verändert werden. Ein Prototyp ist also im Gegensatz zu einer Klasse kein fester Bauplan für immer gleiche Instanzen, sondern selbst ein beliebiges Objekt, an das Eigenschaftsanfragen delegiert werden. Deshalb ist der Begriff »Instanz« für das Objekt, welches <code>new Katze</code> erzeugt, letztlich irreführend. Wo es keine Klassen als rein abstrakten Bauplan gibt, sondern bloß flexible Objekte mittels Konstruktoren erzeugt werden und von Prototypen erben, so trifft dieser Begriff die Sache nicht. Er wird hier trotzdem der Einfachheit halber verwendet.</p>
-	
+
 </div>
 
 <div class="section" id="prototypen-verstehen">
@@ -213,11 +214,11 @@ mauzi.miau();
 	<div class="sidebox">
 		<p>Bei prototypischer Vererbung werden nur sich unterscheidende Eigenschaften beim abgeleiteten Objekt gesetzt.</p>
 	</div>
-	
+
 	<p>Diese Art der Vererbung nennt man <dfn>Differential Inheritance</dfn>. Im Gegensatz zur klassenbasierten Vererbung werden beim abgeleiteten Objekt (der Instanz) keine Eigenschaften erzeugt. Die Instanz ist keine Kopie des Prototypen, die Instanz kann sogar leer sein, wie es Katzen-Beispiel der Fall ist. Erst wenn sich die Instanz vom Prototypen unterscheidet, wird bei der Instanz eine Eigenschaft angelegt, die einen anderen Wert als die des Prototypen besitzt. In der Glasplatten-Metapher bedeutet dies: An den Stellen, in denen die Instanz dem Prototyp gleicht, ist die Platte durchsichtig &ndash; sie delegiert . Wo sie sich unterscheidet, besitzt sie einen eigenen, andersfarbigen Zettel.</p>
-	
+
 	<p>Nehmen wir an, dass hiesige Katzen meistens von der Rasse »Europäisch Kurzhaar« sind. Anstatt dies jedes Mal beim Erzeugen anzugeben, legen wir die Eigenschaft beim Prototypen an:</p>
-	
+
 <pre>
 function Katze () {}
 Katze.prototype.rasse = "Europäisch Kurzhaar";
@@ -227,7 +228,7 @@ alert(maunzi.rasse);
 </pre>
 
 	<p>Greifen wir auf <code>maunzi.rasse</code> zu, so wird die <code>rasse</code>-Eigenschaft beim Prototypen gefunden. Denn die relevanten Objekte sehen so aus (<code>Object.prototype</code> wurde ausgeblendet):</p>
-	
+
 <div class="js-objects">
 
 <div class="object">
@@ -250,7 +251,7 @@ alert(maunzi.rasse);
 </div><!-- /.js-objects -->
 
 	<p>Wenn wir nun eine Katze mit abweichender Rasse erzeugen wollen, so legen wir eine gleichnamige Eigenschaft bei der Instanz an, die die Eigenschaft des Prototypen verdeckt:</p>
-	
+
 <pre>
 var maunzi = new Katze();
 alert(maunzi.rasse); // Derzeit noch »Europäisch Kurzhaar« - vererbt vom Prototypen
@@ -258,9 +259,9 @@ alert(maunzi.rasse); // Derzeit noch »Europäisch Kurzhaar« - vererbt vom Prot
 maunzi.rasse = "Perser";
 alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 </pre>
-	
+
 	<p>Daraufhin besitzt die Instanz eine eigene, abweichende Eigenschaft:</p>
-	
+
 	<div class="js-objects">
 
 <div class="object">
@@ -282,7 +283,7 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 </div>
 
 </div><!-- /.js-objects -->
-	
+
 </div>
 
 <div class="section" id="private-objekte">
@@ -333,12 +334,12 @@ function Katze (name) {
     var pfoten = 4;
     var gestreichelt = 0;
     // name ist ebenfalls eine private Variable
-    
+
     // Private Funktionen
     function miau () {
         alert(name + ' macht miau!');
     }
-    
+
     // --- Öffentliche (priviligierte) Eigenschaften
     this.name = name;
     // Öffentliche Methoden
@@ -370,7 +371,7 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 	</div>
 
 	<p>Wie das Beispiel zeigt, können auch private Funktionen angelegt werden. Private Funktionen können zum Beispiel interne, in verschiedenen Methoden verwendete Helfer sein. Sie entsprechen <em>privaten Methoden</em> in klassenbasierten Sprachen. Dieser Begriff ist auf JavaScript nicht anwendbar, da es sich eben nicht um Methoden des Instanzobjekt handelt. Sie sind lediglich in den tatsächlichen Instanzmethoden verfügbar, da diese Zugriff auf die Variablen des Konstruktor-Scopes haben.</p>
-	
+
 </div>
 
 <div class="section" id="private-objekte-nachteile">
@@ -424,7 +425,7 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 	<p>Ein Überschreiben oder Löschen dieser Eigenschaften über den Prototyp ist nicht möglich. Ein nachträgliches Erweitern über Prototyp möglich, diese Methoden sind allerdings nicht priviligiert, haben also keinen Zugriff auf private Objekte. Denn sie wurden nicht im Konstruktor definiert und schließen die privaten Objekte nicht ein. Aus demselben Grund ist kein nachträgliches Hinzufügen von privaten Objekten möglich.</p>
 
 	<p>Mit jedem Erzeugen einer <code>Katze</code>-Instanz werden alle Eigenschaften von neuem erzeugt. Die Instanzen teilen sich ihre Eigenschaften nicht mit anderen <code>Katze</code>-Instanzen. Dies wirkt sich negativ auf die Performance aus: Das Anlegen der Eigenschaften kostet Zeit und Arbeitsspeicher. Werden z.B. zehn Katzen instantiiert, so werden 20 Funktionsobjekte erzeugt (zehn mal <code>kitzeln</code> und <code>streicheln</code>). Würden die Instanzen diese Methoden vom Prototyp erben, so müssten sie nur einmal am Prototyp erzeugt werden.</p>
-	
+
 </div>
 
 <div class="section" id="kapselung">
@@ -440,23 +441,23 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 	<p>Die API, also das Set an öffentlichen Methoden, wird dokumentiert und von anderen Programmierern angesteuert. Sie bleibt idealerweise über mehrere Programmversionen gleich. Sie kann natürlich erweitert und beizeiten durch eine leistungsfähigere und flexiblere Schnittstelle ergänzt werden.</p>
 
 	<p>Die privaten Objekte umfassen alle Variablen und Methoden, die nur intern Gebrauch finden und die tatsächliche Implementierung strukturieren. Ein bloßer Anwender des Scriptes muss diese nicht kennen. Von Version zu Version kann sich die interne Umsetzung bei gleichbleibender Funktionalität ändern, damit auch die privaten Objekte.</p>
-	
+
 	<p>Ein zweiter Grund für Kapselung ist die effektive Sicherheit: Ein fremdes Script soll die Interna nicht lesen und manipulieren können. Dies ist in anderen Sprachen sehr wichtig. Manche JavaScript-Kenner argumentieren, dass der Aspekt der tatsächlichen Unsichtbarkeit für JavaScript nachrangig ist:</p>
-	
+
 	<ul>
 	<li>Wenn ein Script ein anderes manipulieren will, dann ist das auf die eine oder andere Art möglich, weil ECMAScript 3 so dynamisch ist. Erst ECMAScript 5 wird es ermöglichen, einzelne Objekteigenschaften oder ganze Objekte »einzufrieren« und vor Manipulation zu schützen.</li>
 	<li>Mit Tricks ist es bei einigen JavaScript-Interpretern möglich, auf einen privaten Funktions-Scope zuzugreifen.</li>
 	<li>Es kann durchaus von Vorteil sein, die Interna eines Scriptes lesen, abändern und erweitern zu können. Das gehört zu den Features von JavaScript.</li>
 	</ul>
-	
+
 	<div class="subsection" id="pseudo-privat">
-	
+
 		<h3>Pseudo-private Objekte</h3>
-		
+
 		<p>Aus diesen Gründen kann es ausreichen, Kapselung lediglich als Strukturierungskonzept zu verstehen. Es reicht dann, mit <strong>pseudo-privaten Objekten</strong> zu arbeiten. Diese sind nicht effektiv vor dem Zugriff von außen geschützt, finden jedoch in der Regel nur intern Verwendung.</p>
-		
+
 		<p>Ein einfacher <code>Object</code>-Literal bietet keine effektive Kapselung, d.h. alle Eigenschaften sind von außen sichtbar und änderbar. Kapselung als Konzept lässt sich damit trotzdem umsetzen, indem klar zwischen öffentlichen und (pseudo-)privaten Eigenschaften unterschieden wird. Eine Konvention ist etwa, die privaten Eigenschaften mit einem <code>_</code> (Unterstrich) beginnen zu lassen. Ein entsprechendes Modul könnte folgendermaßen aussehen:</p>
-	
+
 <pre>
 var Modul = {
     // Öffentliche Eigenschaften
@@ -474,7 +475,7 @@ Module.öffentlicheMethode();
 </pre>
 
 	<p>Dasselbe bei einem Prototypen:</p>
-	
+
 	<pre>
 function Konstruktor () {}
 
@@ -495,9 +496,9 @@ instanz.öffentlicheMethode();
 </pre>
 
 		<p>Wie gesagt, technisch gesehen handelt es sich bei diesen pseudo-privaten Eigenschaften um ganz normale Eigenschaften, die sich in puncto Sichtbarkeit und Schreibbarkeit nicht von den sogenannten öffentlichen unterscheiden. Der Unterstrich im Namen hat keine Bedeutung für den JavaScript-Interpreter, er ist lediglich eine Namenskonvention.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection references">
 		<h3>Quellen und Literaturhinweise</h3>
 		<ul>
@@ -505,7 +506,7 @@ instanz.öffentlicheMethode();
 		<li><a href="http://snook.ca/archives/javascript/no-love-for-module-pattern">Jonathan Snook: Why I don't love JavaScript's Module Pattern</a></li>
 		</ul>
 	</div>
-	
+
 </div>
 
 <!--

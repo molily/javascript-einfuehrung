@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Serverkommunikation und dynamische Webanwendungen (Ajax)</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -60,7 +61,7 @@
 <div id="anwendungsbeispiele" class="section">
 	<h2>Typische abwärtskompatible Anwendungsfälle von Ajax</h2>
 	<p>Neben vollständigen Webanwendungen, die das Verhalten einer Desktop-Anwendung komplett in JavaScript zu emulieren versuchen, gibt es viele kleine Fälle, in denen Hintergrund-Serverkommunikation auf klassischen Webseiten sinnvoll ist und die Bedienung vereinfacht. In diesen Fällen kann Ajax zumeist als Zusatz verwendet werden. Das heißt: Falls JavaScript verfügbar ist, genießt der Anwender einen gewissen Extra-Komfort in der Bedienung. Falls JavaScript nicht aktiv oder Ajax nicht verfügbar ist, dann kann die Website trotzdem ohne funktionale Einschränkungen benutzt werden. Dieser abwärtskompatible Einsatz entspricht dem Konzept des <a href="einsatz.html">Unobtrusive JavaScript</a>.</p>
-	
+
 	<div class="subsection" id="anwendung-fragmente">
 		<h3>Laden von kleinen Inhaltsfragmenten</h3>
 		<p>Oftmals werden Inhalte in kurzer, übersichtlicher Listenform dargestellt. Um den vollen Eintrag zu sehen, muss ohne Ajax ein neues Dokument geladen werden. Mit Ajax können Listenansicht und Vorschau- bzw. Vollansicht kombiniert werden, ohne dass alle Detail-Informationen von Anfang an versteckt im Dokument liegen. Auf Benutzerwunsch (z.B. beim Klicken oder beim Überfahren mit der Maus) können die Informationen zu einem Eintrag via Ajax nachgeladen werden und erscheinen dann direkt beim entsprechenden Listeneintrag.</p>
@@ -87,7 +88,7 @@
 	</div>
 	<div class="subsection" id="anwendung-edit-in-place">
 		<h3>Eingebettete Formulare</h3>
-		<p>Vom Benutzer veränderbare Daten (z.B. ein Kundenprofil oder Einstellungen) werden üblicherweise in zwei Ansichten angezeigt: 
+		<p>Vom Benutzer veränderbare Daten (z.B. ein Kundenprofil oder Einstellungen) werden üblicherweise in zwei Ansichten angezeigt:
 		Die Nur-Lesen-Ansicht einerseits und die Editieren-Ansicht andererseits. Beispielsweise gibt es eine tabellarische Auflistung sowie ein zusätzliches Formular, in dem dieselben Daten verändert werden können.</p>
 		<p>Mit Ajax können beide Ansichten zu einer zusammengefasst werden (sogenannte <em>Edit-in-place-Formulare</em> bzw. <em>Inline Edit</em>). Will der Benutzer ein Datenfeld editieren, so kann JavaScript die Lese-Ansicht auf Knpofdruck dynamisch in eine Formular-Ansicht wechseln. Hat der Benutzer das Editieren beendet, so werden die Änderungen per Ajax an den Server gesendet. Verlässt der Benutzer die Seite, so bleiben die Änderungen gespeichert und es besteht keine Gefahr, dass der Benutzer vergisst, das Formular abzusenden.</p>
 	</div>
@@ -101,12 +102,12 @@
 
 <div id="xhr" class="section">
 	<h2>XMLHttpRequest &ndash; die JavaScript-Technik hinter Ajax</h2>
-	
+
 	<p>Nachdem wir einige Anwendungsfälle betrachtet haben, soll es nun zur Sache gehen: Wie wird Ajax in JavaScript konkret angewendet?</p>
 	<p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code>-Objekt</strong>. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objektes werden HTTP-Anfragen gestartet und die Server-Antwort ausgelesen.</p>
 	<p>Andere Browserhersteller erkannten die Möglichkeiten von <code>XMLHttpRequest</code> und übernahmen diese Technik - allerdings ohne ActiveX. Mittlerweile kennen alle großen JavaScript-fähigen Browser das Objekt <code>window.XMLHttpRequest</code>. Ab Version 7 des Internet Explorers ist dieses globale Objekt ebenfalls verfügbar, bei älteren Versionen muss der Umweg über ActiveX genommen werden.</p>
 	</div>
-	
+
 <div id="xhr-asynchron" class="section">
 	<h2>Asynchronität und Event-Basierung bei XMLHttpRequest</h2>
 	<p>Der Clou an <code>XMLHttpRequest</code> ist, dass es eine Server-Anfrage standardmäßig <em>asynchron</em>, d.h. im Hintergrund absendet. Die Server-Antwort wird dann durch Ereignis-Behandlung verarbeitet. Das bedeutet, dass ein Script die Anfrage auslöst und eine angegebene Event-Handler-Funktion aufgerufen wird, sobald sich der Status der Anfrage ändert und schließlich die Antwort eintrifft.</p>
@@ -114,11 +115,11 @@
 	<p>Wenn Sie noch nicht mit Event-Handling in JavaScript vertraut sind, dann wird Sie dieses Modell erst einmal verwirren. Denn die JavaScript-Funktion, die das XMLHttpRequest erzeugt und die HTTP-Anfrage absendet, kann nicht gleichzeitig die Server-Antwort verarbeiten. Diese Aufgabe muss eine weitere Funktion übernehmen. Wie das konkret aussieht, werden wir später sehen.</p>
 	<p>In den meisten Fällen sollten Sie asynchrones XMLHttpRequest wählen. Es soll allerdings nicht verschwiegen werden, dass auch synchrones XMLHttpRequest möglich ist. Dies arbeitet nicht Event-basiert, sondern hält die JavaScript-Ausführung vom Zeitpunkt des Absendens der Anfrage bis zum Zeitpunkt des vollständigen Empfangs der Antwort an. Das bedeutet, dass die JavaScript-Anweisung, die auf <code>xhr.send()</code> folgt (siehe unten) direkt Zugriff auf die Server-Antwort hat.</p>
 </div>
-	
+
 <div class="section" id="xhr-anfrage">
 	<h2>Server-Anfrage mit XMLHttpRequest absenden</h2>
 	<p>Die Absenden einer Anfrage mittels XMLHttpRequest umfasst vier grundlegende Schritte:</p>
-	
+
 	<div class="subsection" id="xhr-erzeugen">
 		<h3>Das Erzeugen eines XMLHttpRequest-Objektes</h3>
 		<pre>var xhr = new XMLHttpRequest();</pre>
@@ -126,14 +127,14 @@
 		<p>Für ältere Internet Explorer ist wie gesagt eine andere Schreibweise nötig, welche ein ActiveX-Objekt erstellt. ...
 		<p>Um browserübergreifend zu arbeiten, benötigen wir eine Fähigkeitenweiche mit einer Objekt-Erkennung. Wenn window.XMLHttpRequest zur Verfügung steht, wird diese Objekt benutzt, andernfalls wird versucht, ein ActiveX-Objekt zu erzeugen. ...</p>
 	</div>
-	
+
 	<div class="subsection" id="xhr-readystatehandler-registrieren">
 		<h3>Registrieren einer Handler-Funktion für das <code>readystate</code>-Ereignis (bei asynchronen Anfragen)</h3>
 		<pre>xhr.onreadystatechange = xhrReadyStateHandler;</pre>
 		<p>Sie müssen eine Funktion angeben, die immer dann aufgerufen wird, wenn sich das Status der Server-Anfrage ändert. Das bewerkstelligt die Zuweisung einer Funktion an die Eigenschaft <code>onreadystatechange</code>. Dieses Schema gleich dem <a href="einbindung.html#traditionelles-evnet-handling">traditionellen Event-Handling</a>. Der Aufbau der <code>readyState</code>-Handler-Funktion wird weiter unten beschrieben.</p>
 		<p>Diese Anweisung ist nur bei asynchronen Anfragen nötig.</p>
 	</div>
-	
+
 	<div class="subsection" id="xhr-open">
 		<h3>Festlegen der Anfrage-Methode, der Anfrage-Adresse sowie des Arbeitsmodus</h3>
 		<pre>xhr.open("GET", "beispiel.html", true);</pre>
@@ -145,7 +146,7 @@
 		</ol>
 		<p>Im obigen Beispielcode wird eine asynchrone GET-Anfrage an die Adresse <var>beispiel.html</var> abgesendet.</p>
 	</div>
-	
+
 	<div class="subsection" id="xhr-send">
 		<h3>Anfrage starten und gegebenenfalls POST-Daten angeben</h3>
 		<pre>xhr.send(null);</pre>
@@ -155,7 +156,7 @@
 
 <div class="section" id="xhr-antwort">
 	<h2>Server-Antwort beim XMLHttpRequest verarbeiten</h2>
-	
+
 	<p>Vor dem Absenden eines asynchronen XMLHttpRequest haben wir eine Handler-Funktion namens <code>xhrReadyStateHandler</code> registriert. Diese wird beispielhaft wie folgt notiert:
 	<pre>function xhrReadyStateHandler () {
    &hellip;
@@ -187,7 +188,7 @@
    // Server-Antwort ist eingetroffen!
 }</pre>
 	</div>
-	
+
 	<div class="subsection" id="xhr-http-status">
 		<h3>HTTP-Statuscode: <code>responseCode</code></h3>
 		<p>Alleine das Eintreffen der Server-Antwort bedeutet nun nicht, dass der Server die Anfrage fehlerfrei verarbeiten konnte. Ausschlaggebend dafür ist der <em>HTTP-Statuscode</em> der Server-Antwort. Dies ist eine vierstellige Zahl. Im Erfolgsfalle lautet der Code <code>200</code>, im Fehlerfalle z.B. <code>404</code> für »Nicht gefunden« oder <code>500</code> für »Server-interner Fehler«. Nur im Erfolgsfalle können Sie damit rechnen, dass der Server die gegebenenfalls übersandten Daten entgegen genommen hat und die Server-Antwort die gewünschten Daten enthält.</p>
@@ -214,18 +215,18 @@
 }</pre>
 		<p>Diese kann Ihnen als Seitenbetreiber helfen, den Fehler zu beheben &ndash; für Ihre Seitenbesucher ist sie allerdings oftmals wenig hilfreich.</p>
 	</div>
-	
+
 	<div class="subsection" id="xhr-responsetext-responsexml">
 		<h3>Zugriff auf die Antwortdaten: <code>responseText</code> und <code>responseXML</code></h3>
 		<p>Nachdem der Anfrage-Status sowie der HTTP-Antwortcode abgefragt wurde, kann endlich auf die tatsächlichen Antwortdaten zugegriffen werden. Dazu stehen zwei Eigenschaften des XMLHttpRequest-Objekts zur Verfügung: <code>responseText</code> und <code>responseXML</code>.</p>
-		
+
 		<h4><code>responseText</code></h4>
 		<p><code>responseText</code> enthält die Server-Antwort als String. Das Auslesen dieser Eigenschaft ist der Standardweg und die folgenden Beispiele werden diese Eigenschaft verwenden.</dd>
-		
+
 		<h4><code>responseXML</code></h4>
 		<p>Wenn es sich bei der Server-Antwort um ein XML-Dokument handelt, erlaubt die Eigenschaft <code>responseXML</code> Zugriff auf das DOM des XML-Dokumentes. Vorausgesetzt ist, dass der Server das Dokument mit einem entsprechenden Inhaltstyp (MIME-Typ) sendet. Dieser lautet ist üblicherweise <code>application/xml</code>. Nur dann verarbeitet der Browser die Server-Antwort automatisch mit seinem XML-Parser und stellt den DOM-Zugriff bereit.</p>
 		<p><code>responseXML</code> liefert den <code>Document</code>-Knoten des DOM-Knotenbaums. Von dort aus stehen Ihnen alle Möglichkeiten des W3C-Core-DOM zur Verfügung. Auf das Wurzelelement können Sie beispielsweise über <code>xhr.responseXML.documentElement</code> zugreifen, eine Liste aller Elemente eines Typs bekommen Sie mit den Methoden <code>xhr.responseXMLgetElementsByTagName()</code> bzw. <code>xhr.responseXMLgetElementsByTagNameNS()</code> abfragen.</p>
-		
+
 		<h4>Server-Antwort aus <code>responseText</code> ins Dokument schreiben</h4>
 		<p>Eine häufige Aufgabe ist es, die Server-Antwort ins aktuelle Dokument einzufügen. Das bekannte Beispiel erweitern wir um eine Zuweisung, die die Antwortdaten in ein Element hineinlädt.</p>
 		<pre>function xhrReadyStateHandler () {
@@ -324,7 +325,7 @@ function formularSubmit () {
 }</pre>
 	<p>...</p>
 	<p>Helferfunktion für den zweiten Schritt, die Serialisierung des Formulars</p>
-	
+
 	<ol>
 		<li>Um den Query String zusammenzusetzen, werden die Felder des Formulars durchlaufen</li>
 		<li>Für jedes Feld dessen Namen und Wert auslesen und ein entsprechendes Paar erzeugen (<code>name=wert</code>)</li>
@@ -332,7 +333,7 @@ function formularSubmit () {
 	</ol>
 
 	<h4>POST und der POST-Anfragekörper</h4>
-	
+
 </div>
 
 <div class="subsection" id="xhr-helferfunktion">
@@ -365,12 +366,12 @@ bild.src = "beispiel.png";</pre>
 
 <div id="formate-xml-json" class="section">
 	<h2>Übertragungsformate</h2>
-	
+
 	<div class="subsection">
 		<h3>HTML / Nur-Text</h3>
 		<p>...</p>
 	</div>
-	
+
 	<div class="subsection">
 		<h3>JSON</h3>
 		<p>...</p>
@@ -396,7 +397,7 @@ bild.src = "beispiel.png";</pre>
 ]</pre>
 		<p>...</p>
 	</div>
-	
+
 	<div class="subsection">
 		<h3>XML</h3>
 		<p><code>XMLHttpRequest</code> hat seinen Namen daher, dass es ursprünglich dazu gedacht war, XML-Dokumente vom Server herunterzuladen. JavaScript kann anschließend mit verschiedenen Schnittstellen mit dem Dokument arbeiten. Das funktioniert zwar vorzüglich, allerdings ist das Extrahieren von Daten aus einem XML-Dokument über die DOM-Schnittstelle umständlich. In den meisten Fällen sollen die Daten nämlich im bestehenden HTML-Dokument angezeigt werden, sodass die XML-Daten in eine HTML-Struktur umgewandelt werden müssen.</p>
@@ -425,24 +426,24 @@ bild.src = "beispiel.png";</pre>
       &lt;ende&gt;1963&lt;/ende&gt;
    &lt;/präsident&gt;
 &lt;/us-präsidenten&gt;</pre>
-	
+
 
 </div>
 
 <div id="sicherheit" class="section">
 	<h2>Ajax und Sicherheit</h2>
-	
+
 	<div class="subsection">
 		<h3>Same-Origin-Policy bei XMLHttpRequest</h3>
 		<p>XMLHttpRequest unterliegt dem grundlegenden Sicherheitskonzept der <a href="sicherheit.html#same-origin-policy">Same-Origin-Policy</a>. Das bedeutet, sie können mit XMLHttpRequest nur HTTP-Anfragen an den Webserver absenden, auf dem das Dokument liegt, in dessen Kontext das JavaScript ausgeführt wird.</p>
 		<p>Wenn Sie von einem Dokument auf <var>example.org</var> aus eine Anfrage an eine fremden Domain, z.B. <var>example.net</var> senden, dann wird der Browser das JavaScript mit einem Ausnahmefehler abbrechen.
 	</p>
-	
+
 		<pre>// Script auf example.org
 xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
 		<p>Sie können also nicht ohne weiteres HTTP-Anfragen an beliebige Adressen senden bzw. beliebige Adressen im Web auslesen &ndash; das verhindert die Same-Origin-Policy. Es gibt jedoch zahlreiche Möglichkeiten, mit JavaScript auf externe Dienste und Datenquellen im Web zuzugreifen und sogenannte <em>Mashups</em> zu erstellen. Diese verwenden nicht klassisches XMLHttpRequest, sondern nutzen alternative Techniken, bei denen andere Sicherheitsmodelle als Same-Origin-Policy greifen.</p>
 	</div>
-	
+
 	<div class="subsection">
 		<h3>Cross-Site Ajax mit HTTP Access Control</h3>
 		<p><em>Cross-Site</em>, <em>Cross-Origin</em> oder auch <em>Cross-Domain Ajax</em> bezeichnet die Möglichkeit, eine HTTP-Anfrage an eine fremde Domain abzusenden und auf die Server-Antwort zuzugreifen. Derzeit etwickelt das Standardisierungsgremium W3C einen Ansatz, der Schnittstellen wie XMLHttpRequest einen  domainübergreifenden Zugriff ermöglichen soll. Der Entwurf für die technische Spezifikation firmiert derzeit unter dem Namen <a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin Resource Sharing</a> (engl. für Herkunft-übergreifender Zugriff auf Ressourcen), ist aber bekannter unter dem Namen <dfn>HTTP Access Control</dfn> (engl. für HTTP-Zugriffskontrolle).</p>
@@ -455,12 +456,12 @@ xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
 		<p>Da beide Techniken noch recht neu und noch nicht breit unterstützt sind, sei hier nur am Rande darauf hingewiesen. ...</p>
 		<p>Wie gesagt setzen diese Techniken die Same-Origin-Policy nicht vollständig außer Kraft, sondern ergänzen das Verbot des domainübergreifenden Zugriffs durch eine Ausnahme: Der Webserver auf der Zieldomain muss so konfiguriert sein, dass er sein Einverständnis zu dieser fremden Anfrage gibt.</p>
 	</div>
-	
+
 	<div class="subsection">
 		<h3>Cross-Site Ajax mit Server-Proxy</h3>
 		<p></p>
 	</div>
-	
+
 	<div class="subsection">
 		<h3>Scripte einbinden und JSONP</h3>
 		<p></p>

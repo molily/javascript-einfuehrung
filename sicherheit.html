@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Sicherheit</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -27,14 +28,14 @@
 
 <div class="section" id="sicherheitskonzepte">
 	<h2>Sicherheitskonzepte von JavaScript</h2>
-	
+
 	<div id="sandbox" class="subsection">
 		<h3>Sandbox-Prinzip</h3>
 		<p>Ein JavaScript verfügt im Vergleich zu anderen Computerprogrammen nur über begrenzte Möglichkeiten. Es operiert im Rahmen eines Browserfenster und eines Dokumentes. Innerhalb dieses strengen Rahmens, in den das Script eingesperrt ist, darf es recht frei schalten und walten, denn es kann nur begrenzten Schaden anrichten. Diese grundlegende Beschränkung nennt sich <em>Sandbox</em>- oder <strong>Sandkastenprinzip</strong>.</p>
 		<p>Insbesondere kann ein gewöhnliches JavaScript auf einer Webseite kann <strong>keine Dateien auf dem Client-Rechner auslesen</strong>, geschweige denn Änderungen daran vornehmen. Es kann auch keine Betriebssystem- oder Browsereinstellungen ändern oder Software auf dem Client-Rechner installieren.</p>
 		<p>Es gibt nur einige wenige Ausnahmen, in denen ein JavaScript über Browserfenster und Dokument hinaus operieren kann. Zum Beispiel kann es einige bestimmte Browserfunktionen aufrufen und einfache Dialogfenster sowie weitere Browserfenster öffnen. Diese Ausnahmen, die meist mit gewissen Einschränkungen verbunden sind, werden wir noch kennenlernen.</p>
 	</div>
-	
+
 	<div id="same-origin-policy" class="subsection">
 		<h3>Same-Origin-Policy</h3>
 		<p>Die Same-Origin-Policy (zu deutsch etwa: <em>Grundregel des selben Ursprungs</em>) besagt, dass ein JavaScript eines Dokuments nur auf diejenigen anderen, fremden Dokumente zugreifen darf, die dieselbe Herkunft haben. Mit <em>derselben Herkunft</em> ist kurz gesagt die Domain in der URI des Dokuments gemeint.</p>
@@ -45,7 +46,7 @@
 		<p>Die Same-Origin-Policy greift auch bei <code>XMLHttpRequest</code>, besser unter dem Namen <a href="ajax.html">Ajax</a> bekannt. Mit <code>XMLHttpRequest</code> kann ein Script HTTP-Anfragen auslösen und somit Daten vom Webserver empfangen oder an ihn übertragen. Die Same-Origin-Policy sorgt dafür, dass mit <code>XMLHttpRequest</code> nur HTTP-Anfragen an dieselbe Domain gesendet werden können.</p>
 		<p>An einem Punkt greift die Same-Origin-Policy nicht: Ein HTML-Dokument kann mittels <code>script</code>-Element JavaScripte von fremden Domains einbinden. Diese werden mit denselben Rechten ausgeführt wie JavaScripte von derselben Domain. Beispielsweise kann <code>http://www.example.org/dokument1.html</code> das externe Script mit der URI <code>http://www.example.net/script.js</code> einbinden. Diesen Einbinden von Scripten von fremden Webservern Gang und Gäbe vor allem zum Einbinden von Online-Werbung und Statistik-Scripten. Aus der Perspektive der Sicherheit ist eine äußerst zweischneidige Praxis: Einerseits ist es ein sehr nützliches Feature, denn es macht z.B. die Nutzung von Webdiensten möglich. Andererseits kann es zu schwerwiegenden Sicherheitslücken führen, fremden Code in die eigene Seite einzubinden &ndash; wir werden später beim <a href="#xss">Cross-Site-Scripting</a> darauf zurückkommen.</p>
 	</div>
-	
+
 	<div id="same-origin-policy-subdomains" class="subsection">
 		<h3>Same-Origin-Policy und Subdomains</h3>
 		<p>Die Same-Origin-Policy blockt nicht nur den Zugriff, der sogenannte Second-Level-Domains übergreift (z.B. <code>example.org</code> darf nicht auf <code>example.net</code> zugreifen). Die Sperre blockt auch den Zugriff zwischen Subdomains derselben Domains. Das heißt, ein Script in einem Dokument unter <code>de.example.org</code> hat keinen Zugriff auf ein Dokument unter <code>en.example.org</code>, obwohl die Domain dieselbe ist (<code>example.org</code>) und sich bloß die Subdomain unterscheidet (<em>de</em> gegenüber <em>en</em>).</p>
@@ -57,7 +58,7 @@
 		<p>Dieses Schema gilt nicht nur für Second-Level-Domains, sondern für beliebige Subdomains. Ein Script unter <code>hildegard.de.example.org</code> kann folgende Anweisung notieren:</p>
 		<pre class="content-example">document.domain = "de.example.org";</pre><p>Damit erlaubt es den Zugriff z.B. von <code>mechthild.de.example.org</code> und allen anderen Domains, die auf <code>de.example.org</code> enden.</p>
 	</div>
-	
+
 	<div id="local-machine-lockdown" class="subsection">
 		<h3>Local Machine Zone Lockdown (Internet Explorer)</h3>
 		<p>Die Same-Origin-Policy lässt einen Punkt außer Acht: Ein Script darf im Kontext der Herkunftsdomain ohne Begrenzung schalten und walten sowie mittels <code>XMLHttpRequest</code> Daten empfangen und versenden. Das kann zu einem schwerwiegenden Problem werden, wenn das Script nicht im Web, sondern <em>lokal</em> ausgeführt wird. <em>Lokal</em> bedeutet, dass das Dokument auf einer Festplatte des Client-Rechners liegt und von dort aus im Browser geöffnet wird. Die URI beginnt dann mit <code>file://localhost/</code>, in der Kurzschreibweise <code>file:///</code>.</p>
@@ -65,13 +66,13 @@
 		<p>Der Internet Explorer ab Windows XP mit dem Service Pack 2 stellt daher alle lokalen Dokumente mit Scripten unter Generalverdacht und verhindert ihre Ausführung. Dieser Sicherheitsmechanismus nennt sich <em>Local Machine Zone Lockdown</em>, zu deutsch <em>Sperrung der Zone des lokalen Computers</em>.</p>
 		<p>Wie sich dieser Generalverdacht auswirkt und wie man den Internet Explorer trotzdem dazu bringen kann, Scripte in lokalen Dokumenten auszuführen, erörtert der Artikel <a href="http://aktuell.de.selfhtml.org/artikel/sonstiges/markoftheweb/" class="anchor-online-page">Umgehung der Sperrung der lokalen Zone</a>.</p>
 	</div>
-	
+
 </div>
 
 <div class="section" id="browser-schutzmechanismen">
 	<h2>Browser-Einschränkungen und Schutz vor schädlichen JavaScripten</h2>
 	<p>JavaScript hat zwar keine vollständige Kontrolle über den Client-Rechner und den Browser, besitzt aber einige Möglichkeiten des Missbrauchs, mit denen der Benutzers irregeführt, belästigt und gegängelt werden kann. Mittlerweile besitzen die Browser eingebaute Schutzmechanismen, die gewisse Freiheiten von JavaScripten beschränken. Sie sollten diese kennen, denn sie werden bei der JavaScript-Entwicklung früher oder später an diese Grenzen stoßen.</p>
-	
+
 	<div id="popup-blocker" class="subsection">
 		<h3>Popup-Blocker</h3>
 		<p>Ein problematisches Thema ist das Öffnen von neuen Fenster mit <code>window.open</code>. Diese Methode wird unter anderem dazu missbraucht, um sogenannte <strong>Popup-Fenster</strong> (kurz: <em>Popups</em>) mit Werbung zu öffnen, die automatisch und ohne ausdrücklichen Wunsch des Websurfers aufspringen. Das unkontrollierte Öffnen von Fenstern belästigt den Surfer nicht nur, sondern ist auch ein Sicherheitsproblem, denn es kann den Browser lahmlegen oder sogar zum Abstürzen bringen.</p>
@@ -100,7 +101,7 @@ window.onload = function () {
 		<p>Es gibt keine allgemeingültigen Regeln, nach denen die verschiedenen Popup-Blocker arbeiten. Zudem können sie verschieden »scharf« eingestellt werden. Es ist daher schwierig, zuverlässige Aussagen darüber zu treffen, welche Popup-Fenster geblockt und welche zugelassen werden.</p>
 		<p>Trotzdem ein paar grobe <strong>Empfehlungen</strong>: Sie sollten darauf verzichten, Fenster als Reaktion auf die dokumentweite Ereignisse zu öffnen. Das betrifft die Ereignisse <code>load</code> oder <code>unload</code>, aber auch Mausereignisse wie <code>click</code> oder Tastaturereignisse wie <code>keypress</code> bei zentralen Objekten wie <code>window</code> und <code>document</code> sowie bei den HTML-Elementen <code>html</code> und <code>body</code>. Solche Fenster werden höchstwahrscheinlich geblockt. Wenn Sie punktuell Popup-Fenster öffnen wollen, dann geben sie einem <code>a</code>- oder <code>button</code>-Element einen Event-Handler für das <code>click</code>-Ereignis. Das obige Beispiel illustriert dies.</p>
 	</div>
-	
+
 	<div id="fenstereigenschaften" class="subsection">
 		<h3>Die Veränderung der Fenstereigenschaften</h3>
 		<p>Das Öffnen von neuen Fenstern bringt noch weiteres Missbrauchspotenzial und <strong>schwerwiegende Sicherheitsprobleme</strong> mit sich. Ursprünglich war es möglich, dass ein Script volle Kontrolle über das Aussehen und das Verhalten des neuen Fensters hatte. Die <code>window.open</code>-Methode hat für diese Fensteroptionen einen dritten Parameter. Problematische <code>window.open</code>-Aufrufe sehen zum Beispel so aus:</p>
@@ -116,7 +117,7 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
 		<p>Die beschriebenen Probleme mit Popup-Fenstern und die Gegenmaßnahmen seitens der Browser haben dazu geführt, dass der Einsatz von Popup-Fenstern nach und nach zurückgegangen ist. Es gibt noch weitere Gründe, warum Popup-Fenster aus der Mode sind. Einer davon ist, dass moderne Browser ihr Fensterkonzept komplett umgemodelt haben. Früher wurde in einem eigenständigen Browserfenster genau ein HTML-Dokument genau dargestellt. Heutzutage bieten die meisten grafischen Browser <strong>Tabbed Browsing</strong>. Das heißt, sie stellen mehrere Dokumente innerhalb eines Fensters dar und machen diese über Registerkarten zugänglich.</p>
 		<p>Die problematischen Fensterveränderungen, die wir betrachtet haben, verlieren beim <em>Tabbed Browsing</em> ihren Sinn. Da klassische Popup-Fenster das Konzept von Registerkarten durchbrechen, überlassen Browser zunehmend dem Anwender die Wahl, ob <code>window.open</code> ein eigenständiges Fenster oder eine Registerkarte öffnet. Auf deren Darstellung hat der Autor des JavaScriptes immer weniger Einfluss - zu Gunsten des Anwenders.</p>
 	</div>
-	
+
 	<div id="kontextmenue" class="section">
 		<h3>Kontextmenü und rechte Maustaste</h3>
 		<p>Als Kontextmenü wird das Aufklappmenü bezeichnet, das üblicherweise dann erscheint, wenn der Anwender ein Element des HTML-Dokuments mit der rechten Maustaste anklickt. Je nach Hardware, Betriebssystem und Browser gibt es noch weitere Möglichkeiten, das Kontextmenü aufzurufen.</p>
@@ -127,7 +128,7 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
 		<p>Es mag in besonderen Fällen, insbesondere speziellen Webanwendungen, seinen Sinn haben, ein eigenes, angepasstes Kontextmenü bereitzustellen. Aus diesem Grund ermöglichen verschiedene Browser die Behandlung des <code>contextmenu</code>-Ereignisses. Aber auch in dem Fall ist das Unterdrücken des browsereigenen Kontextmenüs nur möglich, wenn eine entsprechende Browsereinstellung es zulässt.</p>
 		<p>...</p>
 	</div>
-	
+
 	<div id="kontextmenue" class="section">
 		<h3>Lang laufende Scripte</h3>
 		<p>..</p>

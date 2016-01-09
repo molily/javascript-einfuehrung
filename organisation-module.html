@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Organisation von JavaScripten: Module und Kapselung</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -38,7 +39,7 @@ function funktion3 () {
 </pre>
 
 	<p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Gültigkeitsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>indow.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
-	
+
 </div>
 
 <div class="section" id="kapselung-verfuegbarkeit">
@@ -86,7 +87,7 @@ function funktion3 () {
 	<p>Ein JavaScript-Objekt ist erst einmal nichts anderes als ein Container für weitere Daten. Ein Objekt ist eine Liste, in der unter einem Bezeichner gewisse Unterobjekte gespeichert sind. Aus anderen Programmiersprachen ist diese solche Datenstruktur als <em>Hash</em> oder <em>assoziativer Array</em> bekannt. In JavaScript sind alle vorgegebenen Objekte und Methoden in solchen verschachtelten Objektstrukturen organisiert, z.B. <code>window.document.body</code>.</p>
 
 	<p>In JavaScript gibt es den allgemeinen Objekttyp <code>Object</code>, von dessen Prototypen alle anderen JavaScript-Objekte abstammen. Das heißt, jedes JavaScript-Objekt ist immer auch ein <code>Object</code>-Objekt. <code>Object</code> ist die Grundlage, auf der die restlichen spezifischeren Objekttypen aufbauen.</p>
-	 
+
 	<p>Für die Organisation von eigenen Scripten bieten sich solche unspezifischen <code>Object</code>-Objekte an. Über <code>new Object()</code> lässt sich ein <code>Object</code>-Objekt erzeugen:</p>
 
 <pre>
@@ -110,7 +111,7 @@ Modul.methode();
 
 	<p>Das obige Beispiel-<code>Object</code> lässt sich in der Literalschreibweise so umsetzen:</p>
 
-<pre> 
+<pre>
 var Modul = {
     eigenschaft : "wert",
     methode : function () {
@@ -124,17 +125,17 @@ Modul.methode();
 
 	<p>Eine Illustration der entstehenden Verschachtelung:</p>
 
-	<ul class="kompakt"> 
+	<ul class="kompakt">
 		<li>
 			<code>window</code> (globales Objekt)
 			<ul>
 				<li><code>Modul</code> (Object)
-					<ul> 
-						<li><code>eigenschaft</code> (String)</li> 
-						<li><code>methode</code> (Function)</li> 
-					</ul> 
-				</li> 
-			</ul> 
+					<ul>
+						<li><code>eigenschaft</code> (String)</li>
+						<li><code>methode</code> (Function)</li>
+					</ul>
+				</li>
+			</ul>
 		</li>
 	</ul>
 
@@ -180,21 +181,21 @@ Modul.methode();
 
 <pre>
 (function () {
-    
+
     /* Lokale Variable */
     var variable = 123;
-    
+
     /* Lokale Funktion */
     function funktion () {
         /* ... */
     }
-    
+
     /* Rufe lokale Funktion auf: */
     funktion();
-    
+
     /* Zugriff auf globale Objekte ist ebenfalls möglich: */
     alert(document.title);
-    
+
 })();
 </pre>
 
@@ -208,22 +209,22 @@ Modul.methode();
 
 <pre>
 (function () {
-    
+
     var clickNumber = 0;
     var outputEl;
-    
+
     function buttonClicked () {
         clickNumber++;
         outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
     }
-    
+
     function init () {
         outputEl = jQuery('#output);
         jQuery('#button').click(buttonClicked);
     }
-    
+
     jQuery(document).ready(init);
-    
+
 })();
 </pre>
 
@@ -238,7 +239,7 @@ Modul.methode();
 	<p>Der Code nutzt die jQuery-Bibliothek, um eine Initialisierungsfunktion bei <a href="#domready">DOM ready</a> auszuführen. Diese registriert bei einem Button einen Event-Handler. Wird der Button geklickt, wird eine Zahl erhöht. Zudem wird die bisherige Anzahl der Klicks im Dokument ausgegeben.</p>
 
 	<p>Das Besondere an diesem Script sind die vier lokalen Variablen bzw. Funktionen. Sie werden direkt im Funktions-Scope notiert, anstatt sie an einen <code>Object</code>-Container zu hängen. Innerhalb der verschachtelten Funktionen sind die Variablen des äußeren Funktions-Scope verfügbar (siehe <a href="organisation-verfuegbarkeit.html#closures">Closures</a>). <code>init()</code> füllt die Variable <code>outputEl</code> und greift auf die Funktion <code>buttonClicked()</code> zu. <code>buttonClicked()</code> greift auf die Variablen <code>clickNumber</code> und <code>outputEl</code> zu. Das Script funktioniert, ohne dass Objekte am globalen <code>window</code>-Objekt angelegt werden.</p>
-	
+
 	<div class="subsection" id="dom-ready-scope">
 
 		<h3>DOM-ready-Handler als privater Scope</h3>
@@ -251,29 +252,29 @@ Modul.methode();
 
 <pre>
 jQuery(function ($) {
-    
+
     var clickNumber = 0;
     var outputEl;
-    
+
     function buttonClicked () {
         clickNumber++;
         outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
     }
-    
+
     function init () {
         outputEl = $('#output);
         $('#button').click(buttonClicked);
     }
-    
+
     init();
-    
+
 });
 </pre>
 
 		<p>Die übergebene DOM-ready-Funktion bekommt das globale jQuery-Objekt als ersten Parameter. Wir nennen den Parameter hier <code>$</code>. Funktionsparameter sind automatisch lokale Variablen, das heißt, wir können mit <code>$</code> genauso umgehen wie mit <code>clickNumber</code> oder <code>buttonClicked</code>.</p>
-		
+
 		</div>
-		
+
 		<div class="subsection" id="import-globals">
 
 		<h3>Globale Objekte importieren</h3>
@@ -290,16 +291,16 @@ jQuery(function ($) {
 (function (window, document, undefined) {
 
     /* ... */
-    
+
 })(window, document);
 </pre>
 
 		<p>Gleichzeitig wird hier sichergestellt, dass innerhalb der Funktion der Bezeichner <code>undefined</code> immer den Typ <code>Undefined</code> besitzt. Wir definieren einen solchen Parameter, aber übergeben keinen Wert dafür &ndash; sodass eine lokale Variable namens <code>undefined</code> mit einem leeren Wert angelegt wird. Das ist andernfalls nicht garantiert, denn <code>window.undefined</code> ist durch Scripte überschreibbar.</p>
 
 		<p>Innerhalb der Funktion können die Objekte genauso heißen wie außerhalb. Dennoch handelt es z.B. bei <code>document</code> innerhalb der Funktion um eine lokale Variable, auch wenn sie natürlich auf <code>window.document</code> verweist.</p>
-		
+
 	</div>
-	
+
 </div>
 
 <div class="section" id="revealing-module">
@@ -334,14 +335,14 @@ var Modul = (function () {
 
 <pre>
 var Modul = (function () {
-    
+
     /* ... private Objekte ... */
-    
+
     /* Gebe öffentliche API zurück: */
     return {
         öffentlicheMethode : function () { ... }
     };
-    
+
 })();
 </pre>
 
@@ -356,7 +357,7 @@ var Modul = (function () {
         alert("privateFunktion wurde aufgerufen\n" +
             "Private Variable: " + privateVariable);
     }
-    
+
     // Gebe öffentliches Schnittstellen-Objekt zurück
     return {
         öffentlicheMethode : function () {
@@ -365,7 +366,7 @@ var Modul = (function () {
             privateFunktion();
         }
     };
-    
+
 })();
 
 // Rufe öffentliche Methode auf
@@ -400,7 +401,7 @@ Namensraum.Modul2 = (function () { ... })();
 	</div>
 
 	<p>Ben Cherry schlägt eine <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">Erweiterbarkeit von Modulen</a> auf Basis des Revealing Module Patterns vor. Er unterscheidet zwischen fester und lockerer Kopplung der Teile. Das heißt, entweder setzt ein Aufbaumodul ein Basismodul zwingend voraus. Oder beide Module ergänzen sich gegenseitig, sind aber auch separat funktionsfähig.</p>
-	
+
 	<div class="subsection" id="feste-kopplung">
 
 		<h3>Feste Kopplung</h3>
@@ -432,9 +433,9 @@ Modul.methode2();
 </pre>
 
 		<p>Zu beachten ist, dass die Methoden der Erweiterung keinen Zugriff auf die privaten Objekte des Grundmoduls haben &ndash; denn sie befinden sich in einem anderen Funktions-Scope. Zur Lösung dieses Problems schlägt Ben Cherry eine Methode vor, die die privaten Objekte kurzzeitig öffentlich macht, sodass ein übergreifender Zugriff möglich ist. Das erscheint mir jedoch besonders umständlich &ndash; in diesem Fall würde ich privaten Objekte zu dauerhaft öffentlichen Eigenschaften machen und auf die vollständige Kapselung verzichten.</p>
-		
+
 	</div>
-	
+
 	<div class="subsection" id="lose-kopplung">
 
 		<h3>Lose Kopplung</h3>
@@ -444,20 +445,20 @@ Modul.methode2();
 <pre>
 var Modul = (function (modul) {
     /* ... private Objekte ... */
-    
+
     /* Lege Methode am Modulobjekt an: */
     modul.methode1 = function () { ... };
-    
-    return modul; 
+
+    return modul;
 }(Modul || {}));
 
 var Modul = (function (modul) {
     /* ... private Objekte ... */
-    
+
     /* Lege Methode am Modulobjekt an: */
     modul.methode2 = function () { ... };
-    
-    return modul; 
+
+    return modul;
 }(Modul || {}));
 </pre>
 
@@ -471,7 +472,7 @@ Modul.methode2();
 </pre>
 
 	</div>
-	
+
 </div>
 
 <div class="sequence-navigation">

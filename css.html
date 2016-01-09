@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Zusammenarbeit mit CSS, Darstellung von Dokumenten steuern</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -225,7 +226,7 @@ var currentStyle = element.currentStyle;
 window.alert("Textfarbe: " + currentStyle.color);
 window.alert("Elementbreite: " + currentStyle.width);</pre>
 		<p><code>currentStyle</code> liefert meist ein ähnliches Ergebnis wie das standardisierte <code>getComputedStyle</code>. In manchen Fällen gibt es jedoch Abweichungen, etwa im obigen Beispiel beim Auslesen des <code>width</code>-Wertes. <code>currentStyle.width</code> gibt <code>auto</code> zurück, wenn dem Element keine explizite Breite zugewiesen wurde. Für das browserübergreifende Auslesen der Box-Größe eignen sich stattdessen die Eigenschaft <a href="#elementgroessen"><code>offsetWidth/offsetHeight</code> sowie <code>clientWidth/clientHeight</code></a>.</p>
-		
+
 	</div>
 	<div id="crossbrowser-style-auslesen" class="subsection">
 		<h3>Browserübergreifendes Auslesen von CSS-Eigenschaften</h3>
@@ -244,7 +245,7 @@ window.alert("Elementbreite: " + currentStyle.width);</pre>
 window.alert(currentFontSize);</pre>
 		<p>Dies funktioniert zwar browserübergreifend, allerdings ist das Ergebnis unterschiedlich: Ältere Internet Explorer, in welchen nur <code>currentStyle</code> zur Verfügung steht, geben für die <code>font-size</code>-Eigenschaft einen <code>pt</code>-Wert zurück, andere Browser einen <code>px</code>-Wert. Mit diesen Browserunterschieden müssen Sie rechnen, sie lassen sich nicht einfach vereinheitlichen.</p>
 	</div>
-	
+
 	</div>
 	<div id="elementgroessen" class="subsection">
 		<h3>Elementbox-Größen auslesen über Microsoft-Eigenschaften</h3>

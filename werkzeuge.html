@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Arbeitstechniken und Entwicklerwerkzeuge</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -23,25 +24,25 @@
 <div class="section" id="erste-schritte">
 	<h2>Erste Schritte mit Firefox, Firebug und einem Editor</h2>
 	<p>JavaScripte können Sie mit ganz unterschiedlichen Programmen und Hilfsmitteln entwickeln und jeder Webautor hat unterschiedliche Bedürfnisse und Gewohnheiten. Sobald Sie einige Erfahrung gesammelt haben, sollten Sie sich umschauen, welche Arbeitsweise Ihnen am besten zusagt. Für den Anfang sei hier aber eine einseitige und parteiische Empfehlung ausgesprochen.</p>
-	
+
 	<div class="subsection" id="firefox">
 		<h3>Firefox</h3>
 	<p>Wenn Sie browserübergreifende JavaScripte für das öffentliche Web programmieren, so sollten Sie Ihre Scripte zunächst mit dem Browser <strong>Mozilla Firefox</strong> testen und sie mit dessen Hilfe fortentwickeln. Dieser Browser ist weit verbreitet, läuft auf allen relevanten Plattformen und ist einer der Ziel-Browser, auf dem Ihre Scripte auf jeden Fall funktionieren sollten. Firefox verfügt über ausgezeichnete JavaScript-Fähigkeiten und gibt präzise und hilfreiche JavaScript-Fehlermeldungen. Sie können Firefox unter <a href="http://getfirefox.com/">getfirefox.com</a> herunterladen.</p>
 	</div>
-	
+
 	<div class="subsection" id="firefbug">
 		<h3>Firebug</h3>
 		<p>Eine entscheidende Hilfe stellt das Firefox-Zusatzprogramm <strong>Firebug</strong> dar. Firebug ist nicht nur ein mächtiges JavaScript-Werkzeug, sondern hilft auch enorm bei der HTML- und CSS-Entwicklung - insbesondere durch den sogenannten <em>DOM-Inspektor</em>, mit dem Sie den Elementbaum des HTML-Dokuments sowie die zugehörigen JavaScript- und CSS-Eigenschaften ansehen können. Nachdem Sie Firefox installiert haben, können Sie das Firebug-Addon über die <a href="https://addons.mozilla.org/de/firefox/addon/firebug/">Firefox-Addon-Datenbank</a> installieren.</p>
 		<p>Firebug gibt Lernenden einen wertvollen Einblick in das DOM, veranschaulicht den Aufbau von JavaScript-Objekten und macht die Zusammenarbeit zwischen HTML, CSS und JavaScript verständlich. Seien Sie neugierig und spielen Sie mit Firebug herum – es wird Ihr Verständnis der Webtechniken und insbesondere des <em>DOM Scripting</em> enorm verbessern.</p>
 	</div>
-	
+
 	<div class="subsection" id="editor">
 		<h3>Texteditor</h3>
 		<p>Eine weitere Voraussetzung für die JavaScript-Programmierung ist natürlich ein <strong>Texteditor</strong>, mit dem Sie die JavaScripte schreiben. Auch in puncto Editoren haben Sie zwischen tausenden eine Auswahl. Für den Anfang brauchen Sie keinen Editor mit besonderen Fähigkeiten. Er sollte jedoch Syntax-Highlighting für JavaScript-Code sowie die Anzeige von Zeilen- und Spaltennummern beherrschen. Denn diese Features erweisen sich direkt als hilfreich. Ein brauchbarer einfacher Editor für Windows ist <a href="http://notepad-plus.sourceforge.net/">Notepad++</a>.</p>
 	</div>
-	
+
 	<p>Mit diesem Dreiergespann bestehend aus einem komfortablen Texteditor, einem hochentwickelten Browser und einem Analyse-Werkzeug für JavaScripte können sie gut gewappnet in die Programmierung einsteigen.</p>
-	
+
 </div>
 
 <div class="section" id="fehlerkonsole">
@@ -82,7 +83,7 @@
 		<p class="image"><img src="images/ie9-fehlermeldung.png" alt=""></p>
 		<p>Das Anzeigen von JavaScript-Fehlern ist nur während der Entwicklung sinnvoll. Sie sollten diese Möglichkeit nur solange in Anspruch nehmen, wie sie an JavaScripten arbeiten. Danach können sie die Fehlermeldungen in den Internetoptionen wieder ausschalten, damit Sie nicht beim normalen Surfen gestört werden.</p>
 	</div>
-	
+
 	<div class="subsection" id="ie-fehlerkonsole">
 		<h3>Internet Explorers: Fehlerkonsole der Entwicklertools</h3>
 		<p>Neben diesen Meldungsfenstern kennt der Internet Explorer ab Version 8 eine JavaScript-Konsole, in der alle Fehlermeldungen mitgeloggt werden. Der IE besitzt dazu die sogenannten <strong>Entwicklertools</strong>, die stark an Firebug angelehnt sind. Beim Drücken der Taste <kbd>F12</kbd> klappt eine Leiste am unteren Fensterrand auf. Um JavaScript-Fehler zu sehen, müssen Sie den Tab <em>Skript</em> anwählen:</p>
@@ -91,7 +92,7 @@
 		<p>Sie können aus den Fehlermeldungsfenstern, welche im vorherigen Abschnitt gezeigt wurden, direkt in die Entwicklertools springen. Der Internet Explorer ab Version 8 bietet Ihnen an, den Debugger zu öffnen. Wählen Sie <em>Ja</em> bei der Frage <em>Wollen Sie die Seite debuggen?</em>, so öffnet sich automatisch der Skript-Tab der Entwicklertools. Darin wird die Codezeile markiert, in der der Fehler aufgetreten ist:</p>
 		<p class="image"><img src="images/ie9-debugger.png" akt=""></p>
 	</div>
-	
+
 	<div class="subsection" id="fehlermeldungen-alte-ies">
 		<h3>Fehlermeldungen in älteren Internet Explorern</h3>
 		<p>Sie sollten bei der JavaScript-Entwicklung die neueste Internet-Explorer-Version verwenden, wenn es nicht gerade um das absichtliche Testen mit älteren Versionen geht. Denn die Fehlermeldungen in älteren Versionen sind weniger präzise sowie oft unverständlich und verwirrend. In manchen Fällen wird die Zeilennummer nicht korrekt angegeben und bei ausgelagerten JavaScript-Dateien die tatsächliche Script-Adresse nicht angegeben, nur die Adresse des einbindenden HTML-Dokuments. Ältere Internet Explorer kennen keine Konsole, in der alle Fehlermeldungen mitgeloggt werden.</p>
@@ -229,7 +230,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 		<p>...</p>
 		<p class="image"><img src="images/ie8-dom-inspektor.png" alt=""></p>
 	</div>
-	
+
 	<div id="ie7-developer-toolbar" class="subsection">
 		<h3>Internet Explorer 6 und 7: Developer Toolbar</h3>
 		<p>Der Internet-Explorer-Versionen vor 8 verfügen über keinen eingebauten DOM-Inspektor. Es existiert allerdings ein offizieller Zusatz: Die <a href="http://www.microsoft.com/downloads/details.aspx?familyid=e59c3964-672d-4511-bb3e-2d5e1db91038&amp;displaylang=en">Internet Explorer Developer Toolbar</a>. Diese ist ein Vorgänger der Entwicklertools im Internet Explorer 8 und die Bedienung gestaltet sich weitgehend gleich.</p>

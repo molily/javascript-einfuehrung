@@ -1,13 +1,14 @@
 body {
 	font-family: Calibri,Geneva,'Trebuchet MS',Lucida Sans,Tahoma,Arial,Verdana,Helvetica,sans-serif;
 	max-width: 45em;
-	margin: auto;
+	margin: 0 auto;
+	padding: 0 1em;
 	line-height: 1.6;
 	counter-reset: counterH2;
 }
 
 h1 {
-	font-size: 150%;
+	font-size: 1.5em;
 }
 
 h2, h3 {
@@ -17,29 +18,29 @@ h2, h3 {
 
 h2 {
 	margin-top: 2em;
-	font-size: 125%;
+	font-size: 1.25em;
 	counter-reset: counterH3;
 }
 
 h2:before {
 	content: counter(counterH2) ". ";
 	counter-increment: counterH2;
-	padding-right: .5em;
+	padding-right: 0.5em;
 }
 
 h3 {
 	margin-top: 1.5em;
-	font-size: 112.5%;
+	font-size: 1.125em;
 }
 
 h3:before {
 	content: counter(counterH2) "." counter(counterH3);
 	counter-increment: counterH3;
-	padding-right: .5em;
+	padding-right: 0.5em;
 }
 
 p, ol, ul, dl {
-	margin: 1.5em 1em 1.5em 1.5em;
+	margin: 1.5em 0;
 }
 
 p {
@@ -67,7 +68,7 @@ ul li {
 }
 
 dt {
-	margin-bottom: .5em;
+	margin-bottom: 0.5em;
 	font-weight: bold;
 }
 
@@ -79,19 +80,17 @@ dd {
 }
 
 pre, code {
-	font-family: consolas,"bitstream vera sans monospace","lucida console","liberation mono",monaco,"courier new",courier,monospace;
-	font-size: 100%;
+	font-family: 'Consolas', 'Monaco', 'Droid Sans Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Lucida Console', 'Liberation Mono', 'Courier New', monospace;
+	font-size: inherit;
 	color: #02a;
 }
 
 pre {
 	border: thin solid #ddd;
 	padding: 1em;
-	background-color: rgb(255, 250, 235);
-	font-size: 87.5%;
+	background-color: rgb(255, 251, 245);
+	font-size: 0.875em;
 	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 
 pre strong {
@@ -121,16 +120,16 @@ table {
 
 th, td {
 	border: thin solid #ccc;
-	padding: .2em .5em;
+	padding: 0.2em 0.5em;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 #nav, #footer {
 	margin-top: 1em;
-	padding: .5em 1em;
+	padding: 0.5em 1em;
 	border: 1px solid #ddd;
-	font-size: 87.5%;
+	font-size: 0.9em;
 }
 
 #nav p, #footer p {
@@ -139,7 +138,7 @@ th, td {
 }
 
 #nav strong {
-	font-size: 112.5%;
+	font-size: 1.125em;
 }
 
 #nav strong, #nav a {
@@ -147,7 +146,7 @@ th, td {
 }
 
 #nav .contents-link {
-	font-size: 112.5%;
+	font-size: 1.125em;
 	text-align: right;
 	font-weight: bold;
 }
@@ -156,24 +155,23 @@ th, td {
 
 
 #toc {
-	margin-left: 3em;
 }
 
 #toc li {
-	margin-bottom: .2em;
+	margin-bottom: 0.2em;
 }
 
 #toc ol {
-	font-size: 93.75%;
-	margin: .3em 0;
+	font-size: 0.9375em;
+	margin: 0.5em 0;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .sequence-navigation {
 	border-top: 1px solid #ddd;
-	margin-top: 4em;
-	padding-top: 4em;
+	margin-top: 3em;
+	padding-top: 3em;
 }
 
 .sequence-navigation p {
@@ -191,9 +189,16 @@ th, td {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 #footer {
-	margin-top: 4em;
-	padding: 3em 4em;
+	margin-top: 3em;
+	padding: 3em 0;
 	border-style: solid none none;
+}
+
+@media (min-width: 30em) {
+	#footer {
+		padding-left: 4em;
+		padding-right: 4em;
+	}
 }
 
 body#contents #footer p {
@@ -204,36 +209,26 @@ body#contents #footer p {
 
 .sidebox {
 	float: right;
-	margin: 1em -8.5em 1em 1.5em;
+	margin: 1em -1em 1em 1.5em;
 	max-width: 15em;
 	padding: 1em;
-	
+
 	border: 1px solid #eddb9a;
-	
-	-moz-box-shadow: -3px 3px 3px #ccc;
-	-webkit-box-shadow: -3px 3px 3px #ccc;
+
 	box-shadow: -3px 3px 3px #ccc;
-	
-	background-image: -moz-linear-gradient(19% 75% 45deg, #FCFC94, #FCEC6C);
-	background-image: -webkit-gradient(linear, 100% 0%, 0% 100%, from(#FCEC6C), to(#fcfc94));
+
+	background-image: linear-gradient(to bottom, #FCFC94, #FCEC6C);
 	background-color: #FCFC94;
-	
 	/*
-	-moz-transform: rotate(3deg);
-	-webkit-transform: rotate(3deg);
-	-o-transform: rotate(3deg);
 	transform: rotate(3deg);
 	*/
-	
 	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 
 .sidebox p {
 	margin: 0;
 	text-indent: 0;
-	font-size: 87.5%;
+	font-size: 0.875em;
 	line-height: 1.5;
 	font-family: Cambria,Georgia,serif;
 	color: #393525;
@@ -244,18 +239,17 @@ body#contents #footer p {
 	float: left;
 	margin-left: -1.5em;
 	content: "?";
-	line-height: .5;
+	line-height: 0.5;
 	font-size: 3.5em;
 	font-family: arial, arial unicode ms, times new roman, georgia, verdana;
-	-webkit-transform: rotate(-3deg);
+	transform: rotate(-3deg);
 }
 */
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .pillars {
-	xmargin: 0 -6em;
-	font-size: 87.5%;
+	font-size: 0.875em;
 }
 
 .pillars:after {
@@ -266,12 +260,10 @@ body#contents #footer p {
 
 .pillars .base {
 	margin: 0 0 1em;
-	xmax-width: 68em;
 }
 
 .pillars .pillar {
 	float: left;
-	xmax-width: 19.5em;
 	width: 32%;
 	margin: 0 0 1em 2%;
 }
@@ -283,17 +275,10 @@ body#contents #footer p {
 .pillars .base div,
 .pillars .pillar div {
 	border: 1px solid #999;
-	
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	
-	-moz-box-shadow: 2px 2px 2px #bbb;
-	-webkit-box-shadow: 2px 2px 2px #bbb;
 	box-shadow: 2px 2px 2px #bbb;
-	
-	background-image: -moz-linear-gradient(0% 100% 90deg, #f0f0f0, #FFFFFF);
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#f0f0f0));
+	background-image: linear-gradient(to bottom, #fff, #f0f0f0);
+	background-color: #f0f0f0;
 }
 
 .pillars h3, .pillars ul {
@@ -329,8 +314,6 @@ body#contents #footer p {
 .js-objects .object {
 	float: left;
 	margin: 0 20px 0 0;
-	-moz-box-shadow: 2px 2px 5px #ccc;
-	-webkit-box-shadow: 2px 2px 5px #ccc;
 	box-shadow: 2px 2px 5px #ccc;
 }
 
@@ -340,8 +323,8 @@ body#contents #footer p {
 
 .js-objects h3 {
 	margin: 0;
-	padding: .3em .3em .1em;
-	font-size: 87.5%;
+	padding: 0.3em 0.3em 0.1em;
+	font-size: 0.875em;
 	font-family: inherit;
 	border-style: solid solid none;
 	border-width: 1px;
@@ -356,8 +339,8 @@ body#contents #footer p {
 
 .js-objects th,
 .js-objects td {
-	font-size: 75%;
-	padding: .3em .5em .2em;
+	font-size: 0.75em;
+	padding: 0.3em 0.5em 0.2em;
 	line-height: 1.2;
 }
 
@@ -383,7 +366,7 @@ body#contents #footer p {
 
 .commented-code {
 	margin: 2em -6em;
-	font-size: 87.5%;
+	font-size: 0.875em;
 }
 
 .commented-code td,
@@ -395,7 +378,7 @@ body#contents #footer p {
 }
 
 .commented-code td {
-	padding: .2em .5em;
+	padding: 0.2em 0.5em;
 	border-style: solid none;
 	border-color: #ddd;
 }
@@ -410,8 +393,6 @@ body#contents #footer p {
 	background-color: #fff9f9;
 	border: 1px solid #dadada;
 	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 
 .references h2,
@@ -433,5 +414,5 @@ body#contents #footer p {
 }
 
 .references li {
-	margin: .2em 0 .2em 2.625em;
+	margin: 0.2em 0 0.2em 2.625em;
 }

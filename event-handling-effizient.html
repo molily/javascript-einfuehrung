@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Effiziente Ereignisverarbeitung: Event-Delegation und Capturing</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -39,7 +40,7 @@
    // Vereinheitlichung von <a href="event-handling-objekt.html">Event-Objekt</a> und <a href="event-handling-objekt.html#currenttarget-target">Zielelement</a>
    var e = e || window.event;
    var target = e.target || e.srcElement;
-   
+
    var elementName = target.nodeName,
       aElement = false;
    // Überprüfe, ob das Zielelement ein Link oder ein Bild im Link ist:
@@ -52,7 +53,7 @@
       // suche das zugehörige Link-Element:
       aElement = target.parentNode;
    }
-   
+
    // Zeige das Vollbild, wenn das Zielelement
    // ein Link ist oder in einem Link liegt:
    if (aElement) {
@@ -60,7 +61,7 @@
       // Unterdrücke die Standardaktion:
       return false;
    }
-   
+
    // Andernfalls mache nichts.
 }</pre>
 	<p>In dieser Funktion wird das Zielelement des Ereignisses angesprochen und dessen Elementname überprüft. Wenn ein <code>a</code>-Element geklickt wurde, muss es sich um einen Link auf ein Bild handeln und das Vollbild soll eingeblendet werden.</p>
@@ -70,7 +71,7 @@
    // Empfange das Elementobjekt als ersten Parameter und
    // lese dessen href-Attribut mit der Bild-Adresse aus:
    var bildAdresse = aElement.href;
-   
+
    // Blende das Bild ein, auf das der Link zeigt.
    // (Die genaue Umsetzung ist an dieser Stelle ausgeklammert.)
 }</pre>
@@ -101,7 +102,7 @@
 	<p>Event-Capturing ist nur unter Verwendung der standardisierten Methode <code>addEventListener</code> möglich. Das traditionelle Event-Handling mit seinem Schema <code>element.onevent = handlerfunktion</code> registriert den Handler immer für die Bubbling-Phase. Dasselbe gilt für das Microsoft-Modell mit <code>attachEvent</code>. Für Internet Explorer vor Version 9, welche <code>addEventListener</code> nicht unterstützen, müssen Sie daher gegebenenfalls eine Alternative ohne Event-Capturing bereitstellen.</p>
 	<p>Um Event-Handler für die Capturing-Phase zu registrieren, nutzen Sie wie gewohnt <code>addEventListener</code>, setzen jedoch den dritten Boolean-Parameter auf <code>true</code>:</p>
 	<pre>document.addEventListener("focus", captureHandler, true);</pre>
-	
+
 	<p>Die Vorteile des Capturings liegen also darin, insbesondere nicht aufsteigende Ereignisse bei einem höherliegenden Element zu verarbeiten.
 	<p>Folgende Ereignisse beispielsweise steigen nicht auf:</p>
 	<ul>

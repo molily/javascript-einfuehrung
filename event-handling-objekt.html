@@ -3,8 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JavaScript: Arbeiten mit dem Event-Objekt</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script type="text/javascript" src="js-doku.js"></script>
+<meta name="viewport" content="width=device-width">
+<script src="js-doku.js"></script>
 <style type="text/css">
 #target-area {
 	border: 1px solid #aaf;
@@ -185,7 +187,7 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
 	<p>Innerhalb der Handler-Funktion können wir über <code>this</code> auf das <code>p</code>-Element zugreifen. Im Beispiel wird auf dessen Eigenschaft <code>nodeName</code> ausgegeben, welche den Elementnamen <code>P</code> enthält.</p>
 	<p>Der DOM-Standard sieht eine andere Zugriffsweise vor: Die Eigenschaft <code>currentTarget</code> beim Event-Objekt enthält das Element, dessen Handler gerade ausgeführt wird. Der Internet Explorer kennt diese Eigenschaft erst an Version 9. Das besagte <code>this</code> ist in älteren Internet-Explorer-Versionen die einzige Möglichkeit, auf das fragliche Element zuzugreifen. Der Einfachheit halber können Sie browserübergreifend <code>this</code> verwenden.</p>
-	
+
 	<p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Diese kennen alle modernen Browser, doch der Internet Explorer unterstützt diese Eigenschaft erst ab Version 9. Ältere Versionen kennen eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist &ndash; wir kennen dieses Vorgehensweise bereits vom Zugriff auf das Event-Objekt.</p>
 	<pre>function klickverarbeitung (eventObjekt) {
    if (!eventObjekt) eventObjekt = window.event;
