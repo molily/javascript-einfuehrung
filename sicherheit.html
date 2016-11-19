@@ -64,7 +64,7 @@
 		<p>Die Same-Origin-Policy lässt einen Punkt außer Acht: Ein Script darf im Kontext der Herkunftsdomain ohne Begrenzung schalten und walten sowie mittels <code>XMLHttpRequest</code> Daten empfangen und versenden. Das kann zu einem schwerwiegenden Problem werden, wenn das Script nicht im Web, sondern <em>lokal</em> ausgeführt wird. <em>Lokal</em> bedeutet, dass das Dokument auf einer Festplatte des Client-Rechners liegt und von dort aus im Browser geöffnet wird. Die URI beginnt dann mit <code>file://localhost/</code>, in der Kurzschreibweise <code>file:///</code>.</p>
 		<p>Die Konsequenz ist, dass ein solches Script prinzipiell <strong>alle</strong> Dateien auf den erreichbaren Datenträgern auslesen kann (aber nicht ändern - zumindest nicht über <code>XMLHttpRequest</code> alleine). Mit einigen Kniffen können diese abgegriffenen Daten ins Web gesendet werden. Somit ließen sich vertrauliche Daten ausspionieren. Es stellt daher ein grundlegendes Problem dar, wenn fremde Dokumente mit JavaScript auf den eigenen Rechner gelangen.</p>
 		<p>Der Internet Explorer ab Windows XP mit dem Service Pack 2 stellt daher alle lokalen Dokumente mit Scripten unter Generalverdacht und verhindert ihre Ausführung. Dieser Sicherheitsmechanismus nennt sich <em>Local Machine Zone Lockdown</em>, zu deutsch <em>Sperrung der Zone des lokalen Computers</em>.</p>
-		<p>Wie sich dieser Generalverdacht auswirkt und wie man den Internet Explorer trotzdem dazu bringen kann, Scripte in lokalen Dokumenten auszuführen, erörtert der Artikel <a href="http://aktuell.de.selfhtml.org/artikel/sonstiges/markoftheweb/" class="anchor-online-page">Umgehung der Sperrung der lokalen Zone</a>.</p>
+		<p>Wie sich dieser Generalverdacht auswirkt und wie man den Internet Explorer trotzdem dazu bringen kann, Scripte in lokalen Dokumenten auszuführen, erörtert der Artikel <a href="https://wiki.selfhtml.org/wiki/JavaScript/Anwendung_und_Praxis/Local_Machine_Zone_Lockdown">Umgehung der Sperrung der lokalen Zone</a>.</p>
 	</div>
 
 </div>
@@ -151,7 +151,7 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
 
 	<div id="internet-explorer-seitenspezifisch" class="subsection">
 		<h3>Internet Explorer</h3>
-		<p>Der Internet Explorer verfügt über verschiedene <a href="http://support.microsoft.com/kb/174360/de" class="anchor-external">Sicherheitszonen</a>, die standardmäßig an gewisse Einstellungen gekoppelt sind. Eine normales HTML-Dokument im World Wide Web liegt in der <em>Internetzone</em>, ein Dokument auf dem lokalen Rechner oder im lokalen Netzwerk in der Zone <em>Lokales Intranet</em>.</p>
+		<p>Der Internet Explorer verfügt über verschiedene Sicherheitszonen, die standardmäßig an gewisse Einstellungen gekoppelt sind. Eine normales HTML-Dokument im World Wide Web liegt in der <em>Internetzone</em>, ein Dokument auf dem lokalen Rechner oder im lokalen Netzwerk in der Zone <em>Lokales Intranet</em>.</p>
 		<div class="note-box note-box-question">
 		<p class="note-box-title">Frage von: mschaefer</p>
 		<div class="note-box-text">Das kann so nicht stimmen, Local Machine Zone Lockdown nicht berücksichtigt?! Wie spielt die darein?</div>

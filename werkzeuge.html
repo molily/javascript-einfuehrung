@@ -97,7 +97,7 @@
 		<h3>Fehlermeldungen in älteren Internet Explorern</h3>
 		<p>Sie sollten bei der JavaScript-Entwicklung die neueste Internet-Explorer-Version verwenden, wenn es nicht gerade um das absichtliche Testen mit älteren Versionen geht. Denn die Fehlermeldungen in älteren Versionen sind weniger präzise sowie oft unverständlich und verwirrend. In manchen Fällen wird die Zeilennummer nicht korrekt angegeben und bei ausgelagerten JavaScript-Dateien die tatsächliche Script-Adresse nicht angegeben, nur die Adresse des einbindenden HTML-Dokuments. Ältere Internet Explorer kennen keine Konsole, in der alle Fehlermeldungen mitgeloggt werden.</p>
 		<p class="image"><img src="images/ie7-fehlermeldung.png" alt=""></p>
-		<p>Ein komfortables Debugging von Scripten im Internet Explorer vor Version 8 ist daher ohne Zusatzprogramme schwer möglich. Ein mögliches Zusatzprogramm, das ein brauchbares Fehler-Logging anbietet, lautet <a href="http://www.my-debugbar.com/wiki/CompanionJS/HomePage">Companion.JS</a> bzw. <a href="http://www.debugbar.com/">DebugBar</a>. Einen komplexeren JavaScript-Debugger bietet die umfangreiche <a href="http://www.microsoft.com/germany/express/products/web.aspx">Visual Web Developer 2010 Express Edition</a>, die sich kostenlos herunterladen lässt.</p>
+		<p>Ein komfortables Debugging von Scripten im Internet Explorer vor Version 8 ist daher ohne Zusatzprogramme schwer möglich. Ein mögliches Zusatzprogramm, das ein brauchbares Fehler-Logging anbietet, lautet <a href="http://www.my-debugbar.com/wiki/CompanionJS/HomePage">Companion.JS</a> bzw. <a href="http://www.debugbar.com/">DebugBar</a>. Einen komplexeren JavaScript-Debugger bietet die umfangreiche <a href="https://msdn.microsoft.com/en-us/library/dd537667(v=vs.110).aspx">Visual Studio Express for Web</a>, die sich kostenlos herunterladen lässt.</p>
 	</div>
 
 	<div id="opera" class="subsection">
@@ -170,7 +170,7 @@ window.alert("Farbe gesetzt.");</pre>
 
 	<div class="subsection" id="console-objekt">
 		<h3>Ablaufprotokolle mit Konsolen-Ausgaben (<code>console</code>-Objekt)</h3>
-		<p>Vielseitiger als Ausgaben mittels <code>window.alert</code> ist die Nutzung der Schnittstelle zur JavaScript-Konsole des Browsers. Diese wurde von Firebug für den Firefox erfunden, wurde aber mittlerweile vom Internet Explorer, Safari und Chrome für ihre Fehlerkonsolen zumndest rudimentär übernommen: <a href="http://getfirebug.com/console.html">Dokumentation der Konsole-API von Firebug</a>.</p>
+		<p>Vielseitiger als Ausgaben mittels <code>window.alert</code> ist die Nutzung der Schnittstelle zur JavaScript-Konsole des Browsers. Diese wurde von Firebug für den Firefox erfunden, wurde aber mittlerweile vom Internet Explorer, Safari und Chrome für ihre Fehlerkonsolen zumndest rudimentär übernommen: <a href="https://getfirebug.com/wiki/index.php/Console_API">Dokumentation der Konsole-API von Firebug</a>.</p>
 		<p>Das globale Objekt <code>window.console</code> bietet verschiedene Methoden an, mit denen Sie Statusmeldungen in die browsereigene Konsole schreiben können. In der Konsole haben Sie dann ein Log aller Meldungen Ihres Scriptes - ebenso wie etwaige Fehlermeldungen.</p>
 		<p>Das obige Beispiel könnte für Firebug mithilfe der Methode <code>console.debug</code> folgendermaßen umgesetzt werden:</p>
 		<pre>var überschriftenListe = document.getElementsByTagName("h1");
@@ -233,7 +233,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
 	<div id="ie7-developer-toolbar" class="subsection">
 		<h3>Internet Explorer 6 und 7: Developer Toolbar</h3>
-		<p>Der Internet-Explorer-Versionen vor 8 verfügen über keinen eingebauten DOM-Inspektor. Es existiert allerdings ein offizieller Zusatz: Die <a href="http://www.microsoft.com/downloads/details.aspx?familyid=e59c3964-672d-4511-bb3e-2d5e1db91038&amp;displaylang=en">Internet Explorer Developer Toolbar</a>. Diese ist ein Vorgänger der Entwicklertools im Internet Explorer 8 und die Bedienung gestaltet sich weitgehend gleich.</p>
+		<p>Der Internet-Explorer-Versionen vor 8 verfügen über keinen eingebauten DOM-Inspektor. Es existiert allerdings ein offizieller Zusatz: Die <a href="http://web.archive.org/web/20100328172952/http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;FamilyID=E59C3964-672D-4511-BB3E-2D5E1DB91038">Internet Explorer Developer Toolbar</a>. Diese ist ein Vorgänger der Entwicklertools im Internet Explorer 8 und die Bedienung gestaltet sich weitgehend gleich.</p>
 		<p>Nachdem Sie den Zusatz installiert haben, können Sie die Toolbar aktivieren, indem Sie im Menü <em>Ansicht → Explorer-Leiste → IE Developer Toolbar</em> aktivieren. Gegebenenfalls ist das Menü im Internet Explorer 7 standardmäßig ausgeblendet - Sie können es kurzzeitig einblenden, indem Sie die Alt-Taste drücken. Die Toolbar erscheint am unteren Fensterrand und Sie können deren Höhe variieren.</p>
 		<p>Das Beispieldokument wird in der IE Developer Toolbar folgendermaßen veranschaulicht:</p>
 		<p class="image"><img src="images/ie-developer-toolbar.png" alt=""></p>
@@ -297,7 +297,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 	<p>Bei der JavaScript-Programmierung sollten Sie gewisse Konventionen zur Code-Formatierung einhalten. Das dient nicht nur der Lesbarkeit, Übersichtlichkeit und Klarheit des Quellcodes, sondern macht erst effektive Fehlersuche und Debugging möglich. Das beinhaltet grob gesagt eine Anweisung pro Zeile sowie eine Einrückung innerhalb von Blöcken (Funktionen, Kontrollstrukturen usw.). Wie das im Detail aussieht, ist Ihrem Geschmack überlassen.</p>
 	<p>Wenn das JavaScript jedoch im Browser ausgeführt wird, ...</p>
 	<ul>
-		<li><a href="http://code.google.com/intl/de/closure/compiler/">Google Closure Compiler</a></a></li>
+		<li><a href="https://developers.google.com/closure/compiler/">Google Closure Compiler</a></a></li>
 		<li><a href="http://closure-compiler.appspot.com/home">Closure Compiler Service</a></li>
 		<li><a href="http://marijnhaverbeke.nl/uglifyjs">uglifyjs</a></li>
 	</ul>

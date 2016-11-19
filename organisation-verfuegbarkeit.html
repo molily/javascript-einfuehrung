@@ -411,7 +411,7 @@ instanz.start();
 		<p>Die Methoden <code>call</code> und <code>apply</code> von Funktionsobjekten erlauben das Erzwingen des Kontextes beim Funktionsaufruf.</p>
 		</div>
 
-		<p>Da Funktionen in JavaScript Objekte erster Klasse sind, können sie selbst Methoden besitzen. Zwei der vordefinierten Methoden von Funktionsobjekten sind <a href="https://developer.mozilla.org/Core_JavaScript_1.5_Reference:Global_Objects:Function:call/en">call</a> und <a href="https://developer.mozilla.org/Core_JavaScript_1.5_Reference:Global_Objects:Function:apply/en">apply</a>. Diese rufen die zugehörige Funktion auf und erlauben es zusätzlich, den Kontext beim Aufruf einer Funktion explizit anzugeben. Das Objekt, auf das <code>this</code> innerhalb der Funktion zeigt, wird nicht mehr nach den üblichen Regeln bestimmt. Stattdessen zeigt <code>this</code> auf das Objekt, das <code>call</code> bzw. <code>apply</code> übergeben wird.</p>
+		<p>Da Funktionen in JavaScript Objekte erster Klasse sind, können sie selbst Methoden besitzen. Zwei der vordefinierten Methoden von Funktionsobjekten sind <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> und <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply</a>. Diese rufen die zugehörige Funktion auf und erlauben es zusätzlich, den Kontext beim Aufruf einer Funktion explizit anzugeben. Das Objekt, auf das <code>this</code> innerhalb der Funktion zeigt, wird nicht mehr nach den üblichen Regeln bestimmt. Stattdessen zeigt <code>this</code> auf das Objekt, das <code>call</code> bzw. <code>apply</code> übergeben wird.</p>
 
 		<p>Auf diese Weise können wir jede beliebige Funktion im Kontext eines beliebigen Objektes ausführen, auch ohne dass die Funktion am angegebenen Objekt hängt:</p>
 
@@ -651,7 +651,7 @@ instanz.start();
 
 		<p>Die hier vorgestellten <code>bind</code> und <code>bindAsEventListener</code> sind zwei <em>sehr einfache</em> Umsetzungen. Es gibt viele weitere, die mehr Komfort bieten und auf Performance optimiert sind. Die tatsächlichen Funktionen im Prototype-Framework ermöglichen es beispielsweise, dass Parameter der Wrapper-Funktion an die ursprüngliche Funktion weitergegeben werden. Die oben beschriebene <code>bind</code>-Funktion gibt lediglich die Parameter weiter, die beim <code>bind</code>-Aufruf angegeben wurden. <code>bindAsEventListener</code> aus Prototype erlaubt ebenfalls beides, während die obige Funktion nur das Event-Objekt weitergeben kann.</p>
 
-		<p>Neben Prototype bieten auch andere Frameworks und funktionale Bibliotheken Function Binding und Currying. Das Konzept ist dasselbe, die Umsetzungen und Benennungen unterscheiden sich im Detail. Das Framework <a href="http://mootools.net/">Mootools</a> bietet etwa <a href="http://mootools.net/docs/core/Native/Function#Function:bind">bind</a> und <a href="http://mootools.net/docs/core/Native/Function#Function:bindWithEvent">bindWithEvent</a>.</p>
+		<p>Neben Prototype bieten auch andere Frameworks und funktionale Bibliotheken Function Binding und Currying. Das Konzept ist dasselbe, die Umsetzungen und Benennungen unterscheiden sich im Detail. Das Framework <a href="http://mootools.net/">Mootools</a> bietet etwa <a href="http://mootools.net/core/docs/1.6.0/Types/Function#Function:bind">bind</a> und <a href="http://mootools.net/core/docs/1.6.0/Types/Function#Deprecated-Functions:bindWithEvent">bindWithEvent</a>.</p>
 
 	</div>
 
