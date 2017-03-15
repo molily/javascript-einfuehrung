@@ -38,7 +38,7 @@ function funktion3 () {
 }
 </pre>
 
-	<p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Gültigkeitsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>indow.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
+	<p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Gültigkeitsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>window.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
 
 </div>
 
@@ -70,7 +70,7 @@ function funktion3 () {
 	<li>Erweiterbarkeit (Modularisierung)</li>
 	</ul>
 
-	<p>Es kommt daher auf das richtige Gleichgewicht an. Zwei Beispiele: Das riesige jQuery-Framework definiert standardmäßig nur zwei globale Variablen: <code>window.jQuery()</code> und als Alias <code>window.$()</code>. Das YUI-Framework definiert lediglich <code>window.YUI()</code>. <code>window.jQuery()</code> und <code>window.YUI()</code> sind beides Funktionen, denen man beim Aufruf letztlich Funktionen übergibt - dazu später mehr. Beide Frameworks schaffen es, nicht mehr als ein globales Objekt anzulegen, ohne auf die obigen Features wie Erweiterbarkeit zu verzichten.</p>
+	<p>Es kommt daher auf das richtige Gleichgewicht an. Zwei Beispiele: Das riesige jQuery-Framework definiert standardmäßig nur zwei globale Variablen: <code>window.jQuery</code> und als Alias <code>window.$</code>. Das YUI-Framework definiert lediglich <code>window.YUI</code>. <code>window.jQuery</code> und <code>window.YUI</code> sind beides Funktionen, denen man beim Aufruf letztlich Funktionen übergibt - dazu später mehr. Beide Frameworks schaffen es, nicht mehr als ein globales Objekt anzulegen, ohne auf die obigen Features wie Erweiterbarkeit zu verzichten.</p>
 
 </div>
 
@@ -84,7 +84,7 @@ function funktion3 () {
 
 	<p>Eine einfache Möglichkeit, um den globalen Scope zu schonen, ist die Gruppierung aller Variablen und Funktionen eines Scripts in einer JavaScript-Objektstruktur. Im globalen Geltungsbereich taucht dann nur noch diese eine Objektstruktur auf, andere globale Variablen oder Funktionen werden nicht belegt. Das Script ist in der Objektstruktur in sich abgeschlossen. Damit sind Wechselwirkungen mit anderen Scripten ausgeschlossen, solange der Bezeichner der Objektstruktur eindeutig ist.
 
-	<p>Ein JavaScript-Objekt ist erst einmal nichts anderes als ein Container für weitere Daten. Ein Objekt ist eine Liste, in der unter einem Bezeichner gewisse Unterobjekte gespeichert sind. Aus anderen Programmiersprachen ist diese solche Datenstruktur als <em>Hash</em> oder <em>assoziativer Array</em> bekannt. In JavaScript sind alle vorgegebenen Objekte und Methoden in solchen verschachtelten Objektstrukturen organisiert, z.B. <code>window.document.body</code>.</p>
+	<p>Ein JavaScript-Objekt ist erst einmal nichts anderes als ein Container für weitere Daten. Ein Objekt ist eine Liste, in der unter einem Bezeichner gewisse Werte gespeichert sind. Aus anderen Programmiersprachen ist diese solche Datenstruktur als <em>Hash</em> oder <em>assoziativer Array</em> bekannt. In JavaScript sind alle vorgegebenen Objekte und Methoden in solchen verschachtelten Objektstrukturen organisiert, z.B. <code>window.document.body</code>.</p>
 
 	<p>In JavaScript gibt es den allgemeinen Objekttyp <code>Object</code>, von dessen Prototypen alle anderen JavaScript-Objekte abstammen. Das heißt, jedes JavaScript-Objekt ist immer auch ein <code>Object</code>-Objekt. <code>Object</code> ist die Grundlage, auf der die restlichen spezifischeren Objekttypen aufbauen.</p>
 
@@ -177,6 +177,8 @@ Modul.methode();
 	<li>Schließe die Anweisung mit einem <code>;</code> ab.</li>
 	</ol>
 
+  <p>Kurz gesagt handelt es sich um einen sofort ausgeführten Funktionsausdruck. Daher lautet der englische Name für dieses Programmiermuster <em lang="en">Immediately-invoked Function Expression</em>, abgekürzt »IIFE«.</p>
+
 	<p>Diese anonyme Funktion wird nur notiert, um einen Scope zu erzeugen, und sie wird sofort ausgeführt, ohne dass sie irgendwo gespeichert wird. Innerhalb der Funktion wird nun der gewünschte Code untergebracht:</p>
 
 <pre>
@@ -248,7 +250,7 @@ Modul.methode();
 		<p>DOM-Ready-Handlerfunktionen in verschiedenen Bibliotheken bieten berets einen privaten Scope, den Sie nutzen sollten.</p>
 		</div>
 
-		<p>Bei der Verwendung mit jQuery ist das Anlegen solcher Funktions-Scope gang und gäbe. Wenn die Initialisierung eines Scriptes auf DOM ready warten soll, dann übergibt man einen Funktionausdruck an <code>jQuery(document).ready()</code>. Diese Funktion wird als Handler beim Eintreten des DOM-ready-Ereignisses ausgeführt. Man nutzt sie gleichzeitig als privaten Scope für weitere Objekte. Das obige Beispiel können wir also folgendermaßen anpassen:</p>
+		<p>Bei der Verwendung mit jQuery ist das Anlegen solcher Funktions-Scopes gang und gäbe. Wenn die Initialisierung eines Scriptes auf DOM ready warten soll, dann übergibt man einen <a href="http://api.jquery.com/jQuery/#jQuery3">Funktionausdruck an <code>jQuery(…)</code></a>. Diese Funktion wird als Handler beim Eintreten des <a href="https://api.jquery.com/ready/">DOM-ready-Ereignisses</a> ausgeführt. Man nutzt sie gleichzeitig als privaten Scope für weitere Objekte. Das obige Beispiel können wir also folgendermaßen anpassen:</p>
 
 <pre>
 jQuery(function ($) {
@@ -283,7 +285,7 @@ jQuery(function ($) {
 		<p>Das Übergeben von Objekten in die Kapselfunktion verkürzt die Scope-Kette und beschleunigt den Zugriff auf diese Objekte etwas.</p>
 		</div>
 
-		<p>jQuery stellt standardmäßig <code>window.$</code> als Abkürzung für <code>window.jQuery</code> zur Verfügung, wenn nicht der <a href="http://docs.jquery.com/Using_jQuery_with_Other_Libraries">noConflict-Modus</a> aktiviert wird. Es ergibt jedoch Sinn, das jQuery-Objekt als lokale Variable zu definieren, denn das beschleunigt den Zugriff darauf (Stichwort Scope-Chain).</p>
+		<p>jQuery stellt standardmäßig <code>window.$</code> als Abkürzung für <code>window.jQuery</code> zur Verfügung, wenn nicht der <a href="http://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/">noConflict-Modus</a> aktiviert wird. Es ergibt jedoch Sinn, das jQuery-Objekt als lokale Variable zu definieren, denn das beschleunigt den Zugriff darauf (Stichwort Scope-Chain).</p>
 
 		<p>Aus demselben Grund hat es sich eingebürgert, das <code>window</code>-Objekt sowie weitere häufig benutzte Objekte wie <code>document</code> mittels Parametern in den Funktions-Scope zu übergeben:</p>
 
@@ -307,7 +309,7 @@ jQuery(function ($) {
 
 	<h2>Das Revealing Module Pattern: Kapselung plus öffentliche Schnittstelle</h2>
 
-	<p>Wir haben nun beide Extreme kennengelernt: Bei <code>Object</code>-Containern sind alle Unterobjekte öffentlich. Bei einer Kapselfunktion ist kein Objekt nach außen hin zugänglich. Wenn wir ein wiederverwendbares Script schreiben wollen, wollen wir meist eine öffentliche Schnittstelle (API) anbieten. Dazu müssen einige ausgewählte Objekte, in der Regel Methoden, sowohl nach außen sichtbar sein als auch Zugriff auf die internen, privaten Objekte haben. Man spricht in diesem Fall von <dfn>privilegierten Methoden</dfn>.</p>
+	<p>Wir haben nun beide Extreme kennengelernt: Bei <code>Object</code>-Containern sind alle Unterobjekte öffentlich. Bei einer Kapselfunktion ist kein Objekt nach außen hin zugänglich. Wenn wir ein wiederverwendbares Script schreiben wollen, wollen wir meist eine öffentliche Programmierschnittstelle (API) anbieten. Dazu müssen einige ausgewählte Objekte, in der Regel Methoden, sowohl nach außen sichtbar sein als auch Zugriff auf die internen, privaten Objekte haben. Man spricht in diesem Fall von <dfn>privilegierten Methoden</dfn>.</p>
 
 	<div class="sidebox">
 	<p>Das Revealing Module Pattern erlaubt öffentliche und private Objekte und eignet sich ideal, um API und interne Implementierung sauber zu trennen.</p>

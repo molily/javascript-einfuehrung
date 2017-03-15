@@ -144,7 +144,6 @@ mauzi.miau();
 	<h3>maunzi</h3>
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -153,7 +152,7 @@ mauzi.miau();
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
 	<tr class="own"><th>miau</th><td>function () { alert("Miau!"); }</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -173,14 +172,15 @@ mauzi.miau();
 
 </div><!-- /.js-objects -->
 
-	<p>Wenn wir <code>maunzi.miau</code> notieren, dann wird nacheinander an diesen drei Objekten nach einer Eigenschaft mit diesem Namen gesucht.</p>
+	<p>Wenn wir <code>maunzi.miau</code> notieren, dann wird nacheinander an diesen drei Objekten nach der Eigenschaft <code>miau</code> gesucht.</p>
 
-	<p>Das Objekt <code>maunzi</code> besitzt selbst keine Eigenschaften bis auf <code>constructor</code>, welches auf die Funktion zeigt, mit dem es erzeugt wurde &ndash; das ist bekanntlich <code>Katze</code>. Intern besitzt <code>maunzi</code> einen Verweis auf seinen Prototyp, das ist <code>Katze.prototype</code>. Dieser Verweis wird in der unsichtbaren Eigenschaft <code>[[Prototype]]</code> gespeichert &ndash; lediglich in einigen JavaScript-Engines ist er über die Eigenschaft <code>__proto__</code> les- und schreibbar.</p>
+	<p>Das Instanzobjekt <code>maunzi</code> besitzt in diesem Beispiel keine sichtbaren Eigenschaften. Intern besitzt <code>maunzi</code> jedoch einen Verweis auf seinen Prototyp, das ist <code>Katze.prototype</code>. Dieser Verweis wird in der unsichtbaren Eigenschaft <code>[[Prototype]]</code> gespeichert und ist in einigen JavaScript-Engines über die besondere Eigenschaft <code>__proto__</code> les- und schreibbar.</p>
 
-	<p>Über diesen Verweis schreitet der JavaScript-Interpreter zum Prototypen von <code>maunzi</code>, <code>Katze.prototype</code>. Dort wird er fündig, denn dort existiert eine Eigenschaft namens <code>miau</code>. Dies ist eine Funktion und sie kann mit dem Aufruf-Operator <code>(&hellip;)</code> ausgeführt werden.</p>
+	<p>
+	Das Objekt <code>maunzi</code> besitzt also keine Eigenschaft namens <code>miau</code>. Daher folgt der JavaScript-Interpreter dem Verweis zu Prototypen von <code>maunzi</code>: <code>Katze.prototype</code>. Dort wird er fündig, denn dort existiert eine Eigenschaft namens <code>miau</code>. Dies ist eine Funktion und sie kann mit dem Aufruf-Operator <code>(&hellip;)</code> ausgeführt werden: <code>mauzi.miau()</code>.</p>
 
 	<div class="sidebox">
-	<p>Prototypische Vererbung ist das Delegieren von Funktionalität von einem Objekt zum anderen. Das ist prinzipiell nicht an Konstruktoren und Instanzen gebunden, über diese wird bloß der Prototyp-Verweis angelegt.</p>
+	<p>Prototypische Vererbung ist das Delegieren von Funktionalität von einem Objekt zum anderen. Das ist nicht an Konstruktoren und Instanzen gebunden. Wir nutzen diese lediglich, um den Prototyp-Verweis anzulegen.</p>
 	</div>
 
 	<p>Auf diese Weise stehen alle Eigenschaften eines Prototypen, im Beispiel <code>Katze.prototype</code>, auch beim Instanzobjekt zur Verfügung, im Beispiel <code>maunzi</code>. Dies ist das ganze Geheimnis hinter der <strong>prototypischen Vererbung</strong>. Wenn bei einem Objekt selbst die angeforderten Eigenschaften nicht gefunden wurde, so dienen die Objekte in der Prototyp-Kette als Fallback. Man spricht von einer <dfn>Delegation</dfn> (Übertragung, Weitergabe). Das Objekt gibt die Anfrage an seine Prototypen weiter.</p>
@@ -227,7 +227,7 @@ var maunzi = new Katze();
 alert(maunzi.rasse);
 </pre>
 
-	<p>Greifen wir auf <code>maunzi.rasse</code> zu, so wird die <code>rasse</code>-Eigenschaft beim Prototypen gefunden. Denn die relevanten Objekte sehen so aus (<code>Object.prototype</code> wurde ausgeblendet):</p>
+	<p>Greifen wir auf <code>maunzi.rasse</code> zu, so wird die <code>rasse</code>-Eigenschaft nicht bei der Instanz selbst, aber beim Prototypen gefunden. Denn die relevanten Objekte sehen so aus (<code>Object.prototype</code> wird ausgeblendet):</p>
 
 <div class="js-objects">
 
@@ -235,7 +235,6 @@ alert(maunzi.rasse);
 	<h3>maunzi</h3>
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -244,7 +243,7 @@ alert(maunzi.rasse);
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
 	<tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -269,7 +268,6 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
 	<tr class="own"><th>rasse</th><td>"Perser"</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -278,7 +276,7 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 	<table>
 	<tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
 	<tr class="own"><th>rasse</th><td>"Europäisch Kurzhaar"</td></tr>
-	<tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+	<tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
 	</table>
 </div>
 
@@ -292,7 +290,9 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 
 	<p>Viele klassenbasierte Sprachen erlauben es, die Sichtbarkeit von Instanzeigenschaften festzulegen und unterscheiden beispielsweise zwischen öffentlichen und privaten Eigenschaften.</p>
 
-	<p>In JavaScript (ECMAScript 3) gibt es keine Möglichkeit, gewisse Eigenschaften eines Objektes als privat zu deklarieren, sodass sie ausschließlich in Methoden des Objekt zur Verfügung stehen. Sobald wir einem Objekt eine Eigenschaft hinzufügen, ist diese auch überall dort verfügbar, wo das Objekt verfügbar ist. Ebenso ist es nicht möglich, eine Eigenschaft als nicht überschreibbar und nicht löschbar zu deklarieren. Dies ist erst in ECMAScript 5 möglich, welches derzeit noch nicht breit unterstützt wird.</p>
+	<p>In JavaScript (ECMAScript 3) gibt es keine Möglichkeit, gewisse Eigenschaften eines Objektes als privat zu deklarieren, sodass sie ausschließlich in Methoden des Objekt zur Verfügung stehen. Sobald wir einem Objekt eine Eigenschaft hinzufügen, ist diese auch überall dort verfügbar, wo das Objekt verfügbar ist.</p>
+
+	<p>Das folgende Beispiel zeigt, wie ein Instanzobjekt und auch der Prototyp nachträglich verändert werden können:</p>
 
 <pre>
 function Katze () {}
@@ -305,8 +305,8 @@ Katze.prototype.miau = function () {
 var maunzi = new Katze();
 var schnucki = new Katze();
 
-// Überschreibe vom Prototyp vererbte Eigenschaft,
-// indem eine gleichnamige Eigenschaft bei der Instanz erzeugt wird:
+// Erzeuge eine gleichnamige Eigenschaft bei der Instanz,
+// um die vom Prototyp vererbte Eigenschaft zu überdecken:
 maunzi.pfoten = 5;
 alert('Maunzi hat nun ' + maunzi.pfoten + ' Pfoten.');
 
@@ -317,31 +317,36 @@ Katze.prototype.miau = function () {
 schnucki.miau();
 </pre>
 
-	<p>Das obige Beispiel zeigt, wie ein Instanzobjekt und auch der Prototyp nachträglich verändert werden können: Plötzlich hat Maunzi fünf Pfoten und alle Katzen sagen »wau« anstatt »miau«. Dies ist sowohl ein Defizit von ECMAScript 3 als auch eine Stärke: Prototypen sind nicht abgeschlossen und Objekte immer erweiterbar.</p>
+	<p>Plötzlich hat Maunzi fünf Pfoten und alle Katzen sagen »wau« anstatt »miau«. Dies ist sowohl ein Defizit von ECMAScript 3 als auch eine Stärke: Prototypen sind nicht abgeschlossen und Objekte immer erweiterbar. Erst ab ECMAScript 5 is es möglich, eine Eigenschaft als nicht überschreibbar und ein Objekt als nicht erweiterbar zu deklarieren.</p>
 
 	<div class="sidebox">
 	<p>Private Eigenschaften gibt es nicht &ndash; wir können stattdessen einen Funktions-Scope definieren, dessen private Variablen die Instanzmethoden einschließen.</p>
 	</div>
 
-	<p>Wie gesagt gibt es keine privaten Eigenschaften im Wortsinn, auch wenn manche diesen Begriff auch auf JavaScript anwenden. Denn wenn ein Objekt an der Instanz hängt, ist es in ECMAScript 3 auch notwendig nach außen sichtbar und unkontrolliert überschreibbar. Wir können jedoch einen Trick anwenden, den wir bereits vom Revealing Module Pattern kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des Objektes. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>priviligierte Methoden</dfn>.</p>
+	<p>Wie gesagt gibt es keine privaten Eigenschaften im Wortsinn, auch wenn manche diesen Begriff auch auf JavaScript anwenden. Denn wenn ein Objekt an der Instanz hängt, ist es in ECMAScript 3 auch notwendig nach außen sichtbar und unkontrolliert überschreibbar.</p>
 
-	<p>Da der Konstruktor bereits einen Funktions-Scope bereitstellt, nutzen wir diesen für private Objekte. Damit die Methoden auf die privaten Objekte Zugriff haben, müssen sie im Konstruktor erzeugt und dürfen nicht über den Prototyp definiert werden. Über <code>this</code> werden sie ans Instanzobjekt gehängt.</p>
+	<p>Wir können jedoch einen Trick anwenden, den wir bereits vom <a href="organisation-module.html#revealing-module">Revealing Module Pattern</a> kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des Objektes. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>priviligierte Methoden</dfn>.</p>
+
+	<p>Da der Konstruktor bereits einen Funktions-Scope bereitstellt, nutzen wir kurzerhand diesen für private Objekte. Damit die Methoden auf die privaten Objekte Zugriff haben, müssen sie im Konstruktor erzeugt und dürfen nicht über den Prototyp definiert werden. Über <code>this</code> werden sie ans Instanzobjekt gehängt.</p>
 
 <pre>
 function Katze (name) {
-    // --- Private Objekte
+    // --- Private Objekte ---
+
     // Private Variablen
     var pfoten = 4;
     var gestreichelt = 0;
-    // name ist ebenfalls eine private Variable
+    // Der Parameter »name« ist ebenfalls privat
 
     // Private Funktionen
     function miau () {
         alert(name + ' macht miau!');
     }
 
-    // --- Öffentliche (priviligierte) Eigenschaften
+    // --- Öffentliche (priviligierte) Eigenschaften ---
+
     this.name = name;
+
     // Öffentliche Methoden
     this.kitzeln = function () {
         alert(name + ' hat ' + pfoten + ' kitzlige Pfoten.');
@@ -396,7 +401,7 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
     <h3 class="special">Katze.prototype</h3>
     <table>
     <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+    <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
     </table>
 </div>
 
@@ -416,13 +421,13 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 
 </div><!-- /.js-objects -->
 
-	<p>Der Prototyp ist demnach leer, die Eigenschaften hängen direkt an der Instanz und werden nicht vererbt. Dies hat verschiedene Konsequenzen:</p>
+	<p>Der Prototyp <code>Katze.prototype</code> ist also leer, die Eigenschaften hängen direkt an der Instanz und werden nicht vererbt. Dies hat verschiedene Konsequenzen:</p>
 
 	<div class="sidebox">
 	<p>Wenn Methoden über den Prototyp anstatt im Konstruktor erzeugt werden, wird Speicher eingespart. Dafür ist das Auflösen von Eigenschaften über die Prototyp-Kette etwas langsamer, da an mehreren Objekten gesucht wird.</p>
 	</div>
 
-	<p>Ein Überschreiben oder Löschen dieser Eigenschaften über den Prototyp ist nicht möglich. Ein nachträgliches Erweitern über Prototyp möglich, diese Methoden sind allerdings nicht priviligiert, haben also keinen Zugriff auf private Objekte. Denn sie wurden nicht im Konstruktor definiert und schließen die privaten Objekte nicht ein. Aus demselben Grund ist kein nachträgliches Hinzufügen von privaten Objekten möglich.</p>
+	<p>Ein Überschreiben oder Löschen dieser Eigenschaften über den Prototyp ist nicht möglich. Ein nachträgliches Erweitern des Prototyps ist möglich. Solche Methoden sind allerdings nicht priviligiert, haben also keinen Zugriff auf private Objekte. Denn sie wurden nicht im Konstruktor definiert und schließen die privaten Objekte nicht ein. Aus demselben Grund ist kein nachträgliches Hinzufügen von privaten Objekten möglich.</p>
 
 	<p>Mit jedem Erzeugen einer <code>Katze</code>-Instanz werden alle Eigenschaften von neuem erzeugt. Die Instanzen teilen sich ihre Eigenschaften nicht mit anderen <code>Katze</code>-Instanzen. Dies wirkt sich negativ auf die Performance aus: Das Anlegen der Eigenschaften kostet Zeit und Arbeitsspeicher. Werden z.B. zehn Katzen instantiiert, so werden 20 Funktionsobjekte erzeugt (zehn mal <code>kitzeln</code> und <code>streicheln</code>). Würden die Instanzen diese Methoden vom Prototyp erben, so müssten sie nur einmal am Prototyp erzeugt werden.</p>
 
@@ -432,20 +437,22 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 
 	<h2>Wozu Kapselung gut ist und wann sie nötig ist</h2>
 
-	<p>Kapselung in objektorientiertem JavaScript hat zwei Bedeutungen: Zum einen wird das Programm so strukturiert, dass es möglichst nicht mit anderen Scripten in Konflikt kommt. Dafür muss man in JavaScript selbst Sorge tragen, denn alle Scripte teilen sich das globalen <code>window</code>-Objekt. Zum anderen bedeutet Kapselung die Trennung zwischen öffentlichen und privaten Objekten. Auf die öffentlichen können andere Scripte von außen zugreifen, die privaten sind diesen verborgen.</p>
+	<p>Kapselung in objektorientiertem JavaScript hat zwei Bedeutungen: Zum einen wird das Programm so strukturiert, dass es möglichst nicht mit anderen Scripten in Konflikt kommt. Zum anderen bedeutet Kapselung die Trennung zwischen öffentlichen und privaten Objekten. Auf die öffentlichen können andere Scripte von außen zugreifen, die privaten sind diesen verborgen.</p>
 
-	<p>Die erste Art der Kapselung ist in jedem Fall sinnvoll, eine effektive Kapselung der zweiten Art bringt jedoch Nachteile mit sich. Wann also brauchen wir sie und in welchem Umfang?</p>
+	<p>Die erste Art der Kapselung ist in jedem Fall sinnvoll, denn alle Scripte teilen sich das globale <code>window</code>-Objekt und müssen dafür Sorge tragen, nicht die Objekte anderer Scripte zu überschreiben.</p>
 
-	<p>Das Konzept der Kapselung in der objektorientierten Programmierung hat den Zweck, zwischen einer öffentliche API und der internen Implementierung zu unterscheiden. Sie hilft in aller erster Linie dem Programmierer, gut strukturierte, wiederverwendbare Software zu schreiben.</p>
+	<p>Eine effektive Kapselung der zweiten Art bringt jedoch Nachteile mit sich. Wann also brauchen wir sie und in welchem Umfang?</p>
 
-	<p>Die API, also das Set an öffentlichen Methoden, wird dokumentiert und von anderen Programmierern angesteuert. Sie bleibt idealerweise über mehrere Programmversionen gleich. Sie kann natürlich erweitert und beizeiten durch eine leistungsfähigere und flexiblere Schnittstelle ergänzt werden.</p>
+	<p>Das Konzept der Kapselung in der objektorientierten Programmierung hat den Zweck, zwischen einer öffentlichen Programmierschnittstelle (<abbr lang="en" title="Application Programming Interface">API</abbr>) und der internen Implementierung zu unterscheiden. Sie hilft in aller erster Linie dem Programmierer, gut strukturierte, wiederverwendbare Software zu schreiben.</p>
 
-	<p>Die privaten Objekte umfassen alle Variablen und Methoden, die nur intern Gebrauch finden und die tatsächliche Implementierung strukturieren. Ein bloßer Anwender des Scriptes muss diese nicht kennen. Von Version zu Version kann sich die interne Umsetzung bei gleichbleibender Funktionalität ändern, damit auch die privaten Objekte.</p>
+	<p>Die öffentliche Schnittstelle, also die Menge an öffentlichen Methoden, wird dokumentiert und von anderen Programmierern angesteuert. Sie bleibt idealerweise über mehrere Programmversionen gleich. Sie kann natürlich erweitert und beizeiten durch eine leistungsfähigere und flexiblere Schnittstelle ergänzt werden.</p>
 
-	<p>Ein zweiter Grund für Kapselung ist die effektive Sicherheit: Ein fremdes Script soll die Interna nicht lesen und manipulieren können. Dies ist in anderen Sprachen sehr wichtig. Manche JavaScript-Kenner argumentieren, dass der Aspekt der tatsächlichen Unsichtbarkeit für JavaScript nachrangig ist:</p>
+	<p>Die privaten Objekte umfassen alle Variablen und Methoden, die nur intern Gebrauch finden und die tatsächliche Implementierung strukturieren. Ein bloßer Anwender des Scriptes muss diese nicht kennen. Von Version zu Version kann sich die interne Umsetzung und somit die privaten Objekte ändern, während die Funktionalität nach außen hin gleich bleibt.</p>
+
+	<p>Ein zweiter Grund für Kapselung ist die effektive Sicherheit: Ein fremdes Script soll die Interna nicht lesen und manipulieren können. Dies ist in anderen Sprachen sehr wichtig, um robuste Programme zu ermöglichen. Der Aspekt der tatsächlichen Unsichtbarkeit ist im Falle von JavaScript jedoch nachrangig:</p>
 
 	<ul>
-	<li>Wenn ein Script ein anderes manipulieren will, dann ist das auf die eine oder andere Art möglich, weil ECMAScript 3 so dynamisch ist. Erst ECMAScript 5 wird es ermöglichen, einzelne Objekteigenschaften oder ganze Objekte »einzufrieren« und vor Manipulation zu schützen.</li>
+	<li>Wenn ein Script ein anderes manipulieren will, dann ist das auf die eine oder andere Art möglich, weil ECMAScript 3 so dynamisch ist. Erst ECMAScript 5 ermöglicht es, einzelne Objekteigenschaften oder ganze Objekte »einzufrieren« und vor Manipulation zu schützen.</li>
 	<li>Mit Tricks ist es bei einigen JavaScript-Interpretern möglich, auf einen privaten Funktions-Scope zuzugreifen.</li>
 	<li>Es kann durchaus von Vorteil sein, die Interna eines Scriptes lesen, abändern und erweitern zu können. Das gehört zu den Features von JavaScript.</li>
 	</ul>
@@ -456,7 +463,7 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 
 		<p>Aus diesen Gründen kann es ausreichen, Kapselung lediglich als Strukturierungskonzept zu verstehen. Es reicht dann, mit <strong>pseudo-privaten Objekten</strong> zu arbeiten. Diese sind nicht effektiv vor dem Zugriff von außen geschützt, finden jedoch in der Regel nur intern Verwendung.</p>
 
-		<p>Ein einfacher <code>Object</code>-Literal bietet keine effektive Kapselung, d.h. alle Eigenschaften sind von außen sichtbar und änderbar. Kapselung als Konzept lässt sich damit trotzdem umsetzen, indem klar zwischen öffentlichen und (pseudo-)privaten Eigenschaften unterschieden wird. Eine Konvention ist etwa, die privaten Eigenschaften mit einem <code>_</code> (Unterstrich) beginnen zu lassen. Ein entsprechendes Modul könnte folgendermaßen aussehen:</p>
+		<p>Ein einfacher <code>Object</code>-Literal bietet keine effektive Kapselung, d.h. alle Eigenschaften sind von außen sichtbar und änderbar. Kapselung als Konzept lässt sich damit trotzdem umsetzen, indem klar zwischen öffentlichen und (pseudo-)privaten Eigenschaften unterschieden wird. Eine Konvention ist etwa, die privaten Eigenschaften mit einem <code>_</code> (Unterstrich) beginnen zu lassen. Ein entsprechendes <a href="organisation-module.html#revealing-module">Modul</a> könnte folgendermaßen aussehen:</p>
 
 <pre>
 var Modul = {
@@ -474,7 +481,7 @@ var Modul = {
 Module.öffentlicheMethode();
 </pre>
 
-	<p>Dasselbe bei einem Prototypen:</p>
+	<p>Dasselbe bei einem Konstruktor mit Prototypen:</p>
 
 	<pre>
 function Konstruktor () {}
@@ -495,7 +502,7 @@ var instanz = new Konstruktor();
 instanz.öffentlicheMethode();
 </pre>
 
-		<p>Wie gesagt, technisch gesehen handelt es sich bei diesen pseudo-privaten Eigenschaften um ganz normale Eigenschaften, die sich in puncto Sichtbarkeit und Schreibbarkeit nicht von den sogenannten öffentlichen unterscheiden. Der Unterstrich im Namen hat keine Bedeutung für den JavaScript-Interpreter, er ist lediglich eine Namenskonvention.</p>
+		<p>Technisch gesehen handelt es sich bei diesen pseudo-privaten Eigenschaften um ganz normale Eigenschaften, die sich in puncto Sichtbarkeit und Schreibbarkeit nicht von den sogenannten öffentlichen unterscheiden. Der Unterstrich im Namen hat keine Bedeutung für den JavaScript-Interpreter, er ist lediglich eine Namenskonvention.</p>
 
 	</div>
 

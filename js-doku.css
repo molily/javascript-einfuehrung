@@ -215,13 +215,10 @@ body#contents #footer p {
 
 	border: 1px solid #eddb9a;
 
-	box-shadow: -3px 3px 3px #ccc;
+	box-shadow: 2px 3px 4px #ddd;
 
 	background-image: linear-gradient(to bottom, #FCFC94, #FCEC6C);
 	background-color: #FCFC94;
-	/*
-	transform: rotate(3deg);
-	*/
 	border-radius: 2px;
 }
 
@@ -233,18 +230,6 @@ body#contents #footer p {
 	font-family: Cambria,Georgia,serif;
 	color: #393525;
 }
-
-/*
-.sidebox:before {
-	float: left;
-	margin-left: -1.5em;
-	content: "?";
-	line-height: 0.5;
-	font-size: 3.5em;
-	font-family: arial, arial unicode ms, times new roman, georgia, verdana;
-	transform: rotate(-3deg);
-}
-*/
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
