@@ -5,7 +5,6 @@
 <title>JavaScript: Serverkommunikation und dynamische Webanwendungen (Ajax)</title>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
-<script src="js-doku.js"></script>
 </head>
 <body>
 
@@ -367,12 +366,12 @@ bild.src = "beispiel.png";</pre>
 <div id="formate-xml-json" class="section">
   <h2>Übertragungsformate</h2>
 
-  <div class="subsection">
+  <div class="subsection" id="html-text">
     <h3>HTML / Nur-Text</h3>
     <p>...</p>
   </div>
 
-  <div class="subsection">
+  <div class="subsection" id="json">
     <h3>JSON</h3>
     <p>...</p>
     <pre>[
@@ -398,7 +397,7 @@ bild.src = "beispiel.png";</pre>
     <p>...</p>
   </div>
 
-  <div class="subsection">
+  <div class="subsection" id="xml">
     <h3>XML</h3>
     <p><code>XMLHttpRequest</code> hat seinen Namen daher, dass es ursprünglich dazu gedacht war, XML-Dokumente vom Server herunterzuladen. JavaScript kann anschließend mit verschiedenen Schnittstellen mit dem Dokument arbeiten. Das funktioniert zwar vorzüglich, allerdings ist das Extrahieren von Daten aus einem XML-Dokument über die DOM-Schnittstelle umständlich. In den meisten Fällen sollen die Daten nämlich im bestehenden HTML-Dokument angezeigt werden, sodass die XML-Daten in eine HTML-Struktur umgewandelt werden müssen.</p>
     <p>Wenn Sie strukturierte Daten per XML übertragen wollen, müssen Sie ein eigenes Auszeichnungssprache nach den Regeln von XML entwerfen. Sie denken sich gewisse Elemente und Attribute und die grammatischen Regeln aus, wie diese zusammengesetzt werden können. Mithilfe dieser Datenstrukturen werden die zu übertragenden Informationen geordnet. Das zugehörige JavaScript kann diese Elemente ansprechen und die Werte der enthaltenen Textknoten bzw. Attribute auslesen.</p>
@@ -426,8 +425,7 @@ bild.src = "beispiel.png";</pre>
       &lt;ende&gt;1963&lt;/ende&gt;
    &lt;/präsident&gt;
 &lt;/us-präsidenten&gt;</pre>
-
-
+  </div>
 </div>
 
 <div id="sicherheit" class="section">
@@ -467,6 +465,7 @@ xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
     <p></p>
   </div>
 </div>
+</div>
 
 <div id="footer">
 <p><strong>JavaScript-Dokumentation</strong> &middot; <a href="./">Zum Inhaltsverzeichnis</a></p>
@@ -474,5 +473,6 @@ xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
 <p>Lizenz: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen</a>.</p>
 </div>
 
+<script src="js-doku.js"></script>
 </body>
 </html>
