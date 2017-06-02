@@ -41,7 +41,7 @@ Andernfalls:
     Wenn die Alternativtechnik zur Verfügung steht,
     Dann:
       Löse die Aufgabe auf eine andere Weise</pre>
-	<p>Diese Fallunterscheidungen werden in JavaScript üblicherweise mit bedingten Anweisungen umgesetzt: <code>if (Bedingung) { Anweisungen } else { Anweisungen }</code></p>
+  <p>Diese Fallunterscheidungen werden in JavaScript üblicherweise mit bedingten Anweisungen umgesetzt: <code>if (Bedingung) { Anweisungen } else { Anweisungen }</code></p>
   <p>Entscheidend ist, genau die Unterschiede zu kennen und <em>punktuell</em> solche Abzweigungen einzubauen. Nicht das ganze Script sollte eine solche Struktur haben, es sollte sich dieser verzweigten Abläufe nur dort bedienen, <em>wo es nötig ist</em>. Auf diese Weise sparen Sie sich doppelte Arbeit.</p>
   <p>Wo Unterschiede auftreten, sollten Sie mit solchen Abfragen möglichst für <strong>Vereinheitlichung</strong> sorgen. Darauffolgende Anweisungen müssen sich dann um die Unterschiede keine Gedanken mehr machen. Bis zur nächsten punktuellen Fallunterscheidung folgt wieder Code, der von allen Browsern verstanden wird.</p>
   <p>Nehmen wir ein Beispiel aus dem : Eine Handler-Funktion bekommt das  in manchen Browsern als Parameter übergeben. Im Internet Explorer ist es jedoch nur über <code>window.event</code> zugänglich. Über das Event-Objekt hat man Zugriff auf das , bei dem das Ereignis passiert ist, welches die Handler-Funktion gerade verarbeitet. Auch in dem Punkt unterscheiden sich die Browser: Das Element ist entweder in der Eigenschaft <code>target</code> (W3C-konforme Browser) oder <code>srcElement</code> (Internet Explorer) gespeichert. Nun könnte man folgendermaßen vorgehen:</p><pre class="content-example">function handlerFunktion (eventObjekt) {
@@ -75,7 +75,7 @@ Andernfalls:
 
 }</pre>
 <p>Diese Umsetzung mag zunächst länger und umständlicher scheinen. Das liegt jedoch bloß an der ausführlichen Schreibweise. Eine
-	 mögliche Kurzschreibweise könnte so aussehen:</p>
+   mögliche Kurzschreibweise könnte so aussehen:</p>
   <pre class="content-example">function handlerFunktion (e) {
   e = e || window.event;
   var target = e.target || e.srcElement;
@@ -84,10 +84,10 @@ Andernfalls:
 <p>Mit dem <code>||</code>-Operator wird hier die Fallunterscheidung umgesetzt. Was kryptisch aussehen mag, hat bloß folgenden Effekt: Wenn der Parameter <code>e</code> gesetzt ist, nehme diesen als Event-Objekt, andernfalls versuche es mit <code>window.event</code>.</p>
   <p>Dasselbe Schema wird in der nächsten Zeile angewendet: Wenn die Eigenschaft <code>target</code> des Event-Objektes gesetzt ist, so speichere diese in der Variable <code>target</code>, andernfalls verwende die Eigenschaft <code>srcElement</code>.</p>
   <div class="note-box note-box-todo">
-	 <div class="note-box-text">Todo: Erklärung des ||-Operators in den Sprachgrundlagen verlinken</div>
+   <div class="note-box-text">Todo: Erklärung des ||-Operators in den Sprachgrundlagen verlinken</div>
   </div>
   <p>Das Beispiel lässt außen vor, dass Browser denkbar sind, die weder die eine noch die andere Vorgehensweise unterstützen. Oder die Handler-Funktion wird aus Versehen außerhalb einer Ereignis-Verarbeitung aufgerufen. Es ist nicht immer nötig, diese denkbaren, aber unrealistischen Fälle abzudecken. Sie können es dennoch tun, indem Sie abfragen, ob die Variablen <code>e</code> und <code>target</code> nach der Vereinheitlichung korrekt gesetzt sind. Wenn dies nicht gegeben ist, kann die
-	 Funktionsausführung z.B. durch die Anweisung <code>return;</code> abgebrochen werden.</p>
+   Funktionsausführung z.B. durch die Anweisung <code>return;</code> abgebrochen werden.</p>
   <pre class="content-example">e = e || window.event;
 if (!e) {
   // Kein Zugriff auf das Event-Objekt möglich, breche Funktion ab,
@@ -125,12 +125,12 @@ Andernfalls:
 <div id="objektabfragen" class="section">
   <h2>Objektabfragen</h2>
   <div id="objekte-methoden" class="section">
-	 <h3 class="unit-std-heading">Objekte und Methoden abfragen</h3>
-	 <p>Die einzelnen Fähigkeiten eines Browsers drücken sich meist darin aus, dass bestimmte vordefinierte Objekte, Eigenschaften bzw. Methoden existieren. In manchen Fällen müssen Sie zusätzlich prüfen, ob die Eigenschaft auch einen bestimmten Typ oder Wert hat.</p>
-	 <p>Wenn wir eine bedingte Anweisung mit <code>if (...) {...}</code> notieren, so wird die Bedingung (der Ausdruck zwischen den runden Klammern) letztlich in einen Boolean-Wert, also <code>true</code> oder <code>false</code> umgewandelt. Allgemeine Objekte vom Typ <code>Object</code> ergeben bei der Umwandlung in dem Typ <code>Boolean</code> den Wert <code>true</code>.</p>
-	 <p>Das bedeutet, Sie können einfach <code>if (objekt.unterobjekt) { ... </code>} notieren, um die Existenz des Unterobjektes abzufragen. Für Funktionsobjekte gilt dasselbe, also notieren wir <code>if (objekt.methode) { ... </code>}. Die Schreibweise <code>objekt.unterobjekt</code> bzw. <code>objekt.methode</code> ist dabei entscheidend. Nur in besonderen Fällen ist dies durch <code>if (objekt)</code> bzw. <code>if (methode)</code> ersetzbar.</p>
-	 <p>Das folgende Beispiel veranschaulicht die Existenzabfrage von Objekten und Methoden. Die Funktion bringt den aktuell markierten Text im Dokument in Erfahrung und gibt diesen in einem Meldungsfenster aus.</p>
-	 <pre class="content-example">function selektierterText () {
+   <h3 class="unit-std-heading">Objekte und Methoden abfragen</h3>
+   <p>Die einzelnen Fähigkeiten eines Browsers drücken sich meist darin aus, dass bestimmte vordefinierte Objekte, Eigenschaften bzw. Methoden existieren. In manchen Fällen müssen Sie zusätzlich prüfen, ob die Eigenschaft auch einen bestimmten Typ oder Wert hat.</p>
+   <p>Wenn wir eine bedingte Anweisung mit <code>if (...) {...}</code> notieren, so wird die Bedingung (der Ausdruck zwischen den runden Klammern) letztlich in einen Boolean-Wert, also <code>true</code> oder <code>false</code> umgewandelt. Allgemeine Objekte vom Typ <code>Object</code> ergeben bei der Umwandlung in dem Typ <code>Boolean</code> den Wert <code>true</code>.</p>
+   <p>Das bedeutet, Sie können einfach <code>if (objekt.unterobjekt) { ... </code>} notieren, um die Existenz des Unterobjektes abzufragen. Für Funktionsobjekte gilt dasselbe, also notieren wir <code>if (objekt.methode) { ... </code>}. Die Schreibweise <code>objekt.unterobjekt</code> bzw. <code>objekt.methode</code> ist dabei entscheidend. Nur in besonderen Fällen ist dies durch <code>if (objekt)</code> bzw. <code>if (methode)</code> ersetzbar.</p>
+   <p>Das folgende Beispiel veranschaulicht die Existenzabfrage von Objekten und Methoden. Die Funktion bringt den aktuell markierten Text im Dokument in Erfahrung und gibt diesen in einem Meldungsfenster aus.</p>
+   <pre class="content-example">function selektierterText () {
   var text = "";
 
   if (window.getSelection) {
@@ -146,8 +146,8 @@ Andernfalls:
   alert(text);
 }</pre>
 <p>Es existieren für diese Aufgabenstellung <strong>drei Lösungsweisen</strong>, die in unterschiedlichen Browsern zum Ziel führen. Das Beispiel demonstriert daher eine dreiteilige Fallunterscheidung mit verschachtelten <code>if</code>-<code>else</code>-Anweisungen.</p>
-	 <p>Je nachdem, welche Objekte bzw. Methoden existieren, werden diese verwenden. Kennt der JavaScript-Interpreter keines dieser Objekte, wird die Funktion vorzeitig beendet. Die verschachtelten Fallunterscheidung in verständlicher Sprache:</p>
-	 <pre class="content-example">Existiert die Methode window.getSelection?
+   <p>Je nachdem, welche Objekte bzw. Methoden existieren, werden diese verwenden. Kennt der JavaScript-Interpreter keines dieser Objekte, wird die Funktion vorzeitig beendet. Die verschachtelten Fallunterscheidung in verständlicher Sprache:</p>
+   <pre class="content-example">Existiert die Methode window.getSelection?
 Falls ja:
   benutze diese Methode.
 Falls nein:
@@ -163,25 +163,25 @@ Falls nein:
 <p>Wie Sie sehen, kommt dieses Beispiel ganz ohne Browserabfragen aus und ist doch für verschiedene Browser ausgelegt.</p>
   </div>
   <div class="section">
-	 <h3 class="unit-std-heading">Andere Typen abfragen</h3>
-	 <p>Wenn Sie die Existenz von Objekten anderer Typen prüfen wollen, müssen Sie gegebenenfalls anders vorgehen.</p>
-	 <p>Zahlen (Typ <code>Number</code>) und Zeichenketten (Typ <code>String</code>) können Sie im Prinzip zwar auch mit <code>if (objekt.numberEigenschaft)</code> bzw. <code>if (objekt.stringEigenschaft)</code> abfragen. Die Bedingung in den Klammern wird aber wie gesagt in ein <code>Boolean</code>-Wert umgewandelt. Leere Zeichenketten (<code>""</code>) und gewisse Zahlenwerte (z.B. <code>0</code>) ergeben bei dieser Umwandlung <code>false</code>. Diese Umwandlungsregeln können Verwirrung stiften: Manchmal ist <code>0</code> ein gültiger Wert und Sie können damit arbeiten, in anderen Fällen weist er darauf hin, dass der Browser die von Ihnen benötigte Fähigkeit nicht hat und Sie die abgefragte Eigenschaft nicht verwenden können.</p>
-	 <div class="note-box note-box-todo">
-		<p class="note-box-title">ToDo: Link auf "Was ist alles true/false?"</div>
-	 </div>
-	 <p>Wenn Sie mit solchen Typen umgehen, sollten Sie daher auf den Operator <code>typeof</code> ausweichen. Dieser gibt den Typ einer Eigenschaft als String zurück. In den beschriebenen Fällen wäre das <code>"string"</code> bzw. <code>"number"</code>). Ein Beispiel ist die Abfrage der Existenz von <code>window.innerHeight</code>:</p>
-	 <pre class="content-example">if (typeof window.innerHeight == "number") {
+   <h3 class="unit-std-heading">Andere Typen abfragen</h3>
+   <p>Wenn Sie die Existenz von Objekten anderer Typen prüfen wollen, müssen Sie gegebenenfalls anders vorgehen.</p>
+   <p>Zahlen (Typ <code>Number</code>) und Zeichenketten (Typ <code>String</code>) können Sie im Prinzip zwar auch mit <code>if (objekt.numberEigenschaft)</code> bzw. <code>if (objekt.stringEigenschaft)</code> abfragen. Die Bedingung in den Klammern wird aber wie gesagt in ein <code>Boolean</code>-Wert umgewandelt. Leere Zeichenketten (<code>""</code>) und gewisse Zahlenwerte (z.B. <code>0</code>) ergeben bei dieser Umwandlung <code>false</code>. Diese Umwandlungsregeln können Verwirrung stiften: Manchmal ist <code>0</code> ein gültiger Wert und Sie können damit arbeiten, in anderen Fällen weist er darauf hin, dass der Browser die von Ihnen benötigte Fähigkeit nicht hat und Sie die abgefragte Eigenschaft nicht verwenden können.</p>
+   <div class="note-box note-box-todo">
+    <p class="note-box-title">ToDo: Link auf "Was ist alles true/false?"</div>
+   </div>
+   <p>Wenn Sie mit solchen Typen umgehen, sollten Sie daher auf den Operator <code>typeof</code> ausweichen. Dieser gibt den Typ einer Eigenschaft als String zurück. In den beschriebenen Fällen wäre das <code>"string"</code> bzw. <code>"number"</code>). Ein Beispiel ist die Abfrage der Existenz von <code>window.innerHeight</code>:</p>
+   <pre class="content-example">if (typeof window.innerHeight == "number") {
   alert("Der Anzeigebereich des Browserfensters ist " +
     window.innerHeight + " Pixel breit!");
 }</pre>
 <p>Da manche Browser, insbesondere der Internet Explorer beim Einsatz <code>typeof</code> den Typen nicht immer korrekt wiedergeben, hat sich eingebürgert, bei Existenzabfragen bloß zu prüfen, ob <code>typeof</code> nicht <code>"undefined"</code> liefert:</p>
-	 <pre class="content-example">if (typeof window.innerHeight != "undefined") {
+   <pre class="content-example">if (typeof window.innerHeight != "undefined") {
   alert("Der Anzeigebereich des Browserfensters ist " +
     window.innerHeight + " Pixel breit!");
 }</pre>
 <div class="note-box note-box-todo">
-		<p class="note-box-title">ToDo: siehe den weiterführenden Artikel <a href="https://wiki.selfhtml.org/wiki/JavaScript/Objektabfragen">Objektabfragen und Fallunterscheidungen in JavaScript</a></div>
-	 </div>
+    <p class="note-box-title">ToDo: siehe den weiterführenden Artikel <a href="https://wiki.selfhtml.org/wiki/JavaScript/Objektabfragen">Objektabfragen und Fallunterscheidungen in JavaScript</a></div>
+   </div>
   </div>
 </div>
 <div id="erkennung-sonderfaelle" class="section">
@@ -202,20 +202,20 @@ Falls nein:
 <div id="unterstuetzung" class="section">
   <h2>JavaScript-Unterstützung verbreiteter Browser</h2>
   <div class="section">
-	 <h3 class="unit-std-heading">Einleitung</h3>
-	 <p>... Engines statt Browser!</p>
+   <h3 class="unit-std-heading">Einleitung</h3>
+   <p>... Engines statt Browser!</p>
   </div>
   <div class="section">
-	 <h3 class="unit-std-heading">Mozilla Firefox (Gecko- und SpiderMonkey-Engine)</h3>
+   <h3 class="unit-std-heading">Mozilla Firefox (Gecko- und SpiderMonkey-Engine)</h3>
   </div>
   <div class="section">
-	 <h3 class="unit-std-heading">Internet Explorer</h3>
+   <h3 class="unit-std-heading">Internet Explorer</h3>
   </div>
   <div class="section">
-	 <h3 class="unit-std-heading">Opera</h3>
+   <h3 class="unit-std-heading">Opera</h3>
   </div>
   <div class="section">
-	 <h3 class="unit-std-heading">Safari (Webkit-Engine)</h3>
+   <h3 class="unit-std-heading">Safari (Webkit-Engine)</h3>
   </div>
 </div>
 

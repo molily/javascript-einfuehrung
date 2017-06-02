@@ -9,32 +9,32 @@
 <script src="js-doku.js"></script>
 <style type="text/css">
 #target-area {
-	border: 1px solid #aaf;
-	background-color: #f0f0fa;
-	cursor: pointer;
+  border: 1px solid #aaf;
+  background-color: #f0f0fa;
+  cursor: pointer;
 }
 
 #target-area p,
 #target-area ol,
 #target-area li,
 #target-area strong {
-	border: 1px solid #aaf;
-	text-indent: 0;
-	list-style-position: inside;
+  border: 1px solid #aaf;
+  text-indent: 0;
+  list-style-position: inside;
 }
 #target-area p,
 #target-area ol,
 #target-area li {
-	margin-top: 0.75em;
-	margin-bottom: 0.75em;
-	padding: 0.2em 0.5em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  padding: 0.2em 0.5em;
 }
 
 #target-output {
-	text-indent: 0;
-	list-style-position: inside;
-	background-color: #f0f0f0;
-	padding: 0.5em;
+  text-indent: 0;
+  list-style-position: inside;
+  background-color: #f0f0f0;
+  padding: 0.5em;
 }
 </style>
 </head>
@@ -48,17 +48,17 @@
 <h1>JavaScript: Arbeiten mit dem Event-Objekt</h1>
 
 <div class="section" id="event-objekt">
-	<h2>Zugriff auf das Event-Objekt</h2>
-	<p>Durch das <a href="event-handling-grundlagen.html#traditionelles-event-handling">Registrieren von Event-Handlern</a> wird die angegebene Funktion immer dann ausgeführt, wenn das jeweilige Ereignis beim jeweiligen Element eintritt. In dieser Handler-Funktion ist es meistens nötig, auf die näheren Umstände des Ereignisses zu reagieren. Beispielsweise sind bei einem Mausklick die Koordinaten des Mauszeigers interessant oder bei einem Tastendruck die gedrückte Taste.</p>
-	<p>All diese Informationen sind in JavaScript beim <strong>Event-Objekt</strong> gespeichert. Dieses Objekt repräsentiert das individuelle Ereignis, das der Handler gerade verarbeitet. Es bietet zahlreiche Eigenschaften mit Informationen zum Ereignis und einige Methoden, um das Verhalten des Ereignisses zu steuern. Wenn Sie bei der Ereignisverarbeitung diese Daten benötigen, ist der Zugriff auf das Event-Objekt die erste Aufgabe in der Handler-Funktion.</p>
-	<p>In den meisten Browsern gestaltet sich dieser Zugriff einfach: Das Event-Objekt wird der Handlerfunktion automatisch als erster Parameter übergeben. Sie muss dieses nur noch entgegen nehmen, der Parametername ist dabei frei wählbar. Üblicherweise wird ein Kurzname wie <code>e</code> oder <code>ev</code> verwendet. Für das folgende Beispiel wählen wir den sprechenden Namen <code>eventObjekt</code>:</p>
-	<pre>function handlerfunktion (eventObjekt) {
+  <h2>Zugriff auf das Event-Objekt</h2>
+  <p>Durch das <a href="event-handling-grundlagen.html#traditionelles-event-handling">Registrieren von Event-Handlern</a> wird die angegebene Funktion immer dann ausgeführt, wenn das jeweilige Ereignis beim jeweiligen Element eintritt. In dieser Handler-Funktion ist es meistens nötig, auf die näheren Umstände des Ereignisses zu reagieren. Beispielsweise sind bei einem Mausklick die Koordinaten des Mauszeigers interessant oder bei einem Tastendruck die gedrückte Taste.</p>
+  <p>All diese Informationen sind in JavaScript beim <strong>Event-Objekt</strong> gespeichert. Dieses Objekt repräsentiert das individuelle Ereignis, das der Handler gerade verarbeitet. Es bietet zahlreiche Eigenschaften mit Informationen zum Ereignis und einige Methoden, um das Verhalten des Ereignisses zu steuern. Wenn Sie bei der Ereignisverarbeitung diese Daten benötigen, ist der Zugriff auf das Event-Objekt die erste Aufgabe in der Handler-Funktion.</p>
+  <p>In den meisten Browsern gestaltet sich dieser Zugriff einfach: Das Event-Objekt wird der Handlerfunktion automatisch als erster Parameter übergeben. Sie muss dieses nur noch entgegen nehmen, der Parametername ist dabei frei wählbar. Üblicherweise wird ein Kurzname wie <code>e</code> oder <code>ev</code> verwendet. Für das folgende Beispiel wählen wir den sprechenden Namen <code>eventObjekt</code>:</p>
+  <pre>function handlerfunktion (eventObjekt) {
    window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
    // Fehler im Internet Explorer &lt; 9!
 }</pre>
-	<p>Diesen Zugriff auf das Event-Objekt unterstützen alle relevanten Browser. Lediglich ältere Internet Explorer vor der Version 9 unterstützen diese Technik nicht. Für diese Browserversionen ist eine Sonderlösung notwendig. Diese Internet Explorer übergeben das Event-Objekt nicht als Parameter an die Handlerfunktion, sondern stellen es unter dem globalen Objekt <code>window.event</code> zur Verfügung. Auch wenn es den Anschein hat: Dort ist das Event-Objekt nicht dauerhaft gespeichert, sondern <code>window.event</code> verweist lediglich auf das jeweilige Event-Objekt des Ereignisses, das gerade im jeweiligen Handler verarbeitet wird.</p>
-	<p>Um browserübergreifend auf das Event-Objekt zuzugreifen, ist also eine Vereinheitlichung notwendig. Diese ist recht einfach: Wir prüfen, ob der Funktion ein Parameter übergeben wurde und somit die lokale Variable <code>eventObjekt</code> einen Wert hat. Falls dies zutrifft, nehmen wir diesen Parameter als Event-Objekt. Andernfalls speichern wir in der bisher leeren Variable eine Referenz auf <code>window.event</code>.</p>
-	<pre>function handlerfunktion (eventObjekt) {
+  <p>Diesen Zugriff auf das Event-Objekt unterstützen alle relevanten Browser. Lediglich ältere Internet Explorer vor der Version 9 unterstützen diese Technik nicht. Für diese Browserversionen ist eine Sonderlösung notwendig. Diese Internet Explorer übergeben das Event-Objekt nicht als Parameter an die Handlerfunktion, sondern stellen es unter dem globalen Objekt <code>window.event</code> zur Verfügung. Auch wenn es den Anschein hat: Dort ist das Event-Objekt nicht dauerhaft gespeichert, sondern <code>window.event</code> verweist lediglich auf das jeweilige Event-Objekt des Ereignisses, das gerade im jeweiligen Handler verarbeitet wird.</p>
+  <p>Um browserübergreifend auf das Event-Objekt zuzugreifen, ist also eine Vereinheitlichung notwendig. Diese ist recht einfach: Wir prüfen, ob der Funktion ein Parameter übergeben wurde und somit die lokale Variable <code>eventObjekt</code> einen Wert hat. Falls dies zutrifft, nehmen wir diesen Parameter als Event-Objekt. Andernfalls speichern wir in der bisher leeren Variable eine Referenz auf <code>window.event</code>.</p>
+  <pre>function handlerfunktion (eventObjekt) {
    // Vereinheitlichung:
    if (!eventObjekt) {
       // Korrektur für den Internet Explorer &lt; 9
@@ -68,33 +68,33 @@
    // Browserübergreifender Zugriff:
    window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
 }</pre>
-	<p>Nach der Vereinheitlichung steht das Event-Objekt browserübergreifend in einer Variable zu Verfügung.</p>
-	<p>Mit <code>if (!eventObjekt)</code> wird geprüft, ob der Wert der Variablen bei einer Umwandlung in den Typ Boolean den Wert <code>false</code> ergibt. Eine solche Abfrage ist hier möglich, weil <code>eventObjekt</code> entweder ein Objekt enthält oder, falls der Handlerfunktion nichts übergeben wird, mit dem Wert <code>undefined</code> initialisiert wird. Dieser ergibt in Boolean umgewandelt <code>false</code>.</p>
-	<p>Eine gleichwertige Alternativ-Schreibweise nutzt den <code>||</code>-Operator. Intern funktioniert dies wie die besagte <code>if</code>-Anweisung : Es wird geprüft, ob ein Funktionsparameter übergeben wurde. Falls nicht, wird versucht, das Event-Objekt über <code>window.event</code> anzusprechen. Das Ziel ist ebenfalls vereinheitlichter Zugriff auf das Event-Objekt über die Variable <code>eventObjekt</code>.</p>
-	<pre>function handlerfunktion (eventObjekt) {
+  <p>Nach der Vereinheitlichung steht das Event-Objekt browserübergreifend in einer Variable zu Verfügung.</p>
+  <p>Mit <code>if (!eventObjekt)</code> wird geprüft, ob der Wert der Variablen bei einer Umwandlung in den Typ Boolean den Wert <code>false</code> ergibt. Eine solche Abfrage ist hier möglich, weil <code>eventObjekt</code> entweder ein Objekt enthält oder, falls der Handlerfunktion nichts übergeben wird, mit dem Wert <code>undefined</code> initialisiert wird. Dieser ergibt in Boolean umgewandelt <code>false</code>.</p>
+  <p>Eine gleichwertige Alternativ-Schreibweise nutzt den <code>||</code>-Operator. Intern funktioniert dies wie die besagte <code>if</code>-Anweisung : Es wird geprüft, ob ein Funktionsparameter übergeben wurde. Falls nicht, wird versucht, das Event-Objekt über <code>window.event</code> anzusprechen. Das Ziel ist ebenfalls vereinheitlichter Zugriff auf das Event-Objekt über die Variable <code>eventObjekt</code>.</p>
+  <pre>function handlerfunktion (eventObjekt) {
    eventObjekt = eventObjekt || window.event;
    window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
 }</pre>
-	<p>Der Oder-Operator <code>||</code> überprüft, ob der Wert links <code>true</code> ergibt, also der Parameter <code>eventObjekt</code> gesetzt wurde. Wenn dies der Fall ist, ergibt der Ausdruck den Wert von <code>eventObjekt</code> und es wird quasi <code>eventObjekt = eventObjekt</code> ausgeführt. Dabei passiert selbstverständlich nichts, die Variable wird mit sich selbst überschrieben.</p>
-	<p>Interessant ist der andere Fall, wenn <code>eventObjekt</code> im Internet Explorer den Wert <code>undefined</code> hat, weil kein Wert für den Parameter übergeben wurde (siehe oben). Dann ist das Ergebnis des Ausdrucks der Wert rechts vom <code>||</code>-Operator. Somit wird die Zuweisung <code>eventObjekt = window.event</code> ausgeführt. Durch diese Oder-Verzweigung ist das Event-Objekt in jedem Fall in der Variable <code>eventObjekt</code> gespeichert.</p>
-	<p>Welche der Schreibweise Sie verwenden, bleibt ihnen überlassen, denn sie erfüllen dieselbe Funktion. Die erste ist klarer und leicht verständlich, die zweite ist kürzer, erfordert jedoch das Verständnis des <code>||</code>-Operators.</p>
-	<p>In den obigen Beispielen wird das Event-Objekt in der Variable mit dem sprechenden Namen <code>eventObjekt</code> gespeichert. Die Namenswahl bleibt selbstverständlich Ihnen überlassen. Es hat sich eingebürgert, diese Variable der Kürze halber <code>e</code> zu nennen, um Tipparbeit zu sparen. Wenn in einer Handler-Funktion eine Variable <code>e</code> auftaucht, dann ist darin in der Regel das Event-Objekt gespeichert. Sie könnten gleichermaßen schreiben:</p>
-	<pre>function handlerfunktion (e) {
+  <p>Der Oder-Operator <code>||</code> überprüft, ob der Wert links <code>true</code> ergibt, also der Parameter <code>eventObjekt</code> gesetzt wurde. Wenn dies der Fall ist, ergibt der Ausdruck den Wert von <code>eventObjekt</code> und es wird quasi <code>eventObjekt = eventObjekt</code> ausgeführt. Dabei passiert selbstverständlich nichts, die Variable wird mit sich selbst überschrieben.</p>
+  <p>Interessant ist der andere Fall, wenn <code>eventObjekt</code> im Internet Explorer den Wert <code>undefined</code> hat, weil kein Wert für den Parameter übergeben wurde (siehe oben). Dann ist das Ergebnis des Ausdrucks der Wert rechts vom <code>||</code>-Operator. Somit wird die Zuweisung <code>eventObjekt = window.event</code> ausgeführt. Durch diese Oder-Verzweigung ist das Event-Objekt in jedem Fall in der Variable <code>eventObjekt</code> gespeichert.</p>
+  <p>Welche der Schreibweise Sie verwenden, bleibt ihnen überlassen, denn sie erfüllen dieselbe Funktion. Die erste ist klarer und leicht verständlich, die zweite ist kürzer, erfordert jedoch das Verständnis des <code>||</code>-Operators.</p>
+  <p>In den obigen Beispielen wird das Event-Objekt in der Variable mit dem sprechenden Namen <code>eventObjekt</code> gespeichert. Die Namenswahl bleibt selbstverständlich Ihnen überlassen. Es hat sich eingebürgert, diese Variable der Kürze halber <code>e</code> zu nennen, um Tipparbeit zu sparen. Wenn in einer Handler-Funktion eine Variable <code>e</code> auftaucht, dann ist darin in der Regel das Event-Objekt gespeichert. Sie könnten gleichermaßen schreiben:</p>
+  <pre>function handlerfunktion (e) {
    e = e || window.event;
    window.alert("Es ist ein Ereignis vom Typ " + e.type + " passiert.");
 }</pre>
 </div>
 
 <div class="section" id="standardaktion">
-	<h2>Unterdrücken der Standardaktion des Ereignisses</h2>
-	<p>Viele Ereignisse im Dokument haben eigentümliche Auswirkungen. Ein Beispiel: Wenn der Anwender auf einen Link klickt, so tritt ein <code>click</code>-Ereignis ein. Das bringt den Browser dazu, dem Link zu folgen und zum angegebenen Linkziel (der URI) zu navigieren. Das bedeutet, dass der Browser die Ressource vom Webserver herunterlädt und anzeigt. Ein weiteres Beispiel: Das Aktivieren eines Absende-Buttons eines Formulars löst ein <code>submit</code>-Ereignis aus, das zur Übertragung des Formulars an den Webserver führt.</p>
-	<p>Der Browser behandelt also standardmäßig gewisse Ereignisse und führt die sogenannte <strong>Standardaktion</strong> (englisch <em>default action</em>) aus, ohne dass der Seitenautor eine entsprechende JavaScript-Logik definiert hat.</p>
-	<p>Beim Unobtrusive JavaScript versieht man z.B. bestehende Hyperlinks mit einer JavaScript-Logik. Die ursprüngliche Funktionalität des Links will man dann zumeist unterbinden: Beim Klick auf den Link soll nur das Script ausgeführt werden, nicht mehr das Linkziel angesprungen werden.</p>
-	<p>Angenommen, wir haben folgenden Link:</p>
-	<pre>&lt;a href="bilder/bild.jpg" id="vollbildlink"&gt;Bild in Originalgröße ansehen&lt;/a&gt;</pre>
-	<p>Mit JavaScript soll diesem Link nun ein <code>click</code>-Handler hinzugefügt werden, der das verlinkte Bild im aktuellen Dokument einblendet, anstatt das Dokument durch das Bild auszuwechseln und das Bild einzeln anzuzeigen. Wie dieses Einblenden umgesetzt wird, interessiert uns an dieser Stelle nicht, sondern nur das Unterdrücken der Standardaktion.</p>
-	<p>Im traditionellen Event-Handling wird die Standardaktion unterdrückt, indem die Handler-Funktion <code>false</code> als Ergebnis zurückgibt. Am Ende der Funktion wird daher die Anweisung <code>return false;</code> notiert.</p>
-	<pre>function zeigeVollbild () {
+  <h2>Unterdrücken der Standardaktion des Ereignisses</h2>
+  <p>Viele Ereignisse im Dokument haben eigentümliche Auswirkungen. Ein Beispiel: Wenn der Anwender auf einen Link klickt, so tritt ein <code>click</code>-Ereignis ein. Das bringt den Browser dazu, dem Link zu folgen und zum angegebenen Linkziel (der URI) zu navigieren. Das bedeutet, dass der Browser die Ressource vom Webserver herunterlädt und anzeigt. Ein weiteres Beispiel: Das Aktivieren eines Absende-Buttons eines Formulars löst ein <code>submit</code>-Ereignis aus, das zur Übertragung des Formulars an den Webserver führt.</p>
+  <p>Der Browser behandelt also standardmäßig gewisse Ereignisse und führt die sogenannte <strong>Standardaktion</strong> (englisch <em>default action</em>) aus, ohne dass der Seitenautor eine entsprechende JavaScript-Logik definiert hat.</p>
+  <p>Beim Unobtrusive JavaScript versieht man z.B. bestehende Hyperlinks mit einer JavaScript-Logik. Die ursprüngliche Funktionalität des Links will man dann zumeist unterbinden: Beim Klick auf den Link soll nur das Script ausgeführt werden, nicht mehr das Linkziel angesprungen werden.</p>
+  <p>Angenommen, wir haben folgenden Link:</p>
+  <pre>&lt;a href="bilder/bild.jpg" id="vollbildlink"&gt;Bild in Originalgröße ansehen&lt;/a&gt;</pre>
+  <p>Mit JavaScript soll diesem Link nun ein <code>click</code>-Handler hinzugefügt werden, der das verlinkte Bild im aktuellen Dokument einblendet, anstatt das Dokument durch das Bild auszuwechseln und das Bild einzeln anzuzeigen. Wie dieses Einblenden umgesetzt wird, interessiert uns an dieser Stelle nicht, sondern nur das Unterdrücken der Standardaktion.</p>
+  <p>Im traditionellen Event-Handling wird die Standardaktion unterdrückt, indem die Handler-Funktion <code>false</code> als Ergebnis zurückgibt. Am Ende der Funktion wird daher die Anweisung <code>return false;</code> notiert.</p>
+  <pre>function zeigeVollbild () {
    // Blende das Bild ein, auf das der Link zeigt.
    // ... (an dieser Stelle uninteressant) ...
 
@@ -105,10 +105,10 @@
 // Registriere Event-Handler
 document.getElementById("vollbildlink").onclick = zeigeVollbild;
 </pre>
-	<p>Beachten Sie, dass mit der <code>return</code>-Anweisung die Funktion beendet wird. Code, der auf diese Anweisung folgt, wird nicht ausgeführt. Es sei denn, die <code>return</code>-Anweisung ist z.B. durch eine <code>if</code>-Anweisung gekapselt und wird nicht in jedem Fall ausgeführt.</p>
-	<p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen &ndash; sie können die Standardaktion lediglich verhindern.</p>
-	<p>Neben <code>return false</code> gibt es modernere Techniken, um die Standardaktion zu verhindern. Der DOM-Standard, auf den wir später noch zu sprechen kommen, bietet eine Methode namens <code>preventDefault</code> beim Event-Objekt, mit der sich die Standardaktion unterdrücken lässt. Das obige Beispiel könnte auch folgendermaßen aussehen:</p>
-	<pre>function zeigeVollbild (eventObjekt) {
+  <p>Beachten Sie, dass mit der <code>return</code>-Anweisung die Funktion beendet wird. Code, der auf diese Anweisung folgt, wird nicht ausgeführt. Es sei denn, die <code>return</code>-Anweisung ist z.B. durch eine <code>if</code>-Anweisung gekapselt und wird nicht in jedem Fall ausgeführt.</p>
+  <p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen &ndash; sie können die Standardaktion lediglich verhindern.</p>
+  <p>Neben <code>return false</code> gibt es modernere Techniken, um die Standardaktion zu verhindern. Der DOM-Standard, auf den wir später noch zu sprechen kommen, bietet eine Methode namens <code>preventDefault</code> beim Event-Objekt, mit der sich die Standardaktion unterdrücken lässt. Das obige Beispiel könnte auch folgendermaßen aussehen:</p>
+  <pre>function zeigeVollbild (eventObjekt) {
    // Browserübergreifender Zugriff auf das Event-Objekt
    if (!eventObjekt) eventObjekt = window.event;
 
@@ -119,9 +119,9 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
    // Blende das Bild ein, auf das der Link zeigt.
    // ... (an dieser Stelle uninteressant) ...
 };</pre>
-	<p>Der Vorteil von <code>preventDefault</code> ist, dass es im Gegensatz zu <code>return false</code> auch mitten in der Handler-Funktion aufgerufen werden kann, ohne sie gleichzeitig zu beenden. Das Beispiel demonstriert dies.</p>
-	<p>Der Nachteil ist, dass der Internet Explorer diese standardisierte Methode erst ab Version 9 kennt. Er hat jedoch eine gleichwertige Boolean-Eigenschaft des Event-Objekts namens <code>returnValue</code>. Weist man dieser den Wert <code>false</code> zu, so wird die Standardaktion unterbunden. Um auch ältere Internet Epxlorer zu unterstützen, kann die Existenz der <code>preventDefault</code>-Methode abgefragt werden. Existiert diese nicht, wird alternativ die Eigenschaft <code>returnValue</code> gesetzt:</p>
-	<pre>function zeigeVollbild (eventObjekt) {
+  <p>Der Vorteil von <code>preventDefault</code> ist, dass es im Gegensatz zu <code>return false</code> auch mitten in der Handler-Funktion aufgerufen werden kann, ohne sie gleichzeitig zu beenden. Das Beispiel demonstriert dies.</p>
+  <p>Der Nachteil ist, dass der Internet Explorer diese standardisierte Methode erst ab Version 9 kennt. Er hat jedoch eine gleichwertige Boolean-Eigenschaft des Event-Objekts namens <code>returnValue</code>. Weist man dieser den Wert <code>false</code> zu, so wird die Standardaktion unterbunden. Um auch ältere Internet Epxlorer zu unterstützen, kann die Existenz der <code>preventDefault</code>-Methode abgefragt werden. Existiert diese nicht, wird alternativ die Eigenschaft <code>returnValue</code> gesetzt:</p>
+  <pre>function zeigeVollbild (eventObjekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Existiert die Methode preventDefault? Dann rufe sie auf.
@@ -137,59 +137,59 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
    // Blende das Bild ein, auf das der Link zeigt.
    // ... (an dieser Stelle uninteressant) ...
 };</pre>
-	<p>Diese Vorgehensweise sei hier der Vollständigkeit halber erwähnt. Wenn sie Ihnen unnötig kompliziert erscheint, so können Sie sich mit dem herkömmlichen <code>return false</code> zufrieden geben, das die Aufgabe hinreichend erfüllt. Sie müssen allerdings beachten, dass mit <code>return false</code> die Handler-Funktion beendet wird.</p>
+  <p>Diese Vorgehensweise sei hier der Vollständigkeit halber erwähnt. Wenn sie Ihnen unnötig kompliziert erscheint, so können Sie sich mit dem herkömmlichen <code>return false</code> zufrieden geben, das die Aufgabe hinreichend erfüllt. Sie müssen allerdings beachten, dass mit <code>return false</code> die Handler-Funktion beendet wird.</p>
 </div>
 
 <div class="section" id="bubbling">
-	<h2>Der Event-Fluss: Bubbling</h2>
-	<p>Bisher haben wir erfahren, dass Ereignisse bei bestimmten Elementen passieren. Dort können wir sie überwachen, indem wir Handler registrieren. Tritt das Ereignis bei diesem Element ein, wird die Handler-Funktion ausgelöst.</p>
-	<p>Die Wirklichkeit ist etwas komplizierter. Die Verarbeitung eines Ereignisses verläuft in <strong>drei Phasen</strong>, die nacheinander durchlaufen werden. Davon lernen wir nun eine zweite kennen. Die dritte ist weniger wichtig und braucht Sie zum Einstieg erst einmal nicht interessieren &ndash; Sie finden ihre Beschreibung unter <a href="event-handling-effizient.html#capturing">Capturing</a> beschrieben.</p>
-	<p>Ein Ereignis passiert bei einem Element, dem sogenannten <strong>Zielelement</strong> (englisch <em>target element</em>), und löst dort alle Handler aus, die für das entsprechende Ereignis registriert wurden &ndash; soweit waren wir bereits. Diese bereits bekannte Phase nennt sich entsprechend <strong>Ziel-Phase</strong>.</p>
-	<p>Mit dieser Phase ist die Ereignis-Verarbeitung nicht zuende, denn anschließend steigt das Ereignis im DOM-Elementenbaum auf. Dieser Vorgang nennt sich <strong>Bubbling</strong>. Das Wort ist abgleitet von <em>bubble</em>, Englisch für Blase. Bubbling ist demnach das <strong>Aufsteigen</strong> der Events wie beispielsweise Luftblasen im Wasser.</p>
-	<p>Dieses Aufsteigen bedeutet, dass die entsprechenden Handler auch beim Eltern-Element des Zielelements ausgeführt werden, dann bei dessen Eltern-Element und so weiter, bis das Ereignis schließlich den obersten <code>document</code>-Knoten erreicht hat.
-	Das Ereignis bewegt sich also nach oben im Elementbaum, durchläuft alle Vorfahrenelemente des Zielelements und löst auf diesem Weg alle entsprechenden Handler aus. Dieser Vorgang wird entsprechend <strong>Bubbling-Phase</strong> genannt.</p>
-	<p>Das mag für den Anfang unverständlich klingen, der Sinn und die Funktionsweise des Bubblings sind aber schnell erfasst. Nehmen wir folgenden HTML-Code:</p>
-	<pre>&lt;p id="absatz"&gt;
+  <h2>Der Event-Fluss: Bubbling</h2>
+  <p>Bisher haben wir erfahren, dass Ereignisse bei bestimmten Elementen passieren. Dort können wir sie überwachen, indem wir Handler registrieren. Tritt das Ereignis bei diesem Element ein, wird die Handler-Funktion ausgelöst.</p>
+  <p>Die Wirklichkeit ist etwas komplizierter. Die Verarbeitung eines Ereignisses verläuft in <strong>drei Phasen</strong>, die nacheinander durchlaufen werden. Davon lernen wir nun eine zweite kennen. Die dritte ist weniger wichtig und braucht Sie zum Einstieg erst einmal nicht interessieren &ndash; Sie finden ihre Beschreibung unter <a href="event-handling-effizient.html#capturing">Capturing</a> beschrieben.</p>
+  <p>Ein Ereignis passiert bei einem Element, dem sogenannten <strong>Zielelement</strong> (englisch <em>target element</em>), und löst dort alle Handler aus, die für das entsprechende Ereignis registriert wurden &ndash; soweit waren wir bereits. Diese bereits bekannte Phase nennt sich entsprechend <strong>Ziel-Phase</strong>.</p>
+  <p>Mit dieser Phase ist die Ereignis-Verarbeitung nicht zuende, denn anschließend steigt das Ereignis im DOM-Elementenbaum auf. Dieser Vorgang nennt sich <strong>Bubbling</strong>. Das Wort ist abgleitet von <em>bubble</em>, Englisch für Blase. Bubbling ist demnach das <strong>Aufsteigen</strong> der Events wie beispielsweise Luftblasen im Wasser.</p>
+  <p>Dieses Aufsteigen bedeutet, dass die entsprechenden Handler auch beim Eltern-Element des Zielelements ausgeführt werden, dann bei dessen Eltern-Element und so weiter, bis das Ereignis schließlich den obersten <code>document</code>-Knoten erreicht hat.
+  Das Ereignis bewegt sich also nach oben im Elementbaum, durchläuft alle Vorfahrenelemente des Zielelements und löst auf diesem Weg alle entsprechenden Handler aus. Dieser Vorgang wird entsprechend <strong>Bubbling-Phase</strong> genannt.</p>
+  <p>Das mag für den Anfang unverständlich klingen, der Sinn und die Funktionsweise des Bubblings sind aber schnell erfasst. Nehmen wir folgenden HTML-Code:</p>
+  <pre>&lt;p id="absatz"&gt;
    Dies ist ein Beispiel-Element mit einem
    &lt;strong id="wichtig"&gt;
       wichtigen Text
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
-	<p>Nehmen wir ferner an, dass das <code>p</code>-Element <a href="#traditionelles-event-handling">auf traditionelle Weise</a> einen <code>click</code>-Handler bekommt:</p>
-	<pre>function klickverarbeitung () {
+  <p>Nehmen wir ferner an, dass das <code>p</code>-Element <a href="#traditionelles-event-handling">auf traditionelle Weise</a> einen <code>click</code>-Handler bekommt:</p>
+  <pre>function klickverarbeitung () {
    window.alert("Der Absatz wurde geklickt!");
 }
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
-	<p>Das <code>p</code>-Element wird vom Browser als rechteckige Box dargestellt. Bei einem Klick irgendwo in diese Box soll die Handler-Funktion ausgeführt werden.</p>
-	<p>Wenn der Anwender auf das Wort »Beispiel-Element« klickt, ist das <code>p</code>-Element das Zielelement des Ereignisses. Wenn man hingegen auf »wichtigen Text« klickt, so ist das <code>strong</code>-Element das Zielelement des Ereignisses, nicht das p-Element! Denn dieser Text liegt in erster Linie im <code>strong</code>-Element und nur indirekt im <code>p</code>-Element. Aus Sicht des DOM-Baumes ist der Text ein Textknoten, der ein Kindknoten des <code>strong</code>-Elementknotens ist.</p>
-	<p>Nichtsdestoweniger erwartet man, dass ein Klick auf die Box des <code>strong</code>-Elements ebenfalls den <code>click</code>-Handler beim <code>p</code>-Element auslöst. Und dies ist auch der Fall &ndash; dafür sorgt das Bubbling! Das Ereignis, das ursprünglich beim <code>strong</code>-Element passiert ist, steigt nämlich auf, sodass der Handler des <code>p</code>-Elements ausgeführt wird.</p>
-	<p>Das Bubbling ist also meist erwünscht, damit bei einem Element Ereignisse überwacht werden können, selbst wenn sie ursprünglich bei Kindelementen passieren. Wenn Sie aber nicht damit rechnen, dass Ereignisse aufsteigen, so kann das Bubbling zu einiger Verwirrung führen und Sie werden sich wundern, woher plötzlich gewisse Ereignisse stammen.</p>
-	<p>Nicht alle Ereignisse steigen auf, denn für manche Ereignisse wäre es kontraproduktiv, wenn sie zentrale Handler auslösen würden.</p>
+  <p>Das <code>p</code>-Element wird vom Browser als rechteckige Box dargestellt. Bei einem Klick irgendwo in diese Box soll die Handler-Funktion ausgeführt werden.</p>
+  <p>Wenn der Anwender auf das Wort »Beispiel-Element« klickt, ist das <code>p</code>-Element das Zielelement des Ereignisses. Wenn man hingegen auf »wichtigen Text« klickt, so ist das <code>strong</code>-Element das Zielelement des Ereignisses, nicht das p-Element! Denn dieser Text liegt in erster Linie im <code>strong</code>-Element und nur indirekt im <code>p</code>-Element. Aus Sicht des DOM-Baumes ist der Text ein Textknoten, der ein Kindknoten des <code>strong</code>-Elementknotens ist.</p>
+  <p>Nichtsdestoweniger erwartet man, dass ein Klick auf die Box des <code>strong</code>-Elements ebenfalls den <code>click</code>-Handler beim <code>p</code>-Element auslöst. Und dies ist auch der Fall &ndash; dafür sorgt das Bubbling! Das Ereignis, das ursprünglich beim <code>strong</code>-Element passiert ist, steigt nämlich auf, sodass der Handler des <code>p</code>-Elements ausgeführt wird.</p>
+  <p>Das Bubbling ist also meist erwünscht, damit bei einem Element Ereignisse überwacht werden können, selbst wenn sie ursprünglich bei Kindelementen passieren. Wenn Sie aber nicht damit rechnen, dass Ereignisse aufsteigen, so kann das Bubbling zu einiger Verwirrung führen und Sie werden sich wundern, woher plötzlich gewisse Ereignisse stammen.</p>
+  <p>Nicht alle Ereignisse steigen auf, denn für manche Ereignisse wäre es kontraproduktiv, wenn sie zentrale Handler auslösen würden.</p>
 </div>
 
 
 <div class="section" id="currenttarget-target">
-	<h2>Verarbeitendes Element und Zielelement</h2>
-	<p>Durch das beschriebene Bubbling ist es möglich, dass sich das Element, bei dem ein Ereignis ursprünglich passiert ist, von dem unterscheiden kann, dessen Handler gerade aufgerufen wird. Es ist möglich, dass das Element, das das Ereignis verarbeitet, im DOM-Elementenbaum oberhalb vom Zielelement liegt. Das Ereignis steigt in dem Fall vom Zielelement auf und löst bei einem anderen Element die Handler-Funktion aus.</p>
-	<p>In vielen Fällen will man in der Handler-Funktion auf beide beteiligten Elemente zugreifen, sofern sie sich unterscheiden.</p>
-	<p>Beginnen wir mit dem Zugriff auf das <strong>verarbeitende Element</strong>, bei dem die Handler-Funktion registriert wurde: Das Element kann in der Handler-Funktion über das Schlüsselwort <code>this</code> angesprochen werden, denn die Handler-Funktion wird im Kontext dieses Elementobjektes ausgeführt.</p>
-	<p>Das obige Beispiel wird wieder aufgegriffen:</p>
-	<pre>&lt;p id="absatz"&gt;
+  <h2>Verarbeitendes Element und Zielelement</h2>
+  <p>Durch das beschriebene Bubbling ist es möglich, dass sich das Element, bei dem ein Ereignis ursprünglich passiert ist, von dem unterscheiden kann, dessen Handler gerade aufgerufen wird. Es ist möglich, dass das Element, das das Ereignis verarbeitet, im DOM-Elementenbaum oberhalb vom Zielelement liegt. Das Ereignis steigt in dem Fall vom Zielelement auf und löst bei einem anderen Element die Handler-Funktion aus.</p>
+  <p>In vielen Fällen will man in der Handler-Funktion auf beide beteiligten Elemente zugreifen, sofern sie sich unterscheiden.</p>
+  <p>Beginnen wir mit dem Zugriff auf das <strong>verarbeitende Element</strong>, bei dem die Handler-Funktion registriert wurde: Das Element kann in der Handler-Funktion über das Schlüsselwort <code>this</code> angesprochen werden, denn die Handler-Funktion wird im Kontext dieses Elementobjektes ausgeführt.</p>
+  <p>Das obige Beispiel wird wieder aufgegriffen:</p>
+  <pre>&lt;p id="absatz"&gt;
    Dies ist ein Beispiel-Element mit einem
    &lt;strong id="wichtig"&gt;
          wichtigen Text
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
-	<p>Dem Absatz wird wieder ein <code>click</code>-Handler zugewiesen:</p>
-	<pre>function klickverarbeitung () {
+  <p>Dem Absatz wird wieder ein <code>click</code>-Handler zugewiesen:</p>
+  <pre>function klickverarbeitung () {
    window.alert("Element vom Typ " + this.nodeName + " wurde geklickt!");
 }
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
-	<p>Innerhalb der Handler-Funktion können wir über <code>this</code> auf das <code>p</code>-Element zugreifen. Im Beispiel wird auf dessen Eigenschaft <code>nodeName</code> ausgegeben, welche den Elementnamen <code>P</code> enthält.</p>
-	<p>Der DOM-Standard sieht eine andere Zugriffsweise vor: Die Eigenschaft <code>currentTarget</code> beim Event-Objekt enthält das Element, dessen Handler gerade ausgeführt wird. Der Internet Explorer kennt diese Eigenschaft erst an Version 9. Das besagte <code>this</code> ist in älteren Internet-Explorer-Versionen die einzige Möglichkeit, auf das fragliche Element zuzugreifen. Der Einfachheit halber können Sie browserübergreifend <code>this</code> verwenden.</p>
+  <p>Innerhalb der Handler-Funktion können wir über <code>this</code> auf das <code>p</code>-Element zugreifen. Im Beispiel wird auf dessen Eigenschaft <code>nodeName</code> ausgegeben, welche den Elementnamen <code>P</code> enthält.</p>
+  <p>Der DOM-Standard sieht eine andere Zugriffsweise vor: Die Eigenschaft <code>currentTarget</code> beim Event-Objekt enthält das Element, dessen Handler gerade ausgeführt wird. Der Internet Explorer kennt diese Eigenschaft erst an Version 9. Das besagte <code>this</code> ist in älteren Internet-Explorer-Versionen die einzige Möglichkeit, auf das fragliche Element zuzugreifen. Der Einfachheit halber können Sie browserübergreifend <code>this</code> verwenden.</p>
 
-	<p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Diese kennen alle modernen Browser, doch der Internet Explorer unterstützt diese Eigenschaft erst ab Version 9. Ältere Versionen kennen eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist &ndash; wir kennen dieses Vorgehensweise bereits vom Zugriff auf das Event-Objekt.</p>
-	<pre>function klickverarbeitung (eventObjekt) {
+  <p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Diese kennen alle modernen Browser, doch der Internet Explorer unterstützt diese Eigenschaft erst ab Version 9. Ältere Versionen kennen eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist &ndash; wir kennen dieses Vorgehensweise bereits vom Zugriff auf das Event-Objekt.</p>
+  <pre>function klickverarbeitung (eventObjekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Zugriff auf das Zielelement
@@ -206,9 +206,9 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
       " und wird vom Element " + this.nodeName + " verarbeitet.");
    );
 }</pre>
-	<p>Falls die Eigenschaft <code>target</code> des Event-Objektes gefüllt ist, legen wir in der lokalen Variable <code>target</code> eine Referenz darauf an. Andernfalls, das betrifft den Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
-	<p>Wie beim Zugriff auf das Event-Objekt erlaubt der <code>||</code>-Operator eine Kurzschreibweise. Das Event-Objekt wird zudem unter dem Kurznamen <code>e</code> gespeichert. So kommen wir zu einem Schema, dem viele Handler-Funktionen entsprechen:</p>
-	<pre>function klickverarbeitung (e) {
+  <p>Falls die Eigenschaft <code>target</code> des Event-Objektes gefüllt ist, legen wir in der lokalen Variable <code>target</code> eine Referenz darauf an. Andernfalls, das betrifft den Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
+  <p>Wie beim Zugriff auf das Event-Objekt erlaubt der <code>||</code>-Operator eine Kurzschreibweise. Das Event-Objekt wird zudem unter dem Kurznamen <code>e</code> gespeichert. So kommen wir zu einem Schema, dem viele Handler-Funktionen entsprechen:</p>
+  <pre>function klickverarbeitung (e) {
    // Vereinheitlichung von Event-Objekt und Zielelement
    e = e || window.event;
    var target = e.target || e.srcElement;
@@ -261,17 +261,17 @@ targetArea.onmouseover = function (e) {
 
 
 <div class="section" id="bubbling-verhindern">
-	<h2>Kontrolle über den Event-Fluss: Bubbling verhindern</h2>
-	<p>Es gibt Fälle, in denen das Bubbling nicht gewünscht ist. Beispielsweise wenn zwei verschachtelte Elemente dasselbe Ereignis überwachen, aber nur der Handler des inneren Elements aktiv werden soll, wenn dieses das Ziel des Ereignisses ist. In einer Handler-Funktion können Sie deshalb das weitere Aufsteigen des Ereignisses im Elementenbaum verhindern.</p>
-	<p>Folgendes bekannte Beispiel mit verschachtelten Elementen soll dies illustrieren:</p>
-	<pre>&lt;p id="absatz"&gt;
+  <h2>Kontrolle über den Event-Fluss: Bubbling verhindern</h2>
+  <p>Es gibt Fälle, in denen das Bubbling nicht gewünscht ist. Beispielsweise wenn zwei verschachtelte Elemente dasselbe Ereignis überwachen, aber nur der Handler des inneren Elements aktiv werden soll, wenn dieses das Ziel des Ereignisses ist. In einer Handler-Funktion können Sie deshalb das weitere Aufsteigen des Ereignisses im Elementenbaum verhindern.</p>
+  <p>Folgendes bekannte Beispiel mit verschachtelten Elementen soll dies illustrieren:</p>
+  <pre>&lt;p id="absatz"&gt;
    Dies ist ein Beispiel-Element mit einem
    &lt;strong id="wichtig"&gt;
       wichtigen Text
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
-	<p>Das <code>strong</code>-Element steckt hier im <code>p</code>-Element. Bei beiden Elementen wird ein <code>click</code>-Handler registriert:</p>
-	<pre>function absatzKlick () {
+  <p>Das <code>strong</code>-Element steckt hier im <code>p</code>-Element. Bei beiden Elementen wird ein <code>click</code>-Handler registriert:</p>
+  <pre>function absatzKlick () {
    window.alert("Klick auf das p-Element");
 }
 document.getElementById("absatz").onclick = absatzKlick;
@@ -280,12 +280,12 @@ function wichtigKlick () {
    window.alert("Klick auf das strong-Element");
 }
 document.getElementById("wichtig").onclick = wichtigKlick;</pre>
-	<p>Bei einem Klick auf die Fläche des <code>strong</code>-Elements (»wichtigen Text«) werden beide Handler-Funktionen ausgeführt, denn das Ereignis steigt vom <code>strong</code>-Element zum <code>p</code>-Element auf.</p>
-	<p>Dieses Aufsteigen können Sie in der Handler-Funktion des <code>strong</code>-Elementes (<code>wichtigKlick</code>) verhindern. Der DOM-Standard definiert dafür die Methode <code>stopPropagation</code> (englisch: stoppe die Verbreitung bzw. Weitergabe des Ereignisses) beim Event-Objekt. Ein Aufruf dieser Methode unterbricht den Event-Fluss und verhindert damit das (weitere) Aufsteigen.</p>
-	<p>Der Internet Explorer kennt diese Methode erst ab Version 9. Ältere Versionen verfügen über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch: breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
-	<p>Wieder einmal nutzen wir eine Fähigkeitenerkennung, die die Verfügbarkeit der standardisierten Methode <code>stopPropagation</code> prüft und im Fehlerfalle auf die Microsoft-Alternative <code>cancelBubble</code> zurückfällt.</p>
-	<p>Die Handler-Funktion <code>wichtigKlick</code> wird wie folgt modifiziert:</p>
-	<pre>function wichtigKlick (eventObekt) {
+  <p>Bei einem Klick auf die Fläche des <code>strong</code>-Elements (»wichtigen Text«) werden beide Handler-Funktionen ausgeführt, denn das Ereignis steigt vom <code>strong</code>-Element zum <code>p</code>-Element auf.</p>
+  <p>Dieses Aufsteigen können Sie in der Handler-Funktion des <code>strong</code>-Elementes (<code>wichtigKlick</code>) verhindern. Der DOM-Standard definiert dafür die Methode <code>stopPropagation</code> (englisch: stoppe die Verbreitung bzw. Weitergabe des Ereignisses) beim Event-Objekt. Ein Aufruf dieser Methode unterbricht den Event-Fluss und verhindert damit das (weitere) Aufsteigen.</p>
+  <p>Der Internet Explorer kennt diese Methode erst ab Version 9. Ältere Versionen verfügen über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch: breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
+  <p>Wieder einmal nutzen wir eine Fähigkeitenerkennung, die die Verfügbarkeit der standardisierten Methode <code>stopPropagation</code> prüft und im Fehlerfalle auf die Microsoft-Alternative <code>cancelBubble</code> zurückfällt.</p>
+  <p>Die Handler-Funktion <code>wichtigKlick</code> wird wie folgt modifiziert:</p>
+  <pre>function wichtigKlick (eventObekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Stoppe das Aufsteigen des Ereignisses
@@ -299,12 +299,12 @@ document.getElementById("wichtig").onclick = wichtigKlick;</pre>
 
    window.alert("Klick auf das strong-Element. Das Aufsteigen des Ereignisses wird unterbunden!");
 }</pre>
-	<p>Damit können verschachtelte Elemente denselben Ereignistyp überwachen, im Beispiel <code>click</code>. Obwohl das eine Element in dem anderen enthalten ist und üblicherweise in dessen Grenzen dargestellt wird, übernimmt es die Ereignis-Verarbeitung selbstständig. Der Handler des äußeren Elements, im Beispiel <code>absatzKlick</code> beim <code>p</code>-Element, wird nur bei Klicks ausgeführt, die auf seine Fläche zielen, ausgenommen die Fläche des inneren Elements.</p>
+  <p>Damit können verschachtelte Elemente denselben Ereignistyp überwachen, im Beispiel <code>click</code>. Obwohl das eine Element in dem anderen enthalten ist und üblicherweise in dessen Grenzen dargestellt wird, übernimmt es die Ereignis-Verarbeitung selbstständig. Der Handler des äußeren Elements, im Beispiel <code>absatzKlick</code> beim <code>p</code>-Element, wird nur bei Klicks ausgeführt, die auf seine Fläche zielen, ausgenommen die Fläche des inneren Elements.</p>
 </div>
 
 <div class="sequence-navigation">
-	<p class="next"><a href="event-handling-fortgeschritten.html" rel="next">Fortgeschrittene Ereignisverarbeitung</a></p>
-	<p class="prev"><a href="event-handling-grundlagen.html" rel="prev">Grundlagen zur Ereignisverarbeitung</a></p>
+  <p class="next"><a href="event-handling-fortgeschritten.html" rel="next">Fortgeschrittene Ereignisverarbeitung</a></p>
+  <p class="prev"><a href="event-handling-grundlagen.html" rel="prev">Grundlagen zur Ereignisverarbeitung</a></p>
 </div>
 
 <div id="footer">

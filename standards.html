@@ -16,100 +16,100 @@
 
 <h1>JavaScript: Entstehung und Standardisierung</h1>
  <div class="section" id="standardisierung">
-	<h2>Wer legt fest, was JavaScript ist?</h2>
-	<p>Im Gegensatz zu HTML und CSS gibt es keine zentrale, geschlossene technische Spezifikation, die normativ festlegt, was JavaScript ist und was ein JavaScript-fähiger Browser können muss. JavaScript ist vielmehr ein Flickenteppich aus verschiedenen Spezifikationen und Industriestandards, die von verschiedenen Firmen und Gremien herausgegeben werden. Dies macht die Lage für Einsteiger ungemein schwierig und unübersichtlich.</p>
-	<p>Neben dem mehr oder weniger umrissenen Sprachkern gibt es eine Fülle von Techniken, die über JavaScript nutzbar sind. Man spricht von sogenannten <strong>APIs</strong> (engl. <em>application programming interface</em> &ndash; Programmierschnittstellen). Die Weiterentwicklung von JavaScript besteht zum großen Teil darin, dass neue APIs erfunden und durch die Browser implementiert (umgesetzt, unterstützt) werden.</p>
-	<p>»JavaScript« ist demnach ein offener Begriff, der jegliches Scripting auf Basis von <a href="#ecmascrpt">ECMAScript</a> zusammenfasst. Dass man heute vereinfachend von »JavaScript« spricht, hat bloß historische Gründe hat &ndash; technisch gesehen ist JavaScript ein Mischmasch aus unterschiedlichen, nicht miteinander abgestimmten Techniken.</p>
+  <h2>Wer legt fest, was JavaScript ist?</h2>
+  <p>Im Gegensatz zu HTML und CSS gibt es keine zentrale, geschlossene technische Spezifikation, die normativ festlegt, was JavaScript ist und was ein JavaScript-fähiger Browser können muss. JavaScript ist vielmehr ein Flickenteppich aus verschiedenen Spezifikationen und Industriestandards, die von verschiedenen Firmen und Gremien herausgegeben werden. Dies macht die Lage für Einsteiger ungemein schwierig und unübersichtlich.</p>
+  <p>Neben dem mehr oder weniger umrissenen Sprachkern gibt es eine Fülle von Techniken, die über JavaScript nutzbar sind. Man spricht von sogenannten <strong>APIs</strong> (engl. <em>application programming interface</em> &ndash; Programmierschnittstellen). Die Weiterentwicklung von JavaScript besteht zum großen Teil darin, dass neue APIs erfunden und durch die Browser implementiert (umgesetzt, unterstützt) werden.</p>
+  <p>»JavaScript« ist demnach ein offener Begriff, der jegliches Scripting auf Basis von <a href="#ecmascrpt">ECMAScript</a> zusammenfasst. Dass man heute vereinfachend von »JavaScript« spricht, hat bloß historische Gründe hat &ndash; technisch gesehen ist JavaScript ein Mischmasch aus unterschiedlichen, nicht miteinander abgestimmten Techniken.</p>
 </div>
  <div class="section" id="netscape-microsoft">
-	<h2>Anfangszeit mit Netscape JavaScript und Microsoft JScript</h2>
-	<p>Der Name <strong>JavaScript</strong> ist eine Marke der Firma Netscape, die die Sprache einst aus der Taufe gehoben hat. Netscape gab in den 90er-Jahren verschiedene JavaScript-Spezifikationen heraus, die Versionsnummern trugen (1.0, 1.1, 1.2, 1.3 und 1.5). Es handelte sich hierbei um herstellereigene, sogenannte proprietäre Erfindungen. Die Spezifikationen dokumentierten die Techniken, die der hauseigene Browser namens <em>Netscape Navigator</em> in den Versionen 2.0 bis 4.8 unterstützte (TODO).</p>
-	<p>Der Hintergrund der Entstehung von JavaScript war der sogenannte Browserkrieg: Eine Zeit des Wettlaufs, in der Netscape und Microsoft ihre Browsern mit proprietären Besonderheiten aufwerteten, um dem Konkurrenten Marktanteile zu rauben. Microsoft erkannte schnell die Nützlichkeit von JavaScript und setzte die JavaScript-Spezifikation auch im eigenen Browser, dem Internet Explorer um. Aus markenrechtlichen Gründen nannte Microsoft seine JavaScript-Umsetzung <strong>JScript</strong>. Der eigene Name ging mit eigenen Zusätzen und Besonderheiten einher, wodurch sich Netscapes JavaScript und Microsofts JScript auseinander entwickelten.</p>
-	<p>Für Webentwickler war es ein Horror, sich in derselben Sprache mit unterschiedlichen Ansätzen herumplagen zu müssen, um browserübergreifend dasselbe zu erreichen. Microsoft und Netscape sahen das ein und strebten die Standardisierung der Sprache durch unabhängige Gremien an. Heraus kamen zwei Spezifikationen, die nach wie vor das meiste abdecken, was wir heute unter JavaScript verstehen.</p>
+  <h2>Anfangszeit mit Netscape JavaScript und Microsoft JScript</h2>
+  <p>Der Name <strong>JavaScript</strong> ist eine Marke der Firma Netscape, die die Sprache einst aus der Taufe gehoben hat. Netscape gab in den 90er-Jahren verschiedene JavaScript-Spezifikationen heraus, die Versionsnummern trugen (1.0, 1.1, 1.2, 1.3 und 1.5). Es handelte sich hierbei um herstellereigene, sogenannte proprietäre Erfindungen. Die Spezifikationen dokumentierten die Techniken, die der hauseigene Browser namens <em>Netscape Navigator</em> in den Versionen 2.0 bis 4.8 unterstützte (TODO).</p>
+  <p>Der Hintergrund der Entstehung von JavaScript war der sogenannte Browserkrieg: Eine Zeit des Wettlaufs, in der Netscape und Microsoft ihre Browsern mit proprietären Besonderheiten aufwerteten, um dem Konkurrenten Marktanteile zu rauben. Microsoft erkannte schnell die Nützlichkeit von JavaScript und setzte die JavaScript-Spezifikation auch im eigenen Browser, dem Internet Explorer um. Aus markenrechtlichen Gründen nannte Microsoft seine JavaScript-Umsetzung <strong>JScript</strong>. Der eigene Name ging mit eigenen Zusätzen und Besonderheiten einher, wodurch sich Netscapes JavaScript und Microsofts JScript auseinander entwickelten.</p>
+  <p>Für Webentwickler war es ein Horror, sich in derselben Sprache mit unterschiedlichen Ansätzen herumplagen zu müssen, um browserübergreifend dasselbe zu erreichen. Microsoft und Netscape sahen das ein und strebten die Standardisierung der Sprache durch unabhängige Gremien an. Heraus kamen zwei Spezifikationen, die nach wie vor das meiste abdecken, was wir heute unter JavaScript verstehen.</p>
 </div>
  <div class="section" id="ecmascript">
-	<h2>ECMAScript standardisiert die Sprachgrundlagen</h2>
-	<p>Die Grundlagen von JavaScript wurden ganz allgemein in <strong>ECMAScript (ECMA-262)</strong> festgelegt. ECMA steht dabei für die Standardisierungsorganisation, die die technische Spezifikation herausgibt. Maßgeblich ist derzeit die <strong>dritte Ausgabe</strong> aus dem Jahr 1999 (ECMAScript Edition 3).</p>
-	<p>ECMAScript ist sehr abstrakt gehalten und klammert den für JavaScript charakteristischen Rahmen (Fenster, Dokumente, Ereignisse usw.) aus. Stattdessen definiert ECMAScript eine vielseitige Meta-Sprache, ein Grundgerüst für viele mögliche Programmiersprachen, und beschreibt deren Syntaxregeln, deren grundlegende Objekttypen sowie die Verarbeitung von Programmen. Dadurch stellt ECMAScript nicht nur das Herzstück von JavaScript bereit, sondern wird auch an anderen Stellen eingesetzt &ndash; übrigens auch serverseitig.</p>
-	<p>Unglücklicherweise ist der ECMAScript-Standard für Normalsterbliche unverständlich, sodass er als praktische Referenz weitgehend ungeeignet ist. Sie können die offizielle Spezifikation dennoch <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" class="anchor-external">als PDF-Datei herunterladen</a>. Zur einfacheren Arbeit mit der Spezifikation wurde sie inoffiziell in <a href="http://bclary.com/log/2004/11/07/" class="anchor-external">eine große HTML-Datei</a> konvertiert. In dieser können Sie einfacher nachschlagen oder einzelne Abschnitte verlinken. Doch wie gesagt: Diese Dokumente sind leider für nur für diejenigen verständlich, die sich bereits intensiv mit JavaScript auseinandergesetzt haben.</p>
-	<p>Der ECMAScript-Standard wird nach einer langen Ruhezeit wieder weiterentwickelt. Die Arbeiten an der kommenden Ausgabe, <a href="#ecmascript-zukunft">ECMAScript 5</a>, sind in vollem Gange. Siehe dazu weiter unten.</p>
+  <h2>ECMAScript standardisiert die Sprachgrundlagen</h2>
+  <p>Die Grundlagen von JavaScript wurden ganz allgemein in <strong>ECMAScript (ECMA-262)</strong> festgelegt. ECMA steht dabei für die Standardisierungsorganisation, die die technische Spezifikation herausgibt. Maßgeblich ist derzeit die <strong>dritte Ausgabe</strong> aus dem Jahr 1999 (ECMAScript Edition 3).</p>
+  <p>ECMAScript ist sehr abstrakt gehalten und klammert den für JavaScript charakteristischen Rahmen (Fenster, Dokumente, Ereignisse usw.) aus. Stattdessen definiert ECMAScript eine vielseitige Meta-Sprache, ein Grundgerüst für viele mögliche Programmiersprachen, und beschreibt deren Syntaxregeln, deren grundlegende Objekttypen sowie die Verarbeitung von Programmen. Dadurch stellt ECMAScript nicht nur das Herzstück von JavaScript bereit, sondern wird auch an anderen Stellen eingesetzt &ndash; übrigens auch serverseitig.</p>
+  <p>Unglücklicherweise ist der ECMAScript-Standard für Normalsterbliche unverständlich, sodass er als praktische Referenz weitgehend ungeeignet ist. Sie können die offizielle Spezifikation dennoch <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" class="anchor-external">als PDF-Datei herunterladen</a>. Zur einfacheren Arbeit mit der Spezifikation wurde sie inoffiziell in <a href="http://bclary.com/log/2004/11/07/" class="anchor-external">eine große HTML-Datei</a> konvertiert. In dieser können Sie einfacher nachschlagen oder einzelne Abschnitte verlinken. Doch wie gesagt: Diese Dokumente sind leider für nur für diejenigen verständlich, die sich bereits intensiv mit JavaScript auseinandergesetzt haben.</p>
+  <p>Der ECMAScript-Standard wird nach einer langen Ruhezeit wieder weiterentwickelt. Die Arbeiten an der kommenden Ausgabe, <a href="#ecmascript-zukunft">ECMAScript 5</a>, sind in vollem Gange. Siehe dazu weiter unten.</p>
 </div>
 <div class="subsection" id="dom">
-	<h2>W3C DOM standardisiert den Dokumentzugriff</h2>
-	<p>Auf der anderen Seite war eine Standardisierung des Zugriffs auf das HTML-Dokument nötig. Sowohl Netscape als auch Microsoft erfanden eigene <strong>DHTML-Modelle</strong> &ndash; DHTML steht dabei für <em>dynamisches</em> HTML. Beide Modelle waren jedoch beschränkt, undurchdacht und zu allem Überfluss zueinander nicht kompatibel.</p>
-	<p>Ein weiteres Standardisierungsgremium, das World Wide Consortium (W3C) kam schließlich zur Hilfe. In Zusammenarbeit mit den Browserherstellern wurde das sogenannte <strong>Document Object Model (DOM)</strong> erarbeitet. Die DOM-Programmierschnittstelle nimmt in der JavaScript-Anwendung eine zentrale Stellung ein und ist in vielerlei Hinsicht Referenzpunkt für JavaScript-Programmierer. Näheres erfahren Sie auf der <a href="http://www.w3.org/DOM/" class="anchor-external">DOM-Einstiegsseite des W3C</a>.</p>
-	<div class="subsection" id="dom-standards">
-		<h3>Überblick über die DOM-Standards</h3>
-		<p>Bei dem DOM handelt es sich nicht um eine einzelne technische Spezifikation, sondern um eine ganze Familie von auf einander aufbauenden, sich ergänzenden Spezifikationen. Die meisten darin definierten Schnittstellen sind über JavaScript nutzbar, aber sie sind allesamt Programmiersprachen-unabhängig definiert.</p>
-		<ul>
-			<li>Das sogenannte <strong>Kern-DOM</strong> beschreibt ein Objektmodell, das auf Dokumente aller Auszeichnungssprachen anwendbar ist, die auf SGML bzw. XML aufbauen. Das ist bei HTML 4.01 und XHTML 1.0 der Fall, trifft aber auch auf unzählige andere Sprachen zu. Das DOM bezieht sich also nicht ausschließlich auf HTML-Dokumente.</li>
-			<li>Besonderheiten und Vereinfachungen beim Zugriff auf HTML-Dokumente werden im <strong>HTML-DOM</strong> geregelt. Das Kern-DOM und das HTML-DOM sind für JavaScript-Programmierer die wichtigsten Referenzpunkte &ndash; ein Großteil der Programmierung besteht aus der Nutzung dieser Techniken.</li>
-		</ul>
-		<p>Darüber hinaus gibt es noch viele weitere DOM-Spezifikationen, von denen für die JavaScript-Programmierung im Web vor allem zwei interessant sind:</p>
-		<ul>
-			<li><strong>DOM Style</strong> zusammen mit <strong>DOM CSS</strong> ermöglichen den Zugriff auf die Darstellung des Dokuments. Darüber können CSS-Eigenschaften ausgelesen und geändert werden sowie zentrale Stylesheet-Regeln verändert und erweitert werden. (Siehe <a href="css.html">Darstellung von Dokumenten steuern</a>.)</li>
-			<li><strong>DOM Events</strong> beschreibt die Verarbeitung von Ereignissen (z.B. Benutzereingaben) im Dokument sowie die Art und Weise, wie JavaScripte Ereignisse behandeln und kontrollieren können. (Siehe <a href="einbindung.html">Ereignisverarbeitung</a>.)</li>
-		</ul>
-		<p>Die tatsächlichen Spezifikationen finden Sie unter <a href="http://www.w3.org/DOM/DOMTR" class="anchor-external">Document Object Model (DOM) Technical Reports</a> aufgelistet.</p>
-		<p>Derzeit aktuell ist DOM Level 3, allerdings sind nicht alle der besagten Techniken bei dieser Version angekommen. Das Kern-DOM liegt in Version 3 vor (TODO: Datum), das HTML-DOM in Version 2 (TODO: Datum).</p>
-	</div>
+  <h2>W3C DOM standardisiert den Dokumentzugriff</h2>
+  <p>Auf der anderen Seite war eine Standardisierung des Zugriffs auf das HTML-Dokument nötig. Sowohl Netscape als auch Microsoft erfanden eigene <strong>DHTML-Modelle</strong> &ndash; DHTML steht dabei für <em>dynamisches</em> HTML. Beide Modelle waren jedoch beschränkt, undurchdacht und zu allem Überfluss zueinander nicht kompatibel.</p>
+  <p>Ein weiteres Standardisierungsgremium, das World Wide Consortium (W3C) kam schließlich zur Hilfe. In Zusammenarbeit mit den Browserherstellern wurde das sogenannte <strong>Document Object Model (DOM)</strong> erarbeitet. Die DOM-Programmierschnittstelle nimmt in der JavaScript-Anwendung eine zentrale Stellung ein und ist in vielerlei Hinsicht Referenzpunkt für JavaScript-Programmierer. Näheres erfahren Sie auf der <a href="http://www.w3.org/DOM/" class="anchor-external">DOM-Einstiegsseite des W3C</a>.</p>
+  <div class="subsection" id="dom-standards">
+    <h3>Überblick über die DOM-Standards</h3>
+    <p>Bei dem DOM handelt es sich nicht um eine einzelne technische Spezifikation, sondern um eine ganze Familie von auf einander aufbauenden, sich ergänzenden Spezifikationen. Die meisten darin definierten Schnittstellen sind über JavaScript nutzbar, aber sie sind allesamt Programmiersprachen-unabhängig definiert.</p>
+    <ul>
+      <li>Das sogenannte <strong>Kern-DOM</strong> beschreibt ein Objektmodell, das auf Dokumente aller Auszeichnungssprachen anwendbar ist, die auf SGML bzw. XML aufbauen. Das ist bei HTML 4.01 und XHTML 1.0 der Fall, trifft aber auch auf unzählige andere Sprachen zu. Das DOM bezieht sich also nicht ausschließlich auf HTML-Dokumente.</li>
+      <li>Besonderheiten und Vereinfachungen beim Zugriff auf HTML-Dokumente werden im <strong>HTML-DOM</strong> geregelt. Das Kern-DOM und das HTML-DOM sind für JavaScript-Programmierer die wichtigsten Referenzpunkte &ndash; ein Großteil der Programmierung besteht aus der Nutzung dieser Techniken.</li>
+    </ul>
+    <p>Darüber hinaus gibt es noch viele weitere DOM-Spezifikationen, von denen für die JavaScript-Programmierung im Web vor allem zwei interessant sind:</p>
+    <ul>
+      <li><strong>DOM Style</strong> zusammen mit <strong>DOM CSS</strong> ermöglichen den Zugriff auf die Darstellung des Dokuments. Darüber können CSS-Eigenschaften ausgelesen und geändert werden sowie zentrale Stylesheet-Regeln verändert und erweitert werden. (Siehe <a href="css.html">Darstellung von Dokumenten steuern</a>.)</li>
+      <li><strong>DOM Events</strong> beschreibt die Verarbeitung von Ereignissen (z.B. Benutzereingaben) im Dokument sowie die Art und Weise, wie JavaScripte Ereignisse behandeln und kontrollieren können. (Siehe <a href="einbindung.html">Ereignisverarbeitung</a>.)</li>
+    </ul>
+    <p>Die tatsächlichen Spezifikationen finden Sie unter <a href="http://www.w3.org/DOM/DOMTR" class="anchor-external">Document Object Model (DOM) Technical Reports</a> aufgelistet.</p>
+    <p>Derzeit aktuell ist DOM Level 3, allerdings sind nicht alle der besagten Techniken bei dieser Version angekommen. Das Kern-DOM liegt in Version 3 vor (TODO: Datum), das HTML-DOM in Version 2 (TODO: Datum).</p>
+  </div>
 </div>
 <div class="section" id="erweiterungen">
-	<h2>Hersteller-eigene Techniken und De-facto-Standards</h2>
-	<p>Bisher haben wir drei Quellen kennengelernt, aus denen sich JavaScript heutzutage zusammensetzt:</p>
-	<ol>
-		<li>Netscape JavaScript</li>
-		<li>ECMAScript</li>
-		<li>W3C DOM</li>
-	</ol>
-	<p>Lediglich ECMAScript und DOM sind anerkannte herstellerübergreifende Industriestandards, auf denen wir heute vergleichsweise zuverlässig aufbauen können. Leider decken sie längst nicht das gesamte JavaScript ab, mit dem wir es heute zu tun haben. Außerdem haben die Browser immer noch einige Lücken und Fehler bei der Umsetzung dieser Standards.</p>
-	<p>Heutige JavaScripte machen auf breiter Front Gebrauch von <strong>nicht-standardisierten Objekten</strong>, die ursprünglich ein Browserhersteller erfunden hat. Viele proprietäre Techniken erwiesen sich als nützlich, andere Browserhersteller übernahmen sie und sie mauserten sich zu <strong>De-Facto-Standards</strong>.</p>
-	<p>Diese Techniken können bei entsprechender Browserunterstützung ohne Bedenken verwendet werden. Sie sind jedoch teilweise konzeptionell unausgereift, sodass sie dem Anwender unkomfortabel erscheinen. Oder sie sind schlecht spezifiziert, sodass andere Browserhersteller das Verhalten nicht hundertprozentig nachbauen konnten.</p>
+  <h2>Hersteller-eigene Techniken und De-facto-Standards</h2>
+  <p>Bisher haben wir drei Quellen kennengelernt, aus denen sich JavaScript heutzutage zusammensetzt:</p>
+  <ol>
+    <li>Netscape JavaScript</li>
+    <li>ECMAScript</li>
+    <li>W3C DOM</li>
+  </ol>
+  <p>Lediglich ECMAScript und DOM sind anerkannte herstellerübergreifende Industriestandards, auf denen wir heute vergleichsweise zuverlässig aufbauen können. Leider decken sie längst nicht das gesamte JavaScript ab, mit dem wir es heute zu tun haben. Außerdem haben die Browser immer noch einige Lücken und Fehler bei der Umsetzung dieser Standards.</p>
+  <p>Heutige JavaScripte machen auf breiter Front Gebrauch von <strong>nicht-standardisierten Objekten</strong>, die ursprünglich ein Browserhersteller erfunden hat. Viele proprietäre Techniken erwiesen sich als nützlich, andere Browserhersteller übernahmen sie und sie mauserten sich zu <strong>De-Facto-Standards</strong>.</p>
+  <p>Diese Techniken können bei entsprechender Browserunterstützung ohne Bedenken verwendet werden. Sie sind jedoch teilweise konzeptionell unausgereift, sodass sie dem Anwender unkomfortabel erscheinen. Oder sie sind schlecht spezifiziert, sodass andere Browserhersteller das Verhalten nicht hundertprozentig nachbauen konnten.</p>
 </div>
 <div class="section" id="mozilla-javascript">
-	<h2>Mozilla-Erweiterungen: JavaScript 1.6 bis 1.8</h2>
-	<p>Im Jahr 1999 wurde die Entwicklung des Netscape Navigators eingestellt und der Quellcode freigegeben. Die Firma Netscape stieg damit aus der aktiven Browserentwicklung aus. Das Projekt <strong>Mozilla</strong> trat das Erbe von Netscape an, indem es den Quellcode weiterentwickelte und einen Open-Source-Browser herausbrachte. Daraus entstand die <strong>Gecko-Engine</strong>, auf der u.a. der verbreitete Mozilla Firefox basiert. Mittlerweile ist Mozilla ein eigenständiges Unternehmen und ein einflussreicher Akteur auf dem Browsermarkt.</p>
-	<p>Auch wenn Mozilla Standardkonformität und Standardisierung anstrebt, erfand das Projekt eine Reihe von Erweiterungen des JavaScript-Kerns. Dies kommt vor allem daher, dass Firefox selbst und insbesondere Firefox-Erweiterungen starken Gebrauch von JavaScript machen. Die Erweiterungen vereinfachen die Entwicklung dieser internen Scripte und erlauben eine effizientere und mächtigere Programmierung. Manche Neuheiten krempeln sogar komplett die JavaScript-Syntax um.</p>
-	<p>Leider wählten die Mozilla-Entwickler einen verwirrenden Weg: Sie nahmen die alte JavaScript-1.5-Spezifikationen von Netscape, pflegten ihre Erweiterungen ein und nannten das ganze JavaScript 1.6, 1.7 sowie 1.8.</p>
-	<p>JavaScript 1.6 bis 1.8 ist entgegen des Namens <em>nicht offiziell oder maßgeblich</em>, sondern nur eine Weiterführung des Netscape-Markennamens »JavaScript« und dessen Versionierung durch das Mozilla-Projekt. Der Status dieser drei Spezifikationen ist ein ganz anderer: Das ursprüngliche Netscape-JavaScript 1.5 ist weitgehend identisch mit ECMAScript Edition 3, welches wie gesagt breit unterstützt wird. Mozilla-JavaScript 1.6 bis 1.8 hingegen sind proprietäre Erweiterungen, die nur teilweise von anderen Browsern wie Safari/Chrome (Webkit-Engine) und Opera übernommen wurden. So nützlich manche der Erweiterungen sind, sie können sich nicht stillschweigend darauf verlassen, dass andere Browser sie unterstützen.</p>
-	<p>TODO: Links und Vorstellung</p>
-	<dl>
-		<dt>JavaScript 1.6</dt>
-		<dd></dd>
-		<dt>JavaScript 1.7</dt>
-		<dd></dd>
-		<dt>JavaScript 1.8</dt>
-		<dd></dd>
-	</dl>
+  <h2>Mozilla-Erweiterungen: JavaScript 1.6 bis 1.8</h2>
+  <p>Im Jahr 1999 wurde die Entwicklung des Netscape Navigators eingestellt und der Quellcode freigegeben. Die Firma Netscape stieg damit aus der aktiven Browserentwicklung aus. Das Projekt <strong>Mozilla</strong> trat das Erbe von Netscape an, indem es den Quellcode weiterentwickelte und einen Open-Source-Browser herausbrachte. Daraus entstand die <strong>Gecko-Engine</strong>, auf der u.a. der verbreitete Mozilla Firefox basiert. Mittlerweile ist Mozilla ein eigenständiges Unternehmen und ein einflussreicher Akteur auf dem Browsermarkt.</p>
+  <p>Auch wenn Mozilla Standardkonformität und Standardisierung anstrebt, erfand das Projekt eine Reihe von Erweiterungen des JavaScript-Kerns. Dies kommt vor allem daher, dass Firefox selbst und insbesondere Firefox-Erweiterungen starken Gebrauch von JavaScript machen. Die Erweiterungen vereinfachen die Entwicklung dieser internen Scripte und erlauben eine effizientere und mächtigere Programmierung. Manche Neuheiten krempeln sogar komplett die JavaScript-Syntax um.</p>
+  <p>Leider wählten die Mozilla-Entwickler einen verwirrenden Weg: Sie nahmen die alte JavaScript-1.5-Spezifikationen von Netscape, pflegten ihre Erweiterungen ein und nannten das ganze JavaScript 1.6, 1.7 sowie 1.8.</p>
+  <p>JavaScript 1.6 bis 1.8 ist entgegen des Namens <em>nicht offiziell oder maßgeblich</em>, sondern nur eine Weiterführung des Netscape-Markennamens »JavaScript« und dessen Versionierung durch das Mozilla-Projekt. Der Status dieser drei Spezifikationen ist ein ganz anderer: Das ursprüngliche Netscape-JavaScript 1.5 ist weitgehend identisch mit ECMAScript Edition 3, welches wie gesagt breit unterstützt wird. Mozilla-JavaScript 1.6 bis 1.8 hingegen sind proprietäre Erweiterungen, die nur teilweise von anderen Browsern wie Safari/Chrome (Webkit-Engine) und Opera übernommen wurden. So nützlich manche der Erweiterungen sind, sie können sich nicht stillschweigend darauf verlassen, dass andere Browser sie unterstützen.</p>
+  <p>TODO: Links und Vorstellung</p>
+  <dl>
+    <dt>JavaScript 1.6</dt>
+    <dd></dd>
+    <dt>JavaScript 1.7</dt>
+    <dd></dd>
+    <dt>JavaScript 1.8</dt>
+    <dd></dd>
+  </dl>
 </div>
 <div class="section" id="html5">
-	<h2>HTML 5 spezifiert De-facto-Standards</h2>
-	<p>HTML 5 ist die kommende Version von HTML, die nicht bloß HTML als Auszeichnungssprache fortsetzt, sondern die Web-Plattform fit für komplexe und dynamische Webanwendungen machen soll. Webanwendungen, die vor allem durch JavaScript angetrieben werden.</p>
-	<p>HTML 5 wurde ursprünglich von einer unabhängigen Gruppe namens <strong>WHATWG</strong> (Web Hypertext Application Working Group TODO) aus Unzufriedenheit mit dem Kurs des World Wide Consortium (W3C) ins Leben gerufen. Die WHATWG gewann nach und nach die Unterstützung verschiedener Browserhersteller und namhafter Web-Unternehmen. Schließlich vollzog das W3C eine Kehrtwendung und holte die entstehende HTML-5-Spezifikation ins Boot. Die WHATWG besteht als Gremium fort, sodass HTML 5 derzeit von zwei Communities und Organisationen getragen wird. HTML 5 befindet sich derzeit in der Entwurfsphase und soll bald ein offizieller W3C-Standard (<em>Recommendation</em>) werden.</p>
-	<p>HTML 5 ist der Nachfolger von HTML 4.01 und XHTML 1.0, aber auch gleichzeitig der Nachfolger von W3C DOM 2 HTML. Die kommende HTML-Spezifikation definiert also gleichzeitig die DOM-Schnittstelle für HTML-Dokumente. Während das bisherige HTML-DOM sehr begrenzt und mitunter unkomfortabel war, erweitert das HTML-5-DOM die Möglichkeiten und vereinfacht Prozesse immens.</p>
-	<p>Ein Hauptanliegen von HTML 5 ist es, mit dem unbefriedigenden Wust von unzureichend beschriebenen Verfahren aufzuräumen. HTML 5 soll Ordnung in das Durcheinander bringen, indem es verbreitete und bewährte, aber bisher proprietäre JavaScript-APIs standardisiert. <em>Paving the cowpaths</em>, Pflastern der Trampelpfade, nennen die Herausgeber das Konzept, vorhandene Techniken detailliert und verbindlich zu beschreiben.</p>
-	<p>Mit HTML 5 soll die gesamte HTML-spezifische Objektumgebung erstmals an zentraler Stelle definiert werden. Darunter das oberste, globale Objekt <code>window</code>. Dieses stammt aus Netscape JavaScript 1.0, wurde danach aber in keinem Industriestandard erwähnt. Insofern ist HTML 5 ist ein großer Fortschritt und ein Hoffnungsschimmer, denn es wird die browserübergreifende Programmierung vereinfachen und den Dschungel von Techniken unterschiedlicher Herkunft lichten.</p>
-	<p>Im Rahmen dieses Entwicklungsprozesses entstehen neue und äußerst mächtige JavaScript-APIs, die die Fähigkeiten von Websites und Webanwendungen potenzieren. TODO: Vorstellung. Canvas, Web Worker, Storage, Database, Drag and Drop ...</p>
+  <h2>HTML 5 spezifiert De-facto-Standards</h2>
+  <p>HTML 5 ist die kommende Version von HTML, die nicht bloß HTML als Auszeichnungssprache fortsetzt, sondern die Web-Plattform fit für komplexe und dynamische Webanwendungen machen soll. Webanwendungen, die vor allem durch JavaScript angetrieben werden.</p>
+  <p>HTML 5 wurde ursprünglich von einer unabhängigen Gruppe namens <strong>WHATWG</strong> (Web Hypertext Application Working Group TODO) aus Unzufriedenheit mit dem Kurs des World Wide Consortium (W3C) ins Leben gerufen. Die WHATWG gewann nach und nach die Unterstützung verschiedener Browserhersteller und namhafter Web-Unternehmen. Schließlich vollzog das W3C eine Kehrtwendung und holte die entstehende HTML-5-Spezifikation ins Boot. Die WHATWG besteht als Gremium fort, sodass HTML 5 derzeit von zwei Communities und Organisationen getragen wird. HTML 5 befindet sich derzeit in der Entwurfsphase und soll bald ein offizieller W3C-Standard (<em>Recommendation</em>) werden.</p>
+  <p>HTML 5 ist der Nachfolger von HTML 4.01 und XHTML 1.0, aber auch gleichzeitig der Nachfolger von W3C DOM 2 HTML. Die kommende HTML-Spezifikation definiert also gleichzeitig die DOM-Schnittstelle für HTML-Dokumente. Während das bisherige HTML-DOM sehr begrenzt und mitunter unkomfortabel war, erweitert das HTML-5-DOM die Möglichkeiten und vereinfacht Prozesse immens.</p>
+  <p>Ein Hauptanliegen von HTML 5 ist es, mit dem unbefriedigenden Wust von unzureichend beschriebenen Verfahren aufzuräumen. HTML 5 soll Ordnung in das Durcheinander bringen, indem es verbreitete und bewährte, aber bisher proprietäre JavaScript-APIs standardisiert. <em>Paving the cowpaths</em>, Pflastern der Trampelpfade, nennen die Herausgeber das Konzept, vorhandene Techniken detailliert und verbindlich zu beschreiben.</p>
+  <p>Mit HTML 5 soll die gesamte HTML-spezifische Objektumgebung erstmals an zentraler Stelle definiert werden. Darunter das oberste, globale Objekt <code>window</code>. Dieses stammt aus Netscape JavaScript 1.0, wurde danach aber in keinem Industriestandard erwähnt. Insofern ist HTML 5 ist ein großer Fortschritt und ein Hoffnungsschimmer, denn es wird die browserübergreifende Programmierung vereinfachen und den Dschungel von Techniken unterschiedlicher Herkunft lichten.</p>
+  <p>Im Rahmen dieses Entwicklungsprozesses entstehen neue und äußerst mächtige JavaScript-APIs, die die Fähigkeiten von Websites und Webanwendungen potenzieren. TODO: Vorstellung. Canvas, Web Worker, Storage, Database, Drag and Drop ...</p>
 </div>
 <div class="section" id="ecmascript-5">
-	<h2>ECMAScript 5 erweitert den Sprachkern und räumt mit Altlasten auf</h2>
-	<p>Statistisch gesehen ist ECMAScript die erfolgreichste Scriptsprache der Welt: Auf Milliarden Rechnern ist ein Browser mit JavaScript-Interpreter installiert. Dieser Erfolg beruht ironischerweise nicht auf den Fähigkeiten von JavaScript. JavaScript ist eine mächtige Sprache, die weitestgehend unzugänglich und unliebsam blieb.</p>
-	<p>TODO: Crockfords Artikel verlinken</p>
-	<p>Als ECMAScript 3 Ende der 90er-Jahre verabschiedet wurde, war nicht absehbar, dass eines Tages riesige Webanwendungen mit tausenden Codezeilen entwickelt werden. Die JavaScript-Entwicklung im großen Stil bringt bestimmte Anforderungen mit sich, denen JavaScript nicht ohne weiteres genügt.</p>
-	<p><strong>ECMAScript 5</strong> ist eine abwärtskompatible Weiterentwicklung von ECMAScript 3. Die Versionsnummer 4 wurde übersprungen, um Missverständnisse zu vermeiden: Es gab nämlich Entwürfe für ECMAScript 4, welche inhaltlich eine ganz andere Richtung einschlugen und später verworfen bzw. verschoben wurden.</p>
-	<p>Die fünfte Ausgabe beseitigt Fehler und Unklarheiten, wartet aber auch mit einigen Neuheiten auf. ECMAScript 3.1 nimmt einige nützliche Funktionen u.a. von Arrays und Strings auf, die Mozilla für die Gecko-Engine erfunden hatte (siehe <a href="#mozilla-javascript">JavaScript 1.6 bis 1.8</a>).</p>
-	<ul>
-		<li>Properties &ndash; Merkmale von Objekteigenschaften</li>
-		<li>Getter und Setter &ndash; Funktionen zum Auslesen und Setzen von Objekteigenschaften</li>
-		<li>Strict Mode &ndash; robusten und sicheren Code schreiben, der auf problematische Techniken verzichtet</li>
-		<li>JSON eingebaut</li>
-	</ul>
-	<p>Es existiert bereits ein nahezu fertiger Final Draft (letzter Entwurf) aus dem April 2009.</p>
-	<p>TODO: fortsetzen</p>
+  <h2>ECMAScript 5 erweitert den Sprachkern und räumt mit Altlasten auf</h2>
+  <p>Statistisch gesehen ist ECMAScript die erfolgreichste Scriptsprache der Welt: Auf Milliarden Rechnern ist ein Browser mit JavaScript-Interpreter installiert. Dieser Erfolg beruht ironischerweise nicht auf den Fähigkeiten von JavaScript. JavaScript ist eine mächtige Sprache, die weitestgehend unzugänglich und unliebsam blieb.</p>
+  <p>TODO: Crockfords Artikel verlinken</p>
+  <p>Als ECMAScript 3 Ende der 90er-Jahre verabschiedet wurde, war nicht absehbar, dass eines Tages riesige Webanwendungen mit tausenden Codezeilen entwickelt werden. Die JavaScript-Entwicklung im großen Stil bringt bestimmte Anforderungen mit sich, denen JavaScript nicht ohne weiteres genügt.</p>
+  <p><strong>ECMAScript 5</strong> ist eine abwärtskompatible Weiterentwicklung von ECMAScript 3. Die Versionsnummer 4 wurde übersprungen, um Missverständnisse zu vermeiden: Es gab nämlich Entwürfe für ECMAScript 4, welche inhaltlich eine ganz andere Richtung einschlugen und später verworfen bzw. verschoben wurden.</p>
+  <p>Die fünfte Ausgabe beseitigt Fehler und Unklarheiten, wartet aber auch mit einigen Neuheiten auf. ECMAScript 3.1 nimmt einige nützliche Funktionen u.a. von Arrays und Strings auf, die Mozilla für die Gecko-Engine erfunden hatte (siehe <a href="#mozilla-javascript">JavaScript 1.6 bis 1.8</a>).</p>
+  <ul>
+    <li>Properties &ndash; Merkmale von Objekteigenschaften</li>
+    <li>Getter und Setter &ndash; Funktionen zum Auslesen und Setzen von Objekteigenschaften</li>
+    <li>Strict Mode &ndash; robusten und sicheren Code schreiben, der auf problematische Techniken verzichtet</li>
+    <li>JSON eingebaut</li>
+  </ul>
+  <p>Es existiert bereits ein nahezu fertiger Final Draft (letzter Entwurf) aus dem April 2009.</p>
+  <p>TODO: fortsetzen</p>
 </div>
 <div class="section" id="ecmascript-3.1">
-	<h2>ECMAScript »Harmony«</h2>
-	<p></p>
+  <h2>ECMAScript »Harmony«</h2>
+  <p></p>
 </div>
 
 <div id="footer">
