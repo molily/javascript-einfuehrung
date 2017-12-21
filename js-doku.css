@@ -3,12 +3,16 @@
 /* Body */
 
 body {
-  font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   max-width: 45em;
   margin: 0 auto;
   padding: 0 1em;
-  line-height: 1.6;
   counter-reset: counterH2;
+  line-height: 1.6;
+  font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+  text-decoration-skip: ink;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -79,11 +83,6 @@ dd {
   margin-bottom: 1em;
 }
 
-dfn {
-  font-weight: bold;
-  font-style: normal;
-}
-
 blockquote {
   margin: 0;
 }
@@ -129,6 +128,19 @@ th, td {
   border: thin solid #ccc;
   padding: 0.2em 0.5em;
 }
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* Inline elements */
+
+dfn {
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* Hyperlinks */
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
