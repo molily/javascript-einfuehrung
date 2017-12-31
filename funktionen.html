@@ -68,7 +68,7 @@ Summe(5, 10, 15);</pre>
 </div>
 <div class="section" id="lokale-variablen">
   <h2>Lokale Variablen (Funktionsvariablen)</h2>
-  <p>Gültigkeitsbereich (Scope)</p>
+  <p>Geltungsbereich (Scope)</p>
 </div>
 <div class="section" id="ausdruecke">
   <h2>Funktionsausdrücke</h2>
@@ -90,8 +90,8 @@ bildergalerie.abspielen = function () {
 /* ... */
 };
 bildergalerie.abspielen();</pre>
-  <p>Im obigen Beispiel wird eine leere <a href="kernobjekte.html#object"><code>Object</code>-Instanz</a> erzeugt, die als globale Variable mit dem Namen <code>bildergalerie</code> gespeichert wird. In der zweiten Zeile wird dem zunächst leeren Objekt eine Methode hinzugefügt. Die entsprechende Funktion wird mithilfe eines Funktionsausdrucks notiert. Das entstehende Funktionsobjekt wird in der Eigenschaft <code>abspielen</code> gespeichert (siehe <a href="kernobjekte.html#object-hashes">Object-Objekte als Zuordnungslisten</a>). In der dritten Zeile schließlich wird diese Funktion aufgerufen.</p>
-  <p>Die Gruppierung unter dem Objekt <code>bildergalerie</code> hat den Vorteil, dass der globale Gültigkeitsbereich, das <code>window</code>-Objekt, nicht übermäßig mit eigenen Objekten beschrieben wird. Der Verzicht auf globale Variablen hat den Vorteil, dass mehrere Scripte problemlos zusammenarbeiten können. [TODO: Diese Programmiertechnik der Kapselung zentral beschreiben.]</p>
+  <p>Im obigen Beispiel wird eine leere <a href="datentypen.html#object"><code>Object</code>-Instanz</a> erzeugt, die als globale Variable mit dem Namen <code>bildergalerie</code> gespeichert wird. In der zweiten Zeile wird dem zunächst leeren Objekt eine Methode hinzugefügt. Die entsprechende Funktion wird mithilfe eines Funktionsausdrucks notiert. Das entstehende Funktionsobjekt wird in der Eigenschaft <code>abspielen</code> gespeichert (siehe <a href="datentypen.html#object-hashes">Object-Objekte als Zuordnungslisten</a>). In der dritten Zeile schließlich wird diese Funktion aufgerufen.</p>
+  <p>Die Gruppierung unter dem Objekt <code>bildergalerie</code> hat den Vorteil, dass der globale Geltungsbereich, das <code>window</code>-Objekt, nicht übermäßig mit eigenen Objekten beschrieben wird. Der Verzicht auf globale Variablen hat den Vorteil, dass mehrere Scripte problemlos zusammenarbeiten können. [TODO: Diese Programmiertechnik der Kapselung zentral beschreiben.]</p>
   <p>Im Beispiel wird lediglich das Objekt <code>bildergalerie</code> global gespeichert, das heißt als Eigenschaft von <code>window</code>. Folglich darf an keiner anderen Stelle eine gleichnamige globale Variable erzeugt werden, sonst würde das Objekt überschrieben werden. Die Funktion <code>abspielen</code> hängt hingegen als Methode am <code>bildergalerie</code>-Objekt. Sie kann anderen, gleichnamigen Funktionen nicht in die Quere kommen.</p>
   <p>...</p>
   <p>Eine weitere häufige Anwendung von Funktionsausdrücken findet sich im <strong>Event-Handling</strong>. Um eine Handler-Funktionen zu notieren, können Sie herkömmliche Funktionsdeklarationen nutzen:</p>

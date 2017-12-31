@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>JavaScript: Objekte und Variablen</title>
+<title>JavaScript: Objekte</title>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
 </head>
@@ -13,7 +13,7 @@
 <p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
 </div>
 
-<h1>JavaScript: Objekte und Variablen</h1>
+<h1>JavaScript: Objekte</h1>
 
 <div class="section" id="einfuehrung">
   <h2>Objekte, Eigenschaften und Methoden</h2>
@@ -21,6 +21,24 @@
   <p>Ein Objekt funktioniert als eine Zuordnungsliste, die unter bestimmten Namen weitere <strong>Unterobjekte</strong>, auch <strong>Member</strong> genannt, speichert. Diese Unterobjekte teilt man in <strong>Eigenschaften</strong> und <strong>Methoden</strong>. Methoden sind ausführbare Funktionen, die dem Objekt zugehören, Eigenschaften sind alle nicht ausführbaren Unterobjekte.</p>
   <p>Durch diese Verschachtelung von Objekten entsteht eine beliebig lange Kette von Objekten, die aufeinander verweisen.</p>
   <p>Der Browser stellt einem Script eine große Menge von <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert das Script eigene Objekte. Diese vom JavaScript-Programm selbst eingeführten Objekte werden üblicherweise <strong>Variablen</strong> genannt.</p>
+</div>
+  <div class="section" id="object-literale">
+    <h3>Object-Literale</h3>
+    <!-- verschieben nach objekte.html -->
+    <p>Das obige Beispiel verwendet die Langschreibweise <code>new Object()</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
+  <pre>{
+   name1 : wert3,
+   name2 : wert2,
+   name3 : wert3
+}</pre>
+    <p>Die Anzahl der notierten Eigenschaften ist nicht begrenzt. Zu beachten ist, dass hinter der letzten Zuweisung kein Komma notiert wird.</p>
+    <p>Das erste Beispiel sieht in der Literalschreibweise so aus:</p><pre>var adresse = {
+   name : "Max Mustermann",
+   straße : "Königsallee 56",
+   stadt : "Frankfurt"
+};</pre>
+    <p>Dies erzeugt haargenau das gleiche Objekt wie die Langschreibweise.</p>
+  </div>
 </div>
 <div class="section" id="objektorientierung">
   <h2>Konstruktoren, Prototypen und Instanzen</h2>
@@ -40,14 +58,14 @@
 </div>
 <div class="section" id="bezeichner">
   <h2>Bezeichner: Objekte ansprechen</h2>
-  <p>Bezeichner (engl. Identifier) sind Namen für Objekte. Um ein vorhandenes Objekt in einem JavaScript anzusprechen oder einen Wert unter einem Namen abzuspeichern, notieren wir dessen Namen.</p>
+  <p>Bezeichner (englisch Identifier) sind Namen für Objekte. Um ein vorhandenes Objekt in einem JavaScript anzusprechen oder einen Wert unter einem Namen abzuspeichern, notieren wir dessen Namen.</p>
   <pre>alert(vorname);</pre>
   <p>Hier werden gleich zwei Bezeichner notiert: Einmal <code>alert</code> und einmal <code>vorname</code>. <code>alert</code> bezeichnet die vordefinierte globale Funktion, mit der sich Meldungen ausgeben lassen. <code>vorname</code> steht beispielhaft für eine durch das Script selbst erzeugte Variable.</p>
-  <div class="subsection" id="bezeichner-konventionen">
+  <div class="section" id="bezeichner-konventionen">
     <h3>Unterobjekte ansprechen</h3>
     <p>Um ausgehend von einem Objekt ein Unterobjekt (Member) anzusprechen, notieren wir den einen Objektnamen, dann einen <code>.</code> und danach den Namen des Unterobjekts. Schematisch:</p>
     <pre>objekt.unterobjekt</pre>
-    <p>  Der Punkt (<code>.</code>) ist der sogenannte <em>Property Accessor Operator</em> (engl. Operator zum Zugriff auf Eigenschaften).</p>
+    <p>  Der Punkt (<code>.</code>) ist der sogenannte <em>Property Accessor Operator</em> (englisch für Operator zum Zugriff auf Eigenschaften).</p>
     <p>Auf diese Weise können wir ganze Ketten an Objektnamen notieren, um das gewünschte Objekt zu fassen zu bekommen:</p>
     <pre>window.location.href.substring(0, 4)</pre>
     <p>Hier wird die <code>substring</code>-Methode des durch <code>window.location.href</code> referenzierten String-Objekts angesprochen, um das Protokoll <code>http</code> aus der Adresse (URL) des gegenwärtigen HTML-Dokuments zu extrahieren.</p>
@@ -58,7 +76,7 @@
     <p>Der JavaScript-Interpreter nimmt den String als Objektnamen und sucht nach einem entsprechenden Unterobjekt.</p>
     <p>...</p>
   </div>
-  <div class="subsection" id="bezeichner-konventionen">
+  <div class="section" id="bezeichner-konventionen">
     <h3>Konventionen für Bezeichner</h3>
     <p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Objektnamen beachten müssen:</p>
     <p>Ein Bezeichner darf nur aus Buchstaben, arabischen Ziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
@@ -105,21 +123,22 @@ arbeiter&amp;angestellte
 </div>
 <div class="section" id="variablen">
   <h2>Variablen</h2>
-  <p>Gültigkeitsbereich (Scope)</p>
+  <p>Geltungsbereich (Scope)</p>
   <p>Identifier Resolution</p>
-  <div class="subsection" id="globale-variablen">
+  <div class="section" id="globale-variablen">
     <h3>Globale Variablen</h3>
     <p></p>
   </div>
-  <div class="subsection" id="lokale-variablen">
+  <div class="section" id="lokale-variablen">
     <h3>Lokale Variablen (Funktionsvariablen)</h3>
     <p></p>
   </div>
 </div>
 <div class="section" id="erzeugen">
+  <!-- TODO: Wohin damit? -->
   <h2>Objekte erzeugen: Literale und Instantiierung</h2>
   <p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder eine ausdrückliche <strong>Instantiierung</strong>.</p>
-  <p>Ein Literal (englisch für <em>wörtlich</em>, <em>buchstäblich</em>) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> und <code>false</code> sind <code>Boolean</code>-Literale.</p>
+  <p>Ein Literal (englisch für wörtlich, buchstäblich) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> und <code>false</code> sind <code>Boolean</code>-Literale.</p>
   <p>Die Langschreibweise erzeugt ausdrücklich eine Instanz eines Kernobjekts, indem es den Konstruktoren aufruft. Wenn wir z.B. ein Objekt vom Typ <code>Array</code> erzeugen wollen, können wir <code>new Array()</code> schreiben.</p>
   <p>Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen und das Ergebnis ist auch nicht immer dasselbe (siehe <a href="#objects-primitives">Objekte und primitive Typen</a>). Wenn eine Literalschreibweise für den gewünschten Objekttyp existiert, dann sollten Sie diese nutzen. Für manche Objekttypen existiert keine Literalschreibweise, sodass Sie beispielsweise <code>new Date()</code> notieren müssen.</p>
 </div>

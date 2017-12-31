@@ -37,7 +37,7 @@ function funktion3 () {
 }
 </pre>
 
-  <p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Gültigkeitsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>window.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
+  <p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Geltungsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>window.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
 
 </div>
 
@@ -153,7 +153,7 @@ Modul.methode();
   <p>Beim Objekt-Literal wird ein globales Objekt als Namensraum benutzt, um darin eigene Objekte unterzubringen. All diese Objekte sind über das Containerobjekt für andere Scripte zugänglich. Es gibt also keine Trennung zwischen öffentlichen und privaten Daten. Während es sinnvoll ist, dass z.B. eine Methode <code>Modul.methode()</code> von außen aufrufbar ist, ist es unnötig und potenziell problematisch, dass jede Objekteigenschaft gelesen und manipuliert werden kann.</p>
 
   <p>
-  Der nächste Schritt ist daher, eine wirksame Kapselung zu implementieren. Das Mittel dazu ist ein eigener, privater Scope (Variablen-Gültigkeitsbereich). Darin können beliebig viele lokale Variablen und Methoden definiert werden. Die einzige Möglichkeit, in JavaScript einen Scope zu erzeugen, ist eine Funktion. Wir definieren also eine Funktion, um darin das gesamte Script zu kapseln. Solange durchgehend lokale Variablen und Funktionen verwendet werden, wird der globale Scope nicht angetastet.<p>
+  Der nächste Schritt ist daher, eine wirksame Kapselung zu implementieren. Das Mittel dazu ist ein eigener, privater Scope (Variablen-Geltungsbereich). Darin können beliebig viele lokale Variablen und Methoden definiert werden. Die einzige Möglichkeit, in JavaScript einen Scope zu erzeugen, ist eine Funktion. Wir definieren also eine Funktion, um darin das gesamte Script zu kapseln. Solange durchgehend lokale Variablen und Funktionen verwendet werden, wird der globale Scope nicht angetastet.<p>
 
   <div class="sidebox">
   <p>Schließen Sie Ihren Code in einen Funktionsausdruck ein, der sofort ausgeführt wird. Darin können Sie mit Objekten quasen, ohne den globalen Scope zu verpesten.</p>
@@ -241,7 +241,7 @@ Modul.methode();
 
   <p>Das Besondere an diesem Script sind die vier lokalen Variablen bzw. Funktionen. Sie werden direkt im Funktions-Scope notiert, anstatt sie an einen <code>Object</code>-Container zu hängen. Innerhalb der verschachtelten Funktionen sind die Variablen des äußeren Funktions-Scope verfügbar (siehe <a href="organisation-verfuegbarkeit.html#closures">Closures</a>). <code>init()</code> füllt die Variable <code>outputEl</code> und greift auf die Funktion <code>buttonClicked()</code> zu. <code>buttonClicked()</code> greift auf die Variablen <code>clickNumber</code> und <code>outputEl</code> zu. Das Script funktioniert, ohne dass Objekte am globalen <code>window</code>-Objekt angelegt werden.</p>
 
-  <div class="subsection" id="dom-ready-scope">
+  <div class="section" id="dom-ready-scope">
 
     <h3>DOM-ready-Handler als privater Scope</h3>
 
@@ -276,7 +276,7 @@ jQuery(function ($) {
 
     </div>
 
-    <div class="subsection" id="import-globals">
+    <div class="section" id="import-globals">
 
     <h3>Globale Objekte importieren</h3>
 
@@ -403,7 +403,7 @@ Namensraum.Modul2 = (function () { ... })();
 
   <p>Ben Cherry schlägt eine <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">Erweiterbarkeit von Modulen</a> auf Basis des Revealing Module Patterns vor. Er unterscheidet zwischen fester und lockerer Kopplung der Teile. Das heißt, entweder setzt ein Aufbaumodul ein Basismodul zwingend voraus. Oder beide Module ergänzen sich gegenseitig, sind aber auch separat funktionsfähig.</p>
 
-  <div class="subsection" id="feste-kopplung">
+  <div class="section" id="feste-kopplung">
 
     <h3>Feste Kopplung</h3>
 
@@ -437,7 +437,7 @@ Modul.methode2();
 
   </div>
 
-  <div class="subsection" id="lose-kopplung">
+  <div class="section" id="lose-kopplung">
 
     <h3>Lose Kopplung</h3>
 

@@ -218,7 +218,7 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
       " und wird vom Element " + this.nodeName + " verarbeitet.");
    );
 }</pre>
-   <div class="subsection" id="currenttarget-target-beispiel">
+   <div class="section" id="currenttarget-target-beispiel">
       <h3>Interaktives Beispiel</h3>
       <p>Das folgende Beispiel ist ein <code>div</code>-Element, an dem ein <code>mouseover</code>-Handler registriert wurde. In dem <code>div</code>-Element sind verschiedene Elemente verschachtelt. Bewegen Sie die Maus über deren Boxen, so werden <code>mouseover</code>-Ereignisse an diesen ausgelöst. Sie steigen im DOM-Baum auf und werden beim gemeinsamen <code>div</code>-Elemente verarbeitet. Unter dem <code>div</code> werden das Zielelement und das verarbeitende Element des Ereignisses ausgegeben. Das verarbeiten Element ist immer dasselbe, nämlich das <code>div</code>-Containerelement.</p>
 
@@ -280,8 +280,8 @@ function wichtigKlick () {
 }
 document.getElementById("wichtig").onclick = wichtigKlick;</pre>
   <p>Bei einem Klick auf die Fläche des <code>strong</code>-Elements (»wichtigen Text«) werden beide Handler-Funktionen ausgeführt, denn das Ereignis steigt vom <code>strong</code>-Element zum <code>p</code>-Element auf.</p>
-  <p>Dieses Aufsteigen können Sie in der Handler-Funktion des <code>strong</code>-Elementes (<code>wichtigKlick</code>) verhindern. Der DOM-Standard definiert dafür die Methode <code>stopPropagation</code> (englisch: stoppe die Verbreitung bzw. Weitergabe des Ereignisses) beim Event-Objekt. Ein Aufruf dieser Methode unterbricht den Event-Fluss und verhindert damit das (weitere) Aufsteigen.</p>
-  <p>Der Internet Explorer kennt diese Methode erst ab Version 9. Ältere Versionen verfügen über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch: breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
+  <p>Dieses Aufsteigen können Sie in der Handler-Funktion des <code>strong</code>-Elementes (<code>wichtigKlick</code>) verhindern. Der DOM-Standard definiert dafür die Methode <code>stopPropagation</code> (englisch für stoppe die Verbreitung des Ereignisses) beim Event-Objekt. Ein Aufruf dieser Methode unterbricht den Event-Fluss und verhindert damit das (weitere) Aufsteigen.</p>
+  <p>Der Internet Explorer kennt diese Methode erst ab Version 9. Ältere Versionen verfügen über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch für breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
   <p>Wieder einmal nutzen wir eine Fähigkeitenerkennung, die die Verfügbarkeit der standardisierten Methode <code>stopPropagation</code> prüft und im Fehlerfalle auf die Microsoft-Alternative <code>cancelBubble</code> zurückfällt.</p>
   <p>Die Handler-Funktion <code>wichtigKlick</code> wird wie folgt modifiziert:</p>
   <pre>function wichtigKlick (eventObekt) {

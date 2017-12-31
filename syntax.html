@@ -15,106 +15,141 @@
 
 <h1>JavaScript: Syntax-Grundlagen</h1>
 
-<div class="section" id="notizen">
-  <h2>Notizen</h2>
-  <p>siehe <a href="https://blog.selfhtml.org/2008/01/23/javascript-syntax/">Weblog-Artikel: Geheimnisse der JavaScript-Syntax</a></p>
-</div>
 <div class="section" id="aufbau">
   <h2>Aufbau eines JavaScript-Programmes</h2>
-  <p>Ein JavaScript-Programm ist nach gewissen wiederkehrenden Regeln aufgebaut. Solche Syntax-Regeln kennen Sie aus der natürlichen, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Syntax und Grammatik einhalten, damit Sie verstanden werden.</p>
-  <p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur grob an die Regeln halten. Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenig Spielraum. Zum anderen müssen sich Programmierer an diese Regeln halten und dürfen keine Ausnahmen machen. </p>
-  <p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er zunächst dessen Syntax verstehen. Dieses Aufsplitten in die Bestandteile nennt sich <strong>Parsing</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
-  <p>Die folgende Beschreibung der JavaScript-Syntax ist sehr theoretisch und formal. Sie soll ihnen den groben Aufbau eines JavaScript-Programmes vermitteln, damit Sie wissen, welche Bestandteile an welchen Stellen vorkommen dürfen.</p>
+  <p>Ein JavaScript-Programm ist nach gewissen Regeln aufgebaut. Solche Syntax-Regeln kennen Sie aus der natürlichen Sprache, zum Beispiel der deutschen Sprache. Wenn Ihr Gesprächspartner Sie verstehen soll, müssen Sie beim Formulieren eines Satzes gewisse Grundregeln der Grammatik einhalten, damit Sie verstanden werden.</p>
+  <p>Glücklicherweise verstehen unsere Mitmenschen uns auch dann, wenn wir kleinere Fehler machen und uns nur grob an die Regeln halten. Bei Mehrdeutigkeiten ist oft aus der Situation ersichtlich, was gemeint ist.</p>
+  <p>Programmiersprachen sind jedoch viel strenger: Zum einen sind ihre Regeln vergleichsweise einfach, eindeutig und lassen wenig Spielraum. Zum anderen müssen sich Programmierer an diese Regeln halten und dürfen keine Fehler machen. </p>
+  <p>Dies hat folgende Bewandnis: Damit der JavaScript-Interpreter ein Programm ausführen kann, muss er zunächst dessen Syntax verstehen. Das Zerlegen des Programms in seine Bestandteile nennt sich <strong>Parsing</strong>. Das Modul des Interpreters, das dafür zuständig ist, nennt sich <strong>Parser</strong>. Wenn der Interpreter dabei auf einen Syntaxfehler trifft, bricht er mit einer Fehlermeldung ab und das JavaScript-Programm wird gar nicht erst ausgeführt.</p>
+  <p>Die folgende Beschreibung der JavaScript-Syntax ist sehr formal. Sie soll ihnen den groben Aufbau eines JavaScript-Programmes vermitteln, damit Sie wissen, welche Bestandteile an welchen Stellen vorkommen dürfen.</p>
 </div>
 <div class="section" id="anweisungen">
-  <h2>Anweisungen (Statements)</h2>
-  <p>Vereinfachend gesagt besteht ein JavaScript-Programm aus einer Abfolge von einer oder mehreren Anweisungen, sogenannten Statements. Bei der Ausführung des JavaScripts werden die Anweisungen nacheinander abgearbeitet.</p>
-  <p>(Der Einfachheit halber rechnen wir die Funktionsdeklaration zu den Anweisungen, was der ECMAScript-Standard nicht tut. Aber Sonderfall der Funktionsdeklarationen, sie werden nicht in der Reihenfolge der anderen Anweisungen ausgeführt. Dasselbe bei Variablen-Deklarationen. TODO)</p>
-  <div class="subsection" id="variablen-deklaration">
+  <h2>Anweisungen</h2>
+  <p>Vereinfacht gesagt besteht ein JavaScript-Programm aus einer Abfolge von Anweisungen. Bei der Ausführung des JavaScripts werden die Anweisungen zunächst nacheinander abgearbeitet. Wir werden Sprachbestandteile kennenlernen, die dafür sorgen, dass der JavaScript-Interpreter zwischen Anweisungen herumspringt. Dadurch werden die Anweisungen nicht mehr streng von oben nach unten abgearbeitet. Beispielsweise werden Anweisungen mehrfach ausgeführt, bis eine Bedingung erfüllt ist.</p>
+  <div class="section" id="variablen-deklaration">
     <h3>Variablen-Deklaration</h3>
-    <p>Mit einer Variablen-Deklaration wird eine Variable im aktuellen Gültigkeitsbereich erzeugt, d.h. als globale Variable oder lokale Funktionsvariable. Sie kann entweder ohne Wert instantiiert werden:
+    <p>Mit einer Variablen-Deklaration wird eine Variable erzeugt. Eine Variable kann man sich als eine Schachtel mit einem Namen vorstellen, in die ein Wert gelegt wird.</p>
+    <p>Eine Variable kann ohne Wert angelegt werden. Das sieht so aus:</p>
     <pre>var alter;</pre>
+    <p>Hier wird eine Variable mit dem Namen »alter« erzeugt. Der Wert bleibt erst einmal leer.</p>
     <p>Oder der Anfangswert kann gleich angegeben werden:</p>
     <pre>var alter = 32;</pre>
-    <p>Anstelle der <code>32</code> kann ein beliebiger Ausdruck stehen. Das Schema lautet also:</p>
-    <pre>var <var>Bezeichner</var> = <var>Ausdruck</var>;</pre>
+    <p>Hier wird eine Variable mit dem Namen »alter« und dem Zahlenwert 32 erzeugt.</p>
+    <p>Anstelle des Wertes <code>32</code> kann ein beliebiger Ausdruck stehen. Das Schema der Variablen-Deklaration lautet also:</p>
+    <pre>var <var>Name</var> = <var>Ausdruck</var>;</pre>
+    <p>Genaueres finden Sie im gesonderten <a href="variablen.html">Kapital über Variablen</a>.</p>
   </div>
-  <div class="subsection" id="kontrollstrukturen">
+  <div class="section" id="kontrollstrukturen">
     <h3>Kontrollstrukturen: Verzweigungen und Schleifen</h3>
-    <p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Dadurch ist es möglich, die Ausführung der in den Blöcken enthaltenen Anweisungen entsprechend bestimmter Regeln zu kontrollieren.</p>
-    <p>Man unterscheidet grundsätzlich zwei Arten von Kontrollstrukturen: Verzweigungen und Schleifen. Mittels Verzweigungen ist es möglich, die Ausführung einer oder mehrer Anweisungs-Blöcke von Bedingungen abhängig zu machen. Schleifen ermöglichen, einen Anweisungs-Block wiederholt ausführen zu lassen.</p>
+    <p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Sie steuern die Ausführung der Anweisungs-Blöcke entsprechend bestimmter Regeln.</p>
+    <p>Man unterscheidet zwei Arten von Kontrollstrukturen: Verzweigungen und Schleifen. Mittels Verzweigungen ist es möglich, die Ausführung der Anweisungs-Blöcken von Bedingungen abhängig zu machen. Schleifen ermöglichen es, einen Anweisungs-Block wiederholt auszuführen.</p>
     <h4>Verzweigungen</h4>
-    <p>Zu den Verzweigungen gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt.</p>
+    <p>Zu den Verzweigungen gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt. Sie besteht aus einem festen Gerüst, das mit dem Schlüsselwort <code>if</code> beginnt. Darauf folgt eine Bedingung in runden Klammern. Dann folgt ein Anweisungsblock in geschweiften Klammern und ein zweiter nach dem Schlüsselwort <code>else</code>.</p>
+    <p>Das Gerüst sieht so aus:</p>
+    <pre>if (<var>Bedingung</var>) {
+   <var>Anweisungen</var>
+} else {
+   <var>Anweisungen</var>
+}</pre>
+    <p>Zwischen den runden Klammern für die Bedingung steht ein beliebiger Ausdruck. Zwischen den geschweiften Klammern stehen eine oder mehrere Anweisungen.</p>
+    <p>Betrachten wir ein Beispiel:</p>
     <pre>if (alter &gt;= 18) {
-   alert("Volljährig!");
+  window.alert("Volljährig!");
 } else {
-   alert("Noch nicht volljährig.");
+  window.alert("Noch nicht volljährig.");
 }</pre>
-    <p>Zwischen den runden Klammern steht ein beliebiger Ausdruck, zwischen den geschweiften Klammern eine oder mehrere Anweisungen. Das allgemeine Schema lautet:</p>
-    <pre>if (<var>Ausdruck</var>) {
-   <var>Anweisungen</var>
-} else {
-   <var>Anweisungen</var>
-}</pre>
-    <p>Mit der <code>switch</code>-Anweisung lassen sich Verzweigungen notieren, bei denen ein Wert mit vielen anderen Werten verglichen wird und eine entsprechende Anweisung ausgeführt wird.</p>
-    <pre>switch (alter) {
-   case 10 :
-      alert("zehn");
-   case 20 :
-      alert("zwanzig");
-}</pre>
+    <p>Ist die Bedingung <code>alter &gt;= 18</code> erfüllt, so wird der erste Anweisungs-Block ausgeführt. Ist die Bedingung nicht erfüllt, so wird der zweite Block nach dem <code>else</code> ausgeführt.</p>
     <h4>Schleifen</h4>
-    <p>Ist zur Laufzeit die Anzahl der Wiederholungen bereits beim Eintritt in die Schleife bekannt, verwendet man häufig die <code>for</code>-Anweisung.</p>
-    <pre>for (var i = 0; i &lt; 5; i++) {
-    alert("Sie müssen noch " + (5 - i) + " mal klicken.");
+    <p>Eine Schleife erlaubt es, gewisse Anweisungen wiederholt auszuführen, solange eine Bedingung erfüllt ist.</p>
+    <p>Bei einer festen Anzahl der Wiederholungen verwendet man häufig die <code>for</code>-Schleife. Die Anweisung besteht aus einem festen Gerüst und vier veränderbaren Teilen. Ein Beispiel:</p>
+    <pre>for (
+  var i = 0;
+  i &lt; 5;
+  i = i + 1
+) {
+  window.alert("Sie müssen noch " + (5 - i) + " mal klicken.");
 }</pre>
-    <p>Beim Schleifeneintritt wird zunächst die Variable <code>i</code> deklariert und mit dem Wert <code>0</code> initialisiert. Anschließend wird der Anweisungs-Block so oft ausgeführt, bis der Wert von <code>i</code> die Zahl 4 übersteigt. Da <code>i</code> nach jedem Schleifendurchlauf um eins erhöht wird, wird die Schleife nach fünf Durchläufen verlassen.</p>
-    <p>Allgemein wird die Ausführung einer <code>for</code>-Anweisung von drei Teilen bestimmt. Einmal der <strong>Initialisierung</strong>, in obigem Beispiel <code>var i = 0</code>. Hier wird im normalen Gebrauch eine so genannte <strong>Schleifenvariable</strong> mit einem Startwert initialisiert. Im zweiten Teil, der <strong>Bedingung</strong>, wird eine Eigenschaft der Schleifenvariable geprüft. Als drittes wird in der <strong>Fortsetzung</strong> angegeben, was nach jedem Durchlauf mit der Schleifenvariable getan werden soll.</p>
+    <p>Die Ausführung der Schleife wird von den drei Teilen in den runden Klammern bestimmt. Zur besseren Lesbarkeit sind sie hier auf drei Zeilen verteilt.</p>
+    <p>Der erste Teil ist die <strong>Initialisierung</strong>, im Beispiel <code>var i = 0;</code>. Dies ist eine Variablen-Deklaration, wie wir sie oben kennengelernt haben. Hier wird eine so genannte <strong>Schleifenvariable</strong> mit einem Startwert erzeugt.</p>
+    <p>Im zweiten Teil, der <strong>Abbruchbedingung</strong>, wird die Schleifenvariable geprüft. Im Beispiel <code>i < 5</code>. Das bedeutet: Ist <code>i</code> kleiner als 5?</p>
+    <p>Der dritte Teil, die <strong>Fortsetzung</strong>, ist eine Anweisung, die jedem Durchlauf der Schleife ausgeführt wird. Üblicherweise wird der Wert der Schleifenvariable erhöht oder verringert. Im Beispiel <code>i = i + 1</code>. Das bedeutet: Erhöhe den Wert von <code>i</code> um 1.</p>
+    <p>Zum Beginn der Schleife wird zunächst die Initialisierung ausgeführt. Die Variable <code>i</code> wird mit dem Wert <code>0</code> initialisiert.</p>
+    <p>Anschließend wird der Anweisungs-Block einmal ausgeführt.</p>
+    <p>Danach wird die Fortsetzung ausgeführt: <code>i</code> wird um 1 erhöht und hat damit den Wert 1.</p>
+    <p>Am Ende des Schleifendurchlaufs wird die Abbruchbedingung geprüft: Ist <code>i</code> kleiner als 5? Falls ja, wird wieder der Anweisungs-Block ausgeführt und das Spiel beginnt von Neuem.</p>
+    <p>Die Schleife wird auf diese Weise so oft ausgeführt, bis die Abbruchbedingung nicht mehr erfüllt ist. Im Beispiel wenn <code>i</code> den Wert 5 bekommt. Da <code>i</code> nach jedem Schleifendurchlauf um eins erhöht wird, wird die Schleife nach fünf Durchläufen abgebrochen.</p>
   </div>
-  <div class="subsection" id="expression-statement">
-    <h3>Ausdruck-Anweisung (Expression-Statement)</h3>
-    <p>Die meisten Anweisungen sind sogenannte Ausdruck-Anweisungen. Sie bestehen lediglich aus einem Ausdruck, und ein Ausdruck kann sehr unterschiedlich aussehen.</p>
-<pre>window.print();
+  <div class="section" id="expression-statement">
+    <h3>Anweisung mit Ausdruck</h3>
+    <p>Die meisten Anweisungen in einem JavaScript-Programm sind sogenannte Ausdruck-Anweisungen (englisch expression statement). Sie bestehen lediglich aus einem Ausdruck, und ein Ausdruck kann sehr unterschiedlich aussehen. Hier einige Beispiele:</p>
+<pre>1 + 1;
+window.print();
 alter = 18;
 objekt.nummer = 5;
-objekt.nummer++;
 meldung = alter &gt;= 18 ? "volljährig" : "noch nicht volljährig";
-1 + 1;
 </pre>
-    <p>Eine Ausdruck-Anweisung sollte immer mit einem Semikolon abgeschlossen werden. <!-- TODO Hinweis auf das Laissez-faire des ECMAScript-Standards und daraus entstehender Probleme? --></p>
+    <p>Eine Ausdruck-Anweisung sollte immer mit einem Semikolon abgeschlossen werden.</p>
+    <p>Im <a href="#ausdruecke">Abschnitt über Ausdrücke</a> erfahren Sie, wie Ausdrücke aufgebaut sind.</p>
   </div>
-  <div class="subsection" id="weitere-statements">
-    <h3>Weitere Statements</h3>
-    <p>break, return, continue usw.</p>
+  <div class="section" id="funktionen">
+    <h3>Funktionsdeklarationen</h3>
+    <p>TODO: Siehe <a href="funktionen.html">Funktionen</a></p>
+  </div>
+  <div class="section" id="weitere-statements">
+    <h3>Weitere Anweisungen</h3>
+    <p>TODO: class, let, const, break, return, continue usw.</p>
   </div>
 </div>
 <div class="section" id="ausdruecke">
-  <h2>Ausdrücke (Expressions)</h2>
-  <p>
-  Ein Ausdruck besteht aus Bezeichnern und Literalen, die mit Operatoren verknüpft werden
-  </p>
+  <h2>Ausdrücke</h2>
+  <p>Auf oberster Ebene besteht ein JavaScript-Programm wie gesagt aus Anweisungen. Innerhalb von Anweisungen stecken entweder weitere Anweisungen oder Ausdrücke.</p>
+  <p>Ein <strong>Ausdruck</strong> (englisch expression) ist ein wichtiger Syntax-Bestandteil von JavaScript. Einen Ausdruck kann man sich als mathematischen Term vorstellen. Dabei werden Werte mit <em>Operatoren</em> verknüpft.</p>
+  <p>Dies ist ein einfacher Ausdruck:</p>
+  <pre>8 + 5 * 6</pre>
+  <p>Der Ausdruck besteht aus drei Zahlen-<em>Literalen</em> (8, 5 und 6) und zwei Operatoren (<code>+</code> für Addition und <code>*</code> für Multiplikation).</p>
+  <p>Ein Ausdruck wird bei der Ausführung des JavaScripts schrittweise, Operator für Operator ausgewertet. Dabei kommt genau ein Ergebniswert heraus.</p>
+  <p>Die Operatoren <code>+</code> und <code>*</code> haben eine gewisse Bedeutung und eine gewisse Rangfolge. Bekanntlich gilt Punkt- vor Strichrechnung. Zunächst wird der Teilausdruck <code>5 * 6</code> berechnet. Das Ergebnis der Multiplikation ist 30. Der Teilausdruck wird durch das Ergebnis ersetzt, sodass <code>8 + 30</code> herauskommt. Das Ergebnis der folgenden Addition ist 38. Das Ergebnis des Gesamt-Ausdrucks ist somit 38.</p>
+  <p>Wie in der Mathematik kann ein Ausdruck auch Variablennamen enthalten, sogenannte <em>Bezeichner</em>:</p>
+  <pre>a + b * c</pre>
+  <p>Um diesen Ausdruck auszuwerten, sind die Werte der Variablen <code>a</code>, <code>b</code> und <code>c</code> nötig.</p>
+  <p>Das folgende Beispiel zeigt komplexe Ausdrücke, wie sie in JavaScript-Programmen zu finden sind:</p>
 <pre>
 alter = 18
+alter >= 18
+alter === 18
 element.appendChild(element2)
 objekt.nummer++
-alert("Vorname: " + vorname)
+window.alert("Vorname: " + vorname)
 </pre>
+  <p>Ausdrücke kommen an vielen Stellen in der JavaScript-Syntax vor. Sie können auch alleine stehen in einer <a href="expression-statement">Anweisung mit Ausdruck</a>.</p>
+
+  <div class="section" id="operatoren">
+    <h3>Operatoren</h3>
+    <p>Ein Operator steht für eine Operation, die auf einen Wert oder mehrere Werte angewendet werden kann. Dabei kommt ein neuer Wert heraus, das Ergebnis.</p>
+    <p>Wir haben bereits zwei Operatoren näher kennengelernt, die mathematischen Operatoren <code>+</code> für Addition und <code>*</code> für Multiplikation.</p>
+    <p>Die Werte, die ein Operator erwartet, werden Operanden genannt. Der Operator <code>*</code> beispielsweise erwartet zwei Operanden, zwei Zahlen, links und rechts des Operators. Beispielsweise sind bei <code>5 * 6</code> die Operanden 5 und 6.</p>
+    <p>In JavaScript gibt es Operatoren, die ein, zwei oder drei Operanden erwarten. Man spricht dann von einstelligen /unären), zweistelligen (binären) oder dreistelligen (trinären) Operatoren.</p>
+    <p>Ein Beispiel für einen einstelligen Operator ist die logische Verneinung, der Nicht-Operator <code>!</code>. Er wird dem einen Operanden vorangestellt. Beispielsweise ergibt der Ausdruck <code>! true</code> (»nicht wahr«) den Wert <code>false</code> (falsch).</p>
+  </div>
+  <div class="section" id="literale">
+    <h3>Literale</h3>
+    <p>Ein Literal (englisch für wörtlich, buchstäblich) erzeugt direkt einen Wert, sodass er in einem Ausdruck verwendet werden kann.</p>
+    <p>Wir haben schon den Zahlen-Literal kennengelernt. Dieser kann die bekannten Formen <code>8</code> und <code>8.5</code> annehmen. Sie können Dezimal-Zahlen, aber auch Binär-, Oktal- und Hexadezimalzahlen direkt notieren.</p>
+    <p>Ein weiterer häufiger Literal ist der String-Literal zum Notieren einer Zeichenkette. Er beginnt und endet mit einfachen oder doppelten Anführungszeichen. Dazwischen werden die Zeichen notiert. Beispielsweise <code>"Hallo Welt!"</code> und <code>'Hallo Welt!'</code>.</p>
+    <p>Die meisten Kern-Datentypen in JavaScript lassen sich als Literale schreiben. Mehr dazu finden Sie im Kapitel <a href="datentypen.html">Datentypen</a>.</p>
+  </div>
+  <div class="section" id="bezeichner">
+    <h3>Bezeichner</h3>
+    <p>Ein Bezeichner (englisch <em>identifier</em>) ist ein Name, der in einem Ausdruck verwendet werden kann. Folgender Ausdruck enthält drei Bezeichner, <code>a</code>, <code>b</code> und <code>c</code>:</p>
+    <pre>a + b * c</pre>
+    <p>Um diesen Ausdruck auszuwerten und das Ergebnis zu berechnen, müssen die Bezeichner <code>a</code>, <code>b</code> und <code>c</code> durch Werte ersetzt werden. Das ist die Aufgabe der Auflösung von Bezeichnern (englisch <em>identifier resolution</em>). Der JavaScript-Interpreter sucht in verschiedenen Geltungsbereichen nach einem Eintrag für <code>a</code> usw. Die genaue Funktionsweise finden Sie im <a href="objekte-variablen.html">Kapitel über Variablen</a> beschrieben.</p>
+  </div>
 </div>
-<div class="section" id="operatoren">
-  <h2>Operatoren</h2>
-  <p>Ein, zwei oder drei Operanden. Die Operanden können selbst als Ausdrücke notiert sein.</p>
-</div>
-<div class="section" id="bezeichner">
-  <h2>Bezeichner (Identifier)</h2>
-  <p>siehe Kernobjekte</p>
-</div>
-<div class="section" id="literale">
-  <h2>Literale</h2>
-  <p>siehe Kernobjekte</p>
-</div>
-<div class="section" id="funktionen">
-  <h2>Funktionsdeklarationen</h2>
-  <p>siehe Funktionen</p>
+<div class="references">
+  <h3>Weiterführende Lektüre</h3>
+  <ul>
+    <li><a href="https://blog.selfhtml.org/2008/01/23/javascript-syntax/">Weblog-Artikel: Geheimnisse der JavaScript-Syntax</a></li>
+  </ul>
 </div>
 
 <div id="footer">

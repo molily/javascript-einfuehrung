@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>JavaScript: Kernobjekte und Datentypen</title>
+<title>JavaScript: Datentypen und Kernobjekte</title>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
 </head>
@@ -13,130 +13,266 @@
 <p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
 </div>
 
-<h1>Kernobjekte und Datentypen</h1>
+<h1>Datentypen und Kernobjekte</h1>
 
  <div class="section" id="allgemeines">
-  <h2>Einführung</h2>
-  <p>Die Kernobjekte in JavaScript repräsentieren in erster Linie die grundlegenden <strong>Datentypen</strong>, z.B. Zahlen oder Zeichenketten (sogenannte <em>Strings</em>). Datentypen sind in JavaScript objektorientiert gelöst: Jedes Objekt ist eine Instanz einer bestimmten Konstruktorfunktion. Von dessen Prototypen erbt die Instanz Eigenschaften und Methoden.</p>
-  <p>...</p>
-</div>
-<div class="section" id="object">
-  <h2>Die Mutter aller Objekte: Object</h2>
-  <p>Alle Objekte stammen von einem obersten Kernobjekt ab: <code>Object</code>. Jedes Objekt ist demnach zumindest vom allgemeinen Typ <code>Object</code>, darüber hinaus kann es einem spezifischeren Typ angehören (z.B. <code>String</code>).</p>
-  <p>Ein Objekt vom Typ <code>Object</code> ist bloß ein Container für weitere Daten [... doppelt]</p>
-  <div class="subsection" id="object-hashes">
-    <h3>Object-Objekte als Zuordnungslisten (Hashes)</h3>
-    <p>Als grundlegender Typ hinter allen anderen Typen interessiert uns <code>Object</code> nur wenig. Diejenigen Objekte, die nur von <code>Object</code> abstammen, sind jedoch nützlich, wenn man in JavaScript eine Zuordnungsliste benötigt oder andere, zusammenhängende Objekte geordnet abspeichern will. Eine einfache Anwendung von <code>Object</code> könnte so aussehen:</p>
-<pre>var adresse = new Object();
-adresse.name = "Max Mustermann";
-adresse.straße = "Königsallee 56";
-adresse.stadt = "Frankfurt";</pre>
-    <p>Solche Objekte sind für die Strukturierung von Daten oder sogar JavaScript-Programmen selbst äußerst nützlich. Denn in solchen Objekten lassen sich nicht nur Zeichenketten oder Zahlen unter bestimmten Namen abspeichern, sondern auch beispielsweise Funktionsobjekte. Und sie lassen sich beliebig verschachteln.</p>
-  </div>
-  <div class="subsection" id="object-literale">
-    <h3>Object-Literale</h3>
-    <p>Das obige Beispiel verwendet die Langschreibweise <code>new Object()</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
-  <pre class="content-example">{
-   name1 : wert3,
-   name2 : wert2,
-   name3 : wert3
-}</pre>
-    <p>Die Anzahl der notierten Eigenschaften ist nicht begrenzt. Zu beachten ist, dass hinter der letzten Zuweisung kein Komma notiert wird.</p>
-    <p>Das erste Beispiel sieht in der Literalschreibweise so aus:</p><pre class="content-example">var adresse = {
-   name : "Max Mustermann",
-   straße : "Königsallee 56",
-   stadt : "Frankfurt"
-};</pre>
-    <p>Dies erzeugt haargenau das gleiche Objekt wie die Langschreibweise.</p>
-  </div>
-</div>
- <div class="section" id="string-number-boolean">
-  <h2>String, Number und Boolean</h2>
-  <p>String, Number und Boolean sind die wichtigsten einfachen Datentypen. Sie haben einen direkt und eindeutig darstellbaren Wert.</p>
+  <h2>Datentypen</h2>
+  <p>Ein JavaScript-Programm hantiert mit Daten unterschiedlichen Art. Jeder Wert in JavaScript hat einen gewissen <strong>Typ</strong>. Alle Werte eines Typs ähneln sich. Sie haben gewisse Eigenschaften und Fähigkeiten.</p>
+  <p>Es gibt in JavaScript theoretisch eine unbegrenzte Anzahl von Typen, denn Sie können selbst neue Typen erschaffen. Es gibt jedoch eine kleine Anzahl von Grundtypen, von denen alle anderen abgeleitet sind.</p>
+  <p>Genau gesagt gibt es <strong>sieben Grundtypen</strong> in JavaScript:</p>
   <ul>
-    <li>Ein String-Wert ist eine Zeichenkette. Darin können Sie einzelne Zeichen bis hin zu ganzen Texten speichern.</li>
-    <li>Ein Number-Wert ist eine Zahl. Es kann eine Ganzzahl oder eine Kommazahl sein, positiv oder negativ.</li>
-    <li>Ein Boolean-Wert drückt einen Wahrheitswert aus. Dieser kann zwei Zustände annehmen: <code>true</code> (wahr) oder <code>false</code> (falsch).</li>
+    <li>Undefined</li>
+    <li>Null</li>
+    <li>Boolean</li>
+    <li>String</li>
+    <li>Symbol</li>
+    <li>Number</li>
+    <li>Object</li>
   </ul>
-  <pre class="content-example">var zahl = 1.23;
-var zeichenkette = "Hallo Welt!";
-var boolean = true;</pre>
-  <p>Diese Anweisungen definieren eine <code>String</code>-, eine <code>Number</code>- und eine <code>Boolean</code>-Variable mithilfe der jeweiligen Literalschreibweise.</p>
-  <p>...</p>
+  <p>Mit den ersten sieben Typen lassen sich sogenannte <strong>einfache Werte</strong> (englisch <em>primitive values</em>) erzeugen. Ein einfacher Wert ist das Gegenteil eines komplexen Wertes. Er lässt sich nicht weiter auspacken und zerlegen.</p>
+  <p>Der siebte Typ, Object, umfasst alle Objekte. Das sind eine ganze Menge, denn es gibt viele Unter-Typen, die vom Typ Object abgeleitet sind. Werte dieser Typen sind komplex. Das heißt, sie sind aus einfachen Werten aufgebaut.</p>
+  <p>Schauen wir uns die Grundtypen im Einzelnen an.</p>
+</p>
+ <div class="section" id="undefined">
+  <h2>Undefined – <code>undefined</code></h2>
+  <p>Der Typ Undefined hat nur einen möglichen Wert, nämlich <code>undefined</code>. Das klingt erst einmal verwirrend. Manche Werte sind aber so einzigartig, dass sie ihren eigenen Typ haben.</p>
+  <p>Der Wert <code>undefined</code> steht für »leer, noch kein Wert zugewiesen«. Verschiedene JavaScript-interne Operationen können <code>undefined</code> zurückgeben.</p>
+  <p>Wenn Sie zum Beispiel <a href="variablen.html">eine Variable deklarieren</a>, ohne ihr einen Wert zuzuweisen, so hat die Variable dennoch einen Wert – nämlich <code>undefined</code>. Wenn Sie auf eine Eigenschaft eines Objekts zugreifen, die nicht existiert, so bekommen Sie den Wert <code>undefined</code> zurück.</p>
+  <p><code>undefined</code> wird also intern in JavaScript an verschiedenen Stellen genutzt, um »kein Wert« darzustellen.</p>
+  <p>TODO</p>
+</div>
+<div class="section" id="null">
+  <h2>Null – <code>null</code></h2>
+  <p>Der Typ Null hat ebenfalls nur einen möglichen Wert, nämlich <code>null</code>.</p>
+  <p>Der Wert <code>null</code> steht für »absichtlich kein Wert«. Er steht auch für »absichtlich kein Objekt« dort, wo ein Objekt sein könnte.</p>
+  <p>Es gibt in JavaScript beispielsweise Funktionen, die üblicherweise Objekte zurückgeben. Wenn Sie kein Objekt zurückgeben können, etwa weil sie nichts gefunden haben, dann geben sie <code>null</code> zurück.</p>
+  <p>Der Unterschied zwischen <code>undefined</code> und <code>null</code> ist sehr subtil. Beide sind Platzhalter für »leer« und »kein Wert« mit dem feinen Unterschied »kein Wert zugewiesen« und »absichtlich kein Objekt«.</p>
+</div>
+<div class="section" id="boolean">
+ <h2>Wahrheitswerte (Boolean)</h2>
+ <p>Der Typ Boolean drückt einen Wahrheitswert aus. Der Name Boolean geht auf den englischen Mathematiker George Boole, der zur Logik forschte.</p>
+ <p>Es gibt genau zwei Boolean-Werte:</p>
+  <ul>
+    <li><code>true</code>: wahr, trifft zu</li>
+    <li><code>false</code>: falsch, trifft nicht zu</li>
+  </ul>
+  <p>Wenn Sie einen Wahrheitswert notieren möchten, können Sie einfach direkt <code>true</code> oder <code>false</code> notieren:</p>
+  <pre>var visible = false;</pre>
+  <p>Boolean-Werte werden überall dort benutzt, wo es um Ja/Nein-Entscheidungen geht: Enthält eine Liste einen gesuchten Wert? Ist ein Element sichtbar? Ist die Eingabe in ein Formularfeld gültig? Ist der Benutzer eingeloggt?</p>
+  <p>Boolean-Werte sind auch das Ergebnis von Vergleichsoperatoren: <code>alter >= 18</code> – ist das Alter größer oder gleich 18? <code>userName === ''</code> – ist der Nutzername leer?
+</div>
+<div class="section" id="string">
+  <h2>Zeichenketten (String)</h2>
+  <p>Der Typ String (englisch für Faden, Schnur) erlaubt das Arbeiten mit Zeichenketten. Darin können Sie einzelne Zeichen bis hin zu ganzen Texten speichern. Es sind alle Zeichen möglich, die im globalen Unicode-Standard registriert sind. Das sind die Buchstaben, Zeichen und Symbole aller großen und kleinen Schriften und Sprachen.</p>
+  <p>Strings können Sie mithilfe des String-Literals erzeugen. Er beginnt und endet mit einfachen oder doppelten Anführungszeichen. Dazwischen werden die gewünschten Zeichen notiert. Zum Beispiel:</p>
+<pre>
+var vorname = 'Alice';
+var nachname = "Lidell";
+</pre>
+  <p>Ob Sie als Begrenzer zwei einfache Anführungszeichen <code>'…'</code> oder zwei doppelte Anführungszeichen <code>"…"</code> benutzen, ist Ihnen überlassen. Beide Schreibweisen sind gleichwertig. Allerdings ergeben sich Probleme, wenn der String selbst diese Zeichen enthält. Innerhalb des Strings können Sie die jeweiligen Begrenzer nicht verwenden:</p>
+<pre>
+var text = ""Nein, gewiß nicht!" sagte Alice"; // Fehler!
+var text = ''Nein, gewiß nicht!' sagte Alice'; // Fehler!
+</pre>
+  <p>Eine Lösungsmöglichkeit ist, die jeweils anderen Anführungszeichen zu verwenden, die nicht im String verwendet werden:</p>
+<pre>
+var text = '"Nein, gewiß nicht!" sagte Alice';
+var text = "'Nein, gewiß nicht!' sagte Alice";
+</pre>
+  <p>Oder Sie machen die Begrenzer innerhalb des Strings mit einem Schrägstrich <code>\</code> davor unschädlich. Aus <code>"</code> wird <code>\"</code> und aus <code>'</code> wird <code>\'</code>:</p>
+<pre>
+var text = "\"Nein, gewiß nicht!\" sagte Alice";
+var text = '\'Nein, gewiß nicht!\' sagte Alice';
+</pre>
+  <p>JavaScript-Programme arbeiten häufig mit Strings. Die meisten Nutzereingaben und Dokumentinhalte sind einzelne Zeichen oder längere Texte, die in JavaScript als Strings vorliegen.</p>
+</div>
+<div class="section" id="symbol">
+  <h2>Symbole (Symbol)</h2>
+</div>
+<div class="section" id="number">
+  <h2>Zahlen (Number)</h2>
+  <p>Ein Number-Wert ist eine Zahl. Es kann eine Ganzzahl oder eine Kommazahl sein, positiv oder negativ.</p>
+</div>
+
+<div class="section" id="object">
+  <h2>Objekte (Object)</h2>
+  <p>Nachdem wir uns die Typen angeschaut haben, die einfache Werte bilden, fehlt der siebte Grundtype: Object für sämtliche Objekte.</p>
+  <p>Ein Objekt ist eine Zuordnungsliste, in der gewissen Namen gewisse Werte zugewiesen werden. Die einfachste Art, ein allgemeines Objekt zu erzeugen, ist der Objekt-Literal:</p>
+<pre>
+var adresse = {
+  name: 'Angelika Muster',
+  straße: 'Königsallee 56',
+  stadt: 'Frankfurt'
+};
+</pre>
+  <p>Genauer schauen wir uns diese im <a href="objekte.html">Kapitel über Objekte</a> an.</p>
+  <p>Wie gesagt gibt es viele Unter-Typen, die vom Type Object abgeleitet sind: Function, Array, RegExp, Date, Error, Map, Set und viele mehr.</p>
 </div>
 <div class="section" id="objects-primitives">
-  <h2>Objekte und primitive Typen</h2>
-  <p>Zwar verhalten sich alle Werte in JavaScript in gewissen Situationen wie Objekte, aber strenggenommen gibt es eine Unterscheidung zwischen vollwertigen Objekten und sogenannten einfachen Werten, im der englischen Fachsprache <strong>Primitive Values</strong>, kurz <strong>Primitives</strong> genannt.</p>
-  <p>Diese Doppelung betrifft die eben behandelten <code>Boolean</code>-, <code>Number</code>- und <code>String</code>-Werte. Diese können nämlich entweder als Primitive oder als vollwertiges Objekt notiert werden:</p>
-  <ul>
-    <li>Die Literalschreibweise <code>var string = "Hallo Welt"</code> erzeugt ein <em>String-Primitive</em>.</li>
-    <li>Die Instantiierung <code>var string = new String("Hallo Welt");</code> erzeugt ein <em>String-Objekt</em>.</p>
-  </ul>
-  <p>Dieser Unterschied macht sich an zwei Stellen bemerkbar:</p>
-  <div class="subsection" id="referenzen-kopien">
+  <h2>Objekte und einfache Werte</h2>
+  <p>JavaScript unterscheidet zwischen einfachen Werten (englisch <em lang="en">primitive values</em>) und komplexen Objekten. Allerdings verhalten sich auch einfache Werte in gewissen Situationen wie Objekte. Sie werden intern in Objekte umgewandelt, wenn Sie auf Objekt-Eigenschaften dieser Werte zuzugreifen. Das gilt für Werte der Typen Boolean, Number, String und Symbol.</p>
+  <p>Schauen wir uns die Unterschiede zwischen einfachen Werten und Objekten an.</p>
+  <div class="section" id="referenzen-kopien">
     <h3>Referenzen und Kopien</h3>
-    <p>Primitives werden <strong>als Kopie</strong> an Funktionen übergeben, während Objekte <strong>als Referenzen</strong> auf dieselbe Speicherstelle (in anderen Programmiersprachen »Zeiger« genannt) übergeben werden.</p>
-    <p>Gegeben ist folgender Fall: Sie notieren ein Objekt als Variable. Dieses Objekt übergeben Sie einer Funktion und in der Funktion nehmen Sie Änderungen am Objekt vor, fügen ihm z.B. eine Eigenschaft hinzu.</p>
-    <p>Wenn das Objekt als <em>Referenz</em> übergeben wird, dann haben Sie nach dem Funktionsaufruf auf das geänderte Objekt Zugriff. Denn an beiden Stellen, innerhalb und außerhalb der Funktion, haben Sie Zugriff auf ein und dasselbe Objekt.</p>
-    <p>Wenn das Objekt als <em>Primitive</em> übergeben wird, dann haben Änderungen daran keine Auswirkung auf die Variable im ursprünglichen Kontext &ndash; es sei denn, die Funktion gibt einen Primitive zurück und Sie arbeiten mit dem Rückgabewert der Funktion weiter.</p>
+    <p>Einfache Werte werden <strong>als Kopie</strong> an Funktionen übergeben, während Objekte <strong>als Referenzen</strong> übergeben werden. Eine Referenz ist die Adresse im Speicher, wo das Objekt abgelegt wurde.</p>
+    <p>Gegeben ist folgender Fall: Sie notieren ein Objekt und speichern es in einer Variable. Dieses Objekt übergeben Sie einer Funktion. In der Funktion nehmen Sie Änderungen am Objekt vor, fügen ihm z.B. eine Eigenschaft hinzu.</p>
+<pre>
+function setzeNamen(nutzer, vorname, nachname) {
+  // »nutzer« zeigt auf dasselbe Objekt wie »alice«!
+  nutzer.name = vorname + ' ' + nachname;
+}
+var alice = {};
+setzeNamen(nutzer, 'Alice', 'Liddell');
+window.alert(alice.name); // Ausgabe: »Alice Lidell«
+</pre>
+    <p>In diesem Beispiel wird ein leeres Objekt <code>nutzer</code> einer Funktion übergeben, die verschiedene Eigenschaften hinzufügt.</p>
+    <p>Das Objekt wird als <em>Referenz</em> übergeben. Das heißt, Änderungen daran ändern das Originalobjekt. Sie haben nach dem Funktionsaufruf auf das geänderte Objekt Zugriff. Denn an beiden Stellen, innerhalb und außerhalb der Funktion, haben Sie Zugriff auf ein und dasselbe Objekt.</p>
+    <p>Schauen wir uns zum Vergleich <em>einfache Werte</em> an. Wenn Sie einen einfachen Wert einer Funktion übergeben wird, dann haben Änderungen daran keine Auswirkung auf die Variable außerhalb der Funktion.</p>
+<pre>
+function quadrat(zahl) {
+  zahl = zahl * zahl;
+}
+var i = 5;
+quadrat(i);
+window.alert(i); // Ausgabe: »5«
+</pre>
+    <p>In diesem Beispiel wird eine Zahl einer Funktion übergeben, die dessen Wert um 1 erhöht. Dies ändert zwar den Wert der Funktionsvariable <code>zähler</code>, aber nicht den Wert der äußeren Variable <code>i</code>. Das Beispiel ergibt somit keinen Sinn.</p>
+    <p>Wenn Sie einfache Werte an eine Funktion übergeben und sie verändern wollen, dann muss die Funktion einen neuen Wert zurückgeben. Sie arbeiten dann mit dem Rückgabewert der Funktion weiter:</p>
+<pre>
+function quadrat(zahl) {
+  return zahl * zahl;
+}
+var i = 5;
+var j = quadrat(i);
+window.alert(j); // Ausgabe: »25«
+</pre>
   </div>
-  <div class="subsection" id="identitaet">
+  <div class="section" id="identitaet">
     <h3>Gleichheit und Identität</h3>
-    <p>Der Vergleichsoperator <code>==</code> ergibt beim Vergleich zweier vollwertiger Objekte nur dann <code>true</code>, wenn es sich um ein und dasselbe Objekt handelt. Er verhält sich in dem Fall wie der Identitätsoperator <code>===</code>. Zwei Objekte können also niemals gleich sein, es sei denn, sie sind identisch.</p>
-    <p>Der Vergleich <code>new String("Hallo Welt") == new String("Hallo Welt")</code> ergibt <code>false</code>, denn die beiden String-Objekte sind nicht identisch. Bei Primitives hingegen gibt es eine Gleichheit unabhängig von der Identität: <code>"Hallo Welt" == "Hallo Welt"</code> ergibt erwartungsgemäß <code>true</code>.</p>
-  </div>
-  <div class="subsection" id="identitaet">
-    <h3>Empfehlung</h3>
-    <p>Sofern Sie keinen besonderen Grund haben, sollten Sie <code>Boolean</code>-, <code>Number</code>- und <code>String</code>-Werte stets als Primitives, also mit der Literalschreibweise notieren.</p>
-    <p>...</p>
+    <p>Die Vergleichsoperatoren <code>==</code> und <code>===</code> ergeben beim Vergleich zweier Objekte nur dann <code>true</code>, wenn es sich um ein und dasselbe Objekt handelt. Zwei Objekte können also niemals gleich sein, es sei denn, sie sind identisch.</p>
+<pre>
+var objekt1 = { name: 'Alice' };
+var objekt2 = { name: 'White Rabbit' };
+var objekt3 = { name: 'Alice' };
+// Ausgabe: »false«
+window.alert(objekt1 === objekt2);
+// Ausgabe: »false«
+window.alert(objekt1 === objekt3);
+</pre>
+    <p>Das Beispiel zeigt, dass die Inhalte der Objekte nicht angeschaut und nicht miteinander verglichen werden. <code>objekt1</code> sind zwar in all ihren Eigenschaften gleich, aber sie sind nicht identisch. Es sind immer noch zwei Objekte.</p>
+    <p>Bei einfachen Werten hingegen gibt es eine Gleichheit unabhängig von der Identität: <code>"Hallo Welt" === "Hallo Welt"</code> ergibt erwartungsgemäß <code>true</code>, obwohl es sich um zwei Werte handelt.</p>
   </div>
 </div>
+
+<div class="section" id="kernobjekte">
+  <h2>Kernobjekte</h2>
+  <p>Die Werte der Typen Boolean, String, Symbol, Number und Object haben gewisse Gemeinsamkeiten. Sie haben Eigenschaften und Methoden, die sie von den <strong>Kernobjekten</strong> und den daran gespeicherten Prototypen erben.</p>
+  <p>Beispielsweise haben alle String-Werte die Methode <code>toUpperCase</code>. Sie wandelt alle Zeichen im String in Großbuchstaben um:</p>
+  <pre>window.alert( "Hallo Welt!".toUpperCase() ); // Ausgabe: »HALLO WELT!«</pre>
+  <p>Die Kernobjekte heißen genau so wie die genannten Typen: <code>Boolean</code>, <code>String</code>, <code>Symbol</code>, <code>Number</code> und <code>Object</code>. Sie sind global verfügbar. Es sind Konstruktoren, an den auch der Prototyp hängt. Genaueres über Konstruktoren und Prototypen finden sie im <a href="organisation-instanzen.html">entsprechenden Kapitel</a>.</p>
+  <p>Fürs Erste können Sie sich merken, dass die Werte der Grundtypen ihre Methoden von den Kernobjekten bekommen. Die Methode <code>toUpperCase</code> bei Strings kommt beispielsweise von <code>String.prototype.toUpperCase</code>. Wenn Sie also nachschlagen möchten, welche Methoden zur Verfügung stehen, schauen Sie in der Referenz des jeweiligen Kernobjekts nach.</p>
+  <div class="references">
+    <h3>Weiterführende Lektüre</h3>
+    <ul>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Referenz zum Kernobjekt <code>Boolean</code></a></li>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String">Referenz zum Kernobjekt <code>String</code></a></li>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Referenz zum Kernobjekt <code>Symbol</code></a></li>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Number">Referenz zum Kernobjekt <code>Number</code></a></li>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object">Referenz zum Kernobjekt <code>Object</code></a></li>
+    </ul>
+  </div>
+</div>
+
  <div class="section" id="function">
-  <h2>Function (Funktionsobjekte)</h2>
-  <p>Funktionen sind JavaScript-Objekte, die vom Konstruktor <code>Function</code> abstammen. Ein JavaScript-Programm ist üblicherweise in verschiedene Funktionen unterteilt, die einander aufrufen. Eine Funktion gruppiert zusammengehörige Anweisungen und löst eine gewisse isolierbare Teilaufgabe. Anstatt denselben oder sehr ähnlichen Code immer wieder zu notieren, notiert man stattdessen eine Funktion, die mehrfach aufgerufen werden kann. Durch sogenannte Parameter können ihr variable Informationen bei jedem Aufruf mitgeteilt werden.</p>
-  <p>Näheres zu Funktionen finden Sie im eigenen Abschnitt <a href="funktionen.html">Funktionen</a>.</p>
+  <h2>Funktionsobjekte (Function)</h2>
+  <p>Funktionen sind Objekte des Typs Function, ein Unter-Typ von Object.</p>
+  <p>Ein JavaScript-Programm ist üblicherweise in verschiedene Funktionen unterteilt, die einander aufrufen. Eine Funktion gruppiert zusammengehörige Anweisungen und löst eine gewisse isolierbare Teilaufgabe. Anstatt denselben oder ähnlichen Code immer wieder zu notieren, schreibt man stattdessen eine Funktion, die mehrfach aufgerufen werden kann. Durch sogenannte Parameter können ihr bei jedem Aufruf andere Daten gesendet werden.</p>
+  <p>Näheres dazu finden Sie im <a href="funktionen.html">Kapitel über Funktionen</a>.</p>
+  <div class="references">
+    <h3>Weiterführende Lektüre</h3>
+    <ul>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Function">Referenz zum Kernobjekt <code>Function</code></a></li>
+    </ul>
+  </div>
 </div>
 <div class="section" id="array">
-  <h2>Array: Geordnete Listen</h2>
-  <p>Array sind numerische geordnete Listen mit anderen Objekten. Immer wenn mehrere gleichförmige Objekte in einer bestimmten Abfolge gespeichert werden sollen, sind Arrays die passende Struktur.</p>
-  <pre>
-var städte = [ "Berlin", "Köln", "Hamburg", "München", "Frankfurt" ];
+  <h2>Geordnete Listen (Array)</h2>
+  <p>Arrays sind Objekte des Typs Array, ein Unter-Typ von Object.</p>
+  <p>Ein Array ist eine numerische geordnete Liste mit Werten. Immer wenn mehrere Werte in einer bestimmten Abfolge gespeichert werden sollen, ist ein Array die passende Datenstruktur.</p>
+  <p>Meistens sind die Werte gleichförmig. Das heißt, ein Array enthält Strings, Zahlen oder gleich aufgebaute Objekte. Es ist aber auch möglich, dass ein Array ganz unterschiedliche Werte enthält.</p>
+  <p>Ein Array können Sie mit der Literalschreibweise erzeugen: Am Anfang steht eine öffnende eckige Klammer <code>[</code>, am Ende steht eine schließende eckige Klammer <code>]</code>. Dazwischen können Sie die Einträge des Arrays notieren, auch <strong>Elemente</strong> genannt. Mehrere Elemente können durch Komma getrennt werden.</p>
+  <p>Ein leerer Array sieht demnach so aus: <code>[]</code>. Ein Array mit den drei String-Werten <code>'Margarethe'</code>, 'Michael'</code> und <code>'Monika'</code> sieht so aus: <code>[ 'Margarethe', 'Michael', 'Monika' ]</code>.</p>
+  <p>Hier sind einige Beispiele für Arrays:</p>
+<pre>
+var städte = [ 'Berlin', 'Köln', 'Hamburg', 'München', 'Frankfurt' ];
 var lottozahlen = [ 4, 12, 23, 33, 42, 44 ];
 var mitarbeiter = [
    {
-      name : "Margarethe",
-      geburtsdatum : new Date(1972, 4, 12),
-      durchwahl : 401
+      name: 'Margarethe',
+      geburtsdatum: new Date(1972, 4, 12),
+      durchwahl: 401
    },
    {
-      name : "Michael",
-      geburtsdatum : new Date(1962, 11, 2),
-      durchwahl : 402
+      name: 'Michael',
+      geburtsdatum: new Date(1962, 11, 2),
+      durchwahl: 402
    },
    {
-      name : "Monika",
-      geburtsdatum : new Date(1958, 5, 25),
-      durchwahl : 403
+      name: 'Monika',
+      geburtsdatum: new Date(1958, 5, 25),
+      durchwahl: 403
    }
 ];
+</pre>
+  <p>Jeder Array hat eine Eigenschaft <code>length</code>, die die Anzahl der Element im Array zurückgibt. Ein Beispiel:</p>
+<pre>
+var leererArray = [];
+window.alert(array.length); // Ausgabe: »0«
+var gefüllterArray = [ 'ein Element' ];
+window.alert(gefüllterArray.length); // Ausgabe: »1«
+</pre>
+  <p>Jedes Element im Array bekommt einen fortlaufenden numerischen <strong>Index</strong> zugeordnet. Unter diesem Index ist der Wert gespeichert. Der Index fängt immer bei <code>0</code> an zu zählen, <em>nicht</em> bei 1. Das heißt, das <em>erste</em> Element im Array hat den Index <code>0</code>, das <em>zweite</em> Element den Index <code>1</code> und so weiter.</p>
+  <p>Sie können auf ein Element des Arrays anhand seines Indexes zugreifen: <code>array[index]</code>. Das ist der Operator zum Zugriff auf Objekteigenschaften. Dieser nutzt verwirrenderweise auch wieder eckige Klammern, die aber hinter dem Array oder Variablennamen stehen. Zwischen den Klammern notieren Sie den Index. Zum Beispiel:</p>
+<pre>
+var städte = [ 'Berlin', 'Köln', 'Hamburg', 'München', 'Frankfurt' ];
+window.alert(städte[0]); // Ausgabe: »Berlin«
+window.alert(städte[1]); // Ausgabe: »Köln«
+window.alert(städte[2]); // Ausgabe: »Hamburg«
+window.alert(städte[3]); // Ausgabe: »München«
+window.alert(städte[4]); // Ausgabe: »Frankfurt«
+</pre>
+  <p>Das Beispiel liest die Elemente nur aus. Es ist auch möglich, ein Element zu überschreiben, indem Sie dem Index einen neuen Wert zuweisen:</p>
+<pre>
+städte[0] = 'Potsdam';
+städte[1] = 'Bonn';
+städte[2] = 'Buxtehude';
+</pre>
+  <p>Array-Objekte bieten zahlreiche nützliche Methoden, um dem Array ein Element anzuhängen, den Array zu durchlaufen, zu filtern und aus den bestehenden Elementen einen neuen Array zu erzeugen.</p>
+  <p>
+  <div class="references">
+    <h3>Weiterführende Lektüre</h3>
+    <ul>
+      <li><a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array">Referenz zum Kernobjekt <code>Array</code></a></li>
+    </ul>
+  </div>
 </div>
 <div class="section" id="regexp">
-  <h2>RegExp: Reguläre Ausdrücke</h2>
+  <h2>Reguläre Ausdrücke (RegExp)</h2>
   <p>Mit regulären Ausdrücken lassen sich Muster für Zeichenabfolgen notieren, mit deren Hilfe sich Texte durchsuchen und automatisierte Ersetzungen vormehmen lassen. Mit einem regulären Ausdruck kann beispielsweise geprüft werden, ob ein String in einer bestimmten Weise aufgebaut ist und somit einer Konvention entspricht.</p>
   <p>Wenn ein Formularfeld nur eine ganze Zahl enthalten darf, dann lässt sich mit einem regulären Ausdruck testen, ob das Feld tatsächlich nur Ziffern enthält. Enthält es noch andere Zeichen oder einen Komma-Wert, so kann der Wert vor dem Absenden des Formulars automatisch korrigiert werden.</p>
   <p>Reguläre Ausdrücke sind eigene Objekte vom Typ <code>RegExp</code>. Um ein solches Objekt zu erzeugen, können wir einen RegExp-Literal notieren oder <code>new RegExp()</code> aufrufen. ...</p>
 </div>
 <div class="section" id="date">
-  <h2>Date: Datumsobjekte</h2>
-  <p>...</p>
+  <h2>Datumsobjekte (Date)</h2>
+  <p>…</p>
 </div>
 <div class="section" id="math">
-  <h2>Math: Mathematische Hilfsmethoden</h2>
-  <p>...</p>
+  <h2>Mathematische Hilfsmethoden (Math)</h2>
+  <p>…</p>
 </div>
 <div class="section" id="andere-typen">
   <h2>Objekttypen außerhalb des Kerns</h2>
-  <p>DOM-Knoten, Elementobjekte, ...</p>
+  <p>DOM-Knoten, Elementobjekte, …</p>
 </div>
 
 <div id="footer">

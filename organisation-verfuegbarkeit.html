@@ -139,7 +139,7 @@ Modul.start();
 
   </div>
 
-  <div class="subsection" id="this-problem-instanz">
+  <div class="section" id="this-problem-instanz">
 
     <h3><code>this</code>-Problem bei Prototypen und Instanzmethoden</h3>
 
@@ -257,7 +257,7 @@ function äußereFunktion  () {
 
   <p>Wie helfen uns Closures nun beim <code>this</code>-Problem weiter?</p>
 
-  <div class="subsection" id="closures-modul">
+  <div class="section" id="closures-modul">
 
     <h3>Module: Verzicht auf <code>this</code> zugunsten des Revealing Module Patterns</h3>
 
@@ -331,7 +331,7 @@ privateVariable: privat
 
   </div>
 
-  <div class="subsection" id="closures-instanzen">
+  <div class="section" id="closures-instanzen">
 
     <h3>Konstruktoren/Instanzen: Methoden im Konstruktor verschachteln</h3>
 
@@ -402,7 +402,7 @@ instanz.start();
 
   <p>Die gezeigte Verschachtelung ist eine effektiver, aber folgenschwerer Trick, um die Verfügbarkeit von Objekten zu gewährleisten. Sie liegt nahe, wenn sowieso mit privaten Objekten gearbeitet wird und deshalb alle Modul- bzw. Instanzmethoden verschachtelt werden. Sie funktioniert nicht bei einfachen <code>Object</code>-Literalen und bei der Nutzung von Prototypen. Glücklicherweise erlaubt die funktionale Natur von JavaScript, Funktionen und damit Closures zur Laufzeit anzulegen und den <code>this</code>-Kontext einer Funktion bei ihrem Aufruf festzulegen.</p>
 
-  <div class="subsection" id="call-apply">
+  <div class="section" id="call-apply">
 
     <h3><code>this</code>-Kontext erzwingen mit <code>call</code> und <code>apply</code></h3>
 
@@ -452,7 +452,7 @@ summe.apply(objekt, [1, 2, 3]);
 
   </div>
 
-  <div class="subsection" id="bind-bindaseventlistener">
+  <div class="section" id="bind-bindaseventlistener">
 
     <h3><code>bind</code> und <code>bindAsEventListener</code></h3>
 
@@ -470,7 +470,7 @@ summe.apply(objekt, [1, 2, 3]);
 
   </div>
 
-  <div class="subsection" id="bind-code">
+  <div class="section" id="bind-code">
 
     <h3>Kommentierter Code</h3>
 
@@ -552,7 +552,7 @@ summe.apply(objekt, [1, 2, 3]);
 
   </div>
 
-  <div class="subsection" id="bind-kompakt">
+  <div class="section" id="bind-kompakt">
 
     <h3>Kurzschreibweise</h3>
 
@@ -574,7 +574,7 @@ Function.prototype.bindAsEventListener = function (object) {
 
   </div>
 
-  <div class="subsection" id="bind-modul">
+  <div class="section" id="bind-modul">
 
     <h3>Anwendung bei einfachen Modulen</h3>
 
@@ -606,7 +606,7 @@ Modul.start();
 
   </div>
 
-  <div class="subsection" id="bind-instanz">
+  <div class="section" id="bind-instanz">
 
     <h3>Anwendung bei Prototypen und Instanzmethoden</h3>
 
@@ -640,7 +640,7 @@ instanz.start();
 
   </div>
 
-  <div class="subsection" id="besseres-binding">
+  <div class="section" id="besseres-binding">
 
     <h3>Es gibt viele, bessere Binding-Funktionen</h3>
 

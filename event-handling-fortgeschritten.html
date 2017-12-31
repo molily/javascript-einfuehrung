@@ -26,8 +26,8 @@
 <div class="section" id="dom-events">
   <h2>Event-Handling gemäß dem W3C-Standard DOM Events</h2>
   <p>Das bisher beschriebene traditionelle Schema stammt aus den Anfangstagen von JavaScript. Der Browserhersteller und JavaScript-Erfinder Netscape erfand das Schema einst und andere Browser übernahmen es im Zuge ihrer JavaScript-Unterstützung.</p>
-  <p>Die Entwicklung ging jedoch weiter: Bei der Standardisierung des Event-Handlings verwarf das WWW-Konsortium das traditionelle Event-Handling. Der entsprechende DOM-Standard sieht ein anderes Modell vor: Alle Elementobjekte und weitere zentrale Objekte besitzen die Methode <code>addEventListener</code> (englisch: Ereignis-Überwacher hinzufügen). Will man dem Element einen Event-Handler zuweisen, so ruft man diese Methode auf.</p>
-  <div class="subsection" id="addEventListener">
+  <p>Die Entwicklung ging jedoch weiter: Bei der Standardisierung des Event-Handlings verwarf das WWW-Konsortium das traditionelle Event-Handling. Der entsprechende DOM-Standard sieht ein anderes Modell vor: Alle Elementobjekte und weitere zentrale Objekte besitzen die Methode <code>addEventListener</code> (englisch für Ereignis-Überwacher hinzufügen). Will man dem Element einen Event-Handler zuweisen, so ruft man diese Methode auf.</p>
+  <div class="section" id="addEventListener">
     <h3>Event-Handler registrieren: <code>addEventListener</code></h3>
     <p>Das standardisierte Schema enthält ebenfalls die drei Bestandteile Elementobjekt, Ereignistyp und Handler-Funktion. Es lautet folgendermaßen:</p>
     <pre>element.addEventListener("event", handlerfunktion, capturing);</pre>
@@ -93,9 +93,9 @@ function meldung2 () {
 }</pre>
     <p>Es werden zwei Handler-Funktionen namens <code>meldung1</code> und <code>meldung2</code> definiert. Mithilfe von <code>addEventListener</code> werden sie beide als <code>click</code>-Handler registriert. Wenn Sie auf den Textabsatz klicken, dann sollten nacheinander zwei JavaScript-Meldefenster erscheinen &ndash; und zwar in der Reihenfolge, in der die Handler mittels <code>addEventListener</code> registriert wurden.</p>
   </div>
-  <div class="subsection" id="removeEventListener">
+  <div class="section" id="removeEventListener">
     <h3>Event-Handler entfernen: removeEventListener</h3>
-    <p>Um die mit <code>addEventListener</code> registrierten Handler wieder zu <strong>entfernen</strong>, gibt es die Schwestermethode <code>removeEventListener</code> (englisch: Ereignis-Empfänger entfernen). Die Methode erwartet dieselben Parameter, die <code>addEventListener</code> beim Registrieren bekommen hat: Einen String mit dem Ereignistyp, die zu löschende Handler-Funktion und schließlich einen Boolean-Wert für die Event-Phase.</p>
+    <p>Um die mit <code>addEventListener</code> registrierten Handler wieder zu <strong>entfernen</strong>, gibt es die Schwestermethode <code>removeEventListener</code> (englisch für Ereignis-Empfänger entfernen). Die Methode erwartet dieselben Parameter, die <code>addEventListener</code> beim Registrieren bekommen hat: Einen String mit dem Ereignistyp, die zu löschende Handler-Funktion und schließlich einen Boolean-Wert für die Event-Phase.</p>
     <p>Um beide im Beispiel definierten Handler für das <code>p</code>-Element (nämlich <code>meldung1</code> und <code>meldung2</code>) wieder zu entfernen, notieren wir:</p>
     <pre>function beenden () {
    pElement.removeEventListener("click", meldung1, false);
@@ -108,7 +108,7 @@ function meldung2 () {
   <h2>Event-Handling gemäß Microsoft für ältere Internet Explorer</h2>
   <p>Microsoft hat schon früh für seinen Internet Explorer eine Alternative zum unzureichenden traditionellen Event-Handling eingeführt, welches seinerseits vom damaligen Konkurrenten Netscape erfunden wurde. Das W3C-DOM wurde erst später standardisiert und wurde erst Jahre später im Internet Explorer 9 eingebaut. Das Microsoft-Modell wiederum wird nur vom Internet Explorer verstanden. Es handelt sich hier also um eine Sonderlösung, die nur noch für ältere Internet-Explorer-Versionen interessant ist, welche den DOM-Standard nicht umsetzen.</p>
   <p>Microsofts Modell teilt einige Fähigkeiten mit <code>addEventListener</code> und <code>removeEventListener</code>, funktioniert im Detail jedoch anders und bringt einige Eigenheiten und Schwierigkeiten mit sich.</p>
-  <div class="subsection" id="attachEvent">
+  <div class="section" id="attachEvent">
     <h3>Event-Handler registrieren: attachEvent</h3>
     <p>Im Microsoft-Modell besitzt jedes Elementobjekt sowie einige zentrale Objekte die Methode <code>attachEvent</code> zum Registrieren von Event-Handlern. Das Schema lautet folgendermaßen:</p>
     <pre>element.attachEvent("onevent", handlerfunktion);</pre>
@@ -165,7 +165,7 @@ function meldung2 () {
 }</pre>
     <p>Das Beispiel enthält nichts neues, die Aufrufe von <code>addEventListener</code> wurden auf die besagte Weise durch <code>attachEvent</code> ausgetauscht.</p>
   </div>
-  <div class="subsection" id="detachEvent">
+  <div class="section" id="detachEvent">
     <h3>Event-Handler entfernen: detachEvent</h3>
     <p>Auch das Microsoft-Modell bietet eine Methode, um registrierte Handler wieder zu entfernen. Sie nennt sich <code>detachEvent</code> und erwartet dieselben Parameter wie sein Gegenstück <code>attachEvent</code>.</p>
     <p>Um die besagten <code>click</code>-Handler <code>meldung1</code> und <code>meldung2</code> wieder zu entfernen, notieren wir:</p>
@@ -174,7 +174,7 @@ function meldung2 () {
    pElement.detachEvent("onclick", meldung2);
 }</pre>
   </div>
-  <div class="subsection" id="microsoft-eigenheiten">
+  <div class="section" id="microsoft-eigenheiten">
     <h2>Eigenheiten des Microsoft-Modell</h2>
     <p>Das Microsoft-Modell bringt eine erfreuliche und eine unerfreuliche Besonderheit mit sich:</p>
     <ul>
@@ -188,7 +188,7 @@ function meldung2 () {
 <div class="section" id="addevent">
   <h2>Browserübergreifendes Event-Handling</h2>
 
-  <div class="subsection" id="addevent-lage">
+  <div class="section" id="addevent-lage">
     <h3>Ausgangslage</h3>
     <p>Wir haben drei Modelle und deren Detailunterschiede kennengelernt. Das mag Sie verwirrt haben und Sie werden sich sicher fragen, welches Sie nun in der Praxis ohne Bedenken anwenden können. Das Fazit lautet leider: Keines.</p>
     <ul>
@@ -198,14 +198,14 @@ function meldung2 () {
     </ul>
   </div>
 
-  <div class="subsection" id="addevent-helfer">
+  <div class="section" id="addevent-helfer">
     <h3><code>addEvent</code>-Helferfunktionen</h3>
     <p>Um relativ komfortabel browserübergreifend Ereignisse verarbeiten zu können, benötigen wir eine Helferfunktion, die eine Vereinheitlichung vornimmt und gewisse Browserunterschiede nivelliert. Eine solche alleinstehende Funktion zum Registrieren von Event-Handlern wird in der Regel <code>addEvent</code> genannt</p>
     <p>Die Entwicklung einer solchen <code>addEvent</code>-Funktion ist eine Wissenschaft für sich. Moderne <a href="bibliotheken.html">JavaScript-Bibliotheken</a> nutzen äußerst ausgefeilte Umsetzungen. Diese basieren auf jahrelanger Forschung, um viele Sonderfälle abzudecken und dem Anwender das Event-Handling durch Vereinheitlichung aller relevanter Browserunterschiede zu vereinfachen.</p>
     <p>Diese Bibliotheken bringen jedoch eine eigene Arbeitsweise sowie unzählige weitere Funktionen mit sich. Daher seien hier zwei isolierte Helferscripte vorgestellt.</p>
   </div>
 
-  <div class="subsection" id="einfaches-addevent">
+  <div class="section" id="einfaches-addevent">
     <h3>Einfaches, oftmals ausreichendes <code>addEvent</code></h3>
     <p>Ein einfaches Beispiel ist <a href="http://www.ilfilosofo.com/blog/2008/04/14/addevent-preserving-this/">A Good Enough addEvent</a> von Austin Matzko. Ziel ist es, mehrere Event-Handler für einen Typ bei einem Element registrieren zu können. Die Funktion verwendet <code>addEventListener</code> (DOM-Standard) oder <code>attachEvent</code> (Microsoft-Modell) je nach Verfügbarkeit.</p>
 <pre>function addEvent (obj, type, fn) {
@@ -239,7 +239,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
     </ul>
   </div>
 
-  <div class="subsection" id="flexibles-addevent">
+  <div class="section" id="flexibles-addevent">
     <h3>Flexibles und leistungsfähiges <code>addEvent</code>/<code>removeEvent</code></h3>
     <p>Eine robustere, aber umso kompliziertere Umsetzung der Funktionen <code>addEvent</code> und <code>removeEvent</code> stammt von Dean Edwards und wurde von Tino Zijdel weiterentwickelt: <a href="http://therealcrisp.xs4all.nl/upload/addEvent_dean.html">addEvent() new style</a>.</p>
     <p>Dieses Helferscript verwendet die standardisierte Methoden <code>addEventListener</code> und <code>removeEventListener</code> in den Browsern, in denen sie zur Verfügung stehen. Als Alternative für ältere Internet Explorer wird allerdings nicht das Microsoft-eigene Modell verwendet &ndash; zu groß sind die Unterschiede zwischen den beiden Modellen. Stattdessen wird das Registrieren von mehreren Event-Handlern selbst übernommen: Es wird bei jedem Element eine eigene Liste mit Handler-Funktionen für ein Ereignistyp geführt. Beim Eintreten des Ereignisses wird eine Helferfunktion aufgerufen, die diese interne Liste abarbeitet und jede dort verzeichnete Handler-Funktion aufruft.</p>
@@ -253,7 +253,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
     <p>Falls Sie keine umfangreichere JavaScript-Bibliothek verwenden, welche ausgereiftes Event-Handling ermöglicht, so sind Sie mit diesen beiden Helferfunktionen <code>addEvent</code> und <code>removeEvent</code> gut bedient &ndash; Sie sollten sie in ihren Werkzeugkasten aufnehmen.</p>
   </div>
 
-  <div class="subsection" id="addevent-frameworks">
+  <div class="section" id="addevent-frameworks">
     <h3>Browserübergreifendes Event-Handling mit Frameworks</h3>
     <p> Die besagte Browser-Vereinheitlichung berührt nur die Spitze des Eisberges: Besonders bei der Verarbeitung von Tastatur- und Maus-Ereignissen erwarten den JavaScript-Programmierer noch viel größere Browserunterschiede. Um beispielsweise browserübergreifend die Mausposition relativ zum Dokument auszulesen, ist eine komplexe Fähigkeiten-Weiche nötig. Dasselbe gilt für das Auslesen der gedrückten Taste(n). Für den JavaScript-Einsteiger ist es schwierig und unkomfortabel, für all diese Detailunterschiede Korrekturen einzubauen. Das eigentliche Verarbeiten der Ereignisse rückt durch dieses Browser-Durcheinander (im Englischen »quirks« genannt), in den Hintergrund.</p>
     <p>Wenn Sie bei solchem Event-Handling schnell zu Resultaten kommen wollen, sei Ihnen die Verwendung einer <a href="bibliotheken.html">JavaScript-Bibliothek</a> empfohlen. Die gängigen Frameworks nehmen Ihnen die Vereinheitlichung beim Event-Handling größtenteils ab.</p>

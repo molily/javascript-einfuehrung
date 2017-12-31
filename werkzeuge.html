@@ -24,18 +24,18 @@
   <h2>Erste Schritte mit Firefox, Firebug und einem Editor</h2>
   <p>JavaScripte können Sie mit ganz unterschiedlichen Programmen und Hilfsmitteln entwickeln und jeder Webautor hat unterschiedliche Bedürfnisse und Gewohnheiten. Sobald Sie einige Erfahrung gesammelt haben, sollten Sie sich umschauen, welche Arbeitsweise Ihnen am besten zusagt. Für den Anfang sei hier aber eine einseitige und parteiische Empfehlung ausgesprochen.</p>
 
-  <div class="subsection" id="firefox">
+  <div class="section" id="firefox">
     <h3>Firefox</h3>
   <p>Wenn Sie browserübergreifende JavaScripte für das öffentliche Web programmieren, so sollten Sie Ihre Scripte zunächst mit dem Browser <strong>Mozilla Firefox</strong> testen und sie mit dessen Hilfe fortentwickeln. Dieser Browser ist weit verbreitet, läuft auf allen relevanten Plattformen und ist einer der Ziel-Browser, auf dem Ihre Scripte auf jeden Fall funktionieren sollten. Firefox verfügt über ausgezeichnete JavaScript-Fähigkeiten und gibt präzise und hilfreiche JavaScript-Fehlermeldungen. Sie können Firefox unter <a href="http://getfirefox.com/">getfirefox.com</a> herunterladen.</p>
   </div>
 
-  <div class="subsection" id="firefbug">
+  <div class="section" id="firefbug">
     <h3>Firebug</h3>
     <p>Eine entscheidende Hilfe stellt das Firefox-Zusatzprogramm <strong>Firebug</strong> dar. Firebug ist nicht nur ein mächtiges JavaScript-Werkzeug, sondern hilft auch enorm bei der HTML- und CSS-Entwicklung - insbesondere durch den sogenannten <em>DOM-Inspektor</em>, mit dem Sie den Elementbaum des HTML-Dokuments sowie die zugehörigen JavaScript- und CSS-Eigenschaften ansehen können. Nachdem Sie Firefox installiert haben, können Sie das Firebug-Addon über die <a href="https://addons.mozilla.org/de/firefox/addon/firebug/">Firefox-Addon-Datenbank</a> installieren.</p>
     <p>Firebug gibt Lernenden einen wertvollen Einblick in das DOM, veranschaulicht den Aufbau von JavaScript-Objekten und macht die Zusammenarbeit zwischen HTML, CSS und JavaScript verständlich. Seien Sie neugierig und spielen Sie mit Firebug herum – es wird Ihr Verständnis der Webtechniken und insbesondere des <em>DOM Scripting</em> enorm verbessern.</p>
   </div>
 
-  <div class="subsection" id="editor">
+  <div class="section" id="editor">
     <h3>Texteditor</h3>
     <p>Eine weitere Voraussetzung für die JavaScript-Programmierung ist natürlich ein <strong>Texteditor</strong>, mit dem Sie die JavaScripte schreiben. Auch in puncto Editoren haben Sie zwischen tausenden eine Auswahl. Für den Anfang brauchen Sie keinen Editor mit besonderen Fähigkeiten. Er sollte jedoch Syntax-Highlighting für JavaScript-Code sowie die Anzeige von Zeilen- und Spaltennummern beherrschen. Denn diese Features erweisen sich direkt als hilfreich. Ein brauchbarer einfacher Editor für Windows ist <a href="http://notepad-plus.sourceforge.net/">Notepad++</a>.</p>
   </div>
@@ -51,7 +51,7 @@
   <p>In der JavaScript-Konsole finden sich in erster Linie <strong>Ausnahmefehler</strong> (englisch <em>exception</em>s). Ein solcher führt zum sofortigen Abbruch der Ausführung des Scriptes. Ein Ausnahmefehler tritt beispielsweise auf, wenn Sie auf eine nicht existente Variable zugreifen, eine nicht existente Methode aufrufen oder eine Objekteigenschaft ansprechen, obwohl es sich beim jeweiligen Wert nicht um ein Objekt handelt.</p>
   <p>Die Browser unterscheiden sich darin, wie sie diese Fehlermeldungen darstellen und wie informativ diese sind. Die verständlichsten und präzisesten Fehlermeldungen liefert üblicherweise der Firefox-Browser.</p>
 
-  <div id="fehlermeldungen-firefox" class="subsection">
+  <div id="fehlermeldungen-firefox" class="section">
     <h3>Firefox-Fehlerkonsole und Firebug</h3>
     <p>Im Firefox können Sie die Meldungen über das Menü <em>Extras → Fehlerkonsole</em> erreichen:</p>
     <p class="image"><img src="images/firefox-fehlerkonsole.png" alt=""></p>
@@ -66,7 +66,7 @@
     <p>Nach Möglichkeit sollten Sie mit den JavaScript-Konsolen von Firefox bzw. dem Firebug-Zusatz arbeiten. Dennoch soll nicht verschwiegen werden, wie Sie in den anderen relevanten Browsern an die Fehlermeldungen kommen.</p>
   </div>
 
-  <div id="fehlermeldungen-ie" class="subsection">
+  <div id="fehlermeldungen-ie" class="section">
     <h3>Fehlermeldungen im Internet Explorer ab Version 8</h3>
     <p>Der Internet Explorer hat zwei verschiedene MNodi, was den Umgang mit JavaScript-Fehlermeldungen angeht. Entweder zeigt er jeden JavaScript-Fehler in einem Dialogfeld an. Oder er versteckt diese Meldungen und macht sie nur auf Abruf zugänglich.</p>
     <p>Wenn Sie Scripte im Internet Explorer testen, sollten Sie zumindest zeitweise die Anzeige jedes Fehlers aktivieren. Beim normalen Surfen auf fremden Sites hingegen stören diese Fehlermeldungen. Um die Meldungen zu aktivieren, öffnen Sie die <em>Internetoptionen</em> des IE. Diese finden Sie im Menü <em>Extras</em>. In dem sich öffnenden Fenster wählen Sie die Registerkarte <em>Erweitert</em>. In der dortigen Liste nehmen Sie folgende Einstellungen vor:</p>
@@ -83,7 +83,7 @@
     <p>Das Anzeigen von JavaScript-Fehlern ist nur während der Entwicklung sinnvoll. Sie sollten diese Möglichkeit nur solange in Anspruch nehmen, wie sie an JavaScripten arbeiten. Danach können sie die Fehlermeldungen in den Internetoptionen wieder ausschalten, damit Sie nicht beim normalen Surfen gestört werden.</p>
   </div>
 
-  <div class="subsection" id="ie-fehlerkonsole">
+  <div class="section" id="ie-fehlerkonsole">
     <h3>Internet Explorers: Fehlerkonsole der Entwicklertools</h3>
     <p>Neben diesen Meldungsfenstern kennt der Internet Explorer ab Version 8 eine JavaScript-Konsole, in der alle Fehlermeldungen mitgeloggt werden. Der IE besitzt dazu die sogenannten <strong>Entwicklertools</strong>, die stark an Firebug angelehnt sind. Beim Drücken der Taste <kbd>F12</kbd> klappt eine Leiste am unteren Fensterrand auf. Um JavaScript-Fehler zu sehen, müssen Sie den Tab <em>Skript</em> anwählen:</p>
     <p class="image"><img src="images/ie8-developertools.png" alt=""></p>
@@ -92,14 +92,14 @@
     <p class="image"><img src="images/ie9-debugger.png" akt=""></p>
   </div>
 
-  <div class="subsection" id="fehlermeldungen-alte-ies">
+  <div class="section" id="fehlermeldungen-alte-ies">
     <h3>Fehlermeldungen in älteren Internet Explorern</h3>
     <p>Sie sollten bei der JavaScript-Entwicklung die neueste Internet-Explorer-Version verwenden, wenn es nicht gerade um das absichtliche Testen mit älteren Versionen geht. Denn die Fehlermeldungen in älteren Versionen sind weniger präzise sowie oft unverständlich und verwirrend. In manchen Fällen wird die Zeilennummer nicht korrekt angegeben und bei ausgelagerten JavaScript-Dateien die tatsächliche Script-Adresse nicht angegeben, nur die Adresse des einbindenden HTML-Dokuments. Ältere Internet Explorer kennen keine Konsole, in der alle Fehlermeldungen mitgeloggt werden.</p>
     <p class="image"><img src="images/ie7-fehlermeldung.png" alt=""></p>
     <p>Ein komfortables Debugging von Scripten im Internet Explorer vor Version 8 ist daher ohne Zusatzprogramme schwer möglich. Ein mögliches Zusatzprogramm, das ein brauchbares Fehler-Logging anbietet, lautet <a href="http://www.my-debugbar.com/wiki/CompanionJS/HomePage">Companion.JS</a> bzw. <a href="http://www.debugbar.com/">DebugBar</a>. Einen komplexeren JavaScript-Debugger bietet die umfangreiche <a href="https://msdn.microsoft.com/en-us/library/dd537667(v=vs.110).aspx">Visual Studio Express for Web</a>, die sich kostenlos herunterladen lässt.</p>
   </div>
 
-  <div id="opera" class="subsection">
+  <div id="opera" class="section">
     <h3>Opera-Fehlerkonsole und Opera Dragonfly</h3>
     <p>Im Opera-Browser erreichen Sie die Fehlerkonsole über den Menüeintrag <em>Extras → Weiteres → Fehlerkonsole</em>. Vorher müssen Sie die volle Menüleiste gegebenenfalls erst einblenden über <em>Menü → Menüleiste zeigen</em>.</p>
     <p class="image"><img src="images/opera-fehlerkonsole1.png" alt=""></p>
@@ -111,7 +111,7 @@
     <p class="image"><img src="images/opera-dragonfly.png" alt=""></p>
   </div>
 
-  <div id="fehlerkonsole-safari-chrome" class="subsection">
+  <div id="fehlerkonsole-safari-chrome" class="section">
     <h3>Fehlerkonsolen in Chrome und Safari</h3>
     <p>Google Chrome und Apple Safari verfügen über dasselbe Entwicklerwerkzeug, den <em>Web Inspector</em>, mit dem sich JavaScript sehr gut debuggen lässt..</p>
     <p>Um im Safari an die Fehlermeldungen zu kommen, müssen Sie zunächst das sogenannte Developer-Menü aktivieren, denn darüber lässt sich die JavaScript-Fehlerkonsole öffnen. Dazu wählen Sie im Menü <em>Safari → Einstellungen…</em> (Mac OS) beziehungsweise <em>Bearbeiten → Einstellungen</em> (Windows). Unter der Registerkarte <em>Erweitert</em> aktivieren Sie die Checkbox <em>Menü „Entwickler“ in der Menüleiste einblenden</em>.</p>
@@ -138,7 +138,7 @@
   <p>Bei der JavaScript-Entwicklung sollten Sie sich eine methodische Herangehensweise angewöhnen: Werden Sie sich klar darüber, <strong>was</strong> sie genau vorhaben und <strong>wie</strong>, das heißt mit welchen Einzelschritten Sie das erreichen wollen. Wenn Sie sich diesen Programmablauf überlegt haben, recherchieren Sie die dazu nötigen JavaScript-Techniken. Suchen Sie in einer Objektreferenz die Objekte heraus, mit denen Sie arbeiten wollen. Lesen Sie die Beschreibungen aufmerksam durch, sodass Sie die Objekte korrekt verwenden können. Beachten Sie unter anderem den Typ von Eigenschaften und die Parameter, die Methoden entgegennehmen.</p>
   <p>Wenn ein Script nicht wie erwartet funktioniert, sollten Sie zunächst in der <em>Fehlerkonsole</em> des Browsers schauen, ob in ihrem Script Fehler auftraten und der Browser die Ausführung deshalb gestoppt hat. Die Fehlerkonsole liefert in der Regel die Nummer der Codezeile in Ihrem Script, in der der Fehler aufgetreten ist. Die letztliche Ursache des Fehlers <em>kann</em>, muss aber <em>nicht</em> genau in dieser Zeile liegen! Die Ursache kann genauso eine Anweisung in einer anderen Zeile im Script sein, die vorher ausgeführt wurde, sodass die Voraussetzungen für die spätere Anweisung nicht gegeben sind.</p>
 
-  <div class="subsection" id="alert-kontrollausgaben">
+  <div class="section" id="alert-kontrollausgaben">
     <h3>Kontrollausgaben über die <code>alert</code>-Methode</h3>
     <p>Um Fehlern auf die Spur zu kommen, gehen Sie Ihr JavaScript-Programm Schritt für Schritt durch und notieren nach jeder relevanten Anweisung eine <strong>Kontrollausgabe</strong>. Dies geht am einfachsten mit der browserübergreifenden Methode <code>window.alert</code>, die ein Meldungsfenster erzeugt. Ein Beispiel:</p>
     <pre>var element = document.getElementById("navigation");
@@ -167,7 +167,7 @@ window.alert("Farbe gesetzt.");</pre>
     <p>Der Nachteil von Kontrollausgaben mit <code>window.alert</code> ist, dass es JavaScript-Objekte in Strings umwandeln muss, um sie auszugeben. (Intern wird die Objektmethode <code>toString</code> aufgerufen.) Der String, der dabei herauskommt, gibt Ihnen nicht immer Aufschluss darüber, ob es sich um das erwartete Objekt handelt. Nur in einigen Browsern ist nachvollziehbar, um was für ein Objekt es sich handelt. Bei komplexen Objekten wie Arrays oder DOM-Knoten ist dies aber gewöhnungsbedürftig - mit der Zeit lernen Sie, wie sie solche Knoten am besten in Kontrollausgaben ansprechen.</p>
   </div>
 
-  <div class="subsection" id="console-objekt">
+  <div class="section" id="console-objekt">
     <h3>Ablaufprotokolle mit Konsolen-Ausgaben (<code>console</code>-Objekt)</h3>
     <p>Vielseitiger als Ausgaben mittels <code>window.alert</code> ist die Nutzung der Schnittstelle zur JavaScript-Konsole des Browsers. Diese wurde von Firebug für den Firefox erfunden, wurde aber mittlerweile vom Internet Explorer, Safari und Chrome für ihre Fehlerkonsolen zumndest rudimentär übernommen: <a href="https://getfirebug.com/wiki/index.php/Console_API">Dokumentation der Konsole-API von Firebug</a>.</p>
     <p>Das globale Objekt <code>window.console</code> bietet verschiedene Methoden an, mit denen Sie Statusmeldungen in die browsereigene Konsole schreiben können. In der Konsole haben Sie dann ein Log aller Meldungen Ihres Scriptes - ebenso wie etwaige Fehlermeldungen.</p>
@@ -215,7 +215,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 
-  <div id="dom-inspektor-firefox" class="subsection">
+  <div id="dom-inspektor-firefox" class="section">
     <h3>DOM-Inspektor von Firebug</h3>
     <p>Zum DOM-Inspektor von Firebug gelangen Sie, indem Sie die Firebug-Leiste am unteren Fensterrand durch einen Klick auf das Käfer-Symbol aufklappen. Anschließend wählen Sie den Tab <em>HTML</em>. Auf der linken Seite findet sich der interaktive Elementbaum. Sie können die Verschachtelungen über die Plus-Symbole aufklappen, um die Kindelement eines Elements zu sehen. Um nähere Informationen zu einem Element zu bekommen, klicken Sie auf die blauen Elementnamen. In folgendem Screenshot wurde das <em>h1</em>-Element im Beispieldokument angeklickt:</p>
     <p class="image"><img src="images/firebug-dom-inspector.png" alt=""></p>
@@ -224,13 +224,13 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
     <p>Alternativ zu dieser Vorgehensweise über die Schaltfläche <em>Untersuchen</em> können Sie ein Element im Dokument mit der rechten Maustaste anklicken und im Kontextmenü <em>Element untersuchen</em> wählen. Dies hat denselben Effekt.</p>
   </div>
 
-  <div id="ie7-developer-toolbar" class="subsection">
+  <div id="ie7-developer-toolbar" class="section">
     <h3>Internet Explorer 8: DOM-Inspektor der Entwicklertools</h3>
     <p>...</p>
     <p class="image"><img src="images/ie8-dom-inspektor.png" alt=""></p>
   </div>
 
-  <div id="ie7-developer-toolbar" class="subsection">
+  <div id="ie7-developer-toolbar" class="section">
     <h3>Internet Explorer 6 und 7: Developer Toolbar</h3>
     <p>Der Internet-Explorer-Versionen vor 8 verfügen über keinen eingebauten DOM-Inspektor. Es existiert allerdings ein offizieller Zusatz: Die <a href="http://web.archive.org/web/20100328172952/http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;FamilyID=E59C3964-672D-4511-BB3E-2D5E1DB91038">Internet Explorer Developer Toolbar</a>. Diese ist ein Vorgänger der Entwicklertools im Internet Explorer 8 und die Bedienung gestaltet sich weitgehend gleich.</p>
     <p>Nachdem Sie den Zusatz installiert haben, können Sie die Toolbar aktivieren, indem Sie im Menü <em>Ansicht → Explorer-Leiste → IE Developer Toolbar</em> aktivieren. Gegebenenfalls ist das Menü im Internet Explorer 7 standardmäßig ausgeblendet - Sie können es kurzzeitig einblenden, indem Sie die Alt-Taste drücken. Die Toolbar erscheint am unteren Fensterrand und Sie können deren Höhe variieren.</p>
@@ -240,14 +240,14 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
     <p>Um ein Element durch Anklicken zu untersuchen, klicken Sie das Icon oben links, auf dem ein Cursor und ein blaues Rechteck abgebildet sind. Damit befinden Sie sich im Element-Auswahlmodus und können den Mauszeiger über das Dokument bewegen und durch Klicken auswählen.</p>
   </div>
 
-  <div class="subsection" id="dom-inspektor-dragonfly">
+  <div class="section" id="dom-inspektor-dragonfly">
     <h3>DOM-Inspektor von Opera Dragonfly</h3>
     <p>Den DOM-Inspektor von Opera Dragonfly erreichen Sie über das Menü <em>Extras → Weiteres → Opera Dragonfly</em>. Den DOM-Baum finden Sie im Tab <em>DOM</em>. Mittels Schaltflächen können Sie zwischen verschiedene Darstellungen wechseln und manche Knotentypen ausblenden. Im rechten Bereich können Sie über drei Tabs <em>Styles</em>, <em>Properties</em> und <em>Layout</em> auf die Elementeigenschaften zugreifen. Diese entsprechen funktional den Tabs <em>Styles</em>, <em>DOM</em> und <em>Layout</em> in Firebug.</p>
     <p>Wie auch die anderen vorgestellten DOM-Inspektoren bietet Opera an, ein Element durch Klicken im Dokument auszuwählen. Auf der entsprechenden Schalftläche ist ein Cursor abgebildet.</p>
     <p>...</p>
   </div>
 
-  <div class="subsection" id="dom-inspektor-safari">
+  <div class="section" id="dom-inspektor-safari">
     <h3>Safari und Chrome Web Inspector</h3>
     <p>...</p>
   </div>
@@ -261,19 +261,19 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
   <p>...</p>
   <p>Wenn Sie viele Funktionen definieren, die sich gegenseitig aufrufen, hilft Ihnen ein Debugger, die Übersicht über das Aufrufen und Abarbeiten von Funktionen zu behalten. In der Einzelschritt-Ausführung haben Sie den sogenannten <strong>Call Stack</strong> (englisch für Aufruf-Stapel) im Blick. Das ist die Verschachtelung der Funktionen, die gerade abgearbeitet werden. Wenn beispeilsweise die Funktion <code>a</code> die Funktion <code>b</code> aufruft und diese wiederum die Funktion <code>c</code>, so ist der Stapel <code>a</code> &gt; <code>b</code> &gt; <code>c</code>. Die Funktion <code>c</code>, die gerade ausgeführt wird, liegt sozusagen oben auf dem Stapel. Nach dessen Ausführung wird <code>c</code> vom Stapel genommen und in die Funktion <code>b</code> zurückgekehrt - und so weiter.</p>
   <p>...</p>
-  <div class="subsection">
+  <div class="section">
     <h3>Debugging mit Firebug</h3>
   </div>
-  <div class="subsection">
+  <div class="section">
     <h3>Debugging mit den Internet Explorer Entwicklertools</h3>
   </div>
-  <div class="subsection">
+  <div class="section">
     <h3>Debugging mit Microsoft Visual Web Developer Express</h3>
   </div>
-  <div class="subsection">
+  <div class="section">
     <h3>Debugging von Opera Dragonfly</h3>
   </div>
-  <div class="subsection">
+  <div class="section">
     <h3>Debugging mit Safari und Chrome Web Inspector</h3>
   </div>
 </div>

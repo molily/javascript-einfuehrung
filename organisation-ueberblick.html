@@ -55,13 +55,13 @@
   <p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
   </div>
 
-  <p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (engl. Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
+  <p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (englisch Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
 
   <p>Die Grundlage für eine sinnvolle JavaScript-Programmierung ist die <strong>Auslagerung des JavaScript-Codes</strong>: Im HTML-Code sollte sich kein JavaScript in Form von Event-Handler-Attributen befinden (<code>onload</code>, <code>onclick</code>, <code>onmouseover</code> usw.). Stattdessen werden Elemente, denen ein bestimmtes Verhalten hinzugefügt werden soll, falls nötig mit einer Klasse oder ID markiert, um die Elemente eindeutung adressieren zu können. Die nötige Interaktivität wird dem Dokument automatisch hinzugefügt. Beim Ladens des Dokuments wird das Script aktiv, initialisiert sich und startet die Ereignisüberwachung an den betreffenden Elementen. Diese Anwendung von JavaScript nennt sich <a href="http://ichwill.net/">Unobtrusive JavaScript</a>, »unaufdringliches« JavaScript.</p>
 
   </div>
 
-  <div class="subsection">
+  <div class="section">
 
     <h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
@@ -70,7 +70,7 @@
 
   </div>
 
-  <div class="subsection">
+  <div class="section">
 
     <h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
 
@@ -92,7 +92,7 @@ $(funktion);
 
   </div>
 
-  <div class="subsection">
+  <div class="section">
 
     <h3>DOM-Zugriffe über Selektor-Engines</h3>
 
@@ -109,7 +109,7 @@ $(function () {
 
   </div>
 
-  <div class="subsection">
+  <div class="section">
 
     <h3>Zeitgemäßes Event-Handling</h3>
 
@@ -138,7 +138,7 @@ $(function () {
   <p>JavaScript zieht viele Programmieranfänger an und ist für viele Webautoren die erste Programmiersprache, mit der sie aktiv in Kontakt kommen.
   Für sie bleibt die genaue Funktionsweise von JavaScript zunächst unzugänglich. Sie treffen auf Fallstricke und schaffen es nicht, JavaScript zu bändigen. Aber auch professionelle Software-Entwickler mit fundierten Kenntnissen anderer Programmiersprachen geraten an JavaScript. Sie sind nicht weniger verwirrt und verzweifeln, weil sie in JavaScript nicht Strukturen wiederfinden, die ihnen in anderen Sprachen Orientierung bieten.</p>
 
-  <div class="subsection" id="klassen">
+  <div class="section" id="klassen">
 
     <h3>Klassenbasierte Objektorientierung in anderen Programmiersprachen</h3>
 
@@ -216,7 +216,7 @@ $instanz2->zusatzmethode();
 
   </div>
 
-  <div class="subsection" id="oop-js">
+  <div class="section" id="oop-js">
 
     <h3>JavaScript ist nicht fixiert auf Klassen</h3>
 
@@ -299,7 +299,7 @@ $instanz2->zusatzmethode();
   <h3>Scope</h3>
 
   <ul>
-  <li>Gültigkeitsbereich für Variablen</li>
+  <li>Geltungsbereich für Variablen</li>
   <li>Allzweckwerkzeug für Datenverfügbarkeit und Kapselung/Privatheit</li>
   <li>Auflösung von Bezeichnern zu Werten erfolgt über die Scope-Chain</li>
   <li>Scope-Chain speichert die internen Variablenobjekte von Funktionsaufrufen</li>

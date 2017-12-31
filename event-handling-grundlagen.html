@@ -20,19 +20,19 @@
   <p>Der Abschnitt über die <a href="einbindung.html#ausfuehrung">Verarbeitung von Scripten</a> hat Ihnen gezeigt, dass der Browser Scripte üblicherweise in dem Moment ausführt, in dem er den Code eines HTML-Dokuments herunterlädt, parst und auf ein <code>script</code>-Element trifft.</p>
   <p>Der Schicksal von JavaScript ist aber nicht, bloß in diesem kurzen Moment des Ladens des HTML-Dokuments ausgeführt zu werden und dann für immer zur Ruhe zu kommen. Die meisten JavaScripte sollen Interaktivität bieten. Der Schlüssel dazu ist, das haben wir bereits in den <a href="konzepte.html#events">Grundkonzepten</a> kennengelernt, die <strong>Überwachung und Behandlung von Ereignissen</strong> (auch <strong>Event-Handling</strong> genannt).</p>
   <p>Moderne Scripte durchlaufen deshalb verschiedene <strong>Phasen</strong>:</p>
-  <div class="subsection" id="phase-laden">
+  <div class="section" id="phase-laden">
     <h3>Phase Eins: Das Dokument wird empfangen und geparst</h3>
     <p>Dabei wird das JavaScript erstmals ausgeführt. Objekte und Funktionen werden dabei definiert, sodass sie für die spätere Nutzung zur Verfügung stehen. &ndash; Nicht alle notierten Funktionen werden dabei bereits aufgerufen. &ndash; Zu diesem Zeitpunkt hat das Script noch keinen vollständigen Zugriff auf das Dokument.</p>
   </div>
-  <div class="subsection" id="phase-onload">
+  <div class="section" id="phase-onload">
     <h3>Phase Zwei: Das Dokument ist fertig geladen</h3>
     <p>Der vollständige Zugriff auf das Dokument über das DOM ist erst jetzt möglich. Nun wird ein Teil des Scripts aktiv, um dem bisher statischen Dokument JavaScript-Interaktivität hinzuzufügen: Das Script spricht vorhandene Elementknoten an und fügt ihnen sogenannte <strong>Event-Handler</strong> hinzu. Das Script kann aber auch den Inhalt oder die Darstellung von bestehenden Elementen verändern und dem Dokument neue Elemente hinzufügen (auch <strong>DOM-Manipulation</strong> genannt).</p>
   </div>
-  <div class="subsection" id="phase-event-handling">
+  <div class="section" id="phase-event-handling">
     <h3>Phase Drei: Der Anwender bedient das Dokument und das Script reagiert darauf</h3>
     <p>Wenn die überwachten Ereignisse an den entsprechenden Elementen im Dokument passieren, so werden gewisse andere Teiles des Scripts aktiv, denn die entsprechenden <strong>Handler-Funktionen</strong> werden ausgeführt.</p>
   </div>
-  <div class="subsection" id="script-struktur">
+  <div class="section" id="script-struktur">
     <h3>Resultierende Script-Struktur</h3>
     <p>Dieser chronologische Ablauf gibt die Struktur der meisten Scripte vor:</p>
     <ul>

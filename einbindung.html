@@ -59,7 +59,7 @@
   <p>Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
   <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
   <p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat folgende Konsequenzen:</p>
-  <div class="subsection" id="script-reihenfolge">
+  <div class="section" id="script-reihenfolge">
     <h3>Scripte haben Zugriff auf die Objekte vorher eingebundener Scripte</h3>
     <p>Die <code>script</code>-Elemente samt enthaltenem JavaScript-Code bzw. aus externen Dateien eingebundener JavaScript-Code werden in der Reihenfolge ausgeführt, in der sie im HTML-Quelltext notiert sind. Wenn Sie verschiedene Scripte haben, die aufeinander aufbauen, so müssen Sie sie nacheinander einbinden.</p>
       <pre>&lt;script type="text/javascript" src="grundlagenscript.js"&gt;&lt;/script&gt;
@@ -71,13 +71,13 @@ helferfunktion();
     <p>Das Beispiel bindet drei Scripte ein, die ersten beiden als externe Dateien, das dritte direkt im HTML-Code. Da der Browser die Scripte in der Reihenfolge ihrer Einbindung ausführt, können spätere Scripte die Objekte, Funktionen und Variablen nutzen, die die vorher eingebundenen Scripte definiert haben. Im Beispiel wird zuerst <var>grundlagenscript.js</var> eingebunden, heruntergeladen und ausgeführt. Das darauffolgende Script aus der Datei <var>aufbauscript.js</var> kann die darin notierten Funktionen nutzen. Schließlich kann das dritte Script eine Funktion nutzen, die in <var>aufbauscript.js</var> definiert wurde.</p>
   </div>
 
-  <div class="subsection" id="script-verzoegerung">
+  <div class="section" id="script-verzoegerung">
     <h3>Externe Scripte verzögern den Aufbau des Dokuments</h3>
     <p>Dass der Webbrowser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> dem Einlesen des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
     <p>Dieser Nachteil kann dadurch umgangen werden, alle <code>script</code>-Elemente in der notwendigen Reihenfolge am Dokument-Ende zu platzieren anstatt wie üblich in den Dokumentkopf. Aus Gründen der kürzeren Ladezeit und des schnelleren Aufbau des Dokumentes wird dies immer öfter empfohlen. Es setzt allerdings eine bestimmte Arbeitsweise voraus. Im Abschnitt <a href="event-handling-grundlagen.html">Ereignisbasierte Scripte</a> werden wir eine Methode kennenlernen, bei die Scripte die Hauptarbeit erst verrichten, wenn das Dokument vollständig geladen wurde.</p>
   </div>
 
-  <div class="subsection" id="script-document-write">
+  <div class="section" id="script-document-write">
     <h3>Scripte können während des Ladens das Dokument mit <code>document.write</code> ergänzen</h3>
     <p>Mit der Methode <code>document.write</code> kann ein Script schon während dem Laden das Dokument direkt beeinflussen und einige Weichen stellen. <code>document.write</code> nimmt HTML-Code in einem JavaScript-String entgegen und fügt diesen an der Stelle ins Dokument ein, an denen das zugehörige <code>script</code>-Element steht.</p>
     <pre>
@@ -102,7 +102,7 @@ helferfunktion();
     <p>Der Anwendungsbereich von <code>document.write</code> wird oftmals missverstanden. Wir haben hier den einen von zwei möglichen Anwendungsfällen kennenlernt: Das Ergänzen eines Dokuments noch während der Browser den HTML-Code einliest. Wenn <code>document.write</code> jedoch nach dem vollständigen Einlesen de HTML-Codes aufgerufen wird, hat die Methode einen ganz anderen Effekt und eignet sich nicht dazu, das vorhandene Dokument via JavaScript zu ändern.</p>
   </div>
 
-  <div class="subsection" id="script-dom-zugriff">
+  <div class="section" id="script-dom-zugriff">
     <h3>Ein Script hat Zugriff auf die Elemente vor dem zugehörigen <code>script</code>-Element</h3>
     <p>Wie Sie vielleicht wissen, ist die häufigste Aufgabe von JavaScripten der Zugriff auf das Dokument über die DOM-Schnittstelle, die die Elemente und deren Textinhalte als Knotenobjekte zugänglich macht. Da ein Script mitten im Parsing-Prozess, also während des Einlesens des HTML-Dokuments ausgeführt wird, hat es zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit vom Parser bereits verarbeitet wurden.</p>
     <pre>

@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
   padding: 0 1em;
   counter-reset: counterH2;
-  line-height: 1.6;
+  line-height: 1.7;
   font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-kerning: normal;
   text-rendering: optimizeLegibility;
@@ -24,7 +24,7 @@ h1 {
 }
 
 h2, h3 {
-  border-bottom: thin solid #eee;
+  border-bottom: 1px solid #eee;
   padding-bottom: 2px;
 }
 
@@ -103,7 +103,7 @@ pre, code {
 }
 
 pre {
-  border: thin solid #ddd;
+  border: 1px solid #ddd;
   padding: 1em;
   background-color: rgb(255, 251, 245);
   font-size: 0.9em;
@@ -125,7 +125,7 @@ table {
 }
 
 th, td {
-  border: thin solid #ccc;
+  border: 1px solid #ccc;
   padding: 0.2em 0.5em;
 }
 
@@ -178,7 +178,7 @@ dfn {
 #footer {
   margin-top: 3em;
   padding: 3em 0;
-  border-top: thin solid #ddd;
+  border-top: 1px solid #ddd;
   font-size: 0.9em;
 }
 
@@ -242,7 +242,7 @@ body#contents #footer p {
   max-width: 16em;
   padding: 1em;
 
-  border: thin solid #eddb9a;
+  border: 1px solid #eddb9a;
 
   box-shadow: 2px 3px 4px #ddd;
 
@@ -342,7 +342,7 @@ body#contents #footer p {
   font-size: 0.9em;
   font-family: inherit;
   border-style: solid solid none;
-  border-width: thin;
+  border-width: 1px;
   border-color: #ccc;
   background-color: #f0f0f0;
 }
@@ -409,7 +409,7 @@ body#contents #footer p {
 /* References */
 
 .references {
-  background-color: #fff9f9;
+  background-color: #fffafa;
   border: 1px solid #dadada;
   border-radius: 2px;
 }
