@@ -17,80 +17,85 @@
 
  <div class="section" id="ueber">
   <h2>Vorbemerkung</h2>
-  <p>Von den vielen Möglichkeiten, JavaScript in HTML-Dokumente einzubetten, werden hier nur wenige gängige vorgestellt und empfohlen. Dieses Kapitel geht davon aus, dass HTML und JavaScript möglichst getrennt werden und sich JavaScripte eigenständig hinzuschalten. Die Hintergründe zu diesem Ansatz finden Sie im Kapitel <a href="einsatz.html">Sinnvoller JavaScript-Einsatz</a>.</p>
+  <p>Es gibt viele Möglichkeiten, JavaScript in HTML-Dokumente einzubetten. In dieser Einführung werden nur wenige gängige vorgestellt und empfohlen. Dieses Kapitel geht davon aus, dass HTML und JavaScript möglichst getrennt werden und sich JavaScripte eigenständig hinzuschalten. Die Hintergründe zu diesem Ansatz finden Sie im Kapitel <a href="einsatz.html">Sinnvoller JavaScript-Einsatz</a>.</p>
 </div>
 <div class="section" id="script-element">
   <h2>Das script-Element</h2>
   <p>Zur Einbindung von JavaScript-Code in HTML-Dokument existiert in das HTML-Element <code>script</code>. Dieses darf sowohl im Kopf (<code>head</code>-Element) als auch im Körper (<code>body</code>-Element) eines HTML-Dokuments auftauchen. Es kann entweder direkt JavaScript-Code beinhalten, wie in diesem Beispiel:</p>
   <pre>
-&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Dokument mit integriertem JavaScript&lt;/title&gt;
-&lt;script type="text/javascript"&gt;
-<strong class="js">window.alert("Hallo Welt!");</strong>
-&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;h1&gt;Dokument mit integriertem JavaScript&lt;/h1&gt;
+&lt;script&gt;
+<strong class="js">window.alert("Hallo Welt!");</strong>
+&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
   <p>Oder es kann leer sein und auf eine externe Datei mit JavaScript-Code verweisen. Diese Nutzungsweise sollten Sie vorziehen und Ihre JavaScripte möglichst in separate Dateien auslagern.</p>
-  <p>Schreiben sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie im Dokumentkopf ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Adresse (URI), unter der das Script abrufbar ist. Vergessen Sie auch nicht das Attribut <code>type</code> mit dem festen Wert <code>text/javascript</code>. Dieses teilt dem Browser
-  unmissverständlich mit, dass sie es sich bei ihrem Code um JavaScript handelt.</p>
-  <pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+  <p>Schreiben sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie am Dokument-Ende ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Adresse (<abbr title="Uniform Resource Locator">URL</abbr>), unter der das Script abrufbar ist.</p>
+  <pre>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Dokument mit externem JavaScript&lt;/title&gt;
-&lt;script type="text/javascript" <strong>src="script.js"</strong>&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;h1&gt;Dokument mit externem JavaScript&lt;/h1&gt;
+&lt;script <strong>src="script.js"</strong>&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
-  <p>In der Datei <var>script.js</var> können Sie nun JavaScript-Anweisungen, Funktionen, Objekte und so weiter notieren. Selbstverständlich können Sie mit dieser Methode mehrere Scripte einbinden: Verwenden Sie dazu einfach mehrere <code>script</code>-Elemente.</p>
-  <p>Beachten Sie, dass diese eingebundenen Dateien direkt JavaScript-Code enthalten müssen. HTML-Code darf darin nicht vorkommen &ndash; in JavaScript-Strings ist er natürlich noch erlaubt. Insbesondere ist es nicht nötig, den JavaScript-Code in der separaten Datei noch einmal in ein <code>script</code>-Element zu verpacken. Dies würde dazu führen, dass der Browser den JavaScript-Code nicht korrekt ausführt.</p>
-  <p>Ihre Scriptdateien können Sie &ndash; genauso wie Stylesheets, Grafiken usw. &ndash; auch in Unterverzeichnissen und sogar auf anderen Webservern unterbringen. Solange die angegebene URI korrekt ist, wird ein JavaScript-fähiger Browser sie beim Anzeigen des Dokuments herunterladen und ausführen.</p>
+  <p>In der Datei <var>script.js</var> können Sie nun JavaScript-Anweisungen, Funktionen, Objekte und so weiter notieren. Schreiben Sie zum Test einmal folgende Anweisung in die JavaScript-Datei:</p>
+<pre>
+window.alert('Hallo Welt!');
+</pre>
+  <p>Sie können mit dieser Methode auch mehrere Scripte einbinden. Platzieren Sie dazu mehrere <code>script</code>-Elemente untereinander.</p>
+  <p>Beachten Sie, dass diese eingebundenen Dateien direkt JavaScript-Code enthalten müssen. HTML-Code darf darin nicht vorkommen – in JavaScript-Strings ist er natürlich noch erlaubt. Insbesondere ist es nicht nötig, den JavaScript-Code in der separaten Datei noch einmal in ein <code>script</code>-Element zu verpacken. Dies würde dazu führen, dass der Browser den JavaScript-Code nicht korrekt ausführt.</p>
+  <p>Ihre Script-Dateien können Sie – genauso wie Stylesheets, Grafiken usw. – auch in Unterverzeichnissen und sogar auf anderen Webservern unterbringen. Solange die angegebene URL korrekt ist, wird ein JavaScript-fähiger Browser sie beim Anzeigen des Dokuments herunterladen und ausführen.</p>
 </div>
 <div class="section" id="ausfuehrung">
   <h2>Ausführung von script-Elementen</h2>
 
-  <p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf als auch im Dokumentkörper einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im folgenden betrachten.</p>
-  <p>Wenn der Browser das HTML-Dokument vom Webserver empfängt, beginnt er sofort damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
-  <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Dasselbe gilt für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
-  <p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat folgende Konsequenzen:</p>
+  <p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf <code>&lt;head>…&lt;/head></code> als auch im Dokumentkörper <code>&lt;body>…&lt;/body></code> einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im folgenden betrachten.</p>
+  <p>Sobald der Browser das HTML-Dokument vom Webserver empfängt, beginnt er damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
+  <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Das gilt auch für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
+  <p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat verschiedene Konsequenzen.</p>
   <div class="section" id="script-reihenfolge">
     <h3>Scripte haben Zugriff auf die Objekte vorher eingebundener Scripte</h3>
-    <p>Die <code>script</code>-Elemente samt enthaltenem JavaScript-Code bzw. aus externen Dateien eingebundener JavaScript-Code werden in der Reihenfolge ausgeführt, in der sie im HTML-Quelltext notiert sind. Wenn Sie verschiedene Scripte haben, die aufeinander aufbauen, so müssen Sie sie nacheinander einbinden.</p>
-      <pre>&lt;script type="text/javascript" src="grundlagenscript.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="aufbauscript.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
+    <p>Der JavaScript-Code in <code>script</code>-Elementen bzw. der externe Script-Code wird in der Reihenfolge ausgeführt, in der die <code>script</code>-Elemente im HTML-Quelltext notiert sind. Wenn Sie verschiedene Scripte haben, die aufeinander aufbauen, so müssen Sie sie nacheinander einbinden.</p>
+<pre>
+&lt;script src="grundlagenscript.js"&gt;&lt;/script&gt;
+&lt;script src="aufbauscript.js"&gt;&lt;/script&gt;
+&lt;script&gt;
 // Anwendung der Scripte
 helferfunktion();
 &lt;/script&gt;</pre>
-    <p>Das Beispiel bindet drei Scripte ein, die ersten beiden als externe Dateien, das dritte direkt im HTML-Code. Da der Browser die Scripte in der Reihenfolge ihrer Einbindung ausführt, können spätere Scripte die Objekte, Funktionen und Variablen nutzen, die die vorher eingebundenen Scripte definiert haben. Im Beispiel wird zuerst <var>grundlagenscript.js</var> eingebunden, heruntergeladen und ausgeführt. Das darauffolgende Script aus der Datei <var>aufbauscript.js</var> kann die darin notierten Funktionen nutzen. Schließlich kann das dritte Script eine Funktion nutzen, die in <var>aufbauscript.js</var> definiert wurde.</p>
+    <p>Das Beispiel bindet drei Scripte ein, die ersten beiden als externe Dateien, das dritte direkt im HTML-Code. Der Browser führt die Scripte in der Reihenfolge ihrer Einbindung aus. Daher können spätere Scripte die Objekte, Funktionen und Variablen nutzen, die die vorher eingebundenen Scripte definiert haben.</p>
+    <p>Im Beispiel wird zuerst <var>grundlagenscript.js</var> eingebunden, heruntergeladen und ausgeführt. Das darauffolgende Script aus der Datei <var>aufbauscript.js</var> kann die darin notierten Funktionen nutzen. Schließlich kann das dritte Script eine Funktion nutzen, die in <var>aufbauscript.js</var> definiert wurde.</p>
   </div>
 
   <div class="section" id="script-verzoegerung">
     <h3>Externe Scripte verzögern den Aufbau des Dokuments</h3>
-    <p>Dass der Webbrowser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> dem Einlesen des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
-    <p>Dieser Nachteil kann dadurch umgangen werden, alle <code>script</code>-Elemente in der notwendigen Reihenfolge am Dokument-Ende zu platzieren anstatt wie üblich in den Dokumentkopf. Aus Gründen der kürzeren Ladezeit und des schnelleren Aufbau des Dokumentes wird dies immer öfter empfohlen. Es setzt allerdings eine bestimmte Arbeitsweise voraus. Im Abschnitt <a href="event-handling-grundlagen.html">Ereignisbasierte Scripte</a> werden wir eine Methode kennenlernen, bei die Scripte die Hauptarbeit erst verrichten, wenn das Dokument vollständig geladen wurde.</p>
+    <p>Dass der Browser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> des Einlesens des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
+    <p>Es ist daher empfehlenswert, alle <code>script</code>-Elemente in der notwendigen Reihenfolge <em>am Dokument-Ende</em> zu platzieren. Dadurch wird der Aufbau des Dokumentes nicht durch das Herunterladen und Ausführen von JavaScript unterbrochen.</p>
   </div>
 
   <div class="section" id="script-document-write">
     <h3>Scripte können während des Ladens das Dokument mit <code>document.write</code> ergänzen</h3>
-    <p>Mit der Methode <code>document.write</code> kann ein Script schon während dem Laden das Dokument direkt beeinflussen und einige Weichen stellen. <code>document.write</code> nimmt HTML-Code in einem JavaScript-String entgegen und fügt diesen an der Stelle ins Dokument ein, an denen das zugehörige <code>script</code>-Element steht.</p>
+    <p>Mit der Methode <code>document.write</code> kann ein Script schon während des Ladens das Dokument direkt beeinflussen und einige Weichen stellen. <code>document.write</code> nimmt HTML-Code als String entgegen. Es fügt den HTML-Code an der Stelle ins Dokument ein, an der das zugehörige <code>script</code>-Element steht.</p>
     <pre>
-&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
-&lt;script type="text/javascript"&gt;
-<strong>document.write("&lt;link rel='stylesheet' href='javascript.css'&gt;");</strong>
+&lt;script&gt;
+<strong>document.write("&lt;link rel='stylesheet' href='stylesheet.css'&gt;");</strong>
 &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 <strong>document.write("&lt;p&gt;&lt;a href='javascript:location.reload()'&gt;" +
   "Seite mittels JavaScript neu laden&lt;\/a&gt;&lt;\/p&gt;");</strong>
 &lt;/script&gt;
@@ -98,19 +103,20 @@ helferfunktion();
 &lt;/html&gt;
 </pre>
     <p>Das Beispiel enthält zwei Scripte mit <code>document.write</code>-Aufrufen. Diese schreiben HTML-Elemente ins Dokument, einmal ein Verweis auf ein Stylesheet und einmal ein Textabsatz mit einem JavaScript-Link.</p>
-    <p><code>document.write</code> ist beim »Unobtrusive JavaScript« nur sehr selten sinnvoll. Inhalte, die nur bei aktiviertem JavaScript sichtbar sein sollen, da sie auf JavaScript-Funktionalität beruhen, sollten Sie ohne <code>document.write</code> dynamisch ins Dokument einfügen. Die dazu nötigen Techniken werden wir noch kennenlernen.</p>
-    <p>Der Anwendungsbereich von <code>document.write</code> wird oftmals missverstanden. Wir haben hier den einen von zwei möglichen Anwendungsfällen kennenlernt: Das Ergänzen eines Dokuments noch während der Browser den HTML-Code einliest. Wenn <code>document.write</code> jedoch nach dem vollständigen Einlesen de HTML-Codes aufgerufen wird, hat die Methode einen ganz anderen Effekt und eignet sich nicht dazu, das vorhandene Dokument via JavaScript zu ändern.</p>
+    <p><code>document.write</code> ist beim <a href="einsatz.html#unobtrusive-javascript">Unobtrusive JavaScript</a> nur selten sinnvoll. Es gibt zwar Inhalte, die nur bei verfügbarem JavaScript sichtbar sein sollen, da sie auf JavaScript-Funktionalität beruhen. Im Beispiel ist das ein Link, der die Seite mittels JavaScript neu lädt. Allerdings sollten Sie solche Inhalte ohne <code>document.write</code> dynamisch ins Dokument einfügen. Die dazu nötigen Techniken werden wir noch kennenlernen.</p>
+    <p><code>document.write</code> hat zwei möglichen Anwendungsfälle, von denen wir einen kennenlernt haben: Das Ergänzen eines Dokuments <em>während</em> der Browser den HTML-Code einliest. Wenn <code>document.write</code> jedoch <em>nach</em> dem Einlesen des HTML-Codes aufgerufen wird, hat die Methode einen ganz anderen Effekt: Sie überschreibt den gesamten Inhalt des Dokuments. Sie eignet sich also nicht dazu, das vorhandene Dokument gezielt via JavaScript zu ändern.</p>
   </div>
 
   <div class="section" id="script-dom-zugriff">
     <h3>Ein Script hat Zugriff auf die Elemente vor dem zugehörigen <code>script</code>-Element</h3>
-    <p>Wie Sie vielleicht wissen, ist die häufigste Aufgabe von JavaScripten der Zugriff auf das Dokument über die DOM-Schnittstelle, die die Elemente und deren Textinhalte als Knotenobjekte zugänglich macht. Da ein Script mitten im Parsing-Prozess, also während des Einlesens des HTML-Dokuments ausgeführt wird, hat es zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit vom Parser bereits verarbeitet wurden.</p>
+    <p>Die häufigste Aufgabe von JavaScripten ist der Zugriff auf das Dokument über die DOM-Schnittstelle. Diese macht die Elemente und deren Textinhalte als Knotenobjekte zugänglich.</p>
+    <p>Ein Script wird wie gesagt während des Einlesens des HTML-Dokuments ausgeführt. Zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementenbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit bereits eingelesen wurden.</p>
     <pre>
-&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;<strong>head</strong>&gt;
 &lt;<strong>title</strong>&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 // Der Titel ist an dieser Stelle bereits verfügbar:
 window.alert( document.title );
 // Der Dokumentkörper allerdings noch nicht (ergibt null):
@@ -121,7 +127,7 @@ window.alert( document.getElementById("überschrift") );
 &lt;/head&gt;
 &lt;<strong>body</strong>&gt;
 
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 window.alert( document.title ); // OK
 // Der Dokumentkörper ist erst an dieser Stelle verfügbar:
 window.alert( document.body );
@@ -130,7 +136,8 @@ window.alert( document.getElementById("überschrift") );
 &lt;/script&gt;
 
 &lt;<strong>h1 id="überschrift"</strong>&gt;Beispielüberschrift&lt;/h1&gt;
-&lt;script type="text/javascript"&gt;
+
+&lt;script&gt;
 window.alert( document.title ); // OK
 window.alert( document.body ); // OK
 // Die Überschrift ist erst an dieser Stelle verfügbar:
@@ -140,27 +147,35 @@ window.alert( document.getElementById("überschrift") );
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-    <p>Das Beispiel enthält drei Scripte, die jeweils versuchen, auf den Dokument-Titel (<code>title</code>-Element), den Dokument-Körper (<code>body</code>-Element) und eine Überschrift (<code>h1</code>-Element) zuzugreifen. Je nachdem, an welcher Stelle sich das Script und das angesprochene Element befinden, ist der Zugriff auf das Element möglich oder nicht. Der Zugriff funktioniert erst dann, wenn das anzusprechende Element dem jeweiligen Script vorangeht und bereits geparst wurde. Das Element muss dazu noch nicht abgeschlossen sein. Im Beispiel kann ein Script im <code>body</code>-Element bereits auf das geöffnete, aber noch nicht geschlossene <code>body</code>-Element zugreifen. Das Script hat jedoch nur Zugriff auf die vorherigen Geschwisterelemente (im Beispiel das <code>h1</code>-Element).</p>
-    <p>Dies heißt nun nicht, dass sie zwangsläufig all ihre Scripte ans Dokumentende setzen müssen, damit ihr Script auf das gesamte Dokument zugreifen kann. Dieser Sachverhalt soll Ihnen nur die Ausgangssituation für ereignisbasierte Scripte schildern, die automatisch ihre Arbeit aufnehmen, sobald der gesamte HTML-Code geparst wurde und das Dokument fertig geladen ist.</p>
+    <p>Das Beispiel enthält drei Scripte, die jeweils versuchen, auf den Dokument-Titel (<code>title</code>-Element), den Dokument-Körper (<code>body</code>-Element) und eine Überschrift (<code>h1</code>-Element) zuzugreifen. Je nachdem, an welcher Stelle sich das Script und das angesprochene Element befinden, ist der Zugriff auf das Element möglich oder nicht.</p>
+    <p>Der Zugriff funktioniert erst dann, wenn das gesuchte Element dem jeweiligen Script vorangeht und bereits eingelesen wurde. Das Element muss dazu noch nicht abgeschlossen sein. Im Beispiel kann ein Script im <code>body</code>-Element bereits auf das geöffnete, aber noch nicht geschlossene <code>body</code>-Element zugreifen. Das Script hat zudem Zugriff auf die vorherigen Geschwisterelemente (im Beispiel das <code>h1</code>-Element), nicht jedoch auf die folgenden.</p>
+    <p>Vielleicht verstehen Sie nun, warum wir externe Scripte ans Dokument-Ende setzen haben: Sie haben dadurch Zugriff auf das gesamte Dokument.</p>
   </div>
+</div>
+
+<div class="section" id="asynchron">
+  <h2>Asynchrone Script einbinden</h2>
+  <p>…</p>
 </div>
 
 <div class="section" id="noscript">
   <h2>Das <code>noscript</code>-Element</h2>
-  <p>Das <code>noscript</code> ist als Gegenstück zu <code>script</code> gedacht: Damit lassen sich Alternativinhalte für Programme ins Dokument einfügen, die keine Scripte unterstützen. Browser, in denen JavaScripte deaktiviert oder nicht verfügbar ist, zeigen den Alternativinhalt an. Der Inhalt richtet sich auch an Programme wie Suchmaschinen-Robots, die das Dokument automatisiert verarbeiten, ohne die Scripte dabei zu beachten.</p>
+  <p>Das <code>noscript</code>-Element ist als Gegenstück zu <code>script</code> gedacht: Damit lassen sich Alternativinhalte für Programme ins Dokument einfügen, die keine Scripte unterstützen. Browser, in denen JavaScripte deaktiviert oder nicht verfügbar ist, zeigen den Alternativinhalt an. Der Inhalt richtet sich auch an Programme wie Suchmaschinen-Robots, die das Dokument automatisiert verarbeiten, ohne die Scripte dabei zu beachten.</p>
   <pre>&lt;noscript&gt;
    &lt;p&gt;Dieser Absatz ist gehört zum Inhalt des Dokuments, ist aber
    im Browser nur zu sehen, wenn JavaScript deaktiviert oder nicht
    zur Verfügung steht.&lt;/p&gt;
 &lt;/noscript&gt;</pre>
-  <p>Der Sinn von <code>noscript</code> ist, die Informationen zugänglich zu machen, die sonst nur mithilfe des Scriptes zugänglich wären oder sogar durch das Script eingefügt werden. Diese Abwärtskompatibilität einer Website und die Zugänglichkeit aller Inhalte ohne JavaScript ist zwar erstrebenswert, allerdings zäumt »Unobtrusive JavaScript« das Pferd von vorne anstatt von hinten auf: Alle Informationen liegen bereits im Dokument und es ist auch ohne JavaScript gut bedienbar. Mittels JavaScript werden dann Zusatzfunktionen eingebaut, die die Bedienung und das Lesen der Inhalte vereinfachen und verbessern.</p>
-  <p>Im Unobtrusive JavaScript kommt dem <code>noscript</code>-Element daher keine Bedeutung zu. Von seiner Verwendung wird sogar abgeraten, da es dazu verleitet, JavaScript-Logik mit dem HTML-Code fest zu verschweißen, anstatt diese sauber zu trennen. Gestalten Sie Ihre Website so, dass ohne JavaScript möglichst alle Inhalte zugänglich sind und alle Funktionen zur Verfügung stehen. Ihre JavaScripte schalten sich dann hinzu und modifizieren das Dokument entsprechend. Anstatt also mittels <code>noscript</code> ein Element einzufügen, das nur ohne JavaScript relevant ist, sollten Sie dieses ganz normal ohne <code>noscript</code> im Dokument notieren. Falls es bei aktiviertem JavaScript nicht benötigt wird, dann können Sie es mittels JavaScript verändern oder ganz ausblenden.</p>
-  <p>Aus den besagten Gründen wird an dieser Stelle nicht näher auf <code>noscript</code> eingegangen &ndash; in den meisten Fällen werden Sie <code>noscript</code> nicht brauchen. Es gibt nur einige Spezialfälle, in denen <code>noscript</code> angemessen ist: Etwa wenn es sich bei der Website um eine reine JavaScript-Webanwendung handelt, die (noch) keine Alternativversion anbietet. Dann können Sie mit <code>noscript</code> einen Hinweis darauf hinterlegen, dass die Site einen JavaScript-fähigen Browser zwingend voraussetzt.</p>
+  <p>Der Sinn von <code>noscript</code> ist, die Informationen zugänglich zu machen, die sonst nur mithilfe des Scriptes zugänglich wären oder sogar durch das Script eingefügt werden. Diese Abwärtskompatibilität einer Website und die Zugänglichkeit aller Inhalte ohne JavaScript ist zwar erstrebenswert. Allerdings zäumt diese Vorgehensweise das Pferd von hinten auf.</p>
+  <p><a href="einsatz.html#unobtrusive-javascript">Unobtrusive JavaScript</a> empfiehlt eine andere Vorgehensweise: Alle Informationen liegen bereits im Dokument. Es ist daher ohne JavaScript gut bedienbar. Mittels JavaScript werden Zusatzfunktionen eingebaut, die die Bedienung und das Lesen der Inhalte vereinfachen und verbessern.</p>
+  <p>Im Unobtrusive JavaScript kommt dem <code>noscript</code>-Element daher keine Bedeutung zu. Von seiner Verwendung wird sogar abgeraten. Denn es verleitet dazu, JavaScript-Logik mit dem HTML-Code fest zu verschweißen, anstatt diese sauber zu trennen. Gestalten Sie Ihre Website so, dass ohne JavaScript möglichst alle Inhalte zugänglich sind und alle Funktionen zur Verfügung stehen. Ihre JavaScripte schalten sich dann hinzu und modifizieren das Dokument entsprechend.</p>
+  <p>Anstatt also mittels <code>noscript</code> Inhalte einzufügen, die nur ohne JavaScript relevant ist, sollten Sie diese ganz normal ohne <code>noscript</code> im Dokument notieren. Falls der Inhalt bei aktiviertem JavaScript nicht benötigt wird, dann können Sie es mittels JavaScript verändern oder ganz ausblenden.</p>
+  <p>In den meisten Fällen werden Sie <code>noscript</code> also nicht brauchen. Es gibt einige Sonderfälle, in denen <code>noscript</code> angemessen ist: Etwa wenn es sich bei der Website um eine reine JavaScript-Webanwendung handelt, die (noch) keine Alternativversion anbietet. Dann können Sie mit <code>noscript</code> einen Hinweis darauf hinterlegen, dass die Website einen JavaScript-fähigen Browser zwingend voraussetzt.</p>
 </div>
 
 <div class="sequence-navigation">
-  <p class="next"><a href="event-handling-grundlagen.html" rel="next">Grundlagen zur Ereignisverarbeitung</a></p>
-  <!-- <p class="prev"><a href="" rel="prev"></a></p> -->
+  <p class="next"><a href="event-handling-grundlagen.html" rel="next">Grundlagen der Ereignisverarbeitung</a></p>
+  <p class="prev"><a href="dom.html" rel="prev">Arbeiten mit dem DOM</a></p>
 </div>
 
 <div id="footer">

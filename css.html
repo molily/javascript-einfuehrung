@@ -17,7 +17,7 @@
 
 <div class="section" id="einleitung">
   <h2>Einleitung</h2>
-  <p>Mit JavaScript können Sie die Darstellung des Dokuments dynamisch ändern, während es im Browser angezeigt wird. Dies ist ein wesentlicher Bestandteil der Interaktivität, die Sie einem Dokument mittels Javascript hinzufügen können. Die Möglichkeiten sind vielfältig: Beispielsweise können Sie als Reaktion auf eine Benutzereingabe gewisse Elemente ein- und ausblenden. Es sind aber auch &ndash; mit entsprechendem Aufwand &ndash; visuelle Effekte und komplexe Animationen möglich.</p>
+  <p>Mit JavaScript können Sie die Darstellung des Dokuments dynamisch ändern, während es im Browser angezeigt wird. Dies ist ein wesentlicher Bestandteil der Interaktivität, die Sie einem Dokument mittels Javascript hinzufügen können. Die Möglichkeiten sind vielfältig: Beispielsweise können Sie als Reaktion auf eine Benutzereingabe gewisse Elemente ein- und ausblenden. Es sind aber auch – mit entsprechendem Aufwand – visuelle Effekte und komplexe Animationen möglich.</p>
   <p>Die Programmiersprache JavaScript besitzt keine eigenen Techniken, um die Gestaltung einer Webseite zu beeinflussen. Vielmehr besitzt JavaScript eine Schnittstelle zur Formatierungssprache Cascading Stylesheets (CSS). Mittels JavaScript können Sie also sämtliche Formatierungen vornehmen, die CSS möglich macht. Daher sollten Sie die Grundlagen von CSS bereits beherrschen, bevor Sie Dokumente mittels JavaScript umformatieren.</p>
   <p>Das dynamische Ändern der <em>Darstellung</em> bildet einen großen Komplex in der JavaScript-Programmierung - ein anderer ist das dynamische Ändern der <em>Inhalte</em> über das <a href="dom.html">Document Object Model (DOM)</a>. Über das DOM können Sie Elemente hinzufügen oder löschen, Attributwerte setzen und Textinhalte einfügen oder verändern. In der Praxis gehen diese beiden Aufgaben - den Inhalt und dessen Darstellung modifizieren - oft miteinander einher.</p>
 </div>
@@ -31,10 +31,10 @@
     <li>Die <em>Präsentation</em> hingegen sollte nicht mittels HTML beeinflusst werden, sondern mit ausgelagerten Stylesheets. Diese sprechen gezielt Elemente im Dokument an und formatieren sie mit CSS-Eigenschaften. Idealerweise bleiben die HTML-Strukturen übersichtlich, IDs und Klassen sind sparsam gesetzt und aussagekräftig, sodass eindeutige Angriffspunkte für CSS-Regeln existieren.</li>
   </ul>
   <p>Diese Arbeitsweise hat bringt Ihnen enorme Vorteile bei der Webseiten-Entwicklung. Inhalte und Präsentation können unabhängig voneinander schnell geändert werden, mit wenig Aufwand kann die gewünschte Präsentation erzielt werden.</p>
-  <p>Wenn nun die dritte Technik &ndash; JavaScript &ndash; hinzutritt, sollten Sie dieses Modell konsequent fortführen. Orientieren Sie sich an folgenden Faustregeln:</p>
+  <p>Wenn nun die dritte Technik – JavaScript – hinzutritt, sollten Sie dieses Modell konsequent fortführen. Orientieren Sie sich an folgenden Faustregeln:</p>
   <ul>
     <li>Definieren Sie die Formatierungsregeln im zentralen Stylesheet, nicht im JavaScript. Trennen sie den CSS-Anweisungen vom JavaScript-Code.</li>
-    <li>Sorgen Sie im JavaScript dafür, dass diese Formatierungsregeln angewendet werden &ndash; beispielsweise indem Sie einem Element dynamisch eine Klasse hinzufügen. Durch diese Änderung der Klasse kann eine Regel im Stylesheet greifen, deren Selektor die soeben gesetzte Klasse enthält.</li>
+    <li>Sorgen Sie im JavaScript dafür, dass diese Formatierungsregeln angewendet werden – beispielsweise indem Sie einem Element dynamisch eine Klasse hinzufügen. Durch diese Änderung der Klasse kann eine Regel im Stylesheet greifen, deren Selektor die soeben gesetzte Klasse enthält.</li>
   </ul>
   <p>Sie können nicht nur ausgelagerte Stylesheet-Regeln auf ein Element anwenden, sondern auch direkt gewisse CSS-Eigenschaften von einzelnen Elementen ändern können. Dies entspricht dem <code>style</code>-Attribut in HTML. Diese Vermischung von HTML und CSS bzw. JavaScript und CSS sollten Sie möglichst vermeiden. Diese Direktformatierung ergibt nur in Sonderfällen Sinn, deshalb sollten Sie sich zunächst mit der besagten Arbeitsweise vertraut machen.</p>
 </div>
@@ -54,7 +54,7 @@
    border-color: red;
    background-color: #fff8f5;
 }</pre>
-  <p>Am Anfang trifft der Selektor <code>input.fehlerhaft</code> auf kein Feld im Dokument zu &ndash; solange nicht ein Feld die Klasse <code>fehlerhaft</code> besitzt. Um ein Eingabefeld umzuformatieren und die Regel anzuwenden, vergeben wir dynamisch diese Klasse an das gewünschte <code>input</code>-Element.</p>
+  <p>Am Anfang trifft der Selektor <code>input.fehlerhaft</code> auf kein Feld im Dokument zu – solange nicht ein Feld die Klasse <code>fehlerhaft</code> besitzt. Um ein Eingabefeld umzuformatieren und die Regel anzuwenden, vergeben wir dynamisch diese Klasse an das gewünschte <code>input</code>-Element.</p>
   <p>Die Klassen eines Elements sind in JavaScript über die Eigenschaft <code>className</code> des entsprechenden Elementobjektes zugänglich. Sie können diese Eigenschaft sowohl auslesen als auch ihr einen neuen Wert zuweisen. Das vereinfachte Schema zum Setzen einer Klasse lautet:</p>
   <pre>element.className = 'klassenname';</pre>
   <p>In der beispielhaften Formularüberprüfung kann das Setzen der Klasse folgendermaßen aussehen: Wir definieren eine Funktion <code>formularÜberprüfung</code>, die als Handler für das Ereignis <code>submit</code> registriert wird (siehe <a href="einbindung.html">Ereignisverarbeitung</a>). In dieser Funktion wird das zu überprüfende Formularfeld über das DOM mittels <code>document.getElementById</code> herausgesucht. Ist der Wert des Feldes leer, wird eine Meldung ausgegeben und das Feld bekommt die Klasse <code>fehlerhaft</code>.</p>
@@ -93,7 +93,7 @@ window.onload = init;</pre>
     &lt;p>&lt;input type="submit" value="Absenden">&lt;/p>
 &lt;/form&gt;
 </pre>
-  <p>Der Clou dieser Vorgehensweise ist, dass Sie mit dem Setzen der Klasse an einem Element nur eine minimale JavaScript-Änderung vornehmen. Diese Änderung führt dazu, dass eine Regel aus dem Stylesheet plötzlich auf bestimmte Elemente greift &ndash; der Browser wendet daraufhin automatisch die definierten Formatierungen an.</p>
+  <p>Der Clou dieser Vorgehensweise ist, dass Sie mit dem Setzen der Klasse an einem Element nur eine minimale JavaScript-Änderung vornehmen. Diese Änderung führt dazu, dass eine Regel aus dem Stylesheet plötzlich auf bestimmte Elemente greift – der Browser wendet daraufhin automatisch die definierten Formatierungen an.</p>
   <p>Über dieses Modell können Sie auch komplexere Aufgabenstellungen lösen, denn Ihnen stehen alle Möglichkeiten von CSS-Selektoren zu Verfügung. Beispielsweise können Sie mittels Nachfahrenselektoren Elemente formatieren, die unterhalb des mit der Klasse markierten Elements liegen. So können Sie durch die Änderung der Klasse gleich mehrere enthaltene, im DOM-Baum unterhalb liegende Elemente formatieren, ohne diese einzeln anzusprechen.</p>
   <p>TODO: Beispiel dazu. Mit Nachfahrenselektoren größere Umformatierungen vornehmen, ohne alle Elemente einzeln anzusprechen</p>
 
@@ -278,13 +278,21 @@ window.alert("Breite: " + element.offsetWidth + "\nHöhe: " + element.offsetHeig
   <h2>Zugriff auf die eingebundenen Stylesheets</h2>
   <div class="section">
     <h3>Stylesheets mit JavaScript deaktivieren und einfügen</h3>
+    <p>…</p>
   </div>
   <div class="section">
     <h3>Stylesheet-Regeln dynamisch erzeugen und ändern</h3>
+    <p>…</p>
   </div>
   <div class="section">
     <h3>Stylesheet-Regeln dynamisch erzeugen und ändern</h3>
+    <p>…</p>
   </div>
+</div>
+
+<div class="sequence-navigation">
+  <p class="next"><a href="sicherheit.html" rel="next">Zusammenarbeit mit CSS</a></p>
+  <p class="prev"><a href="fenster.html" rel="prev">Fenster und Dokumente</a></p>
 </div>
 
 <div id="footer">

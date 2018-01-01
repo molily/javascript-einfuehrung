@@ -1,6 +1,27 @@
-(function () {
+(function() {
+
+var FileLinks = {
+
+  init: function() {
+    document.addEventListener('click', this.clickHandler);
+  },
+
+  clickHandler: function(event) {
+    var target = event.target;
+    if (target.tagName === 'A' && target.getAttribute('href') === './') {
+      event.preventDefault();
+      location.href = 'index.html';
+    }
+  }
+
+};
+
+FileLinks.init();
+
+/* ------------------------------------------------------ */
 
 var CoolURIs = {
+
   rules: {
     'einbindung.html#ereignisbasierung': 'event-handling-grundlagen.html#ereignisbasierung',
     'einbindung.html#phase-laden': 'event-handling-grundlagen.html#phase-laden',
@@ -40,7 +61,8 @@ var CoolURIs = {
     'einbindung.html#delegation': 'event-handling-effizient.html#delegation',
     'einbindung.html#capturing': 'event-handling-effizient.html#capturing'
   },
-  init: function () {
+
+  init: function() {
     var currentURI = location.href;
     for (var oldURI in CoolURIs.rules) {
       var regExp = new RegExp(oldURI.replace('.', '\\.') + '$');
@@ -50,18 +72,19 @@ var CoolURIs = {
       }
     }
   }
+
 };
 
 CoolURIs.init();
 
 /* ------------------------------------------------------ */
 
-var sortElementsDocumentPosition = function (a, b) {
+var sortElementsDocumentPosition = function(a, b) {
   if (!a.compareDocumentPosition || !b.compareDocumentPosition) return 0;
   return a.compareDocumentPosition(b) & 4 ? -1 : a === b ? 0 : 1;
 };
 
-var sortElementsSourceIndex = function (a, b) {
+var sortElementsSourceIndex = function(a, b) {
   if (!a.sourceIndex || !b.sourceIndex) return 0;
   return a.sourceIndex - b.sourceIndex;
 };
@@ -76,7 +99,7 @@ var TOC = {
         null;
   })(),
 
-  toArray: Array.from || function (list) {
+  toArray: Array.from || function(list) {
     var length = list.length;
     var array = new Array(length);
     for (var i = 0; i < length; i++) {
@@ -85,7 +108,7 @@ var TOC = {
     return array;
   },
 
-  getHeadings: function () {
+  getHeadings: function() {
     var h2s = document.getElementsByTagName('h2');
     var h3s = document.getElementsByTagName('h3');
     var list = TOC.toArray(h2s).concat(TOC.toArray(h3s));
@@ -93,7 +116,7 @@ var TOC = {
     return list;
   },
 
-  createElement: function (tagName, attributes, innerHTML) {
+  createElement: function(tagName, attributes, innerHTML) {
     var el = document.createElement(tagName);
     for (var prop in attributes) {
       if (attributes.hasOwnProperty(prop)) {
@@ -106,7 +129,7 @@ var TOC = {
     return el;
   },
 
-  buildList: function () {
+  buildList: function() {
     var headings = TOC.getHeadings();
     var h2list = TOC.createElement('ol');
     var lastH2Item = null;
@@ -138,7 +161,7 @@ var TOC = {
     return h2list;
   },
 
-  init: function () {
+  init: function() {
     var mainToc = TOC.buildList();
     mainToc.id = 'toc';
     var h1 = document.getElementsByTagName('h1')[0];

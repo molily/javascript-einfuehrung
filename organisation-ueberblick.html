@@ -65,7 +65,7 @@
 
     <h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
-    <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script type="text/javascript" src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
+    <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
 
   </div>
@@ -148,7 +148,7 @@ $(function () {
 
     <p>Viele verbreitete Programmiersprachen arbeiten zumindest teilweise objektorientiert und besitzen ausgereifte konventielle Konzepte zur Strukturierung von Programmen. Das sind vor allem <dfn>Klassen</dfn> und ferner <dfn>Module</dfn>, <dfn>Pakete</dfn> bzw. <dfn>Namensräume</dfn>.</p>
 
-    <p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen &ndash; oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klasse bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
+    <p>Klassen werden üblicherweise mittels einer Deklaration beschrieben und können daraufhin verwendet werden. Sie bestehen aus Konstruktoren, Methoden und Eigenschaften. Sie können von anderen Klassen erben und diese erweitern. Von Klassen lassen sich beliebig viele Instanzen anlegen – oder nur eine Instanz im Falle von Singletons. Die Sichtbarkeit bzw. Verfügbarkeit von Methoden und Eigenschaften kann über Schlüsselwörter geregelt werden. So wird z.B. zwischen öffentlichen und privaten Eigenschaften und Methoden unterschieden. Eigenschaften können als nur lesbare Konstanten definiert werden. Darüber hinaus erlauben einige Programmiersprachen die Definition von Interfaces, ein Anforderungskatalog mit Methoden, die eine Klasse bereitstellen muss. Verbreitet sind ferner statische Methoden (Klassenmethoden) sowie Getter- und Setter-Methoden, die beim Lesen bzw. Schreiben von Eigenschaften aufgerufen werden.</p>
 
     <p>Diese konventionelle klassenbasierte OOP sieht beispielsweise in PHP 5.3 folgendermaßen aus:</p>
 
@@ -230,7 +230,7 @@ $instanz2->zusatzmethode();
 
     <p>Glücklicherweise ist JavaScript so leistungsfähig, dass sich die Strukturen wie Klassen und Namensräume bzw. Module durchaus umsetzen lassen. Die Klassendeklarationen in ECMAScript 6 vereinfacht den Einstieg für diejenigen, die bereits andere, klassenbasierte Programmiersprachen beherrschen. Zusatzbibliotheken ermöglichen die Anwendung komplexere OOP-Konzepte in JavaScript.</p>
 
-    <p>Dabei sollten allerdings nicht die Eigenarten und besonderen Fähigkeiten von JavaScript vergessen werden. Im Gegensatz zu manchen streng klassenbasierten Sprachen ist JavaScript äußerst dynamisch und besitzt funktionale Aspekte. JavaScript-Kenner empfehlen, die Fähigkeiten von JavaScript zu nutzen, anstatt bloß klassenbasierte OOP überzustülpen. Mit diesen Möglichkeiten ist JavaScript nicht unbedingt schlechter und defizitär &ndash; es ist lediglich ein anderer, nicht minder interessanter und brauchbarer Ansatz.</p>
+    <p>Dabei sollten allerdings nicht die Eigenarten und besonderen Fähigkeiten von JavaScript vergessen werden. Im Gegensatz zu manchen streng klassenbasierten Sprachen ist JavaScript äußerst dynamisch und besitzt funktionale Aspekte. JavaScript-Kenner empfehlen, die Fähigkeiten von JavaScript zu nutzen, anstatt bloß klassenbasierte OOP überzustülpen. Mit diesen Möglichkeiten ist JavaScript nicht unbedingt schlechter und defizitär – es ist lediglich ein anderer, nicht minder interessanter und brauchbarer Ansatz.</p>
 
   </div>
 
@@ -246,7 +246,7 @@ $instanz2->zusatzmethode();
 
   <p>Die Grundlage von ECMAScript 3 sind Objekte, die zur Laufzeit beliebig um Eigenschaften und Methoden ergänzt werden können. Ein JavaScript-Objekt ist eine ungeordnete Liste, in der String-Schlüsseln beliebige Werte zugeordnet werden. Diese dynamischen, erweiterbaren Objekte ermöglicht eine Strukturierung von Programmen. Sie dienen, wie wir später sehen werden, als vielseitiges Mittel zur Gruppierung und sind insofern mit Hashes, Namensräumen, Singletons bzw. Klassen mit statischen Methoden in anderen Sprachen vergleichbar.</p>
 
-  <p>Die wirklichen Stärken von JavaScript liegen jedoch woanders: <strong>Funktionen</strong>. Dazu Douglas Crockford in dem Vortrag <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3">Crockford on JavaScript &ndash; Act III: Function the Ultimate</a>:
+  <p>Die wirklichen Stärken von JavaScript liegen jedoch woanders: <strong>Funktionen</strong>. Dazu Douglas Crockford in dem Vortrag <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3">Crockford on JavaScript – Act III: Function the Ultimate</a>:
 
   <blockquote lang="en">
   <p><img src="images/crockford-functions.jpg" alt="" style="float:right; margin-left: 2em">
@@ -264,7 +264,7 @@ $instanz2->zusatzmethode();
 
   <h3>Objekte / <code>Object</code>-Objekte</h3>
   <ul>
-  <li>Alles ist ein Objekt &ndash; bis auf Primitives, die sich allerdings wie Objekte verhalten können</li>
+  <li>Alles ist ein Objekt – bis auf Primitives, die sich allerdings wie Objekte verhalten können</li>
   <li>Objekte sind i.d.R. erweiterbar (ECMAScript 3)</li>
   <li><code>Object</code>-Objekte sind Allround-Container und Hashes</li>
   <li><code>Object</code>-Literale erzeugen mit <code>{ key : value, … }</code></li>
@@ -334,6 +334,7 @@ $instanz2->zusatzmethode();
 
 <div class="sequence-navigation">
   <p class="next"><a href="organisation-module.html" rel="next">Organisation von JavaScripten: Module und Kapselung</a></p>
+  <p class="prev"><a href="bibliotheken.html" rel="prev">Bibliotheken und Frameworks</a></p>
 </div>
 
 <div id="footer">

@@ -105,7 +105,7 @@
 document.getElementById("vollbildlink").onclick = zeigeVollbild;
 </pre>
   <p>Beachten Sie, dass mit der <code>return</code>-Anweisung die Funktion beendet wird. Code, der auf diese Anweisung folgt, wird nicht ausgeführt. Es sei denn, die <code>return</code>-Anweisung ist z.B. durch eine <code>if</code>-Anweisung gekapselt und wird nicht in jedem Fall ausgeführt.</p>
-  <p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen &ndash; sie können die Standardaktion lediglich verhindern.</p>
+  <p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen – sie können die Standardaktion lediglich verhindern.</p>
   <p>Neben <code>return false</code> gibt es modernere Techniken, um die Standardaktion zu verhindern. Der DOM-Standard, auf den wir später noch zu sprechen kommen, bietet eine Methode namens <code>preventDefault</code> beim Event-Objekt, mit der sich die Standardaktion unterdrücken lässt. Das obige Beispiel könnte auch folgendermaßen aussehen:</p>
   <pre>function zeigeVollbild (eventObjekt) {
    // Browserübergreifender Zugriff auf das Event-Objekt
@@ -142,8 +142,8 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
 <div class="section" id="bubbling">
   <h2>Der Event-Fluss: Bubbling</h2>
   <p>Bisher haben wir erfahren, dass Ereignisse bei bestimmten Elementen passieren. Dort können wir sie überwachen, indem wir Handler registrieren. Tritt das Ereignis bei diesem Element ein, wird die Handler-Funktion ausgelöst.</p>
-  <p>Die Wirklichkeit ist etwas komplizierter. Die Verarbeitung eines Ereignisses verläuft in <strong>drei Phasen</strong>, die nacheinander durchlaufen werden. Davon lernen wir nun eine zweite kennen. Die dritte ist weniger wichtig und braucht Sie zum Einstieg erst einmal nicht interessieren &ndash; Sie finden ihre Beschreibung unter <a href="event-handling-effizient.html#capturing">Capturing</a> beschrieben.</p>
-  <p>Ein Ereignis passiert bei einem Element, dem sogenannten <strong>Zielelement</strong> (englisch <em>target element</em>), und löst dort alle Handler aus, die für das entsprechende Ereignis registriert wurden &ndash; soweit waren wir bereits. Diese bereits bekannte Phase nennt sich entsprechend <strong>Ziel-Phase</strong>.</p>
+  <p>Die Wirklichkeit ist etwas komplizierter. Die Verarbeitung eines Ereignisses verläuft in <strong>drei Phasen</strong>, die nacheinander durchlaufen werden. Davon lernen wir nun eine zweite kennen. Die dritte ist weniger wichtig und braucht Sie zum Einstieg erst einmal nicht interessieren – Sie finden ihre Beschreibung unter <a href="event-handling-effizient.html#capturing">Capturing</a> beschrieben.</p>
+  <p>Ein Ereignis passiert bei einem Element, dem sogenannten <strong>Zielelement</strong> (englisch <em>target element</em>), und löst dort alle Handler aus, die für das entsprechende Ereignis registriert wurden – soweit waren wir bereits. Diese bereits bekannte Phase nennt sich entsprechend <strong>Ziel-Phase</strong>.</p>
   <p>Mit dieser Phase ist die Ereignis-Verarbeitung nicht zuende, denn anschließend steigt das Ereignis im DOM-Elementenbaum auf. Dieser Vorgang nennt sich <strong>Bubbling</strong>. Das Wort ist abgleitet von <em>bubble</em>, Englisch für Blase. Bubbling ist demnach das <strong>Aufsteigen</strong> der Events wie beispielsweise Luftblasen im Wasser.</p>
   <p>Dieses Aufsteigen bedeutet, dass die entsprechenden Handler auch beim Eltern-Element des Zielelements ausgeführt werden, dann bei dessen Eltern-Element und so weiter, bis das Ereignis schließlich den obersten <code>document</code>-Knoten erreicht hat.
   Das Ereignis bewegt sich also nach oben im Elementbaum, durchläuft alle Vorfahrenelemente des Zielelements und löst auf diesem Weg alle entsprechenden Handler aus. Dieser Vorgang wird entsprechend <strong>Bubbling-Phase</strong> genannt.</p>
@@ -161,7 +161,7 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
   <p>Das <code>p</code>-Element wird vom Browser als rechteckige Box dargestellt. Bei einem Klick irgendwo in diese Box soll die Handler-Funktion ausgeführt werden.</p>
   <p>Wenn der Anwender auf das Wort »Beispiel-Element« klickt, ist das <code>p</code>-Element das Zielelement des Ereignisses. Wenn man hingegen auf »wichtigen Text« klickt, so ist das <code>strong</code>-Element das Zielelement des Ereignisses, nicht das p-Element! Denn dieser Text liegt in erster Linie im <code>strong</code>-Element und nur indirekt im <code>p</code>-Element. Aus Sicht des DOM-Baumes ist der Text ein Textknoten, der ein Kindknoten des <code>strong</code>-Elementknotens ist.</p>
-  <p>Nichtsdestoweniger erwartet man, dass ein Klick auf die Box des <code>strong</code>-Elements ebenfalls den <code>click</code>-Handler beim <code>p</code>-Element auslöst. Und dies ist auch der Fall &ndash; dafür sorgt das Bubbling! Das Ereignis, das ursprünglich beim <code>strong</code>-Element passiert ist, steigt nämlich auf, sodass der Handler des <code>p</code>-Elements ausgeführt wird.</p>
+  <p>Nichtsdestoweniger erwartet man, dass ein Klick auf die Box des <code>strong</code>-Elements ebenfalls den <code>click</code>-Handler beim <code>p</code>-Element auslöst. Und dies ist auch der Fall – dafür sorgt das Bubbling! Das Ereignis, das ursprünglich beim <code>strong</code>-Element passiert ist, steigt nämlich auf, sodass der Handler des <code>p</code>-Elements ausgeführt wird.</p>
   <p>Das Bubbling ist also meist erwünscht, damit bei einem Element Ereignisse überwacht werden können, selbst wenn sie ursprünglich bei Kindelementen passieren. Wenn Sie aber nicht damit rechnen, dass Ereignisse aufsteigen, so kann das Bubbling zu einiger Verwirrung führen und Sie werden sich wundern, woher plötzlich gewisse Ereignisse stammen.</p>
   <p>Nicht alle Ereignisse steigen auf, denn für manche Ereignisse wäre es kontraproduktiv, wenn sie zentrale Handler auslösen würden.</p>
 </div>
@@ -187,8 +187,8 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
   <p>Innerhalb der Handler-Funktion können wir über <code>this</code> auf das <code>p</code>-Element zugreifen. Im Beispiel wird auf dessen Eigenschaft <code>nodeName</code> ausgegeben, welche den Elementnamen <code>P</code> enthält.</p>
   <p>Der DOM-Standard sieht eine andere Zugriffsweise vor: Die Eigenschaft <code>currentTarget</code> beim Event-Objekt enthält das Element, dessen Handler gerade ausgeführt wird. Der Internet Explorer kennt diese Eigenschaft erst an Version 9. Das besagte <code>this</code> ist in älteren Internet-Explorer-Versionen die einzige Möglichkeit, auf das fragliche Element zuzugreifen. Der Einfachheit halber können Sie browserübergreifend <code>this</code> verwenden.</p>
 
-  <p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Diese kennen alle modernen Browser, doch der Internet Explorer unterstützt diese Eigenschaft erst ab Version 9. Ältere Versionen kennen eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist &ndash; wir kennen dieses Vorgehensweise bereits vom Zugriff auf das Event-Objekt.</p>
-  <pre>function klickverarbeitung (eventObjekt) {
+  <p>Der eindeutige Zugriff auf das <strong>Zielelement</strong> gestaltet sich etwas schwieriger. Der DOM-Standard definiert die Eigenschaft <code>target</code> beim Event-Objekt. Diese kennen alle modernen Browser, doch der Internet Explorer unterstützt diese Eigenschaft erst ab Version 9. Ältere Versionen kennen eine äquivalente Eigenschaft namens <code>srcElement</code>. Mithilfe einer Fähigkeitenweiche nehmen wir eine Vereinheitlichung vor, sodass das Zielelement in allen Browsern über eine Variable ansprechbar ist – wir kennen dieses Vorgehensweise bereits vom Zugriff auf das Event-Objekt.</p>
+  <pre>function klickverarbeitung(eventObjekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Zugriff auf das Zielelement
@@ -231,7 +231,7 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
 </div>
 <p id="target-output">Hier erfolgt die Ausgabe.</p>
 
-<script type="text/javascript">
+<script>
 (function () {
    var targetArea = document.getElementById('target-area');
    var output = document.getElementById('target-output');

@@ -53,7 +53,7 @@
   <p>Aus Sicht der JavaScript-Programmierung passieren diese Vorgänge meist unbemerkt. Dass beim Erstellen eines Objektes ein Konstruktor aufgerufen wird und der Prototyp als Vorbild für das Objekt dient, wird nur ersichtlich, wenn wir in diese Vorgänge eingreifen wollen oder eigene Konstruktoren und Prototypen schreiben. Dennoch ist das Wissen um Konstruktoren und Instanzen grundlegend, um den Aufbau der Objektwelt und die Objekttypen in JavaScript zu verstehen.</p>
 </div>
 <div class="section" id="klassen">
-  <h2>Klassen &ndash; gibt es nicht in JavaScript</h2>
+  <h2>Klassen – gibt es nicht in JavaScript</h2>
   <p>Objekttypen und Vererbung werden in vielen anderen Programmiersprachen über Klassen gelöst. JavaScript hingegen kennt keine Klassen, sondern nur die besagten Konstruktorfunktionen und Prototypen. ...</p>
 </div>
 <div class="section" id="bezeichner">
@@ -61,7 +61,7 @@
   <p>Bezeichner (englisch Identifier) sind Namen für Objekte. Um ein vorhandenes Objekt in einem JavaScript anzusprechen oder einen Wert unter einem Namen abzuspeichern, notieren wir dessen Namen.</p>
   <pre>alert(vorname);</pre>
   <p>Hier werden gleich zwei Bezeichner notiert: Einmal <code>alert</code> und einmal <code>vorname</code>. <code>alert</code> bezeichnet die vordefinierte globale Funktion, mit der sich Meldungen ausgeben lassen. <code>vorname</code> steht beispielhaft für eine durch das Script selbst erzeugte Variable.</p>
-  <div class="section" id="bezeichner-konventionen">
+  <div class="section" id="unterobjekte">
     <h3>Unterobjekte ansprechen</h3>
     <p>Um ausgehend von einem Objekt ein Unterobjekt (Member) anzusprechen, notieren wir den einen Objektnamen, dann einen <code>.</code> und danach den Namen des Unterobjekts. Schematisch:</p>
     <pre>objekt.unterobjekt</pre>
@@ -110,32 +110,11 @@ arbeiter&amp;angestellte
   </div>
 
 </div>
-<div class="section" id="funktionen">
-  <h2>Funktionen und Methoden aufrufen</h2>
-  <p>...</p>
-  <p>Call-Operator</p>
-  <p>funktion(parameter)</p>
-  <p>objekt.methode(parameter)</p>
-</div>
 <div class="section" id="globales-objekt">
   <h2>Das globale Objekt <code>window</code></h2>
   <p></p>
 </div>
-<div class="section" id="variablen">
-  <h2>Variablen</h2>
-  <p>Geltungsbereich (Scope)</p>
-  <p>Identifier Resolution</p>
-  <div class="section" id="globale-variablen">
-    <h3>Globale Variablen</h3>
-    <p></p>
-  </div>
-  <div class="section" id="lokale-variablen">
-    <h3>Lokale Variablen (Funktionsvariablen)</h3>
-    <p></p>
-  </div>
-</div>
 <div class="section" id="erzeugen">
-  <!-- TODO: Wohin damit? -->
   <h2>Objekte erzeugen: Literale und Instantiierung</h2>
   <p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder eine ausdrückliche <strong>Instantiierung</strong>.</p>
   <p>Ein Literal (englisch für wörtlich, buchstäblich) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> und <code>false</code> sind <code>Boolean</code>-Literale.</p>
@@ -143,6 +122,10 @@ arbeiter&amp;angestellte
   <p>Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen und das Ergebnis ist auch nicht immer dasselbe (siehe <a href="#objects-primitives">Objekte und primitive Typen</a>). Wenn eine Literalschreibweise für den gewünschten Objekttyp existiert, dann sollten Sie diese nutzen. Für manche Objekttypen existiert keine Literalschreibweise, sodass Sie beispielsweise <code>new Date()</code> notieren müssen.</p>
 </div>
 
+<div class="sequence-navigation">
+  <p class="next"><a href="funktionen.html" rel="next">Funktionen</a></p>
+  <p class="prev"><a href="kernobjekte.html" rel="prev">Datentypen und Kernobjekte</a></p>
+</div>
 
 <div id="footer">
 <p><strong>JavaScript-Dokumentation</strong> &middot; <a href="./">Zum Inhaltsverzeichnis</a></p>

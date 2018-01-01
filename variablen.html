@@ -64,21 +64,82 @@ var a = 20,
     <li>Funktions-Geltungsbereich</li>
     <li>Block-Geltungsbereich</li>
   </ol>
+  <p>Um Konflitke zwischen Variablen zu vermeiden und Programme einfach zu halten, gilt folgende Grundregel: Der Geltungsbereich einer Variable sollte immer so klein wie möglich sein. Verwenden Sie wenn möglich den Block-Geltungsbereich, andernfalls den Funktions-Geltungsbereich. Deklarieren Sie eine Variable nur in Ausnahmefällen im globalen Geltungsbereich.</p>
   <p>Im Folgenden schauen wir uns an, wie wir Variablen in den jeweiligen Geltungsbereichen erzeugen.</p>
-  <p>TODO: Grundregel: Geltungsbereich so klein wie möglich</p>
 </div>
 <div class="section" id="globale-variablen">
-  <h2>Globale Variablen</h2>
-  <p>Eine Variablen-Deklaration mit <code>var</code> erzeugt die Variable im aktuellen Geltungsbereich. Außerhalb einer Funktion wird eine globale Variable angelegt, innerhalb einer Funktion eine lokale Funktionsvariable.
+  <h2>Globale Variablen (<code>var</code>)</h2>
+  <p>Eine Variablen-Deklaration mit <code>var</code>, die <em>außerhalb</em> einer Funktion steht, erzeugt eine <em>globale Variable</em>. Global bedeutet, dass sie in allen anderen Geltungsbereichen verfügbar ist.</p>
+<pre>
+var globaleVariable = 'überall verfügbar';
+</pre>
+  <p>Wenn Sie dies direkt in einem Script notieren, so wird eine globale Variable angelegt.</p>
+  <p>Globale Variablen werden nicht in einem unsichtbaren Geltungsbereich gespeichert, sondern sie werden an dem obersten, globalen Objekt gespeichert. Das ist <code>window</code>. Wenn Sie eine globale Variable erzeugen, legen Sie damit eine gleichnamige Eigenschaft am Objekt <code>window</code> an.</p>
+<pre>
+var globaleVariable = 'überall verfügbar';
+// Ausgabe: »überall verfügbar«
+window.alert(window.globaleVariable);
+</pre>
+  <p>Die Variable im Beispiel können Sie also auch über <code>window.globaleVariable</code> lesen und schreiben. Die Deklaration einer globalen Variable entspricht der Wertzuweisung an die <code>window</code>-Eigenschaft:</p>
+<pre>var globaleVariable = 'überall verfügbar';</pre>
+  <p>ist in dem Fall gleichwertig mit</p>
+<pre>window.globaleVariable = 'überall verfügbar';</pre>
+  <p>Das <code>window</code>-Objekt enthält bereits hunderte vordefinierte Eigenschaften. Die Kernobjekte und viele weitere Programmierschnittstellen sind über <code>window</code> erreichbar. Das bedeutet, der globale Geltungsbereich ist ein »öffentlicher Raum«. Alle Schnittstellen und Scripte teilen sich diesen Raum.</p>
+  <p>Ein Name kann darin nur einmal vergeben werden. Hunderte Namen sind wie gesagt schon belegt. Konflikte sind daher vorprogrammiert. Es kann schnell vorkommen, dass ein Script eine bestehende <code>window</code>-Eigenschaft überschreibt und damit anderen Scripten in die Quere kommt.</p>
+  <p>Vermeiden Sie daher globale Variablen möglichst. Die meisten Variablen, die Sie benötigen, können einen eingeschränkten Geltungsbereich haben. Nur einige ausgewählten Werte und Objekte ihrer Programme sollten global verfügbar sein. Das ist zum Beispiel eine öffentliche Schnittstelle, die ihr Programm für andere Programme anbietet.</p>
+  <p>Globale verfügbare Werte können Sie wie gesagt überall nach dem Schema <code>window.<var>globaleVariable</var> = <var>wert</var></code> anlegen.</p>
 </div>
 <div class="section" id="lokale-variablen">
-  <h2>Funktionsvariablen</h2>
+  <h2>Funktionsvariablen (<code>var</code>)</h2>
+  <p>Eine Variablen-Deklaration mit <code>var</code>, die <em>innerhalb</em> einer Funktion steht, erzeugt eine <em>Funktionsvariable</em>. Diese gehört zu den <em>lokalen</em> Variablen.</p>
+  <p>Eine solche Variable hat einen Geltungsbereich, der auf die Funktion selbst beschränkt ist. Die Variable ist nicht von außen sichtbar.</p>
+  <p>Schauen wir uns eine Beispielfunktion mit Funktionsvariablen an:</p>
+<pre>
+function summe(array) {
+  var ergebnis = 0;
+  for (var i = 0; i < array.length; i++) {
+    ergebnis += array[i];
+  }
+  return ergebnis;
+}
+window.alert(summe([ 5, 10, 15 ])); // Ausgabe: »30«
+window.alert(ergebnis); // Programmabbruch: ergebnis ist nicht definiert
+</pre>
+  <p>Die Funktion <code>summe</code> erwartet einen Array mit Zahlen und gibt die Summe dieser Zahlen zurück. Innerhalb der Funktion gibt es drei Variablen. Deren Geltungsbereich ist auf die Funktion beschränkt.</p>
+  <ul>
+    <li><code>array</code> – der Funktionsparameter</li>
+    <li><code>ergebnis</code> – eine mit <code>var</code> deklarierte Variable</li>
+    <li><code>i</code> – eine Variable, die mit <code>var</code> im Kopf der <code>for</code>-Schleife deklariert ist</li>
+  </ul>
+  <p>Funktionsparameter verhalten sich also ebenfalls wie Funktionsvariablen. Sie sind nur in der Funktion verfügbar.</p>
+  <p>Im obigen Beispiel wird versucht, auf die Variable <code>ergebnis</code> außerhalb der Funktion zuzugreifen. Dies ist nicht möglich und führt zu einem Programmabbruch. Denn eine Variable mit dem Namen ergebnis kann an dieser Stelle nicht gefunden werden. Es wird nicht in den Geltungsbereich der Funktion hineingeschaut.</p>
+  <p>Innerhalb einer Funktion können Sie also sicher Variablen anlegen, ohne dass sie anderem Code außerhalb der Funktion in die Quere kommen. Sie können in verschiedenen Funktionen denselben Namen verwenden, ohne dass die beiden zusammenstoßen.</p>
+  <p>Wie alle Variablen haben Funktionsvariablen den Vorteil, dass sie in verschachtelten Geltungsbereichen innerhalb der Funktion ebenfalls verfügbar sind. Das ist beispielsweise zu erkennen, wenn Sie eine Funktion in eine andere schachteln:</p>
+<pre>
+function setzeButtonEventHandler() {
+  var klickZähler = 0;
+  function klickHandler() {
+    klickZähler++;
+    window.alert('Button wurde ' + klickZähler + ' Mal geklickt!');
+  }
+  document.getElementById('button')
+    .addEventListener('click', klickHandler);
+}
+setzeButtonEventHandler();
+</pre>
+  <p>Das Beispiel geht davon aus, dass es einen Button im Dokument mit der ID <code>button</code> gibt:</p>
+<pre>&lt;button id="button"&gt;Klick mich!&lt;button&gt;</pre>
+  <p>Jedes Mal, wenn der Button geklickt wird, wird ein Zähler erhöht und der aktuelle Zählerwert wird ausgegeben. Dazu registriert die Funktion <code>setzeButtonEventHandler</code> einen Event-Handler (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). Dieser Handler ist die Funktion <code>klickHandler</code>.</p>
+  <p>Wir haben hier also eine äußere Funktion, <code>setzeButtonEventHandler</code>, und eine innere Funktion, <code>klickHandler</code>.</p>
+  <p>Die Variable <code>klickZähler</code> ist in der äußeren Funktion definiert. Sie ist dort verfügbar, aber auch in der verschachtelten inneren Funktion. Nur so ist es möglich, dass die innere Funktion den Zählerwert bei jedem Klick erhöhen und ausgeben kann.</p>
 </div>
 <div class="section" id="block-variablen">
-  <h2>Block-Variablen</h2>
+  <h2>Block-Variablen (<code>let</code>)</h2>
+  <p>…</p>
 </div>
 <div class="section" id="block-konstanten">
-  <h2>Block-Konstanten</h2>
+  <h2>Block-Konstanten (<code>const</code>)</h2>
+  <p>…</p>
 </div>
 <div class="section" id="scope">
   <h2>Auflösung von Bezeichnern</h2>
@@ -114,8 +175,12 @@ arbeiter&amp;angestellte
   <p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« <!-- TODO »«, <em></em> oder Kombination? Wann <strong>? --> gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
   <p>Allerdings beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>firmengröße</code> ist also möglich, üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen.</p>
 
-
   <p>Bracket Notation erlaubt beliebigen String</p> <!-- TODO Bracket Notation? -->
+</div>
+
+<div class="sequence-navigation">
+  <p class="next"><a href="kernobjekte.html" rel="next">Datentypen und Kernobjekte</a></p>
+  <p class="prev"><a href="syntax.html" rel="prev">Syntax-Grundlagen</a></p>
 </div>
 
 <div id="footer">

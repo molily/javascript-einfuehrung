@@ -39,11 +39,12 @@
       Parameters wird erst später erklärt werden. Standardmäßig sollten Sie hier <code>false</code> notieren.</li>
     </ol>
     <p>Das folgende Beispiel kennen wir bereits vom traditionellen Event-Handling. Beim fertigen Laden des HTML-Dokuments wird automatisch ein <code>click</code>-Handler bei einem Textabsatz registriert. Dieses Mal nutzen wir die standardisierte Methode <code>addEventListener</code>, die denselben Zweck erfüllt:</p>
-    <pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+<pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Beispiel für Event-Handling gemäß dem W3C DOM&lt;/title&gt;
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 
 window.addEventListener("load", start, false);
 
@@ -67,7 +68,8 @@ function klickverarbeitung () {
 &lt;/p&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</pre>
+&lt;/html&gt;
+</pre>
     <p>Folgende Anweisungen haben sich geändert:</p>
     <p>Aus der Zuweisung <code>window.onload = start;</code> ist der Aufruf <code>window.addEventListener("load", start, false);</code> geworden. Wenngleich <code>window</code> kein Elementobjekt ist, bietet es dennoch die Methode <code>addEventListener</code> an.</p>
     <p>Aus der Zuweisung <code>document.getElementById("interaktiv").onclick = klickverarbeitung;</code> sind zwei geworden. In der ersten Anweisung speichern wir das Elementobjekt des Absatzes in einer Variable zwischen:</p>
@@ -75,7 +77,7 @@ function klickverarbeitung () {
     <p>In der zweiten Anweisung wird schließlich die Handler-Funktion registriert:</p>
     <pre>pElement.addEventListener("click", klickverarbeitung, false);</pre>
     <p>Sie können die Methoden-Aufrufe natürlich auch verketten, anstatt eine Hilfsvariable zu verwenden. Das sähe schematisch so aus: <code>document.getElementById(&hellip;).addEventListener(&hellip;)</code>. Schließlich gibt <code>getElementById</code> im Regelfall ein Elementobjekt zurück, dessen Methoden Sie direkt ansprechen können. Aus Gründen der Lesbarkeit und Verständlichkeit wurde diese Kette im Beispiel in zwei Anweisungen gesplittet.</p>
-    <p>Das obige Beispiel funktioniert in allen modernen Browsern &ndash; jedoch nicht im Internet Explorer vor der Version 9. Die älteren Internet-Explorer-Versionen unterstützen den W3C-DOM-Standard noch nicht. Die Methode <code>addEventListener</code> ist diesen Browsern schlicht unbekannt.</p>
+    <p>Das obige Beispiel funktioniert in allen modernen Browsern – jedoch nicht im Internet Explorer vor der Version 9. Die älteren Internet-Explorer-Versionen unterstützen den W3C-DOM-Standard noch nicht. Die Methode <code>addEventListener</code> ist diesen Browsern schlicht unbekannt.</p>
     <p>Der Internet Explorer unterstützt den Events-Standard erst ab Version 9. Ältere Versionen unterstützen stattdessen ein <a href="#microsoft">eigenes, proprietäres Modell</a>, das im folgenden Abschnitt vorgestellt wird.</p>
     <p>Der Hauptvorteil von <code>addEventListener</code> ist, dass Sie für ein Element <strong>mehrere Handler-Funktionen</strong> für denselben Ereignistyp registrieren können. Beim obigen Beispiel können wir die <code>start</code>-Funktion so anpassen, dass beim <code>p</code>-Element zwei Handler statt bloß einer registriert werden:</p>
     <pre>function start () {
@@ -91,7 +93,7 @@ function meldung1 () {
 function meldung2 () {
    window.alert("Zweite Handler-Funktion ausgeführt!");
 }</pre>
-    <p>Es werden zwei Handler-Funktionen namens <code>meldung1</code> und <code>meldung2</code> definiert. Mithilfe von <code>addEventListener</code> werden sie beide als <code>click</code>-Handler registriert. Wenn Sie auf den Textabsatz klicken, dann sollten nacheinander zwei JavaScript-Meldefenster erscheinen &ndash; und zwar in der Reihenfolge, in der die Handler mittels <code>addEventListener</code> registriert wurden.</p>
+    <p>Es werden zwei Handler-Funktionen namens <code>meldung1</code> und <code>meldung2</code> definiert. Mithilfe von <code>addEventListener</code> werden sie beide als <code>click</code>-Handler registriert. Wenn Sie auf den Textabsatz klicken, dann sollten nacheinander zwei JavaScript-Meldefenster erscheinen – und zwar in der Reihenfolge, in der die Handler mittels <code>addEventListener</code> registriert wurden.</p>
   </div>
   <div class="section" id="removeEventListener">
     <h3>Event-Handler entfernen: removeEventListener</h3>
@@ -118,11 +120,12 @@ function meldung2 () {
       <li>Der zweite Parameter ist der Name der <strong>Handler-Funktion</strong> (ein Ausdruck, der ein Funktionsobjekt ergibt).</li>
     </ol>
     <p>Wir greifen das bekannte Beispiel auf, das wir bereits nach dem traditionellem Modell und nach dem W3C-Modell umgesetzt haben, und setzen es mit dem Microsoft-Modell um:</p>
-    <pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+<pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Beispiel für Event-Handling gemäß dem W3C DOM&lt;/title&gt;
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 
 window.attachEvent("onload", start);
 
@@ -146,9 +149,10 @@ function klickverarbeitung () {
 &lt;/p&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</pre>
+&lt;/html&gt;
+</pre>
     <p>Das Beispiel hat sich gegenüber dem W3C-Modell nur geringfügig geändert. Anstelle von <code>window.addEventListener(&hellip;)</code> wurde <code>window.attachEvent(&hellip;)</code> notiert, dasselbe bei <code>pElement.attachEvent(&hellip;)</code>.</p>
-    <p>Der Ereignistyp im ersten Parameter enthält nun den Präfix <code>on</code> vorangestellt: Aus <code>"load"</code> wird <code>"onload"</code>, aus <code>"click"</code> wird <code>"onclick"</code>. Der dritte Parameter, der die Event-Phase spezifiert, fällt weg &ndash; denn Microsofts Modell unterstützt nur das Registrieren in der Bubbling-Phase.</p>
+    <p>Der Ereignistyp im ersten Parameter enthält nun den Präfix <code>on</code> vorangestellt: Aus <code>"load"</code> wird <code>"onload"</code>, aus <code>"click"</code> wird <code>"onclick"</code>. Der dritte Parameter, der die Event-Phase spezifiert, fällt weg – denn Microsofts Modell unterstützt nur das Registrieren in der Bubbling-Phase.</p>
     <p>Auch mit <code>attachEvent</code> können Sie verschiedene Handler für denselben Ereignistyp definieren. Das obige Beispiel wird entsprechend angepasst:</p>
     <pre>function start () {
    var pElement = document.getElementById("interaktiv");
@@ -179,7 +183,7 @@ function meldung2 () {
     <p>Das Microsoft-Modell bringt eine erfreuliche und eine unerfreuliche Besonderheit mit sich:</p>
     <ul>
       <li>Bei der Verwendung von <code>attachEvent</code> gestaltet sich der <a href="event-handling-objekt.html#event-objekt">Zugriff auf das Event-Objekt</a> einfacher, als wir es vom traditionellen Event-Handling gewöhnt sind. Dort war der Zugriff über <code>window.event</code> nötig. Bei der Benutzung von <code>attachEvent</code> wird das Event-Objekt der Handler-Funktion als Parameter übergeben, wie wir es aus anderen Browsern gewohnt sind und wie es auch beim im DOM-Standard vorgeschrieben ist.</li>
-      <li>Der <a href="event-handling-objekt.html#currenttarget-target">Zugriff auf das verarbeitende Element</a> ist nicht möglich. Beim traditionellen Event-Handling hatten wir <code>this</code> kennengelernt, um das Element anzusprechen, bei dem die gerade ausgeführte Handler-Funktion registriert wurde. Das ist im Zusammenhang mit <code>attachEvent</code> nicht möglich, denn <code>this</code> zeigt nicht auf das gewünschte Objekt, sondern stets auf das globale Objekt <code>window</code> &ndash; und ist damit unbrauchbar.</li>
+      <li>Der <a href="event-handling-objekt.html#currenttarget-target">Zugriff auf das verarbeitende Element</a> ist nicht möglich. Beim traditionellen Event-Handling hatten wir <code>this</code> kennengelernt, um das Element anzusprechen, bei dem die gerade ausgeführte Handler-Funktion registriert wurde. Das ist im Zusammenhang mit <code>attachEvent</code> nicht möglich, denn <code>this</code> zeigt nicht auf das gewünschte Objekt, sondern stets auf das globale Objekt <code>window</code> – und ist damit unbrauchbar.</li>
       <li>Im Gegensatz zum DOM-Standard kennt das Microsoft-Modell keine <a href="event-handling-effizient.html#capturing">Capturing-Phase</a>.</li>
     </ul>
   </div>
@@ -219,7 +223,7 @@ function meldung2 () {
 }</pre>
     <p>Ein Anwendungsbeispiel:</p>
     <pre>&lt;p id="beispielabsatz"&gt;Klick mich!&lt;/p&gt;
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
 function absatzKlick () {
   alert("Der Absatz wurde geklickt!");
 }
@@ -242,7 +246,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
   <div class="section" id="flexibles-addevent">
     <h3>Flexibles und leistungsfähiges <code>addEvent</code>/<code>removeEvent</code></h3>
     <p>Eine robustere, aber umso kompliziertere Umsetzung der Funktionen <code>addEvent</code> und <code>removeEvent</code> stammt von Dean Edwards und wurde von Tino Zijdel weiterentwickelt: <a href="http://therealcrisp.xs4all.nl/upload/addEvent_dean.html">addEvent() new style</a>.</p>
-    <p>Dieses Helferscript verwendet die standardisierte Methoden <code>addEventListener</code> und <code>removeEventListener</code> in den Browsern, in denen sie zur Verfügung stehen. Als Alternative für ältere Internet Explorer wird allerdings nicht das Microsoft-eigene Modell verwendet &ndash; zu groß sind die Unterschiede zwischen den beiden Modellen. Stattdessen wird das Registrieren von mehreren Event-Handlern selbst übernommen: Es wird bei jedem Element eine eigene Liste mit Handler-Funktionen für ein Ereignistyp geführt. Beim Eintreten des Ereignisses wird eine Helferfunktion aufgerufen, die diese interne Liste abarbeitet und jede dort verzeichnete Handler-Funktion aufruft.</p>
+    <p>Dieses Helferscript verwendet die standardisierte Methoden <code>addEventListener</code> und <code>removeEventListener</code> in den Browsern, in denen sie zur Verfügung stehen. Als Alternative für ältere Internet Explorer wird allerdings nicht das Microsoft-eigene Modell verwendet – zu groß sind die Unterschiede zwischen den beiden Modellen. Stattdessen wird das Registrieren von mehreren Event-Handlern selbst übernommen: Es wird bei jedem Element eine eigene Liste mit Handler-Funktionen für ein Ereignistyp geführt. Beim Eintreten des Ereignisses wird eine Helferfunktion aufgerufen, die diese interne Liste abarbeitet und jede dort verzeichnete Handler-Funktion aufruft.</p>
     <p>Neben <code>addEvent</code> umfasst das Script auch eine <code>removeEvent</code>-Methode. Im Vergleich zum einfachen <code>addEvent</code> werden im Internet Explorer zwei weitere Vereinheitlichungen vorgenommen, sodass folgende Techniken browserübergreifend nutzbar sind:</p>
     <ol>
       <li>In der Handler-Funktion ist mittels <code>this</code> der Zugriff auf das verarbeitende Element möglich. (Siehe <a href="event-handling-objekt.html#currenttarget-target">verarbeitendes Element</a>.)</li>
@@ -250,7 +254,7 @@ addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);
       <li>Zum Unterdrücken der Standardaktion kann browserübergreifend die standardisierte Methode <code>preventDefault</code> des Event-Objektes verwendet werden. Eine entsprechende Fähigkeiten-Weiche in der Handler-Funktion ist nicht nötig. (Siehe <a href="event-handling-objekt.html#standardaktion">Unterdrücken der Standardaktion</a>.)</li>
       <li>Um das Aufsteigen des Ereignisses zu verhindern, kann die standardisierte Methode <code>stopPropagation</code> des Event-Objektes browserübergreifend genutzt werden. (Siehe <a href="event-handling-objekt.html#bubbling-verhindern">Bubbling verhindern</a>.)</li>
     </ol>
-    <p>Falls Sie keine umfangreichere JavaScript-Bibliothek verwenden, welche ausgereiftes Event-Handling ermöglicht, so sind Sie mit diesen beiden Helferfunktionen <code>addEvent</code> und <code>removeEvent</code> gut bedient &ndash; Sie sollten sie in ihren Werkzeugkasten aufnehmen.</p>
+    <p>Falls Sie keine umfangreichere JavaScript-Bibliothek verwenden, welche ausgereiftes Event-Handling ermöglicht, so sind Sie mit diesen beiden Helferfunktionen <code>addEvent</code> und <code>removeEvent</code> gut bedient – Sie sollten sie in ihren Werkzeugkasten aufnehmen.</p>
   </div>
 
   <div class="section" id="addevent-frameworks">

@@ -234,7 +234,7 @@ Modul.methode();
 <pre>
 &lt;button id="button">Klick mich&lt;/button>
 &lt;p id="output">Button wurde noch nicht angeklickt&lt;/p>
-&lt;script type="text/javascript" src="beispiel.js">&lt;/script>
+&lt;script src="beispiel.js">&lt;/script>
 </pre>
 
   <p>Der Code nutzt die jQuery-Bibliothek, um eine Initialisierungsfunktion bei <a href="#domready">DOM ready</a> auszuführen. Diese registriert bei einem Button einen Event-Handler. Wird der Button geklickt, wird eine Zahl erhöht. Zudem wird die bisherige Anzahl der Klicks im Dokument ausgegeben.</p>
@@ -296,7 +296,7 @@ jQuery(function ($) {
 })(window, document);
 </pre>
 
-    <p>Gleichzeitig wird hier sichergestellt, dass innerhalb der Funktion der Bezeichner <code>undefined</code> immer den Typ <code>Undefined</code> besitzt. Wir definieren einen solchen Parameter, aber übergeben keinen Wert dafür &ndash; sodass eine lokale Variable namens <code>undefined</code> mit einem leeren Wert angelegt wird. Das ist andernfalls nicht garantiert, denn <code>window.undefined</code> ist durch Scripte überschreibbar.</p>
+    <p>Gleichzeitig wird hier sichergestellt, dass innerhalb der Funktion der Bezeichner <code>undefined</code> immer den Typ <code>Undefined</code> besitzt. Wir definieren einen solchen Parameter, aber übergeben keinen Wert dafür – sodass eine lokale Variable namens <code>undefined</code> mit einem leeren Wert angelegt wird. Das ist andernfalls nicht garantiert, denn <code>window.undefined</code> ist durch Scripte überschreibbar.</p>
 
     <p>Innerhalb der Funktion können die Objekte genauso heißen wie außerhalb. Dennoch handelt es z.B. bei <code>document</code> innerhalb der Funktion um eine lokale Variable, auch wenn sie natürlich auf <code>window.document</code> verweist.</p>
 
@@ -433,7 +433,7 @@ Modul.methode1();
 Modul.methode2();
 </pre>
 
-    <p>Zu beachten ist, dass die Methoden der Erweiterung keinen Zugriff auf die privaten Objekte des Grundmoduls haben &ndash; denn sie befinden sich in einem anderen Funktions-Scope. Zur Lösung dieses Problems schlägt Ben Cherry eine Methode vor, die die privaten Objekte kurzzeitig öffentlich macht, sodass ein übergreifender Zugriff möglich ist. Das erscheint mir jedoch besonders umständlich &ndash; in diesem Fall würde ich privaten Objekte zu dauerhaft öffentlichen Eigenschaften machen und auf die vollständige Kapselung verzichten.</p>
+    <p>Zu beachten ist, dass die Methoden der Erweiterung keinen Zugriff auf die privaten Objekte des Grundmoduls haben – denn sie befinden sich in einem anderen Funktions-Scope. Zur Lösung dieses Problems schlägt Ben Cherry eine Methode vor, die die privaten Objekte kurzzeitig öffentlich macht, sodass ein übergreifender Zugriff möglich ist. Das erscheint mir jedoch besonders umständlich – in diesem Fall würde ich privaten Objekte zu dauerhaft öffentlichen Eigenschaften machen und auf die vollständige Kapselung verzichten.</p>
 
   </div>
 

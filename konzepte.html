@@ -30,14 +30,14 @@
     </li>
     <li>Der Browser auf dem Client empfängt den HTML-Code und verarbeitet ihn. In diesem Moment werden JavaScripte ausführt, die mit dem Dokument verknüpft sind.</li>
   </ol>
-  <p>Dies soll zeigen, wie server- und clientseitige Programme zusammenarbeiten, aber doch getrennt sind &ndash; denn sie laufen nacheinander auf verschiedenen Rechnern, wirken in einer unterschiedlichen Umgebung und erfüllen andere Aufgaben.</p>
+  <p>Dies soll zeigen, wie server- und clientseitige Programme zusammenarbeiten, aber doch getrennt sind – denn sie laufen nacheinander auf verschiedenen Rechnern, wirken in einer unterschiedlichen Umgebung und erfüllen andere Aufgaben.</p>
   <p>Zu allem Überfluss ist JavaScript nicht auf dem Client eingeschlossen, sondern kann von sich aus mit Serverprogrammen interagieren. JavaScripte können allerdings nicht direkt Programmcode auf dem Server aufrufen. Die einzige Möglichkeit ist, eine HTTP-Anfrage im Hintergrund zu starten. Diese Technik werden wir später unter dem Begriff <strong>Ajax</strong> kennenlernen.</p>
   </div>
 
 <div id="objektmodelle" class="section">
   <h2>Dokument-Objektmodell (DOM), Elementobjekte und Knoten</h2>
   <p>Nachdem wir die Übertragung von HTML-Dokumenten vom Webserver zum Browser betrachtet haben, müssen wir uns vor Augen führen, wie der Browser das Dokument verarbeitet.</p>
-  <p>Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Noch während der Browser den Code über das Netz empfängt, verarbeitet er ihn Stück für Stück. Diese Aufgabe übernimmt der sogenannte <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Der Parser überführt den HTML-Code in eine Objektstruktur, die dann im Arbeitsspeicher vorgehalten wird. &ndash; Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. &ndash; Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten und Textknoten, die in einer Baumstruktur angeordnet sind.</p>
+  <p>Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Noch während der Browser den Code über das Netz empfängt, verarbeitet er ihn Stück für Stück. Diese Aufgabe übernimmt der sogenannte <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Der Parser überführt den HTML-Code in eine Objektstruktur, die dann im Arbeitsspeicher vorgehalten wird. – Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. – Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten und Textknoten, die in einer Baumstruktur angeordnet sind.</p>
   <p>Der Browser nutzt für alle weiteren Operationen diese Objektstruktur, nicht den HTML-Quellcode, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, sondern auf den entsprechenden Elementenbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <strong>Document Object Model</strong> geregelt.</p>
 
   <div class="references">
@@ -101,6 +101,11 @@
   <p>Mit JavaScript können wir nun solche Regeln formulieren: <em>Wenn das Ereignis <code>click</code> beim Element mit der ID <code>button</code> eintritt, führe die Handler-Funktion <code>begrüßung</code> aus.</em> Klickt der Benutzer auf das besagte Element, wird die Funktion <code>begrüßung</code> ausgeführt und darin kann auf die Benutzereingabe reagiert werden.</p>
   <p>Mit Fug und Recht kann behauptet werden, dass das <em>event handling</em> das wichtigste Konzept von JavaScript ist: Die Programmierung von JavaScript besteht zum größten Teil aus dem Entwerfen von Abläufen, die durch Ereignisse gesteuert werden. Gleichzeitig bringt dieser Bereich große Herausforderungen mit sich, die die Praxis ungemein erschweren.</p>
   <p>Genaueres zum Thema können Sie im Kapitel <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a> erfahren.</p>
+</div>
+
+<div class="sequence-navigation">
+  <p class="next"><a href="standards.html" rel="next">Entstehung und Standardisierung</a></p>
+  <p class="prev"><a href="voraussetzungen.html" rel="prev">Vorkenntnisse und Voraussetzungen</a></p>
 </div>
 
 <div id="footer">

@@ -35,7 +35,7 @@
 document.addEventListener("load", dokumentGeladen, false);
 document.addEventListener("DOMContentLoaded", dokumentGeladen, false);</pre>
   <p>Internet Explorer vor Version 9 können dieses Beispiel nicht ausführen, sie kennen die Methode <code>addEventListener</code> nicht.</p>
-  <p>Wenn Sie das Beispiel in ein HTML-Dokument einfügen, so demonstriert es, dass der <code>DOMContentLoaded</code>-Event vor dem <code>load</code>-Event passiert. Wenn große und zahlreiche externen Ressourcen in das Dokument eingebunden sind, dann kann zwischen beiden Ereignissen viel Zeit vergehen &ndash; wertvolle Zeit, die ein Script nicht untätig verstreichen lassen sollte.</p>
+  <p>Wenn Sie das Beispiel in ein HTML-Dokument einfügen, so demonstriert es, dass der <code>DOMContentLoaded</code>-Event vor dem <code>load</code>-Event passiert. Wenn große und zahlreiche externen Ressourcen in das Dokument eingebunden sind, dann kann zwischen beiden Ereignissen viel Zeit vergehen – wertvolle Zeit, die ein Script nicht untätig verstreichen lassen sollte.</p>
 </div>
 
 <div class="section" id="domcontentloaded-crossbrowser">
@@ -54,7 +54,7 @@ ContentLoaded(window, init);</pre>
   <h2>Fallstricke bei <code>DOMContentLoaded</code></h2>
   <p>Das <code>DOMContentLoaded</code>-Ereignis wurde ursprünglich vom Browserhersteller Mozilla erfunden. Andere Browserhersteller haben es übernommen, weil sie sie nützlich fanden. Mittlerweile wird die genaue Funktionsweise in HTML5 standardisiert.</p>
   <p>Trotz dieser Standardisierung verhalten sich die Browser im Detail noch unterschiedlich. Eine Unstimmigkeit ist die Frage, ob das Ereignis durch den Ladevorgang externer Stylesheets verzögert werden soll.</p>
-  <p>Beide Varianten ergeben Sinn: Es reicht zwar aus, dass der DOM-Baum komplett eingelesen ist, wenn man Event-Handler registrieren will. Allerdings gibt es auch Scripte, die in der Initialisierungsphase bereits auf die Darstellung gewisser Elemente reagieren sollen &ndash; und diese wird üblicherweise durch externe Stylesheets geregelt. Wenn das Script beispielsweise die Größe eines Elements in Erfahrung bringen will, muss der Browser bereits die Stylesheets verarbeitet und die Darstellung berechnet haben.</p>
+  <p>Beide Varianten ergeben Sinn: Es reicht zwar aus, dass der DOM-Baum komplett eingelesen ist, wenn man Event-Handler registrieren will. Allerdings gibt es auch Scripte, die in der Initialisierungsphase bereits auf die Darstellung gewisser Elemente reagieren sollen – und diese wird üblicherweise durch externe Stylesheets geregelt. Wenn das Script beispielsweise die Größe eines Elements in Erfahrung bringen will, muss der Browser bereits die Stylesheets verarbeitet und die Darstellung berechnet haben.</p>
   <p>In HTML5 ist geregelt, dass das Laden von Stylesheets das <code>DOMContentLoaded</code>-Ereignis verzögert. ...</p>
   <!-- <p>Wenn Ihre Scripte <a href="werte-auslesen">Informationen über die Darstellung der Elemente abfragen</a>, ...</p> -->
 </div>

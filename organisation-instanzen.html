@@ -130,9 +130,9 @@ mauzi.miau();
   <p>Ein konkretes Beispiel: Wenn wir den Ausdruck <code>maunzi.miau</code> schreiben, dann arbeitet der JavaScript-Interpreter die Prototyp-Kette ab, um die Eigenschaft namens <code>miau</code> zu finden und damit den Ausdruck aufzulösen. Die Prototyp-Kette von <code>maunzi</code> hat folgende Einträge:</p>
 
   <ol>
-  <li><code>maunzi</code> &ndash; das Instanzobjekt selbst</li>
-  <li><code>Katze.prototype</code> &ndash; der Prototyp für alle Objekte, die mit dem <code>Katze</code>-Konstruktor erzeugt wurden</li>
-  <li><code>Object.prototype</code> &ndash; der Prototyp, der hinter allen Objekten steht</li>
+  <li><code>maunzi</code> – das Instanzobjekt selbst</li>
+  <li><code>Katze.prototype</code> – der Prototyp für alle Objekte, die mit dem <code>Katze</code>-Konstruktor erzeugt wurden</li>
+  <li><code>Object.prototype</code> – der Prototyp, der hinter allen Objekten steht</li>
   </ol>
 
   <p>Das folgende Diagramm zeigt Objekte der Prototyp-Kette und listet deren Eigenschaften auf:</p>
@@ -194,7 +194,7 @@ mauzi.miau();
 
   <h2>Prototypen verstehen: Die Glasplatten-Metapher</h2>
 
-  <p>Eine hervorragende Veranschaulichung von Prototypen hat Robin Debreuil ausgearbeitet. Er schrieb 2001 ein Tutorial über <a href="http://www.debreuil.com/docs/ch01_Intro.htm">objektorientierte Programmierung mit ActionScript 1.0 in Flash 5</a>. ActionScript war damals eine Sprache, die auf ECMAScript 3 aufbaute und damit in den Grundzügen mit JavaScript identisch war. Die Sprache ActionScript ist mittlerweile von prototypenbasierter auf klassenbasierte Objektorientierung umgestiegen &ndash; für JavaScript sind diese Erklärungen aber immer noch gültig und aufschlussreich.</p>
+  <p>Eine hervorragende Veranschaulichung von Prototypen hat Robin Debreuil ausgearbeitet. Er schrieb 2001 ein Tutorial über <a href="http://www.debreuil.com/docs/ch01_Intro.htm">objektorientierte Programmierung mit ActionScript 1.0 in Flash 5</a>. ActionScript war damals eine Sprache, die auf ECMAScript 3 aufbaute und damit in den Grundzügen mit JavaScript identisch war. Die Sprache ActionScript ist mittlerweile von prototypenbasierter auf klassenbasierte Objektorientierung umgestiegen – für JavaScript sind diese Erklärungen aber immer noch gültig und aufschlussreich.</p>
 
   <p>Die Metapher beschreibt Objekte in der Prototyp-Kette als beklebte Glasplatten. Auf jeder Glasplatte sind farbige Zettel an bestimmten Positionen aufgeklebt. Diese Zettel entsprechen den Objekteigenschaften, die Positionen entsprechen Eigenschaftsnamen. Die Instanz selbst verfügt über ein paar Zettel, sein Prototyp und dessen Prototyp über weitere. Diese können auch an denselben Stellen kleben.</p>
 
@@ -206,7 +206,7 @@ mauzi.miau();
     </object>
   </p>
 
-  <p>Das Objekt ist demnach ein Mosaik, das sich aus den eigenen sowie fremden Eigenschaften zusammensetzt. Welches Objekt in der Prototyp-Kette nun eine gesuchte Eigenschaft bietet, ist unwichtig. An der gesuchten Stelle auf dem Glas ist ein Zettel sichtbar &ndash; in der Grafik z.B. oben links, des entspricht einem Eigenschaftsnamen, z.B. <code>eins</code>.</p>
+  <p>Das Objekt ist demnach ein Mosaik, das sich aus den eigenen sowie fremden Eigenschaften zusammensetzt. Welches Objekt in der Prototyp-Kette nun eine gesuchte Eigenschaft bietet, ist unwichtig. An der gesuchten Stelle auf dem Glas ist ein Zettel sichtbar – in der Grafik z.B. oben links, des entspricht einem Eigenschaftsnamen, z.B. <code>eins</code>.</p>
 
   <p>Die Metapher zeigt auch, dass Objekte in der Prototyp-Kette gleiche Eigenschaften bieten können. An der Stelle oben in der Mitte klebt ein gelber Zettel auf der Instanz-Glasplatte, aber auch ein orangener auf der, die <code>Konstruktor.prototype</code> darstellt. Beim Übereinanderlegen ist nur der gelbe Zettel der oben liegenden Instanz-Glasplatte sichtbar, der orangene wird überdeckt. Übertragen heißt das: Eine Eigenschaft kann am Instanzobjekt definiert werden, und schon überschreibt sie eine gleichnamige Eigenschaft am <code>prototype</code>-Objekt des Konstruktors.</p>
 
@@ -214,7 +214,7 @@ mauzi.miau();
     <p>Bei prototypischer Vererbung werden nur sich unterscheidende Eigenschaften beim abgeleiteten Objekt gesetzt.</p>
   </div>
 
-  <p>Diese Art der Vererbung nennt man <dfn>Differential Inheritance</dfn>. Im Gegensatz zur klassenbasierten Vererbung werden beim abgeleiteten Objekt (der Instanz) keine Eigenschaften erzeugt. Die Instanz ist keine Kopie des Prototypen, die Instanz kann sogar leer sein, wie es Katzen-Beispiel der Fall ist. Erst wenn sich die Instanz vom Prototypen unterscheidet, wird bei der Instanz eine Eigenschaft angelegt, die einen anderen Wert als die des Prototypen besitzt. In der Glasplatten-Metapher bedeutet dies: An den Stellen, in denen die Instanz dem Prototyp gleicht, ist die Platte durchsichtig &ndash; sie delegiert . Wo sie sich unterscheidet, besitzt sie einen eigenen, andersfarbigen Zettel.</p>
+  <p>Diese Art der Vererbung nennt man <dfn>Differential Inheritance</dfn>. Im Gegensatz zur klassenbasierten Vererbung werden beim abgeleiteten Objekt (der Instanz) keine Eigenschaften erzeugt. Die Instanz ist keine Kopie des Prototypen, die Instanz kann sogar leer sein, wie es Katzen-Beispiel der Fall ist. Erst wenn sich die Instanz vom Prototypen unterscheidet, wird bei der Instanz eine Eigenschaft angelegt, die einen anderen Wert als die des Prototypen besitzt. In der Glasplatten-Metapher bedeutet dies: An den Stellen, in denen die Instanz dem Prototyp gleicht, ist die Platte durchsichtig – sie delegiert . Wo sie sich unterscheidet, besitzt sie einen eigenen, andersfarbigen Zettel.</p>
 
   <p>Nehmen wir an, dass hiesige Katzen meistens von der Rasse »Europäisch Kurzhaar« sind. Anstatt dies jedes Mal beim Erzeugen anzugeben, legen wir die Eigenschaft beim Prototypen an:</p>
 
@@ -319,7 +319,7 @@ schnucki.miau();
   <p>Plötzlich hat Maunzi fünf Pfoten und alle Katzen sagen »wau« anstatt »miau«. Dies ist sowohl ein Defizit von ECMAScript 3 als auch eine Stärke: Prototypen sind nicht abgeschlossen und Objekte immer erweiterbar. Erst ab ECMAScript 5 is es möglich, eine Eigenschaft als nicht überschreibbar und ein Objekt als nicht erweiterbar zu deklarieren.</p>
 
   <div class="sidebox">
-  <p>Private Eigenschaften gibt es nicht &ndash; wir können stattdessen einen Funktions-Scope definieren, dessen private Variablen die Instanzmethoden einschließen.</p>
+  <p>Private Eigenschaften gibt es nicht – wir können stattdessen einen Funktions-Scope definieren, dessen private Variablen die Instanzmethoden einschließen.</p>
   </div>
 
   <p>Wie gesagt gibt es keine privaten Eigenschaften im Wortsinn, auch wenn manche diesen Begriff auch auf JavaScript anwenden. Denn wenn ein Objekt an der Instanz hängt, ist es in ECMAScript 3 auch notwendig nach außen sichtbar und unkontrolliert überschreibbar.</p>

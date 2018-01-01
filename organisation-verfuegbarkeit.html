@@ -19,7 +19,7 @@
 
   <h2>Bedeutung von this</h2>
 
-  <p>Bei allen drei vorgestellten Techniken &ndash; <code>Object</code>-Literalen, Revealing Module Pattern und Konstruktoren/Prototypen &ndash; haben wir mit <code>this</code> gearbeitet, um auf das Modul bzw. die Instanz zuzugreifen. Nun wollen wir uns näher der Funktionsweise von <code>this</code> zuwenden.</p>
+  <p>Bei allen drei vorgestellten Techniken – <code>Object</code>-Literalen, Revealing Module Pattern und Konstruktoren/Prototypen – haben wir mit <code>this</code> gearbeitet, um auf das Modul bzw. die Instanz zuzugreifen. Nun wollen wir uns näher der Funktionsweise von <code>this</code> zuwenden.</p>
 
   <p><code>this</code> ist ein Schlüsselwort, das zu einem Wert aufgelöst wird und in der Regel auf ein Objekt zeigt. Worauf es zeigt, hängt ganz vom Kontext ab.</p>
 
@@ -96,7 +96,7 @@ schnucki.zeigePfoten();
   <p>Dieser Bezug kann jedoch verloren gehen, wenn die Funktion außerhalb dieses Objektkontextes ausgeführt wird. Dies passiert vor allem in folgenden Fällen:</p>
 
   <ol>
-  <li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird &ndash; siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
+  <li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird – siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
   <li>Beim Aufrufen der Funktion mit <code>setTimeout</code> oder <code>setInterval</code>. Die verzögert bzw. wiederholt ausgeführte Funktion verliert den Bezug zum Ursprungsobjekt, denn <code>this</code> verweist darin auf das globale Objekt <code>window</code>. In vielen Fällen ist der Zugriff auf das Modul bzw. die Instanz notwendig.</li>
   <li>Bei der Übergabe einer Funktion als Parameter (z.B. als Callback-Funktion), beim Speichern in einer Variablen und dergleichen. In diesen Fällen zeigt gibt es oftmals keinen spezifischen Kontext, sodass <code>this</code> als Fallback auf <code>window</code> zeigt.</li>
   </ol>
@@ -184,10 +184,10 @@ instanz.start();
   <h2>Einführung in Closures</h2>
 
   <div class="sidebox">
-  <p>Verschachtelte Funktionen haben Zugriff auf die lokalen Variablen der äußere Funktion &ndash; und zwar auch nach der Abarbeitung der äußeren Funktion. Sie konservieren die Variablen.</p>
+  <p>Verschachtelte Funktionen haben Zugriff auf die lokalen Variablen der äußere Funktion – und zwar auch nach der Abarbeitung der äußeren Funktion. Sie konservieren die Variablen.</p>
   </div>
 
-  <p>Eine <dfn>Closure</dfn> ist allgemein gesagt eine Funktion, die in einer anderen Funktion notiert wird. Diese verschachtelte, innere Funktion hat Zugriff auf die Variablen des Geltungsbereiches (Scopes) der äußeren Funktion &ndash; und zwar über die Ausführung der äußeren Funktion hinaus.</p>
+  <p>Eine <dfn>Closure</dfn> ist allgemein gesagt eine Funktion, die in einer anderen Funktion notiert wird. Diese verschachtelte, innere Funktion hat Zugriff auf die Variablen des Geltungsbereiches (Scopes) der äußeren Funktion – und zwar über die Ausführung der äußeren Funktion hinaus.</p>
 
   <p>Durch dieses <strong>Einschließen</strong> der Variablen kann man bestimmte Objekte in Funktionen verfügbar machen, die darin sonst nicht oder nur über Umwege verfügbar wären. Closures werden damit zu einem Allround-Werkzeug in der fortgeschrittenen JavaScript-Programmierung. Wir haben Closures bereits verwendet, um private Objekte zu erreichen.</p>
 
@@ -211,7 +211,7 @@ function äußereFunktion  () {
 
   <p>Das Beispiel zeigt, dass die innere Funktion Zugriff auf die Variablen der äußeren Funktion hat. Der entscheidende Punkt bei einer Closure ist jedoch ein anderer:</p>
 
-  <p>Normalerweise werden alle lokalen Variablen einer Funktion aus dem Speicher gelöscht, nachdem die Funktion beendet wurde. Eine Closure aber führt dazu, dass die Variablen der äußeren Funktion nach deren Ausführung nicht gelöscht werden, sondern im Speicher erhalten bleiben. Die Variablen stehen der inneren Funktion weiterhin über deren ursprüngliche Namen zur Verfügung. Die Variablen werden also <em>eingeschlossen</em> und konserviert &ndash; daher der Name »Closure«.</p>
+  <p>Normalerweise werden alle lokalen Variablen einer Funktion aus dem Speicher gelöscht, nachdem die Funktion beendet wurde. Eine Closure aber führt dazu, dass die Variablen der äußeren Funktion nach deren Ausführung nicht gelöscht werden, sondern im Speicher erhalten bleiben. Die Variablen stehen der inneren Funktion weiterhin über deren ursprüngliche Namen zur Verfügung. Die Variablen werden also <em>eingeschlossen</em> und konserviert – daher der Name »Closure«.</p>
 
   <p>Auch lange nach dem Ablauf der äußeren Funktion hat die Closure immer noch Zugriff auf deren Variablen. Vorausgesetzt ist, dass die Closure woanders gespeichert wird und dadurch zu einem späteren Zeitpunkt ausgeführt werden kann. Im obigen Beispiel ist die innere Funktion nur eine lokale Variable, die zwar Zugriff auf die Variablen der äußeren Funktion hat, aber bei deren Beendigung selbst verfällt.</p>
 
@@ -384,7 +384,7 @@ instanz.start();
 &lt;button id="button"&gt;Button, der auf Klick reagiert&lt;/button&gt;
 </pre>
 
-    <p>Wichtig ist hier die Unterscheidung zwischen <code>this</code> und <code>thisObject</code>. <code>this</code> zeigt in den drei Methoden <code>start</code>, <code>verzögert</code> und <code>handler</code> auf drei unterschiedliche Objekte. In <code>start</code> zeigt es auf das Instanzobjekt <code>instanz</code>, in <code>verzögert</code> auf <code>window</code> und in <code>handler</code> auf das Button-Element. <code>thisObject</code> hingegen ist die eingeschlossene Variable, die auf das Instanzobjekt zeigt &ndash; und zwar in allen drei Methoden.</p>
+    <p>Wichtig ist hier die Unterscheidung zwischen <code>this</code> und <code>thisObject</code>. <code>this</code> zeigt in den drei Methoden <code>start</code>, <code>verzögert</code> und <code>handler</code> auf drei unterschiedliche Objekte. In <code>start</code> zeigt es auf das Instanzobjekt <code>instanz</code>, in <code>verzögert</code> auf <code>window</code> und in <code>handler</code> auf das Button-Element. <code>thisObject</code> hingegen ist die eingeschlossene Variable, die auf das Instanzobjekt zeigt – und zwar in allen drei Methoden.</p>
 
     <p>Dank Closures können wir zum Zugriff auf die Instanz auf das uneindeutige <code>this</code> verzichten. Stattdessen nutzen wir die eigene Variable <code>thisObject</code>.</p>
 
@@ -464,7 +464,7 @@ summe.apply(objekt, [1, 2, 3]);
 
     <p><code>bind</code> und <code>bindAsEventListener</code> erzeugen dynamisch eine neue Funktion, die die ursprüngliche Funktion umhüllt und an dessen Stelle verwendet wird. Man spricht von <dfn>Wrapper-Funktionen</dfn>.</p>
 
-    <p>Der Sinn dieser Kapselung ist in erster Linie die Korrektur des <code>this</code>-Kontextes. Dazu werden die besagten <code>call</code> und <code>apply</code> verwendet. <code>bind</code> und <code>bindAsEventListener</code> nehmen &ndash; genauso wie <code>call</code>/<code>apply</code> &ndash; als ersten Parameter das Objekt an, das als Kontext verwendet wird.</p>
+    <p>Der Sinn dieser Kapselung ist in erster Linie die Korrektur des <code>this</code>-Kontextes. Dazu werden die besagten <code>call</code> und <code>apply</code> verwendet. <code>bind</code> und <code>bindAsEventListener</code> nehmen – genauso wie <code>call</code>/<code>apply</code> – als ersten Parameter das Objekt an, das als Kontext verwendet wird.</p>
 
     <p><code>bind</code> ermöglicht es zudem, der ursprünglichen Funktion Parameter zu übergeben, sodass darin nicht nur ein Objekt über <code>this</code>, sondern viele weitere Objekte verfügbar sind. Das Erzeugen einer neuen Wrapper-Funktion, die eine andere mit vordefinierten Parametern aufruft, nennt sich <dfn>Currying</dfn>.</p>
 
@@ -636,7 +636,7 @@ instanz.start();
 
     <p>Hier mag zunächst die Schreibweise <code>this.verzögert.bind(this)</code> und <code>this.handler.bindAsEventHandler(this)</code> irritieren. Diese Aufrufe hüllen <code>verzögert</code> und <code>handler</code> in Closures, welche die beiden Methoden im Kontext der Instanz ausführen.</p>
 
-    <p>Function Binding und Currying mit solchen Helferfunktionen erlaubt das präzise Anlegen von Closures und ist ein wichtiges Werkzeug, um Verfügbarkeitsprobleme zu lösen. Im Gegensatz zu einer großen Kapselfunktion, in der alle weiteren Funktionen als Closures angelegt werden, ist Binding punktgenauer und vielseitiger &ndash; es funktioniert auch bei einfachen <code>Object</code>-Literalen und Methoden, die über den Prototyp hinzugefügt werden.</p>
+    <p>Function Binding und Currying mit solchen Helferfunktionen erlaubt das präzise Anlegen von Closures und ist ein wichtiges Werkzeug, um Verfügbarkeitsprobleme zu lösen. Im Gegensatz zu einer großen Kapselfunktion, in der alle weiteren Funktionen als Closures angelegt werden, ist Binding punktgenauer und vielseitiger – es funktioniert auch bei einfachen <code>Object</code>-Literalen und Methoden, die über den Prototyp hinzugefügt werden.</p>
 
   </div>
 

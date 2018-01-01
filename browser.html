@@ -43,7 +43,7 @@ Andernfalls:
   <p>Diese Fallunterscheidungen werden in JavaScript üblicherweise mit bedingten Anweisungen umgesetzt: <code>if (Bedingung) { Anweisungen } else { Anweisungen }</code></p>
   <p>Entscheidend ist, genau die Unterschiede zu kennen und <em>punktuell</em> solche Abzweigungen einzubauen. Nicht das ganze Script sollte eine solche Struktur haben, es sollte sich dieser verzweigten Abläufe nur dort bedienen, <em>wo es nötig ist</em>. Auf diese Weise sparen Sie sich doppelte Arbeit.</p>
   <p>Wo Unterschiede auftreten, sollten Sie mit solchen Abfragen möglichst für <strong>Vereinheitlichung</strong> sorgen. Darauffolgende Anweisungen müssen sich dann um die Unterschiede keine Gedanken mehr machen. Bis zur nächsten punktuellen Fallunterscheidung folgt wieder Code, der von allen Browsern verstanden wird.</p>
-  <p>Nehmen wir ein Beispiel aus dem : Eine Handler-Funktion bekommt das  in manchen Browsern als Parameter übergeben. Im Internet Explorer ist es jedoch nur über <code>window.event</code> zugänglich. Über das Event-Objekt hat man Zugriff auf das , bei dem das Ereignis passiert ist, welches die Handler-Funktion gerade verarbeitet. Auch in dem Punkt unterscheiden sich die Browser: Das Element ist entweder in der Eigenschaft <code>target</code> (W3C-konforme Browser) oder <code>srcElement</code> (Internet Explorer) gespeichert. Nun könnte man folgendermaßen vorgehen:</p><pre>function handlerFunktion (eventObjekt) {
+  <p>Nehmen wir ein Beispiel aus dem Event-Handling: Eine Handler-Funktion bekommt das Event-Objekt in manchen Browsern als Parameter übergeben. Im Internet Explorer ist es jedoch nur über <code>window.event</code> zugänglich. Über das Event-Objekt hat man Zugriff auf das Element, bei dem das Ereignis passiert ist, welches die Handler-Funktion gerade verarbeitet. Auch in dem Punkt unterscheiden sich die Browser: Das Element ist entweder in der Eigenschaft <code>target</code> (W3C-konforme Browser) oder <code>srcElement</code> (Internet Explorer) gespeichert. Nun könnte man folgendermaßen vorgehen:</p><pre>function (eventObjekt) {
   if (eventObjekt) {
     alert("Element, an dem das Ereignis passierte: " + eventObjekt.target.nodeName);
   } else if (window.event) {
@@ -216,6 +216,11 @@ Falls nein:
   <div class="section">
    <h3 class="unit-std-heading">Safari (Webkit-Engine)</h3>
   </div>
+</div>
+
+<div class="sequence-navigation">
+  <p class="next"><a href="fenster.html" rel="next">Fenster und Dokumente</a></p>
+  <p class="prev"><a href="event-handling-effizient.html" rel="prev">Effiziente Ereignisverarbeitung</a></p>
 </div>
 
 <div id="footer">
