@@ -260,7 +260,7 @@ element.firstChild.nodeValue = "Wikipedia";
   <p>Das Script spricht ein Link-Element über seine ID an und ändert dessen Attribute <code>title</code> und <code>href</code> sowie schließlich dessen Textinhalt. Das Beispiel illustriert, dass sich die Zuweisungen der Attributwerte im HTML und im JavaScript stark ähneln. Die neuen Attributwerte werden im JavaScript einfach als Strings notiert.</p>
   <p>Diese Vorgehensweise ist beim Setzen von Event-Handler-Attributen über JavaScript nicht völlig falsch. <em>Theoretisch</em> haben folgende Schreibweisen denselben Effekt:</p>
   <pre>// Methode 1: Traditionelles Event-Handling
-function handlerfunktion () {
+function handlerfunktion() {
    window.alert("Hallo Welt!");
 }
 element.onevent = handlerfunktion;

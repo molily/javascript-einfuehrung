@@ -26,13 +26,13 @@ var variable1 = "wert";
 var variable2 = "wert";
 var variable3 = "wert";
 
-function funktion1 () {
+function funktion1() {
     /* ... */
 }
-function funktion2 () {
+function funktion2() {
     /* ... */
 }
-function funktion3 () {
+function funktion3() {
     /* ... */
 }
 </pre>
@@ -187,7 +187,7 @@ Modul.methode();
     var variable = 123;
 
     /* Lokale Funktion */
-    function funktion () {
+    function funktion() {
         /* ... */
     }
 
@@ -214,12 +214,12 @@ Modul.methode();
     var clickNumber = 0;
     var outputEl;
 
-    function buttonClicked () {
+    function buttonClicked() {
         clickNumber++;
         outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
     }
 
-    function init () {
+    function init() {
         outputEl = jQuery('#output);
         jQuery('#button').click(buttonClicked);
     }
@@ -257,12 +257,12 @@ jQuery(function ($) {
     var clickNumber = 0;
     var outputEl;
 
-    function buttonClicked () {
+    function buttonClicked() {
         clickNumber++;
         outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
     }
 
-    function init () {
+    function init() {
         outputEl = $('#output);
         $('#button').click(buttonClicked);
     }
@@ -354,7 +354,7 @@ var Modul = (function () {
 
     // Private Objekte
     var privateVariable = "privat";
-    function privateFunktion () {
+    function privateFunktion() {
         alert("privateFunktion wurde aufgerufen\n" +
             "Private Variable: " + privateVariable);
     }

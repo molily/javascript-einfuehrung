@@ -66,7 +66,7 @@
   <p>In dieser Funktion wird das Zielelement des Ereignisses angesprochen und dessen Elementname überprüft. Wenn ein <code>a</code>-Element geklickt wurde, muss es sich um einen Link auf ein Bild handeln und das Vollbild soll eingeblendet werden.</p>
   <p>Das alleine wäre bereits mit der Abfrage <code>if (target.nodeName == "A")</code> zu erledigen. Das Beispiel hat allerdings bewusst eine Schwierigkeit eingebaut, um Ihnen das Event-Bubbling und das Arbeiten mit dem Zielelement näher zu bringen: In den <code>a</code>-Elementen liegen zusätzlich <code>img</code>-Elemente für die Thumbnails. Wenn der Anwender auf diese klickt, soll das Vollbild selbstverständlich ebenfalls eingeblendet werden. In dem Fall ist jedoch nicht der Link das Zielelement, sondern logischerweise das <code>img</code>-Element.</p>
   <p>Aus diesem Grund muss die Abfrage erweitert werden: Handelt es sich um ein <code>a</code>-Element <em>oder</em> um ein Element, das direkt in einem <code>a</code>-Element liegt? Falls ein <code>img</code>-Element das Zielelement ist, steigen wir von diesem zu seinem <code>a</code>-Elternelement auf. Schließlich wird die Funktion <code>zeigeVollbild</code> mit dem gefundenen <code>a</code>-Elementobjekt als Parameter aufgerufen. Das Gerüst dieser Funktion sieht so aus:</p>
-<pre>function zeigeVollbild (aElement) {
+<pre>function zeigeVollbild(aElement) {
    // Empfange das Elementobjekt als ersten Parameter und
    // lese dessen href-Attribut mit der Bild-Adresse aus:
    var bildAdresse = aElement.href;

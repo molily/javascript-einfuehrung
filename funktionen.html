@@ -28,14 +28,14 @@
 <div class="section" id="deklarationen">
   <h2>Funktionsdeklarationen</h2>
   <p>Es gibt drei Arten, wie Sie Funktionen notieren und damit Funktionsobjekte erzeugen können. Die einfachste und wichtigste Art ist die sogenannte Funktions-Deklaration (auf englisch <em>function declaration</em>). Deren Syntax ist folgendermaßen aufgebaut:</p>
-  <pre>function <var>Funktionsname</var> (<var>Parameterliste</var>) {
+  <pre>function <var>Funktionsname</var>(<var>Parameterliste</var>) {
 <var>Anweisungen</var>
 }</pre>
   <p>Der <strong>Funktionsname</strong> muss <a href="objekte-variablen.html#bezeichner">den üblichen Anforderungen an JavaScript-Bezeichner</a> genügen: Sie dürfen Buchstaben, Zahlen und einige Sonderzeichen (das Dollar-Zeichen, den Unterstrich ... TODO) verwenden. Der Funktionsname darf in diesem Fall aber keine Leerzeichen enthalten. TODO: Wann darf er das?</p>
   <p>Die <strong>Parameterliste</strong> zwischen den beiden runden Klammern ist eine durch Kommas getrennte Liste von Namen. Für diese gelten die besagten Namenskonventionen. Unter den in dieser Auflistung vergebenen Namen können Sie innerhalb der Funktion auf die übergebenen Parameter zugreifen.</p>
   <p>Zwischen den beiden geschweiften Klammern wird der sogenannte Funktionskörper notiert: Darin werden die <a href="syntax.html#anweisungen">Anweisungen</a> untergebracht, die beim Aufruf der Funktion ausgeführt werden sollen.</p>
   <p>Folgendes Beispiel soll das Schema verdeutlichen:</p>
-  <pre>function statusMeldung (meldungsTyp, meldungsText) {
+  <pre>function statusMeldung(meldungsTyp, meldungsText) {
 var ausgabeElement = document.getElementById("meldungsausgabe");
 ausgabeElement.className = meldungsTyp;
 ausgabeElement.innerHTML = meldungsText;
@@ -51,7 +51,7 @@ statusMeldung("fehler", "Beim Absenden Ihrer Nachricht ist ein Fehler aufgetrete
 <div class="section" id="parameter">
   <h2>Funktionsparameter</h2>
   <p>Bei der Deklaration weisen Sie den Funktionsparametern </p>
-  <pre>function Summe (zahl1, zahl2, zahl3) {
+  <pre>function Summe(zahl1, zahl2, zahl3) {
 
 }
 
@@ -81,7 +81,7 @@ Summe(5, 10, 15);</pre>
   <p>Das Ergebnis des Ausdruckes, ein Funktionsobjekt, können Sie jedoch weiterverwenden. Beispielsweise können Sie das erzeugte Funktionsobjekt in einer Variable speichern:</p>
   <pre>var <var>Funktionsname</var> = function (<var>Parameterliste</var>) { <var>Anweisungen</var> };
 </pre>
-  <p>Dieses Variablenzuweisung mit Funktionsausdruck hat denselben Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var> (...) {...}</code>. Das bedeutet, sie sind unter allen Umständen austauschbar.</p>
+  <p>Dieses Variablenzuweisung mit Funktionsausdruck hat denselben Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var>(...) {...}</code>. Das bedeutet, sie sind unter allen Umständen austauschbar.</p>
   <p>Darüber lässt sich auch genauer verstehen, was eine Funktionsdeklaration macht. Wenn die gleichwertigen Anweisungen innerhalb einer Funktion notiert werden, wird eine <em>lokale Variable</em> erzeugt, in der die neue Funktion gespeichert wird. Stehen sie außerhalb einer Funktion ausgeführt, dann wird eine <em>globale Variable</em> erzeugt, das heißt die neue Funktion wird als Methode von Objektes <code>window</code> angelegt.</p>
   <p>Was sind nun die <strong>Vorteile</strong> eines Funktionsausdruckes?</p>
   <p>Mit Funktionsdeklarationen erzeugt man üblicherweise globale Funktionen (<code>window</code>-Methoden). Wenn Sie eine Funktion mittels Funktionsausdruck erzeugen, müssen Sie diese nicht zwangsläufig global als <code>window</code>-Methode abspeichern, sondern können sie auch an einem anderen Objekt speichern. Auf diese Weise können Sie Ordnung in Ihre Scripte bringen und zusammenhörige Variablen z.B. unter einem Objekt gruppieren. Ein Beispiel:</p>
@@ -96,7 +96,7 @@ bildergalerie.abspielen();</pre>
   <p>...</p>
   <p>Eine weitere häufige Anwendung von Funktionsausdrücken findet sich im <strong>Event-Handling</strong>. Um eine Handler-Funktionen zu notieren, können Sie herkömmliche Funktionsdeklarationen nutzen:</p>
   <pre>// Handler-Funktion mit Funktionsdeklaration notieren
-function init () {
+function init() {
 window.alert("Dokument ist fertig geladen!");
 }
 // Event-Handler registrieren
@@ -108,7 +108,7 @@ window.onload = init;</pre>
 window.alert("Dokument ist fertig geladen!");
 };</pre>
   <p>Dasselbe Prinzip können Sie überall beim <a href="konzepte.html#events">Event-Handling</a> anwenden. Wenn Sie beispielsweise einem Element einen <code>click</code>-Handler zuweisen wollen, so könnten Sie die fragliche Funktion mit einer Deklaration notieren:</p>
-  <pre>function klickHandler () {
+  <pre>function klickHandler() {
 window.alert("Element wurde geklickt!");
 }
 document.getElementById("bla").onclick = klickHandler;</pre>
@@ -145,12 +145,12 @@ quadrat(5);</pre>
   <p></p>
   <pre>
 
-function meineFunktion () {
+function meineFunktion() {
 document.getElementBy
 }
 window.setTimeout(meineFunktion, 5000);
 
-function irgendeineFunktion () {
+function irgendeineFunktion() {
 var bla = "string"; // diese Variable ist nur in dieser Funktion verfügbar
 var status = 50;
 setTimeout(

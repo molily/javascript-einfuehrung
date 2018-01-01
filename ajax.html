@@ -157,7 +157,7 @@
   <h2>Server-Antwort beim XMLHttpRequest verarbeiten</h2>
 
   <p>Vor dem Absenden eines asynchronen XMLHttpRequest haben wir eine Handler-Funktion namens <code>xhrReadyStateHandler</code> registriert. Diese wird beispielhaft wie folgt notiert:
-  <pre>function xhrReadyStateHandler () {
+  <pre>function xhrReadyStateHandler() {
    &hellip;
 }</pre>
 
@@ -180,7 +180,7 @@
     </table>
 
     <p>In den meisten Fällen ist nur der Status 4 interessant, denn dann können Sie auf die vollständige Server-Antwort zugreifen. Da der <code>readyState</code>-Handler für jeden Status aufgerufen wird, fragen wir darin ab, ob die <code>readyState</code>-Eigenschaft den Wert 4 erreicht hat. Wenn das nicht der Fall ist, brechen wir die Funktion vorzeitig mit <code>return</code> ab. Der restliche JavaScript-Code der Funktion wird dann nur ausgeführt, wenn der Zugriff auf die Server-Antwort möglich ist.</p>
-    <pre>function xhrReadyStateHandler () {
+    <pre>function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
@@ -192,7 +192,7 @@
     <h3>HTTP-Statuscode: <code>responseCode</code></h3>
     <p>Alleine das Eintreffen der Server-Antwort bedeutet nun nicht, dass der Server die Anfrage fehlerfrei verarbeiten konnte. Ausschlaggebend dafür ist der <em>HTTP-Statuscode</em> der Server-Antwort. Dies ist eine vierstellige Zahl. Im Erfolgsfalle lautet der Code <code>200</code>, im Fehlerfalle z.B. <code>404</code> für »Nicht gefunden« oder <code>500</code> für »Server-interner Fehler«. Nur im Erfolgsfalle können Sie damit rechnen, dass der Server die gegebenenfalls übersandten Daten entgegen genommen hat und die Server-Antwort die gewünschten Daten enthält.</p>
     <p>Der HTTP-Statuscode der Antwort lässt sich über die Eigenschaft <code>responseCode</code> des jeweiligen XMLHttpRequest-Objektes auslesen. Der <code>readyState</code>-Handler wird daher um eine <code>if</code>-Anweisung ergänzt, die den <code>responseCode</code> mit <code>200</code> vergleicht. <code>200</code> bedeutet wie gesagt »Alles in Ordnung«.</p>
-    <pre>function xhrReadyStateHandler () {
+    <pre>function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
@@ -202,7 +202,7 @@
    }
 }</pre>
     <p>Im Fehlerfall passiert beim obigen Beispiel nichts – das ist natürlich nicht optimal. Denn selbst wenn der Server nicht mit den gewünschten Daten antwortet, so antwortet er zumeist mit einer Fehlermeldung. Das folgende Beispiel enthält in einem <code>else</code>-Zweig eine sehr einfache Fehlerbehandlung:</p>
-    <pre>function xhrReadyStateHandler () {
+    <pre>function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
@@ -228,7 +228,7 @@
 
     <h4>Server-Antwort aus <code>responseText</code> ins Dokument schreiben</h4>
     <p>Eine häufige Aufgabe ist es, die Server-Antwort ins aktuelle Dokument einzufügen. Das bekannte Beispiel erweitern wir um eine Zuweisung, die die Antwortdaten in ein Element hineinlädt.</p>
-    <pre>function xhrReadyStateHandler () {
+    <pre>function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
@@ -249,7 +249,7 @@
 &lt;html>&lt;head>
 &lt;title>XMLHttpRequest-Beispiel&lt;/title>
 &lt;script>
-function sendXhr () {
+function sendXhr() {
    var xhr;
    if (window.XMLHttpRequest) {
       xhr = new XMLHttpRequest();
@@ -262,7 +262,7 @@ function sendXhr () {
    xhr.open("GET", "beispiel.html", true);
    xhr.send(null);
 }
-function xhrReadyStateHandler () {
+function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
@@ -305,11 +305,11 @@ function xhrReadyStateHandler () {
   <p>Mittels <a href="einbindung.html#traditionelles-event-handling">traditionellem Event-Handling</a> verknüpfen wir JavaScript-Logik mit dem Absenden des Formulares. Dazu nutzen wir das übliche mehrschrittige Schema:</p>
   <pre>window.onload = initFormularXHR;
 
-function initFormularXHR () {
+function initFormularXHR() {
    document.getElementById("formular").onsubmit = formularSubmit;
 }
 
-function formularSubmit () {
+function formularSubmit() {
    // Formular mit XMLHttpRequest absenden
 }</pre>
   <p>Die Handler-Funktion <code>formularSubmit</code> muss nun folgendes leisten:</p>
@@ -320,7 +320,7 @@ function formularSubmit () {
     <li>Das normale Absenden des Formulars unterbrechen, indem die <a href="einbindung.html#standardaktion">Standardaktion abgebrochen</a> wird</li>
   </ol>
   <p>Am kompliziertesten ist der zweite Schritt, deshalb betrachten wir erst einmal das Gerüst mit den restlichen Aufgaben.</p>
-  <pre>function formularSubmit () {
+  <pre>function formularSubmit() {
 }</pre>
   <p>...</p>
   <p>Helferfunktion für den zweiten Schritt, die Serialisierung des Formulars</p>

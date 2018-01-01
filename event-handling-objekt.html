@@ -51,13 +51,13 @@
   <p>Durch das <a href="event-handling-grundlagen.html#traditionelles-event-handling">Registrieren von Event-Handlern</a> wird die angegebene Funktion immer dann ausgeführt, wenn das jeweilige Ereignis beim jeweiligen Element eintritt. In dieser Handler-Funktion ist es meistens nötig, auf die näheren Umstände des Ereignisses zu reagieren. Beispielsweise sind bei einem Mausklick die Koordinaten des Mauszeigers interessant oder bei einem Tastendruck die gedrückte Taste.</p>
   <p>All diese Informationen sind in JavaScript beim <strong>Event-Objekt</strong> gespeichert. Dieses Objekt repräsentiert das individuelle Ereignis, das der Handler gerade verarbeitet. Es bietet zahlreiche Eigenschaften mit Informationen zum Ereignis und einige Methoden, um das Verhalten des Ereignisses zu steuern. Wenn Sie bei der Ereignisverarbeitung diese Daten benötigen, ist der Zugriff auf das Event-Objekt die erste Aufgabe in der Handler-Funktion.</p>
   <p>In den meisten Browsern gestaltet sich dieser Zugriff einfach: Das Event-Objekt wird der Handlerfunktion automatisch als erster Parameter übergeben. Sie muss dieses nur noch entgegen nehmen, der Parametername ist dabei frei wählbar. Üblicherweise wird ein Kurzname wie <code>e</code> oder <code>ev</code> verwendet. Für das folgende Beispiel wählen wir den sprechenden Namen <code>eventObjekt</code>:</p>
-  <pre>function handlerfunktion (eventObjekt) {
+  <pre>function handlerfunktion(eventObjekt) {
    window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
    // Fehler im Internet Explorer &lt; 9!
 }</pre>
   <p>Diesen Zugriff auf das Event-Objekt unterstützen alle relevanten Browser. Lediglich ältere Internet Explorer vor der Version 9 unterstützen diese Technik nicht. Für diese Browserversionen ist eine Sonderlösung notwendig. Diese Internet Explorer übergeben das Event-Objekt nicht als Parameter an die Handlerfunktion, sondern stellen es unter dem globalen Objekt <code>window.event</code> zur Verfügung. Auch wenn es den Anschein hat: Dort ist das Event-Objekt nicht dauerhaft gespeichert, sondern <code>window.event</code> verweist lediglich auf das jeweilige Event-Objekt des Ereignisses, das gerade im jeweiligen Handler verarbeitet wird.</p>
   <p>Um browserübergreifend auf das Event-Objekt zuzugreifen, ist also eine Vereinheitlichung notwendig. Diese ist recht einfach: Wir prüfen, ob der Funktion ein Parameter übergeben wurde und somit die lokale Variable <code>eventObjekt</code> einen Wert hat. Falls dies zutrifft, nehmen wir diesen Parameter als Event-Objekt. Andernfalls speichern wir in der bisher leeren Variable eine Referenz auf <code>window.event</code>.</p>
-  <pre>function handlerfunktion (eventObjekt) {
+  <pre>function handlerfunktion(eventObjekt) {
    // Vereinheitlichung:
    if (!eventObjekt) {
       // Korrektur für den Internet Explorer &lt; 9
@@ -70,7 +70,7 @@
   <p>Nach der Vereinheitlichung steht das Event-Objekt browserübergreifend in einer Variable zu Verfügung.</p>
   <p>Mit <code>if (!eventObjekt)</code> wird geprüft, ob der Wert der Variablen bei einer Umwandlung in den Typ Boolean den Wert <code>false</code> ergibt. Eine solche Abfrage ist hier möglich, weil <code>eventObjekt</code> entweder ein Objekt enthält oder, falls der Handlerfunktion nichts übergeben wird, mit dem Wert <code>undefined</code> initialisiert wird. Dieser ergibt in Boolean umgewandelt <code>false</code>.</p>
   <p>Eine gleichwertige Alternativ-Schreibweise nutzt den <code>||</code>-Operator. Intern funktioniert dies wie die besagte <code>if</code>-Anweisung : Es wird geprüft, ob ein Funktionsparameter übergeben wurde. Falls nicht, wird versucht, das Event-Objekt über <code>window.event</code> anzusprechen. Das Ziel ist ebenfalls vereinheitlichter Zugriff auf das Event-Objekt über die Variable <code>eventObjekt</code>.</p>
-  <pre>function handlerfunktion (eventObjekt) {
+  <pre>function handlerfunktion(eventObjekt) {
    eventObjekt = eventObjekt || window.event;
    window.alert("Es ist ein Ereignis vom Typ " + eventObjekt.type + " passiert.");
 }</pre>
@@ -78,7 +78,7 @@
   <p>Interessant ist der andere Fall, wenn <code>eventObjekt</code> im Internet Explorer den Wert <code>undefined</code> hat, weil kein Wert für den Parameter übergeben wurde (siehe oben). Dann ist das Ergebnis des Ausdrucks der Wert rechts vom <code>||</code>-Operator. Somit wird die Zuweisung <code>eventObjekt = window.event</code> ausgeführt. Durch diese Oder-Verzweigung ist das Event-Objekt in jedem Fall in der Variable <code>eventObjekt</code> gespeichert.</p>
   <p>Welche der Schreibweise Sie verwenden, bleibt ihnen überlassen, denn sie erfüllen dieselbe Funktion. Die erste ist klarer und leicht verständlich, die zweite ist kürzer, erfordert jedoch das Verständnis des <code>||</code>-Operators.</p>
   <p>In den obigen Beispielen wird das Event-Objekt in der Variable mit dem sprechenden Namen <code>eventObjekt</code> gespeichert. Die Namenswahl bleibt selbstverständlich Ihnen überlassen. Es hat sich eingebürgert, diese Variable der Kürze halber <code>e</code> zu nennen, um Tipparbeit zu sparen. Wenn in einer Handler-Funktion eine Variable <code>e</code> auftaucht, dann ist darin in der Regel das Event-Objekt gespeichert. Sie könnten gleichermaßen schreiben:</p>
-  <pre>function handlerfunktion (e) {
+  <pre>function handlerfunktion(e) {
    e = e || window.event;
    window.alert("Es ist ein Ereignis vom Typ " + e.type + " passiert.");
 }</pre>
@@ -93,7 +93,7 @@
   <pre>&lt;a href="bilder/bild.jpg" id="vollbildlink"&gt;Bild in Originalgröße ansehen&lt;/a&gt;</pre>
   <p>Mit JavaScript soll diesem Link nun ein <code>click</code>-Handler hinzugefügt werden, der das verlinkte Bild im aktuellen Dokument einblendet, anstatt das Dokument durch das Bild auszuwechseln und das Bild einzeln anzuzeigen. Wie dieses Einblenden umgesetzt wird, interessiert uns an dieser Stelle nicht, sondern nur das Unterdrücken der Standardaktion.</p>
   <p>Im traditionellen Event-Handling wird die Standardaktion unterdrückt, indem die Handler-Funktion <code>false</code> als Ergebnis zurückgibt. Am Ende der Funktion wird daher die Anweisung <code>return false;</code> notiert.</p>
-  <pre>function zeigeVollbild () {
+  <pre>function zeigeVollbild() {
    // Blende das Bild ein, auf das der Link zeigt.
    // ... (an dieser Stelle uninteressant) ...
 
@@ -107,7 +107,7 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
   <p>Beachten Sie, dass mit der <code>return</code>-Anweisung die Funktion beendet wird. Code, der auf diese Anweisung folgt, wird nicht ausgeführt. Es sei denn, die <code>return</code>-Anweisung ist z.B. durch eine <code>if</code>-Anweisung gekapselt und wird nicht in jedem Fall ausgeführt.</p>
   <p>Wenn Sie kein <code>return false</code> notieren, führt der Browser automatisch die Standardaktion aus. Sie müssen ihn also nicht mit einem <code>return true</code> oder auf andere Art dazu bringen – sie können die Standardaktion lediglich verhindern.</p>
   <p>Neben <code>return false</code> gibt es modernere Techniken, um die Standardaktion zu verhindern. Der DOM-Standard, auf den wir später noch zu sprechen kommen, bietet eine Methode namens <code>preventDefault</code> beim Event-Objekt, mit der sich die Standardaktion unterdrücken lässt. Das obige Beispiel könnte auch folgendermaßen aussehen:</p>
-  <pre>function zeigeVollbild (eventObjekt) {
+  <pre>function zeigeVollbild(eventObjekt) {
    // Browserübergreifender Zugriff auf das Event-Objekt
    if (!eventObjekt) eventObjekt = window.event;
 
@@ -120,7 +120,7 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
 };</pre>
   <p>Der Vorteil von <code>preventDefault</code> ist, dass es im Gegensatz zu <code>return false</code> auch mitten in der Handler-Funktion aufgerufen werden kann, ohne sie gleichzeitig zu beenden. Das Beispiel demonstriert dies.</p>
   <p>Der Nachteil ist, dass der Internet Explorer diese standardisierte Methode erst ab Version 9 kennt. Er hat jedoch eine gleichwertige Boolean-Eigenschaft des Event-Objekts namens <code>returnValue</code>. Weist man dieser den Wert <code>false</code> zu, so wird die Standardaktion unterbunden. Um auch ältere Internet Epxlorer zu unterstützen, kann die Existenz der <code>preventDefault</code>-Methode abgefragt werden. Existiert diese nicht, wird alternativ die Eigenschaft <code>returnValue</code> gesetzt:</p>
-  <pre>function zeigeVollbild (eventObjekt) {
+  <pre>function zeigeVollbild(eventObjekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Existiert die Methode preventDefault? Dann rufe sie auf.
@@ -155,7 +155,7 @@ document.getElementById("vollbildlink").onclick = zeigeVollbild;
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
   <p>Nehmen wir ferner an, dass das <code>p</code>-Element <a href="#traditionelles-event-handling">auf traditionelle Weise</a> einen <code>click</code>-Handler bekommt:</p>
-  <pre>function klickverarbeitung () {
+  <pre>function klickverarbeitung() {
    window.alert("Der Absatz wurde geklickt!");
 }
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
@@ -180,7 +180,7 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
   <p>Dem Absatz wird wieder ein <code>click</code>-Handler zugewiesen:</p>
-  <pre>function klickverarbeitung () {
+  <pre>function klickverarbeitung() {
    window.alert("Element vom Typ " + this.nodeName + " wurde geklickt!");
 }
 document.getElementById("absatz").onclick = klickverarbeitung;</pre>
@@ -207,7 +207,7 @@ document.getElementById("absatz").onclick = klickverarbeitung;</pre>
 }</pre>
   <p>Falls die Eigenschaft <code>target</code> des Event-Objektes gefüllt ist, legen wir in der lokalen Variable <code>target</code> eine Referenz darauf an. Andernfalls, das betrifft den Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
   <p>Wie beim Zugriff auf das Event-Objekt erlaubt der <code>||</code>-Operator eine Kurzschreibweise. Das Event-Objekt wird zudem unter dem Kurznamen <code>e</code> gespeichert. So kommen wir zu einem Schema, dem viele Handler-Funktionen entsprechen:</p>
-  <pre>function klickverarbeitung (e) {
+  <pre>function klickverarbeitung(e) {
    // Vereinheitlichung von Event-Objekt und Zielelement
    e = e || window.event;
    var target = e.target || e.srcElement;
@@ -270,12 +270,12 @@ targetArea.onmouseover = function (e) {
    &lt;/strong&gt;.
 &lt;/p&gt;</pre>
   <p>Das <code>strong</code>-Element steckt hier im <code>p</code>-Element. Bei beiden Elementen wird ein <code>click</code>-Handler registriert:</p>
-  <pre>function absatzKlick () {
+  <pre>function absatzKlick() {
    window.alert("Klick auf das p-Element");
 }
 document.getElementById("absatz").onclick = absatzKlick;
 
-function wichtigKlick () {
+function wichtigKlick() {
    window.alert("Klick auf das strong-Element");
 }
 document.getElementById("wichtig").onclick = wichtigKlick;</pre>
@@ -284,7 +284,7 @@ document.getElementById("wichtig").onclick = wichtigKlick;</pre>
   <p>Der Internet Explorer kennt diese Methode erst ab Version 9. Ältere Versionen verfügen über eine gleichwertige Boolean-Eigenschaft beim Event-Objekt. Diese trägt den Namen <code>cancelBubble</code> (englisch für breche das Aufsteigen ab). Weisen Sie dieser Eigenschaft den Wert <code>true</code> zu, um das Aufsteigen des Ereignisses abzubrechen.</p>
   <p>Wieder einmal nutzen wir eine Fähigkeitenerkennung, die die Verfügbarkeit der standardisierten Methode <code>stopPropagation</code> prüft und im Fehlerfalle auf die Microsoft-Alternative <code>cancelBubble</code> zurückfällt.</p>
   <p>Die Handler-Funktion <code>wichtigKlick</code> wird wie folgt modifiziert:</p>
-  <pre>function wichtigKlick (eventObekt) {
+  <pre>function wichtigKlick(eventObekt) {
    if (!eventObjekt) eventObjekt = window.event;
 
    // Stoppe das Aufsteigen des Ereignisses

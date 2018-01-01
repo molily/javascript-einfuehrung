@@ -39,7 +39,7 @@
 
 <pre>
 // Konstruktorfunktion
-<strong>function Konstruktor</strong> () {
+<strong>function Konstruktor</strong>() {
     // Zugriff auf das neue Objekt über this,
     // Hinzufügen der Eigenschaften und Methoden
     this.eigenschaft = "wert";
@@ -63,7 +63,7 @@ instanz2.methode();
     <p>Als Funktion kann ein Konstruktor Parameter entgegennehmen. Somit können Instanzen mit unterschiedlichen Eigenschaften erzeugt werden:</p>
 
 <pre>
-function Katze (name, rasse) {
+function Katze(name, rasse) {
     this.name = name;
     this.rasse = rasse;
     this.pfoten = 4;
@@ -101,7 +101,7 @@ alert(maunzi.name + ' ist neuerdings eine ' + maunzi.rasse);
     <p>Über die Eigenschaft <code>prototype</code> können wir ausgehend vom Funktionsobjekt auf den Prototypen zugreifen. Dieses Objekt können wir entweder erweitern oder mit einem eigenen Objekt ersetzen. Im folgenden Beispiel wird der Prototyp erweitert, indem eine Methode hinzugefügt wird:</p>
 
 <pre>
-function Katze () {}
+function Katze() {}
 
 <strong>Katze.prototype.miau</strong> = function () {
     alert("Miau!");
@@ -219,7 +219,7 @@ mauzi.miau();
   <p>Nehmen wir an, dass hiesige Katzen meistens von der Rasse »Europäisch Kurzhaar« sind. Anstatt dies jedes Mal beim Erzeugen anzugeben, legen wir die Eigenschaft beim Prototypen an:</p>
 
 <pre>
-function Katze () {}
+function Katze() {}
 Katze.prototype.rasse = "Europäisch Kurzhaar";
 
 var maunzi = new Katze();
@@ -294,7 +294,7 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
   <p>Das folgende Beispiel zeigt, wie ein Instanzobjekt und auch der Prototyp nachträglich verändert werden können:</p>
 
 <pre>
-function Katze () {}
+function Katze() {}
 
 Katze.prototype.pfoten = 4;
 Katze.prototype.miau = function () {
@@ -329,7 +329,7 @@ schnucki.miau();
   <p>Da der Konstruktor bereits einen Funktions-Scope bereitstellt, nutzen wir kurzerhand diesen für private Objekte. Damit die Methoden auf die privaten Objekte Zugriff haben, müssen sie im Konstruktor erzeugt und dürfen nicht über den Prototyp definiert werden. Über <code>this</code> werden sie ans Instanzobjekt gehängt.</p>
 
 <pre>
-function Katze (name) {
+function Katze(name) {
     // --- Private Objekte ---
 
     // Private Variablen
@@ -338,7 +338,7 @@ function Katze (name) {
     // Der Parameter »name« ist ebenfalls privat
 
     // Private Funktionen
-    function miau () {
+    function miau() {
         alert(name + ' macht miau!');
     }
 
@@ -483,7 +483,7 @@ Module.öffentlicheMethode();
   <p>Dasselbe bei einem Konstruktor mit Prototypen:</p>
 
   <pre>
-function Konstruktor () {}
+function Konstruktor() {}
 
 // Öffentliche Eigenschaften
 Konstruktor.prototype.öffentlicheMethode = function () {

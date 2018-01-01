@@ -48,12 +48,12 @@
 
 window.addEventListener("load", start, false);
 
-function start () {
+function start() {
    var pElement = document.getElementById("interaktiv");
    pElement.addEventListener("click", klickverarbeitung, false);
 }
 
-function klickverarbeitung () {
+function klickverarbeitung() {
    document.getElementById("interaktiv").innerHTML +=
       " Huhu, das ist von Javascript eingefügter Text.";
 }
@@ -80,17 +80,17 @@ function klickverarbeitung () {
     <p>Das obige Beispiel funktioniert in allen modernen Browsern – jedoch nicht im Internet Explorer vor der Version 9. Die älteren Internet-Explorer-Versionen unterstützen den W3C-DOM-Standard noch nicht. Die Methode <code>addEventListener</code> ist diesen Browsern schlicht unbekannt.</p>
     <p>Der Internet Explorer unterstützt den Events-Standard erst ab Version 9. Ältere Versionen unterstützen stattdessen ein <a href="#microsoft">eigenes, proprietäres Modell</a>, das im folgenden Abschnitt vorgestellt wird.</p>
     <p>Der Hauptvorteil von <code>addEventListener</code> ist, dass Sie für ein Element <strong>mehrere Handler-Funktionen</strong> für denselben Ereignistyp registrieren können. Beim obigen Beispiel können wir die <code>start</code>-Funktion so anpassen, dass beim <code>p</code>-Element zwei Handler statt bloß einer registriert werden:</p>
-    <pre>function start () {
+    <pre>function start() {
    var pElement = document.getElementById("interaktiv");
    pElement.addEventListener("click", meldung1, false);
    pElement.addEventListener("click", meldung2, false);
 }
 
-function meldung1 () {
+function meldung1() {
    window.alert("Erste Handler-Funktion ausgeführt!");
 }
 
-function meldung2 () {
+function meldung2() {
    window.alert("Zweite Handler-Funktion ausgeführt!");
 }</pre>
     <p>Es werden zwei Handler-Funktionen namens <code>meldung1</code> und <code>meldung2</code> definiert. Mithilfe von <code>addEventListener</code> werden sie beide als <code>click</code>-Handler registriert. Wenn Sie auf den Textabsatz klicken, dann sollten nacheinander zwei JavaScript-Meldefenster erscheinen – und zwar in der Reihenfolge, in der die Handler mittels <code>addEventListener</code> registriert wurden.</p>
@@ -99,7 +99,7 @@ function meldung2 () {
     <h3>Event-Handler entfernen: removeEventListener</h3>
     <p>Um die mit <code>addEventListener</code> registrierten Handler wieder zu <strong>entfernen</strong>, gibt es die Schwestermethode <code>removeEventListener</code> (englisch für Ereignis-Empfänger entfernen). Die Methode erwartet dieselben Parameter, die <code>addEventListener</code> beim Registrieren bekommen hat: Einen String mit dem Ereignistyp, die zu löschende Handler-Funktion und schließlich einen Boolean-Wert für die Event-Phase.</p>
     <p>Um beide im Beispiel definierten Handler für das <code>p</code>-Element (nämlich <code>meldung1</code> und <code>meldung2</code>) wieder zu entfernen, notieren wir:</p>
-    <pre>function beenden () {
+    <pre>function beenden() {
    pElement.removeEventListener("click", meldung1, false);
    pElement.removeEventListener("click", meldung2, false);
 }</pre>
@@ -129,12 +129,12 @@ function meldung2 () {
 
 window.attachEvent("onload", start);
 
-function start () {
+function start() {
    var pElement = document.getElementById("interaktiv");
    pElement.attachEvent("onclick", klickverarbeitung);
 }
 
-function klickverarbeitung () {
+function klickverarbeitung() {
    document.getElementById("interaktiv").innerHTML +=
       " Huhu, das ist von Javascript eingefügter Text.";
 }
@@ -154,17 +154,17 @@ function klickverarbeitung () {
     <p>Das Beispiel hat sich gegenüber dem W3C-Modell nur geringfügig geändert. Anstelle von <code>window.addEventListener(&hellip;)</code> wurde <code>window.attachEvent(&hellip;)</code> notiert, dasselbe bei <code>pElement.attachEvent(&hellip;)</code>.</p>
     <p>Der Ereignistyp im ersten Parameter enthält nun den Präfix <code>on</code> vorangestellt: Aus <code>"load"</code> wird <code>"onload"</code>, aus <code>"click"</code> wird <code>"onclick"</code>. Der dritte Parameter, der die Event-Phase spezifiert, fällt weg – denn Microsofts Modell unterstützt nur das Registrieren in der Bubbling-Phase.</p>
     <p>Auch mit <code>attachEvent</code> können Sie verschiedene Handler für denselben Ereignistyp definieren. Das obige Beispiel wird entsprechend angepasst:</p>
-    <pre>function start () {
+    <pre>function start() {
    var pElement = document.getElementById("interaktiv");
    pElement.attachEvent("onclick", meldung1);
    pElement.attachEvent("onclick", meldung2);
 }
 
-function meldung1 () {
+function meldung1() {
    window.alert("Erste Handler-Funktion ausgeführt!");
 }
 
-function meldung2 () {
+function meldung2() {
    window.alert("Zweite Handler-Funktion ausgeführt!");
 }</pre>
     <p>Das Beispiel enthält nichts neues, die Aufrufe von <code>addEventListener</code> wurden auf die besagte Weise durch <code>attachEvent</code> ausgetauscht.</p>
@@ -173,7 +173,7 @@ function meldung2 () {
     <h3>Event-Handler entfernen: detachEvent</h3>
     <p>Auch das Microsoft-Modell bietet eine Methode, um registrierte Handler wieder zu entfernen. Sie nennt sich <code>detachEvent</code> und erwartet dieselben Parameter wie sein Gegenstück <code>attachEvent</code>.</p>
     <p>Um die besagten <code>click</code>-Handler <code>meldung1</code> und <code>meldung2</code> wieder zu entfernen, notieren wir:</p>
-    <pre>function beenden () {
+    <pre>function beenden() {
    pElement.detachEvent("onclick", meldung1);
    pElement.detachEvent("onclick", meldung2);
 }</pre>
@@ -212,7 +212,7 @@ function meldung2 () {
   <div class="section" id="einfaches-addevent">
     <h3>Einfaches, oftmals ausreichendes <code>addEvent</code></h3>
     <p>Ein einfaches Beispiel ist <a href="http://www.ilfilosofo.com/blog/2008/04/14/addevent-preserving-this/">A Good Enough addEvent</a> von Austin Matzko. Ziel ist es, mehrere Event-Handler für einen Typ bei einem Element registrieren zu können. Die Funktion verwendet <code>addEventListener</code> (DOM-Standard) oder <code>attachEvent</code> (Microsoft-Modell) je nach Verfügbarkeit.</p>
-<pre>function addEvent (obj, type, fn) {
+<pre>function addEvent(obj, type, fn) {
    if (obj.addEventListener) {
       obj.addEventListener(type, fn, false);
    } else if (obj.attachEvent) {
@@ -224,7 +224,7 @@ function meldung2 () {
     <p>Ein Anwendungsbeispiel:</p>
     <pre>&lt;p id="beispielabsatz"&gt;Klick mich!&lt;/p&gt;
 &lt;script&gt;
-function absatzKlick () {
+function absatzKlick() {
   alert("Der Absatz wurde geklickt!");
 }
 addEvent(document.getElementById("beispielabsatz"), "click", absatzKlick);

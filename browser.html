@@ -51,7 +51,7 @@ Andernfalls:
   }
 }</pre><p>Allerdings ist dieser Code stellenweise redundant und setzt stillschweigend voraus, dass die Übergabe des Event-Objektes als Parameter und <code>target</code> sowie <code>window.event</code> und <code>srcElement</code> notwendigerweise zusammengehören - das ist zwar bei diesem Beispiel kein Problem, aber in anderen Fällen kann eine solche Annahme Probleme bringen.</p>
   <p>Anstatt direkt browserspezifischen Code zu schreiben, nutzen wir <strong>punktuelle Vereinheitlichung</strong>, die gleiche Voraussetzungen für das Script schafft. Nachdem die Browserunterschiede eingeebnet wurden, können wir die Aufgabe, die wir eigentlich lösen wollen, viel einfacher umsetzen. Vor allem wird der Code übersichtlicher und besser strukturiert: Die Bereiche, die sich nur den Browserproblemen widmen, sind getrennt von denen, die die eigentliche Aufgabe lösen.</p>
-  <pre>function handlerFunktion (eventObjekt) {
+  <pre>function handlerFunktion(eventObjekt) {
 
   // Vereinheitliche den Zugriff auf das Event-Objekt:
   if (!eventObjekt) {
@@ -75,7 +75,7 @@ Andernfalls:
 }</pre>
 <p>Diese Umsetzung mag zunächst länger und umständlicher scheinen. Das liegt jedoch bloß an der ausführlichen Schreibweise. Eine
    mögliche Kurzschreibweise könnte so aussehen:</p>
-  <pre>function handlerFunktion (e) {
+  <pre>function handlerFunktion(e) {
   e = e || window.event;
   var target = e.target || e.srcElement;
   alert("Element, an dem das Ereignis passierte: " + target.nodeName);
@@ -129,7 +129,7 @@ Andernfalls:
    <p>Wenn wir eine bedingte Anweisung mit <code>if (...) {...}</code> notieren, so wird die Bedingung (der Ausdruck zwischen den runden Klammern) letztlich in einen Boolean-Wert, also <code>true</code> oder <code>false</code> umgewandelt. Allgemeine Objekte vom Typ <code>Object</code> ergeben bei der Umwandlung in dem Typ <code>Boolean</code> den Wert <code>true</code>.</p>
    <p>Das bedeutet, Sie können einfach <code>if (objekt.unterobjekt) { ... </code>} notieren, um die Existenz des Unterobjektes abzufragen. Für Funktionsobjekte gilt dasselbe, also notieren wir <code>if (objekt.methode) { ... </code>}. Die Schreibweise <code>objekt.unterobjekt</code> bzw. <code>objekt.methode</code> ist dabei entscheidend. Nur in besonderen Fällen ist dies durch <code>if (objekt)</code> bzw. <code>if (methode)</code> ersetzbar.</p>
    <p>Das folgende Beispiel veranschaulicht die Existenzabfrage von Objekten und Methoden. Die Funktion bringt den aktuell markierten Text im Dokument in Erfahrung und gibt diesen in einem Meldungsfenster aus.</p>
-   <pre>function selektierterText () {
+   <pre>function selektierterText() {
   var text = "";
 
   if (window.getSelection) {

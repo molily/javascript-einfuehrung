@@ -32,7 +32,7 @@ alert(this); // Ergibt [object Window] oder ähnliches
   <p>Dasselbe gilt, wenn <code>this</code> in einer Funktion verwendet wird, die ganz normal über <code>funktion()</code> aufgerufen wird:</p>
 
 <pre>
-function zeigeThis () {
+function zeigeThis() {
     alert(this); // ergibt ebenfalls [object Window]
 }
 zeigeThis();
@@ -64,7 +64,7 @@ Modul.methode();
   <p>Bei Konstruktoren und Prototypen ist <code>this</code> unersetzlich:</p>
 
 <pre>
-function Katze (name) {
+function Katze(name) {
     <strong>this.name</strong> = name;
 }
 Katze.prototype = {
@@ -146,7 +146,7 @@ Modul.start();
     <p>Dasselbe mit einem Konstruktor, einem Prototyp und einer Instanz:</p>
 
 <pre>
-function Konstruktor () {}
+function Konstruktor() {}
 Konstruktor.prototype = {
     eigenschaft : "Eigenschaftswert",
     start : function () {
@@ -198,7 +198,7 @@ function äußereFunktion  () {
     // Definiere eine lokale Variable
     var <strong>variable</strong> = "wert";
     // Lege eine verschachtelte Funktion an
-    function innereFunktion () {
+    function innereFunktion() {
         // Obwohl diese Funktion einen eigenen Scope mit sich bringt,
         // ist die Variable aus dem umgebenden Scope hier verfügbar:
         alert("Wert der Variablen aus der äußeren Funktion: " + <strong>variable</strong>);
@@ -289,7 +289,7 @@ Modul.öffentlicheMethode();
 var Modul = (function () {
     // Private Objekte
     var privateVariable = "privat";
-    function privateFunktion () {
+    function privateFunktion() {
         alert("privateFunktion wurde verzögert aufgerufen\n"+
             "privateVariable: " + privateVariable);
         // Rufe öffentliche Methode auf:
@@ -344,7 +344,7 @@ privateVariable: privat
     <p>Private Objekte funktionieren letztlich über Closures und bieten die Möglichkeit, das <code>this</code>-Problem zu umgehen: Im Konstruktor wird eine lokale Variable als Referenz auf das Instanzobjekt <code>this</code> angelegt. Diese heißt üblicherweise <code>thisObject</code>, <code>that</code> oder <code>instance</code>. Alle Methoden, die der Instanz im Konstruktor hinzugefügt werden, schließen diese Variable ein. Sie ist darin auch dann verfügbar, wenn sie als Event-Handler oder mit Verzögerung in einem anderen Kontext ausgeführt werden. Folgendes Beispiel demonstriert beide Fälle:</p>
 
 <pre>
-function Konstruktor () {
+function Konstruktor() {
     // Referenz auf das Instanzobjekt anlegen
     <strong>var thisObject = this;</strong>
     // Weitere private Objekte
@@ -419,7 +419,7 @@ var objekt = {
     eigenschaft : "Objekteigenschaft"
 };
 
-function beispielFunktion () {
+function beispielFunktion() {
     // this zeigt nun auf objekt
     alert(this.eigenschaft);
 }
@@ -435,7 +435,7 @@ var objekt = {
     eigenschaft : 0
 };
 
-function summe (a, b, c) {
+function summe(a, b, c) {
     this.eigenschaft = a + b + c;
     alert("Ergebnis: " + this.eigenschaft);
 }
@@ -611,7 +611,7 @@ Modul.start();
     <h3>Anwendung bei Prototypen und Instanzmethoden</h3>
 
 <pre>
-function Konstruktor () {}
+function Konstruktor() {}
 Konstruktor.prototype = {
     eigenschaft : "Eigenschaftswert",
     start : function () {

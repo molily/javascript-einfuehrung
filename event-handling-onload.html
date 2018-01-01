@@ -29,7 +29,7 @@
   <p>Der <code>load</code>-Event ist aus heutiger Sicht für Unobtrusive JavaScript nicht geeignet. Glücklicherweise gibt es ein Ereignis, das eintritt, sobald der Parser den gesamten HTML-Code eingelesen hat und der komplette DOM-Baum für JavaScripte zugänglich ist: <code>DOMContentLoaded</code>.</p>
   <p>Die Überwachung dieses Ereignises ist allerdings nur im Zusammenhang mit <a href="#addEventListener">addEventListener</a>, also dem W3C-Modell möglich. Alle großen Browser, die den DOM-Standard umsetzen, kennen mittlerweile auch <code>DOMContentLoaded</code>. Eine Ausnahme bilden der Internet Explorer vor Version 9: Diese älteren Versionen unterstützen weder den DOM-Events-Standard, noch kennen sie das Ereignis <code>DOMContentLoaded</code>.</p>
   <p>Das folgende Beispiel demonstriert die Überwachung der beiden Ereignisse <code>load</code> und <code>DOMContentLoaded</code>:</p>
-<pre>function dokumentGeladen (e) {
+<pre>function dokumentGeladen(e) {
    alert("Das Ereignis " + e.type + " ist passiert.")
 }
 document.addEventListener("load", dokumentGeladen, false);
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", dokumentGeladen, false);</pre>
   <h2>Browserübergreifendes <code>DOMContentLoaded</code></h2>
   <p>Leider gibt es ältere Browser, die das äußerst nützliche <code>DOMContentLoaded</code>-Ereignis nicht unterstützen. Ältere Internet Explorer kennen auch kein gleichwertiges Ereignis. Daher nutzt die verbreitete Sonderlösung verschiedene Microsoft-eigene Techniken, um Rückschlüsse darauf zu ziehen, ob der Elementenbaum bereits vollständig eingelesen wurde. Die genaue Funktionsweise sei hier nicht näher erklärt. Stattdessen sei auf eine browserübergreifende Fertiglösung hingewiesen, die sowohl <code>DOMContentLoaded</code> unterstützt als auch einen erprobten Workaround für ältere Internet Explorer enthält: <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded.js von Diego Perini</a>. Das Script ist abwärtskompatibel, das heißt, wenn alle Stricke reißen, wird auf das robuste <code>load</code>-Ereignis zurückgefallen.</p>
   <p>Wenn Sie dieses Script einbinden, können Sie eine Funktion folgendermaßen ausführen, sobald der DOM-Baum zur Verfügung steht:</p>
-  <pre>function init () {
+  <pre>function init() {
 // Diese Funktion kann auf den gesamten DOM-Baum zugreifen.
 }
 // Nutzung von Diego Perinis Helferfunktion
