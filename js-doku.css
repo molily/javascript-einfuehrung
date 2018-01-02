@@ -434,3 +434,33 @@ body#contents #footer p {
 .references li {
   margin: 0.2em 0 0.2em 2.625em;
 }
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* Scope */
+
+.js-scope {
+  padding: 1rem;
+  border: 2px solid #aaa;
+  border-radius: 2px;
+}
+
+.js-scope p {
+  margin: 0;
+}
+
+p + .js-scope {
+  margin-top: 1rem;
+}
+
+.js-scope-global {
+  border-color: maroon;
+}
+
+.js-scope-function {
+  border-color: green;
+}
+
+.js-scope-block {
+  border-color: blue;
+}

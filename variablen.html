@@ -22,7 +22,7 @@
   <p>Im Kapitel über Syntax haben wir die einfache <a href="syntax.html#variablen-deklaration">Variablen-Deklaration</a> bereits kennengelernt. In diesem Kapitel schauen wir uns Variablen im Detail an.</p>
   <p>Ein einfaches Beispiel:</p>
   <pre>var alter = 32;</pre>
-  <p>Dies erzeugt eine Variable »alter« und weist ihr den Wert 32 zu.</p>
+  <p>Dies erzeugt eine Variable <code>alter</code> und weist ihr den Wert <code>32</code> zu.</p>
   <p>Das Schema der Variablen-Deklaration lautet:</p>
   <pre>var <var>Bezeichner</var> = <var>Ausdruck</var>;</pre>
   <p>Auf das feste Schlüsselwort <code>var</code> folgt der Name der Variable, genauer gesagt der <a href="#bezeichner">Bezeichner</a>. Danach kommt ein festes <code>=</code> für die Wertzuweisung und schließlich der Wert. Der Wert kann als ein beliebig komplexer <a href="syntax.html#ausdruecke">Ausdruck</a> notiert sein.</p>
@@ -74,7 +74,7 @@ var a = 20,
 var globaleVariable = 'überall verfügbar';
 </pre>
   <p>Wenn Sie dies direkt in einem Script notieren, so wird eine globale Variable angelegt.</p>
-  <p>Globale Variablen werden nicht in einem unsichtbaren Geltungsbereich gespeichert, sondern sie werden an dem obersten, globalen Objekt gespeichert. Das ist <code>window</code>. Wenn Sie eine globale Variable erzeugen, legen Sie damit eine gleichnamige Eigenschaft am Objekt <code>window</code> an.</p>
+  <p>Globale Variablen werden nicht in einem unsichtbaren Geltungsbereich gespeichert, sondern am obersten, globalen Objekt. Das ist <code>window</code>. Wenn Sie eine globale Variable erzeugen, legen Sie damit eine gleichnamige Eigenschaft am Objekt <code>window</code> an.</p>
 <pre>
 var globaleVariable = 'überall verfügbar';
 // Ausgabe: »überall verfügbar«
@@ -135,16 +135,177 @@ setzeButtonEventHandler();
 </div>
 <div class="section" id="block-variablen">
   <h2>Block-Variablen (<code>let</code>)</h2>
-  <p>…</p>
+  <p>Bisher haben wir Variablen-Deklarationen mit <code>var</code> kennengelernt. Es gibt eine weitere Art, Variablen zu deklarieren, und die fängt mit <code>let</code> an:</p>
+<pre>
+let alter = 32;
+</pre>
+  <p>Der Unterschied zu <code>var</code> ist der Geltungsbereich. <code>let</code> erzeugt eine Variable im aktuellen <strong>Block</strong>. Solche Variablen gehören ebenfalls zu den <em>lokalen</em> Variablen.</p>
+  <p>Was ist nun ein Block? Code, der innerhalb geschweifter Klammern <code>{…}</code> steht, bildet einen Block. Verschiedene JavaScript-Strukturen erzeugen solche Blöcke, darunter:</p>
+  <ul>
+    <li>Funktionen: <code>function beispiel() {…}</code></li>
+    <li>Bedingte Anweisungen: <code>if (bedingung) {…} else {…}</code></li>
+    <li>Schleifen: <code>for (…) {…}</code>, <code>while (…) {…}</code></li>
+    <li>Nackte Blöcke mit Anweisungen: <code>{…}</code></li>
+  </ul>
+  <p>Eine mit <code>let</code> deklarierte Variable gilt nur innerhalb eines solchen <code>{…}</code>-Blocks, in dem sie definiert ist. Außerhalb des Blocks ist sie nicht verfügbar. Schauen wir uns ein Beispiel an:</p>
+<pre>
+function zähleHoch(anfang, ende) {
+  for (let i = anfang; i <= ende; i++) {
+    let frage = 'Aktuell: ' + i + ' Weitermachen?';
+    let weitermachen = window.confirm(frage);
+    if (!weitermachen) {
+      let abbruchNachricht = 'Abgebrochen bei ' + i;
+      window.alert(abbruchNachricht);
+      break;
+    }
+  }
+}
+zähleHoch(0, 10);
+</pre>
+  <p>Die Funktion <code>zähleHoch</code> zählt von einer Zahl hoch bis zu einer anderen Zahl. Anfang- und Endzahl werden per Parameter übergeben, <code>anfang</code> und <code>ende</code>. Das Beispiel ruft die Funktion mit Start <code>0</code> und Ende <code>10</code> auf.</p>
+  <p>In der Funktion befindet sich eine <code>for</code>-Schleife, die für das eigentliche Zählen zuständig ist. Mit jedem Schleifendurchlauf wird mittels <code>window.confirm()</code> ein Dialogfenster geöffnet. Darin wird der aktuelle Zählerwert ausgegeben und gefragt, ob weiter gezählt werden soll. Im Bestätigungsfenster lässt sich »OK« oder »Abbrechen« wählen. <code>window.confirm()</code> gibt dementsprechend <code>true</code> oder <code>false</code> zurück.</p>
+  <p>Wenn »Abbrechen« gewählt wird, soll die Schleife ebenfalls abbrechen und die Funktion beendet werden. Vorher wird allerdings noch eine abschließende Meldung mit <code>window.alert()</code> gemacht.</p>
+  <p>Im Beispiel gibt es sechs Variablen mit folgenden Geltungsbereichen:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Geltungsbereich</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>anfang</code> (Funktionsparameter)</td>
+        <td>Funktion: <code>function zähleHoch(…) {…}</code></td>
+      </tr>
+      <tr>
+        <td><code>ende</code> (Funktionsparameter)</td>
+        <td>Funktion: <code>function zähleHoch(…) {…}</code></td>
+      </tr>
+      <tr>
+        <td><code>i</code></td>
+        <td>Block: Schleife <code>for (…) {…}</code></td>
+      </tr>
+      <tr>
+        <td><code>frage</code></td>
+        <td>Block: Schleife <code>for (…) {…}</code></td>
+      </tr>
+      <tr>
+        <td><code>weitermachen</code></td>
+        <td>Block: Schleife <code>for (…) {…}</code></td>
+      </tr>
+      <tr>
+        <td><code>abbruchNachricht</code></td>
+        <td>Block: Bedingte Anweisung <code>if (…) {…}</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Abgesehen von den zwei Funktionsparametern <code>anfang</code> und <code>ende</code>, die einen Funktions-Geltungsbereich haben, haben wir vier mit <code>let</code> erzeugte Variablen mit einem Block-Geltungsbereich.</p>
+  <p>Das heißt: <code>i</code>, <code>frage</code> und <code>weitermachen</code> sind nur innerhalb des <code>for</code>-Blocks verfügbar und in allen Blöcken darin. <code>abbruchNachricht</code> ist nur innerhalb des <code>if</code>-Blocks verfügbar und in allen Blöcken darin (wenn es welche gäbe).</p>
+  <p>Wenn wir also versuchen, außerhalb des Blocks z.B. auf <code>abbruchNachricht</code> zuzugreifen, so gäbe es einen Fehler und das Programm würde abbrechen:</p>
+<pre>
+if (!weitermachen) {
+  let abbruchNachricht = 'Abgebrochen bei ' + i;
+  /* … */
+}
+window.alert(abbruchNachricht); // Fehler!
+</pre>
+  <p>Um den Geltungsbereich einer mit <code>let</code> erzeugten Variable zu finden, müssen Sie einfach die nächstgelegene Struktur mit geschweiften Klammern <code>{…}</code> suchen. Die Code-Einrückung hilft dabei ebenfalls, denn jeder Block sollte eine neue Einrückungsebene erzeugen.</p>
+  <p>Wie gesagt sollten Sie der Grundregel folgen, den Geltungsbereich einer Variablen so klein wie möglich zu halten. Dazu eignen sich Variablen mit <code>let</code> hervorragend, denn sie haben den kleinstmöglichen Geltungsbereich.</p>
+  <p>Der Benutzung von <code>let</code> steht nur eine Sache entgegen: Die Technik wurde erst mit dem JavaScript-Standard ECMAScript 6 eingeführt, der 2015 verabschiedet wurde (siehe <a href="standards.html">JavaScript-Standards</a>). Alle neueren Browser kennen <code>let</code>, aber manche ältere Browser verstehen <code>let</code> noch nicht. Der Internet Explorer kennt <code>let</code> zum Beispiel erst ab Version 11.</p>
 </div>
 <div class="section" id="block-konstanten">
   <h2>Block-Konstanten (<code>const</code>)</h2>
-  <p>…</p>
+  <p>Zu guter Letzt widmen wir uns der Deklaration von Konstanten mit <code>const</code>. Bisher haben wir nur über Variablen geredet. Was ist eine Konstante?</p>
+  <p>Eine Konstante ist ebenfalls ein JavaScript-Wert, der im Arbeitsspeicher aufbewahrt wird. Eine Konstante besteht ebenfalls aus einem Namen (einem Bezeichner) und einem Wert. Eine Konstante hat ebenfalls einen Block-Geltungsbereich, so wie Variablen mit <code>let</code>.</p>
+  <p>Der Unterschied ist: Eine Variable ist veränderbar (variabel eben), eine Konstante ist unveränderbar (konstant eben).</p>
+  <p>Das Erzeugen einer Konstante ist mit dem Schlüsselwort <code>const</code> möglich und der Aufbau gleicht dem von <code>var</code> und <code>let</code>:</p>
+  <pre>const <var>Bezeichner</var> = <var>Ausdruck</var>;</code></pre>
+  <p> Schauen wir uns einen Vergleich an:</p>
+<pre>
+<strong>var</strong> veränderbarVar = 'alt';
+veränderbarVar = 'neu';
+
+<strong>let</strong> veränderbarLet = 'alt';
+veränderbarLet = 'neu';
+
+<strong>const</strong> unveränderbarConst = 'alt';
+unveränderbarConst = 'neu'; // Fehler!
 </div>
-<div class="section" id="scope">
+  <p>Im Beispiel werden zwei Variablen mit <code>var</code> und <code>let</code> erzeugt sowie eine Konstante mit <code>const</code>. Es wird versucht, die Werte nachträglich zu ändern. Das ist bei den beiden Variablen möglich, aber nicht bei der Konstante. JavaScript wirft einen Fehler, wenn Sie versuchen, den Wert einer Konstante nachträglich zu ändern.</p>
+  <p>Der Wert kann nur einmal festgelegt werden, nämlich in dem Moment, in dem Sie die Konstante mit <code>const</code> erzeugen. Es ist demnach auch nicht möglich, die Wertzuweisung mit <code>=</code> wegzulassen, wie es bei Variablen möglich ist (siehe <a href="#variablen-ohne-wert">Variablen ohne Wert</a>).</p>
+  <p>Der Sinn von Konstanten ist, eine unveränderbare Verbindung zwischen Name und Wert zu haben. Eine Konstante sorgt dafür, dass unter einem Namen immer derselbe Wert zu finden ist. Unter diesem Namen wird nichts anderes mehr gespeichert.</p>
+  <p>Das vereinfacht die Programmierung enorm und macht den Code viel klarer! Beim Lesen des Codes müssen Sie nicht mehr Suchen, ob sich der Wert einer Variable später noch einmal ändert. Manche empfehlen sogar, <em>immer wenn möglich</em> Konstanten zu verwenden.</p>
+  <p>Das mag jetzt etwas theoretisch klingen. Schauen wir uns ein Beispiel mit Variablen an und vergleichen es mit Konstanten.</p>
+<pre>
+let liste = [ 23, 75, 11, 64, 99, 5 ];
+liste = liste.filter(function(zahl) {
+  return zahl > 50;
+});
+liste = liste.concat([ 100, 110, 153 ]);
+window.alert(liste);
+</pre>
+  <p>Hier werden an einer Liste mit Zahlen (einem <a href="kernobjekte.html#array">Array</a>) verschiedene Operationen durchgeführt. Jede Operation erzeugt eine neue Liste. Die Liste wird zunächst gefiltert, sodass nur Zahlen größer als 50 darin enthalten sind. Dann wird die gefilterte Liste erweitert, sodass am Ende drei neue Zahlen hinzugefügt werden. Schließlich wird die Ergebnis-Liste ausgegeben.</p>
+  <p>Nach jeder Operation wird die neu erzeugte Liste in der Variable <code>liste</code> gespeichert. Sie bekommt also mit jeder Operation einen neuen Wert zugewiesen, der bestehende wird überschrieben.</p>
+  <p>Schauen wir dasselbe Beispiel mit Konstanten an:</p>
+<pre>
+const ausgangsListe = [ 23, 75, 11, 64, 99, 5 ];
+const gefilterteListe = ausgangsListe.filter(function(zahl) {
+  return zahl > 50;
+});
+const erweiterteGefilterteListe = gefilterteListe.concat([ 100, 110, 153 ]);
+window.alert(erweiterteGefilterteListe);
+</pre>
+  <p>Weiterhin erzeugt jede Operation eine neue Liste. Jede neu erzeugte Liste wird aber in ihrer eigenen Konstante gespeichert: <code>ausgangsListe</code>, <code>gefilterteListe</code>, <code>erweiterteGefilterteListe</code>.</p>
+  <p>Der Beispielcode mit <code>const</code> ist länger und ausführlicher, aber der Code ist verständlicher. Es ist klar, welchen Wert eine Konstante hat, denn Sie ändert ihren Wert nach der Deklaration nicht. Daher sind auch aussagekräftigere Namen möglich, anstatt nur ein generisches <code>liste</code>.</p>
+  <p>Zugegeben, Sie können auch Variablen so einsetzen können, dass Sie mit jeder Wertänderung eine neue Variable erzeugen. Aber Konstanten zwingen Sie dazu und weisen Sie auf Fehler hin.</p>
+  <p>Versuchen Sie deshalb einmal, ausschließlich Konstanten zu verwenden, auch auf die Gefahr hin, viele Konstanten zu verwenden. Es gibt natürlich Fälle, in denen Sie immer noch <code>let</code> benötigen. Zum Beispiel muss der Zähler einer <code>for</code>-Schleife eine Variable sein, denn der Wert soll sich ändern.</p>
+  <p>Es ist wichtig zu versehen, dass bei Konstanten nur die Verbindung zwischen Name und Wert unveränderlich ist. Wenn der Wert ein <a href="kernobjekte.html#object">Objekt</a> ist, ist es weiterhin möglich, das Objekt in sich zu ändern. Es ist nur nicht möglich, den Namen auf ein anderes Objekt zeigen zu lassen. Ein Beispiel, das den Unterschied verdeutlicht:</p>
+<pre>
+const nutzerin = { name: 'Monika' };
+nutzerin.name = 'Monica'; // Erlaubt.
+nutzerin = { name: 'Marlene' }; // Fehler!
+</pre>
+  <p>Das Beispiel deklariert eine Konstante namens <code>nutzerin</code> und ändert die Objekteigenschaft <code>nutzerin.name</code>. Das ist möglich, denn das Objekt selbst ist veränderbar. Es führt allerdings zu einem Fehler, der Konstante <code>nutzerin</code> einem neue Wert zuzuweisen.</p>
+  <p>Genauso wie <code>let</code> steht <code>const</code> erst seit dem JavaScript-Standard ECMAScript 6 zur Verfügung und wird von manchen älteren Browsern noch nicht unterstützt.</p>
+<div class="section" id="identifier-resolution">
   <h2>Auflösung von Bezeichnern</h2>
-  <p>(englisch identifier resolution)</p>
-  <p>TODO: Kette von Geltungsbereichen (englisch scope chain)</p>
+  <p>Wir haben nun die verschiedenen Möglichkeiten kennengelernt, Verbindungen zwischen Namen und Werten in verschiedenen Geltungsbereichen anzulegen. Bei Variablen ist diese Verbindung veränderbar, bei Konstanten nicht.</p>
+  <p>Schauen wir uns nun an, wie ein Name zu einem Wert aufgelöst wird. Wie gesagt wird der Name auch Bezeichner (englisch <em>identifier</em>) genannt. Das Auflösen von Bezeichnern zu Werten heißt auf Englisch <em>identifier resolution</em>.</p>
+  <p>Betrachten wir noch einmal das Beispiel von oben:</p>
+<pre>
+function zähleHoch(anfang, ende) {
+  for (let i = <strong>anfang</strong>; <strong>i</strong> <= <strong>ende</strong>; <strong>i</strong>++) {
+    let frage = 'Aktuell: ' + i + ' Weitermachen?';
+    let weitermachen = <strong>window</strong>.confirm(<strong>frage</strong>);
+    if (!<strong>weitermachen</strong>) {
+      let abbruchNachricht = 'Abgebrochen bei ' + <strong>i</strong>;
+      <strong>window</strong>.alert(<strong>abbruchNachricht</strong>);
+      break;
+    }
+  }
+}
+<strong>zähleHoch</strong>(0, 10);
+</pre>
+  <p>Hier kommen verschiedene Bezeichner vor, die der JavaScript-Interpreter zu Werten auflösen muss. Sie sind grün hervorgehoben.</p>
+  <p>Im Beispiel haben wir mehrere verschachtelte Geltungsbereiche, in denen unterschiedliche Namen gespeichert sind. Hier eine Visualisierung:</p>
+  <div class="js-scope js-scope-global">
+    <p>1. Globaler Geltungsbereich. Definierte Bezeichner: <code>window</code>, <code>zähleHoch</code></p>
+    <div class="js-scope js-scope-function">
+      <p>2. Funktions-Geltungsbereich (<code>zähleHoch</code>). Definierte Bezeichner: <code>anfang</code>, <code>ende</code></p>
+      <div class="js-scope js-scope-block">
+        <p>3. Block-Geltungsbereich (<code>for</code>). Definierte Bezeichner: <code>i</code>, <code>frage</code>, <code>weitermachen</code></p>
+        <div class="js-scope js-scope-block">
+          <p>4. Block-Geltungsbereich (<code>if</code>). Definierte Bezeichner: <code>abbruchNachricht</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Ein Bezeichner wird aufgelöst, indem die sogenannte Kette von Geltungsbereichen (englisch <em lang="en">scope chain</em>) abgelaufen wird. Die Kette wird anhand der Position des Bezeichners bestimmt. Sie enthält alle Geltungsbereiche ausgehend vom aktuellen nach außen hin bis zum äußersten, globalen Geltungsbereich.</p>
+  <p>Zum Beispiel steht im innersten Geltungsbereich 4 der Bezeichner <code>window</code>. Denn dort wird <code>window.alert(…);</code> aufgerufen. Die Kette enthält die Geltungsbereiche 4→3→2→1 in dieser Reihenfolge, vom aktuellen bis hin zum äußersten.</p>
+  <p>Es wird zunächst in Geltungsbereich 4 gesucht, dem aktuellen. Dort ist aber kein Bezeichner <code>window</code> definiert! Also wird weiter gesucht: im Bereich 3, dann im Bereich 2 und schließlich im Bereich 1. Erst dort, im globalen Geltungsbereich, findet sich der Bezeichner <code>window</code>.</p>
+  <p>Spielen wir das Ganze noch einmal für den Bezeichner <code>i</code> durch, der ebenfalls im innersten Geltungsbereich 4 benutzt wird. Die Kette enthält wieder die Geltungsbereiche 4→3→2→1, vom aktuellen bis zum äußersten. Beim Ablaufen der Kette auf der Suche nach <code>i</code> werden wir aber schon Geltungsbereich 3 fündig. Das Ablaufen der Kette wird abgebrochen, denn wir haben schon gefunden, was wir suchten.</p>
+  <p>Diese Funktionsweise ist zunächst einmal ein Interna des JavaScript-Interpreters. Sie erklärt aber auch, wie sich die Geltungsbereiche, von denen wir soviel gehört haben, praktisch auswirken. Beim Deklarieren von Variablen und Konstanten wählen Sie gewisse Geltungsbereiche, damit der Zugriff auf Namen und Werte möglich (oder absichtlich unmöglich) ist.</p>
 </div>
 <div class="section" id="bezeichner">
   <h2>Regeln und Konventionen für Bezeichner</h2>
