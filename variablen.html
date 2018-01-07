@@ -33,7 +33,7 @@
   <pre>var alter;</pre>
   <p>Dies erzeugt eine Variable, auf die später verwiesen werden kann. Sie können ihr später mit dem Zuweisungsoperator einen Wert geben, etwa so:</p>
   <pre>alter = 32;</pre>
-  <p>Tatsächlich gibt es keine Variablen ohne Wert. Wenn Sie eine Variable bloß deklarieren, dann bekommt sie automatisch den Wert <a href="datentypen.html#undefined">undefined</a>. Sie könnten also gleichermaßen schreiben:</p>
+  <p>Tatsächlich gibt es keine Variablen ohne Wert. Wenn Sie eine Variable bloß deklarieren, dann bekommt sie automatisch den Wert <a href="kernobjekte.html#undefined">undefined</a>. Sie könnten also gleichermaßen schreiben:</p>
   <pre>var alter = undefined;</pre>
   <p>In der Praxis hat es sich bewährt, Variablen bei der Deklaration wenn möglich auch einen ausdrücklichen Wert zuzuweisen.</p>
 </div>
@@ -64,7 +64,7 @@ var a = 20,
     <li>Funktions-Geltungsbereich</li>
     <li>Block-Geltungsbereich</li>
   </ol>
-  <p>Um Konflitke zwischen Variablen zu vermeiden und Programme einfach zu halten, gilt folgende Grundregel: Der Geltungsbereich einer Variable sollte immer so klein wie möglich sein. Verwenden Sie wenn möglich den Block-Geltungsbereich, andernfalls den Funktions-Geltungsbereich. Deklarieren Sie eine Variable nur in Ausnahmefällen im globalen Geltungsbereich.</p>
+  <p>Um Konflikte zwischen Variablen zu vermeiden und Programme einfach zu halten, gilt folgende Grundregel: Der Geltungsbereich einer Variable sollte immer so klein wie möglich sein. Verwenden Sie wenn möglich den Block-Geltungsbereich, andernfalls den Funktions-Geltungsbereich. Deklarieren Sie eine Variable nur in Ausnahmefällen im globalen Geltungsbereich.</p>
   <p>Im Folgenden schauen wir uns an, wie wir Variablen in den jeweiligen Geltungsbereichen erzeugen.</p>
 </div>
 <div class="section" id="globale-variablen">
@@ -211,8 +211,8 @@ if (!weitermachen) {
 window.alert(abbruchNachricht); // Fehler!
 </pre>
   <p>Um den Geltungsbereich einer mit <code>let</code> erzeugten Variable zu finden, müssen Sie einfach die nächstgelegene Struktur mit geschweiften Klammern <code>{…}</code> suchen. Die Code-Einrückung hilft dabei ebenfalls, denn jeder Block sollte eine neue Einrückungsebene erzeugen.</p>
-  <p>Wie gesagt sollten Sie der Grundregel folgen, den Geltungsbereich einer Variablen so klein wie möglich zu halten. Dazu eignen sich Variablen mit <code>let</code> hervorragend, denn sie haben den kleinstmöglichen Geltungsbereich.</p>
-  <p>Der Benutzung von <code>let</code> steht nur eine Sache entgegen: Die Technik wurde erst mit dem JavaScript-Standard ECMAScript 6 eingeführt, der 2015 verabschiedet wurde (siehe <a href="standards.html">JavaScript-Standards</a>). Alle neueren Browser kennen <code>let</code>, aber manche ältere Browser verstehen <code>let</code> noch nicht. Der Internet Explorer kennt <code>let</code> zum Beispiel erst ab Version 11.</p>
+  <p>Wie gesagt sollten Sie der Grundregel folgen, den Geltungsbereich einer Variablen so klein wie möglich zu halten. Dazu eignen sich Variablen mit <code>let</code> gut, denn sie haben den kleinstmöglichen Geltungsbereich. Selbst wenn Sie sie außerhalb eines Blocks deklarieren, so haben sie die erfreuliche Eigenheit, niemals eine Eigenschaft beim globalen Objekt <code>window</code> zu erzeugen.</p>
+  <p>Der Benutzung von <code>let</code> steht nur eine Sache entgegen: Die Technik wurde erst mit dem <a href="standards.html">JavaScript-Standard ECMAScript 6</a> eingeführt, der 2015 verabschiedet wurde. Alle neueren Browser kennen <code>let</code>, aber manche ältere Browser verstehen <code>let</code> noch nicht. Der Internet Explorer kennt <code>let</code> zum Beispiel erst ab Version 11.</p>
 </div>
 <div class="section" id="block-konstanten">
   <h2>Block-Konstanten (<code>const</code>)</h2>
@@ -309,9 +309,10 @@ function zähleHoch(anfang, ende) {
 </div>
 <div class="section" id="bezeichner">
   <h2>Regeln und Konventionen für Bezeichner</h2>
-  <p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Objektnamen beachten müssen:</p>
-  <p>Ein Bezeichner darf nur aus Buchstaben, arabischen Ziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
-  Alle anderen Zeichen (etwa Leer- oder Sonderzeichen) sind in Bezeichnern nicht erlaubt.</p>
+  <p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Namen beachten müssen:</p>
+  <p>Ein Bezeichner darf nur aus Buchstaben, Dezimalziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
+  <p>Genauer gesagt sind Zeichen aus der Unicode-Gruppen <code>ID_Start</code> an erster Stelle und Zeichen aus <code>ID_Continue</code> an den folgenden Stellen erlaubt.  Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische, arabische Zeichen usw. sind ebenfalls erlaubt.</p>
+  <p>Alle anderen Zeichen, etwa Leer- oder Sonderzeichen, sind in Bezeichnern nicht erlaubt.</p>
   <p>Beispiele für <strong>erlaubte Bezeichner</strong>:</p>
 <pre>
 mitarbeiter_name
@@ -321,6 +322,7 @@ $mitarbeitername
 lohnIn$
 mitarbeiter1
 twenty4seven
+größe
 </pre>
   <p>Beispiele für <strong>nicht erlaubte</strong> Bezeichner:</p>
 <pre>
@@ -333,10 +335,9 @@ lohnIn£
 ein♥FürTiere
 arbeiter&amp;angestellte
 </pre>
-  <p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« <!-- TODO »«, <em></em> oder Kombination? Wann <strong>? --> gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
-  <p>Allerdings beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>firmengröße</code> ist also möglich, üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen.</p>
-
-  <p>Bracket Notation erlaubt beliebigen String</p> <!-- TODO Bracket Notation? -->
+  <p>Im europäischen und noramerikanischen Raum beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>größe</code> ist zwar möglich. Üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen. Im kommerziellen Umfeld werden meistens englischsprachige Bezeichner verwendet.</p>
+  <p>Fragt sich nur noch, wie mit Groß- und Kleinschreibung in Bezeichnern umgegangen wird. Das ist eine Frage des Stils und letztlich Ihnen überlassen. Die vordefinierten JavaScript-Schnittstellen verwenden das sogenannte <strong>camelCase</strong>: Der erste Buchstabe ist klein. Wird ein Wort angehängt, so folgt ein Großbuchstabe und es geht wieder klein weiter. Wie der Höcker beim Kamel. So kommt beispielsweise <code>mitarbeiterName</code>, <code>toLocaleString</code> und <code>getElementById</code> heraus. Diese Schreibweise ist weit verbreitet und Ihnen sei auch geraten, diese zu verwenden.</p>
+  <!-- Konstruktoren PascalCase -->
 </div>
 
 <div class="sequence-navigation">
