@@ -16,110 +16,217 @@
 <h1>JavaScript: Objekte</h1>
 
 <div class="section" id="einfuehrung">
-  <h2>Objekte, Eigenschaften und Methoden</h2>
-  <p>Ein Objekt ist grob gesagt ein Bündel von Informationen im Speicher. In JavaScript haben wir auf alle zugänglichen Informationen Zugriff als ein Objekt.</p>
-  <p>Ein Objekt funktioniert als eine Zuordnungsliste, die unter bestimmten Namen weitere <strong>Unterobjekte</strong>, auch <strong>Member</strong> genannt, speichert. Diese Unterobjekte teilt man in <strong>Eigenschaften</strong> und <strong>Methoden</strong>. Methoden sind ausführbare Funktionen, die dem Objekt zugehören, Eigenschaften sind alle nicht ausführbaren Unterobjekte.</p>
-  <p>Durch diese Verschachtelung von Objekten entsteht eine beliebig lange Kette von Objekten, die aufeinander verweisen.</p>
-  <p>Der Browser stellt einem Script eine große Menge von <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert das Script eigene Objekte. Diese vom JavaScript-Programm selbst eingeführten Objekte werden üblicherweise <strong>Variablen</strong> genannt.</p>
+  <h2>Objekte und Eigenschaften</h2>
+  <p>Ein Objekt ist grob gesagt ein Bündel von Informationen im Speicher. Wie wir im <a href="kernobjekte.html">Kapitel über Datentypen</a> gelernt haben, unterscheidet JavaScript zwischen einfache Werten und Objekten. Manche einfache Werte können sich jedoch wie Objekte verhalten. Daher beschäftigt sich ein Großteil der JavaScript-Programmierung mit Objekten.</p>
+  <p>Ein Objekt funktioniert als eine Zuordnungsliste, die unter bestimmten <em>Namen</em> bestimmte <em>Werte</em> speichert. Dieses Name-Wert-Paar wird <dfn>Eigenschaft</dfn> genannt.</p>
+  <p>Ein Objekt, das eine Adresse speichert, könnte als Tabelle so aussehen:</p>
+  <table>
+    <caption>Objekt »Adresse«</caption>
+    <thead>
+      <tr>
+        <th>Eigenschaftsname</th>
+        <th>Eigenschaftswert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>name</th>
+        <td>Erika Gabler</td>
+      </tr>
+      <tr>
+        <th>straße</th>
+        <td>Königsallee 56</td>
+      </tr>
+      <tr>
+        <th>stadt</th>
+        <td>60322 Frankfurt</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>In einer Eigenschaft kann ein weiteres Objekt gespeichert sein. Durch diese Verschachtelung von Objekten entsteht eine beliebig lange Kette von Objekten, die aufeinander verweisen.</p>
+  <p>Der Browser stellt einem Script eine große Menge an <strong>vordefinierten Objekten</strong> zur Verfügung. Ein Script nutzt einerseits diese vordefinierten Objekte, indem es Eigenschaften ausliest und Methoden aufruft. Andererseits definiert ein Script eigene Objekte. Diese vom JavaScript-Programm selbst eingeführten Objekte werden üblicherweise in <a href="variablen.html">Variablen</a> gespeichert.</p>
 </div>
-  <div class="section" id="object-literale">
-    <h3>Object-Literale</h3>
-    <!-- verschieben nach objekte.html -->
-    <p>Das obige Beispiel verwendet die Langschreibweise <code>new Object()</code> zum Erzeugen eines <code>Object</code>-Objektes. Anschließend werden dem leeren Objekt Eigenschaften hinzugefügt. Es gibt allerdings auch eine kurze Literalschreibweise, die ungemein einfacher und verbreiteter ist. Um ein solches <strong>Object-Literal</strong> zu notieren, gibt es einen bestimmten Ausdruck: Er fängt mit einer öffnenden geschweiften Klammer an und endet mit einer schließenden. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
-  <pre>{
-   name1 : wert3,
-   name2 : wert2,
-   name3 : wert3
+
+<div class="section" id="object-literale">
+  <h2>Object-Literale</h2>
+  <p>Die einfachste Art, in JavaScript ein Objekt zu erzeugen, ist der <dfn>Object-Literal</dfn>. Dieser fängt mit einer öffnenden geschweiften Klammer <code>{</code> an und endet mit einer schließenden <code>}</code>. Dazwischen werden die Eigenschaften mit Name und Wert aufgelistet. Zwischen Name und Wert steht ein Doppelpunkt, zwischen den Eigenschaften ein Komma. Das Schema sieht demnach so aus:</p>
+<pre>{
+ name1: wert3,
+ name2: wert2,
+ name3: wert3
 }</pre>
-    <p>Die Anzahl der notierten Eigenschaften ist nicht begrenzt. Zu beachten ist, dass hinter der letzten Zuweisung kein Komma notiert wird.</p>
-    <p>Das erste Beispiel sieht in der Literalschreibweise so aus:</p><pre>var adresse = {
-   name : "Max Mustermann",
-   straße : "Königsallee 56",
-   stadt : "Frankfurt"
-};</pre>
-    <p>Dies erzeugt haargenau das gleiche Objekt wie die Langschreibweise.</p>
+  <p>Die Anzahl der notierten Eigenschaften ist nicht begrenzt. Hinter dem letzten Name-Wert-Paar kann ein Komma notiert werden, aber es ist nicht nötig. Üblicherweise wird es weggelassen.</p>
+  <p>Das Adressen-Beispiel sieht in der Literalschreibweise so aus:</p>
+<pre>
+var adresse = {
+  name: 'Erika Gabler',
+  straße: 'Königsallee 56',
+  stadt: '60322 Frankfurt'
+};
+</pre>
+  <p>Dies erzeugt ein Objekt mit drei Eigenschaften: <code>name</code>, <code>straße</code> und <code>stadt</code>. Alle drei Werte sind <a href="kernobjekte.html#string">Strings</a>. Als Tabelle könnte das Objekt so aussehen:</p>
+  <div class="js-objects">
+    <div class="object">
+      <h3>adresse</h3>
+      <table>
+      <tr class="own"><th>name</th><td>"Erika Gabler"</td></tr>
+      <tr class="own"><th>straße</th><td>"Königsallee 56"</td></tr>
+      <tr class="own"><th>stadt</th><td>"60322 Frankfurt"</td></tr>
+      </table>
+    </div>
   </div>
+  <p>Der Object-Literal erzeugt ein allgemeines, unspezifisches Objekt ohne besondere Eigenschaften. Sie können es schnell erzeugen und darin beliebige Werte speichern. Später werden Sie kennenlernen, wie Sie eigene, spezifischere Objekt-Typen definieren.</p>
 </div>
+
+<div class="section" id="eigenschaften-zugriff">
+  <h2>Zugriff auf Eigenschaften</h2>
+  <p>Ausgehend von einem Objekt können Sie auf dessen Eigenschaften zugreifen. Dazu notieren sie den Objektnamen, dann einen Punkt (<code>.</code>) und schließlich den Eigenschaftsnamen. Schematisch:</p>
+  <pre>objekt.eigenschaft</pre>
+  <p>Der Punkt (<code>.</code>) ist der <a href="syntax.html#operatoren">Operator</a> zum Zugriff auf Eigenschaften (englisch <em lang="en">Property Accessor</em>). Sowohl auf der linken als auch auf der rechten Seite des Punkts steht ein <a href="syntax.html#bezeichner">Bezeichner</a>.</p>
+  <p>Ein Beispiel mit dem bekannten Objekt <code>adresse</code>:</p>
+<pre>
+var adresse = {
+  name: 'Erika Gabler',
+  straße: 'Königsallee 56',
+  stadt: '60322 Frankfurt'
+};
+window.alert(
+  'Der Name lautet: ' + adresse.name + '\n' +
+  'Wohnhaft in: ' + adresse.straße + ', ' + adresse.stadt
+);
+</pre>
+  <p>Das Beispiel greift auf die drei Eigenschaften <code>name</code>, <code>straße</code> und <code>stadt</code> zu, um diese auszugeben. Dazu wird jeweils <code>adresse.name</code>, <code>adresse.straße</code> und <code>adresse.stadt</code> notiert.</p>
+  <p>Sie können den Operator zum Zugriff auf Eigenschaften auch mehrfach hintereinander verwenden. Auf diese Weise können Sie ganze Ketten an Eigenschaftsnamen notieren, um das gewünschte Objekt zu fassen zu bekommen:</p>
+  <pre>window.location.href</pre>
+  <p>In der fraglichen Eigenschaft wird Adresse (URL) des aktuellen Dokuments gespeichert.</p>
+  <p>Eine alternative Methode zum Ansprechen von Eigenschaften ist die Klammer-Schreibweise. Dabei wird der Eigenschaftsname zwischen eckigen Klammern als String notiert:</p>
+  <pre>objekt["eigenschaft"]</pre>
+  <p>Dies hat denselben Effekt wie <code>objekt.eigenschaft</code>. Der Vorteil dieser Schreibweise kommt dann zum Tragen, wenn der Name variabel ist und erst zur Laufzeit des Scriptes feststeht. Zwischen den Klammern lässt sich ein beliebiger <a href="syntax.html#ausdruecke">Ausdruck</a> notieren, also beispielsweise ein Variablenname:</p>
+  <pre>objekt[variable]</pre>
+  <p>Der JavaScript-Interpreter behandelt den Ausdruck als String und sucht nach einer entsprechenden Eigenschaft.</p>
+  <p>Mittels <code>objekt.eigenschaft</code> oder <code>objekt["eigenschaft"]</code> sprechen Sie eine Eigenschaft erst einmal an und bekommen eine sogenannte Referenz darauf. Je nachdem, wo Sie diesen Ausdruck verwenden, können Sie Verschiedenes mit der Referenz anfangen.</p>
+  <p>Bisher haben haben wir Eigenschaft <em>gelesen</em>. Schreiben Sie zum Beispiel <code>window.alert(adresse.name)</code>, so wird der Eigenschaftswert gelesen und ausgegeben.</p>
+  <p>Wenn Sie den Wert einer Eigenschaft auslesen, die nicht existiert, bekommen Sie übrigens den Wert <a href="kernobjekte.html#undefined">undefined</a> zurück.</p>
+  <p>Sie können eine Eigenschaft auch <em>schreiben</em>. Dazu verwenden Sie den Zuweisungsoperator. Auf der linken Seite steht die Referenz, auf der rechten Seite der neue Wert:</p>
+<pre>adresse.name = 'Erika Mustermann geb. Gabler';</pre>
+  <p>Falls die Eigenschaft bereits existiert, so wird der Wert geändert. Falls die Eigenschaft noch nicht existiert, wird sie automatisch angelegt, sofern es das Objekt zulässt.</p>
+</div>
+
+<div class="section" id="eigenschaften-konventionen">
+  <h2>Regeln und Konventionen für Eigenschaftsnamen</h2>
+  <p>Ein Eigenschaftsname ist letztlich ein <a href="kernobjekte.html#string">String</a> und kann alle Zeichen enthalten, die in Strings möglich sind. Der Name bestimmt allerdings, mit welcher Methode Sie auf die Eigenschaft zugreifen können.</p>
+  <p>Üblicherweise wird die beschriebene Punkt-Schreibweise verwendet:</p>
+  <pre>objekt.eigenschaft</pre>
+  <p>Bei dieser Schreibweise gelten gewisse Regeln für den Eigenschaftsnamen. Es sind <a href="variablen.html#bezeichner">die gleichen Regeln, die auch für Bezeichner</a> gelten. Eine genaue Beschreibung finden Sie dort.</p>
+  <p>Zusammengefasst: Der Eigenschaftsname darf nur aus Buchstaben, Dezimalziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
+  <p>Beispiele für mögliche Zugriffe auf Eigenschaften:</p>
+<pre>
+objekt.mitarbeiter_name
+objekt.mitarbeiterName
+objekt._mitarbeitername
+objekt.$mitarbeitername
+objekt.lohnIn$
+objekt.mitarbeiter1
+objekt.twenty4seven
+objekt.größe
+</pre>
+  <p>Beispiele für fehlerhafte Zugriffe auf Eigenschaften:</p>
+<pre class="erroneous">
+objekt.mitarbeiter name
+objekt.mitarbeiter-name
+objekt.lohnIn€
+objekt.lohnIn£
+objekt.2raumwohnung
+objekt.ein♥FürTiere
+objekt.arbeiter&amp;angestellte
+</pre>
+  <p>Wie gesagt bedeutet das nicht, dass Sie solche Eigenschaften nicht verwenden können. Sie können sie lediglich nicht über die Punkt-Schreibweise ansprechen, sondern müssen die Klammer-Schreibweise verwenden.</p>
+<pre>
+objekt["mitarbeiter name"]
+objekt["mitarbeiter-name"]
+objekt["lohnIn€"]
+objekt["lohnIn£"]
+objekt["2raumwohnung"]
+objekt["ein♥FürTiere"]
+objekt["arbeiter&amp;angestellte"]
+</pre>
+  <p>Nach Möglichkeit sollten Sie Eigenschaftsnamen verwenden, die den Regeln für Bezeichner entsprechen. Dann können Sie die gewohnte Punkt-Schreibweise verwenden, um auf sie zuzugreifen.</p>
+</div>
+
+<div class="section" id="methoden">
+  <h2>Methoden</h2>
+  <p>Eine Eigenschaft kann einen beliebigen Wert haben. Alle <a href="kernobjekte.html">Typen, die in JavaScript möglich sind</a>, können in einem Objekt als Eigenschaft gespeichert werden.</p>
+  <p>Das heißt, an einem Objekt können auch <a href="funktionen.html">Funktion</a> hängen. Diese Eigenschaften werden dann <dfn>Methoden</dfn> genannt.</p>
+  <p>Ein Objekt kann also reine Daten speichern, aber auch eine Funktionalität besitzen, die zu diesen Daten gehört. Dies ist in der objektorientierten Programmierung häufig. Ein Beispiel:</p>
+<pre>
+var person = {
+  vorname: 'Erika',
+  nachname: 'Gabler',
+  alter: 27,
+  <strong>vollerName</strong>: function () {
+    return this.vorname + ' ' + this.nachname;
+  },
+  <strong>istErwachsen</strong>: function () {
+    return this.alter >= 18;
+  }
+};
+window.alert( person.vollerName() );
+window.alert( person.istErwachsen() );
+</pre>
+  <p>Das Objekt <code>person</code> hat fünf Eigenschaften, davon sind zwei Methoden.</p>
+  <p>Um eine Methode zu erzeugen, verwenden Sie einen <a href="funktionen.html#ausdruecke">Funktionsausdruck</a> <code>function (…) {…}</code> und notieren Sie ihn nach dem Doppelpunkt.</p>
+  <p>Innerhalb einer Methode haben Sie über das Schlüsselwort <code>this</code> Zugriff auf das Objekt, an dem die Funktion hängt. Dies funktioniert allerdings nur, wenn die Funktion mit dem üblichen Schema <code>objekt.methode()</code> aufgerufen wird.</p>
+  <p>Die Methoden <code>vollerName</code> und <code>istErwachsen</code> greifen auf die anderen Eigenschaften zu und machen etwas damit. <code>vollerName</code> verkettet die Eigenschaften <code>vorname</code> und <code>nachname</code> und gibt das Ergebnis zurück, ebenfalls ein String. <code>istErwachsen</code> prüft die Eigenschaft <code>alter</code> und gibt einen Boolean zurück.</p>
+  <p>Seit dem JavaScript-Standard ECMAScript 6 (2015) können Sie Methoden kompakter notieren:</p>
+<pre>
+var person = {
+  vorname: 'Erika',
+  nachname: 'Gabler',
+  alter: 27,
+  <strong>vollerName() {</strong>
+    return this.vorname + ' ' + this.nachname;
+  },
+  <strong>istErwachsen() {</strong>
+    return this.alter >= 18;
+  }
+};
+</pre>
+  <p>Sie können den Doppelpunkt und das Schlüsselwort <code>function</code> weglassen und direkt mit der Parameterliste beginnen.</p>
+</div>
+
 <div class="section" id="objektorientierung">
   <h2>Konstruktoren, Prototypen und Instanzen</h2>
-  <p>Ein JavaScript-Objekt gehört einem gewissen Typ an. Diese Zugehörigkeit stellt sich in JavaScript so dar, dass ein Objekt von einer Funktion erzeugt wurde. Diese erzeugende Funktion wird <strong>Konstruktor</strong> genannt. Die meisten Konstruktorfunktionen sind JavaScript-intern und vordefiniert, Sie können allerdings auch selbst definierte Funktionen als Konstruktoren verwenden.</p>
-  <p>Die Objekte, die ein bestimmter Konstruktor erzeugt hat, werden <strong>Instanzen</strong> (Exemplare, Abkömmlinge) dieses Konstruktors genannt. Beispielsweise ist ein String-Objekt (eine Zeichenkette) eine Instanz der Konstruktorfunktion <code>String</code>.</p>
-  <p>Jedes Objekt hat eine Eigenschaft namens <code>constructor</code>, die auf die Konstruktorfunktion verweist, die es hergestellt hat. Beispielsweise liefert <code>"Dies ist ein String".constructor</code> die Konstruktorfunktion <code>String</code>.</p>
+  <p>Ein JavaScript-Objekt gehört einem gewissen Typ an (siehe <a href="file:///Users/molily/projekte/molily.de/js/kernobjekte.html">Datentypen</a>). Diese Zugehörigkeit stellt sich in JavaScript so dar, dass ein Objekt von einer Funktion erzeugt wurde. Diese erzeugende Funktion wird <strong>Konstruktor</strong> genannt. Die meisten Konstruktor sind JavaScript-intern und vordefiniert, Sie können allerdings auch selbst definierte Funktionen als Konstruktoren verwenden.</p>
+  <p>Die Objekte, die ein bestimmter Konstruktor erzeugt hat, werden <strong>Instanzen</strong> (Exemplare) dieses Konstruktors genannt. Beispielsweise erzeugt ein Object-Literal eine Instanz des Konstruktors <code>Object</code>.</p>
+  <p>Jedes Objekt hat eine Eigenschaft namens <code>constructor</code>, die auf den Konstruktor verweist, der es hergestellt hat. Beispielsweise liefert <code>adresse.constructor</code> den Konstruktor <code>Object</code>.</p>
   <p>Ein Konstruktor ist eine Art Fabrik, die Instanzen nach immer gleichem Muster produziert. Dieses Muster, der Bauplan für die Instanzen ist selbst ein Objekt: Das sogenannte prototypische Objekt, kurz <strong>Prototyp</strong>. Instanzen sind so gesehen Kopien des Prototypen und werden ihm nachgebildet.</p>
-  <p>Das prototypische Objekt hängt an der Konstruktorfunktion. Jede Funktion hat eine Eigenschaft namens <code>prototype</code>, die auf das zugehörige prototypische Objekt verweist. <code>String.prototype</code> liefert beispielsweise das Objekt, das den Bauplan für alle String-Instanzen definiert.</p>
-  <p>Jedes Objekt stammt also von einem Konstruktoren ab, dem ein Prototyp zugeordnet ist. Wenn wir ein Objekt erzeugen, dann wird hinter den Kulissen die entsprechende Konstruktorfunktion aufgerufen. Die Instanz erbt alle Eigenschaften und Methoden des Prototypen, indem sie an das frisch erzeugte, bisher leere Instanz-Objekt kopiert werden. Dieser Vorgang wird <strong>prototypische Vererbung</strong> genannt.</p>
-  <p>Prototypen können auch untereinander erben. Auf diese Weise sind die Objekttypen voneinander ableitbar. Ein String-Objekt ist gleichzeitig eine Instanz vom <code>String</code>-Konstruktor wie auch eine Instanz vom <code>Object</code>-Konstruktor.</p>
-  <p>Das prototypische Objekt ist ein ganz normales JavaScript-Objekt, dem Sie neue Eigenschaften und Methoden hinzufügen können. Auf diese Weise können alle Instanzen, die vom fraglichen Prototypen erben, auf einen Schlag mit neuen Fähigkeiten ausgestattet werden. Diese Methode nennt sich <strong>prototypische Erweiterung</strong>.</p>
-  <p>Aus Sicht der JavaScript-Programmierung passieren diese Vorgänge meist unbemerkt. Dass beim Erstellen eines Objektes ein Konstruktor aufgerufen wird und der Prototyp als Vorbild für das Objekt dient, wird nur ersichtlich, wenn wir in diese Vorgänge eingreifen wollen oder eigene Konstruktoren und Prototypen schreiben. Dennoch ist das Wissen um Konstruktoren und Instanzen grundlegend, um den Aufbau der Objektwelt und die Objekttypen in JavaScript zu verstehen.</p>
+  <p>Der Prototyp hängt an dem Konstruktor. Jede Funktion hat eine Eigenschaft namens <code>prototype</code>, die den zugehörigen Prototyp enthält. <code>Object.prototype</code> liefert beispielsweise das Objekt, das den Bauplan für alle <code>Object</code>-Instanzen definiert.</p>
+  <p>Jedes Objekt stammt also von einem Konstruktoren ab, dem ein Prototyp zugeordnet ist. Wenn wir ein Objekt erzeugen, dann wird entweder ausdrücklich oder hinter den Kulissen der entsprechende Konstruktor aufgerufen. Die Instanz erbt alle Eigenschaften des Prototypen. Dieser Vorgang wird <strong>prototypische Vererbung</strong> genannt.</p>
+  <p>Da Prototypen nur einfache Objekte sind, kann ein Prototyp auch selbst einen Prototyp haben und somit Eigenschaften erben. Auf diese Weise sind die Objekttypen voneinander ableitbar. Ein Date-Objekt beispielsweise ist gleichzeitig eine Instanz des <code>Date</code>-Konstruktors als auch eine Instanz des obersten <code>Object</code>-Konstruktors.</p>
+  <p>Der Prototyp ist ein ganz normales JavaScript-Objekt, dem Sie neue Eigenschaften hinzufügen können. Auf diese Weise können alle Instanzen, die vom fraglichen Prototypen erben, auf einen Schlag mit neuen Fähigkeiten ausgestattet werden. Diese Methode nennt sich <strong>prototypische Erweiterung</strong>.</p>
+  <p>Dass beim Erstellen eines Objektes ein Konstruktor aufgerufen wird und der Prototyp als Bauplan für das Objekt dient, immer nicht immer offensichtlich. Das Wissen um Konstruktoren und Instanzen ist jedoch notwendig, wenn wir in diese Vorgänge eingreifen oder eigene Konstruktoren und Prototypen schreiben wollen. Näheres dazu finden Sie im Kapitel <a href="organisation-instanzen.html">Organisation von JavaScripten: Konstruktoren, Prototypen und Instanzen</a>. </p>
 </div>
-<div class="section" id="klassen">
-  <h2>Klassen – gibt es nicht in JavaScript</h2>
-  <p>Objekttypen und Vererbung werden in vielen anderen Programmiersprachen über Klassen gelöst. JavaScript hingegen kennt keine Klassen, sondern nur die besagten Konstruktorfunktionen und Prototypen. ...</p>
-</div>
-<div class="section" id="bezeichner">
-  <h2>Bezeichner: Objekte ansprechen</h2>
-  <p>Bezeichner (englisch Identifier) sind Namen für Objekte. Um ein vorhandenes Objekt in einem JavaScript anzusprechen oder einen Wert unter einem Namen abzuspeichern, notieren wir dessen Namen.</p>
-  <pre>alert(vorname);</pre>
-  <p>Hier werden gleich zwei Bezeichner notiert: Einmal <code>alert</code> und einmal <code>vorname</code>. <code>alert</code> bezeichnet die vordefinierte globale Funktion, mit der sich Meldungen ausgeben lassen. <code>vorname</code> steht beispielhaft für eine durch das Script selbst erzeugte Variable.</p>
-  <div class="section" id="unterobjekte">
-    <h3>Unterobjekte ansprechen</h3>
-    <p>Um ausgehend von einem Objekt ein Unterobjekt (Member) anzusprechen, notieren wir den einen Objektnamen, dann einen <code>.</code> und danach den Namen des Unterobjekts. Schematisch:</p>
-    <pre>objekt.unterobjekt</pre>
-    <p>  Der Punkt (<code>.</code>) ist der sogenannte <em>Property Accessor Operator</em> (englisch für Operator zum Zugriff auf Eigenschaften).</p>
-    <p>Auf diese Weise können wir ganze Ketten an Objektnamen notieren, um das gewünschte Objekt zu fassen zu bekommen:</p>
-    <pre>window.location.href.substring(0, 4)</pre>
-    <p>Hier wird die <code>substring</code>-Methode des durch <code>window.location.href</code> referenzierten String-Objekts angesprochen, um das Protokoll <code>http</code> aus der Adresse (URL) des gegenwärtigen HTML-Dokuments zu extrahieren.</p>
-    <p>Eine alternative Methode zum Ansprechen von Unterobjekten ist die Klammer-Schreibweise. Dabei wird der Name des Unterobjektes zwischen eckigen Klammern als String notiert:</p>
-    <pre>objekt["unterobjekt"]</pre>
-    <p>Dies hat denselben Effekt wie <code>objekt.unterobjekt</code>. Der Vorteil dieser Schreibweise kommt zum Tragen, wenn der Objektname variabel ist und erst zur Laufzeit des Scriptes feststeht. Zwischen den Klammern lässt sich ein beliebiger <a href="syntax.html#ausdruecke">Ausdruck</a> notieren, also beispielsweise ein Bezeichner, der auf eine String-Variable verweist:</p>
-    <pre>objekt[stringVariable]</pre>
-    <p>Der JavaScript-Interpreter nimmt den String als Objektnamen und sucht nach einem entsprechenden Unterobjekt.</p>
-    <p>...</p>
-  </div>
-  <div class="section" id="bezeichner-konventionen">
-    <h3>Konventionen für Bezeichner</h3>
-    <p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Objektnamen beachten müssen:</p>
-    <p>Ein Bezeichner darf nur aus Buchstaben, arabischen Ziffern (0-9), dem Dollarzeichen (<code>$</code>) sowie dem Unterstrich (<code>_</code>) bestehen. Jedes dieser Zeichen darf an beliebiger Stelle vorkommen, mit Ausnahme der Ziffern, welche nicht an erster Stelle stehen dürfen.</p>
-    Alle anderen Zeichen (etwa Leer- oder Sonderzeichen) sind in Bezeichnern nicht erlaubt.</p>
-    <p>Beispiele für <strong>erlaubte Bezeichner</strong>:</p>
-<pre>
-mitarbeiter_name
-mitarbeiterName
-_mitarbeitername
-$mitarbeitername
-lohnIn$
-mitarbeiter1
-twenty4seven
-</pre>
-    <p>Beispiele für <strong>nicht erlaubte</strong> Bezeichner:</p>
-<pre>
-mitarbeiter name
-mitarbeiter-name
-mitarbeiter.name
-lohnIn€
-lohnIn£
-2raumwohnung
-ein♥FürTiere
-arbeiter&amp;angestellte
-</pre>
-    <p>Buchstaben sind all diejenigen Zeichen, die in der Unicode-Zeichendatenbank als »Letter« <!-- TODO »«, <em></em> oder Kombination? Wann <strong>? --> gekennzeichnet sind. Das sind eine ganze Menge: Neben dem lateinischen Alphabet gehören Buchstaben mit Diakritika wie ü, ö, ä, ß, é, â, ì, å, õ usw. dazu. Griechische, kyrillische, hebräische, japanische, chinesische Zeichen usw. sind ebenfalls erlaubt.</p>
-    <p>Allerdings beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>firmengröße</code> ist also möglich, üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen.</p>
 
-
-    <p>Bracket Notation erlaubt beliebigen String</p> <!-- TODO Bracket Notation? -->
-  </div>
-
-</div>
-<div class="section" id="globales-objekt">
-  <h2>Das globale Objekt <code>window</code></h2>
-  <p></p>
-</div>
 <div class="section" id="erzeugen">
   <h2>Objekte erzeugen: Literale und Instantiierung</h2>
-  <p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder eine ausdrückliche <strong>Instantiierung</strong>.</p>
-  <p>Ein Literal (englisch für wörtlich, buchstäblich) ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. <code>1.23</code> ist ein Literal, der ein Objekt vom Typ <code>Number</code> erzeugt. <code>"Hallo Welt!"</code> ist ein <code>String</code>-Literal, <code>true</code> und <code>false</code> sind <code>Boolean</code>-Literale.</p>
-  <p>Die Langschreibweise erzeugt ausdrücklich eine Instanz eines Kernobjekts, indem es den Konstruktoren aufruft. Wenn wir z.B. ein Objekt vom Typ <code>Array</code> erzeugen wollen, können wir <code>new Array()</code> schreiben.</p>
-  <p>Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen und das Ergebnis ist auch nicht immer dasselbe (siehe <a href="#objects-primitives">Objekte und primitive Typen</a>). Wenn eine Literalschreibweise für den gewünschten Objekttyp existiert, dann sollten Sie diese nutzen. Für manche Objekttypen existiert keine Literalschreibweise, sodass Sie beispielsweise <code>new Date()</code> notieren müssen.</p>
+  <p>Objekte können in JavaScript auf zwei Weisen erzeugt werden: Durch einen <strong>Literal</strong> oder das ausdrückliche Erzeugen einer Instanz mit dem Schlüsselwort <code>new</code>.</p>
+  <p>Ein Literal ist eine Kurzschreibweise, mit der Sie Werte am schnellsten notieren können. Wir haben den Object-Literal <code>{…}</code> kennengelernt. Dieser erzeugt ein Objekt vom Typ <code>Object</code>.</p>
+  <p>Die Langschreibweise erzeugt ein Objekt, indem es einen Konstruktoren mit <code>new</code> aufruft. Um beispielsweise ein <code>Object</code> zu erzeugen, können wir <code>new Object()</code> schreiben. Das heißt, folgende Schreibweisen sind identisch:</p>
+<pre>
+// Object-Literal
+var person1 = { name: 'Erika Gabler' };
+
+// Instanz von Object mit 'new' erzeugen
+var person2 = new Object();
+person2.name = 'Erika Gabler';
+</pre>
+  <p>Nicht alle Objekttypen lassen sich auf beide Weisen erzeugen. Wenn eine Literalschreibweise für den gewünschten Objekttyp existiert, dann sollten Sie diese auch nutzen. Für manche Objekttypen existiert keine Literalschreibweise.</p>
+  <p>Für Arrays beispielsweise gibt es eine Literalschreibweise: <code>[…]</code>. Ebenso für für reguläre Ausdrücke: <code>/…/</code>. Es gibt allerdings kein Literal, um ein Datum zu erzeugen. Sie müssen <code>new Date()</code> notieren.</p>
+</div>
+
+<div class="section" id="globales-objekt">
+  <h2>Das globale Objekt <code>window</code></h2>
+  <p>…</p>
 </div>
 
 <div class="sequence-navigation">
