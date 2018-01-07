@@ -3,9 +3,9 @@
 /* Body */
 
 body {
-  max-width: 45em;
+  max-width: 45rem;
   margin: 0 auto;
-  padding: 0 1em;
+  padding: 0 1rem;
   counter-reset: counterH2;
   line-height: 1.7;
   font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -20,7 +20,7 @@ body {
 /* Headings */
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 h2, h3 {
@@ -29,26 +29,26 @@ h2, h3 {
 }
 
 h2 {
-  margin-top: 2em;
-  font-size: 1.25em;
+  margin-top: 2rem;
+  font-size: 1.25rem;
   counter-reset: counterH3;
 }
 
 h2:before {
   content: counter(counterH2) ".";
   counter-increment: counterH2;
-  padding-right: 0.5em;
+  padding-right: 0.5rem;
 }
 
 h3 {
-  margin-top: 1.5em;
-  font-size: 1.125em;
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
 }
 
 h3:before {
   content: counter(counterH2) "." counter(counterH3);
   counter-increment: counterH3;
-  padding-right: 0.5em;
+  padding-right: 0.5rem;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -56,7 +56,7 @@ h3:before {
 /* Body copy */
 
 p, ol, ul, dl {
-  margin: 1.5em 0;
+  margin: 1.5rem 0;
 }
 
 ul p, ol p {
@@ -69,18 +69,18 @@ ol, ul {
 
 ol li,
 ul li {
-  margin-left: 2.5em;
-  margin-bottom: 1em;
+  margin-left: 2.5rem;
+  margin-bottom: 1rem;
   padding-left: 0;
 }
 
 dt {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
 dd {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 blockquote {
@@ -89,7 +89,7 @@ blockquote {
 
 blockquote p {
   background: #f8f8fa;
-  padding: 1em 1.5em;
+  padding: 1rem 1.5rem;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -104,15 +104,20 @@ pre, code {
 
 pre {
   border: 1px solid #ddd;
-  padding: 1em;
-  background-color: rgb(255, 251, 245);
-  font-size: 0.9em;
+  padding: 1rem;
+  background-color: #fffbf5;
+  font-size: 0.9rem;
   border-radius: 2px;
+  overflow: auto;
 }
 
 pre strong {
   font-weight: normal;
   color: green;
+}
+
+pre.erroneous {
+  background-color: #fff5f5;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -124,9 +129,14 @@ table {
   border-collapse: collapse;
 }
 
+caption {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
 th, td {
   border: 1px solid #ccc;
-  padding: 0.2em 0.5em;
+  padding: 0.2rem 0.5rem;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -147,10 +157,10 @@ dfn {
 /* Navigation */
 
 #nav {
-  margin-top: 1em;
-  padding: 0.5em 1em;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
   border: 1px solid #ddd;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 #nav p, #footer p {
@@ -158,7 +168,7 @@ dfn {
 }
 
 #nav strong {
-  font-size: 1.125em;
+  font-size: 1.125rem;
 }
 
 #nav strong, #nav a {
@@ -166,7 +176,7 @@ dfn {
 }
 
 #nav .contents-link {
-  font-size: 1.125em;
+  font-size: 1.125rem;
   text-align: right;
   font-weight: bold;
 }
@@ -176,25 +186,25 @@ dfn {
 /* Footer */
 
 #footer {
-  margin-top: 3em;
-  padding: 3em 0;
+  margin-top: 3rem;
+  padding: 3rem 0;
   border-top: 1px solid #ddd;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 #footer p {
   margin: 0;
 }
 
-@media (min-width: 30em) {
+@media (min-width: 30rem) {
   #footer {
-    padding-left: 4em;
-    padding-right: 4em;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
 body#contents #footer p {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -202,12 +212,12 @@ body#contents #footer p {
 /* Table of contents */
 
 #toc li {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.2rem;
 }
 
 #toc ol {
-  font-size: 0.9375em;
-  margin: 0.5em 0;
+  font-size: 0.9375rem;
+  margin: 0.5rem 0;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -216,8 +226,8 @@ body#contents #footer p {
 
 .sequence-navigation {
   border-top: 1px solid #ddd;
-  margin-top: 3em;
-  padding-top: 3em;
+  margin-top: 3rem;
+  padding-top: 3rem;
 }
 
 .sequence-navigation p {
@@ -238,9 +248,9 @@ body#contents #footer p {
 
 .sidebox {
   float: right;
-  margin: 1em -1em 1em 1.5em;
-  max-width: 16em;
-  padding: 1em;
+  margin: 1rem -1rem 1rem 1.5rem;
+  max-width: 16rem;
+  padding: 1rem;
 
   border: 1px solid #eddb9a;
 
@@ -250,7 +260,7 @@ body#contents #footer p {
   background-color: #FCFC94;
   border-radius: 2px;
 
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 .sidebox p {
@@ -262,7 +272,7 @@ body#contents #footer p {
 /* JavaScript main pillars */
 
 .pillars {
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 .pillars:after {
@@ -272,13 +282,13 @@ body#contents #footer p {
 }
 
 .pillars .base {
-  margin: 0 0 1em;
+  margin: 0 0 1rem;
 }
 
 .pillars .pillar {
   float: left;
   width: 32%;
-  margin: 0 0 1em 2%;
+  margin: 0 0 1rem 2%;
 }
 
 .pillars .pillar.first {
@@ -328,7 +338,7 @@ body#contents #footer p {
 
 .js-objects .object {
   float: left;
-  margin: 0 1.5em 1.5em 0;
+  margin: 0 1.5rem 1.5rem 0;
   box-shadow: 2px 2px 5px #ccc;
 }
 
@@ -338,25 +348,32 @@ body#contents #footer p {
 
 .js-objects h3 {
   margin: 0;
-  padding: 0.3em 0.5em;
-  font-size: 0.9em;
-  font-family: inherit;
+  padding: 0.3em 0.3em 0.1em;
   border-style: solid solid none;
   border-width: 1px;
   border-color: #ccc;
   background-color: #f0f0f0;
+  color: black;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .js-objects h3:before {
-  content: "";
   content: none;
 }
 
 .js-objects th,
 .js-objects td {
-  font-size: 0.75em;
+  border: 1px solid #ccc;
+  font-size: 0.75rem;
   padding: 0.3em 0.5em 0.2em;
   line-height: 1.2;
+}
+
+.js-objects th {
+  text-align: left;
+  font-weight: normal;
 }
 
 .js-objects .internal th,
@@ -382,8 +399,8 @@ body#contents #footer p {
 /* Table with commented code */
 
 .commented-code {
-  margin: 2em -6em;
-  font-size: 0.9em;
+  margin: 2rem -6rem;
+  font-size: 0.9rem;
 }
 
 .commented-code td,
@@ -395,7 +412,7 @@ body#contents #footer p {
 }
 
 .commented-code td {
-  padding: 0.2em 0.5em;
+  padding: 0.2rem 0.5rem;
   border-style: solid none;
   border-color: #ddd;
 }
@@ -417,7 +434,7 @@ body#contents #footer p {
 .references h2,
 .references h3 {
   margin: 0;
-  padding: 0.5em 0 0.5em 1.3em;
+  padding: 0.5rem 0 0.5rem 1.3rem;
   border-color: #dadada;
 }
 
@@ -428,11 +445,11 @@ body#contents #footer p {
 }
 
 .references ul {
-  margin: 1.5em 0;
+  margin: 1.5rem 0;
 }
 
 .references li {
-  margin: 0.2em 0 0.2em 2.625em;
+  margin: 0.2rem 0 0.2rem 2.625rem;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
