@@ -8,7 +8,11 @@ var FileLinks = {
 
   clickHandler: function(event) {
     var target = event.target;
-    if (target.tagName === 'A' && target.getAttribute('href') === './') {
+    if (
+      target.tagName === 'A' &&
+      target.getAttribute('href') === './' &&
+      !(event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
+    ) {
       event.preventDefault();
       location.href = 'index.html';
     }
