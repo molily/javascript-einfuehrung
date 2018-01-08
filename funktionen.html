@@ -17,172 +17,221 @@
 
 <div class="section" id="function">
   <h2>Einführung</h2>
-  <p>Mit Funktionen können Sie flexible Teilprogramme notieren.</p>
-  <p>... Das haben Sie sicher schon im Grundlagenkurs Programmierung gelernt, oder kennen es schon von anderen Programmiersprachen. ...</p>
-  <p>Die vorgegebenen JavaScript-Objekte bieten in erster Linie Funktionen, die Sie in Ihren Scripten aufrufen können.</p>
-  <p>In JavaScript spielen Funktionen einen höheren Stellenwert als in anderen Programmiersprachen und haben einige Besonderheiten - deshalb spricht man davon, dass JavaScript Aspekte einer <em>funktionalen Programmiersprache</em> besitzt. In JavaScript sind Funktionen nicht einfach feste, einmal definierte Script-Bestandteile, sondern selbst Objekte, mit denen man im Script nahezu ungehindert arbeiten kann. Sie können sogar problemlos neue Funktionen zur Laufzeit erzeugen und einmal
-  definierte wieder löschen.</p>
-  <p>Wenn Sie <strong>eigene Funktionen definieren</strong>, so können Sie sie an bestimmte andere Objekte hängen. Das bedeutet, sie als Unterobjekte eines Objektes zu speichern. In diesem Fall spricht man in der Terminologie der objektorientierten Programmierung von einer <strong>Methode</strong>. In anderen Fällen ist es sinnvoller, die Funktion als lokale Variable in einer anderen Funktion anzulegen. Und schließlich brauchen Sie die Funktion gar nicht zu speichern - sie können Sie auch
-  anonym (namenlos) anlegen, nur um sie z.B. als Parameter an eine andere Funktion weiterzugeben. Diese drei Möglichkeiten werden Ihnen später noch klarer werden, wenn wir betrachten, auf welche Weise Sie Funktionen erzeugen können.</p>
+  <p>Mit Funktionen können Sie flexible Teilprogramme notieren, die sie wiederholt aufrufen können. Funktionen sind ein einfaches Mittel, ein JavaScript-Programm zu strukturieren.</p>
+  <p>In JavaScript haben Funktionen einen höheren Stellenwert als in anderen Programmiersprachen und haben einige Besonderheiten. JavaScript besitzt Aspekte einer <em>funktionalen Programmiersprache</em> besitzt. In JavaScript sind Funktionen nicht feste, einmal definierte Teilprogramme, sondern selbst Werte, mit denen Sie im Programm arbeiten können. Sie können neue Funktionen zur Laufzeit erzeugen. Nicht mehr benötigte Funktionen werden wieder gelöscht.</p>
+  <p>Sie können <strong>eigene Funktionen</strong> auf verschiedene Arten definieren. Sie können Funktionen als lokale Variable in einer anderen Funktion erzeugen. Sie können Funktionen auch an Objekte hängen. Das bedeutet, sie als <a href="objekte.html">Eigenschaft</a> eines Objektes zu speichern. Der Fachbegriff dafür in der objektorientierten Programmierung ist <a href="objekte.html#methoden">Methode</a>. Und schließlich können Sie auch anonyme (namenlose) Funktionen anlegen, um sie z.B. als Parameter an eine andere Funktion zu geben.</p>
 </div>
+
 <div class="section" id="deklarationen">
   <h2>Funktionsdeklarationen</h2>
-  <p>Es gibt drei Arten, wie Sie Funktionen notieren und damit Funktionsobjekte erzeugen können. Die einfachste und wichtigste Art ist die sogenannte Funktions-Deklaration (auf englisch <em>function declaration</em>). Deren Syntax ist folgendermaßen aufgebaut:</p>
-  <pre>function <var>Funktionsname</var>(<var>Parameterliste</var>) {
-<var>Anweisungen</var>
-}</pre>
-  <p>Der <strong>Funktionsname</strong> muss <a href="objekte-variablen.html#bezeichner">den üblichen Anforderungen an JavaScript-Bezeichner</a> genügen: Sie dürfen Buchstaben, Zahlen und einige Sonderzeichen (das Dollar-Zeichen, den Unterstrich ... TODO) verwenden. Der Funktionsname darf in diesem Fall aber keine Leerzeichen enthalten. TODO: Wann darf er das?</p>
-  <p>Die <strong>Parameterliste</strong> zwischen den beiden runden Klammern ist eine durch Kommas getrennte Liste von Namen. Für diese gelten die besagten Namenskonventionen. Unter den in dieser Auflistung vergebenen Namen können Sie innerhalb der Funktion auf die übergebenen Parameter zugreifen.</p>
-  <p>Zwischen den beiden geschweiften Klammern wird der sogenannte Funktionskörper notiert: Darin werden die <a href="syntax.html#anweisungen">Anweisungen</a> untergebracht, die beim Aufruf der Funktion ausgeführt werden sollen.</p>
+  <p>Die einfachste und wichtigste Art, eine Funktion zu definieren, ist die sogenannte <dfn>Funktions-Deklaration</dfn> (auf englisch <em lang="en">function declaration</em>). Deren Syntax ist folgendermaßen aufgebaut:</p>
+<pre>
+function <var>Funktionsname</var>(<var>Parameterliste</var>) {
+  <var>Anweisungen</var>
+}
+</pre>
+  <p>Der <strong>Funktionsname</strong> muss <a href="variablen.html#bezeichner">den üblichen Anforderungen an JavaScript-Bezeichner</a> genügen: Sie dürfen Buchstaben, Dezimalziffern (0-9), das Dollarzeichen ($) sowie den Unterstrich (_) verwenden. Ziffern dürfen nicht an erster Stelle stehen.</p>
+  <p>Die <strong>Parameterliste</strong> zwischen den beiden runden Klammern ist eine durch Kommas getrennte Liste von Namen. Für diese gelten die besagten Namenskonventionen. Innerhalb der Funktion können Sie auf die übergebenen Parameter zugreifen, indem Sie die hier vergebenen Namen verwenden.</p>
+  <p>Zwischen den beiden geschweiften Klammern wird der <dfn>Funktionskörper</dfn> notiert: Darin werden die <a href="syntax.html#anweisungen">Anweisungen</a> untergebracht, die beim Aufruf der Funktion ausgeführt werden sollen.</p>
   <p>Folgendes Beispiel soll das Schema verdeutlichen:</p>
-  <pre>function statusMeldung(meldungsTyp, meldungsText) {
-var ausgabeElement = document.getElementById("meldungsausgabe");
-ausgabeElement.className = meldungsTyp;
-ausgabeElement.innerHTML = meldungsText;
+<pre>
+function statusMeldung(meldungsTyp, meldungsText) {
+  var ausgabeElement = document.getElementById('meldungsausgabe');
+  ausgabeElement.className = meldungsTyp;
+  ausgabeElement.innerHTML = meldungsText;
 }
-statusMeldung("fehler", "Beim Absenden Ihrer Nachricht ist ein Fehler aufgetreten. " +
-"Bitte versuchen Sie es erneut."); </pre>
-  <p>Das Beispiel definiert eine Funktion mit dem Namen <code>statusMeldung</code>. Die Funktion erwartet zwei Parameter mit dem Namen <code>meldungsTyp</code> bzw. <code>meldungsText</code>.</p>
-  <p>Die Funktion wird nach dem Schema <code><var>Funktionsname</var>(<var>Parameterliste</var>)</code> aufgerufen. Die beiden runden Klammern nach dem Funktionsnamen sind der eigentliche</p>
-  <p>...</p>
-  <p>Was passiert: wenn Sie direkt in einem script-Element notieren, wird eine globale Funktion angelegt. Das ist eine Methode des window-Objektes ... Globale Variablen sind wiederum nichts anderes als Eigenschaften des Objektes <code>window</code>.</p>
-  <p>bla() = window.bla()! window["bla"]!</p>
+statusMeldung(
+  'fehler',
+  'Beim Absenden Ihrer Nachricht ist ein Fehler aufgetreten.'
+);
+</pre>
+  <p>Das Beispiel definiert eine Funktion mit dem Namen <code>statusMeldung</code>. Die Funktion erwartet zwei Parameter mit den Namen <code>meldungsTyp</code> und <code>meldungsText</code>. Sie sucht ein Element im Dokument mit der ID <code>meldungsausgabe</code>. Dann setzt sie dessen Klasse auf den Wert des Parameters <code>meldungsTyp</code> und füllt das Element mit dem Wert des Parameters <code>meldungsText</code>.</p>
+  <p>Eine Funktion wird nach dem Schema <code><var>Funktionsname</var>(<var>Parameterliste</var>)</code> aufgerufen. Die Parameterliste beim Aufruf ist eine durch Komma getrennte Liste an <a href="syntax.html#ausdruecke">Ausdrücken</a> (Namen oder Werten). Der Funktion im Beispiel werden zwei Parameter übergeben, die als <a href="kernobjekte.html#string">String-Literale</a> notiert werden.</p>
+  <p>Dies führt dazu, dass <code>meldungsTyp</code> in der Funktion den Wert <code>'fehler'</code> bekommt und <code>meldungsText</code> den Wert <code>'Beim Absenden Ihrer Nachricht ist ein Fehler aufgetreten.'</code>.</p>
+  <!-- TODO: Scope: Eine Funktionsdeklaration erzeugt einen Namen im aktuellen Geltungsbereich. Wenn eine Funktionsdeklaration innerhalb einer Funktion notiert werden, wird ein Name im Funktions-Geltungsbereich registriert. Steht die Deklaration außerhalb jeder Funktion, dann wird ein Name im globalen Geltungsbereich angelegt. -->
 </div>
-<div class="section" id="parameter">
-  <h2>Funktionsparameter</h2>
-  <p>Bei der Deklaration weisen Sie den Funktionsparametern </p>
-  <pre>function Summe(zahl1, zahl2, zahl3) {
 
+<div class="section" id="ergebnis">
+  <h2>Rückgabewert (Ergebnis)</h2>
+  <p>Eine Funktion kann nicht nur Werte entgegen nehmen, sondern auch einen Wert zurückgeben. Dieser Wert heißt <dfn>Rückgabewert</dfn> oder auch <dfn>Ergebnis</dfn>. Der Wert kann an der Stelle benutzt werden, an der der Funktionsaufruf steht. Der Funktionsaufruf <em>ergibt</em> den Wert.</p>
+  <p>Denken Sie an eine einfache mathematische Funktion: <code>f(x) = x²</code>. Für x = 5 ergibt die Funktion 25, für x = 6 ergibt die Funktion 36 usw.</p>
+  <p>In JavaScript könnte die Funktion so aussehen:</p>
+<pre>
+function quadrat(x) {
+  <strong>return</strong> x * x;
+}
+window.alert( quadrat(5) );
+</pre>
+  <p>Mit der <code>return</code>-Anweisung können Sie die Funktion beenden und einen Wert zurückgeben. Nach dem Schlüsselwort <code>return</code> folgt ein beliebiger <a href="syntax.html#ausdruecke">Ausdruck</a>. Die Anweisung wird mit einem Semikolon abgeschlossen.</p>
+  <p>Im Beispiel wird die Funktion <code>quadrat</code> mit dem Parameter 5 aufgerufen. Der Ausdruck <code>x * x</code> ergibt 25, also wird der Wert 25 zurückgegeben.</p>
+  <p>Das Ergebnis 25 wird an der Stelle eingefügt, an der der Funktionsaufruf stand. Aus <code>window.alert( quadrat(5) )</code> wird also <code>window.alert( 25 )</code>.</p>
+  <p>Bei der Funktionsausführung kann <code>return</code> nur einmal ausgeführt werden, denn es beendet die Ausführung sofort und sorgt dafür, dass die Ausführung dort weitergeht, wo die Funktion aufgerufen wurde.</p>
+  <p>Das heißt aber nicht, dass Sie in einer Funktion nicht mehrere <code>return</code>-Anweisungen verwenden können. <code>return</code> kann mehrfach vorkommen, muss aber in unterschiedlichen logischen Zweigen stehen. Zum Beispiel:</p>
+<pre>
+function begrüßung(person) {
+  if (person.nickname) {
+    <strong>return</strong> 'Willkommen ' + person.nickname;
+  } else {
+    <strong>return</strong> 'Hallo ' + person.vorname;
+  }
 }
 
-Summe(5, 10, 15);</pre>
-  <p></p>
+var person1 = {
+  vorname: 'Erika'
+};
+var person2 = {
+  vorname: 'Max',
+  nickname: 'zimtschnecke'
+};
+
+window.alert( begrüßung(person1) );
+window.alert( begrüßung(person2) );
+</pre>
+  <p>Das Beispiel definiert eine Funktion <code>begrüßung</code>, die ein <code>person</code>-Objekt als Parameter erwartet. Darin befindet sich eine <a href="syntax.html#kontrollstrukturen">bedingte Anweisung</a>. Sie prüft, ob das übergebene Objekt eine Eigenschaft <code>nickname</code> besitzt. Falls ja, gibt sie eine Begrüßung zurück, die <code>nickname</code> verwendet. Falls nein, gibt sie eine Begrüßung zurück, die die Eigenschaft <code>vorname</code> verwendet.</p>
+  <p>Die Funktion wird zweimal aufgerufen. Einmal mit dem Objekt <code>person1</code>, das einen Nickname besitzt. Einmal mit dem Objekt <code>person2</code>, das keinen Nickname besitzt. Die Fallunterscheidung in der Funktion bestimmt nun den Rückgabewert: Im ersten Fall wird <code>'Hallo Erika!'</code> zurückgegeben, im zweiten Fall <code>'Willkommen zimtschnecke'</code>.</p>
+  <p>Die <code>return</code>-Anweisung beendet die Funktionsausführung wie gesagt. Das heißt, wir können die Funktion <code>begrüßung</code> auch folgendermaßen definieren:</p>
+<pre>
+function begrüßung(person) {
+  if (person.nickname) {
+    <strong>return</strong> 'Willkommen ' + person.nickname;
+  }
+  <strong>return</strong> 'Hallo ' + person.vorname;
+}
+</pre>
+  <p>Sie können sich den <code>else</code>-Zweig sparen. Wenn die Bedingung der <code>if</code>-Anweisung erfüllt ist, springt der JavaScript-Interpreter sofort aus der Funktion heraus. Dieses Muster wird häufig verwendet, um eine Funktion vorzeitig zu beenden. Ein weiteres Beispiel:</p>
+<pre>
+function hypotenuse(a, b) {
+  if (a &lt;= 0 || b &lt;= 0) {
+    return 0;
+  }
+  var c = Math.sqrt(a * a + b * b);
+  return c;
+}
+</pre>
+  <p>Das Beispiel berechnet die Länge der Hypotenuse in einem rechtwinkligen Dreieck anhand des <a href="https://de.wikipedia.org/wiki/Satz_des_Pythagoras">Satzes des Pythagoras</a>. Die Formel dafür lautet
+  <math>
+      <mi>c</mi>
+      <mo>=</mo>
+      <msqrt>
+        <msup>
+          <mi>a</mi>
+          <mn>2</mn>
+        </msup>
+        <mo>+</mo>
+        <msup>
+          <mi>b</mi>
+          <mn>2</mn>
+        </msup>
+      </msqrt>
+    </math>.</p>
+  <p>Wenn die Längen der Katheten <code>a</code> und <code>b</code> kleiner oder gleich 0 sind, dann ist eine Berechnung nicht möglich oder würde einen fehlerhaften Wert ergeben. Gegebenenfalls wird die Funktion vorzeitig beendet und sie gibt 0 zurück. Erst nach dieser Prüfung folgt die eigentliche Berechnung der Hypotenuse <code>c</code>.</p>
+  <!-- TODO: Beenden ohne Rückgabewert: return; -->
 </div>
+
+<div class="section" id="funktionsvariablen">
+  <h2>Funktionsvariablen</h2>
+  <p>Innerhalb von Funktionen können Sie Variablen deklarieren, deren Geltungsbereich auf die Funktion beschränkt ist. Die obige Beispielfunktion <code>hypotenuse</code> hat eine Variable definiert, nämlich <code>c</code>:</p>
+<pre>
+function hypotenuse(a, b) {
+  if (a &lt;= 0 || b &lt;= 0) {
+    return 0;
+  }
+  var <strong>c</strong> = Math.sqrt(a * a + b * b);
+  return <strong>c</strong>;
+}
+</pre>
+  <p>Die Variable ist nur innerhalb der Funktion verfügbar, aber deren Wert soll nach außen gegeben werden. Das ist mit der besprochenen <code>return</code>-Anweisung möglich.</p>
+  <p>Eine genaue Erklärung von Funktionsvariablen finden Sie im <a href="variablen.html#funktionsvariablen">Kapitel über Variablen</a>.</p>
+</div>
+
+<div class="section" id="ausdruecke">
+  <h2>Funktionsausdrücke</h2>
+  <p>Die vorgestellte Funktionsdeklaration vereint zwei Aufgaben: Sie erzeugt eine Funktion und speichert diese gleichzeitig unter einem Namen im aktuellen <a href="variablen.html#scope">Geltungsbereich</a>.</p>
+  <p>Folgende Funktionsdeklaration speichert unter dem Namen <code>quadrat</code> eine Funktion.</p>
+<pre>
+function quadrat(x) {
+  return x * x;
+}
+</pre>
+  <p>Es ist jedoch nicht immer gewünscht, einer Funktion einen Namen zu geben und diesen im aktuellen Geltungsbereich verfügbar zu machen. Manchmal möchte man eine Funktion erzeugen, ohne sie unter einem Namen verfügbar zu machen.</p>
+  <p>Es gibt daher noch eine weitere Schreibweise, um Funktionen zu erzeugen: Den <dfn>Funktions-Ausdruck</dfn> (englisch <em lang="en">function expression</em>).</p>
+  <p>Syntaktisch gesehen ist eine Funktionsdeklaration eine <a href="syntax.html#anweisungen"><em>Anweisung</em></a>. Ein Funktionsausdruck hingegen ist ein <a href="syntax.html#ausdruecke"><em>Ausdruck</em></a>, wie der Name schon sagt. Damit haben beide unterschiedliche Anwendungsmöglichkeiten. Sie können Funktionsausdrücke an mehr Stellen notieren als eine Funktionsdeklaration.</p>
+  <p>Das Schema eines Funktionsausdruckes sieht folgendermaßen aus:</p>
+  <pre>function (<var>Parameterliste</var>) { <var>Anweisungen</var> }</pre>
+  <p>Ein Funktionsausdruck erzeugt lediglich eine Funktion, speichert sie aber nicht automatisch unter einem Namen. Man spricht daher auch von <dfn>anonymen (namenlosen) Funktionen</dfn>.</p>
+  <p>Das Ergebnis des Ausdruckes ist ein Funktionsobjekt. Sie können es wie jeden anderen Wert in JavaScript beliebig weiterverwenden. Beispielsweise können Sie das erzeugte Funktionsobjekt in einer Variable speichern:</p>
+  <pre>var <var>Funktionsname</var> = function (<var>Parameterliste</var>) { <var>Anweisungen</var> };
+</pre>
+  <p>Diese Variablenzuweisung mit Funktionsausdruck hat den gleichen Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var>(...) {...}</code>. Bis auf einige Sonderfälle sind die beiden Schreibweisen austauschbar.</p>
+  <p>Was sind nun die <strong>Vorteile</strong> eines Funktionsausdruckes?</p>
+  <p>Eine Funktion, die Sie mit einem Funktionsausdruck erzeugen, können Sie direkt an ein Objekt als <a href="objekte.html#methoden">Methode</a> hängen. Auf diese Weise können Sie Ordnung in Ihre Scripte bringen und zusammenhörige Werte und Funktionen unter einem Objekt gruppieren. Ein Beispiel:</p>
+<pre>
+var bildergalerie = {
+  abspielen: <strong>function () {</strong>
+    /* ... */
+  <strong>}</strong>
+};
+bildergalerie.abspielen();
+</pre>
+  <p>Im obigen Beispiel wird eine Objekt mittels <a href="objekte.html#object-literale">Object-Literal</a> erzeugt und in der Varialben <code>bildergalerie</code> gespeichert. Dem Objekt wird eine Methode  leeren Objekt eine Methode namens <code>abspielen</code> hinzugefügt.</p>
+  <p>Die entsprechende Funktion wird als Funktionsausdrucks notiert. Das entstehende Funktionsobjekt wird in der Eigenschaft <code>abspielen</code> gespeichert. Schließlich wird die Funktion als Methode aufgerufen.</p>
+  <p>Das obige Beispiel ließe sich übrigens auch mit einer Funktionsdeklaration lösen:</p>
+<pre>
+<strong>function abspielen() {</strong>
+  /* ... */
+<strong>}</strong>
+var bildergalerie = {
+  abspielen: abspielen
+};
+bildergalerie.abspielen();
+</pre>
+  <p>Hier wird zunächst eine Funktion <code>abspielen</code> erzeugt. Dann wird sie in der gleichnamigen Eigenschaft des Objekts <code>bildergalerie</code> gespeichert.</p>
+  <p>Warum ist es sinnvoller, hier einen Funktionsausdruck zu verwenden?</p>
+  <p>Zunächst einmal ist die Schreibweise mit Funktionsausdruck kompakter. Wichtiger ist aber, dass nur ein Name, nämlich <code>bildergalerie</code> belegt wird. Die Schreibweise mit Funktionsdeklaration belegt einen weiteren Namen, <code>abspielen</code>. Dies ist unnötig und kann zu Konflikten führen, wenn andere Scripte denselben Namen verwenden.</p>
+  <p>Funktionsausdrücken werden häufig verwenden, wenn eine Funktion an eine andere Funktion übergeben wird. Das passiert beispielsweise bei der <a href="event-handling-fortgeschritten.html">fortgeschrittenen Ereignisverarbeitung</a>.</p>
+  <p>Die Variante mit Funktionsdeklaration sähe so aus:</p>
+<pre>
+function init() {
+  window.alert('Dokument ist fertig geladen!');
+}
+window.addEventListener('load', init);
+</pre>
+  <p>Im Beispiel wird eine Funktion namens <code>init</code> angelegt und als Event-Handler für das <code>load</code>-Ereignis beim <code>window</code>-Objekt registriert. Die Funktion wird der Methode <a href="event-handling-fortgeschritten.html#addEventListener">addEventListener</a> die Funktion <code>init</code> als Parameter übergeben.</p>
+  <p>Diese Schreibweise ist sinnvoll, wenn Sie die Funktion <code>init</code> später noch einmal benötigen. Üblicherweise ist das nicht der Fall: Man braucht die Funktion nur einmal, um sie als Handler zu registrieren. Es ist nicht nötig, sie unter einem Namen zu speichern.</p>
+  <p>Ein Funktionsausdruck kann den Code vereinfachen. Notieren Sie die Handler-Funktion mit einem Ausdruck und übergeben Sie die erzeugte Funktion direkt an <code>addEventListener</code>:</p>
+<pre>
+window.addEventListener('load', <strong>function() {
+  window.alert('Dokument ist fertig geladen!');
+}</strong>);
+</pre>
+  <p>Es gibt noch weitere Fälle, in denen das Benennen und Zwischenspeichern einer Funktion unnötig ist. Damit gibt es es weitere Anwendungsmöglichkeiten für Funktionsausdrücke. Im Abschnitt über <a href="#closures">Closures</a> werden wir darauf zurückkommen. <!-- TODO: werden wir? --></p>
+</div>
+
 <div class="section" id="arguments">
   <h2>Variable Parameterzahl: Der arguments-Array</h2>
   <p></p>
 </div>
-<div class="section" id="ergebnis">
-  <h2>Rückgabewert (Ergebnis)</h2>
-  <p>return</p>
-</div>
-<div class="section" id="lokale-variablen">
-  <h2>Lokale Variablen (Funktionsvariablen)</h2>
-  <p>Geltungsbereich (Scope)</p>
-</div>
-<div class="section" id="ausdruecke">
-  <h2>Funktionsausdrücke</h2>
-  <p>Wie gesagt gibt es neben der oben vorgestellten zwei weitere, also insgesamt drei Schreibweisen, mit denen Sie Funktionen erzeugen können. Je nach Verwendungszweck können die folgenden weniger bekannten Schreibweisen passender sein.</p>
-  <p>Die zweite Art, wie Sie Funktionen notieren können, ist der sogenannte <strong>Funktions-Ausdruck</strong> (englisch <em>function expression</em>). Diese Schreibweise hat viele Vorteile, Sie werden sie schätzen lernen und vielfältig anwenden können.</p>
-  <p>Um den Unterschied zwischen Funktionsdeklaration und Funktionsausdruck zu verstehen, müssen Sie den Unterschied zwischen <a href="syntax.html#anweisungen"><em>Anweisungen</em></a> (Statements) und <a href="syntax.html#ausdruecke"><em>Ausdrücken</em></a> (Expressions) kennen. Die vorgestellte Funktionsdeklaration ist nämlich eine Anweisung, der Funktionsausdruck hingegen ein Ausdruck. Damit haben beide unterschiedliche Anwendungsmöglichkeiten. Sie können Funktionsausdrücke an viel mehr Stellen notieren als eine Funktionsdeklaration.</p>
-  <p>Das Schema eines Funktionsausdruckes sieht folgendermaßen aus:</p>
-  <pre>function (<var>Parameterliste</var>) { <var>Anweisungen</var> }</pre>
-  <p>Ein solcher Funktionsausdruck selbst ergibt lediglich eine Funktion, speichert Sie aber nicht unter einem Namen. Man spricht daher auch von <strong>anonymen (namenlosen)</strong> Funktionen.</p>
-  <p>Das Ergebnis des Ausdruckes, ein Funktionsobjekt, können Sie jedoch weiterverwenden. Beispielsweise können Sie das erzeugte Funktionsobjekt in einer Variable speichern:</p>
-  <pre>var <var>Funktionsname</var> = function (<var>Parameterliste</var>) { <var>Anweisungen</var> };
-</pre>
-  <p>Dieses Variablenzuweisung mit Funktionsausdruck hat denselben Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var>(...) {...}</code>. Das bedeutet, sie sind unter allen Umständen austauschbar.</p>
-  <p>Darüber lässt sich auch genauer verstehen, was eine Funktionsdeklaration macht. Wenn die gleichwertigen Anweisungen innerhalb einer Funktion notiert werden, wird eine <em>lokale Variable</em> erzeugt, in der die neue Funktion gespeichert wird. Stehen sie außerhalb einer Funktion ausgeführt, dann wird eine <em>globale Variable</em> erzeugt, das heißt die neue Funktion wird als Methode von Objektes <code>window</code> angelegt.</p>
-  <p>Was sind nun die <strong>Vorteile</strong> eines Funktionsausdruckes?</p>
-  <p>Mit Funktionsdeklarationen erzeugt man üblicherweise globale Funktionen (<code>window</code>-Methoden). Wenn Sie eine Funktion mittels Funktionsausdruck erzeugen, müssen Sie diese nicht zwangsläufig global als <code>window</code>-Methode abspeichern, sondern können sie auch an einem anderen Objekt speichern. Auf diese Weise können Sie Ordnung in Ihre Scripte bringen und zusammenhörige Variablen z.B. unter einem Objekt gruppieren. Ein Beispiel:</p>
-  <pre>var bildergalerie = new Object();
-bildergalerie.abspielen = function () {
-/* ... */
-};
-bildergalerie.abspielen();</pre>
-  <p>Im obigen Beispiel wird eine leere <a href="kernobjekte.html#object"><code>Object</code>-Instanz</a> erzeugt, die als globale Variable mit dem Namen <code>bildergalerie</code> gespeichert wird. In der zweiten Zeile wird dem zunächst leeren Objekt eine Methode hinzugefügt. Die entsprechende Funktion wird mithilfe eines Funktionsausdrucks notiert. Das entstehende Funktionsobjekt wird in der Eigenschaft <code>abspielen</code> gespeichert (siehe <a href="kernobjekte.html#object-hashes">Object-Objekte als Zuordnungslisten</a>). In der dritten Zeile schließlich wird diese Funktion aufgerufen.</p>
-  <p>Die Gruppierung unter dem Objekt <code>bildergalerie</code> hat den Vorteil, dass der globale Geltungsbereich, das <code>window</code>-Objekt, nicht übermäßig mit eigenen Objekten beschrieben wird. Der Verzicht auf globale Variablen hat den Vorteil, dass mehrere Scripte problemlos zusammenarbeiten können. [TODO: Diese Programmiertechnik der Kapselung zentral beschreiben.]</p>
-  <p>Im Beispiel wird lediglich das Objekt <code>bildergalerie</code> global gespeichert, das heißt als Eigenschaft von <code>window</code>. Folglich darf an keiner anderen Stelle eine gleichnamige globale Variable erzeugt werden, sonst würde das Objekt überschrieben werden. Die Funktion <code>abspielen</code> hängt hingegen als Methode am <code>bildergalerie</code>-Objekt. Sie kann anderen, gleichnamigen Funktionen nicht in die Quere kommen.</p>
-  <p>...</p>
-  <p>Eine weitere häufige Anwendung von Funktionsausdrücken findet sich im <strong>Event-Handling</strong>. Um eine Handler-Funktionen zu notieren, können Sie herkömmliche Funktionsdeklarationen nutzen:</p>
-  <pre>// Handler-Funktion mit Funktionsdeklaration notieren
-function init() {
-window.alert("Dokument ist fertig geladen!");
-}
-// Event-Handler registrieren
-window.onload = init;</pre>
-  <p>Im Beispiel wird eine globale Funktion namens <code>init</code> angelegt und daraufhin als Event-Handler für das <code>load</code>-Ereignis beim <code>window</code>-Objekt registriert (siehe <a href="einbindung.html#traditionelles-event-handling">traditionelles Event-Handling</a>).</p>
-  <p>Diese Schreibweise ergibt Sinn, wenn Sie die Funktion <code>init</code> später noch einmal benötigen. Üblicherweise ist das nicht der Fall: Man braucht solche Funktionen nur an der Stelle, wo man sie als Handler registriert; es ist nicht nötig, sie irgendwo unter einem Namen zu speichern.</p>
-  <p>In diesem Fall kann ein Funktionsausdruck den Code vereinfachen. Notieren Sie die Handler-Funktion mit einem Ausdruck und speichern Sie sie direkt in der <code>onload</code>-Eigenschaft:</p>
-  <pre>window.onload = function () {
-window.alert("Dokument ist fertig geladen!");
-};</pre>
-  <p>Dasselbe Prinzip können Sie überall beim <a href="konzepte.html#events">Event-Handling</a> anwenden. Wenn Sie beispielsweise einem Element einen <code>click</code>-Handler zuweisen wollen, so könnten Sie die fragliche Funktion mit einer Deklaration notieren:</p>
-  <pre>function klickHandler() {
-window.alert("Element wurde geklickt!");
-}
-document.getElementById("bla").onclick = klickHandler;</pre>
-  <p>Üblicherweise besteht keine Notwendigkeit, die Handler-Funktion global unter dem Namen »klickHandler« <!-- TODO --> zu speichern. Stattdessen können Sie einen Funktionsausdruck verwenden und die erzeugte Funktion direkt als <code>click</code>-Handler abspeichern:</p>
-  <pre>document.getElementById("bla").onclick = function () {
-window.alert("Element wurde geklickt!");
-};</pre>
-  <p>Es gibt noch viele weitere Fälle, in denen das Zwischenspeichern einer Funktion, wie es eine Funktionsdeklaration zwangsläufig tut, unnötig ist - und damit gibt es es zahlreiche weitere Anwendungsmöglichkeiten für Funktionsausdrücke. Im Abschnitt über Closures werden wir darauf zurückkommen.</p>
-</div>
-<div class="section" id="function-konstruktor">
-  <h2>Function-Konstruktor</h2>
-  <p>Wenden wir uns der dritten und letzten Möglichkeit zur Erzeugung von Funktionen zu. Dieser brauchen Sie keine große Aufmerksamkeit schenken, denn ihr Anwendungsbereich ist klein und ihr Gebrauch entsprechend selten.</p>
-  <p>Alle Funktionen, egal wie sie erzeugt wurden, sind Instanzen des <code>Function</code>-Konstruktors. Sie können daher auch direkt diesen Konstruktor aufrufen, um eine weitere Instanz zu erzeugen. Die Schreibweise lautet folgendermaßen:</p>
-  <pre>new Function("Anweisungen", "Parametername1", "Parametername2", ...)</pre>
-  <p>Sie rufen Function mit dem Schlüsselwort <code>new</code> auf. Der Konstruktor erwartet die Anweisungen, d.h. den Funktionskörper, im ersten Parameter. Dabei muss es sich um einen <strong>String</strong> handeln! Der zweite, dritte und alle folgenden Parameter enthalten die Parameternamen der neuen Funktion - ebenfalls als Strings. Wenn die zu erzeugende Funktion drei Parameter namens ...</p>
-  <p>Der Aufruf von <code>new Function(...)</var></code> erzeugt lediglich eine Funktion, speichert sie selbst aber noch nicht. Sie kennen das bereits vom Funktionsausdruck. Möchten Sie die erzeugte Funktion in einer lokalen Variable speichern, können Sie notieren:</p>
-  <pre>var quadrat = new Function(
-// Funktionskörper mit Anweisungen
-"window.alert('Das Quadrat der Zahl ' + zahl + 'lautet: ' + (zahl * zahl);",
-// Name des ersten Parameters
-"zahl"
-);
-// Aufruf der erzeugten Funktion
-quadrat(5);</pre>
-  <p></p>
-  <!-- TODO ?: <p>var Funktionsname</p>-->
-  <p>Diese recht umständliche Notationsweise macht nur dann Sinn, wenn Sie in Ihrem JavaScript-Programm JavaScript-Code als String gespeichert haben und eine Funktion daraus machen wollen. Dies kommt freilich nur in einigen Spezialanwendungen vor.</p>
-  <p>Verwenden Sie nach Möglichkeit die beschriebenen Funktionsdeklarationen und -ausdrücke.</p>
-</div>
+
 <div class="section" id="closures">
   <h2>Verschachtelte Funktionen (Closures)</h2>
-  <p>Fortgesch</p>
-  <p>siehe Artikel</p>
-  <p></p>
-  <pre>
-
-function meineFunktion() {
-document.getElementBy
-}
-window.setTimeout(meineFunktion, 5000);
-
-function irgendeineFunktion() {
-var bla = "string"; // diese Variable ist nur in dieser Funktion verfügbar
-var status = 50;
-setTimeout(
-  function () {
-   // Verschachtelte Funktion
-   // Closure!
-   alert(status);
-  },
-  5000
-);
-}</pre>
+  <!-- TODO: Beispiel als variablen.html (installiereKlickZähler) nutzen -->
+  <p>Siehe <a href="organisation-verfuegbarkeit.html#closures">Einführung in Closures</a></p>
 </div>
+
 <div class="section" id="funktional">
-  <h2>Funktionale Programmierg: Funktionen als Objekte verwenden</h2>
+  <h2>Funktionale Programmierung: Funktionen als Werte</h2>
   <p>Funktionen sind ganz normale Objekte mit Eigenschaften und Methoden</p>
   <p>Event-Handler und Callback-Funktionen</p>
   <p>Funktionale Programmierung</p>
 </div>
+
 <div class="section" id="this">
   <h2>Kontext einer Funktion: Das Schlüsselwort this</h2>
-  <p>Kontext mit call und apply beeinflussen</p>
-</div>
-<div class="section" id="funktionen">
-  <h2>Funktionen und Methoden aufrufen</h2>
-  <p>...</p>
-  <p>Call-Operator</p>
-  <p>funktion(parameter)</p>
-  <p>objekt.methode(parameter)</p>
-</div>
-<div class="section" id="...">
-  <h2>...</h2>
-  <p>...</p>
+  <p>Siehe <a href="organisation-verfuegbarkeit.html#this">Bedeutung von this</a></p>
+  <p>Aufrufweise bestimmt den this-Kontext</p>
+  <p>objekt.methode() vs. var m = objekt.methode(); m();</p>
+  <p>Function Binding, Function.prototype.bind</p>
+  <p>Kontext mit <code>call</code> und <code>apply</code> beeinflussen</p>
 </div>
 
 <div class="sequence-navigation">
