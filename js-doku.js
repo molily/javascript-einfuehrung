@@ -128,7 +128,7 @@ var TOC = {
       }
     }
     if (innerHTML) {
-      el.innerHTML = innerHTML
+      el.innerHTML = innerHTML;
     }
     return el;
   },
