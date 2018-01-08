@@ -27,6 +27,7 @@
   <pre>var <var>Bezeichner</var> = <var>Ausdruck</var>;</pre>
   <p>Auf das feste Schlüsselwort <code>var</code> folgt der Name der Variable, genauer gesagt der <a href="#bezeichner">Bezeichner</a>. Danach kommt ein festes <code>=</code> für die Wertzuweisung und schließlich der Wert. Der Wert kann als ein beliebig komplexer <a href="syntax.html#ausdruecke">Ausdruck</a> notiert sein.</p>
 </div>
+
 <div class="section" id="variablen-ohne-wert">
   <h2>Variablen deklarieren ohne Wert</h2>
   <p>Es ist möglich, eine Variable zu deklarieren, ohne ihr einen Wert zuzuweisen. Das sieht beispielsweise so aus:</p>
@@ -37,6 +38,7 @@
   <pre>var alter = undefined;</pre>
   <p>In der Praxis hat es sich bewährt, Variablen bei der Deklaration wenn möglich auch einen ausdrücklichen Wert zuzuweisen.</p>
 </div>
+
 <div class="section" id="mehrere-variablen">
   <h2>Mehrere Variablen deklarieren</h2>
   <p>Wenn Sie mehrere Variablen auf einmal deklarieren möchten, so gibt es zwei Schreibweisen. Entweder Sie nutzen mehrere Variablen-Deklarationen:</p>
@@ -55,6 +57,7 @@ var a = 20,
   <p>Die zweite, kurze Schreibweise bringt einige Tücken mit sich. Wenn Sie das Komma vergessen oder einzelne Zeilen verschieben, so wird aus der Variablen-Deklaration eine Wertzuweisung. Diese kann unabsichtlich eine <a href="#globale-variablen">globale Variable</a> anlegen.</p>
   <p>Die erste, lange Schreibweise mit mehreren Variablen-Deklarationen ist daher empfehlenswert.</p>
 </div>
+
 <div class="section" id="scope">
   <h2>Geltungsbereiche</h2>
   <p>Jede Variable hat einen gewissen Geltungsbereich (englisch <em>scope</em> = Bereich), in dem sie erzeugt wird und über danach ihren Namen ansprechbar ist.</p>
@@ -67,6 +70,7 @@ var a = 20,
   <p>Um Konflikte zwischen Variablen zu vermeiden und Programme einfach zu halten, gilt folgende Grundregel: Der Geltungsbereich einer Variable sollte immer so klein wie möglich sein. Verwenden Sie wenn möglich den Block-Geltungsbereich, andernfalls den Funktions-Geltungsbereich. Deklarieren Sie eine Variable nur in Ausnahmefällen im globalen Geltungsbereich.</p>
   <p>Im Folgenden schauen wir uns an, wie wir Variablen in den jeweiligen Geltungsbereichen erzeugen.</p>
 </div>
+
 <div class="section" id="globale-variablen">
   <h2>Globale Variablen (<code>var</code>)</h2>
   <p>Eine Variablen-Deklaration mit <code>var</code>, die <em>außerhalb</em> einer Funktion steht, erzeugt eine <em>globale Variable</em>. Global bedeutet, dass sie in allen anderen Geltungsbereichen verfügbar ist.</p>
@@ -89,15 +93,16 @@ window.alert(window.globaleVariable);
   <p>Vermeiden Sie daher globale Variablen möglichst. Die meisten Variablen, die Sie benötigen, können einen eingeschränkten Geltungsbereich haben. Nur einige ausgewählten Werte und Objekte ihrer Programme sollten global verfügbar sein. Das ist zum Beispiel eine öffentliche Schnittstelle, die ihr Programm für andere Programme anbietet.</p>
   <p>Globale verfügbare Werte können Sie wie gesagt überall nach dem Schema <code>window.<var>globaleVariable</var> = <var>wert</var></code> anlegen.</p>
 </div>
-<div class="section" id="lokale-variablen">
+
+<div class="section" id="funktionsvariablen">
   <h2>Funktionsvariablen (<code>var</code>)</h2>
-  <p>Eine Variablen-Deklaration mit <code>var</code>, die <em>innerhalb</em> einer Funktion steht, erzeugt eine <em>Funktionsvariable</em>. Diese gehört zu den <em>lokalen</em> Variablen.</p>
+  <p>Eine Variablen-Deklaration mit <code>var</code>, die <em>innerhalb</em> einer <a href="funktionen.html">Funktion</a> steht, erzeugt eine <em>Funktionsvariable</em>. Diese gehört zu den <em>lokalen</em> Variablen.</p>
   <p>Eine solche Variable hat einen Geltungsbereich, der auf die Funktion selbst beschränkt ist. Die Variable ist nicht von außen sichtbar.</p>
   <p>Schauen wir uns eine Beispielfunktion mit Funktionsvariablen an:</p>
 <pre>
 function summe(array) {
-  var ergebnis = 0;
-  for (var i = 0; i < array.length; i++) {
+  <strong>var ergebnis = 0;</strong>
+  for (<strong>var i = 0</strong>; i &lt; array.length; i++) {
     ergebnis += array[i];
   }
   return ergebnis;
@@ -111,28 +116,31 @@ window.alert(ergebnis); // Programmabbruch: ergebnis ist nicht definiert
     <li><code>ergebnis</code> – eine mit <code>var</code> deklarierte Variable</li>
     <li><code>i</code> – eine Variable, die mit <code>var</code> im Kopf der <code>for</code>-Schleife deklariert ist</li>
   </ul>
-  <p>Funktionsparameter verhalten sich also ebenfalls wie Funktionsvariablen. Sie sind nur in der Funktion verfügbar.</p>
+  <p>Funktionsparameter verhalten sich also wie Funktionsvariablen: Sie sind nur in der Funktion verfügbar.</p>
   <p>Im obigen Beispiel wird versucht, auf die Variable <code>ergebnis</code> außerhalb der Funktion zuzugreifen. Dies ist nicht möglich und führt zu einem Programmabbruch. Denn eine Variable mit dem Namen ergebnis kann an dieser Stelle nicht gefunden werden. Es wird nicht in den Geltungsbereich der Funktion hineingeschaut.</p>
   <p>Innerhalb einer Funktion können Sie also sicher Variablen anlegen, ohne dass sie anderem Code außerhalb der Funktion in die Quere kommen. Sie können in verschiedenen Funktionen denselben Namen verwenden, ohne dass die beiden zusammenstoßen.</p>
   <p>Wie alle Variablen haben Funktionsvariablen den Vorteil, dass sie in verschachtelten Geltungsbereichen innerhalb der Funktion ebenfalls verfügbar sind. Das ist beispielsweise zu erkennen, wenn Sie eine Funktion in eine andere schachteln:</p>
 <pre>
-function setzeButtonEventHandler() {
-  var klickZähler = 0;
+function installiereKlickZähler() {
+  var <strong>klickZähler</strong> = 0;
+
   function klickHandler() {
-    klickZähler++;
-    window.alert('Button wurde ' + klickZähler + ' Mal geklickt!');
+    <strong>klickZähler</strong>++;
+    window.alert('Button wurde ' + <strong>klickZähler</strong> + ' Mal geklickt!');
   }
+
   document.getElementById('button')
     .addEventListener('click', klickHandler);
 }
-setzeButtonEventHandler();
+installiereKlickZähler();
 </pre>
   <p>Das Beispiel geht davon aus, dass es einen Button im Dokument mit der ID <code>button</code> gibt:</p>
 <pre>&lt;button id="button"&gt;Klick mich!&lt;button&gt;</pre>
-  <p>Jedes Mal, wenn der Button geklickt wird, wird ein Zähler erhöht und der aktuelle Zählerwert wird ausgegeben. Dazu registriert die Funktion <code>setzeButtonEventHandler</code> einen Event-Handler (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). Dieser Handler ist die Funktion <code>klickHandler</code>.</p>
-  <p>Wir haben hier also eine äußere Funktion, <code>setzeButtonEventHandler</code>, und eine innere Funktion, <code>klickHandler</code>.</p>
+  <p>Jedes Mal, wenn der Button geklickt wird, wird ein Zähler erhöht und der aktuelle Zählerwert wird ausgegeben. Dazu registriert die Funktion <code>installiereKlickZähler</code> einen Event-Handler (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). Dieser Handler ist die Funktion <code>klickHandler</code>.</p>
+  <p>Wir haben hier also eine äußere Funktion, <code>installiereKlickZähler</code>, und eine innere Funktion, <code>klickHandler</code>.</p>
   <p>Die Variable <code>klickZähler</code> ist in der äußeren Funktion definiert. Sie ist dort verfügbar, aber auch in der verschachtelten inneren Funktion. Nur so ist es möglich, dass die innere Funktion den Zählerwert bei jedem Klick erhöhen und ausgeben kann.</p>
 </div>
+
 <div class="section" id="block-variablen">
   <h2>Block-Variablen (<code>let</code>)</h2>
   <p>Bisher haben wir Variablen-Deklarationen mit <code>var</code> kennengelernt. Es gibt eine weitere Art, Variablen zu deklarieren, und die fängt mit <code>let</code> an:</p>
@@ -150,22 +158,22 @@ let alter = 32;
   <p>Eine mit <code>let</code> deklarierte Variable gilt nur innerhalb eines solchen <code>{…}</code>-Blocks, in dem sie definiert ist. Außerhalb des Blocks ist sie nicht verfügbar. Schauen wir uns ein Beispiel an:</p>
 <pre>
 function zähleHoch(anfang, ende) {
-  for (let i = anfang; i <= ende; i++) {
-    let frage = 'Aktuell: ' + i + ' Weitermachen?';
-    let weitermachen = window.confirm(frage);
-    if (!weitermachen) {
-      let abbruchNachricht = 'Abgebrochen bei ' + i;
+  for (<strong>let</strong> i = anfang; i &lt;= ende; i++) <strong>{</strong>
+    <strong>let</strong> frage = 'Aktuell: ' + i + ' Weitermachen?';
+    <strong>let</strong> weitermachen = window.confirm(frage);
+    if (!weitermachen) <strong>{</strong>
+      <strong>let</strong> abbruchNachricht = 'Abgebrochen bei ' + i;
       window.alert(abbruchNachricht);
       break;
-    }
-  }
+    <strong>}</strong>
+  <strong>}</strong>
 }
 zähleHoch(0, 10);
 </pre>
   <p>Die Funktion <code>zähleHoch</code> zählt von einer Zahl hoch bis zu einer anderen Zahl. Anfang- und Endzahl werden per Parameter übergeben, <code>anfang</code> und <code>ende</code>. Das Beispiel ruft die Funktion mit Start <code>0</code> und Ende <code>10</code> auf.</p>
   <p>In der Funktion befindet sich eine <code>for</code>-Schleife, die für das eigentliche Zählen zuständig ist. Mit jedem Schleifendurchlauf wird mittels <code>window.confirm()</code> ein Dialogfenster geöffnet. Darin wird der aktuelle Zählerwert ausgegeben und gefragt, ob weiter gezählt werden soll. Im Bestätigungsfenster lässt sich »OK« oder »Abbrechen« wählen. <code>window.confirm()</code> gibt dementsprechend <code>true</code> oder <code>false</code> zurück.</p>
   <p>Wenn »Abbrechen« gewählt wird, soll die Schleife ebenfalls abbrechen und die Funktion beendet werden. Vorher wird allerdings noch eine abschließende Meldung mit <code>window.alert()</code> gemacht.</p>
-  <p>Im Beispiel gibt es sechs Variablen mit folgenden Geltungsbereichen:</p>
+  <p>Im Beispiel gibt es sechs Namen mit folgenden Geltungsbereichen:</p>
   <table>
     <thead>
       <tr>
@@ -214,6 +222,7 @@ window.alert(abbruchNachricht); // Fehler!
   <p>Wie gesagt sollten Sie der Grundregel folgen, den Geltungsbereich einer Variablen so klein wie möglich zu halten. Dazu eignen sich Variablen mit <code>let</code> gut, denn sie haben den kleinstmöglichen Geltungsbereich. Selbst wenn Sie sie außerhalb eines Blocks deklarieren, so haben sie die erfreuliche Eigenheit, niemals eine Eigenschaft beim globalen Objekt <code>window</code> zu erzeugen.</p>
   <p>Der Benutzung von <code>let</code> steht nur eine Sache entgegen: Die Technik wurde erst mit dem <a href="standards.html">JavaScript-Standard ECMAScript 6</a> eingeführt, der 2015 verabschiedet wurde. Alle neueren Browser kennen <code>let</code>, aber manche ältere Browser verstehen <code>let</code> noch nicht. Der Internet Explorer kennt <code>let</code> zum Beispiel erst ab Version 11.</p>
 </div>
+
 <div class="section" id="block-konstanten">
   <h2>Block-Konstanten (<code>const</code>)</h2>
   <p>Zu guter Letzt widmen wir uns der Deklaration von Konstanten mit <code>const</code>. Bisher haben wir nur über Variablen geredet. Was ist eine Konstante?</p>
@@ -268,7 +277,8 @@ nutzerin = { name: 'Marlene' }; // Fehler!
 </pre>
   <p>Das Beispiel deklariert eine Konstante namens <code>nutzerin</code> und ändert die Objekteigenschaft <code>nutzerin.name</code>. Das ist möglich, denn das Objekt selbst ist veränderbar. Es führt allerdings zu einem Fehler, der Konstante <code>nutzerin</code> einem neue Wert zuzuweisen.</p>
   <p>Genauso wie <code>let</code> steht <code>const</code> erst seit dem JavaScript-Standard ECMAScript 6 zur Verfügung und wird von manchen älteren Browsern noch nicht unterstützt.</p>
-<div class="section" id="identifier-resolution">
+
+  <div class="section" id="identifier-resolution">
   <h2>Auflösung von Bezeichnern</h2>
   <p>Wir haben nun die verschiedenen Möglichkeiten kennengelernt, Verbindungen zwischen Namen und Werten in verschiedenen Geltungsbereichen anzulegen. Bei Variablen ist diese Verbindung veränderbar, bei Konstanten nicht.</p>
   <p>Schauen wir uns nun an, wie ein Name zu einem Wert aufgelöst wird. Wie gesagt wird der Name auch Bezeichner (englisch <em>identifier</em>) genannt. Das Auflösen von Bezeichnern zu Werten heißt auf Englisch <em>identifier resolution</em>.</p>
@@ -307,6 +317,7 @@ function zähleHoch(anfang, ende) {
   <p>Spielen wir das Ganze noch einmal für den Bezeichner <code>i</code> durch, der ebenfalls im innersten Geltungsbereich 4 benutzt wird. Die Kette enthält wieder die Geltungsbereiche 4→3→2→1, vom aktuellen bis zum äußersten. Beim Ablaufen der Kette auf der Suche nach <code>i</code> werden wir aber schon Geltungsbereich 3 fündig. Das Ablaufen der Kette wird abgebrochen, denn wir haben schon gefunden, was wir suchten.</p>
   <p>Diese Funktionsweise ist zunächst einmal ein Interna des JavaScript-Interpreters. Sie erklärt aber auch, wie sich die Geltungsbereiche, von denen wir soviel gehört haben, praktisch auswirken. Beim Deklarieren von Variablen und Konstanten wählen Sie gewisse Geltungsbereiche, damit der Zugriff auf Namen und Werte möglich (oder absichtlich unmöglich) ist.</p>
 </div>
+
 <div class="section" id="bezeichner">
   <h2>Regeln und Konventionen für Bezeichner</h2>
   <p>JavaScript-Bezeichner unterliegen gewissen Regeln, die Sie beim Wählen von Namen beachten müssen:</p>
@@ -335,7 +346,7 @@ lohnIn£
 ein♥FürTiere
 arbeiter&amp;angestellte
 </pre>
-  <p>Im europäischen und noramerikanischen Raum beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>größe</code> ist zwar möglich. Üblicher ist allerdings, <code>firmengroesse</code> zu notieren, um etwa Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen. Im kommerziellen Umfeld werden meistens englischsprachige Bezeichner verwendet.</p>
+  <p>Im europäischen und noramerikanischen Raum beschränken sich die meisten JavaScript-Programmierer auf lateinische Buchstaben ohne diakritische Zeichen. Der Bezeichner <code>größe</code> ist zwar möglich. Üblicher ist allerdings, <code>groesse</code> zu notieren, um Schwierigkeiten bei der Zeichenkodierung aus dem Weg zu gehen. Im internationalen, kommerziellen Umfeld werden meistens englischsprachige Bezeichner verwendet.</p>
   <p>Fragt sich nur noch, wie mit Groß- und Kleinschreibung in Bezeichnern umgegangen wird. Das ist eine Frage des Stils und letztlich Ihnen überlassen. Die vordefinierten JavaScript-Schnittstellen verwenden das sogenannte <strong>camelCase</strong>: Der erste Buchstabe ist klein. Wird ein Wort angehängt, so folgt ein Großbuchstabe und es geht wieder klein weiter. Wie der Höcker beim Kamel. So kommt beispielsweise <code>mitarbeiterName</code>, <code>toLocaleString</code> und <code>getElementById</code> heraus. Diese Schreibweise ist weit verbreitet und Ihnen sei auch geraten, diese zu verwenden.</p>
   <!-- Konstruktoren PascalCase -->
 </div>

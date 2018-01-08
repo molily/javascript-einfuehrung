@@ -15,12 +15,12 @@
 
 <h1>Organisation von JavaScripten: Voraussetzungen und Überblick</h1>
 
- <div class="section" id="einleitung">
+<div class="section" id="einleitung">
 
-   <h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
+  <h2>Einleitung: Anforderungen an die heutige JavaScript-Programmierung</h2>
 
   <div class="sidebox">
-  <p>Wie sehen wohlgestrukturierte, umfangreiche JavaScript aus?</p>
+    <p>Wie sehen wohlgestrukturierte, umfangreiche JavaScript aus?</p>
   </div>
 
   <p>Dieser Teil der Einführung in JavaScript richtet sich an Web- und Anwendungsentwickler, die umfangreiche und komplexe JavaScripte schreiben. Mittlerweile ermöglichen Frameworks wie jQuery einen schnellen Einstieg in das DOM-Scripting. Wie gut der Code in diesen kleinen Anwendungsfällen strukturiert ist, spielt keine entscheidende Rolle. Das Framework gibt bereits eine Grundstruktur vor, die für diese Zwecke ausreicht.</p>
@@ -38,7 +38,7 @@
   <h2>Das Schichtenmodell: Trennung von Inhalt, Präsentation und Verhalten</h2>
 
   <div class="sidebox">
-  <p>Inhalte werden sinnvoll ausgezeichnet. Für die Struktur ist HTML zuständig, die Präsentation wird in Stylesheets ausgelagert.</p>
+    <p>Inhalte werden sinnvoll ausgezeichnet. Für die Struktur ist HTML zuständig, die Präsentation wird in Stylesheets ausgelagert.</p>
   </div>
 
   <p>Im modernen Webdesign kommt den Webtechniken HTML, CSS und JavaScript jeweils eine bestimmte Rolle zu. HTML soll die Texte bedeutungsvoll strukturieren, indem z.B. Überschriften, Listen, Absätze, Datentabellen, Abschnitte, Hervorhebungen, Zitate usw. als solche ausgezeichnet werden. CSS definiert die Regeln für die Darstellung dieser Inhalte, sei es auf einem Desktop-Bildschirm, auf einem mobilen Gerät oder beim Ausdrucken.</p>
@@ -52,27 +52,24 @@
   <h2>Erste Schritte zum Unobtrusive JavaScript</h2>
 
   <div class="sidebox">
-  <p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
+    <p>Unaufdringliche JavaScripte sind getrennt vom HTML-Code. Sie starten selbstständig, greifen auf das Dokument zu und fügen Funktionalität hinzu.</p>
   </div>
 
   <p>JavaScript kommt im Schichtenmodell die Aufgabe zu, dem Dokument <strong>Verhalten</strong> (englisch Behaviour) hinzuzufügen. Damit ist gemeint, dass das Dokument auf gewisse Anwenderereignisse reagiert und z.B. Änderungen im Dokument vornimmt.
 
   <p>Die Grundlage für eine sinnvolle JavaScript-Programmierung ist die <strong>Auslagerung des JavaScript-Codes</strong>: Im HTML-Code sollte sich kein JavaScript in Form von Event-Handler-Attributen befinden (<code>onload</code>, <code>onclick</code>, <code>onmouseover</code> usw.). Stattdessen werden Elemente, denen ein bestimmtes Verhalten hinzugefügt werden soll, falls nötig mit einer Klasse oder ID markiert, um die Elemente eindeutung adressieren zu können. Die nötige Interaktivität wird dem Dokument automatisch hinzugefügt. Beim Ladens des Dokuments wird das Script aktiv, initialisiert sich und startet die Ereignisüberwachung an den betreffenden Elementen. Diese Anwendung von JavaScript nennt sich <a href="http://ichwill.net/">Unobtrusive JavaScript</a>, »unaufdringliches« JavaScript.</p>
 
-  </div>
-
-  <div class="section">
+  <div class="section" id="javascript-auslagern">
 
     <h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
     <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
-
   </div>
 
-  <div class="section">
+  <div class="section" id="domready">
 
-    <h3 id="domready">Scripte bei DOM Ready initialisieren</h3>
+    <h3>Scripte bei DOM Ready initialisieren</h3>
 
     <p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
 
@@ -80,7 +77,7 @@
 
 <pre>
 $(function () {
-    // ...
+  // ...
 });
 </pre>
 
@@ -92,7 +89,7 @@ $(funktion);
 
   </div>
 
-  <div class="section">
+  <div class="section" id="selektor-engines">
 
     <h3>DOM-Zugriffe über Selektor-Engines</h3>
 
@@ -102,14 +99,14 @@ $(funktion);
 
 <pre>
 $(function () {
-    // Liefert alle li-Elemente im Element mit der ID produktliste
-    $('#produktliste li')
+  // Liefert alle li-Elemente im Element mit der ID produktliste
+  $('#produktliste li')
 });
 </pre>
 
   </div>
 
-  <div class="section">
+  <div class="section" id="event-handling">
 
     <h3>Zeitgemäßes Event-Handling</h3>
 
@@ -119,9 +116,9 @@ $(function () {
 
 <pre>
 $(function () {
-    $('#produktliste li').click(function (e) {
-        // ... Verarbeite Ereignis ...
-    });
+  $('#produktliste li').click(function (e) {
+    // ... Verarbeite Ereignis ...
+  });
 });
 </pre>
 
@@ -157,47 +154,47 @@ namespace Beispielnamensraum;
 
 interface IBeispielInterface
 {
-    public function oeffentlicheMethode();
+  public function oeffentlicheMethode();
 }
 
 class Beispielklasse implements IBeispielInterface
 {
-    function __construct() {
-        echo "Konstruktor\n";
-    }
+  function __construct() {
+    echo "Konstruktor\n";
+  }
 
-    public $oeffentlich = 'Öffentliche Eigenschaft';
-    private $privat = 'Private Eigenschaft';
+  public $oeffentlich = 'Öffentliche Eigenschaft';
+  private $privat = 'Private Eigenschaft';
 
-    public function oeffentlicheMethode() {
-        echo "Öffentliche Methode\n";
-        $this->privateMethode();
-    }
-    private function privateMethode() {
-        echo "Private Methode\n";
-        echo $this->privat . "\n";
-    }
+  public function oeffentlicheMethode() {
+    echo "Öffentliche Methode\n";
+    $this->privateMethode();
+  }
+  private function privateMethode() {
+    echo "Private Methode\n";
+    echo $this->privat . "\n";
+  }
 
-    const konstante = 'Klassenkonstante';
-    public static $statisch = 'Statische Eigenschaft (Klasseneigenschaft)';
-    public static function statischeMethode() {
-        echo "Statische Methode (Klassenmethode)\n";
-        echo self::$statisch . "\n";
-        echo self::konstante . "\n";
-    }
+  const konstante = 'Klassenkonstante';
+  public static $statisch = 'Statische Eigenschaft (Klasseneigenschaft)';
+  public static function statischeMethode() {
+    echo "Statische Methode (Klassenmethode)\n";
+    echo self::$statisch . "\n";
+    echo self::konstante . "\n";
+  }
 }
 
 class AbgeleiteteKlasse extends Beispielklasse
 {
-    function __construct() {
-        parent::__construct();
-        print "Konstruktor von AbgeleiteteKlasse\n";
-    }
+  function __construct() {
+    parent::__construct();
+    print "Konstruktor von AbgeleiteteKlasse\n";
+  }
 
-    public function zusatzmethode() {
-        echo "Zusatzmethode von AbgeleiteteKlasse\n";
-        parent::oeffentlicheMethode();
-    }
+  public function zusatzmethode() {
+    echo "Zusatzmethode von AbgeleiteteKlasse\n";
+    parent::oeffentlicheMethode();
+  }
 }
 
 $instanz = new Beispielklasse();
@@ -265,7 +262,7 @@ $instanz2->zusatzmethode();
   <h3>Objekte / <code>Object</code>-Objekte</h3>
   <ul>
   <li>Alles ist ein Objekt – bis auf Primitives, die sich allerdings wie Objekte verhalten können</li>
-  <li>Objekte sind i.d.R. erweiterbar (ECMAScript 3)</li>
+  <li>Objekte sind in der Regel erweiterbar</li>
   <li><code>Object</code>-Objekte sind Allround-Container und Hashes</li>
   <li><code>Object</code>-Literale erzeugen mit <code>{ key : value, … }</code></li>
   </ul>
@@ -300,7 +297,7 @@ $instanz2->zusatzmethode();
 
   <ul>
   <li>Geltungsbereich für Variablen</li>
-  <li>Allzweckwerkzeug für Datenverfügbarkeit und Kapselung/Privatheit</li>
+  <li>Allzweckwerkzeug für Datenverfügbarkeit und Kapselung</li>
   <li>Auflösung von Bezeichnern zu Werten erfolgt über die Scope-Chain</li>
   <li>Scope-Chain speichert die internen Variablenobjekte von Funktionsaufrufen</li>
   <li>Scope-Chain ermöglicht Closures</li>

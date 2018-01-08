@@ -40,14 +40,14 @@
 <pre>
 // Konstruktorfunktion
 <strong>function Konstruktor</strong>() {
-    // Zugriff auf das neue Objekt über this,
-    // Hinzufügen der Eigenschaften und Methoden
-    this.eigenschaft = "wert";
-    this.methode = function () {
-        // In den Methoden wird ebenfalls über this auf das Objekt zugegriffen
-        alert("methode wurde aufgerufen\n" +
-              "Instanz-Eigenschaft: " + this.eigenschaft);
-    };
+  // Zugriff auf das neue Objekt über this,
+  // Hinzufügen der Eigenschaften und Methoden
+  this.eigenschaft = "wert";
+  this.methode = function () {
+    // In den Methoden wird ebenfalls über this auf das Objekt zugegriffen
+    alert("methode wurde aufgerufen\n" +
+      "Instanz-Eigenschaft: " + this.eigenschaft);
+  };
 }
 
 // Erzeuge Instanzen
@@ -64,9 +64,9 @@ instanz2.methode();
 
 <pre>
 function Katze(name, rasse) {
-    this.name = name;
-    this.rasse = rasse;
-    this.pfoten = 4;
+  this.name = name;
+  this.rasse = rasse;
+  this.pfoten = 4;
 }
 var maunzi = new Katze('Maunzi', 'Perserkatze');
 </pre>
@@ -104,7 +104,7 @@ alert(maunzi.name + ' ist neuerdings eine ' + maunzi.rasse);
 function Katze() {}
 
 <strong>Katze.prototype.miau</strong> = function () {
-    alert("Miau!");
+  alert("Miau!");
 };
 
 var maunzi = new Katze();
@@ -298,7 +298,7 @@ function Katze() {}
 
 Katze.prototype.pfoten = 4;
 Katze.prototype.miau = function () {
-   alert("Miau!");
+  alert("Miau!");
 };
 
 var maunzi = new Katze();
@@ -311,7 +311,7 @@ alert('Maunzi hat nun ' + maunzi.pfoten + ' Pfoten.');
 
 // Überschreibe Methode des Prototyps:
 Katze.prototype.miau = function () {
-   alert("Wau, wau!");
+  alert("Wau, wau!");
 };
 schnucki.miau();
 </pre>
@@ -330,31 +330,31 @@ schnucki.miau();
 
 <pre>
 function Katze(name) {
-    // --- Private Objekte ---
+  // --- Private Objekte ---
 
-    // Private Variablen
-    var pfoten = 4;
-    var gestreichelt = 0;
-    // Der Parameter »name« ist ebenfalls privat
+  // Private Variablen
+  var pfoten = 4;
+  var gestreichelt = 0;
+  // Der Parameter »name« ist ebenfalls privat
 
-    // Private Funktionen
-    function miau() {
-        alert(name + ' macht miau!');
-    }
+  // Private Funktionen
+  function miau() {
+    alert(name + ' macht miau!');
+  }
 
-    // --- Öffentliche (priviligierte) Eigenschaften ---
+  // --- Öffentliche (priviligierte) Eigenschaften ---
 
-    this.name = name;
+  this.name = name;
 
-    // Öffentliche Methoden
-    this.kitzeln = function () {
-        alert(name + ' hat ' + pfoten + ' kitzlige Pfoten.');
-        miau();
-    };
-    this.streicheln = function () {
-        gestreichelt++;
-        miau();
-    };
+  // Öffentliche Methoden
+  this.kitzeln = function () {
+    alert(name + ' hat ' + pfoten + ' kitzlige Pfoten.');
+    miau();
+  };
+  this.streicheln = function () {
+    gestreichelt++;
+    miau();
+  };
 }
 
 var maunzi = new Katze('Maunzi');
@@ -387,35 +387,35 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 <div class="js-objects">
 
 <div class="object">
-    <h3 class="special">maunzi</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
-    <tr class="own"><th>name</th><td>'Maunzi'</td></tr>
-    <tr class="own"><th>kitzeln</th><td>function () { &hellip; }</td></tr>
-    <tr class="own"><th>streicheln</th><td>function () { &hellip; }</td></tr>
-    </table>
+  <h3 class="special">maunzi</h3>
+  <table>
+  <tr class="internal"><th>[[Prototype]]</th><td>Katze.prototype</td></tr>
+  <tr class="own"><th>name</th><td>'Maunzi'</td></tr>
+  <tr class="own"><th>kitzeln</th><td>function () { &hellip; }</td></tr>
+  <tr class="own"><th>streicheln</th><td>function () { &hellip; }</td></tr>
+  </table>
 </div>
 
 <div class="object">
-    <h3 class="special">Katze.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
-    </table>
+  <h3 class="special">Katze.prototype</h3>
+  <table>
+  <tr class="internal"><th>[[Prototype]]</th><td>Object.prototype</td></tr>
+  <tr class="dontenum"><th>constructor</th><td>Katze</td></tr>
+  </table>
 </div>
 
 <div class="object">
-    <h3 class="special">Object.prototype</h3>
-    <table>
-    <tr class="internal"><th>[[Prototype]]</th><td>null</td></tr>
-    <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
-    <tr class="dontenum"><th>toString</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>toLocaleString</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>valueOf</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>hasOwnProperty</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>isPrototypeOf</th><td>[native Funktion]</td></tr>
-    <tr class="dontenum"><th>propertyIsEnumerable</th><td>[native Funktion]</td></tr>
-    </table>
+  <h3 class="special">Object.prototype</h3>
+  <table>
+  <tr class="internal"><th>[[Prototype]]</th><td>null</td></tr>
+  <tr class="dontenum"><th>constructor</th><td>Object</td></tr>
+  <tr class="dontenum"><th>toString</th><td>[native Funktion]</td></tr>
+  <tr class="dontenum"><th>toLocaleString</th><td>[native Funktion]</td></tr>
+  <tr class="dontenum"><th>valueOf</th><td>[native Funktion]</td></tr>
+  <tr class="dontenum"><th>hasOwnProperty</th><td>[native Funktion]</td></tr>
+  <tr class="dontenum"><th>isPrototypeOf</th><td>[native Funktion]</td></tr>
+  <tr class="dontenum"><th>propertyIsEnumerable</th><td>[native Funktion]</td></tr>
+  </table>
 </div>
 
 </div><!-- /.js-objects -->
@@ -466,16 +466,16 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
 
 <pre>
 var Modul = {
-    // Öffentliche Eigenschaften
-    öffentlicheMethode : function () {
-        alert(this._privateMethode());
-    },
-    // Pseudo-private Eigenschaften
-    <strong>_privateEigenschaft</strong> : 1;
-    <strong>_privateMethode</strong> : function () {
-        this._privateEigenschaft++;
-        return this._privateEigenschaft;
-    }
+  // Öffentliche Eigenschaften
+  öffentlicheMethode : function () {
+    alert(this._privateMethode());
+  },
+  // Pseudo-private Eigenschaften
+  <strong>_privateEigenschaft</strong> : 1;
+  <strong>_privateMethode</strong> : function () {
+    this._privateEigenschaft++;
+    return this._privateEigenschaft;
+  }
 };
 Module.öffentlicheMethode();
 </pre>
@@ -487,14 +487,14 @@ function Konstruktor() {}
 
 // Öffentliche Eigenschaften
 Konstruktor.prototype.öffentlicheMethode = function () {
-   alert(this._privateMethode());
+  alert(this._privateMethode());
 };
 
 // Pseudo-private Eigenschaften
 Konstruktor.prototype.<strong>_privateEigenschaft</strong> = 1;
 Konstruktor.prototype.<strong>_privateMethode</strong> = function () {
-   this._privateEigenschaft++;
-   return this._privateEigenschaft;
+  this._privateEigenschaft++;
+  return this._privateEigenschaft;
 };
 
 var instanz = new Konstruktor();

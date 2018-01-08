@@ -27,13 +27,13 @@ var variable2 = "wert";
 var variable3 = "wert";
 
 function funktion1() {
-    /* ... */
+  /* ... */
 }
 function funktion2() {
-    /* ... */
+  /* ... */
 }
 function funktion3() {
-    /* ... */
+  /* ... */
 }
 </pre>
 
@@ -89,11 +89,13 @@ function funktion3() {
 
   <p>Für die Organisation von eigenen Scripten bieten sich solche unspezifischen <code>Object</code>-Objekte an. Über <code>new Object()</code> lässt sich ein <code>Object</code>-Objekt erzeugen:</p>
 
+  <!-- TODO: Sofort {} verwenden -->
+
 <pre>
 var Modul = <strong>new Object</strong>();
 Modul.eigenschaft = "wert";
 Modul.methode = function () {
-    alert("Modul-Eigenschaft: " + Modul.eigenschaft);
+  alert("Modul-Eigenschaft: " + Modul.eigenschaft);
 };
 Modul.methode();
 </pre>
@@ -112,12 +114,12 @@ Modul.methode();
 
 <pre>
 var Modul = {
-    eigenschaft : "wert",
-    methode : function () {
-        alert("Modul-Eigenschaft (über window.Modul): " + Modul.eigenschaft);
-        // Alternativ:
-        alert("Modul-Eigenschaft (über this): " + this.eigenschaft);
-    }
+  eigenschaft : "wert",
+  methode : function () {
+    alert("Modul-Eigenschaft (über window.Modul): " + Modul.eigenschaft);
+    // Alternativ:
+    alert("Modul-Eigenschaft (über this): " + this.eigenschaft);
+  }
 };
 Modul.methode();
 </pre>
@@ -183,19 +185,19 @@ Modul.methode();
 <pre>
 (function () {
 
-    /* Lokale Variable */
-    var variable = 123;
+  /* Lokale Variable */
+  var variable = 123;
 
-    /* Lokale Funktion */
-    function funktion() {
-        /* ... */
-    }
+  /* Lokale Funktion */
+  function funktion() {
+    /* ... */
+  }
 
-    /* Rufe lokale Funktion auf: */
-    funktion();
+  /* Rufe lokale Funktion auf: */
+  funktion();
 
-    /* Zugriff auf globale Objekte ist ebenfalls möglich: */
-    alert(document.title);
+  /* Zugriff auf globale Objekte ist ebenfalls möglich: */
+  alert(document.title);
 
 })();
 </pre>
@@ -211,20 +213,20 @@ Modul.methode();
 <pre>
 (function () {
 
-    var clickNumber = 0;
-    var outputEl;
+  var clickNumber = 0;
+  var outputEl;
 
-    function buttonClicked() {
-        clickNumber++;
-        outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
-    }
+  function buttonClicked() {
+    clickNumber++;
+    outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
+  }
 
-    function init() {
-        outputEl = jQuery('#output);
-        jQuery('#button').click(buttonClicked);
-    }
+  function init() {
+    outputEl = jQuery('#output);
+    jQuery('#button').click(buttonClicked);
+  }
 
-    jQuery(document).ready(init);
+  jQuery(document).ready(init);
 
 })();
 </pre>
@@ -254,20 +256,20 @@ Modul.methode();
 <pre>
 jQuery(function ($) {
 
-    var clickNumber = 0;
-    var outputEl;
+  var clickNumber = 0;
+  var outputEl;
 
-    function buttonClicked() {
-        clickNumber++;
-        outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
-    }
+  function buttonClicked() {
+    clickNumber++;
+    outputEl.html('Button wurde ' + clickNumber + ' Mal angeklickt');
+  }
 
-    function init() {
-        outputEl = $('#output);
-        $('#button').click(buttonClicked);
-    }
+  function init() {
+    outputEl = $('#output);
+    $('#button').click(buttonClicked);
+  }
 
-    init();
+  init();
 
 });
 </pre>
@@ -291,7 +293,7 @@ jQuery(function ($) {
 <pre>
 (function (window, document, undefined) {
 
-    /* ... */
+  /* ... */
 
 })(window, document);
 </pre>
@@ -320,7 +322,7 @@ jQuery(function ($) {
 
 <pre>
 (function () {
-    /* ... private Objekte ... */
+  /* ... private Objekte ... */
 })();
 </pre>
 
@@ -328,7 +330,7 @@ jQuery(function ($) {
 
 <pre>
 var Modul = (function () {
-    /* ... private Objekte ... */
+  /* ... private Objekte ... */
 })();
 </pre>
 
@@ -337,12 +339,12 @@ var Modul = (function () {
 <pre>
 var Modul = (function () {
 
-    /* ... private Objekte ... */
+  /* ... private Objekte ... */
 
-    /* Gebe öffentliche API zurück: */
-    return {
-        öffentlicheMethode : function () { ... }
-    };
+  /* Gebe öffentliche API zurück: */
+  return {
+    öffentlicheMethode : function () { ... }
+  };
 
 })();
 </pre>
@@ -352,21 +354,21 @@ var Modul = (function () {
 <pre>
 var Modul = (function () {
 
-    // Private Objekte
-    var privateVariable = "privat";
-    function privateFunktion() {
-        alert("privateFunktion wurde aufgerufen\n" +
-            "Private Variable: " + privateVariable);
-    }
+  // Private Objekte
+  var privateVariable = "privat";
+  function privateFunktion() {
+    alert("privateFunktion wurde aufgerufen\n" +
+        "Private Variable: " + privateVariable);
+  }
 
-    // Gebe öffentliches Schnittstellen-Objekt zurück
-    return {
-        öffentlicheMethode : function () {
-            alert("öffentlicheMethode wurde aufgerufen\n" +
-                "Private Variable: " + privateVariable);
-            privateFunktion();
-        }
-    };
+  // Gebe öffentliches Schnittstellen-Objekt zurück
+  return {
+    öffentlicheMethode : function () {
+      alert("öffentlicheMethode wurde aufgerufen\n" +
+        "Private Variable: " + privateVariable);
+      privateFunktion();
+    }
+  };
 
 })();
 
@@ -410,17 +412,17 @@ Namensraum.Modul2 = (function () { ... })();
 <pre>
 /* Grundmodul */
 var Modul = (function (Modul) {
-    /* ... private Objekte ... */
-    return {
-        methode1 : function () { ... }
-    };
+  /* ... private Objekte ... */
+  return {
+    methode1 : function () { ... }
+  };
 })();
 
 /* Erweiterung des Grundmoduls */
 (function (modul) {
-    /* ... private Objekte ... */
-    /* Erweitere Modul um neue Methoden: */
-    modul.methode2 = function () { ... };
+  /* ... private Objekte ... */
+  /* Erweitere Modul um neue Methoden: */
+  modul.methode2 = function () { ... };
 })(Modul);
 </pre>
 
@@ -445,21 +447,21 @@ Modul.methode2();
 
 <pre>
 var Modul = (function (modul) {
-    /* ... private Objekte ... */
+  /* ... private Objekte ... */
 
-    /* Lege Methode am Modulobjekt an: */
-    modul.methode1 = function () { ... };
+  /* Lege Methode am Modulobjekt an: */
+  modul.methode1 = function () { ... };
 
-    return modul;
+  return modul;
 }(Modul || {}));
 
 var Modul = (function (modul) {
-    /* ... private Objekte ... */
+  /* ... private Objekte ... */
 
-    /* Lege Methode am Modulobjekt an: */
-    modul.methode2 = function () { ... };
+  /* Lege Methode am Modulobjekt an: */
+  modul.methode2 = function () { ... };
 
-    return modul;
+  return modul;
 }(Modul || {}));
 </pre>
 

@@ -35,7 +35,7 @@
     <p>Oder der Anfangswert kann gleich angegeben werden:</p>
     <pre>var alter = 32;</pre>
     <p>Hier wird eine Variable mit dem Namen »alter« und dem Zahlenwert 32 erzeugt.</p>
-    <p>Anstelle des Wertes <code>32</code> kann ein beliebiger Ausdruck stehen. Das Schema der Variablen-Deklaration lautet also:</p>
+    <p>Anstelle des Wertes <code>32</code> kann ein beliebiger <a href="#ausdrucke">Ausdruck</a> stehen. Das Schema der Variablen-Deklaration lautet also:</p>
     <pre>var <var>Name</var> = <var>Ausdruck</var>;</pre>
     <p>Genaueres finden Sie im gesonderten <a href="variablen.html">Kapital über Variablen</a>.</p>
   </div>
@@ -44,31 +44,37 @@
     <p>Kontrollstrukturen sind Anweisungen, die wiederum Blöcke mit Anweisungen enthalten. Sie steuern die Ausführung der Anweisungs-Blöcke entsprechend bestimmter Regeln.</p>
     <p>Man unterscheidet zwei Arten von Kontrollstrukturen: Verzweigungen und Schleifen. Mittels Verzweigungen ist es möglich, die Ausführung der Anweisungs-Blöcken von Bedingungen abhängig zu machen. Schleifen ermöglichen es, einen Anweisungs-Block wiederholt auszuführen.</p>
     <h4>Verzweigungen</h4>
-    <p>Zu den Verzweigungen gehört die bedingte Anweisung, auch <code>if</code>-Anweisung genannt. Sie besteht aus einem festen Gerüst, das mit dem Schlüsselwort <code>if</code> beginnt. Darauf folgt eine Bedingung in runden Klammern. Dann folgt ein Anweisungsblock in geschweiften Klammern und ein zweiter nach dem Schlüsselwort <code>else</code>.</p>
+    <p>Zu den Verzweigungen gehört die <dfn>bedingte Anweisung</dfn>, auch <code>if</code>-Anweisung genannt. Sie besteht aus einem festen Gerüst, das mit dem Schlüsselwort <code>if</code> beginnt. Darauf folgt eine Bedingung in runden Klammern. Dann folgt ein Anweisungsblock in geschweiften Klammern und ein zweiter nach dem Schlüsselwort <code>else</code>.</p>
     <p>Das Gerüst sieht so aus:</p>
-    <pre>if (<var>Bedingung</var>) {
+<pre>
+if (<var>Bedingung</var>) {
    <var>Anweisungen</var>
 } else {
    <var>Anweisungen</var>
-}</pre>
-    <p>Zwischen den runden Klammern für die Bedingung steht ein beliebiger Ausdruck. Zwischen den geschweiften Klammern stehen eine oder mehrere Anweisungen.</p>
+}
+</pre>
+    <p>Zwischen den runden Klammern für die Bedingung steht ein beliebiger <a href="#ausdruecke">Ausdruck</a>. Zwischen den geschweiften Klammern stehen eine oder mehrere Anweisungen.</p>
     <p>Betrachten wir ein Beispiel:</p>
-    <pre>if (alter &gt;= 18) {
+<pre>
+if (alter &gt;= 18) {
   window.alert("Volljährig!");
 } else {
   window.alert("Noch nicht volljährig.");
-}</pre>
+}
+</pre>
     <p>Ist die Bedingung <code>alter &gt;= 18</code> erfüllt, so wird der erste Anweisungs-Block ausgeführt. Ist die Bedingung nicht erfüllt, so wird der zweite Block nach dem <code>else</code> ausgeführt.</p>
     <h4>Schleifen</h4>
     <p>Eine Schleife erlaubt es, gewisse Anweisungen wiederholt auszuführen, solange eine Bedingung erfüllt ist.</p>
     <p>Bei einer festen Anzahl der Wiederholungen verwendet man häufig die <code>for</code>-Schleife. Die Anweisung besteht aus einem festen Gerüst und vier veränderbaren Teilen. Ein Beispiel:</p>
-    <pre>for (
+<pre>
+for (
   var i = 0;
   i &lt; 5;
   i = i + 1
 ) {
   window.alert("Sie müssen noch " + (5 - i) + " mal klicken.");
-}</pre>
+}
+</pre>
     <p>Die Ausführung der Schleife wird von den drei Teilen in den runden Klammern bestimmt. Zur besseren Lesbarkeit sind sie hier auf drei Zeilen verteilt.</p>
     <p>Der erste Teil ist die <strong>Initialisierung</strong>, im Beispiel <code>var i = 0;</code>. Dies ist eine Variablen-Deklaration, wie wir sie oben kennengelernt haben. Hier wird eine so genannte <strong>Schleifenvariable</strong> mit einem Startwert erzeugt.</p>
     <p>Im zweiten Teil, der <strong>Abbruchbedingung</strong>, wird die Schleifenvariable geprüft. Im Beispiel <code>i < 5</code>. Das bedeutet: Ist <code>i</code> kleiner als 5?</p>
@@ -81,8 +87,9 @@
   </div>
   <div class="section" id="expression-statement">
     <h3>Anweisung mit Ausdruck</h3>
-    <p>Die meisten Anweisungen in einem JavaScript-Programm sind sogenannte Ausdruck-Anweisungen (englisch expression statement). Sie bestehen lediglich aus einem Ausdruck, und ein Ausdruck kann sehr unterschiedlich aussehen. Hier einige Beispiele:</p>
-<pre>1 + 1;
+    <p>Die meisten Anweisungen in einem JavaScript-Programm sind sogenannte Ausdruck-Anweisungen (englisch expression statement). Sie bestehen lediglich aus einem <a href="#ausdruecke">Ausdruck</a>, und ein Ausdruck kann sehr unterschiedlich aussehen. Hier einige Beispiele:</p>
+<pre>
+1 + 1;
 window.print();
 alter = 18;
 objekt.nummer = 5;

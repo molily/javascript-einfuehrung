@@ -33,7 +33,7 @@ alert(this); // Ergibt [object Window] oder ähnliches
 
 <pre>
 function zeigeThis() {
-    alert(this); // ergibt ebenfalls [object Window]
+  alert(this); // ergibt ebenfalls [object Window]
 }
 zeigeThis();
 </pre>
@@ -50,11 +50,11 @@ zeigeThis();
 
 <pre>
 var Modul = {
-    eigenschaft : "wert",
-    methode : function () {
-        alert("methode wurde aufgerufen\n" +
-              "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    }
+  eigenschaft : "wert",
+  methode : function () {
+    alert("methode wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  }
 };
 Modul.methode();
 </pre>
@@ -65,13 +65,13 @@ Modul.methode();
 
 <pre>
 function Katze(name) {
-    <strong>this.name</strong> = name;
+  <strong>this.name</strong> = name;
 }
 Katze.prototype = {
-    pfoten : 4,
-    zeigePfoten : function () {
-        alert("Die Katze zeigt ihre " + <strong>this.pfoten</strong> + " Pfoten.");
-    }
+  pfoten : 4,
+  zeigePfoten : function () {
+    alert("Die Katze zeigt ihre " + <strong>this.pfoten</strong> + " Pfoten.");
+  }
 };
 var maunzi = new Katze('Maunzi');
 maunzi.zeigePfoten();
@@ -109,24 +109,24 @@ schnucki.zeigePfoten();
 
 <pre>
 var Modul = {
-    eigenschaft : "Eigenschaftswert",
-    start : function () {
-        // Funktioniert:
-        alert("start wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-        <strong>setTimeout(this.verzögert, 100);</strong>
-        <strong>document.getElementById("button").onclick = this.handler;</strong>
-    },
-    verzögert : function () {
-        // <strong>Fehler</strong>: this verweist auf window
-        alert("verzögert wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    },
-    handler : function (e) {
-        // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
-        alert("handler wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    }
+  eigenschaft : "Eigenschaftswert",
+  start : function () {
+    // Funktioniert:
+    alert("start wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    <strong>setTimeout(this.verzögert, 100);</strong>
+    <strong>document.getElementById("button").onclick = this.handler;</strong>
+  },
+  verzögert : function () {
+    // <strong>Fehler</strong>: this verweist auf window
+    alert("verzögert wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  },
+  handler : function (e) {
+    // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
+    alert("handler wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  }
 };
 Modul.start();
 </pre>
@@ -148,24 +148,24 @@ Modul.start();
 <pre>
 function Konstruktor() {}
 Konstruktor.prototype = {
-    eigenschaft : "Eigenschaftswert",
-    start : function () {
-        // Funktioniert:
-        alert("start wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-        <strong>setTimeout(this.verzögert, 100);</strong>
-        <strong>document.getElementById("button").onclick = this.handler;</strong>
-    },
-    verzögert : function () {
-        // <strong>Fehler</strong>: this verweist auf window
-        alert("verzögert wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    },
-    handler : function (e) {
-        // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
-        alert("handler wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    }
+  eigenschaft : "Eigenschaftswert",
+  start : function () {
+    // Funktioniert:
+    alert("start wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+    <strong>setTimeout(this.verzögert, 100);</strong>
+    <strong>document.getElementById("button").onclick = this.handler;</strong>
+  },
+  verzögert : function () {
+    // <strong>Fehler</strong>: this verweist auf window
+    alert("verzögert wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  },
+  handler : function (e) {
+    // <strong>Fehler</strong>: this verweist auf das Element, dem der Event-Handler anhängt
+    alert("handler wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  }
 };
 var instanz = new Konstruktor();
 instanz.start();
@@ -194,17 +194,17 @@ instanz.start();
   <p>Dieses Beispiel demonstriert die Variablen-Verfügbarkeit bei verschachtelten Funktionen:</p>
 
 <pre>
-function äußereFunktion  () {
-    // Definiere eine lokale Variable
-    var <strong>variable</strong> = "wert";
-    // Lege eine verschachtelte Funktion an
-    function innereFunktion() {
-        // Obwohl diese Funktion einen eigenen Scope mit sich bringt,
-        // ist die Variable aus dem umgebenden Scope hier verfügbar:
-        alert("Wert der Variablen aus der äußeren Funktion: " + <strong>variable</strong>);
-    }
-    // Führe die eben definierte Funktion aus
-    innerfunktion();
+function äußereFunktion() {
+  // Definiere eine lokale Variable
+  var <strong>variable</strong> = "wert";
+  // Lege eine verschachtelte Funktion an
+  function innereFunktion() {
+    // Obwohl diese Funktion einen eigenen Scope mit sich bringt,
+    // ist die Variable aus dem umgebenden Scope hier verfügbar:
+    alert("Wert der Variablen aus der äußeren Funktion: " + <strong>variable</strong>);
+  }
+  // Führe die eben definierte Funktion aus
+  innerfunktion();
 }
 äußereFunktion();
 </pre>
@@ -219,13 +219,13 @@ function äußereFunktion  () {
 
 <pre>
 function äußereFunktion  () {
-    var variable = "wert";
-    // Lege eine verschachtelte Funktion an
-    function closure {
-        alert("Wert der Variablen aus der äußeren Funktion: " + variable);
-    };
-    // Speichere die Closure-Funktion als Event-Handler
-    <strong>document.getElementById("button").onclick = closure;</strong>
+  var variable = "wert";
+  // Lege eine verschachtelte Funktion an
+  function closure {
+    alert("Wert der Variablen aus der äußeren Funktion: " + variable);
+  }
+  // Speichere die Closure-Funktion als Event-Handler
+  <strong>document.getElementById("button").onclick = closure;</strong>
 }
 äußereFunktion();
 </pre>
@@ -271,14 +271,14 @@ function äußereFunktion  () {
 
 <pre>
 var Modul = (function () {
-    // Private Objekte
-    var privateVariable = "privat";
-    // Öffentliche API
-    return {
-        öffentlicheMethode : function () {
-            alert(privateVariable);
-        }
-    };
+  // Private Objekte
+  var privateVariable = "privat";
+  // Öffentliche API
+  return {
+    öffentlicheMethode : function () {
+      alert(privateVariable);
+    }
+  };
 })();
 Modul.öffentlicheMethode();
 </pre>
@@ -287,30 +287,30 @@ Modul.öffentlicheMethode();
 
 <pre>
 var Modul = (function () {
-    // Private Objekte
-    var privateVariable = "privat";
-    function privateFunktion() {
-        alert("privateFunktion wurde verzögert aufgerufen\n"+
-            "privateVariable: " + privateVariable);
-        // Rufe öffentliche Methode auf:
-        <strong>api</strong>.end();
+  // Private Objekte
+  var privateVariable = "privat";
+  function privateFunktion() {
+    alert("privateFunktion wurde verzögert aufgerufen\n" +
+      "privateVariable: " + privateVariable);
+    // Rufe öffentliche Methode auf:
+    <strong>api</strong>.end();
+  }
+  // Öffentliche API, gespeichert in einer Variable
+  <strong>var api</strong> = {
+    start: function () {
+      alert("Test startet");
+      // Hier würde this noch funktionieren, wir nutzen trotzdem api
+      setTimeout(<strong>api</strong>.öffentlicheMethode, 100);
+    },
+    öffentlicheMethode: function () {
+      alert("öffentlicheMethode wurde verzögert aufgerufen");
+      setTimeout(privateFunktion, 100);
+    },
+    ende: function () {
+      alert("Öffentliche ende-Methode wurde aufgerufen. Test beendet");
     }
-    // Öffentliche API, gespeichert in einer Variable
-    <strong>var api</strong> = {
-        start : function () {
-            alert("Test startet");
-            // Hier würde this noch funktionieren, wir nutzen trotzdem api
-            setTimeout(<strong>api</strong>.öffentlicheMethode, 100);
-        }
-        öffentlicheMethode : function () {
-            alert("öffentlicheMethode wurde verzögert aufgerufen");
-            setTimeout(privateFunktion, 100);
-        }
-        ende : function () {
-            alert("Öffentliche ende-Methode wurde aufgerufen. Test beendet");
-        }
-    };
-    return <strong>api</strong>;
+  };
+  return <strong>api</strong>;
 })();
 Modul.start();
 </pre>
@@ -345,33 +345,33 @@ privateVariable: privat
 
 <pre>
 function Konstruktor() {
-    // Referenz auf das Instanzobjekt anlegen
-    <strong>var thisObject = this;</strong>
-    // Weitere private Objekte
-    var privateVariable = "privat";
+  // Referenz auf das Instanzobjekt anlegen
+  <strong>var thisObject = this;</strong>
+  // Weitere private Objekte
+  var privateVariable = "privat";
 
-    // Öffentliche Eigenschaften
-    this.eigenschaft = "wert";
+  // Öffentliche Eigenschaften
+  this.eigenschaft = "wert";
 
-    this.start = function () {
-        alert("start() wurde aufgerufen\n" +
-            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
-        setTimeout(<strong>thisObject</strong>.verzögert, 500);
-    };
+  this.start = function () {
+    alert("start() wurde aufgerufen\n" +
+      "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+    setTimeout(<strong>thisObject</strong>.verzögert, 500);
+  };
 
-    this.verzögert = function () {
-        alert("verzögert() wurde aufgerufen\n" +
-            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
-    };
+  this.verzögert = function () {
+    alert("verzögert() wurde aufgerufen\n" +
+      "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+  };
 
-    this.handler = function () {
-        alert("handler wurde aufgerufen\n" +
-            "Element, das den Event behandelt: " + <strong>this</strong> + "\n" +
-            "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
-    };
+  this.handler = function () {
+    alert("handler wurde aufgerufen\n" +
+      "Element, das den Event behandelt: " + <strong>this</strong> + "\n" +
+      "Instanz-Eigenschaft: " + <strong>thisObject</strong>.eigenschaft);
+  };
 
-    // Hier im Konstruktor kann this noch verwendet werden
-    document.getElementById("button").onclick = this.handler;
+  // Hier im Konstruktor kann this noch verwendet werden
+  document.getElementById("button").onclick = this.handler;
 }
 
 var instanz = new Konstruktor();
@@ -416,15 +416,15 @@ instanz.start();
 
 <pre>
 var objekt = {
-    eigenschaft : "Objekteigenschaft"
+  eigenschaft: "Objekteigenschaft"
 };
 
 function beispielFunktion() {
-    // this zeigt nun auf objekt
-    alert(this.eigenschaft);
+  // this zeigt nun auf objekt
+  alert(this.eigenschaft);
 }
 
- // Erzwinge Kontext mit apply, setze objekt als Kontext
+// Erzwinge Kontext mit apply, setze objekt als Kontext
 beispielFunktion.call(objekt);
 </pre>
 
@@ -432,12 +432,12 @@ beispielFunktion.call(objekt);
 
 <pre>
 var objekt = {
-    eigenschaft : 0
+  eigenschaft: 0
 };
 
 function summe(a, b, c) {
-    this.eigenschaft = a + b + c;
-    alert("Ergebnis: " + this.eigenschaft);
+  this.eigenschaft = a + b + c;
+  alert("Ergebnis: " + this.eigenschaft);
 }
 
 // call: Übergebe drei einzelne Parameter
@@ -482,31 +482,31 @@ summe.apply(objekt, [1, 2, 3]);
 <td>Erweitere alle Funktionsobjekte um die Methode <code>bind</code> über den Prototyp aller Funktionsobjekte.</td>
 </tr>
 <tr>
-<td><pre>    var originalFunction = this;</pre></td>
+<td><pre>  var originalFunction = this;</pre></td>
 <td>Speichere die gegenwärtige Funktion in einer Variablen, damit in der Closure ein Zugriff darauf möglich ist.</td>
 </tr>
 <tr>
-<td><pre>    var args = Array.prototype.slice.call(arguments);</pre></td>
+<td><pre>  var args = Array.prototype.slice.call(arguments);</pre></td>
 <td><code>bind</code> nimmt eine beliebige Anzahl von Parametern entgegen. Sie sind nicht in der Parameterliste aufgeführt, denn es wird <code>arguments</code> zum Zugriff darauf verwendet. Diese Liste wird zunächst in einen echten Array umgewandelt, indem eine Array-Methode darauf angewendet wird.</td>
 </tr>
 <tr>
-<td><pre>    var contextObject = args.shift();</pre></td>
+<td><pre>  var contextObject = args.shift();</pre></td>
 <td>Entnehme dem Array den ersten Parameter. Das ist das Objekt, in dessen Kontext die Funktion ausgeführt werden soll. <code>args</code> enthält nun die restlichen Parameter.</td>
 </tr>
 <tr>
-<td><pre>    var wrapperFunction = function () {</pre></td>
+<td><pre>  var wrapperFunction = function () {</pre></td>
 <td>Erzeuge eine verschachtelte Funktion, die als Closure wirkt. Die Closure schließt <code>originalFunction</code>, <code>args</code> und <code>contextObject</code> ein.</td>
 </tr>
 <tr>
-<td><pre>        return originalFunction.apply(contextObject, args);</pre></td>
+<td><pre>    return originalFunction.apply(contextObject, args);</pre></td>
 <td>Innerhalb der erzeugten Funktion: Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei die restlichen Parameter durch und gib den Rückgabewert der Funktion zurück.</td>
 </tr>
 <tr>
-<td><pre>    };</pre></td>
+<td><pre>  };</pre></td>
 <td></td>
 </tr>
 <tr>
-<td><pre>    return wrapperFunction;</pre></td>
+<td><pre>  return wrapperFunction;</pre></td>
 <td>Gib die soeben erzeugte Wrapper-Funktion zurück.</td>
 </tr>
 <tr>
@@ -521,27 +521,27 @@ summe.apply(objekt, [1, 2, 3]);
 <td>Erweitere alle Funktionsobjekte um die Methode <code>bindAsEventListener</code> über den Prototyp aller Funktionsobjekte. Die Funktion nimmt nur einen Parameter entgegen: Das Objekt, in dessen Kontext die Funktion ausgeführt werden soll.</td>
 </tr>
 <tr>
-<td><pre>    var originalFunction = this;</pre></td>
+<td><pre>  var originalFunction = this;</pre></td>
 <td>Speichere die gegenwärtige Funktion in einer Variablen, damit in der Closure ein Zugriff darauf möglich ist.</td>
 </tr>
 <tr>
-<td><pre>    var wrapperFunction = function (event) {</pre></td>
+<td><pre>  var wrapperFunction = function (event) {</pre></td>
 <td>Erzeuge eine verschachtelte Funktion, die als Closure wirkt. Die Closure schließt <code>contextObject</code> und <code>originalFunction</code> ein.</td>
 </tr>
 <tr>
-<td><pre>        var eventObject = event || window.event;</pre></td>
+<td><pre>    var eventObject = event || window.event;</pre></td>
 <td>Vereinheitliche den Zugriff auf das Event-Objekt. Dieses wird der Handler-Funktion entweder als Parameter übergeben (hier <code>event</code>) oder steht im Internet Explorer unter <code>window.event</code> zur Verfügung.</td>
 </tr>
 <tr>
-<td><pre>        return originalFunction.call(contextObject, eventObject);</pre></td>
+<td><pre>    return originalFunction.call(contextObject, eventObject);</pre></td>
 <td>Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei das Event-Objekt durch und gib den Rückgabewert der Funktion zurück.</td>
 </tr>
 <tr>
-<td><pre>    };</pre></td>
+<td><pre>  };</pre></td>
 <td></td>
 </tr>
 <tr>
-<td><pre>    return wrapperFunction;</pre></td>
+<td><pre>  return wrapperFunction;</pre></td>
 <td>Gib die soeben erzeugte Wrapper-Funktion zurück.</td>
 </tr>
 <tr>
@@ -558,19 +558,21 @@ summe.apply(objekt, [1, 2, 3]);
 
     <p>Ohne Kommentare und Variablen, die bloß der Lesbarkeit dienen, sehen die beiden Funktionen wie folgt aus:</p>
 
-<pre>Function.prototype.bind = function () {
-    var method = this, args = Array.prototype.slice.call(arguments), object = args.shift();
-    return function () {
-        return method.apply(object, args);
-    };
+<pre>
+Function.prototype.bind = function () {
+  var method = this, args = Array.prototype.slice.call(arguments), object = args.shift();
+  return function () {
+    return method.apply(object, args);
+  };
 };
 
 Function.prototype.bindAsEventListener = function (object) {
-    var method = this;
-    return function (event) {
-        return method.call(object, event || window.event);
-    }
-};</pre>
+  var method = this;
+  return function (event) {
+    return method.call(object, event || window.event);
+  }
+};
+</pre>
 
   </div>
 
@@ -584,22 +586,22 @@ Function.prototype.bindAsEventListener = function (object) {
 
 <pre>
 var Modul = {
-    eigenschaft : "Eigenschaftswert",
-    start : function () {
-        alert("start wurde aufgerufen\n" +
-            "this.eigenschaft: " + this.eigenschaft);
-        setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
-        document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
-    },
-    verzögert : function () {
-        alert("verzögert wurde aufgerufen\n" +
-            "this.eigenschaft: " + this.eigenschaft);
-    },
-    handler : function (e) {
-        alert("handler wurde aufgerufen\n" +
-            "Event-Objekt: " + e + "\n",
-            "this.eigenschaft: " + this.eigenschaft);
-    },
+  eigenschaft: "Eigenschaftswert",
+  start: function () {
+    alert("start wurde aufgerufen\n" +
+      "this.eigenschaft: " + this.eigenschaft);
+    setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
+    document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
+  },
+  verzögert: function () {
+    alert("verzögert wurde aufgerufen\n" +
+      "this.eigenschaft: " + this.eigenschaft);
+  },
+  handler: function (e) {
+    alert("handler wurde aufgerufen\n" +
+      "Event-Objekt: " + e + "\n",
+      "this.eigenschaft: " + this.eigenschaft);
+  }
 };
 Modul.start();
 </pre>
@@ -611,24 +613,24 @@ Modul.start();
     <h3>Anwendung bei Prototypen und Instanzmethoden</h3>
 
 <pre>
-function Konstruktor() {}
+function Konstruktor() { }
 Konstruktor.prototype = {
-    eigenschaft : "Eigenschaftswert",
-    start : function () {
-        alert("start wurde aufgerufen\n" +
-            "this.eigenschaft: " + this.eigenschaft);
-        setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
-        document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
-    },
-    verzögert : function () {
-        alert("verzögert wurde aufgerufen\n" +
-            "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
-    },
-    handler : function (e) {
-        alert("handler wurde aufgerufen\n" +
-            "Event-Objekt: " + e + "\n",
-            "this.eigenschaft: " + this.eigenschaft);
-    };
+  eigenschaft: "Eigenschaftswert",
+  start: function () {
+    alert("start wurde aufgerufen\n" +
+      "this.eigenschaft: " + this.eigenschaft);
+    setTimeout(<strong>this.verzögert.bind(this)</strong>, 100);
+    document.getElementById("button").onclick = <strong>this.handler.bindAsEventListener(this)</strong>;
+  },
+  verzögert: function () {
+    alert("verzögert wurde aufgerufen\n" +
+      "this.eigenschaft: " + <strong>this</strong>.eigenschaft);
+  },
+  handler: function (e) {
+    alert("handler wurde aufgerufen\n" +
+      "Event-Objekt: " + e + "\n",
+      "this.eigenschaft: " + this.eigenschaft);
+  }
 };
 var instanz = new Konstruktor();
 instanz.start();
@@ -655,18 +657,6 @@ instanz.start();
   </div>
 
 </div>
-
-<!--
-
-<hr>
-
-<pre>
-Verknüpfen von Daten mit Elementen im DOM (jQuerys data(), Prototypes store(), Mootools store() usw.)
-    - benötigt ein DOM, auch evtl. Performance-Schwierigkeiten
-weitere Methoden zur Übergabe (z.B. jQuerys e.data)
-</pre>
-
--->
 
 <div class="sequence-navigation">
   <p class="next"><a href="organisation-frameworks.html" rel="next">Organisation von JavaScripten: Framework-Architekturen</a></p>
