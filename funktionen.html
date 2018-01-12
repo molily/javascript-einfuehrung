@@ -162,13 +162,13 @@ function quadrat(x) {
   <p>Das Ergebnis des Ausdruckes ist ein Funktionsobjekt. Sie können es wie jeden anderen Wert in JavaScript beliebig weiterverwenden. Beispielsweise können Sie das erzeugte Funktionsobjekt in einer Variable speichern:</p>
   <pre>var <var>Funktionsname</var> = function (<var>Parameterliste</var>) { <var>Anweisungen</var> };
 </pre>
-  <p>Diese Variablenzuweisung mit Funktionsausdruck hat den gleichen Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var>(...) {...}</code>. Bis auf einige Sonderfälle sind die beiden Schreibweisen austauschbar.</p>
+  <p>Diese Variablenzuweisung mit Funktionsausdruck hat den gleichen Effekt wie die klassische Funktionsdeklaration <code>function <var>Funktionsname</var>(…) {…}</code>. Bis auf einige Sonderfälle sind die beiden Schreibweisen austauschbar.</p>
   <p>Was sind nun die <strong>Vorteile</strong> eines Funktionsausdruckes?</p>
   <p>Eine Funktion, die Sie mit einem Funktionsausdruck erzeugen, können Sie direkt an ein Objekt als <a href="objekte.html#methoden">Methode</a> hängen. Auf diese Weise können Sie Ordnung in Ihre Scripte bringen und zusammenhörige Werte und Funktionen unter einem Objekt gruppieren. Ein Beispiel:</p>
 <pre>
 var bildergalerie = {
   abspielen: <strong>function () {</strong>
-    /* ... */
+    /* … */
   <strong>}</strong>
 };
 bildergalerie.abspielen();
@@ -178,7 +178,7 @@ bildergalerie.abspielen();
   <p>Das obige Beispiel ließe sich übrigens auch mit einer Funktionsdeklaration lösen:</p>
 <pre>
 <strong>function abspielen() {</strong>
-  /* ... */
+  /* … */
 <strong>}</strong>
 var bildergalerie = {
   abspielen: abspielen
@@ -188,7 +188,7 @@ bildergalerie.abspielen();
   <p>Hier wird zunächst eine Funktion <code>abspielen</code> erzeugt. Dann wird sie in der gleichnamigen Eigenschaft des Objekts <code>bildergalerie</code> gespeichert.</p>
   <p>Warum ist es sinnvoller, hier einen Funktionsausdruck zu verwenden?</p>
   <p>Zunächst einmal ist die Schreibweise mit Funktionsausdruck kompakter. Wichtiger ist aber, dass nur ein Name, nämlich <code>bildergalerie</code> belegt wird. Die Schreibweise mit Funktionsdeklaration belegt einen weiteren Namen, <code>abspielen</code>. Dies ist unnötig und kann zu Konflikten führen, wenn andere Scripte denselben Namen verwenden.</p>
-  <p>Funktionsausdrücken werden häufig verwenden, wenn eine Funktion an eine andere Funktion übergeben wird. Das passiert beispielsweise bei der <a href="event-handling-fortgeschritten.html">fortgeschrittenen Ereignisverarbeitung</a>.</p>
+  <p>Funktionsausdrücken werden häufig verwenden, wenn eine Funktion an eine andere Funktion übergeben wird. Das passiert beispielsweise bei der <a href="event-handling-fortgeschritten.html">fortgeschrittenen Ereignis-Verarbeitung</a>.</p>
   <p>Die Variante mit Funktionsdeklaration sähe so aus:</p>
 <pre>
 function init() {

@@ -38,7 +38,7 @@
   <h2>Dokument-Objektmodell (DOM), Elementobjekte und Knoten</h2>
   <p>Nachdem wir die Übertragung von HTML-Dokumenten vom Webserver zum Browser betrachtet haben, müssen wir uns vor Augen führen, wie der Browser das Dokument verarbeitet.</p>
   <p>Der HTML-Code liegt dem Browser zunächst als bloßer Text vor. Noch während der Browser den Code über das Netz empfängt, verarbeitet er ihn Stück für Stück. Diese Aufgabe übernimmt der sogenannte <em>Parser</em> (englisch <em>parse</em> = einen Satz in seine grammatikalischen Einzelteile zerlegen). Der Parser überführt den HTML-Code in eine Objektstruktur, die dann im Arbeitsspeicher vorgehalten wird. – Mit <em>Objekt</em> ist hier ein Bündel von Informationen im Speicher gemeint. – Diese Objektstruktur besteht aus verschachtelten <strong>Knoten</strong>, allen voran Elementknoten und Textknoten, die in einer Baumstruktur angeordnet sind.</p>
-  <p>Der Browser nutzt für alle weiteren Operationen diese Objektstruktur, nicht den HTML-Quellcode, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, sondern auf den entsprechenden Elementenbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <strong>Document Object Model</strong> geregelt.</p>
+  <p>Der Browser nutzt für alle weiteren Operationen diese Objektstruktur, nicht den HTML-Quellcode, an dem der Webautor üblicherweise arbeitet. Insbesondere CSS und JavaScript beziehen sich nicht auf den HTML-Code als Text, sondern auf den entsprechenden Elementbaum im Speicher. Wie diese Objektstruktur aufgebaut ist, ist im besagten <strong>Document Object Model</strong> geregelt.</p>
 
   <div class="references">
     <h3>Weiterführende Lektüre</h3>
@@ -96,11 +96,11 @@
   <ol>
      <li>Die Stelle, <strong>wo</strong> das Ereignis überwacht werden soll: Fensterweit, dokumentweit oder an einem bestimmten Element im Dokument.</li>
      <li>Der <strong>Typ</strong> des Ereignisses. Zum Beispiel <code>click</code>, das bedeutet alle Mausklicks.</li>
-     <li>Die JavaScript-<strong>Funktion</strong>, die beim Ereignis ausgeführt werden soll. Diese Funktion wird auch <strong>Handler</strong> oder <strong>Event-Handler</strong> genannt (englisch <code>handle</code> = verarbeiten, abwickeln).</li>
+     <li>Die JavaScript-<strong>Funktion</strong>, die beim Ereignis ausgeführt werden soll. Diese Funktion wird <strong>Event-Handler</strong> genannt (englisch <em>handle</em> = verarbeiten, <em>handler</em> = Verarbeiter).</li>
   </ol>
   <p>Mit JavaScript können wir nun solche Regeln formulieren: <em>Wenn das Ereignis <code>click</code> beim Element mit der ID <code>button</code> eintritt, führe die Handler-Funktion <code>begrüßung</code> aus.</em> Klickt der Benutzer auf das besagte Element, wird die Funktion <code>begrüßung</code> ausgeführt und darin kann auf die Benutzereingabe reagiert werden.</p>
   <p>Mit Fug und Recht kann behauptet werden, dass das <em>event handling</em> das wichtigste Konzept von JavaScript ist: Die Programmierung von JavaScript besteht zum größten Teil aus dem Entwerfen von Abläufen, die durch Ereignisse gesteuert werden. Gleichzeitig bringt dieser Bereich große Herausforderungen mit sich, die die Praxis ungemein erschweren.</p>
-  <p>Genaueres zum Thema können Sie im Kapitel <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a> erfahren.</p>
+  <p>Genaueres zum Thema können Sie im Kapitel <a href="event-handling-grundlagen.html">Grundlagen der Ereignis-Verarbeitung</a> erfahren.</p>
 </div>
 
 <div class="sequence-navigation">

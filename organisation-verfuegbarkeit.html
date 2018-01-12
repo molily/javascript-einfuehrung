@@ -96,7 +96,7 @@ schnucki.zeigePfoten();
   <p>Dieser Bezug kann jedoch verloren gehen, wenn die Funktion außerhalb dieses Objektkontextes ausgeführt wird. Dies passiert vor allem in folgenden Fällen:</p>
 
   <ol>
-  <li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird – siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
+  <li>Beim Event-Handling, wenn die Funktion als Event-Handler registriert wird. Beim Unobtrusive JavaScript ist es üblich, dass Methoden eines Moduls oder einer Instanz als Event-Handler dienen (siehe <a href="event-handling-grundlagen.html">Grundlagen der Ereignis-Verarbeitung</a>). <code>this</code> zeigt in Handler-Funktionen auf das Elementobjekt, bei dem das Ereignis verarbeitet wird – siehe <a href="http://www.quirksmode.org/js/this.html" hreflang="en">this beim Event-Handling</a>. Dadurch werden die Methoden außerhalb des Modul- bzw. Instanzkontextes ausgeführt. </li>
   <li>Beim Aufrufen der Funktion mit <code>setTimeout</code> oder <code>setInterval</code>. Die verzögert bzw. wiederholt ausgeführte Funktion verliert den Bezug zum Ursprungsobjekt, denn <code>this</code> verweist darin auf das globale Objekt <code>window</code>. In vielen Fällen ist der Zugriff auf das Modul bzw. die Instanz notwendig.</li>
   <li>Bei der Übergabe einer Funktion als Parameter (z.B. als Callback-Funktion), beim Speichern in einer Variablen und dergleichen. In diesen Fällen zeigt gibt es oftmals keinen spezifischen Kontext, sodass <code>this</code> als Fallback auf <code>window</code> zeigt.</li>
   </ol>
@@ -529,11 +529,11 @@ summe.apply(objekt, [1, 2, 3]);
 <td>Erzeuge eine verschachtelte Funktion, die als Closure wirkt. Die Closure schließt <code>contextObject</code> und <code>originalFunction</code> ein.</td>
 </tr>
 <tr>
-<td><pre>    var eventObject = event || window.event;</pre></td>
+<td><pre>    var event = event || window.event;</pre></td>
 <td>Vereinheitliche den Zugriff auf das Event-Objekt. Dieses wird der Handler-Funktion entweder als Parameter übergeben (hier <code>event</code>) oder steht im Internet Explorer unter <code>window.event</code> zur Verfügung.</td>
 </tr>
 <tr>
-<td><pre>    return originalFunction.call(contextObject, eventObject);</pre></td>
+<td><pre>    return originalFunction.call(contextObject, event);</pre></td>
 <td>Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei das Event-Objekt durch und gib den Rückgabewert der Funktion zurück.</td>
 </tr>
 <tr>

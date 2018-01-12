@@ -136,7 +136,7 @@ installiereKlickZähler();
 </pre>
   <p>Das Beispiel geht davon aus, dass es einen Button im Dokument mit der ID <code>button</code> gibt:</p>
 <pre>&lt;button id="button"&gt;Klick mich!&lt;button&gt;</pre>
-  <p>Jedes Mal, wenn der Button geklickt wird, wird ein Zähler erhöht und der aktuelle Zählerwert wird ausgegeben. Dazu registriert die Funktion <code>installiereKlickZähler</code> einen Event-Handler (siehe <a href="event-handling-grundlagen.html">Grundlagen zur Ereignisverarbeitung</a>). Dieser Handler ist die Funktion <code>klickHandler</code>.</p>
+  <p>Jedes Mal, wenn der Button geklickt wird, wird ein Zähler erhöht und der aktuelle Zählerwert wird ausgegeben. Dazu registriert die Funktion <code>installiereKlickZähler</code> einen Event-Handler (siehe <a href="event-handling-grundlagen.html">Grundlagen der Ereignis-Verarbeitung</a>). Dieser Handler ist die Funktion <code>klickHandler</code>.</p>
   <p>Wir haben hier also eine äußere Funktion, <code>installiereKlickZähler</code>, und eine innere Funktion, <code>klickHandler</code>.</p>
   <p>Die Variable <code>klickZähler</code> ist in der äußeren Funktion definiert. Sie ist dort verfügbar, aber auch in der verschachtelten inneren Funktion. Nur so ist es möglich, dass die innere Funktion den Zählerwert bei jedem Klick erhöhen und ausgeben kann.</p>
 </div>

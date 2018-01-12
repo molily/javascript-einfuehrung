@@ -27,13 +27,13 @@ var variable2 = "wert";
 var variable3 = "wert";
 
 function funktion1() {
-  /* ... */
+  /* … */
 }
 function funktion2() {
-  /* ... */
+  /* … */
 }
 function funktion3() {
-  /* ... */
+  /* … */
 }
 </pre>
 
@@ -165,16 +165,16 @@ Modul.methode();
 
 <pre>
 (function () {
-    /* ... */
+    /* … */
 })();
 </pre>
 
   <p>Dies erscheint zunächst sehr kryptisch, daher eine schrittweise Zerlegung der Syntax:</p>
 
   <ol>
-  <li>Erzeuge eine namenlose Funktion per Funktionsausdruck: <code>function () { ... }</code></li>
+  <li>Erzeuge eine namenlose Funktion per Funktionsausdruck: <code>function () { … }</code></li>
   <li>Umschließe diesen Funktionsausdruck mit runden Klammern: <code><strong>(</strong>function () {}<strong>)</strong></code></li>
-  <li>Führe die Funktion sofort aus mit dem Call-Operator, das sind die beiden runden Klammern: <code>(function () { ... })<strong>()</strong></code>. Die Parameterliste bleibt in diesem Beispiel leer.</li>
+  <li>Führe die Funktion sofort aus mit dem Call-Operator, das sind die beiden runden Klammern: <code>(function () { … })<strong>()</strong></code>. Die Parameterliste bleibt in diesem Beispiel leer.</li>
   <li>Schließe die Anweisung mit einem <code>;</code> ab.</li>
   </ol>
 
@@ -190,7 +190,7 @@ Modul.methode();
 
   /* Lokale Funktion */
   function funktion() {
-    /* ... */
+    /* … */
   }
 
   /* Rufe lokale Funktion auf: */
@@ -248,7 +248,7 @@ Modul.methode();
     <h3>DOM-ready-Handler als privater Scope</h3>
 
     <div class="sidebox">
-    <p>DOM-Ready-Handlerfunktionen in verschiedenen Bibliotheken bieten berets einen privaten Scope, den Sie nutzen sollten.</p>
+    <p>DOM-Ready-Handler-Funktionen in verschiedenen Bibliotheken bieten berets einen privaten Scope, den Sie nutzen sollten.</p>
     </div>
 
     <p>Bei der Verwendung mit jQuery ist das Anlegen solcher Funktions-Scopes gang und gäbe. Wenn die Initialisierung eines Scriptes auf DOM ready warten soll, dann übergibt man einen <a href="http://api.jquery.com/jQuery/#jQuery3">Funktionausdruck an <code>jQuery(…)</code></a>. Diese Funktion wird als Handler beim Eintreten des <a href="https://api.jquery.com/ready/">DOM-ready-Ereignisses</a> ausgeführt. Man nutzt sie gleichzeitig als privaten Scope für weitere Objekte. Das obige Beispiel können wir also folgendermaßen anpassen:</p>
@@ -293,7 +293,7 @@ jQuery(function ($) {
 <pre>
 (function (window, document, undefined) {
 
-  /* ... */
+  /* … */
 
 })(window, document);
 </pre>
@@ -322,7 +322,7 @@ jQuery(function ($) {
 
 <pre>
 (function () {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
 })();
 </pre>
 
@@ -330,7 +330,7 @@ jQuery(function ($) {
 
 <pre>
 var Modul = (function () {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
 })();
 </pre>
 
@@ -339,11 +339,11 @@ var Modul = (function () {
 <pre>
 var Modul = (function () {
 
-  /* ... private Objekte ... */
+  /* … private Objekte … */
 
   /* Gebe öffentliche API zurück: */
   return {
-    öffentlicheMethode : function () { ... }
+    öffentlicheMethode : function () { … }
   };
 
 })();
@@ -389,8 +389,8 @@ window.alert("Modul.privateFunktion von außerhalb: " + Modul.privateFunktion);
 
 <pre>
 var Namensraum = {};
-Namensraum.Modul1 = (function () { ... })();
-Namensraum.Modul2 = (function () { ... })();
+Namensraum.Modul1 = (function () { … })();
+Namensraum.Modul2 = (function () { … })();
 </pre>
 
 </div>
@@ -412,17 +412,17 @@ Namensraum.Modul2 = (function () { ... })();
 <pre>
 /* Grundmodul */
 var Modul = (function (Modul) {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
   return {
-    methode1 : function () { ... }
+    methode1 : function () { … }
   };
 })();
 
 /* Erweiterung des Grundmoduls */
 (function (modul) {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
   /* Erweitere Modul um neue Methoden: */
-  modul.methode2 = function () { ... };
+  modul.methode2 = function () { … };
 })(Modul);
 </pre>
 
@@ -447,19 +447,19 @@ Modul.methode2();
 
 <pre>
 var Modul = (function (modul) {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
 
   /* Lege Methode am Modulobjekt an: */
-  modul.methode1 = function () { ... };
+  modul.methode1 = function () { … };
 
   return modul;
 }(Modul || {}));
 
 var Modul = (function (modul) {
-  /* ... private Objekte ... */
+  /* … private Objekte … */
 
   /* Lege Methode am Modulobjekt an: */
-  modul.methode2 = function () { ... };
+  modul.methode2 = function () { … };
 
   return modul;
 }(Modul || {}));

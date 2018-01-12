@@ -125,7 +125,7 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
     <p>Es kann nüchtern festgestellt werden, dass das Sperren des Kontextmenüs diesen Zweck nicht zuverlässig erfüllt. Stattdessen richtet es mehr Schaden als Nutzen an. Wer Texte und Bilder kopieren möchte bzw. den Quelltext lesen will, schafft es ohne viel technisches Know-How auch trotz dieser »Rechtsklick-Sperre«.</p>
     <p>Neuere Browser haben erkannt, dass das Sperren des Kontextmenüs den Benutzer gängelt und in der gewohnten Bedienung von Webseiten einschränkt. Sie bieten daher in ihrer Konfiguration die Möglichkeit, diese Sperren zu ignorieren. »Rechtsklick-Sperren« werden damit schlichtweg wirkungslos.</p>
     <p>Es mag in besonderen Fällen, insbesondere speziellen Webanwendungen, seinen Sinn haben, ein eigenes, angepasstes Kontextmenü bereitzustellen. Aus diesem Grund ermöglichen verschiedene Browser die Behandlung des <code>contextmenu</code>-Ereignisses. Aber auch in dem Fall ist das Unterdrücken des browsereigenen Kontextmenüs nur möglich, wenn eine entsprechende Browsereinstellung es zulässt.</p>
-    <p>...</p>
+    <p>…</p>
   </div>
 
   <div id="kontextmenue" class="section">
@@ -137,10 +137,10 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
 
 <div class="section" id="browser-konfiguration">
   <h2>Browser-Einschränkungen konfigurieren</h2>
-  <p>... an welchen Stellen man das JavaScript-Verhalten der Browser einstellen kann.</p>
+  <p>… an welchen Stellen man das JavaScript-Verhalten der Browser einstellen kann.</p>
   <p>IE 8: Extras > Popup-Blocker > Popupblockereinstellungen; Internetoptionen > Erweitert; Internetoptionen > Sicherheit > [Zone] > Skripting / Verschiedenes</p>
-  <p>Firefox 3.0: Extras > Einstellungen > Inhalt > JavaScript aktivieren > Erweitert...</p>
-  <p>Opera: Tools > Preferences > Advanced > Content > JavaScript Options...</p>
+  <p>Firefox 3.0: Extras > Einstellungen > Inhalt > JavaScript aktivieren > Erweitert…</p>
+  <p>Opera: Tools > Preferences > Advanced > Content > JavaScript Options…</p>
 </div>
 
 <div class="section" id="seitenspezifische-einstellungen">
@@ -173,19 +173,19 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
 
   <div id="opera-seitenspezifisch" class="section">
   <h3>Opera</h3>
-    <p>Im Opera können Sie eine Vielzahl von Einstellung seitenspezifisch anpassen. Navigieren Sie zunächst zur Webseite, für die Sie besondere Einstellungen angeben wollen. Klicken Sie mit der rechten Maustaste auf eine freie Fläche des Dokuments und wählen Sie im Kontextmenü den Eintrag <em>Seitenspezifische Einstellungen...</em>. Unter der Registerkarte <em>Skripte</em> können Sie nicht nur JavaScript für die Seite aktivieren oder deaktivieren, sondern auch verschiedene JavaScript-Einstellungen festlegen:</p>
+    <p>Im Opera können Sie eine Vielzahl von Einstellung seitenspezifisch anpassen. Navigieren Sie zunächst zur Webseite, für die Sie besondere Einstellungen angeben wollen. Klicken Sie mit der rechten Maustaste auf eine freie Fläche des Dokuments und wählen Sie im Kontextmenü den Eintrag <em>Seitenspezifische Einstellungen…</em>. Unter der Registerkarte <em>Skripte</em> können Sie nicht nur JavaScript für die Seite aktivieren oder deaktivieren, sondern auch verschiedene JavaScript-Einstellungen festlegen:</p>
     <p><img src="images/opera-seitenspezifisch.png" width="459" height="398" alt=""></p>
   </div>
 
   <div id="safari-seitenspezifisch" class="section">
     <h3>Safari</h3>
-    <p>...</p>
+    <p>…</p>
   </div>
 </div>
 
 <div id="privilegien" class="section">
 <h2>Privilegien und Signaturen (Gecko)</h2>
-<p>...</p>
+<p>…</p>
 </div>
 
 <div id="xss" class="section">
@@ -193,7 +193,7 @@ window.open("dokument.html", "popup2", "location=no,menubar=no,resizable=no,stat
   <p>Cross-Site Scripting, abgekürzt XSS, ist das Einschleusen von fremden, möglicherweise schädlichen JavaScripten in eine Website. Es handelt sich weniger um ein Sicherheitsproblem innerhalb von JavaScript, sondern um eine Sicherheitslücke in fehlerhaften Webanwendungen. Wenn Webanwendungen Daten aus nicht vertrauenswürdigen Quellen (z.B. aus Formulareingaben oder HTTP-Parametern) ungefiltert ins HTML einbauen, so können Angreifer schlimmstenfalls dauerhaft (persistent) JavaScript-Code einschmuggeln.</p>
   <p>Dieser Code wird mit allen Rechten ausgeführt, die ein JavaScript üblicherweise hat. Handelt es sich um eine per Login geschützte Anwendung, so kann das Scriptdie Benutzer-Beglaubigung missbrauchen und im Namen des Benutzers automatisiert Aktionen vornehmen. Denn das eingeschleuste Script kann HTTP-Anfragen an die Domain versenden, darüber private Daten auslesen, ändern und verschicken. Weder muss der Benutzer davon Notiz nehmen, noch kann die Webanwendung ohne weiteres unterscheiden, ob ein schädliches JavaScript sogenanntes <em>Session-Hijacking</em> betreibt oder der Benutzer selbst Urheber der Aktionen ist.</p>
   <p>XSS-Lücken in großen Webanwendungen wie MySpace, Facebook, Orkut, StudiVZ und Twitter haben spektakuläre JavaScript-Würmer möglich gemacht. Diese pflanzten sich innerhalb der Website z.B. über Benutzerprofile fort, konnten private Daten auslesen oder löschen (Phishing) und damit großen Schaden anrichten. Es gibt auch XSS-Würmer, die andere Domains mit derselben Webanwendung (z.B. der Blogsoftware WordPress) infizierten und sich so über Webserver hinweg verbreiteten.</p>
-  <p>Um XSS-Lücken zu vermeiden, ist eine sorgfältige Prüfung, Filterung und Entschärfung aller nicht vertrauenswürdiger Daten nötig, die in den HTML-, CSS- und JavaScript-Code server- oder clientseitig eingebaut werden. ...</p>
+  <p>Um XSS-Lücken zu vermeiden, ist eine sorgfältige Prüfung, Filterung und Entschärfung aller nicht vertrauenswürdiger Daten nötig, die in den HTML-, CSS- und JavaScript-Code server- oder clientseitig eingebaut werden. …</p>
 </div>
 
 <div class="sequence-navigation">

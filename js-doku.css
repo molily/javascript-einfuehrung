@@ -8,7 +8,7 @@ body {
   padding: 0 1rem;
   counter-reset: counterH2;
   line-height: 1.7;
-  font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
@@ -161,15 +161,16 @@ dfn {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
+  border-radius: 2px;
   font-size: 0.9rem;
 }
 
-#nav p, #footer p {
-  margin: 0;
+#nav p {
+  margin: 0 0 0.5rem;
 }
 
-#nav strong {
-  font-size: 1.125rem;
+#nav p:last-child {
+  margin-bottom: 0;
 }
 
 #nav strong, #nav a {
@@ -177,7 +178,7 @@ dfn {
 }
 
 #nav .contents-link {
-  font-size: 1.125rem;
+  font-size: 1rem;
   text-align: right;
   font-weight: bold;
 }

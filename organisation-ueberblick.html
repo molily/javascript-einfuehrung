@@ -63,7 +63,7 @@
 
     <h3>JavaScript auslagern und extern am Dokumentende einbinden</h3>
 
-    <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script src="..."&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
+    <p>Vermeiden Sie auf ins HTML eingebetteten JavaScript-Code. Verzichten Sie auf Inline-Event-Handler und <code>script</code>-Elemente, die direkt JavaScript enthalten. Binden Sie externe Scripte mit <code>&lt;script src="…"&gt;&lt;/script&gt;</code> ein. Aus Performance-Gründen sollten Sie dieses <code>script</code>-Element ans Dokumentende setzen, direkt vor den schließenden <code>&lt;/body&gt;</code>-Tag.</p>
 
   </div>
 
@@ -71,13 +71,13 @@
 
     <h3>Scripte bei DOM Ready initialisieren</h3>
 
-    <p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="event-handling-onload.html">Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
+    <p>Initialisieren Sie Ihre Script zu dem Zeitpunkt, wenn das HTML-Dokument eingelesen wurde und das DOM vollständig verfügbar ist. Dieser Zeitpunkt wird üblicherweise <strong>DOM ready</strong> genannt. Siehe <a href="event-handling-onload.html">Scripte beim Laden des Dokuments ausführen</a>. Die üblichen JavaScript-Frameworks stellen dafür Methoden bereit. Intern arbeiten diese hauptsächlich mit dem <code>DOMContentLoaded</code>-Event. Wenn Sie kein Framework verwenden, gibt es auch lose Helferfunktionen für diesen Zweck, z.B. <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded von Diego Perini</a>.</p>
 
     <p>Beispiel jQuery:</p>
 
 <pre>
 $(function () {
-  // ...
+  // …
 });
 </pre>
 
@@ -117,7 +117,7 @@ $(function () {
 <pre>
 $(function () {
   $('#produktliste li').click(function (e) {
-    // ... Verarbeite Ereignis ...
+    // … Verarbeite Ereignis …
   });
 });
 </pre>

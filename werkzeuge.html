@@ -26,7 +26,7 @@
 
   <div class="section" id="firefox">
     <h3>Firefox</h3>
-  <p>Wenn Sie browserübergreifende JavaScripte für das öffentliche Web programmieren, so sollten Sie Ihre Scripte zunächst mit dem Browser <strong>Mozilla Firefox</strong> testen und sie mit dessen Hilfe fortentwickeln. Dieser Browser ist weit verbreitet, läuft auf allen relevanten Plattformen und ist einer der Ziel-Browser, auf dem Ihre Scripte auf jeden Fall funktionieren sollten. Firefox verfügt über ausgezeichnete JavaScript-Fähigkeiten und gibt präzise und hilfreiche JavaScript-Fehlermeldungen. Sie können Firefox unter <a href="http://getfirefox.com/">getfirefox.com</a> herunterladen.</p>
+    <p>Wenn Sie browserübergreifende JavaScripte für das öffentliche Web programmieren, so sollten Sie Ihre Scripte zunächst mit dem Browser <strong>Mozilla Firefox</strong> testen und sie mit dessen Hilfe fortentwickeln. Dieser Browser ist weit verbreitet, läuft auf allen relevanten Plattformen und ist einer der Ziel-Browser, auf dem Ihre Scripte auf jeden Fall funktionieren sollten. Firefox verfügt über ausgezeichnete JavaScript-Fähigkeiten und gibt präzise und hilfreiche JavaScript-Fehlermeldungen. Sie können Firefox unter <a href="http://getfirefox.com/">getfirefox.com</a> herunterladen.</p>
   </div>
 
   <div class="section" id="firefbug">
@@ -153,14 +153,14 @@ window.alert("Textknoten wurde angehängt.");</pre>
     <p>Um Fehler auf diese Weise eingrenzen zu können, sollten Sie die Anweisungen zwischen den Kontrollausgaben möglichst einfach halten - zumindest solange Ihr Script noch in der Entwicklungsphase ist. Die folgende Anweisung ist zusammengesetzt und kann an gleich mehreren Stellen zu einem Programmabbruch führen:</p>
     <pre>document.getElementsByTagName("h1")[0].style.color = "red";</pre>
     <p>Wenn in dieser Zeile ein JavaScript-Fehler auftritt, dann sollten Sie die Anweisung in ihre Teile aufspalten und Kontrollausgaben einfügen:</p>
-    <pre>window.alert("Suche alle Überschriften im Dokument...");
+    <pre>window.alert("Suche alle Überschriften im Dokument…");
 var überschriftenListe = document.getElementsByTagName("h1");
 window.alert("Anzahl der gefundenen h1-Überschriften: " + überschriftenListe.length);
 
 var ersteÜberschrift = überschriftenListe[0];
 window.alert("Erste h1-Überschrift: " + ersteÜberschrift);
 
-window.alert("Setze Farbe der Überschrift...");
+window.alert("Setze Farbe der Überschrift…");
 ersteÜberschrift.style.color = "red";
 window.alert("Farbe gesetzt.");</pre>
     <p>Dieses Beispiel ist übertrieben, soll aber die Möglichkeiten von Kontrollausgaben veranschaulichen. Der Vorteil von <code>window.alert</code> ist, dass der Browser die Ausführung des Scriptes solange anhält, wie das Meldungsfenster geöffnet ist. Auf die Weise können Sie einem Script, das sonst ganz schnell ausgeführt wird, bei der Arbeit zuschauen und Fehler erkennen.</p>
@@ -178,7 +178,7 @@ console.debug("Gefundene h1-Überschriften:", überschriftenListe);
 var ersteÜberschrift = überschriftenListe[0];
 console.debug("Erste h1-Überschrift:", ersteÜberschrift);
 
-console.debug("Setze nun die Farbe der Überschrift...");
+console.debug("Setze nun die Farbe der Überschrift…");
 ersteÜberschrift.style.color = "red";
 console.debug("Farbe gesetzt. Zur Kontrolle:", ersteÜberschrift.style.color);</pre>
     <p>Ein Vorteil dieser Konsolenausgabe liegt darin, dass Firebug auch komplexe Objekte sinnfällig darstellt und so detaillierte Einblicke in die verwendeten Objekte und Werte erlaubt. Die Ausgaben in der Konsole sind interaktiv, d.h. sie können ein dort ausgegebenes Objekt anklicken und sich dessen Eigenschaften auflisten lassen.</p>
@@ -194,9 +194,9 @@ console.debug("Farbe gesetzt. Zur Kontrolle:", ersteÜberschrift.style.color);</
 <div class="section" id="dom-inspektor">
   <h2>DOM-Inspektoren</h2>
   <p>Beim Einlesen eines HTML-Dokuments erzeugt der Browser aus dem HTML-Code eine Baumstruktur aus Elementen - diese Vorgang nennt sich Parsing. Die auf HTML aufbauenden Webtechniken CSS und JavaScript operieren auf dieser Grundlage. Den JavaScript-Zugriff auf diese interne Baumstruktur regelt das <a href="dom.html">Document Object Model (DOM)</a>.</p>
-  <p>Zum Auslesen und Verändern des Dokuments bewegt sich ein Script im DOM-Baum. Um den Elementenbaum des aktuellen Dokuments zu veranschaulichen, bieten verschiedene Browser sogenannte <strong>DOM-Inspektoren</strong> an. Diese bilden die Knotenstruktur ab, die sie aus dem Dokument generiert haben, und erlauben eine Navigation darin. Sie können in der Baumdarstellung einen Elementknoten anklicken, um die Lage im Dokument, seine JavaScript-Eigenschaften und -Methoden, die wirkenden CSS-Formatierungen sowie die Dimensionen zu sehen.</p>
+  <p>Zum Auslesen und Verändern des Dokuments bewegt sich ein Script im DOM-Baum. Um den Elementbaum des aktuellen Dokuments zu veranschaulichen, bieten verschiedene Browser sogenannte <strong>DOM-Inspektoren</strong> an. Diese bilden die Knotenstruktur ab, die sie aus dem Dokument generiert haben, und erlauben eine Navigation darin. Sie können in der Baumdarstellung einen Elementknoten anklicken, um die Lage im Dokument, seine JavaScript-Eigenschaften und -Methoden, die wirkenden CSS-Formatierungen sowie die Dimensionen zu sehen.</p>
   <p>Eine Möglichkeit, Informationen zu einem gewissen Element abzurufen, nennt sich <em>Element untersuchen</em> oder ähnlich. Dabei können Sie einen beliebigen Bereich im Dokument anklicken und im DOM-Inspektor wird automatisch das zugehörige Element fokussiert.</p>
-  <p>Nehmen wir folgendes Beispieldokument und schauen uns an, wie die verschiedenen DOM-Inspektoren den Elementenbaum wiedergeben:</p>
+  <p>Nehmen wir folgendes Beispieldokument und schauen uns an, wie die verschiedenen DOM-Inspektoren den Elementbaum wiedergeben:</p>
   <pre>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -210,7 +210,7 @@ der freien Enzyklopädie&lt;/a&gt;.)&lt;/p&gt;
 &lt;blockquote cite="http://de.wikipedia.org/wiki/Document_Object_Model"&gt;
 &lt;p&gt;Das Document Object Model (DOM) ist eine Programmierschnittstelle (API) für den Zugriff
 auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
-&lt;p&gt;...&lt;/p&gt;
+&lt;p&gt;…&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
@@ -226,7 +226,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 
   <div id="ie7-developer-toolbar" class="section">
     <h3>Internet Explorer 8: DOM-Inspektor der Entwicklertools</h3>
-    <p>...</p>
+    <p>…</p>
     <p class="image"><img src="images/ie8-dom-inspektor.png" alt=""></p>
   </div>
 
@@ -244,12 +244,12 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
     <h3>DOM-Inspektor von Opera Dragonfly</h3>
     <p>Den DOM-Inspektor von Opera Dragonfly erreichen Sie über das Menü <em>Extras → Weiteres → Opera Dragonfly</em>. Den DOM-Baum finden Sie im Tab <em>DOM</em>. Mittels Schaltflächen können Sie zwischen verschiedene Darstellungen wechseln und manche Knotentypen ausblenden. Im rechten Bereich können Sie über drei Tabs <em>Styles</em>, <em>Properties</em> und <em>Layout</em> auf die Elementeigenschaften zugreifen. Diese entsprechen funktional den Tabs <em>Styles</em>, <em>DOM</em> und <em>Layout</em> in Firebug.</p>
     <p>Wie auch die anderen vorgestellten DOM-Inspektoren bietet Opera an, ein Element durch Klicken im Dokument auszuwählen. Auf der entsprechenden Schalftläche ist ein Cursor abgebildet.</p>
-    <p>...</p>
+    <p>…</p>
   </div>
 
   <div class="section" id="dom-inspektor-safari">
     <h3>Safari und Chrome Web Inspector</h3>
-    <p>...</p>
+    <p>…</p>
   </div>
 
 </div>
@@ -258,9 +258,9 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
   <h2>Debugger</h2>
   <p>Mithilfe von Kontrollausgaben können Sie den Ablauf eines Scriptes nachvollziehen und Variablen ausgeben, um deren Werte zu prüfen. Ein vielseitigeres und mächtigeres Werkzeug sind Debugger. Damit können Sie komfortabler die Funktionsweise eines Scriptes untersuchen, denn Sie müssen nicht nach jeder Anweisung eine Kontrollausgabe einfügen. Ein JavaScript-Debugger bietet im Allgemeinen folgende Möglichkeiten:</p>
   <p>Sie können im Code sogenannte <strong>Haltepunkte</strong> (englisch <em>Breakpoints</em>) setzen. Die Ausführung des JavaScripts wird an dieser Stelle unterbrochen und der Browser öffnet den Debugger. Ausgehend von dieser Code-Zeile können Sie die folgenden Anweisungen nun Schritt für Schritt ausführen, Anweisungen überspringen und aus aufgerufenen Funktionen herausspringen. Bei dieser <strong>schrittweisen Ausführung</strong> können Sie überprüfen, welche Werte bestimmte Objekte und Variablen an dieser Stelle im Script haben. Eine Weiterentwicklung dieser <strong>Überwachung von Variablenwerten</strong> stellen sogenannte <strong>Watch-Expressions</strong> (englisch für Überwachungs-Ausdrücke) dar.</p>
-  <p>...</p>
+  <p>…</p>
   <p>Wenn Sie viele Funktionen definieren, die sich gegenseitig aufrufen, hilft Ihnen ein Debugger, die Übersicht über das Aufrufen und Abarbeiten von Funktionen zu behalten. In der Einzelschritt-Ausführung haben Sie den sogenannten <strong>Call Stack</strong> (englisch für Aufruf-Stapel) im Blick. Das ist die Verschachtelung der Funktionen, die gerade abgearbeitet werden. Wenn beispeilsweise die Funktion <code>a</code> die Funktion <code>b</code> aufruft und diese wiederum die Funktion <code>c</code>, so ist der Stapel <code>a</code> &gt; <code>b</code> &gt; <code>c</code>. Die Funktion <code>c</code>, die gerade ausgeführt wird, liegt sozusagen oben auf dem Stapel. Nach dessen Ausführung wird <code>c</code> vom Stapel genommen und in die Funktion <code>b</code> zurückgekehrt - und so weiter.</p>
-  <p>...</p>
+  <p>…</p>
   <div class="section">
     <h3>Debugging mit Firebug</h3>
   </div>
@@ -294,7 +294,7 @@ auf HTML- oder XML-Dokumente. Sie wird vom World Wide Web Consortium definiert.
 <div class="section" id="packer">
   <h2>Code-Komprimierer und -Formatierer</h2>
   <p>Bei der JavaScript-Programmierung sollten Sie gewisse Konventionen zur Code-Formatierung einhalten. Das dient nicht nur der Lesbarkeit, Übersichtlichkeit und Klarheit des Quellcodes, sondern macht erst effektive Fehlersuche und Debugging möglich. Das beinhaltet grob gesagt eine Anweisung pro Zeile sowie eine Einrückung innerhalb von Blöcken (Funktionen, Kontrollstrukturen usw.). Wie das im Detail aussieht, ist Ihrem Geschmack überlassen.</p>
-  <p>Wenn das JavaScript jedoch im Browser ausgeführt wird, ...</p>
+  <p>Wenn das JavaScript jedoch im Browser ausgeführt wird, …</p>
   <ul>
     <li><a href="https://developers.google.com/closure/compiler/">Google Closure Compiler</a></a></li>
     <li><a href="http://closure-compiler.appspot.com/home">Closure Compiler Service</a></li>

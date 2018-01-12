@@ -53,7 +53,7 @@
     <h3>Zugänglichkeit von Ajax-Anwendungen</h3>
     <p>Ajax-Anwendungen verlagern einen großen Teil der Datenverarbeitung vom Server-Rechner auf den Client-Rechner, genauer gesagt in den Browser. Damit steigen die Ansprüche, die an die Zugangssoftware gestellt werden - auch wenn mittlerweile alle neueren JavaScript-fähigen Browser über leistungsfähige Ajax-Umsetzungen verfügen.</p>
     <p>Es ist eine besondere Herausforderung, eine Site mit Ajax zugänglich für Nutzer ohne JavaScript, mit alternativen oder assistiven Zugangstechniken wie Screenreadern oder Mobilbrowsern zu gestalten. Funktionen wie der Verlauf, den bisher der Browser automatisch zur Verfügung stellte, müssen in Ajax-Anwendungen nachgebaut werden, z.B. indem jeder Status eine Adresse bekommt, damit die Zurück-Navigation funktioniert und der Status verlinkt werden kann. Es ist also mit einigem Aufwand verbunden, eine Ajax-Anwendung so komfortabel und robust zu bekommen, wie es klassische Lösungen von Haus aus sind.</p>
-    <p>...</p>
+    <p>…</p>
   </div>
 </div>
 
@@ -123,8 +123,8 @@
     <h3>Das Erzeugen eines XMLHttpRequest-Objektes</h3>
     <pre>var xhr = new XMLHttpRequest();</pre>
     <p>Eine neue Instanz wird erzeugt, indem der Konstruktor <code>XMLHttpRequest</code> mit dem Schlüsselwort <code>new</code> aufgerufen wird. Das zurückgelieferte Anfrage-Objekt wird hier in einer Variable namens <code>xhr</code> gespeichert.</p>
-    <p>Für ältere Internet Explorer ist wie gesagt eine andere Schreibweise nötig, welche ein ActiveX-Objekt erstellt. ...
-    <p>Um browserübergreifend zu arbeiten, benötigen wir eine Fähigkeitenweiche mit einer Objekt-Erkennung. Wenn window.XMLHttpRequest zur Verfügung steht, wird diese Objekt benutzt, andernfalls wird versucht, ein ActiveX-Objekt zu erzeugen. ...</p>
+    <p>Für ältere Internet Explorer ist wie gesagt eine andere Schreibweise nötig, welche ein ActiveX-Objekt erstellt. …
+    <p>Um browserübergreifend zu arbeiten, benötigen wir eine Fähigkeitenweiche mit einer Objekt-Erkennung. Wenn window.XMLHttpRequest zur Verfügung steht, wird diese Objekt benutzt, andernfalls wird versucht, ein ActiveX-Objekt zu erzeugen. …</p>
   </div>
 
   <div class="section" id="xhr-readystatehandler-registrieren">
@@ -276,7 +276,7 @@ function xhrReadyStateHandler() {
 &lt;p id="zielelement">Hier erscheint die Server-Antwort.&lt;/p>
 &lt;/body>&lt;/html>
 </pre>
-  <p>...</p>
+  <p>…</p>
 </div>
 
 <div class="section" id="xhr-datenuebertragung">
@@ -322,7 +322,7 @@ function formularSubmit() {
   <p>Am kompliziertesten ist der zweite Schritt, deshalb betrachten wir erst einmal das Gerüst mit den restlichen Aufgaben.</p>
   <pre>function formularSubmit() {
 }</pre>
-  <p>...</p>
+  <p>…</p>
   <p>Helferfunktion für den zweiten Schritt, die Serialisierung des Formulars</p>
 
   <ol>
@@ -368,12 +368,12 @@ bild.src = "beispiel.png";</pre>
 
   <div class="section" id="html-text">
     <h3>HTML / Nur-Text</h3>
-    <p>...</p>
+    <p>…</p>
   </div>
 
   <div class="section" id="json">
     <h3>JSON</h3>
-    <p>...</p>
+    <p>…</p>
     <pre>[
    {
       "name" : "Harry S. Truman",
@@ -394,7 +394,7 @@ bild.src = "beispiel.png";</pre>
       "ende" : 1963
    }
 ]</pre>
-    <p>...</p>
+    <p>…</p>
   </div>
 
   <div class="section" id="xml">
@@ -403,7 +403,7 @@ bild.src = "beispiel.png";</pre>
     <p>Wenn Sie strukturierte Daten per XML übertragen wollen, müssen Sie ein eigenes Auszeichnungssprache nach den Regeln von XML entwerfen. Sie denken sich gewisse Elemente und Attribute und die grammatischen Regeln aus, wie diese zusammengesetzt werden können. Mithilfe dieser Datenstrukturen werden die zu übertragenden Informationen geordnet. Das zugehörige JavaScript kann diese Elemente ansprechen und die Werte der enthaltenen Textknoten bzw. Attribute auslesen.</p>
     <p>Auch wenn Sie diese XML-Sprache nicht unbedingt in einer formalen Dokumentyp-Definition (DTD) niederschreiben müssen, ist das Entwerfen eines passenden XML-Derivates für für Ajax vergleichsweise aufwändig. Das Auslesen der Informationen im JavaScript erfordert nicht nur Kenntnisse des XML-DOM, sondern ist mit ziemlicher Schreibarbeit verbunden.</p>
     <p>Wenn die serverseitigen Programme, die Ihre Website betreiben, bereits ein XML-Format als Speicher- oder Austauschformat verwendet und die damit ausgezeichneten Daten zum Client weitergeschickt werden sollen, bietet es sich auch für Ajax an. Andernfalls ist XML oftmals kompliziert und überdimensioniert.</p>
-    <p>...</p>
+    <p>…</p>
     <pre>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;us-präsidenten&gt;
    &lt;präsident&gt;
@@ -451,7 +451,7 @@ xhr.open("GET", "http://example.net/", true); // Fehler!</pre>
     <p>Die Überprüfung der Erlaubnis nimmt der Browser vor: Wenn ein JavaScript von <code>example.org</code> eine Anfrage an <code>example.net</code> sendet, so prüft der Browser, ob die Antwort von <code>example.net</code> die besagten HTTP-Kopfzeile enthält. Falls ja, so kann das JavaScript die Serverantwort wie gewohnt verarbeiten, andernfalls wird das Script mit einem Ausnahmefehler abgebrochen. (???)</p>
     <p>Dies ist nur ein vereinfachtes Beispiel, um einfache Anfragen zu erlauben. Die besagte Spezifikation sieht viel feinere Zugriffskontrolle vor. An dieser soll lediglich das Grundprinzip ersichtlich werden.</p>
     <p>In der Praxis gibt es derzeit zwei Umsetzungen der W3C-Spezifikation: Mozilla Firefox erlaubt ab Version 3.5 den domainübergreifenden Zugriff mithilfe eines normalen <code>XMLHttpRequest</code>-Objekts. Der Internet Explorer ab Version 8 hat hingegen ein eigenes Objekt nur solche Zugriffe erfunden: <a href="http://msdn.microsoft.com/en-us/library/cc288060(VS.85).aspx">XDomainRequest</a>. Dessen Bedienung ähnelt der von XMLHttpRequest stark, es gibt im Detail allerdings einige Unterschiede, Eigenheiten und Verbesserungen.</p>
-    <p>Da beide Techniken noch recht neu und noch nicht breit unterstützt sind, sei hier nur am Rande darauf hingewiesen. ...</p>
+    <p>Da beide Techniken noch recht neu und noch nicht breit unterstützt sind, sei hier nur am Rande darauf hingewiesen. …</p>
     <p>Wie gesagt setzen diese Techniken die Same-Origin-Policy nicht vollständig außer Kraft, sondern ergänzen das Verbot des domainübergreifenden Zugriffs durch eine Ausnahme: Der Webserver auf der Zieldomain muss so konfiguriert sein, dass er sein Einverständnis zu dieser fremden Anfrage gibt.</p>
   </div>
 

@@ -126,8 +126,8 @@ Andernfalls:
   <div id="objekte-methoden" class="section">
    <h3 class="unit-std-heading">Objekte und Methoden abfragen</h3>
    <p>Die einzelnen Fähigkeiten eines Browsers drücken sich meist darin aus, dass bestimmte vordefinierte Objekte, Eigenschaften bzw. Methoden existieren. In manchen Fällen müssen Sie zusätzlich prüfen, ob die Eigenschaft auch einen bestimmten Typ oder Wert hat.</p>
-   <p>Wenn wir eine bedingte Anweisung mit <code>if (...) {...}</code> notieren, so wird die Bedingung (der Ausdruck zwischen den runden Klammern) letztlich in einen Boolean-Wert, also <code>true</code> oder <code>false</code> umgewandelt. Allgemeine Objekte vom Typ <code>Object</code> ergeben bei der Umwandlung in dem Typ <code>Boolean</code> den Wert <code>true</code>.</p>
-   <p>Das bedeutet, Sie können einfach <code>if (objekt.unterobjekt) { ... </code>} notieren, um die Existenz des Unterobjektes abzufragen. Für Funktionsobjekte gilt dasselbe, also notieren wir <code>if (objekt.methode) { ... </code>}. Die Schreibweise <code>objekt.unterobjekt</code> bzw. <code>objekt.methode</code> ist dabei entscheidend. Nur in besonderen Fällen ist dies durch <code>if (objekt)</code> bzw. <code>if (methode)</code> ersetzbar.</p>
+   <p>Wenn wir eine bedingte Anweisung mit <code>if (…) {…}</code> notieren, so wird die Bedingung (der Ausdruck zwischen den runden Klammern) letztlich in einen Boolean-Wert, also <code>true</code> oder <code>false</code> umgewandelt. Allgemeine Objekte vom Typ <code>Object</code> ergeben bei der Umwandlung in dem Typ <code>Boolean</code> den Wert <code>true</code>.</p>
+   <p>Das bedeutet, Sie können einfach <code>if (objekt.unterobjekt) { … </code>} notieren, um die Existenz des Unterobjektes abzufragen. Für Funktionsobjekte gilt dasselbe, also notieren wir <code>if (objekt.methode) { … </code>}. Die Schreibweise <code>objekt.unterobjekt</code> bzw. <code>objekt.methode</code> ist dabei entscheidend. Nur in besonderen Fällen ist dies durch <code>if (objekt)</code> bzw. <code>if (methode)</code> ersetzbar.</p>
    <p>Das folgende Beispiel veranschaulicht die Existenzabfrage von Objekten und Methoden. Die Funktion bringt den aktuell markierten Text im Dokument in Erfahrung und gibt diesen in einem Meldungsfenster aus.</p>
    <pre>function selektierterText() {
   var text = "";
@@ -190,19 +190,19 @@ Falls nein:
   <p>In diesen Ausnahmefällen bleibt oft nichts anderes als eine Browserabfrage übrig. Wenn Sie eine solche einbauen, müssen Sie darauf achten, dass das Script nicht unter unerwarteten Umständen fehlerhaft arbeitet. Beispielweise kann der Browserfehler, den Sie umgehen wollen, schon in der nächsten Version behoben sein. Dann kann es sein, dass Ihr Script abbricht. Eine Regel lautet daher, nur bekannte Browserversionen anzusprechen. Doch auch diese Vorgehensweise hat ihren Nachteil: Erscheint eine neue Version, die den Fehler immer noch beinhaltet, müssen Sie das Script zeitnah aktualisieren und die Erkennung anpassen. Wie Sie sehen, handelt Sie sich mit Browserabfragen schnell Probleme ein.</p>
   <p>Eine allgemeine Browsererkennung ist über das Objekt <code>window.navigator</code> und dessen Eigenschaften möglich. Ein Fertigscript, das Ihnen Browsername und -version zur Verfügung stellt, finden Sie unter <a href="http://www.quirksmode.org/js/detect.html" lang="en">Browser detect [en]</a>. Seien Sie sich jedoch darüber im klaren, dass diese <code>navigator</code>-Eigenschaften nicht verfügbar oder manipuliert sein können - eine Erkennung über <code>navigator</code> ist nicht hundertprozentig zuverlässig!</p>
   <p>Für spezifische Browser gibt es zuverlässigere Erkennungsmethoden:</p>
-  <p><strong>Opera</strong> bietet das Objekt <code>window.opera</code> an, welches auch nur im Opera existiert. Dieses können Sie einfach mit <code>if (window.opera) {...}</code> abfragen.</p>
-  <p>Wenn Sie den <strong>Internet Explorer</strong> in einem Script erkennen wollen, so können Sie alternativ zu <em>Conditional Compilation</em> (englisch für bedingte Ausführung) greifen. Dabei handelt es sich um eine Microsoft-eigene Zusatzsprache, die Sie in den JavaScript-Code einfügen können. Im Grunde handelt es sich um JavaScript-Kommentare nach dem Schema <code>/*@cc_on ... @*/</code>. Während die anderen Browser sie ignorieren, erkennt der Internet Explorer <code>@cc_on</code> eine Anweisung. In diesem Fall: Schalte Conditional Compilation (CC) an. Das bedeutet, dass der Internet Explorer den Text zwischen <code>@cc_on</code> und <code>@</code> als JavaScript-Code behandelt und ausführt, obwohl diese sich in einem Kommentar befindet. Lange Rede, kurzer Sinn: Auf diese Weise können Sie JavaScript-Code notieren, der garantiert nur vom Internet Explorer ausgeführt wird - denn vor allen anderen Browser ist er in einem Kommentar versteckt. Ein Beispiel:</p>
+  <p><strong>Opera</strong> bietet das Objekt <code>window.opera</code> an, welches auch nur im Opera existiert. Dieses können Sie einfach mit <code>if (window.opera) {…}</code> abfragen.</p>
+  <p>Wenn Sie den <strong>Internet Explorer</strong> in einem Script erkennen wollen, so können Sie alternativ zu <em>Conditional Compilation</em> (englisch für bedingte Ausführung) greifen. Dabei handelt es sich um eine Microsoft-eigene Zusatzsprache, die Sie in den JavaScript-Code einfügen können. Im Grunde handelt es sich um JavaScript-Kommentare nach dem Schema <code>/*@cc_on … @*/</code>. Während die anderen Browser sie ignorieren, erkennt der Internet Explorer <code>@cc_on</code> eine Anweisung. In diesem Fall: Schalte Conditional Compilation (CC) an. Das bedeutet, dass der Internet Explorer den Text zwischen <code>@cc_on</code> und <code>@</code> als JavaScript-Code behandelt und ausführt, obwohl diese sich in einem Kommentar befindet. Lange Rede, kurzer Sinn: Auf diese Weise können Sie JavaScript-Code notieren, der garantiert nur vom Internet Explorer ausgeführt wird - denn vor allen anderen Browser ist er in einem Kommentar versteckt. Ein Beispiel:</p>
   <pre>if (/*@cc_on ! @*/ false) {
   window.alert("Dies wird nur im Internet Explorer ausgeführt!");
 }</pre>
-<p>Alle Browser außer dem Internet Explorer führen den Code <code>if (false) {...}</code> aus, nur im Internet Explorer wird mittels speziellem Kommentar ein Negationsoperator (das Ausrufezeichen) eingefügt. Der IE führt also <code>if (!false) {...}</code> und damit die Anweisungen im <code>if</code>-Block aus.</p>
-  <p>...</p>
+<p>Alle Browser außer dem Internet Explorer führen den Code <code>if (false) {…}</code> aus, nur im Internet Explorer wird mittels speziellem Kommentar ein Negationsoperator (das Ausrufezeichen) eingefügt. Der IE führt also <code>if (!false) {…}</code> und damit die Anweisungen im <code>if</code>-Block aus.</p>
+  <p>…</p>
 </div>
 <div id="unterstuetzung" class="section">
   <h2>JavaScript-Unterstützung verbreiteter Browser</h2>
   <div class="section">
    <h3 class="unit-std-heading">Einleitung</h3>
-   <p>... Engines statt Browser!</p>
+   <p>… Engines statt Browser!</p>
   </div>
   <div class="section">
    <h3 class="unit-std-heading">Mozilla Firefox (Gecko- und SpiderMonkey-Engine)</h3>
@@ -220,7 +220,7 @@ Falls nein:
 
 <div class="sequence-navigation">
   <p class="next"><a href="fenster.html" rel="next">Fenster und Dokumente</a></p>
-  <p class="prev"><a href="event-handling-effizient.html" rel="prev">Effiziente Ereignisverarbeitung</a></p>
+  <p class="prev"><a href="event-handling-effizient.html" rel="prev">Effiziente Ereignis-Verarbeitung</a></p>
 </div>
 
 <div id="footer">

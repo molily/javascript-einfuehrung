@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>JavaScript: Onload-Techniken: Scripte ausführen, sobald das Dokument verfügbar ist</title>
+<title>JavaScript: Scripte beim Laden des Dokuments ausführen</title>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="js-doku.css">
 </head>
@@ -13,55 +13,75 @@
 <p class="contents-link"><a href="./">Zum Inhaltsverzeichnis</a></p>
 </div>
 
-<h1>JavaScript: Onload-Techniken</h1>
-
-<p></p>
+<h1>JavaScript: Scripte beim Laden des Dokuments ausführen</h1>
 
 <div class="section" id="onload-nachteile">
-  <h2>Nachteile des <code>load</code>-Ereignisses</h2>
-  <p>Wir haben bereits die <a href="event-handling-grundlagen.html#ereignisbasierung#ereignisbasierung">drei Phasen von ereignisbasierten Scripten</a> kennengelernt. Die zweite Phase tritt ein, wenn das Dokument fertig geladen ist und der DOM-Elementenbaum des Dokuments vollständig aufgebaut ist. Sinnvolle Scripte schalten sich automatisch hinzu, ohne dass JavaScript-Code direkt ins HTML eingebettet ist (Unobtrusive JavaScript). Dazu ist es von zentraler Wichtigkeit, das Script zu initialisieren, sobald der Zugriff auf den gesamten DOM-Baum möglich ist, vor allem um Event-Handler bei gewissen Elementen registriert.</p>
-  <p>Mit dem dokumentweiten <code>load</code>-Ereignis (<code>window.onload</code>) haben wir eine Funktion nach dem vollständigen Laden des Dokuments ausgeführt. Das <code>load</code>-Ereignis tritt jedoch erst dann ein, wenn das gesamte Dokument <em>mitsamt aller externen Ressourcen</em> vom Webserver heruntergeladen wurde. Dazu gehören eingebettete Grafiken, Multimedia-Plugins und gegebenenfalls Iframes mit weiteren HTML-Dokumenten. Je nachdem, welche externen Ressourcen eingebunden werden, kann das Dokument zum Zeitpunkt des <code>load</code>-Ereignisses schon längst im Browser aufgebaut sein und der Anwender kann es schon größtenteils lesen und bedienen.</p>
-  <p>Für das Event-Handling interessiert uns nicht, wann alle eingebetteten Ressourcen fertig geladen sind, sondern lediglich, wann der JavaScript-Zugriff auf den DOM-Baum möglich ist. Dieser Zeitpunkt, genannt <em>DOM ready</em>, tritt meistens weit vor dem <code>load</code>-Ereignis ein. Ein Script sollte dem Dokument so zeitnah wie möglich Interaktivität hinzufügen und notwendige Änderungen vornehmen, damit das Dokument einschließlich der JavaScript-Funktionalität bereits während des Ladens für den Anwender bedienbar ist.</p>
+  <h2>Einleitung</h2>
+  <p>Wir haben bereits die <a href="event-handling-grundlagen.html#ereignisbasierung#ereignisbasierung">drei Phasen von ereignisbasierten Scripten</a> kennengelernt. Die zweite Phase tritt ein, wenn das Dokument fertig geladen ist und der DOM-Elementbaum des Dokuments vollständig aufgebaut ist.</p>
+  <p>Ein Script sollte dem Dokument so schnell wie möglich Interaktivität hinzufügen. Sobald der Zugriff auf den gesamten DOM-Baum möglich ist, sollte ein Script die Ereignis-Überwachung starten und notwendige Änderungen vornehmen. Dies ist gewährleistet, wenn wir das Script ans Dokumentende stellen. Ein solches Script hat automatisch Zugriff auf alle Elemente, die vor ihm notiert sind.</p>
+  <p>Falls das Script an einer anderen Stelle eingebunden wird, beispielsweise im Dokumentkopf, so hat es nicht direkt Zugriff auf alle gewünschten Elemente. Es muss stattdessen warten, bis das Dokument fertig geladen ist und der DOM-Baum aufgebaut ist.</p>
 </div>
 
 <div class="section" id="domcontentloaded">
-  <h2>DOMContentLoaded</h2>
-  <p>Der <code>load</code>-Event ist aus heutiger Sicht für Unobtrusive JavaScript nicht geeignet. Glücklicherweise gibt es ein Ereignis, das eintritt, sobald der Parser den gesamten HTML-Code eingelesen hat und der komplette DOM-Baum für JavaScripte zugänglich ist: <code>DOMContentLoaded</code>.</p>
-  <p>Die Überwachung dieses Ereignises ist allerdings nur im Zusammenhang mit <a href="#addEventListener">addEventListener</a>, also dem W3C-Modell möglich. Alle großen Browser, die den DOM-Standard umsetzen, kennen mittlerweile auch <code>DOMContentLoaded</code>. Eine Ausnahme bilden der Internet Explorer vor Version 9: Diese älteren Versionen unterstützen weder den DOM-Events-Standard, noch kennen sie das Ereignis <code>DOMContentLoaded</code>.</p>
-  <p>Das folgende Beispiel demonstriert die Überwachung der beiden Ereignisse <code>load</code> und <code>DOMContentLoaded</code>:</p>
-<pre>function dokumentGeladen(e) {
-   alert("Das Ereignis " + e.type + " ist passiert.")
+  <h2>Das DOMContentLoaded-Ereignis</h2>
+  <p>Es gibt ein Ereignis, das eintritt, sobald der Parser den gesamten HTML-Code eingelesen hat und der komplette DOM-Baum für JavaScripte zugänglich ist: <code>DOMContentLoaded</code>.</p>
+  <p>Das folgende Beispiel demonstriert das <code>DOMContentLoaded</code>-Ereignis:</p>
+<pre>
+&lt;!DOCTYPE html>
+&lt;html lang="de">
+&lt;head>
+&lt;meta charset="utf-8">
+&lt;title>Dokument mit Script im Kopf&lt;/title>
+&lt;script>
+function clickHandler() {
+  window.alert('Button wurde geklickt!');
 }
-document.addEventListener("load", dokumentGeladen, false);
-document.addEventListener("DOMContentLoaded", dokumentGeladen, false);</pre>
-  <p>Internet Explorer vor Version 9 können dieses Beispiel nicht ausführen, sie kennen die Methode <code>addEventListener</code> nicht.</p>
-  <p>Wenn Sie das Beispiel in ein HTML-Dokument einfügen, so demonstriert es, dass der <code>DOMContentLoaded</code>-Event vor dem <code>load</code>-Event passiert. Wenn große und zahlreiche externen Ressourcen in das Dokument eingebunden sind, dann kann zwischen beiden Ereignissen viel Zeit vergehen – wertvolle Zeit, die ein Script nicht untätig verstreichen lassen sollte.</p>
+
+function dokumentGeladen(event) {
+  window.alert('Dokument wurde geladen! Zugriff auf das komplette DOM möglich.')
+  document.getElementById('interaktiv').addEventListener('click', clickHandler, false);
+}
+
+document.addEventListener('DOMContentLoaded', dokumentGeladen, false);
+&lt;/script>
+&lt;/head>
+&lt;body>
+
+&lt;button id="interaktiv">
+  Dies ist ein Button ohne Bedeutung, aber mithilfe von JavaScript können wir ihn
+  interaktiv gestalten. Klicken Sie diesen Button einfach mal mit der Maus an!
+&lt;/button>
+
+&lt;/body>
+&lt;/html>
+</pre>
+  <p>Wir kennen den Grundaufbau des Beispiels bereits. Das Dokument enthält einen Button, der JavaScript-Interaktivität erhalten soll.</p>
+  <p>Da sich das Script im Dokumentkopf und nicht am Dokumentende befindet, können wir jedoch nicht sofort mit <code>document.getElementById('interaktiv')</code> auf den Button zugreifen. Wir müssen erst warten, bis der DOM-Baum zur Verfügung steht.</p>
+  <p>Daher registrieren wir zunächst einen Event-Handler für das <code>DOMContentLoaded</code>-Ereignis. Der DOM-Knoten, bei dem das Ereignis passiert, ist <code>document</code>. Daher rufen wir <code>document.addEventListener(…)</code> auf und übergeben die für <code>addEventListener</code> üblichen Parameter. Als Handler-Funktion wird <code>dokumentGeladen</code> angegeben.</p>
+  <p>Die Funktion <code>dokumentGeladen</code> wird ausgeführt, sobald der DOM-Baum verfügbar ist. Darin können wir nun den Button ansprechen und einen <code>click</code>-Handler registrieren. Der Rest des Beispiels ist wie gehabt.</p>
+  <p>Beachten Sie, dass die Groß- und Kleinschreibung beim Ereignisnamen von Bedeutung ist. Sie müssen exakt <code>'DOMContentLoaded'</code> notieren. Eine andere Schreibung führt nicht zum Erfolg.</p>
+  <p>Alle Browser, die den <a href="event-handling-fortgeschritten.html#dom-events">DOM-Events-Standard umsetzen</a>, kennen auch <code>DOMContentLoaded</code>. Für den Internet Explorer vor Version 9 können Sie stattdessen ein Helferscript verwenden: <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded.js von Diego Perini</a>.</p>
 </div>
 
-<div class="section" id="domcontentloaded-crossbrowser">
-  <h2>Browserübergreifendes <code>DOMContentLoaded</code></h2>
-  <p>Leider gibt es ältere Browser, die das äußerst nützliche <code>DOMContentLoaded</code>-Ereignis nicht unterstützen. Ältere Internet Explorer kennen auch kein gleichwertiges Ereignis. Daher nutzt die verbreitete Sonderlösung verschiedene Microsoft-eigene Techniken, um Rückschlüsse darauf zu ziehen, ob der Elementenbaum bereits vollständig eingelesen wurde. Die genaue Funktionsweise sei hier nicht näher erklärt. Stattdessen sei auf eine browserübergreifende Fertiglösung hingewiesen, die sowohl <code>DOMContentLoaded</code> unterstützt als auch einen erprobten Workaround für ältere Internet Explorer enthält: <a href="http://javascript.nwbox.com/ContentLoaded/contentloaded.js">ContentLoaded.js von Diego Perini</a>. Das Script ist abwärtskompatibel, das heißt, wenn alle Stricke reißen, wird auf das robuste <code>load</code>-Ereignis zurückgefallen.</p>
-  <p>Wenn Sie dieses Script einbinden, können Sie eine Funktion folgendermaßen ausführen, sobald der DOM-Baum zur Verfügung steht:</p>
-  <pre>function init() {
-// Diese Funktion kann auf den gesamten DOM-Baum zugreifen.
+<div class="section" id="load">
+  <h2>Das load-Ereignis</h2>
+  <p>Das besprochene <code>DOMcontentLoaded</code>-Ereignis tritt ein, sobald der HTML-Parser seine Arbeit verrichtet hat und der JavaScript-Zugriff auf alle Elemente im Dokument möglich ist. Dies ist entkoppelt vom Laden des Dokuments, wie es der Benutzer wahrnimmt.</p>
+  <p>Um das Dokument erstmalig zu <dfn>rendern</dfn> (anzuzeigen), muss der Browser nämlich das Stylesheet heruntergeladen haben, das im Dokumentkopf verlinkt ist. Manchmal wartet er auch noch auf das Laden spezieller Schriften (Webfonts), die eingebunden sind. Dann kann der Anwender das Dokument schon größtenteils lesen und bedienen.</p>
+  <p>Es fehlen aber noch Inhalte. Nach dem ersten Rendern werden üblicherweise weitere Ressourcen vom Webserver heruntergeladen. Dazu gehören eingebettete Grafiken, Audio- und Video-Inhalte, Plugins sowie Iframes. Sobald diese Ressourcen teilweise geladen sind, rendert der Browser erneut und aktualisiert die Darstellung.</p>
+  <p>Es gibt ein JavaScript-Ereignis, das eintritt, wenn all diese Ressourcen vollständig heruntergeladen sind. Es lautet schlicht <code>load</code> und passiert beim globalen <code>window</code>-Objekt. Das folgende Beispiel überwacht das <code>load</code>-Ereignis:</p>
+<pre>
+function dokumentVollständigGeladen() {
+  window.alert('Dokument wurde vollständig geladen!')
 }
-// Nutzung von Diego Perinis Helferfunktion
-ContentLoaded(window, init);</pre>
-  <p>Ein solche DOM-Ready-Technik ist in den verbreiteten <a href="bibliotheken.html">JavaScript-Frameworks</a> bereits eingebaut. Diese bringen eigene Event-Handling-Systeme mit sich, die das Ausführen von Funktionen erlauben, sobald die DOM-Schnittstelle vollständig nutzbar ist.</p>
-</div>
-
-<div class="section" id="domcontentloaded-fallstricke">
-  <h2>Fallstricke bei <code>DOMContentLoaded</code></h2>
-  <p>Das <code>DOMContentLoaded</code>-Ereignis wurde ursprünglich vom Browserhersteller Mozilla erfunden. Andere Browserhersteller haben es übernommen, weil sie sie nützlich fanden. Mittlerweile wird die genaue Funktionsweise in HTML5 standardisiert.</p>
-  <p>Trotz dieser Standardisierung verhalten sich die Browser im Detail noch unterschiedlich. Eine Unstimmigkeit ist die Frage, ob das Ereignis durch den Ladevorgang externer Stylesheets verzögert werden soll.</p>
-  <p>Beide Varianten ergeben Sinn: Es reicht zwar aus, dass der DOM-Baum komplett eingelesen ist, wenn man Event-Handler registrieren will. Allerdings gibt es auch Scripte, die in der Initialisierungsphase bereits auf die Darstellung gewisser Elemente reagieren sollen – und diese wird üblicherweise durch externe Stylesheets geregelt. Wenn das Script beispielsweise die Größe eines Elements in Erfahrung bringen will, muss der Browser bereits die Stylesheets verarbeitet und die Darstellung berechnet haben.</p>
-  <p>In HTML5 ist geregelt, dass das Laden von Stylesheets das <code>DOMContentLoaded</code>-Ereignis verzögert. ...</p>
-  <!-- <p>Wenn Ihre Scripte <a href="werte-auslesen">Informationen über die Darstellung der Elemente abfragen</a>, ...</p> -->
+window.addEventListener('load', dokumentVollständigGeladen, false);
+</pre>
+  <p>Zwischen dem <code>DOMContentLoaded</code>- und dem <code>load</code>-Ereignis können viele Sekunden liegen. <code>DOMContentLoaded</code> passiert immer zuerst, dann <code>load</code> einige Zeit später.</p>
+  <p>Seitdem es <code>DOMContentLoaded</code> gibt, ist das <code>load</code>-Ereignis nicht mehr wichtig. In den meisten Fällen sollten Sie Ihre Script beim Eintreten des <code>DOMContentLoaded</code>-Ereignisses starten. Das <code>load</code>-Ereignis können Sie verwenden, um die Geschwindigkeit (Performance) ihrer Seite zu messen oder auf die Größen und die Pixeldaten von Grafiken zuzugreifen.</p>
 </div>
 
 <div class="sequence-navigation">
-  <p class="next"><a href="event-handling-effizient.html" rel="next">Effiziente Ereignisverarbeitung</a></p>
-  <p class="prev"><a href="event-handling-fortgeschritten.html" rel="prev">Fortgeschrittene Ereignisverarbeitung</a></p>
+  <p class="next"><a href="event-handling-effizient.html" rel="next">Effiziente Ereignis-Verarbeitung</a></p>
+  <p class="prev"><a href="event-handling-fortgeschritten.html" rel="prev">Fortgeschrittene Ereignis-Verarbeitung</a></p>
 </div>
 
 <div id="footer">
