@@ -17,7 +17,7 @@
 
 <div class="section" id="einleitung">
   <h2>Einleitung</h2>
-  <p>Mit JavaScript können Sie die Darstellung des Dokuments dynamisch ändern, während es im Browser angezeigt wird. Dies ist ein wesentlicher Bestandteil der Interaktivität, die Sie einem Dokument mittels Javascript hinzufügen können. Die Möglichkeiten sind vielfältig: Beispielsweise können Sie als Reaktion auf eine Benutzereingabe gewisse Elemente ein- und ausblenden. Es sind aber auch – mit entsprechendem Aufwand – visuelle Effekte und komplexe Animationen möglich.</p>
+  <p>Mit JavaScript können Sie die Darstellung des Dokuments dynamisch ändern, während es im Browser angezeigt wird. Dies ist ein wesentlicher Bestandteil der Interaktivität, die Sie einem Dokument mittels Javascript hinzufügen können. Die Möglichkeiten sind vielfältig: Beispielsweise können Sie als Reaktion auf eine Eingabe gewisse Elemente ein- und ausblenden. Es sind aber auch – mit entsprechendem Aufwand – visuelle Effekte und komplexe Animationen möglich.</p>
   <p>Die Programmiersprache JavaScript besitzt keine eigenen Techniken, um die Gestaltung einer Webseite zu beeinflussen. Vielmehr besitzt JavaScript eine Schnittstelle zur Formatierungssprache Cascading Stylesheets (CSS). Mittels JavaScript können Sie also sämtliche Formatierungen vornehmen, die CSS möglich macht. Daher sollten Sie die Grundlagen von CSS bereits beherrschen, bevor Sie Dokumente mittels JavaScript umformatieren.</p>
   <p>Das dynamische Ändern der <em>Darstellung</em> bildet einen großen Komplex in der JavaScript-Programmierung - ein anderer ist das dynamische Ändern der <em>Inhalte</em> über das <a href="dom.html">Document Object Model (DOM)</a>. Über das DOM können Sie Elemente hinzufügen oder löschen, Attributwerte setzen und Textinhalte einfügen oder verändern. In der Praxis gehen diese beiden Aufgaben - den Inhalt und dessen Darstellung modifizieren - oft miteinander einher.</p>
 </div>
@@ -25,140 +25,93 @@
 <div id="trennung-javascript-css" class="section">
   <h2>Trennung von Layout-Regeln und JavaScript-Logik</h2>
   <p>Bevor Sie die verschiedenen Möglichkeiten kennenlernen, wie Sie ein Element CSS-Formatierungen mithilfe von JavaScript verändern können, sollten Sie sich die Konzepte des <a href="einsatz.html">Unobtrusive JavaScript</a> in Erinnerung rufen.</p>
-  <p>Wenn Sie bereits mit CSS fortgeschritten sind und einige Layouts mit CSS umgesetzt haben, sollten Sie die Aufgaben der Webtechniken kennen und deren sinnvolle Anwendung bereits beherrschen:</p>
+  <p>Wenn Sie bereits einige Layouts mit CSS umgesetzt haben, sollten Sie die Aufgaben der Webtechniken kennen und deren sinnvolle Anwendung bereits beherrschen:</p>
   <ul>
-    <li>Für die <em>Strukturierung der Inhalte</em> ist HTML zuständig. Sie wählen möglichst bedeutungsvolle HTML-Elemente und für die Feinstrukturierung vergeben Sie Klassen und IDs.</li>
-    <li>Die <em>Präsentation</em> hingegen sollte nicht mittels HTML beeinflusst werden, sondern mit ausgelagerten Stylesheets. Diese sprechen gezielt Elemente im Dokument an und formatieren sie mit CSS-Eigenschaften. Idealerweise bleiben die HTML-Strukturen übersichtlich, IDs und Klassen sind sparsam gesetzt und aussagekräftig, sodass eindeutige Angriffspunkte für CSS-Regeln existieren.</li>
+    <li>Für die <em>Strukturierung der Inhalte</em> ist HTML zuständig. Sie wählen möglichst bedeutungsvolle HTML-Elemente. Für die Feinstruktur vergeben Sie Klassen und IDs.</li>
+    <li>Die <em>Präsentation</em> wird in ausgelagerten Stylesheets definiert. Diese sprechen gezielt Elemente im Dokument an und formatieren sie mit CSS-Eigenschaften. Elementnamen, IDs und Klassen bieten Angriffspunkte für CSS-Regeln.</li>
   </ul>
-  <p>Diese Arbeitsweise hat bringt Ihnen enorme Vorteile bei der Webseiten-Entwicklung. Inhalte und Präsentation können unabhängig voneinander schnell geändert werden, mit wenig Aufwand kann die gewünschte Präsentation erzielt werden.</p>
-  <p>Wenn nun die dritte Technik – JavaScript – hinzutritt, sollten Sie dieses Modell konsequent fortführen. Orientieren Sie sich an folgenden Faustregeln:</p>
+  <p>Diese Arbeitsweise hat enorme Vorteile bei der Webseiten-Entwicklung. Inhalt und Präsentation können unabhängig voneinander geändert werden. Mit wenig Aufwand kann die gewünschte Präsentation erzielt werden.</p>
+  <p>Wenn nun die JavaScript hinzutritt, sollten Sie dieses Modell konsequent fortführen. Orientieren Sie sich an folgenden Faustregeln:</p>
   <ul>
-    <li>Definieren Sie die Formatierungsregeln im zentralen Stylesheet, nicht im JavaScript. Trennen sie den CSS-Anweisungen vom JavaScript-Code.</li>
-    <li>Sorgen Sie im JavaScript dafür, dass diese Formatierungsregeln angewendet werden – beispielsweise indem Sie einem Element dynamisch eine Klasse hinzufügen. Durch diese Änderung der Klasse kann eine Regel im Stylesheet greifen, deren Selektor die soeben gesetzte Klasse enthält.</li>
+    <li>Definieren Sie die Formatierungsregeln im Stylesheet, nicht im JavaScript. Trennen sie den CSS-Anweisungen vom JavaScript-Code.</li>
+    <li>Sorgen Sie im JavaScript lediglich dafür, dass diese Formatierungsregeln angewendet werden – beispielsweise indem Sie einem Element eine Klasse hinzufügen. Durch diese Änderung der Klasse greift eine Regel im Stylesheet, deren Selektor die Klasse enthält.</li>
   </ul>
-  <p>Sie können nicht nur ausgelagerte Stylesheet-Regeln auf ein Element anwenden, sondern auch direkt gewisse CSS-Eigenschaften von einzelnen Elementen ändern können. Dies entspricht dem <code>style</code>-Attribut in HTML. Diese Vermischung von HTML und CSS bzw. JavaScript und CSS sollten Sie möglichst vermeiden. Diese Direktformatierung ergibt nur in Sonderfällen Sinn, deshalb sollten Sie sich zunächst mit der besagten Arbeitsweise vertraut machen.</p>
+  <p>Sie können nicht nur ausgelagerte CSS-Regeln auf ein Element anwenden, sondern auch direkt CSS-Eigenschaften von einzelnen Elementen ändern. Dies entspricht dem <code>style</code>-Attribut in HTML. Diese Vermischung von HTML und CSS bzw. JavaScript und CSS sollten Sie möglichst vermeiden. Diese Direktformatierung ist nur in Sonderfällen sinnvoll und nötig.</p>
 </div>
 
 <div id="regeln-anwenden" class="section">
   <h2>Stylesheet-Regeln auf ein Element anwenden</h2>
-  <p>Eine einfache Methode, um die Darstellung von Elementen per JavaScript zu ändern, ist das <strong>Setzen einer Klasse</strong>. Die Formatierungen für diese Klasse wird im Stylesheet untergebracht. Damit wird der empfohlenen Trennung vom JavaScript-Code Genüge getan.</p>
+  <p>Eine einfache Methode, um die Darstellung von Elementen per JavaScript zu ändern, ist das <strong>Hinzufügen einer Klasse</strong>. Die Formatierungen für diese Klasse wird im Stylesheet untergebracht. Damit wird der empfohlenen Trennung vom JavaScript-Code Genüge getan.</p>
   <p>Betrachten wir als Beispiel ein JavaScript, dass die Eingaben eines Formulars überprüft. Beim Absenden des Formulars wird eine Handler-Funktion für das Ereignis <code>submit</code> aktiv. Diese Funktion soll fehlerhafte Formularfelder rot markieren.</p>
   <p>Nehmen wir an, die <code>input</code>-Eingabefelder sind standardmäßig im Stylesheet so formatiert:</p>
-  <pre>input {
-    padding: 4px 6px;
-    border: 1px solid #555;
-    background-color: #fafafa;
-}</pre>
+<pre>
+input {
+  padding: 4px 6px;
+  border: 1px solid #555;
+  background-color: #fafafa;
+}
+</pre>
   <p>Im Stylesheet wird nun eine Regel definiert mit den Eigenschaften für fehlerhafte Felder. Wir nutzen dazu einen Selektor mit dem Elementnamen <code>input</code> kombiniert mit der Klasse <code>fehlerhaft</code>:</p>
   <pre>input.fehlerhaft {
    border-color: red;
    background-color: #fff8f5;
 }</pre>
-  <p>Am Anfang trifft der Selektor <code>input.fehlerhaft</code> auf kein Feld im Dokument zu – solange nicht ein Feld die Klasse <code>fehlerhaft</code> besitzt. Um ein Eingabefeld umzuformatieren und die Regel anzuwenden, vergeben wir dynamisch diese Klasse an das gewünschte <code>input</code>-Element.</p>
-  <p>Die Klassen eines Elements sind in JavaScript über die Eigenschaft <code>className</code> des entsprechenden Elementobjektes zugänglich. Sie können diese Eigenschaft sowohl auslesen als auch ihr einen neuen Wert zuweisen. Das vereinfachte Schema zum Setzen einer Klasse lautet:</p>
-  <pre>element.className = 'klassenname';</pre>
-  <p>In der beispielhaften Formularüberprüfung kann das Setzen der Klasse folgendermaßen aussehen: Wir definieren eine Funktion <code>formularÜberprüfung</code>, die als Handler für das Ereignis <code>submit</code> registriert wird (siehe <a href="einbindung.html">Ereignis-Verarbeitung</a>). In dieser Funktion wird das zu überprüfende Formularfeld über das DOM mittels <code>document.getElementById</code> herausgesucht. Ist der Wert des Feldes leer, wird eine Meldung ausgegeben und das Feld bekommt die Klasse <code>fehlerhaft</code>.</p>
-<pre>function formularÜberprüfung() {
-    // Spreche das Formularfeld über das DOM an und
-    // speichere es in eine Variable zwischen:
-    var element = document.getElementById("kontaktformular-name");
-    // Prüfe den Feldwert:
-    if (element.value == "") {
-        // Zeige im Fehlerfall ein Hinweisfenster:
-        window.alert("Bitte geben Sie Ihren Namen an.");
-        // Weise dem Element die Klasse »fehlerhaft« zu:
-        <strong>element.className = 'fehlerhaft';</strong>
-        // Setze den Fokus auf das Feld:
-        element.focus();
-        // Verhindere das Absenden des Formulars
-        // (unterdrücke die Standardaktion des Ereignisses):
-        return false;
-    }
+  <p>Am Anfang trifft der Selektor <code>input.fehlerhaft</code> auf kein Feld im Dokument zu. Um ein Eingabefeld umzuformatieren und die Regel anzuwenden, vergeben wir diese Klasse an das gewünschte <code>input</code>-Element.</p>
+  <p>Die Klassen eines Elements sind in JavaScript über die Eigenschaft <code>classList</code> des entsprechenden Elementobjekts zugänglich. <code>classList</code> ist listenartiges Objekt, das alle Klassen beinhaltet. Das Objekt bietet verschiedene Methoden an, um die Klassen eines Elements abzufragen und zu ändern.</p>
+  <p>Das Schema zum Hinzufügen einer Klasse lautet:</p>
+  <pre>element.classList.add('klassenname');</pre>
+  <p>Die beispielhafte Formularüberprüfung sieht so aus: Wir definieren eine Funktion <code>formularÜberprüfung</code>, die als Handler für das Ereignis <code>submit</code> registriert wird (siehe <a href="event-handling-grundlagen.html">Ereignis-Verarbeitung</a>). Die Funktion sucht das Formularfeld mittels <code>document.getElementById(…)</code> heraus. Ist der Wert des Feldes leer, wird eine Meldung ausgegeben und das Feld bekommt die Klasse <code>fehlerhaft</code>.</p>
+<pre>
+function formularÜberprüfung(event) {
+  // Suche das Formularfeld heraus und
+  // speichere es in eine Variable:
+  var element = document.getElementById('kontaktformular-name');
+  // Prüfe den Wert des Feldes:
+  if (element.value === '') {
+      // Zeige im Fehlerfall ein Hinweisfenster:
+      window.alert('Bitte geben Sie Ihren Namen an.');
+      // Weise dem Element die Klasse »fehlerhaft« zu:
+      <strong>element.classList.add('fehlerhaft');</strong>
+      // Setze den Fokus auf das Feld:
+      element.focus();
+      // Verhindere das Absenden des Formulars
+      // (unterdrücke die Standardaktion des Ereignisses):
+      event.preventDefault();
+  }
 }
 
-function init() {
-    // Starte die Ereignis-Überwachung mittels
-    // traditionellem Event-Handling
-    document.getElementById("kontaktformular").onsubmit = formularÜberprüfung;
-}
-
-window.onload = init;</pre>
-  <p>Der zugehörige HTML mit den nötigen IDs könnte so aussehen:</p>
-<pre>&lt;form action="&hellip;" method="post" id="kontaktformular"&gt;
-    &lt;p&gt;&lt;label&gt;
-        Ihr Name:
-        &lt;input type="text" name="name" id="kontaktformular-name"&gt;
-    &lt;/label>&lt;/p&gt;
-    <em>&hellip; weitere Felder &hellip;</em>
-    &lt;p>&lt;input type="submit" value="Absenden">&lt;/p>
-&lt;/form&gt;
+// Überwache das submit-Ereignis beim Formular
+document.getElementById('kontaktformular')
+  .addEventListener('submit', formularÜberprüfung, false);
 </pre>
-  <p>Der Clou dieser Vorgehensweise ist, dass Sie mit dem Setzen der Klasse an einem Element nur eine minimale JavaScript-Änderung vornehmen. Diese Änderung führt dazu, dass eine Regel aus dem Stylesheet plötzlich auf bestimmte Elemente greift – der Browser wendet daraufhin automatisch die definierten Formatierungen an.</p>
-  <p>Über dieses Modell können Sie auch komplexere Aufgabenstellungen lösen, denn Ihnen stehen alle Möglichkeiten von CSS-Selektoren zu Verfügung. Beispielsweise können Sie mittels Nachfahrenselektoren Elemente formatieren, die unterhalb des mit der Klasse markierten Elements liegen. So können Sie durch die Änderung der Klasse gleich mehrere enthaltene, im DOM-Baum unterhalb liegende Elemente formatieren, ohne diese einzeln anzusprechen.</p>
+  <p>Der zugehörige HTML mit den nötigen IDs könnte so aussehen:</p>
+<pre>
+&lt;form action="&hellip;" method="post" id="kontaktformular">
+  &lt;p>
+    &lt;label>
+      Ihr Name:
+      &lt;input type="text" name="name" id="kontaktformular-name">
+    &lt;/label>
+  &lt;/p>
+  <em>&hellip; weitere Felder &hellip;</em>
+  &lt;p>&lt;button>Absenden&lt;/button>&lt;/p>
+&lt;/form>
+</pre>
+  <p>Das Hinzufügen der Klasse an einem Element ist nur eine minimale JavaScript-Änderung. Sie führt dazu, dass eine Regel aus dem Stylesheet auf bestimmte Elemente greift. Der Browser wendet daraufhin die definierten Formatierungen an.</p>
+  <p>Damit können Sie auch komplexere Aufgabenstellungen lösen, denn Ihnen stehen alle Möglichkeiten von CSS-Selektoren zu Verfügung. Beispielsweise können Sie mittels Nachfahrenselektoren Elemente formatieren, die unterhalb des mit der Klasse markierten Elements liegen. So können Sie durch das Ändern einer Klasse gleich mehrere, im DOM-Baum unterhalb liegende Elemente formatieren, ohne diese einzeln anzusprechen.</p>
+
   <p>TODO: Beispiel dazu. Mit Nachfahrenselektoren größere Umformatierungen vornehmen, ohne alle Elemente einzeln anzusprechen</p>
 
-  <div id="addclass" class="section">
-    <h3>Komfortables Hinzufügen, Löschen und Abfragen von Klassen</h3>
-    <p>Die oben vorgestellte Methode zum Setzen der Klasse ist stark vereinfacht und hat verschiedene Nachteile. Ein HTML-Element kann nämlich mehreren Klassen angehören. Die JavaScript-Eigenschaft <code>className</code> enthält dann eine Liste von Klassen, die durch Leerzeichen getrennt werden.</p>
-    <p>Beispielsweise kann im HTML <code>&lt;input class="klasse1 klasse2"&gt;</code> notiert sein. Wenn Sie nun mittels JavaScript eine dritte Klasse hinzufügen wollen, so können Sie nicht einfach <code>element.className = "klasse3"</code> notieren, denn dies würde die ersten beiden Klassen löschen. Dasselbe gilt für das Entfernen einer Klasse: Wenn Sie einfach den Attributwert mit <code>element.className = ""</code> leeren, dann löschen Sie alle Klassenzugehörigkeiten.</p>
-    <p>Aus diesem Grund sollten Sie nicht direkt mit der <code>className</code>-Eigenschaft arbeten, sondern für diese Aufgaben Helferfunktionen verwenden, die mehrere Klassen berücksichtigen. Die meisten Allround-Bibliotheken bieten entsprechenden Funktionen an. Üblicherweise tragen sie folgende Namen:</p>
+  <div class="section" id="classlist">
+    <h3>Hinzufügen, Löschen und Abfragen von Klassen</h3>
+    <p>Das <code>classList</code>-Objekt erlaubt es nicht nur, eine Klasse hinzuzufügen, sondern auch sie zu löschen, zu ersetzen und ihr Vorhandensein abzufragen. Hier eine kleine Übersicht:</p>
     <ul>
-      <li><code>addClass</code> zum Hinzufügen einer Klasse,</li>
-      <li><code>removeClass</code> zum Löschen einer Klasse,</li>
-      <li><code>hasClass</code> zur Überprüfung auf Zugehörigkeit zu einer Klasse. (Die Funktion gibt einen Boolean-Wert zurück.)</li>
-      <li>Hinzu kommt oftmals <code>toggleClass</code>, welche eine Klasse hinzufügt oder löscht je nachdem, ob sie bereits gesetzt ist.</li>
+      <li><code>element.classList.add('klasse')</code> fügt eine Klasse hinzu.</li>
+      <li><code>element.classList.remove('klasse')</code> löscht eine Klasse.</li>
+      <li><code>element.classList.toggle('klasse')</code> fügt eine Klasse hinzu, falls sie noch nicht vorhanden ist, oder löscht sie, falls sie schon vorhanden ist.</li>
+      <li><code>element.classList.contains('klasse')</code> gibt zurück, ob eine Klasse vorhanden ist. Die Funktion gibt einen Boolean-Wert zurück.</li>
+      <li><code>element.classList.replace('klasse1', 'klasse2')</code> ersetzt eine Klasse mit einer anderen, sofern sie vorhanden ist.</li>
     </ul>
-    <p>Falls Sie keine Fertigbibliothek nutzen, können Sie diese Helferfunktionen dennoch in ihre Scripte aufnehmen. Eine mögliche Umsetzung als lose globale Funktionen sieht folgendermaßen aus:</p>
-<pre>function addClass(element, className) {
-    if (!hasClass(element, className)) {
-        if (element.className) {
-            element.className += " " + className;
-        } else {
-            element.className = className;
-        }
-    }
-}
-
-function removeClass(element, className) {
-var regexp = addClass[className];
-    if (!regexp) {
-        regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
-    }
-    element.className = element.className.replace(regexp, "$2");
-}
-
-function hasClass(element, className) {
-    var regexp = addClass[className];
-    if (!regexp) {
-        regexp = addClass[className] = new RegExp("(^|\\s)" + className + "(\\s|$)");
-    }
-    return regexp.test(element.className);
-}
-
-function toggleClass(element, className) {
-    if (element.hasClass(className)) {
-        element.removeClass(className);
-    } else {
-        element.addClass(className);
-    }
-}</pre>
-  <p>Alle Funktionen erwarten jeweils zwei Parameter, nämlich das Elementobjekt und den gewünschten Klassennamen als String. Folgende Beispiele sollen die Anwendung illustrieren:</p>
-<pre>// Element ansprechen und Elementobjekt in einer Variable zwischenspeichern:
-var element = document.getElementById("beispielID");
-// Klasse hinzufügen:
-addClass(element, "beispielklasse");
-// Klasse löschen:
-removeClass(element, "beispielklasse");
-// Klasse an- und ausschalten je nach vorherigem Status:
-toggleClass(element, "beispielklasse");
-// Vorhandensein einer Klasse prüfen:
-if (hasClass(element, "beispielklasse")) {
-    window.alert("Klasse gefunden.");
-} else {
-    window.alert("Klasse nicht gefunden.");
-}</pre>
-    <p>Mit diesen Funktionen in Ihrem JavaScript-Werkzeugkasten können Sie das Zusammenspiel von JavaScript-Interaktivität und Stylesheet-Formatierungen komfortabel und übersichtlich meistern.</p>
-  </div>
 </div>
 
 <div id="style-objekt" class="section">
@@ -166,99 +119,74 @@ if (hasClass(element, "beispielklasse")) {
 
   <div id="html-inline-styles" class="section">
     <h3>Inline-Styles in HTML</h3>
-    <p>Um direkt einzelne HTML-Elemente mit CSS zu formatieren, existiert das <code>style</code>-Attribut, welches eine Liste von Eigenschafts-Wert-Zuweisungen enthält. Ein HTML-Beispiel:</p>
+    <p>Zur direkten CSS-Formatierung eines HTML-Elements existiert das <code>style</code>-Attribut. Es ist eine Zuordnungsliste mit Eigenschaft-Wert-Paaren. Ein HTML-Beispiel:</p>
     <pre>&lt;p style="color: red; background-color: yellow; font-weight: bold;"&gt;Fehler!&lt;/p&gt;</pre>
-    <p>Gegenüber dem Einsatz von zentralen Formaten in Stylesheets sind diese sogenannten <em>Inline-Styles</em> (eingebettete Formatierungen) ineffektiv und führen zu zu einer Vermischung von HTML und CSS, die die Wartbarkeit des Dokuments verschlechtert. Sie sollten Sie daher nur in Ausnahmefällen einsetzen, auf die wir später noch zu sprechen kommen.</p>
+    <p>Gegenüber dem Einsatz eines Stylesheets sind diese <em>Inline-Styles</em> (eingebettete Formatierungen) ineffektiv und führen zu zu einer Vermischung von HTML und CSS, die die Wartbarkeit des Dokuments verschlechtert. Sie sollten Sie daher nur in Ausnahmefällen einsetzen, auf die wir später noch zu sprechen kommen.</p>
   </div>
 
   <div id="style-objekt-inline-styles" class="section">
     <h3>Das <code>style</code>-Objekt als Schnittstelle zu Inline-Styles</h3>
-  <p>JavaScript bietet eine Schnittstelle zu diesem <code>style</code>-Attribut: Das <code>style</code>-Objekt bei jedem Elementobjekt. Das <code>style</code>-Objekt hat für jede mögliche CSS-Eigenschaft eine entsprechende les- und schreibbare Objekteigenschaft. Zu der CSS-Eigenschaft <code>color</code> existiert also eine Objekteigenschaft <code>element.style.color</code> vom Type String.</p>
+  <p>JavaScript bietet eine Schnittstelle zu diesem <code>style</code>-Attribut: Das <code>style</code>-Objekt bei jedem Elementobjekt. Das <code>style</code>-Objekt hat für jede mögliche CSS-Eigenschaft eine entsprechende Objekteigenschaft. Der CSS-Eigenschaft <code>color</code> entspricht also eine Objekteigenschaft <code>element.style.color</code> vom Typ String.</p>
     <p>CSS-Eigenschaftsnamen mit Bindestrichen, wie z.B. <code>background-color</code>, können nicht unverändert als JavaScript-Eigenschaftsnamen übernommen werden. Deshalb werden sie im sogenannten <em>Camel-Case</em> (Groß- und Kleinschreibung im Kamel-Stil) notiert: Der Bindestrich fällt weg, dafür wird der darauf folgende Buchstabe zu einem Großbuchstaben. Aus <code>background-color</code> wird also <code>backgroundColor</code>, aus <code>border-left-width</code> wird <code>borderLeftWidth</code> und so weiter. Die Großbuchstaben in der Wortmitte werden mit Höcker eines Kamels verglichen.</p>
     <p>Folgendes Beispiel veranschaulicht das Setzen der Hintergrundfarbe eines Elements auf rot:</p>
-    <pre>document.getElementById("beispielID").style.backgroundColor = "red";</pre>
-    <p>Als Werte müssen Sie stets Strings angeben genau in der Form, wie sie in CSS spezifiziert sind. Das gilt auch für Zahlenwerte, die eine Einheit erfordern:</p>
-    <pre>element.style.marginTop = 15; // Falsch!
-element.style.marginTop = "15px"; // Richtig</pre>
+    <pre>document.getElementById('beispielID').style.backgroundColor = 'red';</pre>
+    <p>Als Werte müssen Sie stets Strings angeben. Darin muss ein gültiger Eigenschaftswert stehen. Das gilt auch für Zahlenwerte, die eine Einheit erfordern:</p>
+<pre>
+element.style.marginTop = 15; // Falsch!
+element.style.marginTop = '15px'; // Richtig
+</pre>
   </div>
 
   <div id="style-eigenschaftsnamen" class="section">
-    <h3>Sonderfälle bei der Umsetzung von CSS- in JavaScript-Eigenschaftsnamen</h3>
-    <p>Abweichungen vom besagten Schema</p>
-    <p><code>cssFloat</code> vs. <code>styleFloat</code></p>
+    <h3>Besondere JavaScript-Eigenschaftsnamen</h3>
+    <p>Es gibt einen Sonderfall bei der Übersetzung von CSS-Eigenschaftsnamen in JavaScript-Eigenschaftsnamen. Das betrifft die CSS-Eigenschaft <code>float</code>. Dieser Name war einmal ein reserviertes Wort in JavaScript, d.h. er konnte nicht als <a href="syntax.html#bezeichner">Bezeichner</a> verwendet werden.</p>
+    <p>Auch wenn das mittlerweile kein Problem mehr ist, sollten Sie statt <code>float</code> die JavaScript-Eigenschaft <code>cssFloat</code> notieren, also z.B. <code>element.style.cssFloat</code>.</p>
   </div>
 
   <div id="style-objekt-sinnvoll" class="section">
-    <h3>Sinnvoller Einsatz des <code>style</code>-Objektes</h3>
-    <p>Das Setzen von CSS-Formatierungen direkt über das <code>style</code>-Objekt ist zwar einfach. Doch Sie diese Präsentationsregeln wie gesagt  nicht im JavaScript, sondern sie z.B. in einer Klasse im Stylesheet unterbringen. Nur in manchen Fällen ist die Verwendung von Inline-Styles notwendig: Wenn der Eigenschaftswert nicht fest steht, sondern erst im JavaScript berechnet wird. Das ist der Fall z.B. bei Animationen oder bei einer Positionierung abhängig von der Mauszeiger-Position wie beim Drag and Drop.</p>
-  </div>
-
-  <div id="style-nachteile" class="section">
-    <h3><code>style</code> ist nicht zum Auslesen der gegenwärtigen Eigenschaftswerte geeignet</h3>
-    <p>Das <code>style</code>-Objekt wird immer wieder missverstanden: <strong>Sie können über das <code>style</code>-Objekt <strong>nicht</strong> den aktuellen, berechneten Wert einer CSS-Eigenschaft auslesen.</strong> Sie können damit lediglich Inline-Styles setzen und die bereits gesetzten auslesen.</p>
-    <p>Die besagten Objekteigenschaften (<code>.style.<var>cssEigenschaft</var></code>) sind allesamt <strong>leer</strong>, wenn sie nicht im betreffenden HTML-Element über ein <code>style</code>-Attribut oder wie beschrieben mit JavaScript gesetzt wurden. Folgendes Beispiel verdeutlicht dies:</p>
-    <pre>&lt;p id="ohne-inline-styles"&gt;Element ohne Inline-Styles&lt;/p&gt;
-&lt;p id="mit-inline-styles" style="color: red"&gt;Element mit Inline-Styles&lt;/p&gt;</pre>
-    <pre>// Gibt einen leeren String aus:
-window.alert(
-    document.getElementById("ohne-inline-styles").style.backgroundColor
-);
-// Gibt »red« aus, weil Inline-Style gesetzt wurde:
-window.alert(
-    document.getElementById("mit-inline-styles").style.backgroundColor
-);</pre>
+    <h3>Sinnvoller Einsatz des <code>style</code>-Objekts</h3>
+    <p>Das Setzen von CSS-Formatierungen direkt über das <code>style</code>-Objekt ist zwar einfach. Doch Sie sollten diese Präsentationsinformationen wie gesagt nicht im JavaScript, sondern in einer Regel im Stylesheet unterbringen. Die Verwendung von Inline-Styles ist nur dann notwendig, wenn der Eigenschaftswert nicht fest steht, sondern im JavaScript berechnet wird. Das ist der Fall z.B. bei Animationen oder bei einer Positionierung abhängig von der Mauszeiger-Position wie.</p>
   </div>
 </div>
 
 <div id="werte-auslesen" class="section">
-  <h2>CSS-Eigenschaften auslesen</h2>
-  <p>Über das <code>style</code>-Objekt besteht wie gesagt kein Zugriff auf den aktuellen CSS-Eigenschaftswert eines Elements, sofern kein entsprechender Inline-Style gesetzt wurde. Dies ist meistens der Fall, denn die Formatierungen gehen üblicherweise auf zentrale Formatierungen in ausgelagerten Stylesheets und auf die Standarformatierungen des Browsers zurück.</p>
-  <p>Das Auslesen des gegenwärtigen Werts von CSS-Eigenschaften eines Elements gestaltet sich als schwierig. Wenn man in Erfahrung bringen will, welche tatsächliche Textfarbe oder welche Pixel-Breite ein Element hat, dann ist nach den sogenannten <em>berechneten Werten</em> (englisch <em>computed values</em>) gefragt, wie sie in der CSS-Fachsprache genannt werden.</p>
+  <h2>Berechnete CSS-Eigenschaften auslesen</h2>
+    <p>Das <code>style</code>-Objekt wird immer wieder missverstanden. <strong>Sie können über das <code>style</code>-Objekt <strong>nicht</strong> den aktuellen, berechneten Wert einer CSS-Eigenschaft auslesen.</strong> Sie können damit lediglich Inline-Styles setzen und die bereits gesetzten auslesen.</p>
+    <p>Die Objekteigenschaften (<code>element.style.<var>eigenschaft</var></code>) sind allesamt <strong>leer</strong>, wenn sie per HTML-Inline-Style (<code>style</code>-Attribut) oder wie beschrieben mit JavaScript gesetzt wurden. Folgendes Beispiel verdeutlicht dies:</p>
+<pre>
+&lt;p id="ohne-inline-styles"&gt;Element ohne Inline-Styles&lt;/p&gt;
+&lt;p id="mit-inline-styles" style="color: red"&gt;Element mit Inline-Styles&lt;/p&gt;
+</pre>
+<pre>
+// Gibt einen leeren String aus:
+window.alert(
+  document.getElementById('ohne-inline-styles').style.backgroundColor
+);
+// Gibt »red« aus, weil Inline-Style gesetzt wurde:
+window.alert(
+  document.getElementById('mit-inline-styles').style.backgroundColor
+);
+</pre>
+  <p>Wenn man in Erfahrung bringen will, welche tatsächliche Textfarbe oder welche Pixel-Breite ein Element hat, dann ist nach den sogenannten <em>berechneten Werten</em> (englisch <em>computed values</em>) gefragt.</p>
 
-  <div id="getcomputedstyle" class="section">
-    <h3><code>getComputedStyle</code> aus W3C DOM CSS</h3>
-    <p>Der W3C-Standard, der die Schnittstelle zwischen JavaScript und CSS und damit der Darstellung eines Dokuments festlegt, kennt zu diesem Zweck die Methode <code>window.getComputedStyle()</code>. Sie erwartet ein Elementobjekt als ersten Parameter und einen String mit einem CSS-Pseudo-Element als zweiten Parameter (beispielsweise <code>"after"</code>, <code>"before"</code>, <code>"first-line"</code> oder <code>"first-letter"</code>). Wenn man nicht die Formatierung des Pseudo-Elements abfragen will, übergibt man schlichtweg <code>null</code> als zweiten Parameter.</p>
-    <p><code>getComputedStyle</code> gibt ein Objekt zurück, das genauso aufgebaut ist wie das bereits besprochene <code>element.style</code>-Objekt. Es enthält für jede CSS-Eigenschaft eine entsprechende Objekteigenschaft mit dem aktuellen berechneten Wert.</p>
-    <pre>var element = document.getElementById('beispielID');
-var computedStyle = window.getComputedStyle(element, null);
-window.alert("Textfarbe: " + computedStyle.color);
-window.alert("Elementbreite: " + computedStyle.width);</pre>
-    <p>Die berechneten Werte (<em>computed values</em>), die <code>getComputedStyle</code> zurückgibt, sind nicht in jedem Fall identisch mit den Werten, die Sie im Stylesheet notiert haben. Der Längenwert in <code>margin-top: 2em;</code> und der Prozentwert in <code>font-size: 120%;</code> werden von den verbreiteten grafischen Browsern letztlich in Pixelwerte umgerechnet, sodass <code>getComputedStyle</code> Werte mit der Einheit <code>px</code> zurückgibt.</p>
-    <p>Auch beispielsweise bei Farbwerten können Sie nicht erwarten, dass das Format des berechneten Wertes mit dem des Stylesheets übereinstimmt. Denn es gibt in CSS verschiedene Formate, um Farbwerte zu notieren. Notieren Sie im Stylesheet beispielsweise <code>color: red</code>, so kann es sein, dass <code>getComputedStyle</code> für <code>color</code> den Wert <code>"rgb(255, 0, 0)"</code> liefert. Dies ist derselbe Wert in einer alternativen Schreibweise.</p>
+  <div class="section" id="getcomputedstyle">
+    <h3><code>getComputedStyle</code></h3>
+    <p>Der Standard, der die Schnittstelle zwischen JavaScript und CSS festlegt, definiert die globale Funktion <code>window.getComputedStyle()</code>. Sie erwartet ein Elementobjekt als ersten Parameter und einen String mit einem CSS-Pseudo-Element als zweiten Parameter (beispielsweise <code>'::after'</code> oder <code>'::before'</code>). Sofern Sie nicht die Formatierung des Pseudo-Elements abfragen wollen, lassen Sie den zweiten Parameter einfach weg.</p>
+    <p><code>getComputedStyle()</code> gibt ein Objekt zurück, das genauso aufgebaut ist wie das bereits besprochene <code>style</code>-Objekt. Es enthält für jede CSS-Eigenschaft eine entsprechende Objekteigenschaft mit dem aktuellen berechneten Wert.</p>
+<pre>
+var element = document.getElementById('beispielID');
+var computedStyle = window.getComputedStyle(element);
+window.alert('Textfarbe: ' + computedStyle.color);
+window.alert('Elementbreite: ' + computedStyle.width);
+</pre>
+    <p>Die berechneten Werte (<em>computed values</em>) sind nicht identisch mit den Werten, die Sie im Stylesheet notiert haben. Die Werte in <code>margin-top: 2em;</code> und <code>font-size: 120%;</code> werden in Pixelwerte umgerechnet, sodass <code>getComputedStyle()</code> Werte mit der Einheit <code>px</code> zurückgibt.</p>
+    <p>Auch beispielsweise bei Farbwerten können Sie nicht erwarten, dass das Format des berechneten Wertes mit dem des Stylesheets übereinstimmt. Denn es gibt in CSS verschiedene Formate, um Farben zu notieren. Notieren Sie im Stylesheet beispielsweise <code>color: red</code>, so kann es sein, dass <code>getComputedStyle()</code> für <code>color</code> den Wert <code>'rgb(255, 0, 0)'</code> liefert. Dies ist derselbe Wert in einer anderen Schreibweise.</p>
   </div>
 
-  <div id="currentstyle" class="section">
-    <h3>Microsofts <code>currentStyle</code></h3>
-    <p><code>getComputedStyle</code> wird von allen großen Browsern unterstützt. Der Internet Explorer kennt die Methode jedoch erst ab Version 9. Browserübergreifende Scripte, die ältere Internet Explorer unterstützen, müssen daher eine Sonderlösung für den IE einbauen.</p>
-    <p>Microsoft bietet eine Alternative, die ähnliches leistet: Jedes Elementobjekt kennt neben dem angesprochenen <code>style</code>-Objekt ein gleich aufgebautes Objekt namens <code>currentStyle</code> mit Objekteigenschaften für jede unterstützte CSS-Eigenschaft. Im Gegensatz zum <code>style</code>-Objekt erlaubt <code>currentStyle</code> das Auslesen des aktuellen berechneten CSS-Eigenschaftswertes:</p>
-    <pre>var element = document.getElementById('beispielID');
-var currentStyle = element.currentStyle;
-window.alert("Textfarbe: " + currentStyle.color);
-window.alert("Elementbreite: " + currentStyle.width);</pre>
-    <p><code>currentStyle</code> liefert meist ein ähnliches Ergebnis wie das standardisierte <code>getComputedStyle</code>. In manchen Fällen gibt es jedoch Abweichungen, etwa im obigen Beispiel beim Auslesen des <code>width</code>-Wertes. <code>currentStyle.width</code> gibt <code>auto</code> zurück, wenn dem Element keine explizite Breite zugewiesen wurde. Für das browserübergreifende Auslesen der Box-Größe eignen sich stattdessen die Eigenschaft <a href="#elementgroessen"><code>offsetWidth/offsetHeight</code> sowie <code>clientWidth/clientHeight</code></a>.</p>
-  </div>
-
-  <div id="crossbrowser-style-auslesen" class="section">
-    <h3>Browserübergreifendes Auslesen von CSS-Eigenschaften</h3>
-    <p>Durch Kombination von <code>getComputedStyle</code> für standardkonforme Browser und <code>currentStyle</code> für ältere Internet Explorer können wir eine lose Helferfunktion schreiben, die uns den aktuellen CSS-Eigenschaftswert liefert. Die Funktion fragt ab, welches Objekt zur Verfügung steht, und bringt den Wert damit in Erfahrung:</p>
-    <pre>function getStyleValue(element, cssProperty) {
-    var value = "";
-    if (window.getComputedStyle) {
-        value = window.getComputedStyle(element, null)[cssProperty];
-    } else if (element.currentStyle) {
-        value = element.currentStyle[cssProperty];
-    }
-    return value;
-}</pre>
-    <p>Bei der Anwendung wird der Funktion das Elementobjekt und ein String übergeben, der den Eigenschaftsnamen in der JavaScript-typischen Schreibweise enthält:</p>
-    <pre>var currentFontSize = getStyleValue(document.getElementById("beispielID"), "fontSize");
-window.alert(currentFontSize);</pre>
-    <p>Dies funktioniert zwar browserübergreifend, allerdings ist das Ergebnis unterschiedlich: Ältere Internet Explorer, in welchen nur <code>currentStyle</code> zur Verfügung steht, geben für die <code>font-size</code>-Eigenschaft einen <code>pt</code>-Wert zurück, andere Browser einen <code>px</code>-Wert. Mit diesen Browserunterschieden müssen Sie rechnen, sie lassen sich nicht einfach vereinheitlichen.</p>
-  </div>
-
-  <div id="elementgroessen" class="section">
-    <h3>Elementbox-Größen auslesen über Microsoft-Eigenschaften</h3>
-    <p>Über die vorgestellten Techniken ist es nicht browserübergreifend möglich, die aktuelle Höhe und Breite einer Element-Box in der Einheit Pixel auszulesen. Stattdessen sollten Sie folgende Eigenschaften der Elementobjekte verwenden. Sie wurden ursprünglich von Microsoft erfunden, erfreuen sich aber breiter Browser-Unterstützung. Im Gegensatz zu <code>getComputedStyle</code> und <code>currentStyle</code> geben sie keine String-Werte samt Einheiten zurück, sondern direkt JavaScript-Zahlen (Number-Werte) in der Einheit Pixel.</p>
+  <div class="section" id="elementgroessen">
+    <h3>Elementbox-Größen auslesen</h3>
+    <p>Sie können <code>getComputedStyle()</code> nutzen, um die aktuelle berechnete Höhe (<code>width</code>) und Breite <(<code>height</code>) einer Element-Box auszulesen. Die Methode gibt dann einen String-Wert wie <code>'560px'</code> zurück. Beim Standard-Box-Modell beziehen sich die CSS-Eigenschaft <code>width</code> und <code>height</code> auf die Innengröße. Das heißt Innenabstand (<code>padding</code>), Rahmen (<code>border</code>) und gegebenenfalls Außenrahmen (<code>margin</code>) müssen hinzugefügt werden, um die vollständige Höhe und Breite des Elements zu berechnen.</p>
+    <p>Es gibt eine Reihe vom Eigenschaften der Elementobjekte, die diese Berechnungen vereinfachen. Im Gegensatz zu <code>getComputedStyle()</code> geben sie keine String-Werte samt Einheiten zurück, sondern direkt JavaScript-Ganzzahlen (Number-Werte) in der Einheit Pixel.</p>
     <dl>
       <dt><code>offsetWidth</code> und <code>offsetHeight</code></dt>
       <dd>liefern die Breite bzw. Höhe der Rahmen-Box des Elements. Das bedeutet, dass der Innenabstand (<code>padding</code>) und der Rahmen (<code>border</code>) inbegriffen sind, der Außenrahmen hingegen (<code>margin</code>) nicht.</dd>
@@ -269,12 +197,15 @@ window.alert(currentFontSize);</pre>
     </dl>
     <p>In den meisten Fällen werden Sie die äußere Größe eines Elements benötigen, also <code>offsetWidth</code> und <code>offsetHeight</code>. Das folgende Beispiel gibt die Größe eines Elements aus:</p>
     <pre>var element = document.getElementById('beispielID');
-window.alert("Breite: " + element.offsetWidth + "\nHöhe: " + element.offsetHeight);</pre>
-    <p>Falls sie die innere Größe benötigen, so können Sie zunächst die aktuellen Werte der jeweiligen <code>padding</code>-Eigenschaften <a href="#crossbrowser-style-auslesen">auslesen</a>. Das sind <code>padding-left</code> und <code>padding-right</code> für die Breite bzw. <code>padding-top</code> und <code>padding-bottom</code> für die Höhe. Diese substrahieren sie von <code>offsetWidth</code> bzw. <code>offsetHeight</code>, um die tatsächliche Innengröße zu erhalten.</p>
+window.alert('Breite: ' + element.offsetWidth + ' Höhe: ' + element.offsetHeight);</pre>
+  </div>
+  <div class="section" id="getboundingclientrect">
+    <h3>getBoundingClientRect</h3>
+    <p>…</p>
   </div>
 </div>
 
-<div id="stylesheets-aendern" class="section">
+<div class="section" id="stylesheets-aendern">
   <h2>Zugriff auf die eingebundenen Stylesheets</h2>
   <div class="section">
     <h3>Stylesheets mit JavaScript deaktivieren und einfügen</h3>

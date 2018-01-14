@@ -17,7 +17,7 @@
 
 <div class="section" id="traditionell-nachteile">
   <h2>Nachteile des traditionellen Event-Handlings</h2>
-  <p>Das <a href="event-handling-grundlagen.html#traditionelles-event-handling">traditionelle Event-Handling</a> basiert darauf, dass ein Funktionsobjekt in einer Eigenschaft des Elementobjektes gespeichert wird. Wir erinnern uns an das Schema:</p>
+  <p>Das <a href="event-handling-grundlagen.html#traditionelles-event-handling">traditionelle Event-Handling</a> basiert darauf, dass ein Funktionsobjekt in einer Eigenschaft des Elementobjekts gespeichert wird. Wir erinnern uns an das Schema:</p>
   <pre>element.onevent = handlerfunktion;</pre>
   <p>Der Vorteil dieses Schemas ist seine Einfachheit. Will man ein Ereignis überwachen, schreibt man bloß die Handler-Funktion in eine entsprechende Element-Eigenschaft. Der größte Nachteile ist jedoch folgender: Es kann nur <em>eine</em> Handler-Funktion zugleich registriert werden. Denn in der Eigenschaft kann nur eine Funktion gespeichert werden. Weist man eine andere Funktion zu, überschreibt man die erste.</p>
   <p>In manchen Fällen mag <em>eine</em> Handler-Funktion für ein Element und Ereignistyp ausreichen. Diese kann schließlich weitere Funktionen aufrufen, sodass nicht der gesamte auszuführende Code direkt in dieser einen Funktion stehen muss. Doch wenn verschiedene Scripte zusammenarbeiten, besteht die Gefahr, dass sie beim traditionellen Event-Handling einander in die Quere kommen.</p>

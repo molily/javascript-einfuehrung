@@ -37,7 +37,7 @@ function funktion3() {
 }
 </pre>
 
-  <p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Geltungsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objektes. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>window.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
+  <p>Diese Organisation bringt in der Regel mit sich, dass das Script nicht einfach konfigurierbar, anpassbar und erweiterbar ist. Am schwersten wiegt jedoch, dass es sich um eine große Zahl von losen Objekten im globalen Scope (Variablen-Geltungsbereich) handelt. Globale Variablen und Funktionen sind Eigenschaften des <code>window</code>-Objekts. Das obige Beispiel definiert daher sechs Eigenschaften beim <code>window</code>-Objekt: <code>window.variable1</code> bis <code>window.variable3</code> sowie <code>window.funktion1</code> bis <code>window.funktion3</code>.</p>
 
 </div>
 
@@ -49,7 +49,7 @@ function funktion3() {
   <p>Unstrukturierte Scripte sind schlecht zu warten und kollidieren mit anderen Scripten. Vermeiden Sie globale Variablen, soweit möglich.</p>
   </div>
 
-  <p>Clientseitige JavaScripte arbeiten unter besonderen Bedingungen: Ein Script operiert auf einem HTML-Dokument, auf das es über das DOM zugreift. Ferner operiert es im Kontext des sogenannten globalen Objektes. Das ist in JavaScript das <code>window</code>-Objektes, welches den obersten Namensraum bereitstellt. Sowohl das globale Objekt als auch das DOM teilt es sich mit anderen Scripten. Diese »öffentlichen Güter« darf kein Script für sich alleine beanspruchen.</p>
+  <p>Clientseitige JavaScripte arbeiten unter besonderen Bedingungen: Ein Script operiert auf einem HTML-Dokument, auf das es über das DOM zugreift. Ferner operiert es im Kontext des sogenannten globalen Objekts. Das ist in JavaScript das <code>window</code>-Objekts, welches den obersten Namensraum bereitstellt. Sowohl das globale Objekt als auch das DOM teilt es sich mit anderen Scripten. Diese »öffentlichen Güter« darf kein Script für sich alleine beanspruchen.</p>
 
   <p>Wenn Scripte unterschiedlicher Herkunft zusammenkommen, kann das schnell zu Konflikten führen. Die Vermeidung von Konflikten setzt bereits beim <a href="#unobtrusivejs">Unobtrusive JavaScript</a> an: Indem wir JavaScript-Code nicht direkt ins HTML-Dokument einbetten, sondern fortgeschrittenes Event-Handling verwenden, reduzieren wir Überschneidungen im DOM.</p>
 

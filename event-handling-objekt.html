@@ -178,7 +178,7 @@ document.getElementById('absatz').onclick = clickHandler;
   <h2>Verarbeitendes Element und Zielelement</h2>
   <p>Infolge des Bubblings kann sich das Zielelement, bei dem das Ereignis ursprünglich passiert ist, von dem verarbeitenden Element unterscheiden, dessen Handler aufgerufen wird. Letzteres Element liegt dann im DOM-Elementbaum oberhalb des Zielelements.</p>
   <p>In vielen Fällen will man in der Handler-Funktion auf beide beteiligten Elemente zugreifen, sofern sie sich unterscheiden.</p>
-  <p>Beginnen wir mit dem Zugriff auf das <strong>verarbeitende Element</strong>: Das Element kann in der Handler-Funktion über das Schlüsselwort <code>this</code> angesprochen werden. Die Handler-Funktion wird nämlich im Kontext dieses Elementknotens ausgeführt.</p>
+  <p>Beginnen wir mit dem Zugriff auf das <strong>verarbeitende Element</strong>: Das Element kann in der Handler-Funktion über das Schlüsselwort <code>this</code> angesprochen werden. Die Handler-Funktion wird nämlich im Kontext dieses Elementobjekts ausgeführt.</p>
   <p>Das obige Beispiel wird wieder aufgegriffen:</p>
 <pre>
 &lt;p id="absatz">
@@ -224,7 +224,7 @@ function clickHandler(event) {
   );
 }
 </pre>
-  <p>Falls die Eigenschaft <code>target</code> des Event-Objektes gefüllt ist, speichern wir deren Wert in der lokalen Variable <code>target</code>. Andernfalls, das betrifft den Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
+  <p>Falls die Eigenschaft <code>target</code> des Event-Objekts gefüllt ist, speichern wir deren Wert in der lokalen Variable <code>target</code>. Andernfalls, das betrifft den Internet Explorer, wird die Eigenschaft <code>srcElement</code> verwendet.</p>
   <p>Wie beim Zugriff auf das Event-Objekt erlaubt der <code>||</code>-Operator eine Kurzschreibweise. So kommen wir zu einem Schema, dem viele Handler-Funktionen entsprechen:</p>
 <pre>
 function clickHandler(event) {

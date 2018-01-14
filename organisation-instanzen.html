@@ -19,7 +19,7 @@
 
   <h2>Objektinstanzen mit Konstruktoren und Prototypen</h2>
 
-  <p>Mit <code>Object</code>-Literalen und dem Revealing Module Pattern haben wir das gebaut, was in anderen Programmiersprachen <em>Singleton</em> oder <em>Klasse</em> mit statischen Methoden genannt wird. Ein solches Modul kommt nur einmal vor und kann nur einen internen Status haben. In vielen Fällen ist es jedoch sinnvoll, mehrere Instanzen (Exemplare) eines Objektes zu erzeugen. In vielen anderen Programmiersprachen würde man dazu eine eigene Klasse definieren und davon Instanzen erzeugen.</p>
+  <p>Mit <code>Object</code>-Literalen und dem Revealing Module Pattern haben wir das gebaut, was in anderen Programmiersprachen <em>Singleton</em> oder <em>Klasse</em> mit statischen Methoden genannt wird. Ein solches Modul kommt nur einmal vor und kann nur einen internen Status haben. In vielen Fällen ist es jedoch sinnvoll, mehrere Instanzen (Exemplare) eines Objekts zu erzeugen. In vielen anderen Programmiersprachen würde man dazu eine eigene Klasse definieren und davon Instanzen erzeugen.</p>
 
   <p>In JavaScript gibt es wie eingangs erwähnt keine Klassen. Es gibt jedoch <strong>Konstruktor-Funktionen</strong> (kurz: <dfn>Konstruktoren</dfn>) und <strong>prototypische Objekte</strong> (kurz: Prototypen).</p>
 
@@ -33,7 +33,7 @@
 
     <p>Der Name Konstruktor stammt vom englischen <em>construct</em> = erzeugen, konstruieren, bauen. Eine Konstruktor-Funktion ist demnach ein Erzeuger neuer Objekte. Sie werden sich sicher fragen, wie die Syntax zum Notieren von Konstruktoren lautet. Ein Konstruktur ist jedoch keine besondere Sprachstruktur, sondern erst einmal eine ganz normale Funktion. Zu einem Konstruktor wird sie lediglich dadurch, dass sie mit dem Schlüsselwort <code>new</code> aufgerufen wird.</p>
 
-    <p>Wenn eine Funktion mit <code>new</code> aufgerufen wird, wird intern ein neues, leeres <code>Object</code>-Objekt angelegt und die Funktion <a href="organisation-verfuegbarkeit.html">im Kontext dieses Objektes ausgeführt</a>. Das bedeutet, im Konstruktor kann das neue Objekt über <code>this</code> angesprochen werden. Darüber können ihm z.B. Eigenschaften und Methoden hinzugefügt werden.</p>
+    <p>Wenn eine Funktion mit <code>new</code> aufgerufen wird, wird intern ein neues, leeres <code>Object</code>-Objekt angelegt und die Funktion <a href="organisation-verfuegbarkeit.html">im Kontext dieses Objekts ausgeführt</a>. Das bedeutet, im Konstruktor kann das neue Objekt über <code>this</code> angesprochen werden. Darüber können ihm z.B. Eigenschaften und Methoden hinzugefügt werden.</p>
 
     <p>Intern wird also ein <code>Object</code>-Objekt angelegt, genauso wie wir es zur Strukturierung getan haben. Der Unterschied beim Konstruktor ist, dass auf diese Weise unzählige gleich ausgestattete Objekte, sogenannte <dfn>Instanzen</dfn> erzeugt werden können.</p>
 
@@ -125,7 +125,7 @@ mauzi.miau();
   <p>Der Prototyp steht »hinter« einem Objekt: Wird bei dem Objekt eine Eigenschaft nicht direkt gefunden, so kann der Prototyp einspringen und sie bereitstellen.</p>
   </div>
 
-  <p>Durch den Aufruf von <code>new Katze</code> wird wie gesagt intern ein zunächst leeres <code>Object</code> erzeugt. Der Prototyp des Konstruktors, <code>Katze.prototype</code>, wird dabei in die sogenannte <strong><dfn>Prototyp-Kette</dfn></strong> (<dfn>Prototype Chain</dfn>) des Objektes eingehängt. Dies ist eine geordnete Liste mit Objekten, die abgearbeitet wird, wenn auf eine Eigenschaft des Objektes zugegriffen wird.</p>
+  <p>Durch den Aufruf von <code>new Katze</code> wird wie gesagt intern ein zunächst leeres <code>Object</code> erzeugt. Der Prototyp des Konstruktors, <code>Katze.prototype</code>, wird dabei in die sogenannte <strong><dfn>Prototyp-Kette</dfn></strong> (<dfn>Prototype Chain</dfn>) des Objekts eingehängt. Dies ist eine geordnete Liste mit Objekten, die abgearbeitet wird, wenn auf eine Eigenschaft des Objekts zugegriffen wird.</p>
 
   <p>Ein konkretes Beispiel: Wenn wir den Ausdruck <code>maunzi.miau</code> schreiben, dann arbeitet der JavaScript-Interpreter die Prototyp-Kette ab, um die Eigenschaft namens <code>miau</code> zu finden und damit den Ausdruck aufzulösen. Die Prototyp-Kette von <code>maunzi</code> hat folgende Einträge:</p>
 
@@ -184,7 +184,7 @@ mauzi.miau();
 
   <p>Auf diese Weise stehen alle Eigenschaften eines Prototypen, im Beispiel <code>Katze.prototype</code>, auch beim Instanzobjekt zur Verfügung, im Beispiel <code>maunzi</code>. Dies ist das ganze Geheimnis hinter der <strong>prototypischen Vererbung</strong>. Wenn bei einem Objekt selbst die angeforderten Eigenschaften nicht gefunden wurde, so dienen die Objekte in der Prototyp-Kette als Fallback. Man spricht von einer <dfn>Delegation</dfn> (Übertragung, Weitergabe). Das Objekt gibt die Anfrage an seine Prototypen weiter.</p>
 
-  <p>Prototypische Vererbung funktioniert grundlegend anders als klassenbasierte Vererbung, denn JavaScript ist eine äußerst dynamische Sprache. Es gibt keine Klassen, die einmal deklariert werden und nach der Kompilierung unveränderlich sind. Über die Prototyp-Kette erben gewöhnliche Objekte von gewöhnlichen Objekten. Jedes Objekt kann der Prototyp eines anderen Objektes werden und »einspringen«, wenn es die angeforderte Eigenschaft nicht selbst bereitstellen kann.</p>
+  <p>Prototypische Vererbung funktioniert grundlegend anders als klassenbasierte Vererbung, denn JavaScript ist eine äußerst dynamische Sprache. Es gibt keine Klassen, die einmal deklariert werden und nach der Kompilierung unveränderlich sind. Über die Prototyp-Kette erben gewöhnliche Objekte von gewöhnlichen Objekten. Jedes Objekt kann der Prototyp eines anderen Objekts werden und »einspringen«, wenn es die angeforderte Eigenschaft nicht selbst bereitstellen kann.</p>
 
   <p>Alle beteiligten Objekte einschließlich der Prototypen können zur Laufzeit beliebig verändert werden. Ein Prototyp ist also im Gegensatz zu einer Klasse kein fester Bauplan für immer gleiche Instanzen, sondern selbst ein beliebiges Objekt, an das Eigenschaftsanfragen delegiert werden. Deshalb ist der Begriff »Instanz« für das Objekt, welches <code>new Katze</code> erzeugt, letztlich irreführend. Wo es keine Klassen als rein abstrakten Bauplan gibt, sondern bloß flexible Objekte mittels Konstruktoren erzeugt werden und von Prototypen erben, so trifft dieser Begriff die Sache nicht. Er wird hier trotzdem der Einfachheit halber verwendet.</p>
 
@@ -289,7 +289,7 @@ alert(maunzi.rasse); // Jetzt »Perser« - eigene Eigenschaft
 
   <p>Viele klassenbasierte Sprachen erlauben es, die Sichtbarkeit von Instanzeigenschaften festzulegen und unterscheiden beispielsweise zwischen öffentlichen und privaten Eigenschaften.</p>
 
-  <p>In JavaScript (ECMAScript 3) gibt es keine Möglichkeit, gewisse Eigenschaften eines Objektes als privat zu deklarieren, sodass sie ausschließlich in Methoden des Objekt zur Verfügung stehen. Sobald wir einem Objekt eine Eigenschaft hinzufügen, ist diese auch überall dort verfügbar, wo das Objekt verfügbar ist.</p>
+  <p>In JavaScript (ECMAScript 3) gibt es keine Möglichkeit, gewisse Eigenschaften eines Objekts als privat zu deklarieren, sodass sie ausschließlich in Methoden des Objekt zur Verfügung stehen. Sobald wir einem Objekt eine Eigenschaft hinzufügen, ist diese auch überall dort verfügbar, wo das Objekt verfügbar ist.</p>
 
   <p>Das folgende Beispiel zeigt, wie ein Instanzobjekt und auch der Prototyp nachträglich verändert werden können:</p>
 
@@ -324,7 +324,7 @@ schnucki.miau();
 
   <p>Wie gesagt gibt es keine privaten Eigenschaften im Wortsinn, auch wenn manche diesen Begriff auch auf JavaScript anwenden. Denn wenn ein Objekt an der Instanz hängt, ist es in ECMAScript 3 auch notwendig nach außen sichtbar und unkontrolliert überschreibbar.</p>
 
-  <p>Wir können jedoch einen Trick anwenden, den wir bereits vom <a href="organisation-module.html#revealing-module">Revealing Module Pattern</a> kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des Objektes. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>priviligierte Methoden</dfn>.</p>
+  <p>Wir können jedoch einen Trick anwenden, den wir bereits vom <a href="organisation-module.html#revealing-module">Revealing Module Pattern</a> kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des O. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>priviligierte Methoden</dfn>.</p>
 
   <p>Da der Konstruktor bereits einen Funktions-Scope bereitstellt, nutzen wir kurzerhand diesen für private Objekte. Damit die Methoden auf die privaten Objekte Zugriff haben, müssen sie im Konstruktor erzeugt und dürfen nicht über den Prototyp definiert werden. Über <code>this</code> werden sie ans Instanzobjekt gehängt.</p>
 

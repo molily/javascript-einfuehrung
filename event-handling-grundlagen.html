@@ -27,7 +27,7 @@
   </div>
   <div class="section" id="phase-onload">
     <h3>Phase 2: Das Dokument ist fertig geladen</h3>
-    <p>Der vollständige Zugriff auf das Dokument über das DOM ist jetzt möglich. Nun wird der Teil des Scripts aktiv, der dem Dokument JavaScript-Interaktivität hinzufügt. Das Script spricht vorhandene Elementknoten an und fügt ihnen <dfn>Event-Handler</dfn> hinzu (englisch <em>handle</em> = verarbeiten, <em>handler</em> = Verarbeiter). Das Script kann auch den Inhalt oder die Darstellung bestehender Elemente verändern und dem Dokument neue Elemente hinzufügen – auch <dfn>DOM-Manipulation</dfn> genannt.</p>
+    <p>Der vollständige Zugriff auf das Dokument über das DOM ist jetzt möglich. Nun wird der Teil des Scripts aktiv, der dem Dokument JavaScript-Interaktivität hinzufügt. Das Script spricht vorhandene Elemente an und fügt ihnen <dfn>Event-Handler</dfn> hinzu (englisch <em>handle</em> = verarbeiten, <em>handler</em> = Verarbeiter). Das Script kann auch den Inhalt oder die Darstellung bestehender Elemente verändern und dem Dokument neue Elemente hinzufügen – auch <dfn>DOM-Manipulation</dfn> genannt.</p>
   </div>
   <div class="section" id="phase-event-handling">
     <h3>Phase 3: Der Anwender bedient das Dokument und das Script reagiert darauf</h3>
@@ -52,14 +52,14 @@
   <p>Um die Überwachung eines Ereignisses an einem Element zu starten, wird ein Event-Handler registriert. Im Folgenden wird die einfachste und älteste Methode vorgestellt, um Event-Handler zu registrieren.</p>
   <p>In den <a href="konzepte.html#events">Grundkonzepten</a> haben wir die typischen Bestandteile der Ereignis-Überwachung kennengelernt:</p>
   <ul>
-    <li>Einen Elementknoten,</li>
+    <li>Einen Elementobjekt,</li>
     <li>einen Ereignistyp (z.B. <code>click</code>) und</li>
     <li>eine Handler-Funktion.</li>
   </ul>
   <p>Diese drei Bestandteile finden wir im Aufbau der JavaScript-Anweisung wieder. Das allgemeine Schema für das traditionelle Event-Handling lautet:</p>
   <pre>element.onevent = handlerfunktion;</pre>
   <ul>
-    <li><code>element</code> steht für ein DOM-Objekt, üblicherweise ein Elementknoten. Es kommen auch besondere Objekte wie <code>window</code> und <code>document</code> in Frage.</li>
+    <li><code>element</code> steht für ein DOM-Objekt, üblicherweise ein Elementobjekt. Es kommen auch besondere Objekte wie <code>window</code> und <code>document</code> in Frage.</li>
     <li><code>onevent</code> ist eine Objekteigenschaft, die mit der Vorsilbe <code>on</code> beginnt, auf die der Ereignistyp folgt. <em>on</em> ist die englische Präposition für <em>bei</em>. Zum Beispiel bedeutet <em>onclick</em> soviel wie <em>beim Klicken</em>.</li>
     <li><code>handlerfunktion</code> ist der Name einer Funktion. Genauer gesagt steht an dieser Stelle ein <a href="syntax.html#ausdruecke">Ausdruck</a>, der eine Funktion ergibt: JavaScript wird diesen Ausdruck auflösen und das Ergebnis als Handler-Funktion verwenden.</li>
   </ul>
@@ -114,9 +114,9 @@ document.getElementById('interaktiv').onclick = clickHandler;
 </pre>
   <p>Was zunächst kompliziert aussieht, ist die Anwendung des bekannten Schemas <code>element.onevent = handlerfunktion;</code>.</p>
   <p>Zum Registrieren des Event-Handler greifen wir über das DOM auf das Dokument zu. Dies ist direkt möglich, weil sich das Script am Ende des Dokuments befindet.</p>
-  <p>Der Code nutzt die DOM-Methode <code>document.getElementById</code> auf (zu deutsch: <em>hole ein Element anhand der ID</em>). Der Aufruf <code>document.getElementById('interaktiv')</code> gibt den Elementknoten zurück, der den Button repräsentiert.</p>
+  <p>Der Code nutzt die DOM-Methode <code>document.getElementById</code> auf (zu deutsch: <em>hole ein Element anhand der ID</em>). Der Aufruf <code>document.getElementById('interaktiv')</code> gibt das Elementobjekt zurück, der den Button repräsentiert.</p>
   <p>Damit der Zugriff auf das gewünschte Element einfach möglich ist, haben wir einen Angriffspunkt für das Script geschaffen: Das <code>button</code>-Element besitzt eine dokumentweit eindeutige ID namens <code>interaktiv</code>. Solche IDs werden neben Klassen (<code>class</code>-Attributen) benutzt, um Angriffspunkte für Stylesheets und Scripte zu bieten.</p>
-  <p>Nachdem wir den Elementknoten herausgesucht haben, registrieren wir den Event-Handler. Die Objekteigenschaft lautet <code>onclick</code>, denn es geht um das <code>click</code>-Ereignis. Dieser Name ist feststehend. Die Handler-Funktion lautet <code>clickHandler</code>. Dieser Name ist willkürlich gewählt, wir haben sie definiert.</p>
+  <p>Nachdem wir das Element herausgesucht haben, registrieren wir den Event-Handler. Die Objekteigenschaft lautet <code>onclick</code>, denn es geht um das <code>click</code>-Ereignis. Dieser Name ist feststehend. Die Handler-Funktion lautet <code>clickHandler</code>. Dieser Name ist willkürlich gewählt, wir haben sie definiert.</p>
   <p>Zusammengefasst sieht das Beispiel so aus:</p>
 <pre>
 &lt;!DOCTYPE html>
@@ -156,7 +156,7 @@ document.getElementById('interaktiv').onclick = clickHandler;
 </pre>
   <p>Wir haben dort eine einfache Wertzuweisung (erkennbar durch das <code>=</code>). Auf der linken Seite steht eine Objekteigenschaft. Das Objekt ist der Elementknoten und die Eigenschaft heißt <code>onclick</code>. Auf der rechten Seite steht der zugewiesene Wert, <code>clickHandler</code>..</p>
   <p>Nach dieser Zuweisung ist die Funktion <code>clickHandler</code> in der Objekteigenschaft gespeichert. Dies funktioniert, weil Funktionen in JavaScripte auch nur Objekte sind, auf die beliebig viele Variablen und Eigenschaften verweisen können.</p>
-  <p>Passiert nun ein Ereignis am Elementknoten <code>window</code>, sucht der JavaScript-Interpreter nach einer Objekteigenschaft, die den Namen <code>on</code> gefolgt vom Ereignistyp trägt (im Beispiel <code>onclick</code>). Wenn diese Eigenschaft eine Funktion beinhaltet, führt er diese aus. Das ist erst einmal alles – aber enorm wichtig zum Verständnis des Event-Handlings.</p>
+  <p>Passiert nun ein Ereignis am Button-Element, so sucht der JavaScript-Interpreter nach einer Objekteigenschaft, die den Namen <code>on</code> gefolgt vom Ereignistyp trägt (im Beispiel <code>onclick</code>). Wenn diese Eigenschaft eine Funktion beinhaltet, führt er diese aus. Das ist erst einmal alles – aber enorm wichtig zum Verständnis des Event-Handlings.</p>
   <p>Diese Methode hat verschiedene Nachteile und ist im Grunde überholt (siehe <a href="event-handling-fortgeschritten.html#traditionell-nachteile">Nachteile und Alternativen</a>). Dieses <em>traditionelle</em> Event-Handling ist aber immer noch verbreitet.</p>
 </div>
 
@@ -180,7 +180,7 @@ element.onevent = handlerfunktion(); // Fehler!
 <pre class="erroneous">
 element.onevent = handlerfunktion(parameter); // Fehler!
 </pre>
-  <p>Sie müssen sich die Funktionsweise des traditionellen Event-Handlings noch einmal durch den Kopf gehen lassen, um zu verstehen, warum diese Anweisung nicht den gewünschten Zweck erfüllt. Beim korrekten Schema <code>element.onevent = handlerfunktion;</code> wird eine Funktion, genauer gesagt ein Funktionsobjekt, in einer Eigenschaft des Elementknotens gespeichert.</p>
+  <p>Sie müssen sich die Funktionsweise des traditionellen Event-Handlings noch einmal durch den Kopf gehen lassen, um zu verstehen, warum diese Anweisung nicht den gewünschten Zweck erfüllt. Beim korrekten Schema <code>element.onevent = handlerfunktion;</code> wird ein Funktionsobjekt in einer Eigenschaft des Elementobjekts gespeichert.</p>
   <p>Das ist beim obigen fehlerhaften Code nicht der Fall. Anstatt auf das Eintreten des Ereignisses zu warten, wird die Handler-Funktion <strong>sofort ausgeführt</strong>. Dafür verantwortlich sind die Klammern <code>()</code> hinter dem Funktionsnamen. Diese Klammern sind der JavaScript-Operator zum Aufruf von Funktionen.</p>
   <p>Das Erste, was der JavaScript-Interpreter beim Verarbeiten dieser Zeile macht, ist die Funktion aufzurufen. Deren <em>Rückgabewert</em> wird schließlich in der <code>onevent</code>-Eigenschaft gespeichert. In den meisten Fällen hat die Handler-Funktion keinen Rückgabewert, was dem Wert <code>undefined</code> entspricht.</p>
   <p>Wir wollen die Funktion aber nicht direkt aufrufen, sondern bloß das Funktionsobjekt ansprechen, um es in der Eigenschaft zu speichern. Daher dürfen an dieser Stelle keine Klammern hinter dem Namen notiert werden.</p>

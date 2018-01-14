@@ -215,7 +215,7 @@ function äußereFunktion() {
 
   <p>Auch lange nach dem Ablauf der äußeren Funktion hat die Closure immer noch Zugriff auf deren Variablen. Vorausgesetzt ist, dass die Closure woanders gespeichert wird und dadurch zu einem späteren Zeitpunkt ausgeführt werden kann. Im obigen Beispiel ist die innere Funktion nur eine lokale Variable, die zwar Zugriff auf die Variablen der äußeren Funktion hat, aber bei deren Beendigung selbst verfällt.</p>
 
-  <p>Eine Möglichkeit, die innere Funktion zu speichern, ist das Registrieren als Event-Handler. Dabei wird das Funktionsobjekt in einer Eigenschaft (hier <code>onclick</code>) eines Elementobjektes gespeichert und bleibt damit über die Ausführung der äußeren Funktion hinweg erhalten:</p>
+  <p>Eine Möglichkeit, die innere Funktion zu speichern, ist das Registrieren als Event-Handler. Dabei wird das Funktionsobjekt in einer Eigenschaft (hier <code>onclick</code>) eines Elementobjekts gespeichert und bleibt damit über die Ausführung der äußeren Funktion hinweg erhalten:</p>
 
 <pre>
 function äußereFunktion  () {
@@ -412,7 +412,7 @@ instanz.start();
 
     <p>Da Funktionen in JavaScript Objekte erster Klasse sind, können sie selbst Methoden besitzen. Zwei der vordefinierten Methoden von Funktionsobjekten sind <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> und <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply</a>. Diese rufen die zugehörige Funktion auf und erlauben es zusätzlich, den Kontext beim Aufruf einer Funktion explizit anzugeben. Das Objekt, auf das <code>this</code> innerhalb der Funktion zeigt, wird nicht mehr nach den üblichen Regeln bestimmt. Stattdessen zeigt <code>this</code> auf das Objekt, das <code>call</code> bzw. <code>apply</code> übergeben wird.</p>
 
-    <p>Auf diese Weise können wir jede beliebige Funktion im Kontext eines beliebigen Objektes ausführen, auch ohne dass die Funktion am angegebenen Objekt hängt:</p>
+    <p>Auf diese Weise können wir jede beliebige Funktion im Kontext eines beliebigen Objekts ausführen, auch ohne dass die Funktion am angegebenen Objekt hängt:</p>
 
 <pre>
 var objekt = {
@@ -499,7 +499,7 @@ summe.apply(objekt, [1, 2, 3]);
 </tr>
 <tr>
 <td><pre>    return originalFunction.apply(contextObject, args);</pre></td>
-<td>Innerhalb der erzeugten Funktion: Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei die restlichen Parameter durch und gib den Rückgabewert der Funktion zurück.</td>
+<td>Innerhalb der erzeugten Funktion: Rufe die ursprüngliche Funktion im Kontext des Objekts auf, reiche dabei die restlichen Parameter durch und gib den Rückgabewert der Funktion zurück.</td>
 </tr>
 <tr>
 <td><pre>  };</pre></td>
@@ -534,7 +534,7 @@ summe.apply(objekt, [1, 2, 3]);
 </tr>
 <tr>
 <td><pre>    return originalFunction.call(contextObject, event);</pre></td>
-<td>Rufe die ursprüngliche Funktion im Kontext des Objektes auf, reiche dabei das Event-Objekt durch und gib den Rückgabewert der Funktion zurück.</td>
+<td>Rufe die ursprüngliche Funktion im Kontext des Objekts auf, reiche dabei das Event-Objekt durch und gib den Rückgabewert der Funktion zurück.</td>
 </tr>
 <tr>
 <td><pre>  };</pre></td>

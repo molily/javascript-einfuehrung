@@ -103,7 +103,7 @@
   <h2>XMLHttpRequest – die JavaScript-Technik hinter Ajax</h2>
 
   <p>Nachdem wir einige Anwendungsfälle betrachtet haben, soll es nun zur Sache gehen: Wie wird Ajax in JavaScript konkret angewendet?</p>
-  <p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code>-Objekt</strong>. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objektes werden HTTP-Anfragen gestartet und die Server-Antwort ausgelesen.</p>
+  <p>Hintergrund-Serverkommunikation wird in erster Linie mit einer JavaScript-Technik umgesetzt: dem <strong><code>XMLHttpRequest</code>-Objekt</strong>. Dies ist ursprünglich eine proprietäre Erfindung von Microsoft für den Internet Explorer. Die Erzeugung eines <code>XMLHttpRequest</code>-Objekt war zunächst an ActiveX gekoppelt, eine weitere Microsoft-Technik. Mithilfe dieses Objekts werden HTTP-Anfragen gestartet und die Server-Antwort ausgelesen.</p>
   <p>Andere Browserhersteller erkannten die Möglichkeiten von <code>XMLHttpRequest</code> und übernahmen diese Technik - allerdings ohne ActiveX. Mittlerweile kennen alle großen JavaScript-fähigen Browser das Objekt <code>window.XMLHttpRequest</code>. Ab Version 7 des Internet Explorers ist dieses globale Objekt ebenfalls verfügbar, bei älteren Versionen muss der Umweg über ActiveX genommen werden.</p>
   </div>
 
@@ -120,7 +120,7 @@
   <p>Die Absenden einer Anfrage mittels XMLHttpRequest umfasst vier grundlegende Schritte:</p>
 
   <div class="section" id="xhr-erzeugen">
-    <h3>Das Erzeugen eines XMLHttpRequest-Objektes</h3>
+    <h3>Das Erzeugen eines XMLHttpRequest-Objekts</h3>
     <pre>var xhr = new XMLHttpRequest();</pre>
     <p>Eine neue Instanz wird erzeugt, indem der Konstruktor <code>XMLHttpRequest</code> mit dem Schlüsselwort <code>new</code> aufgerufen wird. Das zurückgelieferte Anfrage-Objekt wird hier in einer Variable namens <code>xhr</code> gespeichert.</p>
     <p>Für ältere Internet Explorer ist wie gesagt eine andere Schreibweise nötig, welche ein ActiveX-Objekt erstellt. …
@@ -137,7 +137,7 @@
   <div class="section" id="xhr-open">
     <h3>Festlegen der Anfrage-Methode, der Anfrage-Adresse sowie des Arbeitsmodus</h3>
     <pre>xhr.open("GET", "beispiel.html", true);</pre>
-    <p>Mit dem Aufruf der <code>open</code>-Methode des Anfrage-Objektes geben Sie drei zentrale Daten an.</p>
+    <p>Mit dem Aufruf der <code>open</code>-Methode des Anfrage-Objekts geben Sie drei zentrale Daten an.</p>
     <ol>
       <li>Im ersten Parameter die HTTP-Anfragemethode als String. Üblich sind <code>"GET"</code>, <code>"POST"</code> und <code>"HEAD"</code>.</li>
       <li>Im zweiten Parameter die Adresse (URL) als String, an die die Anfrage gesendet werden soll. Im Beispiel wird davon ausgegangen, dass unter demselben Pfad wie das HTML-Dokument, das die Server-Anfrage startet, eine Datei namens <var>beispiel.html</var> existiert.</li>
@@ -164,7 +164,7 @@
   <div class="section" id="xhr-readystate">
     <h3>Anfrage-Status: <code>readyState</code></h3>
     <p>Die Funktion wird immer dann ausgeführt, wenn sich der Status der Anfrage ändert (der sogenannte <em>ready state</em>, auf deutsch in etwa Fortschrittsstatus). Jede Anfrage durchläuft eine Reihe von fünf Phasen, die jeweils durch eine Nummer von 0 bis 4 identifiziert werden.</p>
-    <p>Der gegenwärtigen Status lässt sich über die Eigenschaft <code>readyState</code> des XMLHttpRequest-Objektes abfragen. Diese Eigenschaft enthält eine Nummer gemäß der folgenden Tabelle.</p>
+    <p>Der gegenwärtigen Status lässt sich über die Eigenschaft <code>readyState</code> des XMLHttpRequest-Objekts abfragen. Diese Eigenschaft enthält eine Nummer gemäß der folgenden Tabelle.</p>
 
     <table>
     <thead>
@@ -191,13 +191,13 @@
   <div class="section" id="xhr-http-status">
     <h3>HTTP-Statuscode: <code>responseCode</code></h3>
     <p>Alleine das Eintreffen der Server-Antwort bedeutet nun nicht, dass der Server die Anfrage fehlerfrei verarbeiten konnte. Ausschlaggebend dafür ist der <em>HTTP-Statuscode</em> der Server-Antwort. Dies ist eine vierstellige Zahl. Im Erfolgsfalle lautet der Code <code>200</code>, im Fehlerfalle z.B. <code>404</code> für »Nicht gefunden« oder <code>500</code> für »Server-interner Fehler«. Nur im Erfolgsfalle können Sie damit rechnen, dass der Server die gegebenenfalls übersandten Daten entgegen genommen hat und die Server-Antwort die gewünschten Daten enthält.</p>
-    <p>Der HTTP-Statuscode der Antwort lässt sich über die Eigenschaft <code>responseCode</code> des jeweiligen XMLHttpRequest-Objektes auslesen. Der <code>readyState</code>-Handler wird daher um eine <code>if</code>-Anweisung ergänzt, die den <code>responseCode</code> mit <code>200</code> vergleicht. <code>200</code> bedeutet wie gesagt »Alles in Ordnung«.</p>
+    <p>Der HTTP-Statuscode der Antwort lässt sich über die Eigenschaft <code>responseCode</code> des jeweiligen XMLHttpRequest-Objekts auslesen. Der <code>readyState</code>-Handler wird daher um eine <code>if</code>-Anweisung ergänzt, die den <code>responseCode</code> mit <code>200</code> vergleicht. <code>200</code> bedeutet wie gesagt »Alles in Ordnung«.</p>
     <pre>function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
    // Server-Antwort ist eingetroffen!
-   if (<strong>xhr.responseCode</strong> == 200) {
+   if (<strong>xhr.responseCode</strong> === 200) {
       // Server-Antwort in Ordnung
    }
 }</pre>
@@ -206,7 +206,7 @@
    if (xhr.readyState != 4) {
       return;
    }
-   if (xhr.responseCode == 200) {
+   if (xhr.responseCode === 200) {
       // Server-Antwort in Ordnung
    } else {
       alert("Es ist ein Fehler beim Laden aufgetreten:\n" + xhr.responseCode);
@@ -232,7 +232,7 @@
    if (xhr.readyState != 4) {
       return;
    }
-   if (xhr.responseCode == 200) {
+   if (xhr.responseCode === 200) {
       document.getElementById("zielelement").innerHTML = <strong>xhr.responseText</strong>;
    }
 }</pre>
@@ -266,7 +266,7 @@ function xhrReadyStateHandler() {
    if (xhr.readyState != 4) {
       return;
    }
-   if (xhr.responseCode == 200) {
+   if (xhr.responseCode === 200) {
       document.getElementById("zielelement").innerHTML = xhr.responseText;
    }
 }

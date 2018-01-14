@@ -57,11 +57,11 @@ function bilderlistenKlick (event) {
   var aElement = null;
 
   // Überprüfe, ob das Zielelement ein Link oder ein Bild im Link ist:
-  if (elementName == 'A') {
+  if (elementName === 'A') {
     // Falls ein Link geklickt wurde, speichere das Zielelement
     // in der Variable aElement:
     aElement = event.target;
-  } else if (elementName == 'IMG') {
+  } else if (elementName === 'IMG') {
     // Falls das Thumbnail-Bild geklickt wurde, suche
     // das zugehörige Link-Element. Es ist das Elternelement:
     aElement = event.target.parentNode;
@@ -79,7 +79,7 @@ function bilderlistenKlick (event) {
 }
 </pre>
   <p>In dieser Funktion wird das Zielelement des Ereignisses angesprochen und dessen Elementname überprüft. Wenn ein <code>a</code>-Element geklickt wurde, muss es sich um einen Link auf ein Bild handeln und das Vollbild soll eingeblendet werden.</p>
-  <p>Das alleine wäre bereits mit der Abfrage <code>if (event.target.nodeName == 'A')</code> zu erledigen. Das Beispiel hat allerdings bewusst eine Schwierigkeit eingebaut, um Ihnen das Event-Bubbling und das Arbeiten mit dem Zielelement näher zu bringen: In den <code>a</code>-Elementen liegen zusätzlich <code>img</code>-Elemente für die Thumbnails. Wenn der Anwender auf diese klickt, soll das Vollbild ebenfalls eingeblendet werden. In dem Fall ist jedoch nicht das <code>a</code>-Element das Zielelement, sondern das <code>img</code>-Element.</p>
+  <p>Das alleine wäre bereits mit der Abfrage <code>if (event.target.nodeName === 'A')</code> zu erledigen. Das Beispiel hat allerdings bewusst eine Schwierigkeit eingebaut, um Ihnen das Event-Bubbling und das Arbeiten mit dem Zielelement näher zu bringen: In den <code>a</code>-Elementen liegen zusätzlich <code>img</code>-Elemente für die Thumbnails. Wenn der Anwender auf diese klickt, soll das Vollbild ebenfalls eingeblendet werden. In dem Fall ist jedoch nicht das <code>a</code>-Element das Zielelement, sondern das <code>img</code>-Element.</p>
   <p>Aus diesem Grund muss die Abfrage erweitert werden: Handelt es sich um ein <code>a</code>-Element <em>oder</em> um ein Element, das darin liegt? Falls das Zielelement ein <code>img</code>-Element ist, steigen wir mittels <code>parentNode</code> zu seinem <code>a</code>-Elternelement auf.</p>
   <p>Falls ein <code>a</code>-Element ermittelt werden könnte, wird schließlich die Funktion <code>zeigeVollbild</code> mit dem Elementobjekt als Parameter aufgerufen. Das Gerüst dieser Funktion sieht so aus:</p>
 <pre>
@@ -123,7 +123,7 @@ function zeigeVollbild(aElement) {
     <li><code>focus</code> und <code>blur</code>. (Als alternative aufsteigende Ereignisse gibt es allerdings <code>focusin</code> und <code>focusout</code>.)</li>
     <li><code>mouseenter</code> und <code>mouseleave</code>. (Die Ereignisse <code>mouseover</code> und <code>mouseout</code> hingegen steigen auf.)</li>
   </ul>
-  <p>Da die Capturing-Phase die erst im Event-Fluss ist, ist es möglich, ein Ereignis schon in dieser Phase abzufangen. Ruft man in der Capturing-Phase die <a href="event-handling-objekt.html#bubbling-verhindern"><code>stopPropation</code>-Methode des Event-Objektes</a> auf, so wird der Fluss abgebrochen und die Ziel- und Bubbling-Phase fallen aus. Das Ereignis erreicht somit das Zielelement nicht.</p>
+  <p>Da die Capturing-Phase die erst im Event-Fluss ist, ist es möglich, ein Ereignis schon in dieser Phase abzufangen. Ruft man in der Capturing-Phase die <a href="event-handling-objekt.html#bubbling-verhindern"><code>stopPropation</code>-Methode des Event-Objekts</a> auf, so wird der Fluss abgebrochen und die Ziel- und Bubbling-Phase fallen aus. Das Ereignis erreicht somit das Zielelement nicht.</p>
 </div>
 
 <div class="sequence-navigation">
