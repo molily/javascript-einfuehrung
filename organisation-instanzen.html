@@ -324,7 +324,7 @@ schnucki.miau();
 
   <p>Wie gesagt gibt es keine privaten Eigenschaften im Wortsinn, auch wenn manche diesen Begriff auch auf JavaScript anwenden. Denn wenn ein Objekt an der Instanz hängt, ist es in ECMAScript 3 auch notwendig nach außen sichtbar und unkontrolliert überschreibbar.</p>
 
-  <p>Wir können jedoch einen Trick anwenden, den wir bereits vom <a href="organisation-module.html#revealing-module">Revealing Module Pattern</a> kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des O. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>priviligierte Methoden</dfn>.</p>
+  <p>Wir können jedoch einen Trick anwenden, den wir bereits vom <a href="organisation-module.html#revealing-module">Revealing Module Pattern</a> kennen: In einem Funktions-Scope notieren wir lokale Variablen und zudem die öffentlichen Methoden des Objekts. Die öffentlichen Methoden haben auf erstere Zugriff, weil sie im selben Scope erzeugt wurden und damit <a href="organisation-verfuegbarkeit.html#closures">Closures</a> sind. Daher handelt es sich um sogenannte <dfn>privilegierte Methoden</dfn>.</p>
 
   <p>Da der Konstruktor bereits einen Funktions-Scope bereitstellt, nutzen wir kurzerhand diesen für private Objekte. Damit die Methoden auf die privaten Objekte Zugriff haben, müssen sie im Konstruktor erzeugt und dürfen nicht über den Prototyp definiert werden. Über <code>this</code> werden sie ans Instanzobjekt gehängt.</p>
 
@@ -342,7 +342,7 @@ function Katze(name) {
     alert(name + ' macht miau!');
   }
 
-  // --- Öffentliche (priviligierte) Eigenschaften ---
+  // --- Öffentliche (privilegierte) Eigenschaften ---
 
   this.name = name;
 
@@ -426,7 +426,7 @@ alert('maunzi.pfoten: ' + maunzi.pfoten);
   <p>Wenn Methoden über den Prototyp anstatt im Konstruktor erzeugt werden, wird Speicher eingespart. Dafür ist das Auflösen von Eigenschaften über die Prototyp-Kette etwas langsamer, da an mehreren Objekten gesucht wird.</p>
   </div>
 
-  <p>Ein Überschreiben oder Löschen dieser Eigenschaften über den Prototyp ist nicht möglich. Ein nachträgliches Erweitern des Prototyps ist möglich. Solche Methoden sind allerdings nicht priviligiert, haben also keinen Zugriff auf private Objekte. Denn sie wurden nicht im Konstruktor definiert und schließen die privaten Objekte nicht ein. Aus demselben Grund ist kein nachträgliches Hinzufügen von privaten Objekten möglich.</p>
+  <p>Ein Überschreiben oder Löschen dieser Eigenschaften über den Prototyp ist nicht möglich. Ein nachträgliches Erweitern des Prototyps ist möglich. Solche Methoden sind allerdings nicht privilegiert, haben also keinen Zugriff auf private Objekte. Denn sie wurden nicht im Konstruktor definiert und schließen die privaten Objekte nicht ein. Aus demselben Grund ist kein nachträgliches Hinzufügen von privaten Objekten möglich.</p>
 
   <p>Mit jedem Erzeugen einer <code>Katze</code>-Instanz werden alle Eigenschaften von neuem erzeugt. Die Instanzen teilen sich ihre Eigenschaften nicht mit anderen <code>Katze</code>-Instanzen. Dies wirkt sich negativ auf die Performance aus: Das Anlegen der Eigenschaften kostet Zeit und Arbeitsspeicher. Werden z.B. zehn Katzen instantiiert, so werden 20 Funktionsobjekte erzeugt (zehn mal <code>kitzeln</code> und <code>streicheln</code>). Würden die Instanzen diese Methoden vom Prototyp erben, so müssten sie nur einmal am Prototyp erzeugt werden.</p>
 
