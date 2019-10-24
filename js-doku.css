@@ -12,7 +12,6 @@ body {
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
-  text-decoration-skip: ink; /* Deprecated */
   -webkit-text-decoration-skip: ink; /* Deprecated */
   text-decoration-skip-ink: auto;
 }
