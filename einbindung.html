@@ -36,7 +36,7 @@
 &lt;/body&gt;
 &lt;/html&gt;</pre>
   <p>Oder es kann leer sein und auf eine externe Datei mit JavaScript-Code verweisen. Diese Nutzungsweise sollten Sie vorziehen und Ihre JavaScripte möglichst in separate Dateien auslagern.</p>
-  <p>Schreiben sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie am Dokument-Ende ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Adresse (<abbr title="Uniform Resource Locator">URL</abbr>), unter der das Script abrufbar ist.</p>
+  <p>Schreiben Sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie am Dokument-Ende ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Adresse (<abbr title="Uniform Resource Locator">URL</abbr>), unter der das Script abrufbar ist.</p>
   <pre>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -58,7 +58,7 @@ window.alert('Hallo Welt!');
 <div class="section" id="ausfuehrung">
   <h2>Ausführung von script-Elementen</h2>
 
-  <p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf <code>&lt;head>…&lt;/head></code> als auch im Dokumentkörper <code>&lt;body>…&lt;/body></code> einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im folgenden betrachten.</p>
+  <p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf <code>&lt;head>…&lt;/head></code> als auch im Dokumentkörper <code>&lt;body>…&lt;/body></code> einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im Folgenden betrachten.</p>
   <p>Sobald der Browser das HTML-Dokument vom Webserver empfängt, beginnt er damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
   <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Das gilt auch für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
   <p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat verschiedene Konsequenzen.</p>
@@ -110,7 +110,7 @@ helferfunktion();
   <div class="section" id="script-dom-zugriff">
     <h3>Ein Script hat Zugriff auf die Elemente vor dem zugehörigen <code>script</code>-Element</h3>
     <p>Die häufigste Aufgabe von JavaScripten ist der Zugriff auf das Dokument über die DOM-Schnittstelle. Diese macht die Elemente und deren Textinhalte als Knotenobjekte zugänglich.</p>
-    <p>Ein Script wird wie gesagt während des Einlesens des HTML-Dokuments ausgeführt. Zu diesem Zeitpunkt noch nicht Zugriff auf den gesamten DOM-Elementbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit bereits eingelesen wurden.</p>
+    <p>Ein Script wird wie gesagt während des Einlesens des HTML-Dokuments ausgeführt. Zu diesem Zeitpunkt hat es noch keinen Zugriff auf den gesamten DOM-Elementbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit bereits eingelesen wurden.</p>
     <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
