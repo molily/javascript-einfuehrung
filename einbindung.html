@@ -21,7 +21,7 @@
 </div>
 <div class="section" id="script-element">
   <h2>Das script-Element</h2>
-  <p>Zur Einbindung von JavaScript-Code in HTML-Dokument existiert in das HTML-Element <code>script</code>. Dieses darf sowohl im Kopf (<code>head</code>-Element) als auch im Körper (<code>body</code>-Element) eines HTML-Dokuments auftauchen. Es kann entweder direkt JavaScript-Code beinhalten, wie in diesem Beispiel:</p>
+  <p>Zur Einbindung von JavaScript-Code in ein HTML-Dokument existiert das HTML-Element <code>script</code>. Dieses darf sowohl im Kopf (<code>head</code>-Element) als auch im Körper (<code>body</code>-Element) eines HTML-Dokuments auftauchen. Es kann entweder direkt JavaScript-Code beinhalten, wie in diesem Beispiel:</p>
   <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -59,8 +59,8 @@ window.alert('Hallo Welt!');
   <h2>Ausführung von script-Elementen</h2>
 
   <p>Mit dem <code>script</code>-Element können Sie sowohl Scripte im Dokumentkopf <code>&lt;head>…&lt;/head></code> als auch im Dokumentkörper <code>&lt;body>…&lt;/body></code> einbetten. Die Ausführung des Scriptcodes läuft nach gewissen Regeln ab, die wir im Folgenden betrachten.</p>
-  <p>Sobald der Browser das HTML-Dokument vom Webserver empfängt, beginnt er damit, den Quellcode zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Modul im Browser nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
-  <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsing des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Das gilt auch für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quellcodes fort.</p>
+  <p>Sobald der Browser das HTML-Dokument vom Webserver empfängt, beginnt er damit, den Quelltext zu verarbeiten und in eine interne Speicherstruktur, das <a href="dom.html">Document Object Model (DOM)</a> zu überführen. Das dafür zuständige Browser-Modul nennt sich <dfn>Parser</dfn> und der Verarbeitungsvorgang <dfn>Parsen</dfn>.</p>
+  <p>Sobald der Parser auf ein <code>script</code>-Element trifft, wird das Parsen des HTML-Dokuments angehalten und der JavaScript-Code innerhalb des <code>script</code>-Elements ausgeführt. Das gilt auch für externe JavaScript-Dateien: Der HTML-Parser stoppt, lädt die externe JavaScript-Datei vom Webserver, führt den JavaScript-Code aus und fährt erst dann mit der Verarbeitung des restlichen HTML-Quelltextes fort.</p>
   <p>Diese Vorgehensweise, den JavaScript-Code direkt beim Einlesen des HTML-Dokuments auszuführen, hat verschiedene Konsequenzen.</p>
   <div class="section" id="script-reihenfolge">
     <h3>Scripte haben Zugriff auf die Objekte vorher eingebundener Scripte</h3>
@@ -78,7 +78,9 @@ helferfunktion();
 
   <div class="section" id="script-verzoegerung">
     <h3>Externe Scripte verzögern den Aufbau des Dokuments</h3>
-    <p>Dass der Browser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> des Einlesens des HTML-Codes ausführt, hat Vor- und Nachteile. Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird. Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
+    <p>Dass der Browser die eingebundenen Scripte nicht erst <em>nach</em>, sondern bereits <em>während</em> des Einlesens des HTML-Codes ausführt, hat Vor- und Nachteile.</p>
+    <p>Einerseits werden Scripte so schnell wie möglich ausgeführt und es ist garantiert, dass ein externes Script ausgeführt wird, bevor ein nachfolgendes internes Script abgearbeitet wird.</p>
+    <p>Andererseits verlangsamt sich der Seitenaufbau, wenn große externe Scriptdateien vom Webserver heruntergeladen werden.</p>
     <p>Es ist daher empfehlenswert, alle <code>script</code>-Elemente in der notwendigen Reihenfolge <em>am Dokument-Ende</em> zu platzieren. Dadurch wird der Aufbau des Dokumentes nicht durch das Herunterladen und Ausführen von JavaScript unterbrochen.</p>
   </div>
 
