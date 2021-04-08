@@ -24,8 +24,9 @@
   <p>Zur Einbindung von JavaScript-Code in ein HTML-Dokument existiert das HTML-Element <code>script</code>. Dieses darf sowohl im Kopf (<code>head</code>-Element) als auch im Körper (<code>body</code>-Element) eines HTML-Dokuments auftauchen. Es kann entweder direkt JavaScript-Code beinhalten, wie in diesem Beispiel:</p>
   <pre>
 &lt;!DOCTYPE html&gt;
-&lt;html&gt;
+&lt;html lang="de"&gt;
 &lt;head&gt;
+&lt;meta charset="utf-8"&gt;
 &lt;title&gt;Dokument mit integriertem JavaScript&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -38,8 +39,9 @@
   <p>Oder es kann leer sein und auf eine externe Datei mit JavaScript-Code verweisen. Diese Nutzungsweise sollten Sie vorziehen und Ihre JavaScripte möglichst in separate Dateien auslagern.</p>
   <p>Schreiben Sie dazu Ihren JavaScript-Code in eine eigene Datei und speichern Sie sie mit der Dateiendung <code>.js</code> ab. Notieren Sie am Dokument-Ende ein <code>script</code>-Element, das den Browser auf die externe JavaScript-Datei hinweist. Dazu notieren Sie im <code>src</code>-Attribut die Adresse (<abbr title="Uniform Resource Locator">URL</abbr>), unter der das Script abrufbar ist.</p>
   <pre>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
+&lt;html lang="de"&gt;
 &lt;head&gt;
+&lt;meta charset="utf-8"&gt;
 &lt;title&gt;Dokument mit externem JavaScript&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -89,8 +91,9 @@ helferfunktion();
     <p>Mit der Methode <code>document.write</code> kann ein Script schon während des Ladens das Dokument direkt beeinflussen und einige Weichen stellen. <code>document.write</code> nimmt HTML-Code als String entgegen. Es fügt den HTML-Code an der Stelle ins Dokument ein, an der das zugehörige <code>script</code>-Element steht.</p>
     <pre>
 &lt;!DOCTYPE html&gt;
-&lt;html&gt;
+&lt;html lang="de"&gt;
 &lt;head&gt;
+&lt;meta charset="utf-8"&gt;
 &lt;title&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
 &lt;script&gt;
 <strong>document.write("&lt;link rel='stylesheet' href='stylesheet.css'&gt;");</strong>
@@ -115,7 +118,7 @@ helferfunktion();
     <p>Ein Script wird wie gesagt während des Einlesens des HTML-Dokuments ausgeführt. Zu diesem Zeitpunkt hat es noch keinen Zugriff auf den gesamten DOM-Elementbaum. Stattdessen kann es nur auf einen Teil-Baum zugreifen, nämlich auf die Elemente, die <em>vor</em> dem zugehörigen <code>script</code>-Element liegen und somit bereits eingelesen wurden.</p>
     <pre>
 &lt;!DOCTYPE html&gt;
-&lt;html&gt;
+&lt;html lang="de"&gt;
 &lt;<strong>head</strong>&gt;
 &lt;<strong>title</strong>&gt;Zugriff auf das DOM während dem Parsen des Dokuments&lt;/title&gt;
 &lt;script&gt;
@@ -155,9 +158,58 @@ window.alert( document.getElementById("überschrift") );
   </div>
 </div>
 
-<div class="section" id="asynchron">
-  <h2>Asynchrone Script einbinden</h2>
-  <p>…</p>
+<div class="section" id="hintergrund">
+  <h2>Scripte im Hintergrund laden</h2>
+  <p>Wie beschrieben werden Scripte beim Einlesen des Dokuments ausgeführt. Damit ist die Reihenfolge der Ausführung dieselbe wie die Reihenfolge der Scripte im Dokument. Der große Nachteil ist, dass das Herunterladen und Ausführen der Scripte den Aufbau der Seite verlangsamt.</p>
+  <p>Um die Ladegeschwindigkeit zu verbessern, haben wir einen Trick kennengelernt: Scripte werden ausgelagert und die <code>script</code>-Elemente ans Dokument-Ende verschoben. Dadurch verlangsamen sie die Verarbeitung des restlichen Dokumentinhalts nicht.<p>
+  <p>Dieser Trick hat allerdings den Nachteil, dass der Browser die Scripte erst bemerkt, wenn das HTML-Dokument fast komplett heruntergeladen und eingelesen ist. Erst spät startet der Browser das Herunterladen und Ausführen der Scripte. Diese Verzögerung kann zu unerwünschten Effekten führen.</p>
+  <p>Beim Unobtrusive JavaScript ist es üblich, dass Scripte das Dokument verändern und Funktionen hinzufügen. Passiert das einige Sekunden nach dem erstmaligen Anzeigen der Seite, so verändert sich die Seite plötzlich, während der Benutzer die Seite bereits liest.</p>
+  <p>HTML ermöglicht es daher, ein Script dem Browser so früh wie möglich bekannt zu machen, es aber erst später auszuführen. Dadurch kann der Browser das Script bereits im Hintergrund herunterladen. Das Einlesen des Dokuments wird aber nicht verzögert.</p>
+  <p>Das Herunterladen des Scripts und das Einlesen des Dokuments laufen somit gleichzeitig nebeneinander. Das Script blockiert die Verarbeitung des Dokuments nicht. Der Browser wartet nicht auf das Herunterladen und Ausführen des Scripts.</p>
+  <p>Dazu gibt es zwei zusätzliche HTML-Attribute, die Sie dem <code>script</code>-Element geben können: <code>defer</code> und <code>async</code>.</p>
+  <div class="section" id="defer">
+    <h3><code>defer</code>: Script ausführen, sobald das Dokument geladen ist</h3>
+    <p><code>defer</code> ist ein Attribut ohne Wert. Sie notieren einfach <code>defer</code> in der Attributliste im Start-Tag:</p>
+    <pre>&lt;script src="script.js" <strong>defer</strong>&gt;&lt;/script&gt;</pre>
+    <p>Wenn das <code>defer</code>-Attribute gesetzt ist, so lädt der Browser das Script sobald möglich herunter. Das Einlesen und der Aufbau des Dokuments läuft derweil weiter. Der Browser führt das Script nämlich erst aus, sobald das Dokument fertig geladen ist.
+    <p>Das englische Wort <em>defer</em> bedeutet »verzögern«. Der Browser verzögert die Script-Ausführung bis zum erfolgreichen Übertragen und Einlesen des HTML-Codes.</p>
+    <p>Damit hat das Script garantierten Zugriff auf den gesamten DOM-Elementbaum. Es verhält sich insofern wie ein Script, das am Ende des Dokuments eingebunden ist. Mit dem Unterschied, dass der Browser früh mit dem Herunterladen beginnen kann. Dies kann den Seitenaufbau enorm beschleunigen.</p>
+    <p>Die Position eines solchen Scripts im Dokument hat keinen Einfluss auf den Zeitpunkt seiner Ausführung. Der Zeitpunkt ist garantiert, nämlich nach dem Einlesen des Dokuments.</p>
+    <p>Damit der Browser das Script möglichst früh im Hintergrund herunterlädt, sollten Sie das zugehörige Script-Element im <code>head</code> notieren:</p>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Dokument mit defer-Script&lt;/title&gt;
+<strong>&lt;script src="script.js" defer&gt;&lt;/script&gt;</strong>
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Dokument mit defer-Script&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</pre>
+    <p>Das <code>defer</code>-Attribut funktioniert nur bei externen, ausgelagerten Scripten. Wenn Sie es angeben, müssen Sie auch ein <code>src</code>-Attribut angeben. <code>defer</code> funktioniert nicht bei direkt ins Dokument integriertem JavaScript-Code.</p>
+    <p>Wenn es mehrere Scripte mit <code>defer</code> im Dokument gibt, so werden sie garantiert in der Reihenfolge ausgeführt, in der sie im Dokument notiert sind:</p>
+    <pre>
+&lt;script src="script1.js" defer&gt;&lt;/script&gt;
+&lt;script src="script2.js" defer&gt;&lt;/script&gt;
+</pre>
+    <p>Im obigen Beispiel lädt der Browser Script 1 und 2 parallel herunter. Beide werden ausgeführt, wenn das Dokument fertig eingelesen, und zwar erst Script 1 und dann Script 2.</p>
+    <p>Ein Script, das Sie mit <code>defer</code> laden, darf nicht <a href="#script-document-write"><code>document.write</code></a> verwenden. Wenn Sie das Dokument ergänzen möchten, so müssen Sie stattdessen die DOM-Schnittstelle verwenden.</p>
+  </div>
+  <div class="section" id="defer">
+    <h3><code>async</code>: Script ausführen, sobald sie heruntergeladen sind</h3>
+    <p>Das zweite Attribut, <code>async</code>, ist auch ein Attribut ohne Wert:</p>
+    <pre>&lt;script src="script.js" <strong>async</strong>&gt;&lt;/script&gt;</pre>
+    <p><code>async</code> bewirkt ebenfalls, dass der Browser das Script sobald möglich herunterlädt. Das Einlesen des Dokuments wird nicht unterbrochen.</p>
+    <p>Der Unterschied zu <code>defer</code> ist nun folgender: Das Script mit <code>async</code> wird ausgeführt, sobald es fertig heruntergeladen ist. Der Browser wartet mit der Ausführung nicht, bis das Dokument vollständig eingelesen ist.</p>
+    <p><code>async</code> steht für das englische <em>asynchronous</em>, was hier asynchron, zeitlich losgelöst und entkoppelt bedeutet. Die Script-Ausführung ist nämlich losgelöst vom Dokumentaufbau.</p>
+    <p>Das Script wird schnellstmöglich ausgeführt. Es hat auf die Elemente Zugriff, die zu diesem Zeitpunkt bereits eingelesen wurden. Welche das sind, ist willkürlich und kann sich von Mal zu Mal unterscheiden.</p>
+    <p>Sie sollten in einem solchen Script nicht davon ausgehen, dass bestimmte Elemente bereits eingelesen sind und ein DOM-Zugriff möglich ist. <code>async</code> eignet sich daher nur für besondere Scripte, die nicht zielgenau über die DOM-Schnittstelle auf das Dokument zugreifen.</p>
+    <p>Ein Beispiel sind Scripte zur Besucherzählung. Diese erheben Daten und schicken sie gegebenenfalls an den Server, aber benötigen keinen Zugriff auf die Inhalte im Dokument-Körper (<code>body</code>-Element).</p>
+    <p>In den meisten Fällen sollten Sie Ihre <code>script</code>-Elemente ans Dokumentende stellen – ohne <code>defer</code> und <code>async</code> – oder im Dokument-Kopf mit <code>defer</code> laden.</p>
+  </div>
 </div>
 
 <div class="section" id="noscript">
