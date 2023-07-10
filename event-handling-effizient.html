@@ -89,7 +89,7 @@ function zeigeVollbild(aElement) {
   var bildAdresse = aElement.href;
 
   // Blende das Bild ein, auf das der Link zeigt.
-  // Die genaue Umsetzung ist an dieser Stelle ausgeklammert.)
+  // (Die genaue Umsetzung ist an dieser Stelle ausgeklammert.)
   window.alert(bildAdresse);
 }
 </pre>
@@ -123,7 +123,7 @@ function zeigeVollbild(aElement) {
     <li><code>focus</code> und <code>blur</code>. (Als alternative aufsteigende Ereignisse gibt es allerdings <code>focusin</code> und <code>focusout</code>.)</li>
     <li><code>mouseenter</code> und <code>mouseleave</code>. (Die Ereignisse <code>mouseover</code> und <code>mouseout</code> hingegen steigen auf.)</li>
   </ul>
-  <p>Da die Capturing-Phase die erst im Event-Fluss ist, ist es möglich, ein Ereignis schon in dieser Phase abzufangen. Ruft man in der Capturing-Phase die <a href="event-handling-objekt.html#bubbling-verhindern"><code>stopPropation</code>-Methode des Event-Objekts</a> auf, so wird der Fluss abgebrochen und die Ziel- und Bubbling-Phase fallen aus. Das Ereignis erreicht somit das Zielelement nicht.</p>
+  <p>Da die Capturing-Phase die erst im Event-Fluss ist, ist es möglich, ein Ereignis schon in dieser Phase abzufangen. Ruft man in der Capturing-Phase die <a href="event-handling-objekt.html#bubbling-verhindern"><code>stopPropagation</code>-Methode des Event-Objekts</a> auf, so wird der Fluss abgebrochen und die Ziel- und Bubbling-Phase fallen aus. Das Ereignis erreicht somit das Zielelement nicht.</p>
 </div>
 
 <div class="sequence-navigation">
