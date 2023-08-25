@@ -8,7 +8,7 @@ body {
   padding: 0 1rem;
   counter-reset: counterH2;
   line-height: 1.8;
-  font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, "-apple-system", system-ui, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Geneva, 'Trebuchet MS', 'Lucida Sans', Tahoma, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
